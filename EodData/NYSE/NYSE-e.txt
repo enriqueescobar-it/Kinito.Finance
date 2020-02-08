@@ -1,0 +1,158 @@
+Symbol	Description
+E	Eni S.P.A.
+EAB	First Mortgage Bonds
+EAE	Entergy Arkansas Inc
+EAF	Graftech International Ltd
+EAI	Entergy Arkansas Inc
+EARN	Ellington Residential Mortgage
+EAT	Brinker International
+EB	Eventbrite Inc
+EBF	Ennis Inc
+EBR	Centrais Electricas Brazil
+EBR.B	Centrais Eletricas Brasileiras ADR
+EBS	Emergent Biosolutions
+EC	Ecopetrol S.A.
+ECA	Encana Corp
+ECC	Eagle Point Credit Co. Inc
+ECCA	Eagle Point Credit Company Inc
+ECCB	Eagle Point Credit Company Inc
+ECCX	Eagle Point Credit Company Inc 6.6875% Notes Du
+ECCY	Eagle Point Credit Company Inc
+ECL	Ecolab Inc
+ECOM	Channeladvisor Corp
+ECT	Eca Marcellus Trust
+ED	Consolidated Edison Company of New York
+EDD	Emerging Markets Domestic Debt Fund
+EDF	Stone Harbor Emerging Markets
+EDI	Stone Harbor Emerging Markets
+EDN	Empresa Distribuidora Y Comercializadora
+EDU	New Oriental Education & Technology Group
+EE	El Paso Electric Company
+EEA	European Equity Fund
+EEX	Emerald Expositions Events Inc
+EFC	Ellington Financial Llc
+EFC-A	Ellington Financial Inc Pfd.
+EFF	Eaton Vance Floating-Rate Inco
+EFL	Eaton Vance Floating-Rate 2022 Target Term Trust
+EFR	Eaton Vance Senior Floating-Rate Fund
+EFT	Eaton Vance Floating Rate Income Trust
+EFX	Equifax Inc
+EGF	Blackrock Enhanced Government Fund
+EGHT	8X8 Inc
+EGIF	Eagle Growth and Income Opportunity
+EGO	Eldorado Gold Corp
+EGP	Eastgroup Properties
+EGY	Vaalco Energy Inc
+EHC	Encompass Health Corp
+EHI	Western Asset Global High
+EHT	Eaton Vance High Income 2021 Ta
+EIC	Eagle Point Income Company Inc
+EIG	Employers Holdings Inc
+EIX	Edison International
+EL	Estee Lauder Companies
+ELAN	Elanco Animal Health Inc
+ELC	Entergy Louisiana Llc
+ELF	E.L.F. Beauty Inc
+ELJ	Entergy Louisiana Llc
+ELP	Companhia Paranaense DE Energia
+ELS	Equity Lifestyle Properties
+ELU	Entergy Louisiana Llc First M
+ELVT	Elevate Credit Inc
+ELY	Callaway Golf Company
+EMD	Western Asset Emerging Market Debt Fund Inc
+EME	Emcor Group
+EMF	Templeton Emerging Markets Fund
+EMN	Eastman Chemical Company
+EMO	Clearbridge Energy MLP Opportu
+EMP	Entergy Mississippi Inc 4.9% Bonds
+EMR	Emerson Electric Company
+ENB	Enbridge Inc
+ENBA	Enbridge Inc 6.375% Fixed-To-Floating Rate
+ENBL	Enable Midstream Partners LP
+ENIA	Enersis Americas S.A. American
+ENIC	Enersis Chile S.A. ADR
+ENJ	Entergy New Orleans Inc
+ENLC	Enlink Midstream Llc
+ENO	Entergy New Orleans Incfirst
+ENR	Energizer Holdings Inc
+ENR-A	Energizer Holdings Inc [Enr/Pa]
+ENS	Enersys Inc
+ENV	Envestnet Inc
+ENVA	Enova International Inc
+ENZ	Enzo Biochem
+EOD	Wells Fargo Global Dividend Opportunity
+EOG	Eog Resources
+EOI	Eaton Vance Enhance Equity
+EOS	Eaton Vance Enhanced Equity II
+EOT	Eaton Vance Muni Income Trust
+EP-C	El Paso Energy Capital [Ep/Pc]
+EPAC	Actuant Corp
+EPAM	Epam Systems Inc
+EPC	Edgewell Personal Care
+EPD	Enterprise Products Partners LP
+EPR	Entertainment Properties Trust
+EPR-C	Epr Pptys [Epr/Pc]
+EPR-E	Epr Pptys [Epr/Pe]
+EPR-G	Epr Pptys [Epr/Pg]
+EPRT	Essential Properties Realty Trust Inc
+EQC	Equity Commonwealth
+EQC-D	Equity Comwlth [Eqc/Pd]
+EQH	Axa Equitable Holdings Inc
+EQH-A	Axa Equitable Holdings Inc 5.25% Prf Perpetual U
+EQM	Eqm Midstream Partners LP
+EQNR	Equinor ASA
+EQR	Equity Residential
+EQS	Equus Total Return
+EQT	Eqt Corp
+ERA	Era Group Inc
+ERF	Enerplus Corp
+ERJ	Embraer-Empresa Brasileira DE Aeronautica
+EROS	Eros International Plc
+ES	Eversource Energy
+ESE	Esco Technologies Inc
+ESI	Element Solutions Inc
+ESNT	Essent Group Ltd
+ESRT	Empire State Realty Trust Inc
+ESS	Essex Property Trust
+ESTC	Elastic N.V.
+ESTE	Earthstone Energy
+ET	Energy Transfer LP
+ETB	Eaton Vance Tax-Managed Buy-Write
+ETG	Eaton Vance Tax-Advantaged Global Dividend
+ETH	Ethan Allen Interiors Inc
+ETI.P	Entergy Texas Inc 5.375% Series A Preferred Stoc
+ETJ	Eaton Vance Risk-Managed Diversified Equity
+ETM	Entercom Communications Corp
+ETN	Eaton Corp
+ETO	Eaton Vance Tax-Advantage Global Dividend Opp
+ETP-C	Energy Transfer Operating L P [Etp/Pc]
+ETP-D	Energy Transfer Operating L P [Etp/Pd]
+ETP-E	Energy Transfer Operating L P [Etp/Pe]
+ETR	Entergy Corp
+ETRN	Equitrans Midstream Corp
+ETV	Eaton Vance Corp
+ETW	Eaton Vance Corp
+ETX	Eaton Vance Municipal Income T
+ETY	Eaton Vance Tax-Managed Diversified Equity
+EURN	Euronav NV
+EV	Eaton Vance Corp
+EVA	Enviva Partners LP
+EVC	Entravision Communications Corp
+EVF	Eaton Vance Senior Income Trust
+EVG	Eaton Vance Short Diversified
+EVH	Evolent Health Inc Cl A Com
+EVN	Eaton Vance Muni Income Trust
+EVR	Evercore Partners Inc
+EVRG	Evergy Inc
+EVRI	Everi Holdings Inc
+EVT	Eaton Vance Tax Advantaged Dividend
+EVTC	Evertec Inc
+EW	Edwards Lifesciences Corp
+EXD	Eaton Vance Tax-Advantaged Bond
+EXG	Eaton Vance Tax-Managed Global Diversified Equit
+EXK	Endeavour Silver Corp
+EXP	Eagle Materials Inc
+EXPR	Express Inc
+EXR	Extra Space Storage Inc
+EXTN	Exterran Corp
+EZT	First Mortgage Bonds

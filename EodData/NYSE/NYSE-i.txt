@@ -1,0 +1,84 @@
+Symbol	Description
+I	Intelsat S.A.
+IAA	Iaa Inc
+IAE	VOYA Asia Pacific High Dividend Equity
+IAG	Iamgold Corp
+IBA	Industrias Bachoco S.A. DE C.V.
+IBM	International Business Machines
+IBN	Icici Bank Ltd
+IBP	Installed Building Products
+ICD	Independence Contract Drilling Inc
+ICE	Intercontinental Exchange
+ICL	Israel Chemicals Ltd
+IDA	Idacorp Inc
+IDE	VOYA Infrastructure Industrial
+IDT	IDT Corp
+IEX	Idex Corp
+IFF	International Flavors & Fragrances
+IFFT	International Flavors & Fragrances Inc
+IFN	India Fund
+IFS	Intercorp Financial Services Inc
+IGA	VOYA Global Advantage and Premium
+IGD	VOYA Global Equity Dividend and Premium
+IGI	Western Asset Investment Grade Defined
+IGR	VOYA Clarion Global Real Estate
+IGT	International Game Technology
+IHC	Independence Holding Company
+IHD	VOYA Emerging Markets High Dividend
+IHG	Intercontinental Hotels Group
+IHIT	Invesco High Income 2023 Target Term Fund
+IHTA	Invesco High Income 2024 Target Term Fund
+IID	VOYA International High Dividend Equity
+IIF	Morgan Stanley India Investment Fund Inc
+IIM	Invesco Insured Muni Income Trust
+IIP-A	Innovative Indl Pptys Inc [Iipr/Pa]
+IIPR	Innovative Industrial Properties
+IMAX	Imax Corp
+INB	Cohen & Steers Global Income Builder
+INF	Brookfield Global Listed Infra
+INFO	IHS Markit Ltd
+INFY	Infosys Ltd
+ING	ING Groep N.V. ADR
+INGR	Ingredion Inc
+INN	Summit Hotel Properties
+INN-D	Summit Hotel Pptys Inc [Inn/Pd]
+INN-E	Summit Hotel Pptys Inc [Inn/Pe]
+INS-A	International Seaways Inc [Insw/Pa]
+INSI	Insight Select Income Fund
+INSP	Inspire Medical Systems Inc
+INST	Instructure Inc
+INSW	International Seaways Inc
+INT	World Fuel Services Corp
+INVH	Invitation Homes Inc
+INXN	Interxion Holding N.V.
+IO	ION Geophysical Corp
+IP	International Paper Company
+IPG	Interpublic Group of Companies
+IPHI	Inphi Corp
+IPI	Intrepid Potash Inc
+IQI	Invesco Quality Muni Income Trust
+IQV	Iqvia Holdings Inc
+IR	Ingersoll-Rand Plc [Ireland]
+IRE-C	Investors Real Estate TR [Iret/Pc]
+IRET	Investors Real Estate Trust
+IRL	Irish Investment Fund
+IRM	Iron Mountain Inc
+IRR	VOYA Risk Managed Natural Resources Fund
+IRS	Irsa Inversiones Y Representaciones S.A.
+IRT	Independence Realty Trust Inc
+ISD	Prudential Short Duration High
+ISG	VOYA Group N.V.
+IT	Gartner Inc
+ITCB	Itau Corpbanca
+ITGR	Integer Holdings Corp
+ITT	ITT Inc
+ITUB	Itau Unibanco Banco Holding S.A.
+ITW	Illinois Tool Works Inc
+IVC	Invacare Corp
+IVH	Ivy High Income Opportunities
+IVR	Invesco Mortgage Capital Inc
+IVR-A	Invesco Mortgage Capital Inc [Ivr/Pa]
+IVR-B	Invesco Mortgage Capital Inc [Ivr/Pb]
+IVR-C	Invesco Mortgage Capital Inc [Ivr/Pc]
+IVZ	Invesco Plc
+IX	Orix Corp ADR

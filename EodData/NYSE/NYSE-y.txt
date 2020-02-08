@@ -1,0 +1,9 @@
+Symbol	Description
+Y	Alleghany Corp
+YELP	Yelp Inc
+YETI	Yeti Holdings Inc
+YEXT	Yext Inc
+YPF	Ypf Sociedad Anonima
+YRD	Yirendai Ltd
+YUM	Yum! Brands
+YUMC	Yum China Holdings Inc

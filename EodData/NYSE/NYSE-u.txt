@@ -1,0 +1,60 @@
+Symbol	Description
+UA	Under Armour Inc Cl C
+UAA	Under Armour
+UAN	Cvr Partners LP
+UBA	Urstadt Biddle Properties Inc
+UBER	Uber Technologies Inc
+UBP	Urstadt Biddle Properties Inc
+UBP-H	Urstadt Biddle Pptys Inc [Ubp/Ph]
+UBP-K	Urstadt Biddle Properties Inc 5.875% Prf Perpetu
+UBS	UBS Group Ag
+UDR	United Dominion Realty Trust
+UE	Urban Edge Properties
+UFI	Unifi Inc
+UFS	Domtar Corp
+UGI	Ugi Corp
+UGP	Ultrapar Participacoes S.A.
+UHS	Universal Health Services
+UHT	Universal Health Realty Income Trust
+UI	Ubiquiti Networks
+UIS	Unisys Corp
+UL	Unilever Plc
+UMC	United Microelectronics Corp
+UMH	Umh Properties
+UMH-B	Umh Pptys Inc [Umh/Pb]
+UMH-C	Umh Pptys Inc [Umh/Pc]
+UMH-D	Umh Pptys Inc [Umh/Pd]
+UN	Unilever NV
+UNF	Unifirst Corp
+UNFI	United Nat Foods
+UNH	Unitedhealth Group Inc
+UNM	Unumprovident Corp
+UNMA	Unum Group 6.250% Junior Subordinated Notes Due
+UNP	Union Pacific Corp
+UNT	Unit Corp
+UNVR	Univar Inc
+UPS	United Parcel Service
+URI	United Rentals
+USA	Liberty All-Star Equity Fund
+USAC	USA Compression Partners LP
+USB	U.S. Bancorp
+USB-A	US Bancorp [Usb/Pa]
+USB-H	US Bancorp [Usb/Ph]
+USB-M	US Bancorp [Usb/Pm]
+USB-O	US Bancorp [Usb/Po]
+USB-P	US Bancorp Del [Usb/Pp]
+USDP	USD Partners LP
+USFD	US Foods Holding
+USM	United States Cellular Corp
+USNA	Usana Health Sciences Inc
+USPH	U.S. Physical Therapy
+USX	U.S. Xpress Enterprises Inc Cl A
+UTF	Cohen & Steers Infrastructure Fund
+UTI	Universal Technical Institute Inc
+UTL	Unitil Corp
+UTX	United Technologies Corp
+UVE	Universal Insurance Holdings Inc
+UVV	Universal Corp
+UZA	United States Cellular Corp
+UZB	United States Cellular Corp
+UZC	United States Cellular Corp
