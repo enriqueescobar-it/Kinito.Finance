@@ -4,26 +4,15 @@ import csv
 #panda
 import pandas as Pan
 import datetime as PanDateTime
-import time as PanTime
-import os as PanOS
 
 tgt_start = PanDateTime.datetime(2019, 1, 1)
 tgt_stop_ = PanDateTime.datetime.now()
-tgt_date_ = PanDateTime.datetime.now().strftime('%Y%m%d')
-tgt_hour_ = PanTime.strftime('%h')
-'''if(tgt_hour_<12): h = "00"
-else: h ="12"'''
-tgt_foldr = str(tgt_date_)#+""+str(h)
 
 def set_dataframe(yahoo_content):
 	if (yahoo_content.empty):
 		yahoo_content = "NA"
 	else:
-		yahoo_stuff = str(yahoo_content.info()) + "\n"
-		yahoo_stuff += str(yahoo_content.shape) + "\n"
-		yahoo_stuff += str(yahoo_content.describe()) + "\n"
-		yahoo_stuff += yahoo_content.to_string()
-		yahoo_content = yahoo_stuff
+		yahoo_content = yahoo_content.to_string()
 	return yahoo_content
 
 def set_series(yahoo_content):
@@ -31,10 +20,7 @@ def set_series(yahoo_content):
 		yahoo_content = "NA"
 		print("\tSERIES\t" + yahoo_content)
 	else:
-		yahoo_stuff = str(yahoo_content.shape) + "\n"
-		yahoo_stuff += str(yahoo_content.describe()) + "\n"
-		yahoo_stuff += yahoo_content.to_string()
-		yahoo_content = yahoo_stuff
+		yahoo_content.to_string()
 	return yahoo_content
 
 def set_tuple(yahoo_content):
