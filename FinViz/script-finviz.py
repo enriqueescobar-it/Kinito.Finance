@@ -19,22 +19,25 @@ def set_file(yahoo_date, yahoo_stock_exchange, yahoo_orderby, yahoo_csv_stocks):
 #stock_filters = ['exch_nyse']
 stock_filters = 'exch_nyse'
 # Get the first 50 results sorted by price ascending
-stock_orderby = 'price'
+stock_orderby = 'pe'# 'price'
 stock_datetim = str(PanDateTime.datetime.now().strftime('%Y%m%d'))
 stock_list = PanScreener(filters = stock_filters, order = stock_orderby)
 # Export the screener results to .csv
 stock_csv_ = stock_list.to_csv()
+#stock_csv_ = stock_csv_.replace(',-,', ',NA,')
 PanPrint.pprint(stock_datetim)
 set_file(stock_datetim, stock_filters, stock_orderby, stock_csv_)
 # Create a SQLite database
-#stock_list.to_sqlite()
-
-'''for stock in stock_list[9:19]:  # Loop through 10th - 20th stocks
-	print(stock['Ticker'], stock['Price']) # Print symbol and price
+#PanPrint.pprint(str(type(stock_list.to_sqlite('script-finviz.sqlite'))))
+# Loop through 10th - 20th stocks
+for stock in stock_list[9:19]:
+	# Print symbol and price
+	print(stock['Ticker'], stock['Price'])
 
 # Add more stock_filters
-stock_list.add(stock_filters=['fa_div_high'])  # Show stocks with high dividend yield
+# Show stocks with high dividend yield
+# stock_list.add(stock_filters = ['fa_div_high'])
 # or just stock_list(stock_filters=['fa_div_high'])
 
 # Print the table into the console
-print(stock_list)'''
+# print(stock_list)
