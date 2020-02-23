@@ -1,0 +1,469 @@
+No.;Ticker;Company;Sector;Industry;Country;Market Cap;P/E;Price;Change;Volume
+1;BRK-B;Berkshire Hathaway Inc.;Financial;Property & Casualty Insurance;USA;565750000000;0.01;229.33;0.51%;4682691
+2;OIBR-C;Oi S.A.;Technology;Diversified Communication Services;Brazil;1480000000;0.04;1.24;8.77%;682446
+3;SNMP;Sanchez Midstream Partners LP;Basic Materials;Oil & Gas Pipelines;USA;7700000;0.09;0.36;-4.75%;53519
+4;SBOW;SilverBow Resources, Inc.;Basic Materials;Independent Oil & Gas;USA;46990000;0.26;3.66;-8.27%;160763
+5;JE;Just Energy Group Inc.;Utilities;Diversified Utilities;Canada;138190000;0.52;0.91;-8.10%;1176738
+6;NTZ;Natuzzi S.p.A.;Consumer Goods;Home Furnishings & Fixtures;Italy;20000000;0.54;1.73;-5.03%;7917
+7;GPOR;Gulfport Energy Corporation;Basic Materials;Independent Oil & Gas;USA;207600000;0.54;1.26;-3.08%;2979051
+8;AXAS;Abraxas Petroleum Corporation;Basic Materials;Independent Oil & Gas;USA;38500000;0.64;0.22;-2.36%;1127292
+9;KXIN;Kaixin Auto Holdings;Conglomerates;Conglomerates;China;69320000;0.67;1.14;0.99%;21029
+10;CMCT;CIM Commercial Trust Corporation;Financial;REIT - Industrial;USA;220050000;0.69;15.01;-0.40%;31107
+11;UONEK;Urban One, Inc.;Services;Broadcasting - Radio;USA;84300000;0.71;1.9;-2.41%;1315
+12;CEPU;Central Puerto S.A.;Utilities;Electric Utilities;Argentina;519280000;0.74;3.45;-3.09%;124648
+13;DAC;Danaos Corporation;Services;Shipping;Greece;163770000;0.79;6.43;-4.32%;95978
+14;UONE;Urban One, Inc.;Services;Broadcasting - Radio;USA;3400000;0.8;2.15;8.04%;1040
+15;SWN;Southwestern Energy Company;Basic Materials;Independent Oil & Gas;USA;936410000;0.84;1.66;-4.05%;13136941
+16;LONE;Lonestar Resources US Inc.;Basic Materials;Independent Oil & Gas;USA;31400000;0.84;1.29;2.38%;73795
+17;CHK;Chesapeake Energy Corporation;Basic Materials;Independent Oil & Gas;USA;935300000;0.91;0.45;-6.39%;42092510
+18;PVAC;Penn Virginia Corporation;Basic Materials;Independent Oil & Gas;USA;259850000;0.92;16.13;-6.11%;122693
+19;CRC;California Resources Corporation;Basic Materials;Independent Oil & Gas;USA;372670000;0.98;7.59;16.77%;9055986
+20;EDN;Empresa Distribuidora y Comercializadora Norte Sociedad Anonima;Utilities;Electric Utilities;Argentina;151300000;0.98;5.32;1.33%;25875
+21;ESGRO;Enstar Group Limited;Financial;Insurance Brokers;Bermuda;591670000;1.0;27.57;-0.12%;8111
+22;FINV;FinVolution Group;Financial;Credit Services;China;610800000;1.05;1.95;-2.01%;467127
+24;ESGRP;Enstar Group Limited;Financial;Insurance Brokers;Bermuda;623010000;1.06;29.03;-0.68%;27815
+25;SRL;Scully Royalty Ltd.;Financial;Asset Management;Hong Kong;117280000;1.18;9.07;-3.09%;14100
+26;TALO;Talos Energy Inc.;Basic Materials;Independent Oil & Gas;USA;996090000;1.18;17.88;-2.72%;280087
+27;DNR;Denbury Resources Inc.;Basic Materials;Independent Oil & Gas;USA;484600000;1.19;0.93;-2.54%;11679093
+28;SMMT;Summit Therapeutics plc;Healthcare;Biotechnology;United Kingdom;98160000;1.19;1.46;0.69%;25033
+29;ROYT;Pacific Coast Oil Trust;Basic Materials;Independent Oil & Gas;USA;15050000;1.19;0.39;0.36%;259924
+30;IPLDP;Interstate Power and Light Company;Utilities;Electric Utilities;USA;343600000;1.23;25.58;-0.45%;6877
+31;LBTYK;Liberty Global Plc;Services;CATV Systems;United Kingdom;8870000000;1.24;20.21;-0.39%;2487752
+32;PAM;Pampa Energia S.A.;Utilities;Electric Utilities;Argentina;1220000000;1.28;13.25;0.30%;294682
+33;CXDC;China XD Plastics Company Limited;Consumer Goods;Rubber & Plastics;China;100390000;1.45;1.42;-5.33%;291821
+34;TUSK;Mammoth Energy Services, Inc.;Basic Materials;Oil & Gas Drilling & Exploration;USA;67990000;1.48;1.64;8.61%;295187
+35;QD;Qudian Inc.;Technology;Information Technology Services;China;674200000;1.48;2.73;2.63%;9529248
+36;CTRA;Contura Energy, Inc.;Basic Materials;Industrial Metals & Minerals;USA;117690000;1.56;6.12;-5.26%;130107
+37;JFIN;Jiayin Group Inc.;Technology;Internet Information Providers;China;169800000;1.62;2.77;-12.20%;15327
+38;HPR;HighPoint Resources Corporation;Basic Materials;Independent Oil & Gas;USA;230800000;1.66;1.04;-3.70%;546446
+39;ATV;Acorn International, Inc.;Services;Catalog & Mail Order Houses;China;37530000;1.68;14.11;-3.02%;14114
+40;MR;Montage Resources Corporation;Basic Materials;Oil & Gas Drilling & Exploration;China;136810000;1.74;3.63;-4.97%;599591
+41;ARL;American Realty Investors, Inc.;Financial;Property Management;USA;231340000;1.76;14.45;-0.09%;1398
+42;XYF;X Financial;Financial;Credit Services;China;237590000;1.79;1.42;-4.70%;14457
+43;OSN;Ossen Innovation Co., Ltd.;Basic Materials;Steel & Iron;China;20300000;1.81;3.09;0.65%;11559
+44;YRD;Yiren Digital Ltd.;Financial;Credit Services;China;456090000;1.85;4.91;-0.41%;196257
+45;XIN;Xinyuan Real Estate Co., Ltd.;Financial;Real Estate Development;China;198090000;1.87;3.22;6.62%;194895
+46;TUP;Tupperware Brands Corporation;Consumer Goods;Packaging & Containers;USA;305590000;1.92;5.95;-4.80%;1486945
+47;CMCM;Cheetah Mobile Inc.;Technology;Application Software;China;501510000;1.95;2.99;-16.94%;1947031
+48;LXRX;Lexicon Pharmaceuticals, Inc.;Healthcare;Biotechnology;USA;302890000;1.97;2.69;-5.61%;1136601
+49;FORK;Fuling Global Inc.;Consumer Goods;Home Furnishings & Fixtures;China;36800000;2.01;2.11;-9.44%;18054
+50;CEIX;CONSOL Energy Inc.;Basic Materials;Industrial Metals & Minerals;USA;156580000;2.12;5.88;-2.65%;690766
+51;BBAR;Banco BBVA Argentina S.A.;Financial;Foreign Regional Banks;Argentina;1240000000;2.18;4.58;0.44%;745801
+52;BCEI;Bonanza Creek Energy, Inc.;Basic Materials;Independent Oil & Gas;USA;391270000;2.2;18.73;-1.21%;210393
+53;BPT;BP Prudhoe Bay Royalty Trust;Basic Materials;Oil & Gas Refining & Marketing;USA;158390000;2.24;7.36;-0.54%;72595
+54;TCI;Transcontinental Realty Investors, Inc.;Financial;REIT - Diversified;USA;297640000;2.28;34.65;1.52%;527
+55;WLL;Whiting Petroleum Corporation;Basic Materials;Oil & Gas Drilling & Exploration;USA;260209999;2.31;2.75;-3.51%;6872589
+56;WTI;W&T Offshore, Inc.;Basic Materials;Oil & Gas Drilling & Exploration;USA;503690000;2.32;3.38;-5.59%;3014110
+57;QFIN;360 Finance, Inc.;Financial;Credit Services;China;1060000000;2.34;8.43;-2.09%;428125
+58;JNCE;Jounce Therapeutics, Inc.;Healthcare;Biotechnology;USA;189390000;2.35;5.28;-7.37%;417539
+59;PER;SandRidge Permian Trust;Basic Materials;Independent Oil & Gas;USA;46700000;2.42;0.9;0.80%;78511
+60;ARLP;Alliance Resource Partners, L.P.;Basic Materials;Industrial Metals & Minerals;USA;941710000;2.42;7.55;1.75%;662445
+61;NOG;Northern Oil and Gas, Inc.;Basic Materials;Oil & Gas Drilling & Exploration;USA;653290000;2.46;1.57;-2.48%;4907368
+62;XTLB;XTL Biopharmaceuticals Ltd.;Healthcare;Biotechnology;Israel;8000000;2.49;1.5;4.90%;203
+63;ZKIN;ZK International Group Co., Ltd.;Basic Materials;Steel & Iron;China;20610000;2.5;1.23;-1.14%;48942
+64;OVV;Ovintiv Inc.;Basic Materials;Independent Oil & Gas;USA;4250000000;2.56;15.82;-3.00%;3017533
+65;TGA;TransGlobe Energy Corporation;Basic Materials;Independent Oil & Gas;Canada;87800000;2.58;1.22;0.00%;38936
+66;ECT;ECA Marcellus Trust I;Basic Materials;Oil & Gas Drilling & Exploration;USA;10780000;2.6;0.61;0.42%;21582
+67;MFGP;Micro Focus International plc;Technology;Application Software;United Kingdom;3370000000;2.6;10.12;-0.88%;822049
+68;CPE;Callon Petroleum Company;Basic Materials;Independent Oil & Gas;USA;1200000000;2.79;2.85;-5.94%;12189246
+69;CMLS;Cumulus Media Inc.;Services;Broadcasting - Radio;USA;248350000;2.81;14.24;0.64%;128053
+70;XOG;Extraction Oil & Gas, Inc.;Basic Materials;Independent Oil & Gas;USA;129130000;2.88;0.92;-0.89%;1316187
+71;OMP;Oasis Midstream Partners LP;Basic Materials;Independent Oil & Gas;USA;489430000;2.91;13.92;-3.87%;173250
+72;BH-A;Biglari Holdings Inc.;Services;Restaurants;USA;132949999;2.99;642.67;-0.36%;6
+73;MIK;The Michaels Companies, Inc.;Services;Specialty Retail, Other;USA;763320000;3.02;5.22;0.48%;8693585
+74;PINC;Premier, Inc.;Technology;Healthcare Information Services;USA;2220000000;3.04;31.11;-0.06%;641750
+75;MTL;Mechel PAO;Basic Materials;Steel & Iron;Russia;928490000;3.07;3.17;0.63%;23723
+76;ASA;ASA Gold and Precious Metals Limited;Financial;Asset Management;USA;280480000;3.07;14.54;2.76%;158333
+77;HCC;Warrior Met Coal, Inc.;Basic Materials;Industrial Metals & Minerals;USA;919830000;3.08;18.02;1.75%;1186566
+78;KGJI;Kingold Jewelry, Inc.;Basic Materials;Gold;China;14710000;3.11;1.26;-5.26%;41525
+79;TLRD;Tailored Brands, Inc.;Services;Apparel Stores;USA;208200000;3.13;4.01;-6.74%;1564497
+80;BRY;Berry Petroleum Corporation;Basic Materials;Independent Oil & Gas;USA;611500000;3.21;7.2;-4.64%;452945
+81;SND;Smart Sand, Inc.;Basic Materials;Industrial Metals & Minerals;USA;83500000;3.24;2.0;-0.99%;228909
+82;FLY;Fly Leasing Limited;Services;Rental & Leasing Services;Ireland;581470000;3.27;18.53;-1.54%;119459
+83;FSK;FS KKR Capital Corp.;Financial;Asset Management;USA;3180000000;3.3;6.24;0.00%;1861553
+84;BH;Biglari Holdings Inc.;Services;Restaurants;USA;378790000;3.33;116.91;0.34%;6200
+85;CPS;Cooper-Standard Holdings Inc.;Consumer Goods;Auto Parts;USA;364320000;3.38;20.56;-4.99%;190639
+86;CET;Central Securities Corp.;Financial;Asset Management;USA;857970000;3.42;33.14;-0.12%;28812
+87;LGND;Ligand Pharmaceuticals Incorporated;Healthcare;Biotechnology;USA;1780000000;3.43;100.73;-0.61%;279795
+88;SBBP;Strongbridge Biopharma plc;Healthcare;Biotechnology;USA;186500000;3.46;3.26;-5.23%;211031
+89;ESTE;Earthstone Energy, Inc.;Basic Materials;Independent Oil & Gas;USA;306680000;3.46;4.74;-0.21%;284223
+90;ANY;Sphere 3D Corp.;Technology;Application Software;Canada;3000000;3.47;0.77;-4.75%;77142
+91;GGAL;Grupo Financiero Galicia S.A.;Financial;Foreign Regional Banks;Argentina;2150000000;3.48;14.49;1.26%;767171
+92;CNF;CNFinance Holdings Limited;Financial;Credit Services;China;310420000;3.5;4.46;-1.44%;2784
+93;JMEI;Jumei International Holding Limited;Services;Specialty Retail, Other;China;196220000;3.53;16.11;-2.66%;25290
+94;OTEL;Otelco Inc.;Technology;Telecom Services - Domestic;USA;29310000;3.55;8.35;-2.94%;4086
+95;CONN;Conn's, Inc.;Services;Electronics Stores;USA;265170000;3.55;9.36;1.30%;689034
+96;WEI;Weidai Ltd.;Financial;Credit Services;China;175400000;3.59;2.46;-1.18%;104363
+97;BTO;John Hancock Financial Opportunities Fund;Financial;Closed-End Fund - Equity;USA;639250000;3.59;34.2;-2.01%;47855
+98;NRP;Natural Resource Partners L.P.;Basic Materials;Industrial Metals & Minerals;USA;216420000;3.63;17.19;-2.62%;8969
+99;VIAC;ViacomCBS Inc.;Services;Entertainment - Diversified;USA;18250000000;3.66;28.26;-3.52%;17468992
+100;CHKR;Chesapeake Granite Wash Trust;Basic Materials;Independent Oil & Gas;USA;32380000;3.71;0.66;-4.39%;78997
+101;BDR;Blonder Tongue Laboratories, Inc.;Technology;Communication Equipment;USA;7300000;3.71;0.8;6.43%;39032
+102;WF;Woori Financial Group Inc.;Financial;Foreign Regional Banks;South Korea;6030000000;3.71;24.0;-0.95%;61971
+103;ISEE;IVERIC bio, Inc.;Healthcare;Biotechnology;USA;304080000;3.77;6.1;-3.94%;374176
+104;PFIN;P&F Industries, Inc.;Industrial Goods;Small Tools & Accessories;USA;21290000;3.82;6.76;-3.91%;6
+105;LND;BrasilAgro - Companhia Brasileira de Propriedades Agricolas;Financial;Property Management;Brazil;272980000;3.82;4.6;0.11%;116
+106;ERF;Enerplus Corporation;Basic Materials;Oil & Gas Drilling & Exploration;Canada;1170000000;3.82;5.04;-4.18%;4041756
+107;OAS;Oasis Petroleum Inc.;Basic Materials;Independent Oil & Gas;USA;700500000;3.83;2.08;-4.59%;6238215
+108;EAF;GrafTech International Ltd.;Industrial Goods;Diversified Machinery;USA;2880000000;3.86;9.93;0.30%;1434304
+109;BPRAP;Brookfield Property REIT Inc.;Financial;REIT - Retail;USA;3810000000;3.87;25.83;0.23%;13366
+110;ARCH;Arch Coal, Inc.;Basic Materials;Industrial Metals & Minerals;USA;813270000;3.89;51.44;-4.28%;486463
+111;ISNS;Image Sensing Systems, Inc.;Technology;Scientific & Technical Instruments;USA;30570000;3.89;5.62;-2.40%;719
+112;BIG;Big Lots, Inc.;Services;Discount, Variety Stores;USA;1010000000;3.92;25.41;-1.97%;1323542
+113;VNO;Vornado Realty Trust;Financial;REIT - Diversified;USA;12280000000;3.94;63.85;-0.67%;1606916
+114;SORL;SORL Auto Parts, Inc.;Consumer Goods;Auto Manufacturers - Major;China;87280000;3.94;4.52;0.00%;44330
+115;GNC;GNC Holdings, Inc.;Services;Drug Stores;USA;189400000;3.96;2.2;-1.79%;556847
+116;AWP;Aberdeen Global Premier Properties Fund;Financial;Closed-End Fund - Foreign;USA;582480000;3.99;6.82;-0.58%;343562
+117;CHN;The China Fund, Inc.;Financial;Closed-End Fund - Foreign;USA;226000000;3.99;21.42;-0.05%;8351
+118;BHAT;Fujian Blue Hat Interactive Entertainment Technology Ltd.;Technology;Multimedia & Graphics Software;China;39200000;4.01;1.12;-10.40%;213204
+119;MVO;MV Oil Trust;Basic Materials;Independent Oil & Gas;USA;58380000;4.04;5.05;-0.59%;15661
+120;BMA;Banco Macro S.A.;Financial;Foreign Regional Banks;Argentina;3000000000;4.12;34.24;1.00%;255076
+121;EVK;Ever-Glory International Group, Inc.;Consumer Goods;Textile - Apparel Clothing;China;22220000;4.14;1.5;7.83%;27
+122;MMAC;MMA Capital Holdings, Inc.;Financial;Mortgage Investment;USA;184280000;4.15;32.5;1.59%;17401
+123;TGS;Transportadora de Gas del Sur S.A.;Utilities;Gas Utilities;Argentina;703890000;4.18;6.43;0.16%;309617
+124;PTN;Palatin Technologies, Inc.;Healthcare;Biotechnology;USA;141250000;4.23;0.59;-3.85%;1572829
+125;GDP;Goodrich Petroleum Corporation;Basic Materials;Independent Oil & Gas;USA;75080000;4.37;6.05;-0.82%;25119
+126;ATH;Athene Holding Ltd.;Financial;Asset Management;Bermuda;8390000000;4.39;49.71;-0.08%;2232298
+127;AMCX;AMC Networks Inc.;Services;Entertainment - Diversified;USA;2020000000;4.42;35.05;-3.44%;1188223
+128;METC;Ramaco Resources, Inc.;Basic Materials;Industrial Metals & Minerals;USA;122790000;4.51;2.92;-2.67%;48944
+129;AHC;A.H. Belo Corporation;Services;Publishing - Newspapers;USA;57110000;4.51;2.73;2.63%;48884
+130;NVFY;Nova LifeStyle, Inc.;Consumer Goods;Home Furnishings & Fixtures;USA;10700000;4.57;1.89;-1.56%;3621
+131;CYOU;Changyou.com Limited;Technology;Multimedia & Graphics Software;China;588410000;4.62;10.71;0.09%;69537
+132;TX;Ternium S.A.;Basic Materials;Steel & Iron;Luxembourg;4130000000;4.62;20.39;-1.02%;159378
+133;NRO;Neuberger Berman Real Estate Securities Income Fund Inc.;Financial;Asset Management;USA;284040000;4.63;5.99;-0.17%;78123
+134;WLFC;Willis Lease Finance Corporation;Services;Rental & Leasing Services;USA;347770000;4.67;59.55;0.17%;3501
+135;ATLC;Atlanticus Holdings Corporation;Financial;Credit Services;USA;241350000;4.72;15.0;-1.38%;22123
+136;CVGI;Commercial Vehicle Group, Inc.;Services;Auto Parts Wholesale;USA;150090000;4.76;4.96;3.55%;142784
+137;GRVY;Gravity Co., Ltd.;Technology;Multimedia & Graphics Software;South Korea;199520000;4.87;31.72;9.42%;67423
+138;ARNA;Arena Pharmaceuticals, Inc.;Healthcare;Biotechnology;USA;2670000000;4.88;52.69;-1.01%;311680
+139;HAPP;Happiness Biotech Group Limited;Healthcare;Drugs - Generic;China;100010000;4.9;4.06;1.43%;19386
+140;ZIOP;ZIOPHARM Oncology, Inc.;Healthcare;Biotechnology;USA;680890000;4.9;3.3;1.23%;1501749
+141;CEE;The Central and Eastern Europe Fund, Inc.;Financial;Closed-End Fund - Foreign;USA;186670000;4.91;27.49;-0.03%;545
+142;REI;Ring Energy, Inc.;Basic Materials;Oil & Gas Drilling & Exploration;USA;130889999;4.92;1.9;-1.55%;407153
+143;SUPV;Grupo Supervielle S.A.;Financial;Foreign Regional Banks;Argentina;320290000;4.95;3.08;0.00%;753359
+144;TECK;Teck Resources Limited;Basic Materials;Industrial Metals & Minerals;Canada;7070000000;4.98;10.92;-15.28%;15426186
+145;KRA;Kraton Corporation;Basic Materials;Specialty Chemicals;USA;511990000;5.01;15.95;-1.24%;298525
+146;AMPY;Amplify Energy Corp.;Basic Materials;Independent Oil & Gas;USA;222380000;5.03;5.51;-2.30%;254634
+147;SHG;Shinhan Financial Group Co., Ltd.;Financial;Foreign Regional Banks;South Korea;14640000000;5.04;29.27;-2.01%;165924
+148;SALT;Scorpio Bulkers Inc.;Services;Shipping;Monaco;258790000;5.12;3.29;-7.84%;804871
+149;PUMP;ProPetro Holding Corp.;Basic Materials;Oil & Gas Equipment & Services;USA;1050000000;5.15;10.01;-4.39%;833931
+150;BGS;B&G Foods, Inc.;Consumer Goods;Processed & Packaged Goods;USA;884430000;5.16;13.71;-0.72%;1367584
+151;NRT;North European Oil Royalty Trust;Financial;Diversified Investments;USA;39410000;5.18;4.27;-0.31%;20867
+152;ELVT;Elevate Credit, Inc.;Financial;Credit Services;USA;169890000;5.23;3.81;-3.54%;324732
+153;SFE;Safeguard Scientifics, Inc.;Financial;Asset Management;USA;206190000;5.24;9.8;-1.90%;46304
+154;AEG;Aegon N.V.;Financial;Life Insurance;Netherlands;8439999999;5.27;3.98;-1.00%;1431913
+155;M;Macy's, Inc.;Services;Department Stores;USA;5140000000;5.35;16.23;-2.46%;8102271
+156;GTES;Gates Industrial Corporation plc;Industrial Goods;Diversified Machinery;USA;3740000000;5.36;12.6;-2.17%;238757
+157;CCR;CONSOL Coal Resources LP;Basic Materials;Industrial Metals & Minerals;USA;218310000;5.36;7.62;-3.54%;59314
+158;KB;KB Financial Group Inc.;Financial;Foreign Regional Banks;South Korea;14710000000;5.45;34.0;-2.38%;117536
+159;CNXM;CNX Midstream Partners LP;Basic Materials;Oil & Gas Pipelines;USA;1220000000;5.47;13.35;-1.62%;698988
+160;VNDA;Vanda Pharmaceuticals Inc.;Healthcare;Biotechnology;USA;715850000;5.47;12.19;-9.13%;958784
+161;NAVI;Navient Corporation;Financial;Credit Services;USA;3190000000;5.48;14.17;-1.94%;1292842
+162;VOC;VOC Energy Trust;Basic Materials;Independent Oil & Gas;USA;71090000;5.52;4.03;-3.59%;37610
+163;MGU;Macquarie Global Infrastructure Total Return Fund Inc.;Financial;Closed-End Fund - Foreign;USA;327540000;5.61;26.27;-0.90%;34820
+164;TTM;Tata Motors Limited;Consumer Goods;Auto Manufacturers - Major;India;7830000000;5.62;10.88;-1.54%;1467867
+165;FCAU;Fiat Chrysler Automobiles N.V.;Consumer Goods;Auto Manufacturers - Major;United Kingdom;20530000000;5.65;13.1;-1.50%;1982805
+166;DK;Delek US Holdings, Inc.;Basic Materials;Oil & Gas Refining & Marketing;USA;2069999999;5.68;28.27;1.33%;2163821
+167;HA;Hawaiian Holdings, Inc.;Services;Regional Airlines;USA;1230000000;5.68;26.81;0.07%;441200
+168;MSGN;MSG Networks Inc.;Services;Entertainment - Diversified;USA;860980000;5.71;14.21;-0.70%;752437
+169;UNM;Unum Group;Financial;Accident & Health Insurance;USA;6110000000;5.72;29.97;-0.50%;1327774
+170;UTG;Reaves Utility Income Fund;Financial;Closed-End Fund - Equity;USA;1910000000;5.73;39.25;-0.96%;119903
+171;RYI;Ryerson Holding Corporation;Industrial Goods;Metal Fabrication;USA;332520000;5.74;8.57;-2.61%;101975
+172;LX;LexinFintech Holdings Ltd.;Financial;Credit Services;China;2340000000;5.74;12.71;-3.86%;1424322
+173;GLIBP;GCI Liberty, Inc.;Technology;Telecom Services - Domestic;USA;3000000000;5.79;27.75;-2.08%;5649
+174;ENVA;Enova International, Inc.;Financial;Credit Services;USA;718860000;5.81;21.97;0.78%;270572
+175;PRT;PermRock Royalty Trust;Basic Materials;Oil & Gas Equipment & Services;USA;62420000;5.81;5.21;1.56%;26703
+176;SPRT;Support.com, Inc.;Technology;Internet Software & Services;USA;23400000;5.83;1.26;2.44%;26293
+177;GBL;GAMCO Investors, Inc.;Financial;Asset Management;USA;481670000;5.86;17.49;-0.17%;7561
+178;FLC;Flaherty & Crumrine Total Return Fund Inc.;Financial;Closed-End Fund - Debt;USA;234130000;5.86;23.47;-0.47%;24397
+179;NBLX;Noble Midstream Partners LP;Basic Materials;Oil & Gas Pipelines;USA;1820000000;5.94;19.61;-2.87%;485134
+180;NMCI;Navios Maritime Containers L.P.;Services;Shipping;Monaco;44630000;5.94;1.29;-0.78%;88019
+181;CURO;CURO Group Holdings Corp.;Financial;Credit Services;USA;567120000;5.98;13.6;-0.51%;652304
+182;SYF;Synchrony Financial;Financial;Credit Services;USA;20640000000;6.01;33.33;-0.92%;4864694
+183;UTF;Cohen & Steers Infrastructure Fund, Inc;Financial;Closed-End Fund - Equity;USA;2330000000;6.01;27.36;-0.18%;178486
+184;PAA;Plains All American Pipeline, L.P.;Basic Materials;Oil & Gas Pipelines;USA;11760000000;6.01;15.84;-1.98%;4402317
+185;MCEP;Mid-Con Energy Partners, LP;Basic Materials;Independent Oil & Gas;USA;7700000;6.05;0.25;-1.12%;78490
+186;SBH;Sally Beauty Holdings, Inc.;Services;Specialty Retail, Other;USA;1570000000;6.05;13.12;-2.38%;1626622
+187;HTD;John Hancock Tax-Advantaged Dividend Income Fund;Financial;Closed-End Fund - Debt;USA;980030000;6.06;27.69;-0.40%;32051
+188;DNP;DNP Select Income Fund Inc.;Financial;Closed-End Fund - Equity;USA;3940000000;6.07;13.04;0.38%;308572
+189;GTS;Triple-S Management Corporation;Financial;Accident & Health Insurance;USA;429160000;6.08;17.41;-1.30%;194371
+190;FFC;Flaherty & Crumrine Preferred Securities Income Fund Inc.;Financial;Closed-End Fund - Debt;USA;1010000000;6.13;22.8;-0.78%;84456
+191;CYD;China Yuchai International Limited;Industrial Goods;Diversified Machinery;Singapore;526669999;6.2;12.7;-1.47%;41103
+192;DXF;Dunxin Financial Holdings Limited;Financial;Credit Services;China;20900000;6.23;0.99;-1.01%;12779
+193;KBSF;KBS Fashion Group Limited;Consumer Goods;Textile - Apparel Clothing;China;3630000;6.26;2.14;2.39%;40812
+194;ECPG;Encore Capital Group, Inc.;Financial;Asset Management;USA;1090000000;6.27;34.3;-1.94%;131476
+195;PFO;Flaherty & Crumrine Preferred Income Opportunity Fund Inc.;Financial;Closed-End Fund - Debt;USA;165910000;6.28;13.15;0.27%;26575
+196;MFG;Mizuho Financial Group, Inc.;Financial;Foreign Regional Banks;Japan;35370000000;6.28;2.79;-0.71%;400392
+197;SAR;Saratoga Investment Corp.;Financial;Diversified Investments;USA;308280000;6.3;27.57;-0.29%;33982
+198;SSW;Seaspan Corporation;Services;Shipping;Hong Kong;2480000000;6.32;11.31;-1.57%;704272
+199;ADES;Advanced Emissions Solutions, Inc.;Industrial Goods;Pollution & Treatment Controls;USA;223050000;6.36;11.27;-6.12%;422533
+200;BCV;Bancroft Fund Ltd.;Financial;Closed-End Fund - Debt;USA;142040000;6.42;27.04;-0.92%;20621
+201;IAF;Aberdeen Australia Equity Fund, Inc.;Financial;Asset Management;USA;123040000;6.43;5.41;-0.37%;57283
+202;CSIQ;Canadian Solar Inc.;Technology;Semiconductor - Specialized;Canada;1450000000;6.46;23.0;-5.99%;1245359
+203;ALCO;Alico, Inc.;Consumer Goods;Farm Products;USA;268180000;6.5;35.71;-0.39%;13366
+204;CIG;Companhia Energetica de Minas Gerais;Utilities;Electric Utilities;Brazil;5030000000;6.52;3.34;1.21%;3093973
+205;CEF;Sprott Physical Gold and Silver Trust;Financial;Asset Management;Canada;3050000000;6.53;15.79;1.54%;1148716
+206;ALLY;Ally Financial Inc.;Financial;Mortgage Investment;USA;11170000000;6.55;28.47;-3.16%;6861754
+207;EARN;Ellington Residential Mortgage REIT;Financial;Mortgage Investment;USA;147690000;6.57;11.74;-1.01%;22521
+208;SCX;The L.S. Starrett Company;Industrial Goods;Small Tools & Accessories;USA;36320000;6.61;5.31;3.11%;22323
+209;ORI;Old Republic International Corporation;Financial;Property & Casualty Insurance;USA;7040000000;6.62;23.22;0.09%;1332802
+210;ACGLP;Arch Capital Group Ltd.;Financial;Insurance Brokers;Bermuda;10340000000;6.63;25.65;-0.04%;32653
+211;VEON;VEON Ltd.;Technology;Telecom Services - Foreign;Netherlands;4210000000;6.63;2.36;0.00%;6746326
+212;STAR;iStar Inc.;Financial;REIT - Diversified;USA;1130000000;6.64;16.42;1.99%;1433003
+213;MTR;Mesa Royalty Trust;Financial;Diversified Investments;USA;13360000;6.65;7.17;1.47%;7693
+214;FAX;Aberdeen Asia-Pacific Income Fund, Inc.;Financial;Closed-End Fund - Debt;Singapore;1080000000;6.66;4.36;-0.91%;457099
+215;KELYB;Kelly Services, Inc.;Services;Staffing & Outsourcing Services;USA;66239999;6.66;18.93;21.69%;225
+216;PVL;Permianville Royalty Trust;Basic Materials;Independent Oil & Gas;USA;67000000;6.69;2.0;-1.48%;36046
+217;UAL;United Airlines Holdings, Inc.;Services;Major Airlines;USA;20220000000;6.71;78.01;-2.38%;4351552
+218;OCSL;Oaktree Specialty Lending Corporation;Financial;Credit Services;USA;754140000;6.71;5.35;-0.37%;459665
+219;CVE;Cenovus Energy Inc.;Basic Materials;Oil & Gas Drilling & Exploration;Canada;11330000000;6.72;9.04;-1.63%;3010797
+220;SRLP;Sprague Resources LP;Basic Materials;Oil & Gas Refining & Marketing;USA;337820000;6.72;14.72;-0.88%;27210
+221;RCG;RENN Fund, Inc.;Financial;Asset Management;USA;10210000;6.73;1.72;-0.26%;1485
+222;CLF;Cleveland-Cliffs Inc.;Basic Materials;Industrial Metals & Minerals;USA;1950000000;6.74;7.09;-1.39%;7019544
+223;NVG;Nuveen AMT-Free Municipal Credit Income Fund;Financial;Asset Management;USA;3450000000;6.81;17.04;0.41%;296857
+224;KELYA;Kelly Services, Inc.;Services;Staffing & Outsourcing Services;USA;749610000;6.84;19.42;0.23%;1224547
+225;MESA;Mesa Air Group, Inc.;Services;Major Airlines;USA;256670000;6.86;7.68;-1.16%;293258
+226;ACGLO;Arch Capital Group Ltd.;Financial;Insurance Brokers;Bermuda;10700000000;6.86;26.55;-0.19%;16139
+227;BIO;Bio-Rad Laboratories, Inc.;Healthcare;Medical Laboratories & Research;USA;12220000000;6.88;400.5;-2.09%;154581
+228;PFD;Flaherty & Crumrine Preferred Income Fund Inc.;Financial;Closed-End Fund - Debt;USA;195410000;6.89;17.38;-0.11%;25483
+229;BIO-B;Bio-Rad Laboratories, Inc.;Healthcare;Medical Laboratories & Research;USA;2049999999;6.89;401.44;-1.37%;5
+230;ETO;Eaton Vance Tax-Advantaged Global Dividend Opportunities Fund;Financial;Closed-End Fund - Equity;USA;406860000;6.9;26.42;-1.01%;47894
+231;RIO;Rio Tinto Group;Basic Materials;Industrial Metals & Minerals;United Kingdom;92120000000;6.9;54.62;0.79%;2535159
+232;GRF;Eagle Capital Growth Fund, Inc.;Financial;Asset Management;USA;31220000;6.9;8.02;-0.80%;4700
+233;BSM;Black Stone Minerals, L.P.;Basic Materials;Independent Oil & Gas;USA;2290000000;6.93;10.12;-2.41%;870318
+234;WPX;WPX Energy, Inc.;Basic Materials;Independent Oil & Gas;USA;5080000000;6.93;11.85;-2.71%;6922968
+235;MDWD;MediWound Ltd.;Healthcare;Biotechnology;Israel;81800000;7.0;2.98;-1.00%;56918
+236;SHI;Sinopec Shanghai Petrochemical Company Limited;Basic Materials;Oil & Gas Refining & Marketing;China;4810000000;7.01;27.02;0.15%;23437
+237;CFBK;Central Federal Corporation;Financial;Savings & Loans;USA;79890000;7.03;14.85;-0.75%;14859
+238;BSIG;BrightSphere Investment Group Inc.;Financial;Asset Management;USA;938630000;7.04;10.95;0.46%;485019
+239;WOW;WideOpenWest, Inc.;Services;CATV Systems;USA;632880000;7.04;7.45;-0.80%;162631
+240;NAD;Nuveen Quality Municipal Income Fund;Financial;Diversified Investments;USA;3040000000;7.06;15.04;0.40%;428155
+241;JHI;John Hancock Investors Trust;Financial;Closed-End Fund - Debt;USA;159340000;7.07;18.3;-0.92%;7385
+242;CIEN;Ciena Corporation;Technology;Communication Equipment;USA;6840000000;7.11;43.89;-1.30%;2047490
+243;NZF;Nuveen Municipal Credit Income Fund;Financial;Asset Management;USA;2380000000;7.11;16.75;0.18%;136767
+244;CIH;China Index Holdings Limited;Technology;Application Software;China;222710000;7.12;2.35;-5.62%;72203
+245;ESGR;Enstar Group Limited;Financial;Property & Casualty Insurance;Bermuda;4219999999;7.14;195.54;-0.39%;25219
+246;RVI;Retail Value Inc.;Services;Specialty Retail, Other;USA;632390000;7.17;33.46;0.78%;51015
+247;PDT;John Hancock Premium Dividend Fund;Financial;Closed-End Fund - Debt;USA;908510000;7.19;18.7;-0.16%;56411
+248;NEA;Nuveen AMT-Free Quality Municipal Income Fund;Financial;Diversified Investments;USA;3900000000;7.19;14.85;0.27%;298629
+249;OPY;Oppenheimer Holdings Inc.;Financial;Investment Brokerage - Regional;USA;354200000;7.2;27.5;-0.65%;30682
+250;SID;Companhia Siderurgica Nacional;Basic Materials;Steel & Iron;Brazil;4179999999;7.21;2.94;-1.01%;3526289
+251;CINR;Ciner Resources LP;Basic Materials;Industrial Metals & Minerals;USA;339680000;7.21;16.7;-0.89%;11722
+252;MTG;MGIC Investment Corporation;Financial;Property & Casualty Insurance;USA;4680000000;7.22;13.36;-0.89%;2635352
+253;MCR;MFS Charter Income Trust;Financial;Closed-End Fund - Debt;USA;386610000;7.23;8.57;0.00%;213603
+254;CNO;CNO Financial Group, Inc.;Financial;Accident & Health Insurance;USA;2890000000;7.24;19.27;-1.43%;965807
+255;PFSI;PennyMac Financial Services, Inc.;Financial;Mortgage Investment;USA;2750000000;7.25;35.47;1.14%;804807
+256;RQI;Cohen & Steers Quality Income Realty Fund, Inc.;Financial;Closed-End Fund - Equity;USA;1560000000;7.26;14.3;-0.83%;986139
+257;BTZ;BlackRock Credit Allocation Income Trust;Financial;Closed-End Fund - Debt;USA;1520000000;7.28;14.66;-0.07%;224168
+258;ENIA;Enel Americas S.A.;Utilities;Electric Utilities;Chile;14050000000;7.28;9.16;0.00%;752162
+259;BKN;BlackRock Investment Quality Municipal Trust Inc.;Financial;Closed-End Fund - Debt;USA;275660000;7.28;16.04;0.00%;33375
+260;AER;AerCap Holdings N.V.;Services;Air Services, Other;Netherlands;8240000000;7.29;61.65;-1.52%;1770863
+261;AAL;American Airlines Group Inc.;Services;Major Airlines;USA;12150000000;7.31;27.82;-2.42%;11106640
+262;MARPS;Marine Petroleum Trust;Financial;Diversified Investments;USA;3760000;7.32;1.88;0.00%;156
+263;BRBR;BellRing Brands, Inc.;Consumer Goods;Processed & Packaged Goods;USA;874030000;7.33;22.24;0.32%;172501
+264;NUE;Nucor Corporation;Basic Materials;Steel & Iron;USA;14800000000;7.35;48.57;1.50%;2343564
+265;MTDR;Matador Resources Company;Basic Materials;Independent Oil & Gas;USA;1520000000;7.36;12.64;-2.84%;1965037
+266;IX;ORIX Corporation;Financial;Credit Services;Japan;22900000000;7.39;85.38;-1.05%;27979
+267;SMFG;Sumitomo Mitsui Financial Group, Inc.;Financial;Foreign Regional Banks;Japan;46260000000;7.4;6.69;-0.59%;874963
+268;HGSH;China HGS Real Estate Inc.;Financial;Real Estate Development;China;23380000;7.42;0.49;-5.85%;46391
+269;NMR;Nomura Holdings, Inc.;Financial;Investment Brokerage - National;Japan;17710000000;7.42;5.0;-1.38%;70233
+270;RDN;Radian Group Inc.;Financial;Property & Casualty Insurance;USA;4840000000;7.46;23.73;-1.37%;1697116
+271;IVR;Invesco Mortgage Capital Inc.;Financial;Mortgage Investment;USA;3010000000;7.51;18.23;-0.16%;2136182
+272;MOV;Movado Group, Inc.;Consumer Goods;Recreational Goods, Other;USA;266440000;7.52;15.85;-2.34%;100820
+273;AT;Atlantic Power Corporation;Utilities;Electric Utilities;USA;274400000;7.52;2.52;0.40%;156671
+274;WHR;Whirlpool Corporation;Consumer Goods;Appliances;USA;9360000000;7.55;147.19;-1.27%;531389
+275;HOLI;Hollysys Automation Technologies Ltd.;Industrial Goods;Industrial Electrical Equipment;China;937700000;7.56;14.59;-6.11%;209696
+276;AFB;AllianceBernstein National Municipal Income Fund;Financial;Closed-End Fund - Debt;USA;409610000;7.56;14.25;-0.07%;60212
+277;GM;General Motors Company;Consumer Goods;Auto Manufacturers - Major;USA;50430000000;7.58;34.65;-1.81%;8341454
+278;JHS;John Hancock Income Securities Trust;Financial;Closed-End Fund - Debt;USA;177960000;7.58;15.28;1.01%;9750
+279;MEN;BlackRock MuniEnhanced Fund, Inc.;Financial;Closed-End Fund - Debt;USA;346980000;7.58;11.69;0.09%;59849
+280;HEAR;Turtle Beach Corporation;Technology;Communication Equipment;USA;102890000;7.6;7.19;1.41%;269548
+281;EVT;Eaton Vance Tax-Advantaged Dividend Income Fund;Financial;Closed-End Fund - Equity;USA;1910000000;7.6;26.09;-0.80%;122071
+282;NXJ;Nuveen New Jersey Quality Municipal Income Fund;Financial;Asset Management;USA;627190000;7.62;15.11;0.40%;44745
+283;SIGA;SIGA Technologies, Inc.;Healthcare;Biotechnology;USA;402900000;7.63;4.73;-4.83%;114665
+284;MQY;BlackRock MuniYield Quality Fund, Inc.;Financial;Closed-End Fund - Debt;USA;479420000;7.63;15.61;0.13%;33087
+285;ADS;Alliance Data Systems Corporation;Services;Business Services;USA;4750000000;7.63;102.16;-0.87%;493507
+286;TRT;Trio-Tech International;Technology;Semiconductor Equipment & Materials;USA;13200000;7.64;3.75;4.17%;4437
+287;NC;NACCO Industries, Inc.;Consumer Goods;Home Furnishings & Fixtures;USA;336030000;7.65;48.35;0.60%;10538
+288;OMF;OneMain Holdings, Inc.;Financial;Credit Services;USA;6640000000;7.65;47.97;-1.54%;1041647
+289;GPS;The Gap, Inc.;Services;Apparel Stores;USA;6520000000;7.67;17.06;-2.35%;4084515
+290;WNC;Wabash National Corporation;Consumer Goods;Trucks & Other Vehicles;USA;666780000;7.68;12.44;-0.24%;552574
+291;MQT;BlackRock MuniYield Quality Fund II, Inc.;Financial;Closed-End Fund - Debt;USA;302500000;7.68;13.41;-0.07%;47103
+292;RCMT;RCM Technologies, Inc.;Services;Staffing & Outsourcing Services;USA;34610000;7.7;2.61;-2.25%;3464
+293;PSX;Phillips 66;Basic Materials;Oil & Gas Refining & Marketing;USA;40080000000;7.71;89.25;-1.04%;2404725
+294;ACB;Aurora Cannabis Inc.;Healthcare;Drug Manufacturers - Other;Canada;1950000000;7.73;1.67;-0.60%;13534941
+295;JEQ;Aberdeen Japan Equity Fund, Inc.;Financial;Closed-End Fund - Foreign;USA;100140000;7.73;7.47;-0.53%;15015
+296;HNNA;Hennessy Advisors, Inc.;Financial;Asset Management;USA;81690000;7.78;10.72;-3.16%;15015
+297;EMD;Western Asset Emerging Markets Debt Fund Inc.;Financial;Closed-End Fund - Debt;USA;913010000;7.79;15.03;0.27%;148353
+298;JEF;Jefferies Financial Group Inc.;Financial;Investment Brokerage - Regional;USA;6750000000;7.79;23.56;-0.67%;1719433
+299;GPP;Green Plains Partners LP;Basic Materials;Oil & Gas Pipelines;USA;324520000;7.81;14.0;-0.07%;21472
+300;MMT;MFS Multimarket Income Trust;Financial;Closed-End Fund - Debt;USA;397330000;7.82;6.21;-0.80%;400829
+301;ARCB;ArcBest Corporation;Services;Trucking;USA;637610000;7.86;24.8;-1.20%;147038
+302;TRMT;Tremont Mortgage Trust;Financial;Mortgage Investment;USA;49500000;7.87;6.0;-0.17%;18217
+303;EVY;Eaton Vance New York Municipal Income Trust;Financial;Asset Management;USA;75730000;7.9;14.02;0.14%;13564
+304;DAL;Delta Air Lines, Inc.;Services;Major Airlines;USA;37370000000;7.91;57.87;-0.87%;6293546
+305;NKX;Nuveen California AMT-Free Quality Municipal Income Fund;Financial;Asset Management;USA;760320000;7.91;16.0;0.21%;42607
+306;ASG;Liberty All-Star Growth Fund, Inc.;Financial;Closed-End Fund - Equity;USA;247880000;7.92;6.52;0.00%;199504
+307;ONEW;OneWater Marine Inc.;Consumer Goods;Recreational Vehicles;USA;261829999;7.92;17.86;-0.78%;47176
+308;RBS;The Royal Bank of Scotland Group plc;Financial;Foreign Money Center Banks;United Kingdom;32450000000;7.93;5.29;-1.31%;975388
+309;GLP;Global Partners LP;Services;Basic Materials Wholesale;USA;648000000;7.93;18.75;-1.63%;161491
+310;EHI;Western Asset Global High Income Fund Inc.;Financial;Closed-End Fund - Debt;USA;460470000;7.94;10.44;0.19%;241828
+311;CMA;Comerica Incorporated;Financial;Money Center Banks;USA;8970000000;7.95;62.48;-1.50%;2118507
+312;BPOP;Popular, Inc.;Financial;Foreign Regional Banks;USA;5280000000;7.96;54.76;-0.83%;541445
+313;COG;Cabot Oil & Gas Corporation;Basic Materials;Independent Oil & Gas;USA;6260000000;7.96;14.89;-3.00%;10042617
+314;KSM;DWS Strategic Municipal Income Trust;Financial;Closed-End Fund - Debt;USA;137700000;7.99;12.29;-0.24%;34991
+315;CEV;Eaton Vance California Municipal Income Trust;Financial;Asset Management;USA;98090000;7.99;13.75;-0.29%;14969
+316;PKOH;Park-Ohio Holdings Corp.;Services;Industrial Equipment Wholesale;USA;371450000;8.0;29.74;0.03%;20561
+317;NL;NL Industries, Inc.;Services;Industrial Equipment Wholesale;USA;190110000;8.02;3.8;-2.56%;10073
+318;BBGI;Beasley Broadcast Group, Inc.;Services;Broadcasting - Radio;USA;108210000;8.03;3.88;0.00%;6580
+319;SOI;Solaris Oilfield Infrastructure, Inc.;Basic Materials;Oil & Gas Equipment & Services;USA;605160000;8.06;13.11;0.00%;349318
+320;PAGP;Plains GP Holdings, L.P.;Basic Materials;Oil & Gas Pipelines;USA;4179999999;8.1;16.26;-2.52%;3380694
+321;ING;ING Groep N.V.;Financial;Life Insurance;Netherlands;42320000000;8.1;10.73;-1.56%;3497998
+322;NMY;Nuveen Maryland Quality Municipal Income Fund;Financial;Closed-End Fund - Debt;USA;324320000;8.12;14.04;0.14%;29947
+323;NMZ;Nuveen Municipal High Income Opportunity Fund;Financial;Asset Management;USA;1100000000;8.14;14.88;-0.27%;362515
+324;NQP;Nuveen Pennsylvania Quality Municipal Income Fund;Financial;Closed-End Fund - Debt;USA;546920000;8.16;14.63;-0.14%;29409
+325;NBW;Neuberger Berman California Municipal Fund Inc.;Financial;Asset Management;USA;81160000;8.17;14.62;-0.14%;10336
+326;ASIX;AdvanSix Inc.;Basic Materials;Chemicals - Major Diversified;USA;545370000;8.19;17.73;-9.26%;712366
+327;PANL;Pangaea Logistics Solutions, Ltd.;Services;Shipping;USA;129389999;8.23;2.93;0.69%;9424
+328;ATRO;Astronics Corporation;Industrial Goods;Aerospace/Defense Products & Services;USA;749760000;8.24;24.55;1.20%;297972
+329;UBOH;United Bancshares, Inc.;Financial;Money Center Banks;USA;76030000;8.25;22.56;-2.94%;1276
+330;MFD;Macquarie/First Trust Global Infrastructure/Utilities Dividend & Income Fund;Financial;Closed-End Fund - Equity;USA;95650000;8.27;11.19;-2.86%;44904
+331;YY;JOYY Inc.;Technology;Internet Information Providers;China;4940000000;8.27;58.85;-3.90%;1383686
+332;NUO;Nuveen Ohio Quality Municipal Income Fund;Financial;Asset Management;USA;288220000;8.28;15.73;0.35%;16764
+333;DFS;Discover Financial Services;Financial;Credit Services;USA;23760000000;8.3;75.32;-0.62%;1706243
+334;SVT;Servotronics, Inc.;Industrial Goods;Industrial Electrical Equipment;USA;25660000;8.34;10.31;-1.29%;11
+335;SJT;San Juan Basin Royalty Trust;Basic Materials;Independent Oil & Gas;USA;121210000;8.38;2.59;-0.38%;24119
+336;SKYW;SkyWest, Inc.;Services;Regional Airlines;USA;2860000000;8.38;55.48;-1.96%;282723
+337;RNP;Cohen & Steers REIT and Preferred Income Fund, Inc.;Financial;Closed-End Fund - Debt;USA;1200000000;8.4;25.18;0.00%;63901
+338;SAVE;Spirit Airlines, Inc.;Services;Major Airlines;USA;2820000000;8.41;41.1;-0.36%;917892
+339;RM;Regional Management Corp.;Financial;Credit Services;USA;312640000;8.41;28.09;-0.92%;67229
+340;FL;Foot Locker, Inc.;Consumer Goods;Textile - Apparel Footwear & Accessories;USA;4240000000;8.43;38.84;-4.15%;3296986
+341;TRTN;Triton International Limited;Services;Rental & Leasing Services;Bermuda;2780000000;8.43;38.24;-0.93%;185870
+342;OZK;Bank OZK;Financial;Regional - Southeast Banks;USA;3630000000;8.44;27.87;-1.55%;474973
+343;NPV;Nuveen Virginia Quality Municipal Income Fund;Financial;Diversified Investments;USA;262810000;8.46;14.7;-0.05%;26714
+344;MET;MetLife, Inc.;Financial;Life Insurance;USA;48080000000;8.47;51.23;-2.01%;5203019
+345;ADX;Adams Diversified Equity Fund, Inc.;Financial;Closed-End Fund - Equity;USA;1740000000;8.48;16.43;-0.67%;323652
+346;TLYS;Tilly's, Inc.;Services;Apparel Stores;USA;219030000;8.48;7.13;-3.39%;333892
+347;PMO;Putnam Municipal Opportunities Trust;Financial;Closed-End Fund - Debt;USA;463660000;8.49;13.51;-0.30%;112893
+348;CEO;CNOOC Limited;Basic Materials;Oil & Gas Drilling & Exploration;Hong Kong;70200000000;8.5;155.7;-1.55%;159048
+349;SAH;Sonic Automotive, Inc.;Services;Auto Dealerships;USA;1250000000;8.5;28.1;-3.24%;247811
+350;ESNT;Essent Group Ltd.;Financial;Mortgage Investment;Bermuda;4740000000;8.5;48.09;-0.19%;748154
+351;WSTG;Wayside Technology Group, Inc.;Services;Computers Wholesale;USA;81120000;8.5;17.52;-2.72%;24037
+352;MUI;BlackRock Muni Intermediate Duration Fund, Inc.;Financial;Closed-End Fund - Debt;USA;564870000;8.52;14.75;-0.14%;68291
+353;AL;Air Lease Corporation;Services;Rental & Leasing Services;USA;5060000000;8.52;43.33;-2.98%;576008
+354;VBF;Invesco Bond Fund;Financial;Closed-End Fund - Debt;USA;234710000;8.55;20.63;-0.15%;19280
+355;XEC;Cimarex Energy Co.;Basic Materials;Independent Oil & Gas;USA;4410000000;8.55;42.49;-1.87%;2156757
+356;CRK;Comstock Resources, Inc.;Basic Materials;Independent Oil & Gas;USA;1290000000;8.55;6.73;-1.17%;335712
+357;CSQ;Calamos Strategic Total Return Fund;Financial;Closed-End Fund - Debt;USA;2210000000;8.55;14.29;-1.18%;325985
+358;TG;Tredegar Corporation;Basic Materials;Specialty Chemicals;USA;681000000;8.57;20.0;-2.06%;43487
+359;EQC;Equity Commonwealth;Financial;REIT - Office;USA;4030000000;8.57;33.02;-0.15%;358822
+360;PBT;Permian Basin Royalty Trust;Basic Materials;Independent Oil & Gas;USA;179010000;8.57;4.02;4.69%;350367
+361;NKG;Nuveen Georgia Quality Municipal Income Fund;Financial;Asset Management;USA;135150000;8.57;12.99;0.15%;6288
+362;FSBW;FS Bancorp, Inc.;Financial;Regional - Pacific Banks;USA;227460000;8.57;52.29;0.36%;8872
+363;TEX;Terex Corporation;Industrial Goods;Farm & Construction Machinery;USA;1750000000;8.58;25.18;1.74%;812968
+364;NAZ;Nuveen Arizona Quality Municipal Income Fund;Financial;Asset Management;USA;163390000;8.59;14.12;0.36%;4296
+365;CIF;MFS Intermediate High Income Fund;Financial;Closed-End Fund - Debt;USA;57610000;8.61;2.93;0.16%;23521
+366;NAC;Nuveen California Quality Municipal Income Fund;Financial;Closed-End Fund - Debt;USA;2260000000;8.63;15.59;0.39%;146393
+367;LYB;LyondellBasell Industries N.V.;Basic Materials;Specialty Chemicals;Netherlands;27790000000;8.64;82.91;-0.53%;1580286
+368;FT;Franklin Universal Trust;Financial;Closed-End Fund - Debt;USA;208850000;8.65;8.31;0.24%;86545
+369;HFC;HollyFrontier Corporation;Basic Materials;Oil & Gas Refining & Marketing;USA;6880000000;8.65;43.03;0.99%;2073966
+370;AGM-A;Federal Agricultural Mortgage Corporation;Financial;Credit Services;USA;69830000;8.67;67.74;5.59%;205
+371;ACCO;ACCO Brands Corporation;Consumer Goods;Office Supplies;USA;916520000;8.68;9.3;-1.59%;403385
+372;PT;Pintec Technology Holdings Limited;Technology;Wireless Communications;Portugal;111890000;8.72;2.59;-8.16%;236771
+373;MCY;Mercury General Corporation;Financial;Property & Casualty Insurance;USA;2840000000;8.73;50.45;-1.54%;164746
+374;STX;Seagate Technology plc;Technology;Data Storage Devices;Ireland;14290000000;8.73;54.04;-1.30%;2280180
+375;MSB;Mesabi Trust;Financial;Diversified Investments;USA;277490000;8.74;21.15;0.19%;67479
+376;NCR;NCR Corporation;Technology;Information Technology Services;USA;4080000000;8.74;31.28;-2.19%;1063063
+377;FITB;Fifth Third Bancorp;Financial;Regional - Midwest Banks;USA;21170000000;8.74;29.4;-1.44%;3581578
+378;KTF;DWS Municipal Income Trust;Financial;Closed-End Fund - Debt;USA;467690000;8.76;11.84;0.13%;57831
+379;EDUC;Educational Development Corporation;Services;Publishing - Books;USA;50600000;8.76;5.96;-0.33%;14187
+380;WTM;White Mountains Insurance Group, Ltd.;Financial;Property & Casualty Insurance;Bermuda;3640000000;8.77;1142.06;-0.26%;8718
+381;NWLI;National Western Life Group, Inc.;Financial;Life Insurance;USA;1010000000;8.77;278.98;0.39%;24242
+382;VHI;Valhi, Inc.;Basic Materials;Chemicals - Major Diversified;USA;553000000;8.78;1.58;-3.07%;100926
+383;IMOS;ChipMOS TECHNOLOGIES INC.;Technology;Semiconductor Equipment & Materials;Taiwan;753600000;8.78;20.34;-0.29%;23569
+384;ALL;The Allstate Corporation;Financial;Property & Casualty Insurance;USA;40000000000;8.78;123.62;0.13%;1471912
+385;GIII;G-III Apparel Group, Ltd.;Consumer Goods;Textile - Apparel Clothing;USA;1270000000;8.79;25.68;-3.09%;549883
+386;HBI;Hanesbrands Inc.;Consumer Goods;Textile - Apparel Clothing;USA;5340000000;8.82;14.49;-1.56%;4030266
+387;CVU;CPI Aerostructures, Inc.;Industrial Goods;Aerospace/Defense Products & Services;USA;47190000;8.82;3.83;-3.77%;201728
+388;IMO;Imperial Oil Limited;Basic Materials;Major Integrated Oil & Gas;Canada;18260000000;8.84;23.91;-1.24%;178109
+389;BYM;BlackRock Municipal Income Quality Trust;Financial;Closed-End Fund - Debt;USA;385000000;8.84;14.58;-0.21%;35140
+390;EVN;Eaton Vance Municipal Income Trust;Financial;Closed-End Fund - Debt;USA;544630000;8.85;13.73;0.22%;60543
+391;MHI;Pioneer Municipal High Income Trust;Financial;Closed-End Fund - Debt;USA;283270000;8.85;12.44;-0.16%;37714
+392;EIM;Eaton Vance Municipal Bond Fund;Financial;Asset Management;USA;1010000000;8.87;13.37;0.15%;338113
+393;CRT;Cross Timbers Royalty Trust;Basic Materials;Oil & Gas Drilling & Exploration;USA;54540000;8.88;9.09;1.56%;40592
+394;CPSS;Consumer Portfolio Services, Inc.;Financial;Credit Services;USA;89200000;8.89;3.96;0.11%;14961
+395;EIG;Employers Holdings, Inc.;Financial;Accident & Health Insurance;USA;1370000000;8.89;42.96;2.43%;231559
+396;INSI;Insight Select Income Fund;Financial;Asset Management;USA;224050000;8.9;20.92;0.50%;19840
+397;UVE;Universal Insurance Holdings, Inc.;Financial;Property & Casualty Insurance;USA;782430000;8.9;23.37;-0.81%;192125
+398;PKBK;Parke Bancorp, Inc.;Financial;Regional - Northeast Banks;USA;292960000;8.9;22.11;-1.60%;17970
+399;CIT;CIT Group Inc.;Financial;Credit Services;USA;4540000000;8.91;47.0;-1.96%;765081
+400;ET;Energy Transfer LP;Basic Materials;Oil & Gas Equipment & Services;USA;33659999999;8.93;12.14;-3.19%;29912058
+401;MUS;BlackRock MuniHoldings Quality Fund, Inc.;Financial;Closed-End Fund - Debt;USA;169500000;8.93;13.02;0.04%;50099
+402;MUH;BlackRock MuniHoldings Fund II, Inc.;Financial;Closed-End Fund - Debt;USA;184780000;8.94;16.3;-0.91%;50970
+403;MTOR;Meritor, Inc.;Consumer Goods;Auto Parts;USA;1900000000;8.95;25.68;-0.27%;581068
+404;HWBK;Hawthorn Bancshares, Inc.;Financial;Regional - Northeast Banks;USA;144460000;8.97;23.04;0.09%;7347
+405;FMN;Federated Premier Municipal Income Fund;Financial;Closed-End Fund - Debt;USA;168890000;8.97;14.69;0.00%;35446
+406;NAN;Nuveen New York Quality Municipal Income Fund;Financial;Closed-End Fund - Debt;USA;448890000;8.98;14.55;-0.41%;40904
+407;MHN;BlackRock MuniHoldings New York Quality Fund, Inc.;Financial;Closed-End Fund - Debt;USA;438650000;8.99;14.09;-0.35%;31471
+408;BBK;BlackRock Municipal Bond Trust;Financial;Closed-End Fund - Debt;USA;170210000;9.01;16.17;-0.22%;9812
+409;FSFG;First Savings Financial Group, Inc.;Financial;Regional - Midwest Banks;USA;149410000;9.01;63.31;0.09%;1861
+410;TM;Toyota Motor Corporation;Consumer Goods;Auto Manufacturers - Major;Japan;227160000000;9.01;139.04;-0.05%;150343
+411;NMT;Nuveen Massachusetts Quality Municipal Income Fund;Financial;Closed-End Fund - Debt;USA;132199999;9.03;14.18;-0.70%;2620
+412;NUM;Nuveen Michigan Quality Municipal Income Fund;Financial;Asset Management;USA;293090000;9.04;14.49;0.14%;36780
+413;CNHI;CNH Industrial N.V.;Industrial Goods;Farm & Construction Machinery;United Kingdom;12960000000;9.05;9.5;-0.84%;2285753
+414;TCBI;Texas Capital Bancshares, Inc.;Financial;Regional - Southwest  Banks;USA;2930000000;9.06;56.25;-3.28%;457465
+415;NRK;Nuveen New York AMT-Free Quality Municipal Income Fund;Financial;Diversified Investments;USA;1220000000;9.06;13.98;0.22%;68622
+416;CUK;Carnival Corporation & Plc;Services;General Entertainment;United Kingdom;28630000000;9.07;39.24;-1.73%;294538
+417;ALSN;Allison Transmission Holdings, Inc.;Consumer Goods;Auto Parts;USA;5350000000;9.08;44.55;1.04%;915172
+418;ANAT;American National Insurance Company;Financial;Property & Casualty Insurance;USA;3040000000;9.09;112.17;-0.73%;25690
+419;DTF;DTF Tax-Free Income Inc.;Financial;Closed-End Fund - Debt;USA;130280000;9.09;15.29;0.89%;8214
+420;HTH;Hilltop Holdings Inc.;Financial;Mortgage Investment;USA;2009999999;9.09;22.2;0.32%;259098
+421;CFFI;C&F Financial Corporation;Financial;Regional - Mid-Atlantic Banks;USA;174130000;9.1;49.75;-1.89%;3163
+422;CVI;CVR Energy, Inc.;Basic Materials;Oil & Gas Refining & Marketing;USA;3530000000;9.12;34.47;-1.71%;795548
+423;COP;ConocoPhillips Company;Basic Materials;Independent Oil & Gas;USA;63660000000;9.14;58.44;-0.75%;5206661
+424;BLX;Banco Latinoamericano de Comercio Exterior, S.A;Financial;Foreign Money Center Banks;Panama;619980000;9.14;19.57;-2.30%;84039
+425;BWA;BorgWarner Inc.;Consumer Goods;Auto Parts;USA;7260000000;9.15;33.98;-3.33%;2470238
+426;PRU;Prudential Financial, Inc.;Financial;Life Insurance;USA;37230000000;9.15;92.6;-1.26%;2080255
+427;HIX;Western Asset High Income Fund II Inc.;Financial;Closed-End Fund - Debt;USA;597800000;9.18;7.02;-0.28%;226700
+428;IIM;Invesco Value Municipal Income Trust;Financial;Closed-End Fund - Debt;USA;748200000;9.18;15.9;0.06%;56930
+429;COF;Capital One Financial Corporation;Financial;Credit Services;USA;47280000000;9.18;101.15;-2.31%;2749122
+430;CINF;Cincinnati Financial Corporation;Financial;Property & Casualty Insurance;USA;18320000000;9.2;111.32;-0.71%;673344
+431;BTA;BlackRock Long-Term Municipal Advantage Trust;Financial;Closed-End Fund - Debt;USA;183260000;9.2;13.65;1.19%;34751
+432;AGM;Federal Agricultural Mortgage Corporation;Financial;Credit Services;USA;762270000;9.21;71.98;-0.46%;30924
+433;CMC;Commercial Metals Company;Basic Materials;Steel & Iron;USA;2440000000;9.23;20.78;1.07%;1405149
+434;SLM;SLM Corporation;Financial;Credit Services;USA;5180000000;9.24;12.04;-1.95%;3942548
+435;FBC;Flagstar Bancorp, Inc.;Financial;Savings & Loans;USA;2000000000;9.27;35.31;-0.03%;140726
+436;VSEC;VSE Corporation;Services;Technical Services;USA;329840000;9.28;29.85;-0.70%;30719
+437;FDUS;Fidus Investment Corporation;Financial;Asset Management;USA;375750000;9.29;15.36;-1.22%;99529
+438;RFI;Cohen & Steers Total Return Realty Fund, Inc.;Financial;Closed-End Fund - Equity;USA;395010000;9.3;15.11;-0.33%;76651
+439;PACW;PacWest Bancorp;Financial;Regional - Pacific Banks;USA;4440000000;9.3;36.38;-1.81%;1033551
+440;NGHCO;National General Holdings Corp.;Financial;Property & Casualty Insurance;USA;2720000000;9.31;25.38;-0.10%;9570
+441;MFL;BlackRock MuniHoldings Investment Quality Fund;Financial;Closed-End Fund - Debt;USA;526000000;9.31;13.88;0.00%;61215
+442;NGHCN;National General Holdings Corp.;Financial;Property & Casualty Insurance;USA;2720000000;9.31;25.4;-0.39%;25304
+443;TSBK;Timberland Bancorp, Inc.;Financial;Savings & Loans;USA;234620000;9.32;27.57;-1.68%;7792
+444;ETG;Eaton Vance Tax-Advantaged Global Dividend Income Fund;Financial;Closed-End Fund - Equity;USA;1420000000;9.33;18.56;-2.26%;202685
+445;UNTY;Unity Bancorp, Inc.;Financial;Money Center Banks;USA;215530000;9.33;19.81;-0.10%;9338
+446;SC;Santander Consumer USA Holdings Inc.;Financial;Mortgage Investment;USA;9060000000;9.35;26.66;0.00%;1095949
+447;KKR;KKR & Co. Inc.;Financial;Asset Management;USA;28590000000;9.35;33.11;-1.75%;1690645
+448;OCSI;Oaktree Strategic Income Corporation;Financial;Asset Management;USA;246050000;9.35;8.35;-0.60%;22869
+449;HTGC;Hercules Capital, Inc.;Financial;Mortgage Investment;USA;1670000000;9.35;15.99;1.85%;1875479
+450;MFC;Manulife Financial Corporation;Financial;Life Insurance;Canada;39010000000;9.36;19.51;-2.60%;7016588
+451;WCC;WESCO International, Inc.;Services;Industrial Equipment Wholesale;USA;2040000000;9.36;48.3;-0.98%;601561
+452;PLBC;Plumas Bancorp;Financial;Regional - Pacific Banks;USA;144280000;9.37;27.8;-0.50%;728
+453;C;Citigroup Inc.;Financial;Money Center Banks;USA;170770000000;9.38;76.44;-2.28%;13973440
+454;BSD;BlackRock Strategic Municipal Trust;Financial;Closed-End Fund - Debt;USA;109840000;9.41;15.03;0.40%;19125
+455;MSD;Morgan Stanley Emerging Markets Debt Fund, Inc.;Financial;Closed-End Fund - Debt;USA;203460000;9.42;9.98;-0.20%;41919
+456;NGHCP;National General Holdings Corp.;Financial;Property & Casualty Insurance;USA;2750000000;9.42;25.67;0.14%;2522
+457;BBDO;Banco Bradesco S.A.;Financial;Foreign Regional Banks;Brazil;53010000000;9.43;6.6;-2.37%;10595
+458;MVT;BlackRock MuniVest Fund II, Inc.;Financial;Closed-End Fund - Debt;USA;328310000;9.43;15.39;0.23%;12718
+459;WEA;Western Asset Premier Bond Fund;Financial;Closed-End Fund - Debt;USA;175600000;9.44;14.75;0.00%;20786
+460;MRLN;Marlin Business Services Corp.;Financial;Mortgage Investment;USA;255020000;9.44;20.75;-1.47%;13557
+461;BQH;BlackRock New York Municipal Bond Trust;Financial;Closed-End Fund - Debt;USA;44160000;9.45;15.77;-0.06%;114
+462;AUG;Auryn Resources Inc.;Basic Materials;Industrial Metals & Minerals;Canada;140130000;9.45;1.38;0.00%;207828
+463;IMKTA;Ingles Markets, Incorporated;Services;Grocery Stores;USA;727360000;9.46;35.99;0.25%;56033
+464;BPMP;BP Midstream Partners LP;Basic Materials;Independent Oil & Gas;USA;1510000000;9.47;14.19;-1.53%;251146
+465;PMM;Putnam Managed Municipal Income Trust;Financial;Closed-End Fund - Debt;USA;410860000;9.47;8.35;-0.48%;111063
+466;BSE;BlackRock New York Municipal Income Quality Trust;Financial;Closed-End Fund - Debt;USA;91320000;9.47;14.01;-0.02%;19274
+467;CAI;CAI International, Inc.;Services;Rental & Leasing Services;USA;499520000;9.47;28.43;-0.84%;55453
+468;BOSC;B.O.S. Better Online Solutions Ltd.;Technology;Communication Equipment;Israel;8890000;9.49;2.04;-2.86%;21400
+469;MGA;Magna International Inc.;Services;Auto Parts Wholesale;Canada;16260000000;9.5;51.55;-1.75%;1388258
