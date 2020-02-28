@@ -20,6 +20,11 @@ def set_directory(yahoo_directory):
         print("+ " + yahoo_directory + "\tcreating new directory")
         PanOS.makedirs(yahoo_directory)
 
+def set_file_header(stockCsvFile, stockHeaderList):
+    if not PanOS.path.exists(stockCsvFile):
+        with open(stockCsvFile, mode='w') as csv_yfile:
+            writer = csv.DictWriter(csv_yfile, fieldnames=stockHeaderList, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writeheader()
 
 def get_yfile(yahoo_file, yahoo_symbol):
     y_file = yahoo_file.replace('.', '_' + yahoo_symbol + '.')
@@ -525,18 +530,18 @@ with open(tsx_file_) as aStockFile:
     set_directory(tsx_today)
     stockCsvFile = PanOSPath.join(tsx_today, PanOSPath.basename(tsx_file_ + ".csv"))
     print(stockCsvFile)
-    with open(stockCsvFile, mode='w') as csv_yfile:
-        writer = csv.DictWriter(csv_yfile, fieldnames = headlist, delimiter = ';', quotechar = '"', quoting = csv.QUOTE_MINIMAL)
-        writer.writeheader()
-	'''for readStockCSVLine in readStockCSV:
-		readStockCSVfile = get_yfile(tsx_file_, readStockCSVLine['Symbol'])
-		tsx_list_[0] = readStockCSVLine['Symbol']
-		tsx_list_[1] = readStockCSVLine['Description']
-		tsx_list_[2] = get_panda_tgt(readStockCSVLine['Symbol'])
-		set_yfile(readStockCSVfile, readStockCSVLine['Symbol'], readStockCSVLine['Description'])
-		get_yfinancials(readStockCSVLine['Symbol'], readStockCSVfile, tsx_list_)
-		pprint.pprint(tsx_list_)
-		# Appending a row to csv with missing entries
-		f = open(stockCsvFile, "a")
-		f.write(';'.join(tsx_list_) + "\n")
-		f.close()'''
+    set_file_header(stockCsvFile, headlist)
+    for readStockCSVLine in readStockCSV:
+        readStockCSVfile = get_yfile(tsx_file_, readStockCSVLine['Symbol'])
+        print(readStockCSVfile)
+'''
+tsx_list_[0] = readStockCSVLine['Symbol']
+tsx_list_[1] = readStockCSVLine['Description']
+tsx_list_[2] = get_panda_tgt(readStockCSVLine['Symbol'])
+set_yfile(readStockCSVfile, readStockCSVLine['Symbol'], readStockCSVLine['Description'])
+get_yfinancials(readStockCSVLine['Symbol'], readStockCSVfile, tsx_list_)
+pprint.pprint(tsx_list_)
+# Appending a row to csv with missing entries
+f = open(stockCsvFile, "a")
+f.write(';'.join(tsx_list_) + "\n")
+f.close()'''
