@@ -52,13 +52,10 @@ PanPrint.pprint(myDf.info())
 PanPrint.pprint(myDf['P/E'].describe(include='all'))
 PanPrint.pprint(myDf['Price'].describe(include='all'))
 PanPrint.pprint(myDf['Volume'].describe(include='all'))
-PEratio15 = myDf['P/E'].quantile(.15)
-myDf = myDf[myDf['P/E'] <= PEratio15]
-Volume200k = 200000
-myDf = myDf[myDf['Volume'] <= Volume200k]
-PanPrint.pprint(PanYahooFinancial('TUP').get_dividend_yield())
-PanPrint.pprint(PanYahooFinancial('TUP').get_exdividend_date())
-myDf.to_csv(stock_file.replace('.', '_15_200k.'), header=True, index=False, sep=';', mode='w+', encoding='utf-8')
+PanPrint.pprint(str(type(myDf['Ticker'].tolist())))
+#PanPrint.pprint(PanYahooFinancial(tickerList).get_exdividend_date())
+#PanPrint.pprint(PanYahooFinancial('TUP').get_exdividend_date())
+myDf.to_csv(stock_file, header=True, index=False, sep=';', mode='w+', encoding='utf-8')
 exit(11)
 # Create a SQLite database
 # PanPrint.pprint(str(type(stock_list.to_sqlite('script-finviz.sqlite'))))
