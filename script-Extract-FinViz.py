@@ -1,5 +1,8 @@
 from finviz.screener import Screener as PanScreener
 from yahoofinancials import YahooFinancials as PanYahooFinancial
+import matplotlib.pyplot as PanPyPlot
+import numpy as PanNumPy
+import seaborn as PanSeaBorn
 import datetime as PanDateTime
 import os as PanOS
 import os.path as PanOSPath
@@ -56,6 +59,8 @@ PanPrint.pprint(str(type(myDf['Ticker'].tolist())))
 #PanPrint.pprint(PanYahooFinancial(tickerList).get_exdividend_date())
 #PanPrint.pprint(PanYahooFinancial('TUP').get_exdividend_date())
 myDf.to_csv(stock_file, header=True, index=False, sep=';', mode='w+', encoding='utf-8')
+PanPyPlot.close('all')
+#.savefig('PanPyPlot.png')
 exit(11)
 # Create a SQLite database
 # PanPrint.pprint(str(type(stock_list.to_sqlite('script-finviz.sqlite'))))
