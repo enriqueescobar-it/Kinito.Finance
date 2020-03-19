@@ -1,38 +1,34 @@
-# ============================================================================
-# Import OHLCV data using yahoofinancials
-# Author - Mayank Rasu
-# =============================================================================
-
-
 import pandas as pd
 from yahoofinancials import YahooFinancials
 import datetime
 
 all_tickers = ["AAPL","MSFT","CSCO","AMZN","INTC"]
-
 # extracting stock data (historical close price) for the stocks identified
-close_prices = pd.DataFrame()
+all_dataframe = pd.DataFrame()
+beg_date = (datetime.date.today()-datetime.timedelta(365)).strftime('%Y-%m-%d')
+print(beg_date)
 end_date = (datetime.date.today()).strftime('%Y-%m-%d')
-beg_date = (datetime.date.today()-datetime.timedelta(1825)).strftime('%Y-%m-%d')
-cp_tickers = all_tickers
+print(end_date)
+new_tickers = all_tickers
 attempt = 0
-drop = []
-while len(cp_tickers) != 0 and attempt <=5:
+drop_list = []
+while len(new_tickers) != 0 and attempt <=5:
     print("-----------------")
     print("attempt number ",attempt)
     print("-----------------")
-    cp_tickers = [j for j in cp_tickers if j not in drop]
-    for i in range(len(cp_tickers)):
+    new_tickers = [j for j in new_tickers if j not in drop_list]
+    for i in range(len(new_tickers)):
         try:
-            yahoo_financials = YahooFinancials(cp_tickers[i])
-            json_obj = yahoo_financials.get_historical_stock_data(beg_date,end_date,"daily")
-            ohlv = json_obj[cp_tickers[i]]['prices']
-            temp = pd.DataFrame(ohlv)[["formatted_date","adjclose"]]
-            temp.set_index("formatted_date",inplace=True)
-            temp2 = temp[~temp.index.duplicated(keep='first')]
-            close_prices[cp_tickers[i]] = temp2["adjclose"]
-            drop.append(cp_tickers[i])       
+            new_financial = YahooFinancials(new_tickers[i])
+            print(type(new_financial.get_historical_stock_data(beg_date,end_date,"daily")))
+            new_json = new_financial.get_historical_stock_data(beg_date,end_date,"daily")
+            new_json_field = new_json[new_tickers[i]]['prices']
+            new_dataframe = pd.DataFrame(new_json_field)[["formatted_date","adjclose"]]
+            new_dataframe.set_index("formatted_date",inplace=True)
+            first_dataframe = new_dataframe[~new_dataframe.index.duplicated(keep='first')]
+            all_dataframe[new_tickers[i]] = first_dataframe["adjclose"]
+            drop_list.append(new_tickers[i])   
         except:
-            print(cp_tickers[i]," :failed to fetch data...retrying")
+            print(new_tickers[i]," :failed to fetch data...retrying")
             continue
     attempt+=1
