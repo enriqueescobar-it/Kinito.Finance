@@ -80,3 +80,11 @@ exit(12)
 '''FUNDAMENTAL PEratio low < 15
 DESCRIPTIVE Dividend Yield very high > 10%
 			Average Volume > over 200K'''
+dict_keys(['Index', 'P/E',
+ 'EPS (ttm)', 'Insider Own',
+ 'Shs Outstand', 'Perf Week', 'Market Cap',
+ 'Forward P/E', 'EPS next Y', 'Insider Trans', 'Shs Float', 'Perf Month', 'Income', 'PEG', 'EPS next Q', 'Inst Own', 'Short Float', 'Perf Quarter', 'Sales', 'P/S', 'EPS this Y', 'Inst Trans', 'Short Ratio', 'Perf Half Y', 'Book/sh', 'P/B', 'ROA', 'Target Price', 'Perf Year', 'Cash/sh', 'P/C', 'EPS next 5Y', 'ROE',
+ '52W Range', 'Perf YTD', 'Dividend', 'P/FCF', 'EPS past 5Y', 'ROI', '52W High',
+ 'Beta', 'Dividend %', 'Quick Ratio', 'Sales past 5Y', 'Gross Margin', '52W Low', 'ATR', 'Employees', 'Current Ratio', 'Sales Q/Q', 'Oper. Margin', 'RSI (14)', 'Volatility', 'Optionable', 'Debt/Eq', 'EPS Q/Q', 'Profit Margin',
+ 'Rel Volume', 'Prev Close', 'Shortable', 'LT Debt/Eq', 'Earnings', 'Payout', 'Avg Volume',
+ 'Price', 'Recom', 'SMA20', 'SMA50', 'SMA200', 'Volume', 'Change'])

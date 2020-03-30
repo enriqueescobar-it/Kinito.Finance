@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZRu8mWviytX3OiDIYyBNhudRYL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="sortByType" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Data" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\Disk_X\Kinito.Finance\Data" />
+      <recent name="H:\Disk_X\Kinito.Finance\Data\Yahoo" />
+      <recent name="H:\Disk_X\Kinito.Finance\Data\YahooFinancial" />
+      <recent name="H:\Disk_X\Kinito.Finance\Data\Manager" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.script">
+    <configuration name="alphavantage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="C:/Python38/Lib/site-packages/alpha_vantage" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:/Python38/Lib/site-packages/alpha_vantage/alphavantage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="script" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.script" />
+        <item itemvalue="Python.alphavantage" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="330" y="90" key="#Inspections" timestamp="1585021292042">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="330" y="90" key="#Inspections/0.0.1474.864@0.0.1474.864" timestamp="1585021292042" />
+    <state x="330" y="45" width="814" height="819" key="#Intentions" timestamp="1584915913115">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="330" y="45" width="814" height="819" key="#Intentions/0.0.1474.864@0.0.1474.864" timestamp="1584915913115" />
+    <state x="507" y="222" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584814159571">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="507" y="222" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1474.864@0.0.1474.864" timestamp="1584814159571" />
+    <state x="418" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585281190396">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="418" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1474.864@0.0.1474.864" timestamp="1585281190396" />
+    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1585238354579">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1585238354579" />
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1585546408203">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
+    <state width="1453" height="271" key="GridCell.Tab.0.center" timestamp="1585546408203">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
+    <state width="1453" height="271" key="GridCell.Tab.0.left" timestamp="1585546408203">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
+    <state width="1453" height="271" key="GridCell.Tab.0.right" timestamp="1585546408203">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
+    <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="255" key="GridCell.Tab.1.bottom/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
+    <state width="1453" height="255" key="GridCell.Tab.1.center" timestamp="1585191259386">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="255" key="GridCell.Tab.1.center/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
+    <state width="1453" height="255" key="GridCell.Tab.1.left" timestamp="1585191259386">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="255" key="GridCell.Tab.1.left/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
+    <state width="1453" height="255" key="GridCell.Tab.1.right" timestamp="1585191259386">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state width="1453" height="255" key="GridCell.Tab.1.right/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
+    <state x="246" y="74" key="SettingsEditor" timestamp="1585439945729">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1585439945729" />
+    <state x="394" y="197" key="run.anything.popup" timestamp="1585439941855">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="394" y="197" key="run.anything.popup/0.0.1474.864@0.0.1474.864" timestamp="1585439941855" />
+    <state x="296" y="289" width="672" height="676" key="search.everywhere.popup" timestamp="1585439937681">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="296" y="289" width="672" height="676" key="search.everywhere.popup/0.0.1474.864@0.0.1474.864" timestamp="1585439937681" />
+  </component>
+</project>
