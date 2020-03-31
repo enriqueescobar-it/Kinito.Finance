@@ -3,7 +3,7 @@ import pandas
 
 class AverageTrueRangeManager(object):
     """Average True Range class manager"""
-    AverageTrueRangeDf: pandas.DataFrame
+    IndicatorDf: pandas.DataFrame
 
     def __init__(self, a_df: pandas.DataFrame, days_span: int = 20):
         self.__setIndicator(a_df, days_span)
@@ -20,7 +20,7 @@ class AverageTrueRangeManager(object):
         # some use exponential mean
         # df['AvgTrueRate'] = df['TrueRange'].ewm(span=days_span,adjust=False,min_periods=days_span).mean()
         # df = df.drop(['H-L', 'H-PC', 'L-PC'], axis=1) #
-        self.AverageTrueRangeDf = df
+        self.IndicatorDf = df
 
     def getAvgTrueRange(self, a_df: pandas.DataFrame, days_span: int = 20):
         """function to calculate True Range and Average True Range"""

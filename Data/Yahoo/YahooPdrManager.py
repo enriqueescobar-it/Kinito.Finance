@@ -1,10 +1,8 @@
 from datetime import date
 import numpy as np
-import statsmodels.api as sm
 from pandas import DataFrame
 from pandas_datareader import get_data_yahoo
 from stocktrends import Renko
-
 import Data.Yahoo.YahooTicker as YahooTicker
 
 
@@ -14,8 +12,6 @@ class YahooPdrManager(object):
     DateFrom: date
     YahooData: DataFrame
     YahooDailyReturn: DataFrame
-    YahooOnBalanceDemand: DataFrame
-    YahooSlopes: DataFrame
 
     def __init__(self, yahoo_ticker: YahooTicker, from_date: date, to_date: date, y_data=None):
         self.DateTo = to_date
@@ -29,8 +25,6 @@ class YahooPdrManager(object):
             self.YahooData = y_data
         self.__updateDailyReturn()
         ### self.__setAvgDirectionalIndeX(14)
-        self.__setOnBalanceDemand()
-        self.__setSlope()
         # self.__setRenko()
 
     def __updateDailyReturn(self):
@@ -93,37 +87,6 @@ class YahooPdrManager(object):
                 adx_list.append(((days_span - 1) * adx_list[j - 1] + dx_list[j]) / days_span)
         df['ADX'] = np.array(adx_list)
         self.YahooADX = df['ADX']
-
-    def __setOnBalanceDemand(self):
-        """function to calculate On Balance Volume"""
-        df: DataFrame = self.YahooData.copy()
-        df['daily_ret'] = df['Adj Close'].pct_change()
-        df['direction'] = np.where(df['daily_ret'] >= 0, 1, -1)
-        df['direction'][0] = 0
-        df['vol_adj'] = df['Volume'] * df['direction']
-        df['obv'] = df['vol_adj'].cumsum()
-        self.YahooOnBalanceDemand = df
-
-    def __setSlope(self, nb_points: int = 5):
-        """function to calculate the slope of n consecutive points on a plot"""
-        df: DataFrame = self.YahooData.copy()
-        n: int = nb_points  # you can use 20 or more
-        slopes = [i * 0 for i in range(n - 1)]
-        ser = df['Adj Close']
-        i: int
-        for i in range(n, len(ser) + 1):
-            y = ser[i - n:i]
-            x = np.array(range(n))
-            y_scaled = (y - y.min()) / (y.max() - y.min())
-            x_scaled = (x - x.min()) / (x.max() - x.min())
-            # y = mx+c this is c
-            x_scaled = sm.add_constant(x_scaled)
-            model = sm.OLS(y_scaled, x_scaled)
-            results = model.fit()
-            slopes.append(results.params[-1])
-        slope_angle = (np.rad2deg(np.arctan(np.array(slopes))))
-        df['Slopes'] = np.array(slope_angle)
-        self.YahooSlopes = df
 
     def __setRenko(self):
         """function to convert ohlc data into renko bricks"""

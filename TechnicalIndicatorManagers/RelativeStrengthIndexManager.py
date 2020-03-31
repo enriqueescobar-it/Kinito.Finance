@@ -5,7 +5,7 @@ import numpy as np
 
 class RelativeStrengthIndexManager(object):
     """Relative Strength Index manager"""
-    RelativeStrengthIndexDf: pandas.DataFrame
+    IndicatorDf: pandas.DataFrame
 
     def __init__(self, a_df: pandas.DataFrame):
         self.__setIndicator(a_df)
@@ -35,7 +35,7 @@ class RelativeStrengthIndexManager(object):
         df['RsiAvgLoss'] = np.array(avg_loss)
         df['RelativeStrength'] = df['RsiAvgGain'] / df['RsiAvgLoss']
         df['RelativeStrengthIndex'] = 100 - (100 / (1 + df['RelativeStrength']))
-        self.RelativeStrengthIndexDf = df
+        self.IndicatorDf = df
 
     def getIndicator(self, a_df, days_span: int = 14):
         """function to calculate RSI without using loop"""

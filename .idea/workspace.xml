@@ -2,37 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/AbstractMeasureManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/CalmarRatioManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/CumulativeAnnualGrowthRateManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/KPIs/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/MaximumDrawdownRatioManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/SharpeRatioManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/SortinoRatioManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PerformanceMeasurements/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/AbstractIndicatorManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/AverageDirectionalIndexManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/AverageTrueRangeManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/BollingerBandsManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/MovingAverageConvergenceDivergenceManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/OnBalanceVolumeManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/RelativeStrengthIndexManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/RenkoManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/SlopesManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/AverageDirectionalIndexIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/AverageTrueRangeIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/BollingerBandsIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/MovingAverageConvergenceDivergenceIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/OnBalanceVolumeIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/RelativeStrengthIndexIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/RenkoIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/SlopesIndicator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TechnicalIndicators/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/TradingStrategyLibraryManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Data/Yahoo/YahooPdrManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Yahoo/YahooPdrManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Yahoo/YahooTicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Yahoo/YahooTicker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicatorManagers/AverageTrueRangeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/AverageTrueRangeManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicatorManagers/BollingerBandsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/BollingerBandsManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicatorManagers/MovingAverageConvergenceDivergenceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/MovingAverageConvergenceDivergenceManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicatorManagers/OnBalanceVolumeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/OnBalanceVolumeManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicatorManagers/RelativeStrengthIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/RelativeStrengthIndexManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicatorManagers/SlopesManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TechnicalIndicatorManagers/SlopesManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script" beforeDir="false" afterPath="$PROJECT_DIR$/script" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,25 +127,25 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1585238354579" />
-    <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1585624450099">
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1585627822718">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585624450099" />
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585627822718" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
-    <state width="1453" height="271" key="GridCell.Tab.0.center" timestamp="1585624450099">
+    <state width="1453" height="271" key="GridCell.Tab.0.center" timestamp="1585627822718">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585624450099" />
+    <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585627822718" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
-    <state width="1453" height="271" key="GridCell.Tab.0.left" timestamp="1585624450099">
+    <state width="1453" height="271" key="GridCell.Tab.0.left" timestamp="1585627822718">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585624450099" />
+    <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585627822718" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
-    <state width="1453" height="271" key="GridCell.Tab.0.right" timestamp="1585624450099">
+    <state width="1453" height="271" key="GridCell.Tab.0.right" timestamp="1585627822718">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585624450099" />
+    <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585627822718" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1585546408203" />
     <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">
       <screen x="0" y="0" width="1474" height="864" />

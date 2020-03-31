@@ -1,9 +1,6 @@
 import datetime
-
-from alpha_vantage.timeseries import TimeSeries
 from pandas import DataFrame
 from pandas_datareader import get_data_yahoo
-
 import Data.DateTime.PyDateTimes as PyDays
 
 

@@ -10,7 +10,6 @@ from Data.TimeSerie.AlphaVantageManager import AlphaVantageManager
 from Data.WebScrapper.FmpScrapper import FmpScrapper
 from Data.WebScrapper.StockRowScrapper import StockRowScrapper
 from Data.WebScrapper.YahooScrapper import YahooScrapper
-from Data.Yahoo.YahooPdrManager import YahooPdrManager
 from Data.Yahoo.YahooTicker import YahooTicker
 from Data.YahooFinancial.FinancialManager import FinancialManager
 from Data.YahooFinance.FinanceManager import FinanceManager
@@ -20,6 +19,8 @@ from TechnicalIndicatorManagers.MovingAverageConvergenceDivergenceManager import
 from TechnicalIndicatorManagers.AverageTrueRangeManager import AverageTrueRangeManager
 from TechnicalIndicatorManagers.BollingerBandsManager import BollingerBandsManager
 from TechnicalIndicatorManagers.RelativeStrengthIndexManager import RelativeStrengthIndexManager
+from TechnicalIndicatorManagers.OnBalanceVolumeManager import OnBalanceVolumeManager
+from TechnicalIndicatorManagers.SlopesManager import SlopesManager
 
 to_day: date = PyDays.DateTimeNow()
 to_day_s: str = to_day.strftime('%Y-%m-%d')
@@ -43,23 +44,25 @@ financialManager: FinancialManager = FinancialManager(yTicker)
 yahooPdrManager: YahooPdrManager = YahooPdrManager(yTicker, ya_day, to_day)
 print('MACD')
 macdManager: MovingAverageConvergenceDivergenceManager = MovingAverageConvergenceDivergenceManager(yahooPdrManager.YahooData, ya_day, to_day)
-pprint(macdManager.MovingAverageConvergenceDivergenceDf.tail().iloc[:, -5:])
+pprint(macdManager.IndicatorDf.tail().iloc[:, -5:])
 print('ATR')
 atrManager: AverageTrueRangeManager = AverageTrueRangeManager(yahooPdrManager.YahooData, 20)
-pprint(atrManager.AverageTrueRangeDf.tail().iloc[:, -5:])
+pprint(atrManager.IndicatorDf.tail().iloc[:, -5:])
 print('BollingerBands')
 babeManager: BollingerBandsManager = BollingerBandsManager(yahooPdrManager.YahooData)
-pprint(babeManager.BollingerBandsDf.tail().iloc[:, -5:])
+pprint(babeManager.IndicatorDf.tail().iloc[:, -5:])
 print('RSI')
 rsiManager: RelativeStrengthIndexManager = RelativeStrengthIndexManager(yahooPdrManager.YahooData)
-pprint(rsiManager.RelativeStrengthIndexDf.tail().iloc[:, -5:])
+pprint(rsiManager.IndicatorDf.tail().iloc[:, -5:])
+print('OBV')
+obvManager: OnBalanceVolumeManager = OnBalanceVolumeManager(yahooPdrManager.YahooData)
+pprint(obvManager.IndicatorDf.head().iloc[:, -5:])
+print('Slopes')
+slopesManager: SlopesManager = SlopesManager(yahooPdrManager.YahooData)
+pprint(slopesManager.IndicatorDf.head().iloc[:, -5:])
 exit(777)
 print('ADX')
 pprint(yahooPdrManager.YahooADX.describe())
-print('OBV')
-pprint(yahooPdrManager.YahooOnBalanceDemand.head().iloc[:, -5:])
-print('Slopes')
-pprint(yahooPdrManager.YahooSlopes.head().iloc[:, -5:])
 avManager: AlphaVantageManager = AlphaVantageManager(alpha_key, yTicker)
 exit(-1)
 yahooScrapper: YahooScrapper = YahooScrapper(yTicker)

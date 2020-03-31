@@ -3,7 +3,7 @@ import pandas
 
 class BollingerBandsManager(object):
     """Bollinger Bands class manager"""
-    BollingerBandsDf: pandas.DataFrame
+    IndicatorDf: pandas.DataFrame
 
     def __init__(self, a_df: pandas.DataFrame):
         self.__setIndicator(a_df)
@@ -14,9 +14,9 @@ class BollingerBandsManager(object):
         df: pandas.DataFrame = a_df.copy()
         df[movingAverageTitle] = df['Adj Close'].rolling(days_span).mean()
         # ddof=0 is required since we want to take the standard deviation of the population and not sample
-        df["BB_up"] = df[movingAverageTitle] + 2 * df['Adj Close'].rolling(days_span).std(ddof=0)
+        df["BBup"] = df[movingAverageTitle] + 2 * df['Adj Close'].rolling(days_span).std(ddof=0)
         # ddof=0 is required since we want to take the standard deviation of the population and not sample
-        df["BB_dn"] = df[movingAverageTitle] - 2 * df['Adj Close'].rolling(days_span).std(ddof=0)
-        df["BB_width"] = df["BB_up"] - df["BB_dn"]
+        df["BBdn"] = df[movingAverageTitle] - 2 * df['Adj Close'].rolling(days_span).std(ddof=0)
+        df["BBwidth"] = df["BBup"] - df["BBdn"]
         df.dropna(inplace=True)
-        self.BollingerBandsDf = df
+        self.IndicatorDf = df
