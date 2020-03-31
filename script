@@ -23,6 +23,11 @@ from TechnicalIndicatorManagers.OnBalanceVolumeManager import OnBalanceVolumeMan
 from TechnicalIndicatorManagers.SlopesManager import SlopesManager
 from TechnicalIndicatorManagers.RenkoManager import RenkoManager
 from TechnicalIndicatorManagers.AverageDirectionalIndexManager import AverageDirectionalIndexManager
+from PerformanceMeasurements.SortinoRatioManager import SortinoRatioManager
+from PerformanceMeasurements.SharpeRatioManager import SharpeRatioManager
+from PerformanceMeasurements.MaximumDrawdownRatioManager import MaximumDrawDownManager
+from PerformanceMeasurements.CumulativeAnnualGrowthRateManager import CumulativeAnnualGrowthRateManager
+from PerformanceMeasurements.CalmarRatioManager import CalmarRatioManager
 
 to_day: date = PyDays.DateTimeNow()
 to_day_s: str = to_day.strftime('%Y-%m-%d')
@@ -68,6 +73,21 @@ pprint(renkoManager.IndicatorDf.head().iloc[:, -5:])
 print('ADX')
 adxManager: AverageDirectionalIndexManager = AverageDirectionalIndexManager(yahooPdrManager.YahooData)
 pprint(adxManager.IndicatorDf.tail().iloc[:, -5:])
+print('SortinoRatio')
+sortinoRatioManage: SortinoRatioManager = SortinoRatioManager(yahooPdrManager.YahooData)
+print(sortinoRatioManage.KPIdf)
+print('SharpeRatio')
+sharpeRatioManager: SharpeRatioManager = SharpeRatioManager(yahooPdrManager.YahooData)
+print(sharpeRatioManager.KPIdf)
+print('MaximumDrawDown')
+mddManager: MaximumDrawDownManager = MaximumDrawDownManager(yahooPdrManager.YahooData)
+print(mddManager.KPIdf)
+print('CumulativeAnnualGrowthRate')
+cagrManager: CumulativeAnnualGrowthRateManager = CumulativeAnnualGrowthRateManager(yahooPdrManager.YahooData)
+print(cagrManager.KPIdf)
+print('CalmarRatio')
+crManager: CalmarRatioManager = CalmarRatioManager(yahooPdrManager.YahooData)
+print(crManager.KPIdf)
 exit(777)
 avManager: AlphaVantageManager = AlphaVantageManager(alpha_key, yTicker)
 exit(-1)
