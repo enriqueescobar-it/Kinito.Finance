@@ -22,6 +22,7 @@ from TechnicalIndicatorManagers.RelativeStrengthIndexManager import RelativeStre
 from TechnicalIndicatorManagers.OnBalanceVolumeManager import OnBalanceVolumeManager
 from TechnicalIndicatorManagers.SlopesManager import SlopesManager
 from TechnicalIndicatorManagers.RenkoManager import RenkoManager
+from TechnicalIndicatorManagers.AverageDirectionalIndexManager import AverageDirectionalIndexManager
 
 to_day: date = PyDays.DateTimeNow()
 to_day_s: str = to_day.strftime('%Y-%m-%d')
@@ -64,9 +65,10 @@ pprint(slopesManager.IndicatorDf.head().iloc[:, -5:])
 print('Renko')
 renkoManager: RenkoManager = RenkoManager(yahooPdrManager.YahooData)
 pprint(renkoManager.IndicatorDf.head().iloc[:, -5:])
-exit(777)
 print('ADX')
-pprint(yahooPdrManager.YahooADX.describe())
+adxManager: AverageDirectionalIndexManager = AverageDirectionalIndexManager(yahooPdrManager.YahooData)
+pprint(adxManager.IndicatorDf.tail().iloc[:, -5:])
+exit(777)
 avManager: AlphaVantageManager = AlphaVantageManager(alpha_key, yTicker)
 exit(-1)
 yahooScrapper: YahooScrapper = YahooScrapper(yTicker)
