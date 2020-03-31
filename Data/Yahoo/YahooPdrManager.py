@@ -2,7 +2,6 @@ from datetime import date
 import numpy as np
 from pandas import DataFrame
 from pandas_datareader import get_data_yahoo
-from stocktrends import Renko
 import Data.Yahoo.YahooTicker as YahooTicker
 
 
@@ -25,7 +24,6 @@ class YahooPdrManager(object):
             self.YahooData = y_data
         self.__updateDailyReturn()
         ### self.__setAvgDirectionalIndeX(14)
-        # self.__setRenko()
 
     def __updateDailyReturn(self):
         self.YahooDailyReturn = self.YahooData.pct_change()
@@ -87,18 +85,3 @@ class YahooPdrManager(object):
                 adx_list.append(((days_span - 1) * adx_list[j - 1] + dx_list[j]) / days_span)
         df['ADX'] = np.array(adx_list)
         self.YahooADX = df['ADX']
-
-    def __setRenko(self):
-        """function to convert ohlc data into renko bricks"""
-        df: DataFrame = self.YahooData.copy()
-        df.reset_index(inplace=True)
-        df = df.iloc[:, [0, 1, 2, 3, 5, 6]]
-        df.rename(columns={"Date": "date", "High": "high", "Low": "low", "Open": "open", "Adj Close": "close",
-                           "Volume": "volume"}, inplace=True)
-        df2 = Renko(df)
-        df2.brick_size = round(self.__getAvgTrueRange(self.YahooData.copy(), 120)["AvgTrueRate"][-1], 0)
-        # if get_bricks() does not work try using get_ohlc_data() instead
-        # df2.get_bricks() error => using get_ohlc_data()
-        # renkoDataFrame = df2.get_bricks()
-        renkoDataFrame: DataFrame = df2.get_ohlc_data()
-        self.YahooRenko = renkoDataFrame
