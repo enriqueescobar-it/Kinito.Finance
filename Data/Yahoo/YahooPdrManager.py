@@ -1,12 +1,9 @@
 from datetime import date
-import datetime
-from stocktrends import Renko
-
 import numpy as np
-import pandas as pd
 import statsmodels.api as sm
 from pandas import DataFrame
 from pandas_datareader import get_data_yahoo
+from stocktrends import Renko
 
 import Data.Yahoo.YahooTicker as YahooTicker
 
@@ -15,12 +12,9 @@ class YahooPdrManager(object):
     """description of class"""
     DateTo: date
     DateFrom: date
-    YahooATR: DataFrame
-    YahooBollingerBang: DataFrame
     YahooData: DataFrame
     YahooDailyReturn: DataFrame
     YahooOnBalanceDemand: DataFrame
-    YahooMACD: DataFrame
     YahooSlopes: DataFrame
 
     def __init__(self, yahoo_ticker: YahooTicker, from_date: date, to_date: date, y_data=None):
@@ -34,12 +28,7 @@ class YahooPdrManager(object):
         else:
             self.YahooData = y_data
         self.__updateDailyReturn()
-        self.__setMovAvgConvDiv()
-        self.__setAvgTrueRate(20)
-        self.__SetBollingerBang(20)
-        # self.__serRsi(14)
-        self.__setRsiLoop(14)
-        self.__setAvgDirectionalIndeX(14)
+        ### self.__setAvgDirectionalIndeX(14)
         self.__setOnBalanceDemand()
         self.__setSlope()
         # self.__setRenko()
@@ -54,96 +43,6 @@ class YahooPdrManager(object):
     def DropRowsWithNan(self):
         self.YahooData.dropna(how='any', axis=0, inplace=True)
         self.__updateDailyReturn()
-
-    def __setMovAvgConvDiv(self, a: int = 12, b: int = 26, c: int = 9):
-        """function to calculate Moving Average Conversion Divergence"""
-        df: DataFrame = self.YahooData.copy()
-        df["MA_Fast"] = df["Adj Close"].ewm(span=a, min_periods=a).mean()
-        df["MA_Slow"] = df["Adj Close"].ewm(span=b, min_periods=b).mean()
-        df["MACD"] = df["MA_Fast"] - df["MA_Slow"]
-        df["Signal"] = df["MACD"].ewm(span=c, min_periods=c).mean()
-        df.dropna(inplace=True)
-        self.YahooMACD = df
-
-    def __setAvgTrueRate(self, days_span: int = 20):
-        """function to calculate True Range and Average True Range"""
-        df: DataFrame = self.YahooData.copy()
-        df['H-L'] = abs(df['High'] - df['Low'])
-        df['H-PC'] = abs(df['High'] - df['Adj Close'].shift(1))
-        df['L-PC'] = abs(df['Low'] - df['Adj Close'].shift(1))
-        # some take average instead of max
-        df['TrueRange'] = df[['H-L', 'H-PC', 'L-PC']].max(axis=1, skipna=False)
-        df['AvgTrueRate'] = df['TrueRange'].rolling(days_span).mean()
-        # some use exponential mean
-        # df['AvgTrueRate'] = df['TrueRange'].ewm(span=days_span,adjust=False,min_periods=days_span).mean()
-        self.YahooATR = df.drop(['H-L', 'H-PC', 'L-PC'], axis=1)
-
-    def __getAvgTrueRate(self, DF: DataFrame, n: int):
-        """function to calculate True Range and Average True Range"""
-        df: DataFrame = DF.copy()
-        df['H-L'] = abs(df['High'] - df['Low'])
-        df['H-PC'] = abs(df['High'] - df['Adj Close'].shift(1))
-        df['L-PC'] = abs(df['Low'] - df['Adj Close'].shift(1))
-        df['TR'] = df[['H-L', 'H-PC', 'L-PC']].max(axis=1, skipna=False)
-        df['ATR'] = df['TR'].rolling(n).mean()
-        df2 = df.drop(['H-L', 'H-PC', 'L-PC'], axis=1)
-        return df2
-
-    def __SetBollingerBang(self, days_span: int = 20):
-        """function to calculate Bollinger Band"""
-        df: DataFrame = self.YahooData.copy()
-        df["MA"] = df['Adj Close'].rolling(days_span).mean()
-        # ddof=0 is required since we want to take the standard deviation of the population and not sample
-        df["BB_up"] = df["MA"] + 2 * df['Adj Close'].rolling(days_span).std(ddof=0)
-        # ddof=0 is required since we want to take the standard deviation of the population and not sample
-        df["BB_dn"] = df["MA"] - 2 * df['Adj Close'].rolling(days_span).std(ddof=0)
-        df["BB_width"] = df["BB_up"] - df["BB_dn"]
-        df.dropna(inplace=True)
-        self.YahooBollingerBang = df
-
-    def __serRsi(self, days_span: int = 14):
-        """function to calculate RSI without using loop"""
-        df: DataFrame = self.YahooData.copy()
-        delta = df["Adj Close"].diff().dropna()
-        u = delta * 0
-        d = u.copy()
-        u[delta > 0] = delta[delta > 0]
-        d[delta < 0] = -delta[delta < 0]
-        # first value is sum of avg gains
-        u[u.index[days_span - 1]] = np.mean(u[:days_span])
-        u = u.drop(u.index[:(days_span - 1)])
-        # first value is sum of avg losses
-        d[d.index[days_span - 1]] = np.mean(d[:days_span])
-        d = d.drop(d.index[:(days_span - 1)])
-        rs = pd.stats.moments.ewma(u, com=days_span - 1, adjust=False) / pd.stats.moments.ewma(d, com=days_span - 1,
-                                                                                               adjust=False)
-        self.YahooRsi = (100 - 100 / (1 + rs))
-
-    def __setRsiLoop(self, days_span: int = 14):
-        """function to calculate RSI with loop"""
-        df: DataFrame = self.YahooData.copy()
-        df['delta'] = df['Adj Close'] - df['Adj Close'].shift(1)
-        df['gain'] = np.where(df['delta'] >= 0, df['delta'], 0)
-        df['loss'] = np.where(df['delta'] < 0, abs(df['delta']), 0)
-        avg_gain = []
-        avg_loss = []
-        gain_list = df['gain'].tolist()
-        loss_list = df['loss'].tolist()
-        for i in range(len(df)):
-            if i < days_span:
-                avg_gain.append(np.NaN)
-                avg_loss.append(np.NaN)
-            elif i == days_span:
-                avg_gain.append(df['gain'].rolling(days_span).mean().tolist()[days_span])
-                avg_loss.append(df['loss'].rolling(days_span).mean().tolist()[days_span])
-            elif i > days_span:
-                avg_gain.append(((days_span - 1) * avg_gain[i - 1] + gain_list[i]) / days_span)
-                avg_loss.append(((days_span - 1) * avg_loss[i - 1] + loss_list[i]) / days_span)
-        df['avg_gain'] = np.array(avg_gain)
-        df['avg_loss'] = np.array(avg_loss)
-        df['RS'] = df['avg_gain'] / df['avg_loss']
-        df['RSI'] = 100 - (100 / (1 + df['RS']))
-        self.YahooRsiLoop = df['RSI']
 
     def __setAvgDirectionalIndeX(self, days_span: int = 14):
         """function to calculate RSI with loop"""
@@ -234,7 +133,7 @@ class YahooPdrManager(object):
         df.rename(columns={"Date": "date", "High": "high", "Low": "low", "Open": "open", "Adj Close": "close",
                            "Volume": "volume"}, inplace=True)
         df2 = Renko(df)
-        df2.brick_size = round(self.__getAvgTrueRate(self.YahooData.copy(), 120)["AvgTrueRate"][-1], 0)
+        df2.brick_size = round(self.__getAvgTrueRange(self.YahooData.copy(), 120)["AvgTrueRate"][-1], 0)
         # if get_bricks() does not work try using get_ohlc_data() instead
         # df2.get_bricks() error => using get_ohlc_data()
         # renkoDataFrame = df2.get_bricks()
