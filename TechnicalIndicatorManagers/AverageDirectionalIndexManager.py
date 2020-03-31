@@ -19,28 +19,28 @@ class AverageDirectionalIndexManager(object):
         df['DMminus'] = np.where((df['Low'].shift(1) - df['Low']) > (df['High'] - df['High'].shift(1)),
                                  df['Low'].shift(1) - df['Low'], 0)
         df['DMminus'] = np.where(df['DMminus'] < 0, 0, df['DMminus'])
-        TRn = []
-        DMplusN = []
-        DMminusN = []
-        TR = df['TR'].tolist()
-        DMplus = df['DMplus'].tolist()
-        DMminus = df['DMminus'].tolist()
+        tr_n_list = []
+        DMplus_n_list = []
+        DMminus_n_list = []
+        tr_list = df['TR'].tolist()
+        DMplus_list = df['DMplus'].tolist()
+        DMminus_list = df['DMminus'].tolist()
         for i in range(len(df)):
             if i < days_span:
-                TRn.append(np.NaN)
-                DMplusN.append(np.NaN)
-                DMminusN.append(np.NaN)
+                tr_n_list.append(np.NaN)
+                DMplus_n_list.append(np.NaN)
+                DMminus_n_list.append(np.NaN)
             elif i == days_span:
-                TRn.append(df['TR'].rolling(days_span).sum().tolist()[days_span])
-                DMplusN.append(df['DMplus'].rolling(days_span).sum().tolist()[days_span])
-                DMminusN.append(df['DMminus'].rolling(days_span).sum().tolist()[days_span])
+                tr_n_list.append(df['TR'].rolling(days_span).sum().tolist()[days_span])
+                DMplus_n_list.append(df['DMplus'].rolling(days_span).sum().tolist()[days_span])
+                DMminus_n_list.append(df['DMminus'].rolling(days_span).sum().tolist()[days_span])
             elif i > days_span:
-                TRn.append(TRn[i - 1] - (TRn[i - 1] / days_span) + TR[i])
-                DMplusN.append(DMplusN[i - 1] - (DMplusN[i - 1] / days_span) + DMplus[i])
-                DMminusN.append(DMminusN[i - 1] - (DMminusN[i - 1] / days_span) + DMminus[i])
-        df['TRn'] = np.array(TRn)
-        df['DMplusN'] = np.array(DMplusN)
-        df['DMminusN'] = np.array(DMminusN)
+                tr_n_list.append(tr_n_list[i - 1] - (tr_n_list[i - 1] / days_span) + tr_list[i])
+                DMplus_n_list.append(DMplus_n_list[i - 1] - (DMplus_n_list[i - 1] / days_span) + DMplus_list[i])
+                DMminus_n_list.append(DMminus_n_list[i - 1] - (DMminus_n_list[i - 1] / days_span) + DMminus_list[i])
+        df['TRn'] = np.array(tr_n_list)
+        df['DMplusN'] = np.array(DMplus_n_list)
+        df['DMminusN'] = np.array(DMminus_n_list)
         df['DIplusN'] = 100 * (df['DMplusN'] / df['TRn'])
         df['DIminusN'] = 100 * (df['DMminusN'] / df['TRn'])
         df['DIdiff'] = abs(df['DIplusN'] - df['DIminusN'])
