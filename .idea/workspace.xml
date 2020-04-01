@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Strategies/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PerformanceMeasurements/CalmarRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceMeasurements/CalmarRatioManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PerformanceMeasurements/CumulativeAnnualGrowthRateManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceMeasurements/CumulativeAnnualGrowthRateManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PerformanceMeasurements/MaximumDrawdownRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceMeasurements/MaximumDrawdownRatioManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PerformanceMeasurements/SharpeRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceMeasurements/SharpeRatioManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PerformanceMeasurements/SortinoRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/PerformanceMeasurements/SortinoRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/TimeSerie/AlphaVantageManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data/TimeSerie/AlphaVantageManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Yahoo/TickerNameList.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Yahoo/TickerNameList.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script" beforeDir="false" afterPath="$PROJECT_DIR$/script" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +39,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Data" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -124,25 +123,25 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1585238354579" />
-    <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1585685340418">
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1585712871085">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585685340418" />
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1585669191425" />
-    <state width="1453" height="271" key="GridCell.Tab.0.center" timestamp="1585685340418">
+    <state width="1453" height="271" key="GridCell.Tab.0.center" timestamp="1585712871085">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585685340418" />
+    <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1585669191424" />
-    <state width="1453" height="271" key="GridCell.Tab.0.left" timestamp="1585685340418">
+    <state width="1453" height="271" key="GridCell.Tab.0.left" timestamp="1585712871085">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585685340418" />
+    <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1585669191424" />
-    <state width="1453" height="271" key="GridCell.Tab.0.right" timestamp="1585685340418">
+    <state width="1453" height="271" key="GridCell.Tab.0.right" timestamp="1585712871085">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585685340418" />
+    <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1585669191424" />
     <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">
       <screen x="0" y="0" width="1474" height="864" />
@@ -160,9 +159,10 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1453" height="255" key="GridCell.Tab.1.right/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
-    <state x="246" y="74" key="SettingsEditor" timestamp="1585439945729">
+    <state x="246" y="74" key="SettingsEditor" timestamp="1585712869598">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712869598" />
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1585439945729" />
     <state x="394" y="197" key="run.anything.popup" timestamp="1585439941855">
       <screen x="0" y="0" width="1474" height="864" />

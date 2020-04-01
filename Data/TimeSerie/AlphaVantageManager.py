@@ -1,5 +1,4 @@
-from typing import List, Any, Union
-
+from typing import List
 from alpha_vantage.timeseries import TimeSeries
 import Data.Yahoo.YahooTicker as YahooTicker
 

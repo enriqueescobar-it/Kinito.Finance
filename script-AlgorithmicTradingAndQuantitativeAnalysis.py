@@ -1,21 +1,33 @@
 from datetime import date
 from pprint import pprint
 from typing import List, Any, Union
-
 import pandas as pd
 from pandas import DataFrame
-import matplotlib.pyplot as plt
-
 import Data.DateTime.PyDateTimes as PyDays
 import Data.Yahoo.TickerNameList as PyTickers
 import Data.Yahoo.YahooTicker as PyTicker
-from Data.WebScrapper.StockRowScrapper import StockRowScrapper
-from Data.Yahoo.YahooPdrManager import YahooPdrManager
-from Data.YahooFinancial.FinancialManager import FinancialManager
 from Data.TimeSerie.AlphaVantageManager import AlphaVantageManager
-from Data.Yahoo.YahooTicker import YahooTicker
-from Data.WebScrapper.YahooScrapper import YahooScrapper
 from Data.WebScrapper.FmpScrapper import FmpScrapper
+from Data.WebScrapper.StockRowScrapper import StockRowScrapper
+from Data.WebScrapper.YahooScrapper import YahooScrapper
+from Data.Yahoo.YahooTicker import YahooTicker
+from Data.YahooFinancial.FinancialManager import FinancialManager
+from Data.YahooFinance.FinanceManager import FinanceManager
+from Data.FinViz.FinVizManager import FinVizManager
+from Data.Yahoo.YahooPdrManager import YahooPdrManager
+from TechnicalIndicatorManagers.MovingAverageConvergenceDivergenceManager import MovingAverageConvergenceDivergenceManager
+from TechnicalIndicatorManagers.AverageTrueRangeManager import AverageTrueRangeManager
+from TechnicalIndicatorManagers.BollingerBandsManager import BollingerBandsManager
+from TechnicalIndicatorManagers.RelativeStrengthIndexManager import RelativeStrengthIndexManager
+from TechnicalIndicatorManagers.OnBalanceVolumeManager import OnBalanceVolumeManager
+from TechnicalIndicatorManagers.SlopesManager import SlopesManager
+from TechnicalIndicatorManagers.RenkoManager import RenkoManager
+from TechnicalIndicatorManagers.AverageDirectionalIndexManager import AverageDirectionalIndexManager
+from PerformanceMeasurements.SortinoRatioManager import SortinoRatioManager
+from PerformanceMeasurements.SharpeRatioManager import SharpeRatioManager
+from PerformanceMeasurements.MaximumDrawdownRatioManager import MaximumDrawDownManager
+from PerformanceMeasurements.CumulativeAnnualGrowthRateManager import CumulativeAnnualGrowthRateManager
+from PerformanceMeasurements.CalmarRatioManager import CalmarRatioManager
 
 to_day: date = PyDays.DateTimeNow()
 to_day_s: str = to_day.strftime('%Y-%m-%d')
@@ -32,6 +44,67 @@ alpha_close_df: DataFrame = pd.DataFrame()
 drop_list: List[Union[str, Any]] = []
 py_tickers: List[YahooTicker] = []
 new_tickers = ticker_list
+yTicker = PyTicker.YahooTicker('NYSE', ticker_list[1], 26, 0)
+financeManager: FinanceManager = FinanceManager(yTicker)
+finVizManager: FinVizManager = FinVizManager(yTicker)
+financialManager: FinancialManager = FinancialManager(yTicker)
+yahooPdrManager: YahooPdrManager = YahooPdrManager(yTicker, ya_day, to_day)
+print('MACD')
+macdManager: MovingAverageConvergenceDivergenceManager = MovingAverageConvergenceDivergenceManager(yahooPdrManager.YahooData, ya_day, to_day)
+pprint(macdManager.IndicatorDf.tail().iloc[:, -5:])
+print('ATR')
+atrManager: AverageTrueRangeManager = AverageTrueRangeManager(yahooPdrManager.YahooData, 20)
+pprint(atrManager.IndicatorDf.tail().iloc[:, -5:])
+print('BollingerBands')
+babeManager: BollingerBandsManager = BollingerBandsManager(yahooPdrManager.YahooData)
+pprint(babeManager.IndicatorDf.tail().iloc[:, -5:])
+print('RSI')
+rsiManager: RelativeStrengthIndexManager = RelativeStrengthIndexManager(yahooPdrManager.YahooData)
+pprint(rsiManager.IndicatorDf.tail().iloc[:, -5:])
+print('OBV')
+obvManager: OnBalanceVolumeManager = OnBalanceVolumeManager(yahooPdrManager.YahooData)
+pprint(obvManager.IndicatorDf.head().iloc[:, -5:])
+print('Slopes')
+slopesManager: SlopesManager = SlopesManager(yahooPdrManager.YahooData)
+pprint(slopesManager.IndicatorDf.head().iloc[:, -5:])
+print('Renko')
+renkoManager: RenkoManager = RenkoManager(yahooPdrManager.YahooData)
+pprint(renkoManager.IndicatorDf.head().iloc[:, -5:])
+print('ADX')
+adxManager: AverageDirectionalIndexManager = AverageDirectionalIndexManager(yahooPdrManager.YahooData)
+pprint(adxManager.IndicatorDf.tail().iloc[:, -5:])
+print('SortinoRatio')
+sortinoRatioManage: SortinoRatioManager = SortinoRatioManager(yahooPdrManager.YahooData)
+print(sortinoRatioManage.KPIdf)
+print('SharpeRatio')
+sharpeRatioManager: SharpeRatioManager = SharpeRatioManager(yahooPdrManager.YahooData)
+print(sharpeRatioManager.KPIdf)
+print('MaximumDrawDown')
+mddManager: MaximumDrawDownManager = MaximumDrawDownManager(yahooPdrManager.YahooData)
+print(mddManager.KPIdf)
+print('CumulativeAnnualGrowthRate')
+cagrManager: CumulativeAnnualGrowthRateManager = CumulativeAnnualGrowthRateManager(yahooPdrManager.YahooData)
+print(cagrManager.KPIdf)
+print('CalmarRatio')
+crManager: CalmarRatioManager = CalmarRatioManager(yahooPdrManager.YahooData)
+print(crManager.KPIdf)
+exit(777)
+avManager: AlphaVantageManager = AlphaVantageManager(alpha_key, yTicker)
+exit(-1)
+yahooScrapper: YahooScrapper = YahooScrapper(yTicker)
+pprint(yahooScrapper.BalanceSheetUrl)
+pprint(yahooScrapper.CashFlowUrl)
+pprint(yahooScrapper.FinancialUrl)
+pprint(yahooScrapper.KeyStatsUrl)
+fmpScrapper: FmpScrapper = FmpScrapper(yTicker)
+pprint(fmpScrapper.BalanceSheetUrl)
+pprint(fmpScrapper.CashFlowUrl)
+pprint(fmpScrapper.FinancialUrl)
+pprint(fmpScrapper.KeyStatsUrl)
+pprint(fmpScrapper.IncomeUrl)
+stockRowScrapper: StockRowScrapper = StockRowScrapper(yTicker)
+pprint(stockRowScrapper.BalanceSheetUrl)
+pprint(stockRowScrapper.BalanceSheetCsv)
 # removing stocks whose data has been extracted from the ticker list
 while len(new_tickers) != 0 and counter <= 5:
     new_tickers = [j for j in new_tickers if
@@ -54,9 +127,10 @@ while len(new_tickers) != 0 and counter <= 5:
             # new_dic = y_ticker.FinancialDf.get_historical_price_data(ya_day_s, to_day_s, "daily")[new_ticker]
             fm = FinancialManager(y_ticker)
             new_dic_field = fm.GetDailyHistoricalDataPrices(ya_day, to_day)
-            new_data_frame = pd.DataFrame(new_dic_field)[["formatted_date", "adjclose"]].set_index("formatted_date", inplace=True)
-            first_data_frame = new_data_frame[~new_data_frame.index.duplicated(keep='first')]
-            financial_df[new_ticker] = first_data_frame["adjclose"]
+            new_data_frame = pd.DataFrame(new_dic_field)[["formatted_date", "adjclose"]]
+            new_data_frame = new_data_frame.set_index("formatted_date", inplace=True)
+            # first_data_frame = new_data_frame[~new_data_frame.index.duplicated(keep='first')]
+            # financial_df[new_ticker] = first_data_frame["adjclose"]'''
             # alpha vantage
             # alpha_ts = TimeSeries(key=open(alpha_key, 'r').read(), output_format='pandas')
             # alpha_ts = getAvDay1MinPdrDataFrame(alpha_key, new_ticker)
@@ -68,27 +142,17 @@ while len(new_tickers) != 0 and counter <= 5:
             #
             drop_list.append(new_ticker)
             py_tickers.append(y_ticker)
-            pprint(str(counter) + " " + new_ticker + " " + str(len(drop_list)))
+            # i_sleep = (counter*random.random())/(2*counter)
+            # time.sleep(i_sleep)
+            pprint(str(counter) + " " + new_ticker + " " + str(len(drop_list)))  # + ":" + str(i_sleep))
         except:
             print(new_ticker, "_".ljust(20) + "failed to fetch data...retrying -> " + str(counter))
             continue
     counter += 1
+
 pprint(py_tickers[0].TickerName)
 pprint(str(py_tickers[0].PdrDf.shape))
-ys: YahooScrapper = YahooScrapper(py_tickers[0])
-pprint(ys.BalanceSheetUrl)
-pprint(ys.CashFlowUrl)
-pprint(ys.FinancialUrl)
-pprint(ys.KeyStatsUrl)
-fs: FmpScrapper = FmpScrapper(py_tickers[0])
-pprint(fs.BalanceSheetUrl)
-pprint(fs.CashFlowUrl)
-pprint(fs.FinancialUrl)
-pprint(fs.KeyStatsUrl)
-pprint(fs.IncomeUrl)
-sr: StockRowScrapper = StockRowScrapper(py_tickers[0])
-pprint(sr.BalanceSheetUrl)
-pprint(sr.BalanceSheetCsv)
+exit(9)
 # Replaces NaN values with the next valid value along the column
 yPdr = YahooPdrManager(py_tickers[0], py_tickers[0].DateTimeFrom, py_tickers[0].DateTimeTo)
 yPdr.FillNaWithNextValue()
@@ -128,5 +192,9 @@ pprint(daily_return.ewm(span=20, min_periods=20).std().tail())
 exit(7)
 # Handling NaN Values
 # Replaces NaN values with the next valid value along the column
-pdr_adjclose_df.fillna(method='bfill',axis=0,inplace=True)
-
+pdr_adjclose_df.fillna(method='bfill', axis=0, inplace=True)
+# Creates dataframe with daily return for each stock
+daily_return = pdr_adjclose_df.pct_change()
+# Data vizualization
+# Plot of all the stocks superimposed on the same chart
+pdr_adjclose_df.plot()
