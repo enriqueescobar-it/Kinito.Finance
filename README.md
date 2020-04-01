@@ -140,10 +140,58 @@ First test your system/ strategy with a set of rules with trading signal mocking
 Factor in slippage (trading/ brokerage costs) when assessing performance.
 Be conservative on side of caution
 
-### Rebalancing
+### Rebalancing - long term
 
-### Resistance Breakout
+Find a logical subset (L/ M/ S cap, industry, factor) specific and stick to this group.
+Build fixed individual position sized long only portfolio by picking:
+- M number of stocks based on monthly returns
+- any other criteria
 
+Rebalance every month replacing N worse stocks by top N stocks
+Backtest it and compare the KPIs with that simple buy and hold strategy of corresponding index
+
+### Intraday Resistance Breakout
+
+Helps figure out when stock reach resistance (temporary historical top value - upper line)
+Choose high volume, high activity stocks for this strategy (pre market movers, historically high volumes stocks)
+
+Define breakout rule:
+- use price breach 20 * period rolling max/ min price & vlume breaching rolling max volume (go long/ short stocks based on signals)
+
+Define exit/ stop loss signal:
+- use previous price +/- 20 * period ATR as the roling stop loss price
+
+Calculate strategy cumulative return for each stock
+
+### Intraday Renko Ratio - On Balance Volume
+
+Pick high volume, high activity stock (pre market movers, historically high volumes stocks)
+
+Define Buy Signal:
+- Renko Ratio bar >= 2
+- 5 day OBV Slope >= 30 degrees
+- exit if Renko Ratio bar < 2
+
+Define Sell Signal:
+- Renko Ratio bar <= -2
+- 5 day OBV Slope <= -30 degrees
+- exit if Renko Ratio bar > -2
+
+### Intraday Renko Ratio - MACD
+
+Pick high volume, high activity stock (pre market movers, historically high volumes stocks)
+
+Define Buy Signal:
+- Renko Ratio bar >= 2
+- MACD line >= signal line
+- MACD line's slope (over 5 day period) >= signal line's slope (over the last 5 periods)
+- exit if (MACD line < signal line) & (MACD line's slope < signal line's slope)
+
+Define Sell Signal:
+- Renko Ratio bar <= -2
+- MACD line < signal line
+- MACD line's slope (over 5 day period) < signal line's slope (over the last 5 periods)
+- exit if (MACD line >= signal line) & (MACD line's slope >= signal line's slope)
 
 ## Value Investing
 

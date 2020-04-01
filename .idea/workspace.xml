@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Strategies/CalmarRatioManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Strategies/CompoundedAnnualGrowthRateManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Strategies/SharpeRatioManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Strategies/SortinoRatioManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Strategies/VolatilityManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
