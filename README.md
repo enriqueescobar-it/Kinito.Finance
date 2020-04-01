@@ -35,7 +35,7 @@ Momentum oscilation [0,100]
 - [70,100] overbought (Emerging markets use 80)
 - [0,30] oversold (Emerging markets use 80)
 
-![RSI](img/TechnicalIndicators-RSI.png "RSI")
+![TechnicalIndicators-RSI](img/TechnicalIndicators-RSI.png "TechnicalIndicators-RSI")
 
 ### Average Directional IndeX - ADX
 
@@ -51,7 +51,7 @@ Volume preceeding price movement. Higher OBV price increase, lower OBV price dec
 False signals
 Used with MACD
 
-![OBV](img/TechnicalIndicators-OBV.png "OBV")
+![TechnicalIndicators-OBV](img/TechnicalIndicators-OBV.png "TechnicalIndicators-OBV")
 
 ### Slope Charts - Supertrend
 
@@ -80,6 +80,7 @@ TA-Lib documentation of pattern recognition: https://mrjbq7.github.io/ta-lib/fun
 Discussion on installation problems: https://github.com/mrjbq7/ta-lib/issues/127
 
 Command to install TA-lib for python 3.5 and 3.6:
+
 ```
 pip install -i https://pypi.anaconda.org/masdeseiscaracteres/simple ta-lib
 ```
@@ -88,7 +89,61 @@ Good website on chart patterns: http://thepatternsite.com
 
 ## Performance Measurements KPIs
 
+### Compounded Annual Growth Rate - CAGR
+
+Comparison of different trading strategies for asset or portfolio.
+Does not reflect investment risk, use with volatility measure.
+
+![KPIs-CAGR](img/KPIs-CAGR.png "KPIs-CAGR")
+
+### Volatility Ratio
+
+Standard deviation of the returns to capture variability of returns from the mean return. Annualization by multiplying volatility with aquare root of annualization factor:
+
+- annualize daily volatility * sqrt(252) => 252 traiding days
+- annualize weekly volatility * sqrrt(52) => 52 traiding weeks
+- annualize monthly volatility * sqrt(12) => 12 traiding months
+
+Used as risk measure assuming normal distribution of returns (false)
+Does not capture tail risk.
+
+### Sharpe Ratio
+
+Average return earned in excess of the risk free rate per unit of volatility
+Measure of risk adjusted return
+Fails to dicern between upside and downside fluctuation
+Used to compare funds
+- [1,2] good
+- [2,3] very good
+- [3,more] excellent
+
+![KPIs-SharpeRatio](img/KPIs-SharpeRatio.png "KPIs-SharpeRatio")
+
+### Sortino Ratio
+
+Similar to Sharpe Ratio but uses standard deviation of only negative returns.
+Used to dicern between upside and downside fluctuation => consider harmful volatility
+
+![KPIs-SortinoRatio](img/KPIs-SortinoRatio.png "KPIs-SortinoRatio")
+
+### Maximum Drawdown Ratio
+
+Largest percentage drop in asset price over a specified time period (peak distance difference)
+
+### Calmar Ratio
+
+Ratio of CAGR and Maximum Draw Down. Measure of risk adjusted return
+
 ## Strategies
+
+First test your system/ strategy with a set of rules with trading signal mocking data with trading conditions
+Factor in slippage (trading/ brokerage costs) when assessing performance.
+Be conservative on side of caution
+
+### Rebalancing
+
+### Resistance Breakout
+
 
 ## Value Investing
 
