@@ -202,6 +202,10 @@ Quantitative methods:
 - (Joel Greenblatt's) Magic Formula
 - (Stanford Accounting Professor Joseph Piotroski) F-score
 
+Excellent artcile on HFT based on actual events:
+
+https://www.nytimes.com/2014/04/06/magazine/flash-boys-michael-lewis.html
+
 ### Magic Formula
 
 Best seller ''The little book that beats the market'':
@@ -236,8 +240,85 @@ Number [0-9] which assess company's financial position strength, 9 bieng best. P
     - higher gross margin compared to previous year (1 point)
     - higher asset turnover ratio compared to previous year (1 point)
 
-## Trading System
+## Trading System - building algorithmic automated
+
+* direct access to stock exchange
+  - high frequency
+  - colocation
+  - milliseconds downtime
+* API trading
+  - RESTful
+  - similar to any broker
+  - cheap
+  - test performances
+  - FXCM demo account https://www.fxcm.com/uk/forex-trading-demo/ u=D291103820 p=1504 token=49efa2a744bfcaa80119ebb7fd12ddb777ea2e70
+* running code continiously/ periodically
+  - crontab
+  - taskmgr
+  - Python 'timed' scripts
+
+### Fxcm way
+
+### Oanda way
+
+API-Key 8f61d5ed3ce2f93b2cbc3d753abb6f82-e292f680364fc69b424f86fe2a817b3f
+
+1. OANDA web trading terminal
+https://trade.oanda.com/
+
+2. OANDA Python wrapper installation
+https://pypi.org/project/oandapyV20/
+
+```
+pip install oandapyV20
+```
+
+3. OANDA API (python wrapper) documentation
+https://buildmedia.readthedocs.org/media/pdf/oanda-api-v20/latest/oanda-api-v20.pdf
+
+4. OANDA developer account intro
+http://developer.oanda.com/
+
+#### SMA crosover
+
+1. SMA Crossover Strategy Link
+https://www.babypips.com/trading/forex-system-20150605
+
+2. Stochastic
+https://excellenceassured.com/trading/stochastic-oscillator-trading-indicator
 
 ## Cloud
+
+Faster, reliable, try EC2 free on AWS
+https://ca-central-1.console.aws.amazon.com/console/home?region=ca-central-1
+
+i-05c31a451783d16d4
+ec2-15-222-12-63.ca-central-1.compute.amazonaws.com
+
+```
+cd /path/to/PEMfile
+chmod 400 udemy_demo.pem
+chmod go-rwx filename.pem
+chmod u-wx filename.pem
+ssh -i "udemy_demo.pem" ec2-user@ec2-15-222-12-63.ca-central-1.compute.amazonaws.com
+```
+
+link to documentation on installing python and pip in your ec2 instance https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install-linux.html
+
+```
+sudo yum install python37
+curl -O https://bootstrap.pypa.io/get-pip.py
+python3 get-pip.py --user
+```
+
+Basic introduction of crontab - https://www.thegeekstuff.com/2009/06/15-practical-crontab-examples/
+
+sample crontab command to run you file every day at 9 am (monday to friday)
+
+```
+crontab -e
+```
+
+00 09 * * 1-5 /path/to/file
 
 ## Sentiment Analaysis
