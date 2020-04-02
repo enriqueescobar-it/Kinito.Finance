@@ -300,7 +300,7 @@ cd /path/to/PEMfile
 chmod 400 udemy_demo.pem
 chmod go-rwx filename.pem
 chmod u-wx filename.pem
-ssh -i "udemy_demo.pem" ec2-user@ec2-15-222-12-63.ca-central-1.compute.amazonaws.com
+ssh -i "udemy_demo.pem" ec2-user@ec2-35-183-238-191.ca-central-1.compute.amazonaws.com
 ```
 
 link to documentation on installing python and pip in your ec2 instance https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install-linux.html
@@ -321,4 +321,70 @@ crontab -e
 
 00 09 * * 1-5 /path/to/file
 
-## Sentiment Analaysis
+## Sentiment Analysis
+
+
+### NLTK - Natural Language Processing
+
+```
+pip install -U nltk wordnet
+```
+
+### Lexicon based approach
+
+Relies on underlyng sentiment, some manually constructed
+- LIWC
+- ANEW
+- SentiWordNet
+- SenticNet
+- VADER
+
+### VADER - Valence Aware Dictionary and sEntiment Reasoner
+
+Inludes abbreviations and emoticons, Successfule in social media data. VADER [-4,4] Paper by Georgia Tech Computer Department: 
+http://comp.social.gatech.edu/papers/icwsm14.vader.hutto.pdf
+
+VADER Python library gitgub page:
+https://github.com/cjhutto/vaderSentiment
+
+```
+pip install --upgrade vaderSentiment textblob
+```
+
+### Machine Learning approach on Natural Language
+
+Probalility
+![SentimentIndicators-Probability](img/SentimentIndicators-Probability.png "SentimentIndicators-Probability")
+
+Naive Bayes
+![SentimentIndicators-NaiveBayes](img/SentimentIndicators-NaiveBayes.png "SentimentIndicators-NaiveBayes")
+
+Probability Prediction
+![SentimentIndicators-ProbabilityPredicting](img/SentimentIndicators-ProbabilityPredicting.png "SentimentIndicators-ProbabilityPredicting")
+
+#### Training Data (labeled data)
+
+Constructing feature matrix
+![SentimentIndicators-TrainingData](img/SentimentIndicators-TrainingData.png "SentimentIndicators-TrainingData")
+
+##### TF-IDF (Term Frequency - Inverse Document Frequency)
+
+Algorithm assigning *weighting factor* to get important features of a document
+
+TF: number of times the term t appear in the doc / total number of words in the doc
+
+IDF: log(total number of documents/ number of documents with the term t in it)
+
+TF-IDF: TF * IDF
+![SentimentIndicators-TF-IDF](img/SentimentIndicators-TF-IDF.png "SentimentIndicators-TF-IDF")
+
+### Application
+
+Evolving area
+Commercial product lexicon based therefore un accurate
+Custom ML can be a product to sell
+Challenges:
+- label large volumes of news data accurately
+- equities need industry specific classifiers
+- streaming news expensive
+
