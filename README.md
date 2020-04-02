@@ -193,7 +193,48 @@ Define Sell Signal:
 - MACD line's slope (over 5 day period) < signal line's slope (over the last 5 periods)
 - exit if (MACD line >= signal line) & (MACD line's slope >= signal line's slope)
 
-## Value Investing
+## Value Investing - Fundamental Analysis
+
+Price is what you pay, value is what you get.
+
+Quantitative approach if you can afford computational power.
+Quantitative methods:
+- (Joel Greenblatt's) Magic Formula
+- (Stanford Accounting Professor Joseph Piotroski) F-score
+
+### Magic Formula
+
+Best seller ''The little book that beats the market'':
+- identify *wonderfull stocks* at *bargain price*
+
+![FundamentalIndicators-ROIC](img/FundamentalIndicators-ROIC.png "FundamentalIndicators-ROIC")
+
+*Wonderful stocks* : Return On Invested Capital (ROIC) focussing on assets generating the return
+
+![FundamentalIndicators-EarningsYield](img/FundamentalIndicators-EarningsYield.png "FundamentalIndicators-EarningsYield")
+
+*Bargain price*: Earning Yield is the ratio of EBIT to Enterprise Value (like P/E ratio but capital structure independent)
+
+![FundamentalIndicators-MagicFormula](img/FundamentalIndicators-MagicFormula.png "FundamentalIndicators-MagicFormula")
+
+Invest in the top 20-30 companies (exclude finance & insurance), accumulating 2-3 positions per month over 12 months period and rebalance each year.
+
+### F-score (mid & small caps)
+
+Number [0-9] which assess company's financial position strength, 9 bieng best. Pick sctock [8,9] and rebalance once or twice a year.
+
+* profiltability criteria:
+    - positive return on assets in the current year (1 point)
+    - positive perating cash flow in the current year (1 point)
+    - return on asset higher in the current year compared to previous year (1 point)
+    - cash flow from operations divided by total assets greater than ROA in current year - Accruals - (1 point)
+* leverage, liquidity & source of funds criteria:
+    - lower ratio of long term debt in the current period, compared to previous - decreased leverage - (1 point)
+    - higher current ratio this year compared to previous year, more liquidity (1 point)
+    - no new shares were issued in the last year, lack of dilution (1 point)
+* operating efficiency criteria:
+    - higher gross margin compared to previous year (1 point)
+    - higher asset turnover ratio compared to previous year (1 point)
 
 ## Trading System
 
