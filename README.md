@@ -388,3 +388,7 @@ Challenges:
 - equities need industry specific classifiers
 - streaming news expensive
 
+```
+export PATH=` echo $PATH | sed 's/:/\n/g' | grep -v mnt | xargs | sed 's/\ /\:/g' `
+jupyter nbconvert --to script Section-17_98-WhatIsaNormalDistribution-Note.ipynb
+```
