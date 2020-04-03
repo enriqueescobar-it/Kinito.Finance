@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SentimentIndicators/NaiveBayesClassifier.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SentimentIndicators/NaiveBayesManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SentimentIndicators/NaiveBayesTrainer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SentimentIndicators/NltkManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SentimentIndicators/VaderSentimentManager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SentimentIndicators/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/81_VADER_links.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/81_VADER_tblob.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/82_VADER_tblob.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/84_VADER_crude_oil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/87_news_crude_oil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/88_nb_train.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/89_nb_predict.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
