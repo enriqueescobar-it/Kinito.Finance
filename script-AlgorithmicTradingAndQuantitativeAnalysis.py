@@ -35,7 +35,7 @@ ya_day: date = PyDays.DateTime52WeekAgo()
 ya_day_s: str = ya_day.strftime('%Y-%m-%d')
 alpha_key = "Data/alphavantage-key.txt"
 # extracting stock data (historical close price) for the stocks identified
-ticker_list = PyTickers.FAGMAlist()
+ticker_list = PyTickers.PortfolioDjiStocks()
 # ticker_list = PyTickers.NameList50()
 counter: int = 0
 pdr_adjclose_df: DataFrame = pd.DataFrame()
@@ -88,9 +88,7 @@ print(cagrManager.KPIdf)
 print('CalmarRatio')
 crManager: CalmarRatioManager = CalmarRatioManager(yahooPdrManager.YahooData)
 print(crManager.KPIdf)
-exit(777)
 avManager: AlphaVantageManager = AlphaVantageManager(alpha_key, yTicker)
-exit(-1)
 yahooScrapper: YahooScrapper = YahooScrapper(yTicker)
 pprint(yahooScrapper.BalanceSheetUrl)
 pprint(yahooScrapper.CashFlowUrl)
@@ -111,7 +109,7 @@ while len(new_tickers) != 0 and counter <= 5:
                    j not in drop_list]
     for new_ticker in new_tickers:
         try:
-            y_ticker = PyTicker.YahooTicker('NYSE', new_ticker, 26, 0)
+            y_ticker = PyTicker.YahooTicker('NYSE', new_ticker, 52, 0)
             # pdr
             # pdr_df = get_data_yahoo(new_ticker, ya_day, to_day)
             # pdr_df.dropna(inplace=True)
@@ -152,7 +150,7 @@ while len(new_tickers) != 0 and counter <= 5:
 
 pprint(py_tickers[0].TickerName)
 pprint(str(py_tickers[0].PdrDf.shape))
-exit(9)
+exit(999)
 # Replaces NaN values with the next valid value along the column
 yPdr = YahooPdrManager(py_tickers[0], py_tickers[0].DateTimeFrom, py_tickers[0].DateTimeTo)
 yPdr.FillNaWithNextValue()

@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
-
 # In[1]:
-
-
 prices = {
     "box_of_spaghetti" : 4,
     "lasagna"  : 5,
@@ -14,11 +11,8 @@ quantity = {
     "lasagna"  : 10,
     "hamburger" : 0
     }
-
 money_spent = 0
-
 for i in prices:
     money_spent = money_spent + (prices[i]*quantity[i])
     
 print (money_spent)
-
