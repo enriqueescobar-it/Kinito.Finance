@@ -2,151 +2,248 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Data/AssetTypes/EquityShare.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/AssetTypes/GovernmentBond.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/AssetTypes/InvestmentPortfolio.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/AssetTypes/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/MarketIndices/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/ReturnTerms/LogReturn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/ReturnTerms/SimpleReturn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/ReturnTerms/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/AssetTypes/BaseAsset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Data_01.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Data_02.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/snk/iex.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_16-AddComments-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_16-AddComments-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_25-ANoteonBooleanValues-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_25-ANoteonBooleanValues-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_26-DefiningaFunctioninPython-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_26-DefiningaFunctioninPython-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_31-CreatingFunctionsContainingaFewArguments-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_31-CreatingFunctionsContainingaFewArguments-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Exercise_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Exercise_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Lecture_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Lecture_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Solution_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Solution_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_47-ImportingModules-Lecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_47-ImportingModules-Lecture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_48-Must-HavePackagesforFinanceandDataScience-Lecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_48-Must-HavePackagesforFinanceandDataScience-Lecture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Exercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Exercise.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Lecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Lecture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Exercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Exercise.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Lecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Lecture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Exercise_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Exercise_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Lecture_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Lecture_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Solution_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Solution_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-AlphaVantage.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-AlphaVantage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-ImportingandOrganizingYourDatainPython-PartII.A-Lecture_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-ImportingandOrganizingYourDatainPython-PartII.A-Lecture_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Exercise_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Exercise_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Lecture_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Lecture_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Solution_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Solution_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Exercise_CSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Exercise_CSV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Lecture_CSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Lecture_CSV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Solution_CSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Solution_CSV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Lecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Lecture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_59-RestartingtheJupyterKernel.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_59-RestartingtheJupyterKernel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Exercise_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Exercise_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Exercise_Yahoo_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Exercise_Yahoo_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Exercise_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Exercise_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Lecture_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Lecture_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Lecture_Yahoo_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Lecture_Yahoo_Py3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/AssetTypes/EquityShare.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data/AssetTypes/EquityShare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/AssetTypes/GovernmentBond.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data/AssetTypes/GovernmentBond.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_10-Variables-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_11-NumbersandBooleanValues-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-03_12-Strings-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_13-ArithmeticOperators-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_14-TheDoubleEqualitySign-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_15-ReassignValues-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_16-AddComments-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_16-AddComments-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_17-LineContinuation-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_18-IndexingElements-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-04_19-StructureYourCodewithIndentation-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_20-ComparisonOperators-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-05_21-LogicalandIdentityOperators-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_22-IntroductiontotheIfStatement-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_23-AddanElseStatement-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_24-ElseIfForBrief-Elif-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_25-ANoteonBooleanValues-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-06_25-ANoteonBooleanValues-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_26-DefiningaFunctioninPython-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_26-DefiningaFunctioninPython-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_27-CreatingaFunctionwithaParameter-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_28-AnotherWaytoDefineaFunction-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_29-UsingaFunctioninanotherFunction-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_30-CombiningConditionalStatementsandFunctions-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_31-CreatingFunctionsContainingaFewArguments-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_31-CreatingFunctionsContainingaFewArguments-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-07_32-NotableBuilt-InFunctionsinPython-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_33-Lists-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_34-HelpYourselfwithMethods-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_35-ListSlicing-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_36-Tuples-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-08_37-Dictionaries-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_38-ForLoops-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_39-WhileLoopsandIncrementing-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_40-CreateListswiththerangeFunction-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_41-UseConditionalStatementsandLoopsTogether-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_42-AllIn-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Exercise_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Exercise_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Lecture_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Lecture_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Solution_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-09_43-IteratingoverDictionaries-Solution_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_47-ImportingModules-Lecture.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_47-ImportingModules-Lecture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_48-Must-HavePackagesforFinanceandDataScience-Lecture.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_48-Must-HavePackagesforFinanceandDataScience-Lecture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Exercise.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Exercise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Lecture.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Lecture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Solution.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_49-WorkingwithArrays-Solution.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Exercise.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Exercise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Lecture.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Lecture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Solution.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_50-GeneratingRandomNumbers-Solution.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Exercise_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Exercise_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Lecture_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Lecture_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_54-ImportingandOrganizingYourDatainPython-PartI-Solution_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-AlphaVantage.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-AlphaVantage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-ImportingandOrganizingYourDatainPython-PartII.A-Lecture_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_55-ImportingandOrganizingYourDatainPython-PartII.A-Lecture_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Exercise_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Exercise_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Lecture_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Lecture_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_56-ImportingandOrganizingYourDatainPython-PartII.B-Solution_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Lecture_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Lecture_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Solution_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Solution_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Lecture.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Lecture.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Solution.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_58-ChangingtheIndexofYourTime-SeriesData_Solution.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_59-RestartingtheJupyterKernel.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-10_59-RestartingtheJupyterKernel.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Lecture_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Lecture_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Solution_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Solution_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Solution_Yahoo_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Solution_Yahoo_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Solution_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_63-SimpleReturns-PartI-Solution_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Exercise_CSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Exercise_CSV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Exercise_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Exercise_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Exercise_Yahoo_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Exercise_Yahoo_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Lecture_CSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Lecture_CSV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Lecture_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Lecture_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Lecture_Yahoo_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Lecture_Yahoo_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Solution_CSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Solution_CSV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Solution_IEX.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Solution_IEX.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Solution_Yahoo_Py3.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_64-SimpleReturns-PartII-Solution_Yahoo_Py3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script" beforeDir="false" afterPath="$PROJECT_DIR$/script" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-FinanceAnalysisAlgoTrading.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-FinanceAnalysisAlgoTrading.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,6 +272,7 @@
     <option name="sortByType" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Data" />
@@ -241,6 +339,9 @@
   <component name="SvnConfiguration">
     <configuration />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="330" y="90" key="#Inspections" timestamp="1585021292042">
       <screen x="0" y="0" width="1474" height="864" />
@@ -262,28 +363,28 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1585238354579" />
-    <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1585962544835">
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1586200971793">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1585962544835" />
+    <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586200971793" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1585669191425" />
-    <state width="1453" height="271" key="GridCell.Tab.0.center" timestamp="1585962544835">
+    <state width="1453" height="271" key="GridCell.Tab.0.center" timestamp="1586200971793">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1585962544835" />
+    <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586200971793" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1585669191424" />
-    <state width="1453" height="271" key="GridCell.Tab.0.left" timestamp="1585962544835">
+    <state width="1453" height="271" key="GridCell.Tab.0.left" timestamp="1586200971793">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1585962544835" />
+    <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586200971793" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1585669191424" />
-    <state width="1453" height="271" key="GridCell.Tab.0.right" timestamp="1585962544835">
+    <state width="1453" height="271" key="GridCell.Tab.0.right" timestamp="1586200971793">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1585962544835" />
+    <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586200971793" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1585669191424" />
     <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">

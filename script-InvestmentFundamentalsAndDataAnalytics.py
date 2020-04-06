@@ -6,11 +6,13 @@ import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
 import matplotlib.pyplot as plt
-
+from Data.AssetTypes.BaseAsset import BaseAsset
+from Data.AssetTypes.EquityShare import EquityShare
+from Data.AssetTypes.GovernmentBond import GovernmentBond
 # In[2]:
 PG = wb.DataReader('PG', data_source='yahoo', start='1995-1-1')
-# with iex key
-PG = wb.DataReader('PG', data_source='iex', start='2015-1-1')
+# with iex key`
+# PG = wb.DataReader('PG', data_source='iex', start='2015-1-1')
 # csv
 PG = pd.read_csv('Section-11_PG_1995-03_23_2017.csv')
 PG = PG.set_index('Date')

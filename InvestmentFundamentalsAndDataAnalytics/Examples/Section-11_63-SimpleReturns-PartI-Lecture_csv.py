@@ -6,10 +6,10 @@ import pandas as pd
 from pandas_datareader import data as wb
 import matplotlib.pyplot as plt
 # In[2]:
-PG = pd.read_csv('D:/Python/PG_1995-03_23_2017.csv', index_col = 'Date')
+PG = pd.read_csv('Section-11_PG_1995-03_23_2017.csv', index_col = 'Date')
 # or:
 # In[3]:
-PG = pd.read_csv('D:/Python/PG_1995-03_23_2017.csv')
+PG = pd.read_csv('Section-11_PG_1995-03_23_2017.csv')
 PG = PG.set_index('Date')
 # In[4]:
 PG.head()
