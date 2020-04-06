@@ -12,10 +12,10 @@ class BaseAsset(object):
         self.AssetType: str = a_type
         self.ShortType: str = s_type
 
-    def getSimpleReturn(self, data_frame: pd.DataFrame) -> pd.DataFrame:
+    def getSimpleReturn(self, data_frame: pd.DataFrame): #> pd.DataFrame:
         data_frame['SimpleReturn'] = (data_frame['Adj Close'] / data_frame['Adj Close'].shift(1)) - 1
-        return data_frame
+        return data_frame['SimpleReturn']
 
-    def getLogReturn(self, data_frame: pd.DataFrame) -> pd.DataFrame:
-        data_frame['log_return'] = np.log(data_frame['Adj Close'] / data_frame['Adj Close'].shift(1))
-        return data_frame
+    def getLogReturn(self, data_frame: pd.DataFrame): #-> pd.DataFrame:
+        data_frame['LogReturn'] = np.log(data_frame['Adj Close'] / data_frame['Adj Close'].shift(1))
+        return data_frame['LogReturn']

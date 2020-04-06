@@ -2,33 +2,41 @@
 # $$
 # \frac{P_1 - P_0}{P_0} = \frac{P_1}{P_0} - 1
 # $$
-import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
-import matplotlib.pyplot as plt
-from Data.AssetTypes.BaseAsset import BaseAsset
-from Data.AssetTypes.EquityShare import EquityShare
-from Data.AssetTypes.GovernmentBond import GovernmentBond
-# In[2]:
+'''from AssetTypes.BaseAsset import BaseAsset
+from AssetTypes.EquityShare import EquityShare
+from AssetTypes.GovernmentBond import GovernmentBond'''
 PG = wb.DataReader('PG', data_source='yahoo', start='1995-1-1')
 # with iex key`
 # PG = wb.DataReader('PG', data_source='iex', start='2015-1-1')
 # csv
-PG = pd.read_csv('Section-11_PG_1995-03_23_2017.csv')
-PG = PG.set_index('Date')
-PG.head()
-PG.tail()
+#PG = pd.read_csv('Section-11_PG_1995-03_23_2017.csv')
+#PG = PG.set_index('Date')
 PG['simple_return'] = (PG['Adj Close'] / PG['Adj Close'].shift(1)) - 1
 print(PG['simple_return'])
+PG['simple_return'].plot(figsize=(8, 5))
+plt.show()
+# Calculate the average daily return.
+avg_returns_d = PG['simple_return'].mean()
+# Estimate the average annual return.
+avg_returns_a = PG['simple_return'].mean() * 250
+# Print the percentage version of the result as a float with 2 digits after the decimal point.
+print (str(round(avg_returns_a, 5) * 100) + ' %')
+'''baseAsset: BaseAsset = EquityShare('PG')
+print(baseAsset.ShortType)
+print(baseAsset.AssetType)
+print(baseAsset.AssetName)
+print(baseAsset.getSimpleReturn(PG))'''
 #
-tickers = ['PG', 'MSFT', 'T', 'F', 'GE']
+'''tickers = ['PG', 'MSFT', 'T', 'F', 'GE']
 newDataFrame = pd.DataFrame()
 for t in tickers:
     newDataFrame[t] = wb.DataReader(t, data_source='iex', start='2015-1-1')['close']
 newDataFrame.tail()
 newDataFrame.head()
 newDataFrame.to_csv('Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-example_01.csv')
-newDataFrame.to_excel('Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-example_01.xlsx')
+newDataFrame.to_excel('Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-example_01.xlsx')'''
 #
 import quandl
 #
