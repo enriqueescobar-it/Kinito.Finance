@@ -1,9 +1,8 @@
 from typing import Dict, Any
 
-import Data.Yahoo.YahooTicker as YahooTicker
+import Yahoo.YahooTicker as YahooTicker
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
 
 
 class YahooScrapper(object):

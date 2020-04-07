@@ -1,6 +1,6 @@
 from typing import Dict, Any
 
-import Data.Yahoo.YahooTicker as YahooTicker
+import Yahoo.YahooTicker as YahooTicker
 import requests
 
 

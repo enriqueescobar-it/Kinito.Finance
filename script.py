@@ -1,8 +1,8 @@
 from datetime import date
 from typing import List, Any, Union
 import TradingDateTimes.PyDateTimes as PyDays
-import Data.Yahoo.TickerNameList as PyTickers
-import Data.Yahoo.YahooTicker as PyTicker
+import Yahoo.TickerNameList as PyTickers
+import Yahoo.YahooTicker as PyTicker
 
 from yahoofinancials import YahooFinancials
 
@@ -11,7 +11,7 @@ from pprint import pprint
 import pandas as pd
 from pandas_datareader.data import get_data_yahoo
 
-from Data.Yahoo.YahooTicker import YahooTicker
+from Yahoo.YahooTicker import YahooTicker
 
 from alpha_vantage.timeseries import TimeSeries
 

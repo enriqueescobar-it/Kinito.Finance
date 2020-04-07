@@ -13,8 +13,8 @@ PG = wb.DataReader('PG', data_source='yahoo', start='1995-1-1')
 # with iex key`
 # PG = wb.DataReader('PG', data_source='iex', start='2015-1-1')
 # csv
-#PG = pd.read_csv('Section-11_PG_1995-03_23_2017.csv')
-#PG = PG.set_index('Date')
+# PG = pd.read_csv('Section-11_PG_1995-03_23_2017.csv')
+# PG = PG.set_index('Date')
 # calculate simple return
 PG['simple_return'] = (PG['Adj Close'] / PG['Adj Close'].shift(1)) - 1
 print(PG['simple_return'])
@@ -96,13 +96,51 @@ weights_2 = np.array([0.4, 0.4, 0.15, 0.05])
 pfolio_2 = str(round(np.dot(annual_returns, weights_2), 5) * 100) + ' %'
 print (pfolio_2)
 ## Calculating the Risk of a Portfolio of Securities Section-11_MSFT_2000_2017.csv
-returns = np.log(yahoo_df / yahoo_df.shift(1))
-returns.head()
+log_returns = np.log(yahoo_df / yahoo_df.shift(1))
+log_returns.head()
 # MSFT
+log_returns['MSFT'].mean()
+log_returns['MSFT'].mean()*250
 # Daily risk:
-returns['MSFT'].std()
-# Annual risk:
-returns['MSFT'].std() * 250 ** 0.5
+log_returns['MSFT'].std()
+# Annual risk: covariance
+log_returns['MSFT'].std() * 250 ** 0.5
+# PG
+log_returns['PG'].mean()
+log_returns['PG'].mean()*250
+# Daily risk:
+log_returns['PG'].std()
+# Annual risk: covariance
+log_returns['PG'].std() * 250 ** 0.5
+# Repeat the process we went through in the lecture for these two stocks. How would you explain the difference between their means and their standard deviations?
+returns[['MSFT', 'PG']].mean() * 250
 # Store the volatilities of the two stocks in an array called "vols".
-volatilities = returns[['MSFT', 'AAPL']].std() * 250 ** 0.5
+volatilities = log_returns[['MSFT', 'PG']].std() * 250 ** 0.5
 volatilities
+# ## Covariance and Correlation on returns
+# \begin{eqnarray*}
+# Covariance Matrix: \  \   
+# \Sigma = \begin{bmatrix}
+#         \sigma_{1}^2 \ \sigma_{12} \ \dots \ \sigma_{1I} \\
+#         \sigma_{21} \ \sigma_{2}^2 \ \dots \ \sigma_{2I} \\
+#         \vdots \ \vdots \ \ddots \ \vdots \\
+#         \sigma_{I1} \ \sigma_{I2} \ \dots \ \sigma_{I}^2
+#     \end{bmatrix}
+# \end{eqnarray*}
+# variance on returns
+ms_var = log_returns['MSFT'].var() 
+ms_var
+ms_var_anual = log_returns['MSFT'].var() * 250
+ms_var_anual
+pg_var = log_returns['PG'].var() 
+pg_var
+pg_var_anual = log_returns['PG'].var() * 250
+pg_var_anual
+# covariance on returns
+cov_matrix = log_returns.cov()
+cov_matrix
+cov_matrix_anual = log_returns.cov() * 250
+cov_matrix_anual
+# correlation on returns no need x 252
+corr_matrix = log_returns.corr()
+corr_matrix

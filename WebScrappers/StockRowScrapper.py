@@ -1,5 +1,4 @@
-import Data.Yahoo.YahooTicker as YahooTicker
-from Data.StockRow.TermEnums import TermEnums
+import Yahoo.YahooTicker as YahooTicker
 
 
 class StockRowScrapper(object):
