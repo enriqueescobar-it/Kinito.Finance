@@ -1,4 +1,4 @@
-import Yahoo.YahooTicker as YahooTicker
+import DataReaders.YahooTicker as YahooTicker
 
 
 class StockRowScrapper(object):

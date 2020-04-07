@@ -1,5 +1,5 @@
 from yahoofinancials import YahooFinancials
-import Yahoo.YahooTicker as YahooTicker
+import DataReaders.YahooTicker as YahooTicker
 from datetime import date
 
 

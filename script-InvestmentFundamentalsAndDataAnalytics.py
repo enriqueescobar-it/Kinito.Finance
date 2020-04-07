@@ -72,7 +72,7 @@ iex_df = pd.DataFrame()
 for t in tickers:
     yahoo_df[t] = wb.DataReader(t, data_source='yahoo', start='1995-1-1')['Adj Close']
     # iex_df[t] = wb.DataReader(t, data_source='iex', start='2002-1-1')['Close']
-    # yahoo_df = pd.read_csv('Section-11_67-4_stocks_1995_2017.csv', index_col='Date')
+yahoo_df = pd.read_csv('Section-12_PG_BEI.DE_2007_2017.csv', index_col='Date')
 yahoo_df.tail()
 yahoo_df.head()
 # newDataFrame.to_csv('Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-example_01.csv')
@@ -80,42 +80,44 @@ yahoo_df.head()
 yahoo_df.iloc[0]
 (yahoo_df / yahoo_df.iloc[0] * 100).plot(figsize = (15, 6));
 yahoo_df.plot(figsize=(15,6))
-yahoo_df.loc['1995-01-03']
+yahoo_df.loc['2007-01-03']
 yahoo_df.iloc[0]
 ## Calculating the Return of a Portfolio of Securities
-returns = (yahoo_df / yahoo_df.shift(1)) - 1
-returns.head()
-weights = np.array([0.25, 0.25, 0.25, 0.25])
-np.dot(returns, weights)
-annual_returns = returns.mean() * 250
-annual_returns
-np.dot(annual_returns, weights)
-pfolio_1 = str(round(np.dot(annual_returns, weights), 5) * 100) + ' %'
+simple_returns = (yahoo_df / yahoo_df.shift(1)) - 1
+simple_returns.head()
+weights = np.array([0.5, 0.5])
+np.dot(simple_returns, weights)
+simple_returns_anual = simple_returns.mean() * 250
+simple_returns_anual
+np.dot(simple_returns_anual, weights)
+pfolio_1 = str(round(np.dot(simple_returns_anual, weights), 5) * 100) + ' %'
 print (pfolio_1)
-weights_2 = np.array([0.4, 0.4, 0.15, 0.05])
-pfolio_2 = str(round(np.dot(annual_returns, weights_2), 5) * 100) + ' %'
+weights_2 = np.array([0.75, 0.25])
+pfolio_2 = str(round(np.dot(simple_returns_anual, weights_2), 5) * 100) + ' %'
 print (pfolio_2)
 ## Calculating the Risk of a Portfolio of Securities Section-11_MSFT_2000_2017.csv
 log_returns = np.log(yahoo_df / yahoo_df.shift(1))
 log_returns.head()
 # MSFT
-log_returns['MSFT'].mean()
-log_returns['MSFT'].mean()*250
-# Daily risk:
-log_returns['MSFT'].std()
-# Annual risk: covariance
-log_returns['MSFT'].std() * 250 ** 0.5
-# PG
 log_returns['PG'].mean()
+# Annual risk: covariance
 log_returns['PG'].mean()*250
 # Daily risk:
 log_returns['PG'].std()
 # Annual risk: covariance
 log_returns['PG'].std() * 250 ** 0.5
+# PG
+log_returns['BEI.DE'].mean()
+# Annual risk: covariance
+log_returns['BEI.DE'].mean()*250
+# Daily risk:
+log_returns['BEI.DE'].std()
+# Annual risk: covariance
+log_returns['BEI.DE'].std() * 250 ** 0.5
 # Repeat the process we went through in the lecture for these two stocks. How would you explain the difference between their means and their standard deviations?
-returns[['MSFT', 'PG']].mean() * 250
+log_returns[['PG', 'BEI.DE']].mean() * 250
 # Store the volatilities of the two stocks in an array called "vols".
-volatilities = log_returns[['MSFT', 'PG']].std() * 250 ** 0.5
+volatilities = log_returns[['PG', 'BEI.DE']].std() * 250 ** 0.5
 volatilities
 # ## Covariance and Correlation on returns
 # \begin{eqnarray*}
@@ -128,13 +130,13 @@ volatilities
 #     \end{bmatrix}
 # \end{eqnarray*}
 # variance on returns
-ms_var = log_returns['MSFT'].var() 
+ms_var = log_returns['PG'].var() 
 ms_var
-ms_var_anual = log_returns['MSFT'].var() * 250
+ms_var_anual = log_returns['PG'].var() * 250
 ms_var_anual
-pg_var = log_returns['PG'].var() 
+pg_var = log_returns['BEI.DE'].var() 
 pg_var
-pg_var_anual = log_returns['PG'].var() * 250
+pg_var_anual = log_returns['BEI.DE'].var() * 250
 pg_var_anual
 # covariance on returns
 cov_matrix = log_returns.cov()
@@ -144,3 +146,30 @@ cov_matrix_anual
 # correlation on returns no need x 252
 corr_matrix = log_returns.corr()
 corr_matrix
+# ## Calculating Portfolio Risk
+# Weigthing scheme:
+weights = np.array([0.25, 0.75])
+# Portfolio Variance:
+pfolio_var = np.dot(weights.T, np.dot(log_returns.cov() * 250, weights))
+pfolio_var
+# Portfolio Volatility:
+pfolio_vol = (np.dot(weights.T, np.dot(log_returns.cov() * 250, weights))) ** 0.5
+pfolio_vol
+print (str(round(pfolio_vol, 5) * 100) + ' %')
+# systematic = un diversifiable risk
+# unsystematic = diversifiable risk = idiosyncratic -> diversification
+## Calculating Diversifiable and Non-Diversifiable Risk of a Portfolio
+# Diversifiable Risk:
+ms_var_anual = log_returns['PG'].var() * 250
+ms_var_anual
+pg_var_anual = log_returns['BEI.DE'].var() * 250
+pg_var_anual
+diversifable_risk = pfolio_var - (weights[0] ** 2 * ms_var_anual) - (weights[1] ** 2 * pg_var_anual)
+diversifable_risk
+print (str(round(diversifable_risk*100, 3)) + ' %')
+# Non-Diversifiable Risk:
+n_dr_1 = pfolio_var - diversifable_risk
+n_dr_1
+n_dr_2 = (weights[0] ** 2 * ms_var_anual) + (weights[1] ** 2 * pg_var_anual)
+n_dr_2
+n_dr_1 == n_dr_2

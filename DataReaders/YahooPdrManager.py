@@ -1,8 +1,7 @@
 from datetime import date
 from pandas import DataFrame
 from pandas_datareader import get_data_yahoo
-import Yahoo.YahooTicker as YahooTicker
-
+import DataReaders.YahooTicker as YahooTicker
 
 class YahooPdrManager(object):
     """description of class"""

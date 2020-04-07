@@ -1,6 +1,6 @@
 from typing import Dict, Any
 
-import Yahoo.YahooTicker as YahooTicker
+import DataReaders.YahooTicker as YahooTicker
 import requests
 from bs4 import BeautifulSoup
 

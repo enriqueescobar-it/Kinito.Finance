@@ -3,33 +3,34 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/FinViz/FinVizManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinViz/FinVizManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/FinViz/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/MarketIndices/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Manager/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReturnTerms/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/MarketIndices/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/StockRow/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/ReturnTerms/LogReturn.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReturnTerms/LogReturn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/ReturnTerms/SimpleReturn.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReturnTerms/SimpleReturn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/ReturnTerms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/TimeSeries/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/StockRow/FinancialEnums.py" beforeDir="false" afterPath="$PROJECT_DIR$/StockRow/FinancialEnums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/StockRow/TermEnums.py" beforeDir="false" afterPath="$PROJECT_DIR$/StockRow/TermEnums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/StockRow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScrappers/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/TimeSerie/AlphaVantageManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TimeSeries/AlphaVantageManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/TimeSerie/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Yahoo/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/WebScrapper/FmpScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScrappers/FmpScrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/WebScrapper/StockRowScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScrappers/StockRowScrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/WebScrapper/YahooScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScrappers/YahooScrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/WebScrapper/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/YahooFinance/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Yahoo/TickerCsvReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Yahoo/TickerCsvReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Yahoo/TickerNameList.py" beforeDir="false" afterPath="$PROJECT_DIR$/Yahoo/TickerNameList.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Yahoo/YahooPdrManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Yahoo/YahooPdrManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Yahoo/YahooTicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Yahoo/YahooTicker.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Yahoo/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/YahooFinancial/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/YahooFinance/FinanceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/YahooFinance/FinanceManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/YahooFinance/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/YahooFinancial/FinancialManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/YahooFinancial/FinancialManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/YahooFinancial/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/alphavantage-key.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TimeSeries/alphavantage-key.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Data_01.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataReaders/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinViz/FinVizManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinViz/FinVizManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Lecture_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Lecture_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Solution_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Solution_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Solution_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Lecture_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Lecture_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Lecture_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Lecture_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Solution_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Solution_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Solution_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Solution_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Solution_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimeSeries/AlphaVantageManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/TimeSeries/AlphaVantageManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScrappers/FmpScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScrappers/FmpScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScrappers/StockRowScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScrappers/StockRowScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScrappers/YahooScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/WebScrappers/YahooScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yahoo/TickerCsvReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataReaders/TickerCsvReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yahoo/TickerNameList.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataReaders/TickerNameList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yahoo/YahooPdrManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataReaders/YahooPdrManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yahoo/YahooTicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataReaders/YahooTicker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Yahoo/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/YahooFinance/FinanceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/YahooFinance/FinanceManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YahooFinancial/FinancialManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/YahooFinancial/FinancialManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/script.py" afterDir="false" />
@@ -64,16 +65,16 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Data/TimeSeries" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/DataReaders" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\Disk_X\Kinito.Finance\DataReaders" />
       <recent name="H:\Disk_X\Kinito.Finance" />
       <recent name="H:\Disk_X\Kinito.Finance\FinViz" />
       <recent name="H:\Disk_X\Kinito.Finance\" />
       <recent name="H:\Disk_X\Kinito.Finance\Data\TimeSeries" />
-      <recent name="H:\Disk_X\Kinito.Finance\Data" />
     </key>
   </component>
   <component name="RunManager" selected="Python.script-InvestmentFundamentalsAndDataAnalytics">
@@ -175,10 +176,10 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="468" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586222515871" />
-    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1586222306454">
+    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1586231044404">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586222306454" />
+    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1585238354579" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1586206549982">
       <screen x="0" y="0" width="1474" height="864" />
