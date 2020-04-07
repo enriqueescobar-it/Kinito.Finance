@@ -2,13 +2,121 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Data_01.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/AssetTypes/BaseAsset.py" beforeDir="false" afterPath="$PROJECT_DIR$/AssetTypes/BaseAsset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/AssetTypes/EquityShare.py" beforeDir="false" afterPath="$PROJECT_DIR$/AssetTypes/EquityShare.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/AssetTypes/GovernmentBond.py" beforeDir="false" afterPath="$PROJECT_DIR$/AssetTypes/GovernmentBond.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/AssetTypes/InvestmentPortfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/AssetTypes/InvestmentPortfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/AssetTypes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/AssetTypes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AssetTypes/BaseAsset.py" beforeDir="false" afterPath="$PROJECT_DIR$/AssetTypes/BaseAsset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/DateTime/PyDateTimes.py" beforeDir="false" afterPath="$PROJECT_DIR$/TradingDateTimes/PyDateTimes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/DateTime/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/TradingDateTimes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Yahoo/YahooTicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Yahoo/YahooTicker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Lecture_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Lecture_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Lecture_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Lecture_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Lecture_csv.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Lecture_csv.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Solution_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Solution_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Solution_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Solution_csv.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_65-LogarithmicReturns-Solution_csv.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Exercise_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Exercise_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Lecture_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Lecture_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Lecture_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Lecture_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Lecture_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Lecture_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Solution_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Solution_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Solution_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Solution_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-CalculatingtheReturnofaPortfolioofSecurities-Solution_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-UsingLocAndIloc-Note_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-UsingLocAndIloc-Note_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-UsingLocAndIloc-Note_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-UsingLocAndIloc-Note_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-UsingLocAndIloc-Note_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_67-UsingLocAndIloc-Note_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Lecture_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Lecture_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Lecture_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Lecture_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Solution_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Solution_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Solution_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-11_69-CalculatingtheReturnofIndices-Solution_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Exercise_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Exercise_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Lecture_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Lecture_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Solution_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Solution_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_71-CalculatingtheRiskofaSecurity-Solution_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Exercise_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Exercise_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Lecture_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Lecture_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Solution_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_75-CalculatingCovarianceandCorrelation-Solution_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Exercise_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Exercise_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Lecture_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Lecture_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Solution_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Solution_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_77-CalculatingPortfolioRisk-Solution_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Exercise_IEX.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Exercise_IEX.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-12_79-DiversifiableandNon-DiversifiableRiskofaPortfolio-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-13_81-RunningaRegressioninPython-Exercise.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-13_81-RunningaRegressioninPython-Exercise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-13_83-ComputingAlpha,Beta,andRSquaredinPython-Exercise.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-13_83-ComputingAlpha,Beta,andRSquaredinPython-Exercise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_85-ObtainingtheEfficientFrontier-PartI-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_85-ObtainingtheEfficientFrontier-PartI-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_85-ObtainingtheEfficientFrontier-PartI-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_85-ObtainingtheEfficientFrontier-PartI-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_86-ObtainingtheEfficientFrontier-PartII-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_86-ObtainingtheEfficientFrontier-PartII-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_86-ObtainingtheEfficientFrontier-PartII-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_86-ObtainingtheEfficientFrontier-PartII-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_87-ObtainingtheEfficientFrontier-PartIII-Exercise_CSV.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_87-ObtainingtheEfficientFrontier-PartIII-Exercise_CSV.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_87-ObtainingtheEfficientFrontier-PartIII-Exercise_Yahoo_Py3.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-14_87-ObtainingtheEfficientFrontier-PartIII-Exercise_Yahoo_Py3.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/script.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +153,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\Disk_X\Kinito.Finance\" />
       <recent name="H:\Disk_X\Kinito.Finance" />
       <recent name="H:\Disk_X\Kinito.Finance\Data" />
       <recent name="H:\Disk_X\Kinito.Finance\Data\Yahoo" />
       <recent name="H:\Disk_X\Kinito.Finance\Data\YahooFinancial" />
-      <recent name="H:\Disk_X\Kinito.Finance\Data\Manager" />
     </key>
   </component>
   <component name="RunManager" selected="Python.script-InvestmentFundamentalsAndDataAnalytics">

@@ -3,7 +3,7 @@ from pprint import pprint
 from typing import List, Any, Union
 import pandas as pd
 from pandas import DataFrame
-import Data.DateTime.PyDateTimes as PyDays
+import TradingDateTimes.PyDateTimes as PyDays
 import Data.Yahoo.TickerNameList as PyTickers
 import Data.Yahoo.YahooTicker as PyTicker
 from Data.TimeSerie.AlphaVantageManager import AlphaVantageManager
