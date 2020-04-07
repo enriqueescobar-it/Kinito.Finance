@@ -173,3 +173,53 @@ n_dr_1
 n_dr_2 = (weights[0] ** 2 * ms_var_anual) + (weights[1] ** 2 * pg_var_anual)
 n_dr_2
 n_dr_1 == n_dr_2
+# regresssions
+import numpy as np
+import pandas as pd
+from scipy import stats
+import statsmodels.api as sm 
+import matplotlib.pyplot as plt
+data = pd.read_excel('Section-13_Housing.xlsx')
+data[['House Price', 'House Size (sq.ft.)']]
+X = data['House Size (sq.ft.)']
+Y = data['House Price']
+plt.scatter(X,Y)
+plt.axis([0, 2500, 0, 1500000])
+plt.ylabel('House Price')
+plt.xlabel('House Size (sq.ft)')
+# regression linear OLS
+X1 = sm.add_constant(X)
+reg = sm.OLS(Y, X1).fit()
+reg.summary()
+### Alpha, Beta, R^2:
+slope, intercept, r_value, p_value, std_err = stats.linregress(X,Y)
+line = intercept + slope * X
+plt.plot(X,line)
+print(slope)
+print(intercept)
+print(r_value)
+print(r_value**2)
+print(p_value)
+print(std_err)
+data = pd.read_excel('Section-13_IQ_data.xlsx')
+data[['IQ', 'Test 1']]
+X = data['Test 1']
+Y = data['IQ']
+plt.scatter(X,Y)
+plt.axis([0, 120, 0, 150])
+plt.ylabel('IQ')
+plt.xlabel('Test 1')
+# regression linear OLS
+X1 = sm.add_constant(X)
+reg = sm.OLS(Y, X1).fit()
+reg.summary()
+### Alpha, Beta, R^2:
+slope, intercept, r_value, p_value, std_err = stats.linregress(X,Y)
+line = intercept + slope * X
+plt.plot(X,line)
+print(slope)
+print(intercept)
+print(r_value)
+print(r_value**2)
+print(p_value)
+print(std_err)
