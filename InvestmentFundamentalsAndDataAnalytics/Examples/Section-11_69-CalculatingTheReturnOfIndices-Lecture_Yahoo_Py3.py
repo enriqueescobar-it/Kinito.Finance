@@ -11,6 +11,7 @@ tickers = ['^DJI', '^GSPC', '^IXIC', '^GDAXI']
 ind_data = pd.DataFrame()
 for t in tickers:
     ind_data[t] = wb.DataReader(t, data_source='yahoo', start='1997-1-1')['Adj Close']
+#     ind_data[t] = wb.DataReader(t, data_source='yahoo', start='2000-1-1')['Adj Close']
 ind_data.head()
 ind_data.tail()
 # Normalize the data to 100 and plot the results on a graph. 
@@ -24,13 +25,10 @@ ind_returns.tail()
 annual_ind_returns = ind_returns.mean() * 250
 annual_ind_returns
 # ***
-# In[8]:
 tickers = ['PG', '^GSPC', '^DJI']
 data_2 = pd.DataFrame()
 for t in tickers:
-    data_2[t] = wb.DataReader(t, data_source='yahoo', start='2007-1-1')['Adj Close']    
-# In[9]:
+    data_2[t] = wb.DataReader(t, data_source='yahoo', start='2007-1-1')['Adj Close']
 data_2.tail()
-# In[10]:
 (data_2 / data_2.iloc[0] * 100).plot(figsize=(15, 6));
 plt.show()

@@ -411,6 +411,10 @@ Logarithmic Rate of Return
 Simple Rate of Return
 ![CalculatingAndComparingRisk-SimpleRateReturn](img/CalculatingAndComparingRisk-SimpleRateReturn.png "CalculatingAndComparingRisk-SimpleRateReturn")
 
+$$
+\frac{P_1 - P_0}{P_0} = \frac{P_1}{P_0} - 1
+$$
+
 ##### Normalization to 100 to visualize
 
 P1 / P0 * 100
@@ -419,7 +423,7 @@ P1 / P0 * 100
 
 ![CalculatingAndComparingRisk-DotProduct](img/CalculatingAndComparingRisk-DotProduct.png "CalculatingAndComparingRisk-DotProduct")
 
-Run permitation calculations
+Run permutation calculations
 
 #### Popular Market Indices
 
@@ -435,7 +439,7 @@ DAX30: GER -> '^GDAXI'
 
 NIKKEI225: JPN
 
-MSCI: Morgan Stanley Composit International
+MSCI: Morgan Stanley Composite International
 
 ### Calculating Rate of Return RoR
 
@@ -452,14 +456,14 @@ MSCI: Morgan Stanley Composit International
 ![MeasuringInvestmentRisk-Covariance](img/MeasuringInvestmentRisk-Covariance.png "MeasuringInvestmentRisk-Covariance")
 
 * cov > 0 : both move in the same direction
-* cov = 0 : both are independant
+* cov = 0 : both are independent
 * cov < 0 : both move in opposite direction
 
 ### Correlation between 2 values
 
 ![MeasuringInvestmentRisk-CovarianceCorrelation](img/MeasuringInvestmentRisk-CovarianceCorrelation.png "MeasuringInvestmentRisk-CovarianceCorrelation")
 
-* Corr(returns) : Dependance between prices at different times, focus on returns of your portfolio.
+* Corr(returns) : Dependence between prices at different times, focus on returns of your portfolio.
 * Corr(prices) : focus on price levels
 * variance = Dot Product (weights as Vector, Dot Product (252*cov(returns), weights) )
 * volatility = sqrt(Dot Product (weights as Vector, Dot Product (252*cov(returns), weights) ))
@@ -487,6 +491,11 @@ Perform many iterations for performance graph
 Capital Market Line
 ![CapitalAssetPricingModel-CapitalMarketLine](img/CapitalAssetPricingModel-CapitalMarketLine.png "CapitalAssetPricingModel-CapitalMarketLine")
 
+**Beta**
+$$ 
+\beta_{stock,market} = \frac{\sigma_{stock,market}}{\sigma_{market}^2}
+$$
+
 Beta = cov(stock, market) / variance of the market
 Risk that cannot be avoided using diversification
 
@@ -494,6 +503,48 @@ Risk that cannot be avoided using diversification
 * beta = 0 no relationship
 * beta < 1 defensive - performance follows slowly
 
-## Multivariste Regression Analysis
+![CapitalAssetPricingModel-CapitalMarketLineFormula](img/CapitalAssetPricingModel-CapitalMarketLineFormula.png "CapitalAssetPricingModel-CapitalMarketLineFormula")
+
+**CAPM**
+$$
+ \overline{r_{stock}} = r_{free} + \beta_{stock,market}(\overline{r_{market}} - r_{free})
+$$
+
+**Equity Risk Premium**
+$$(\overline{r_{market}} - r_{free})$$
+
+Example for a US stock
+* risk free: 2.5% (10 year US government bond yield)
+* beta: 0.62 (S&P500 approximation) aka average premium
+* equity risk premium: [4.5%, 5.5%] (historical in US)
+* r(stock) = 2.5% + 0.62 * 5% = 5.6%
+
+Sharpe Ratio allows to compare 2 stocks or 2 portfolios
+
+![CapitalAssetPricingModel-SharpeRatio](img/CapitalAssetPricingModel-SharpeRatio.png "CapitalAssetPricingModel-SharpeRatio")
+
+**Sharpe ratio:**
+$$
+Sharpe = \frac{\overline{r_{stock}} - r_{free}}{\sigma_{stock}}
+$$
+
+CAPM alpha
+![CapitalAssetPricingModel-CAPMalpha](img/CapitalAssetPricingModel-CAPMalpha.png "CapitalAssetPricingModel-CAPMalpha")
+
+## Multivariate Regression Analysis
+
+Univariate regression has a unique beta coefficient and unique explanatory variable
+
+![MultivariateRegressionAnalysis-Univariate](img/MultivariateRegressionAnalysis-Univariate.png "MultivariateRegressionAnalysis-Univariate")
+
+Multivariate regression has a multiple beta coefficients and multiple explanatory variables
+
+![MultivariateRegressionAnalysis-Multivariate](img/MultivariateRegressionAnalysis-Multivariate.png "MultivariateRegressionAnalysis-Multivariate")
 
 ## Monte Carlo Simulations for Decision Making Tool
+
+### Using historical data
+
+On revenues
+* cogs: Gross Profits
+* opex: Operating Profits
