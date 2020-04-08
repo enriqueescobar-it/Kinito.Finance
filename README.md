@@ -392,3 +392,56 @@ Challenges:
 export PATH=` echo $PATH | sed 's/:/\n/g' | grep -v mnt | xargs | sed 's/\ /\:/g' `
 jupyter nbconvert --to script Section-17_98-WhatIsaNormalDistribution-Note.ipynb
 ```
+
+## Calculating & Comparing risk
+
+### Calculating Return
+
+#### Annual
+
+Annual Return = ((Daily Return + 1)^365)*100-1
+
+#### Single Equity
+
+Logarithmic Rate of Return
+![CalculatingAndComparingRisk-LogRateReturn](img/CalculatingAndComparingRisk-LogRateReturn.png "CalculatingAndComparingRisk-LogRateReturn")
+
+#### Multiple Equities
+
+Simple Rate of Return
+![CalculatingAndComparingRisk-SimpleRateReturn](img/CalculatingAndComparingRisk-SimpleRateReturn.png "CalculatingAndComparingRisk-SimpleRateReturn")
+
+##### Normalization to 100 to visualize
+
+P1 / P0 * 100
+
+##### Dot Product from Average Retrurn by Weights
+
+![CalculatingAndComparingRisk-DotProduct](img/CalculatingAndComparingRisk-DotProduct.png "CalculatingAndComparingRisk-DotProduct")
+
+Run permitation calculations
+
+#### Popular Market Indices
+
+S&P500: 500 largest US companies reflects its diversity
+DowJones: Industrial Average 30 largest
+NASDAQ: Composite Grouped Securities & IT Companies
+FTSE100: UK
+DAX30: GER
+NIKKEI225: JPN
+MSCI: Morgan Stanley Composit International
+
+### Calculating Rate of Return RoR
+
+
+## Measuring Investment Risk
+
+## Regressions for Financial Analysis
+
+## Markowitz Portfolio Optimization
+
+## Capital Asset Pricing Model
+
+## MultivaristebRegression Analysis
+
+## Monte Carlo Simulations for Decision Making Tool
