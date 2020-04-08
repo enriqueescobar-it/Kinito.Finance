@@ -487,6 +487,13 @@ Perform many iterations for performance graph
 Capital Market Line
 ![CapitalAssetPricingModel-CapitalMarketLine](img/CapitalAssetPricingModel-CapitalMarketLine.png "CapitalAssetPricingModel-CapitalMarketLine")
 
+Beta = cov(stock, market) / variance of the market
+Risk that cannot be avoided using diversification
+
+* beta > 1 aggressive - performance follows the market
+* beta = 0 no relationship
+* beta < 1 defensive - performance follows slowly
+
 ## Multivariste Regression Analysis
 
 ## Monte Carlo Simulations for Decision Making Tool
