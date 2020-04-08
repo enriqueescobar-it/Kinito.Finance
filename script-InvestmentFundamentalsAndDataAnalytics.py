@@ -61,6 +61,28 @@ mydata_03 = pd.read_excel('Section-10_57-ImportingandOrganizingYourDatainPython-
 mydata_03.info()
 mydata_03.set_index('Year')
 mydata_03.info()
+########## Return of Indices
+import numpy as np
+import pandas as pd
+from pandas_datareader import data as wb
+import matplotlib.pyplot as plt
+tickers = ['^DJI', '^GSPC', '^IXIC', '^GDAXI']
+ind_data = pd.DataFrame()
+for t in tickers:
+    ind_data[t] = wb.DataReader(t, data_source='yahoo', start='2000-1-1')['Adj Close']
+ind_data.head()
+ind_data.tail()
+# Normalize the data to 100 and plot the results on a graph. 
+(ind_data / ind_data.iloc[0] * 100).plot(figsize=(15, 6));
+plt.show()
+# How would you explain the common and the different parts of the behavior of the three indices?
+# Obtain the simple returns of the indices.
+ind_returns = (ind_data / ind_data.shift(1)) - 1
+ind_returns.tail()
+# Estimate the average annual return of each index.
+annual_ind_returns = ind_returns.mean() * 250
+annual_ind_returns
+##########
 '''baseAsset: BaseAsset = EquityShare('PG')
 print(baseAsset.ShortType)
 print(baseAsset.AssetType)

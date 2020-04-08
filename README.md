@@ -423,18 +423,29 @@ Run permitation calculations
 
 #### Popular Market Indices
 
-S&P500: 500 largest US companies reflects its diversity
-DowJones: Industrial Average 30 largest
-NASDAQ: Composite Grouped Securities & IT Companies
-FTSE100: UK
-DAX30: GER
+S&P500: 500 largest US companies reflects its diversity -> '^GSPC'
+
+DowJones: Industrial Average 30 largest -> '^DJI'
+
+NASDAQ: Composite Grouped Securities & IT Companies -> '^IXIC'
+
+FTSE100: UK -> '^FTSE'
+
+DAX30: GER -> '^GDAXI'
+
 NIKKEI225: JPN
+
 MSCI: Morgan Stanley Composit International
 
 ### Calculating Rate of Return RoR
 
+![CalculatingAndComparingRisk-RateOfReturn](img/CalculatingAndComparingRisk-RateOfReturn.png "CalculatingAndComparingRisk-RateOfReturn")
 
 ## Measuring Investment Risk
+
+### Variance & Standard Deviation
+
+![MeasuringInvestmentRisk-VARandSTD](img/MeasuringInvestmentRisk-VARandSTD.png "MeasuringInvestmentRisk-VARandSTD")
 
 ## Regressions for Financial Analysis
 
