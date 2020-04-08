@@ -479,10 +479,13 @@ Higher percent implies more predictive is: R square = 1 - (SSR / TSS)
 
 Distribute to have low correlation
 
-Perform many iterations
+Perform many iterations for performance graph
 ![MeasuringInvestmentRisk-EfficientFrontier](img/MeasuringInvestmentRisk-EfficientFrontier.png "MeasuringInvestmentRisk-EfficientFrontier")
 
 ## Capital Asset Pricing Model
+
+Capital Market Line
+![CapitalAssetPricingModel-CapitalMarketLine](img/CapitalAssetPricingModel-CapitalMarketLine.png "CapitalAssetPricingModel-CapitalMarketLine")
 
 ## Multivariste Regression Analysis
 
