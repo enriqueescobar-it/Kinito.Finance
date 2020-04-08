@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
-# In[1]:
+# ## Obtaining the Efficient Frontier - Part III
+# *Suggested Answers follow (usually there are multiple ways to solve a problem in Python).*
+# We are in the middle of a set of 3 Python lectures that will help you reproduce the Markowitz Efficient Frontier. Let’s split this exercise into 3 parts and cover the first part here. 
+# Begin by loading data for Walmart and Facebook from the 1st of January 2014 until today.
 import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
@@ -8,7 +11,7 @@ import matplotlib.pyplot as plt
 get_ipython().run_line_magic('matplotlib', 'inline')
 # In[2]:
 assets = ['WMT', 'FB', 'BP']
-pf_data = pd.read_csv('D:/Python/WMT_FB_BP_2014_2017.csv', index_col='Date')
+pf_data = pd.read_csv('Section-14_87-WMT_FB_BP_2014_2017.csv', index_col='Date')
 # In[3]:
 pf_data.head()
 # In[4]:
@@ -17,11 +20,8 @@ pf_data.tail()
 (pf_data / pf_data.iloc[0] * 100).plot(figsize=(10, 5))
 # In[6]:
 log_returns = np.log(pf_data / pf_data.shift(1))
-# In[7]:
 log_returns.mean() * 250
-# In[8]:
 log_returns.cov() * 250
-# In[9]:
 log_returns.corr()
 # In[10]:
 num_assets = len(assets)

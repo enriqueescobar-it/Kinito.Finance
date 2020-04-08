@@ -447,12 +447,43 @@ MSCI: Morgan Stanley Composit International
 
 ![MeasuringInvestmentRisk-VARandSTD](img/MeasuringInvestmentRisk-VARandSTD.png "MeasuringInvestmentRisk-VARandSTD")
 
+### Coviariance between 2 values
+
+![MeasuringInvestmentRisk-Covariance](img/MeasuringInvestmentRisk-Covariance.png "MeasuringInvestmentRisk-Covariance")
+
+* cov > 0 : both move in the same direction
+* cov = 0 : both are independant
+* cov < 0 : both move in opposite direction
+
+### Correlation between 2 values
+
+![MeasuringInvestmentRisk-CovarianceCorrelation](img/MeasuringInvestmentRisk-CovarianceCorrelation.png "MeasuringInvestmentRisk-CovarianceCorrelation")
+
+* Corr(returns) : Dependance between prices at different times, focus on returns of your portfolio.
+* Corr(prices) : focus on price levels
+* variance = Dot Product (weights as Vector, Dot Product (252*cov(returns), weights) )
+* volatility = sqrt(Dot Product (weights as Vector, Dot Product (252*cov(returns), weights) ))
+
 ## Regressions for Financial Analysis
+
+* univariate regression: one variable (line = intercept + slope * x + residuals)
+* multivariate regression: multiple variables
+
+### Good regression
+
+![MeasuringInvestmentRisk-TSS](img/MeasuringInvestmentRisk-TSS.png "MeasuringInvestmentRisk-TSS")
+
+Higher percent implies more predictive is: R square = 1 - (SSR / TSS)
 
 ## Markowitz Portfolio Optimization
 
+Distribute to have low correlation
+
+Perform many iterations
+![MeasuringInvestmentRisk-EfficientFrontier](img/MeasuringInvestmentRisk-EfficientFrontier.png "MeasuringInvestmentRisk-EfficientFrontier")
+
 ## Capital Asset Pricing Model
 
-## MultivaristebRegression Analysis
+## Multivariste Regression Analysis
 
 ## Monte Carlo Simulations for Decision Making Tool

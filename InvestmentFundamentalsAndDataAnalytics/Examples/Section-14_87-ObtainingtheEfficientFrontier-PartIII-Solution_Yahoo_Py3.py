@@ -2,8 +2,8 @@
 # coding: utf-8
 # ## Obtaining the Efficient Frontier - Part III
 # *Suggested Answers follow (usually there are multiple ways to solve a problem in Python).*
-# Ok, let’s continue the exercise from the last lecture.
-# In[1]:
+# We are in the middle of a set of 3 Python lectures that will help you reproduce the Markowitz Efficient Frontier. Let’s split this exercise into 3 parts and cover the first part here. 
+# Begin by loading data for Walmart and Facebook from the 1st of January 2014 until today.
 import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
@@ -15,21 +15,22 @@ for a in assets:
     pf_data[a] = wb.DataReader(a, data_source = 'yahoo', start = '2014-1-1')['Adj Close']
 # In[2]:
 log_returns = np.log(pf_data / pf_data.shift(1))
+log_returns.mean() * 250
+log_returns.cov() * 250
+log_returns.corr()
+# In[10]:
 num_assets = len(assets)
 weights = np.random.random(num_assets)
 weights /= np.sum(weights)
 weights
+weights[0] + weights[1]
 # Now, estimate the expected Portfolio Return, Variance, and Volatility.
 # Expected Portfolio Return:
-# In[3]:
 np.sum(weights * log_returns.mean()) * 250
 # Expected Portfolio Variance:
-# In[4]:
 np.dot(weights.T, np.dot(log_returns.cov() * 250, weights))
 # Expected Portfolio Volatility:
-# In[5]:
 np.sqrt(np.dot(weights.T,np.dot(log_returns.cov() * 250, weights)))
-# ***
 # The rest of this exercise will be a reproduction of what we did in the previous video.
 # 1)	Create two empty lists. Name them pf_returns and pf_volatilites.
 # In[6]:
@@ -97,18 +98,23 @@ np.sqrt(np.dot(weights.T,np.dot(log_returns.cov() * 250, weights)))
 # In[21]:
 pfolio_returns = []
 pfolio_volatilities = []
+# 2)	Create a loop with 1,000 iterations that will generate random weights, summing to 1, and will append the obtained values for the portfolio returns and the portfolio volatilities to pf_returns and pf_volatilities, respectively.
 for x in range (1000):
     weights = np.random.random(num_assets)
     weights /= np.sum(weights)
     pfolio_returns.append(np.sum(weights * log_returns.mean()) * 250)
     pfolio_volatilities.append(np.sqrt(np.dot(weights.T,np.dot(log_returns.cov() * 250, weights))))
     
+pfolio_returns, pfolio_volatilities
+# 3)	Transform the obtained lists into NumPy arrays and reassign them to pf_returns and pf_volatilites. Once you have done that, the two objects will be NumPy arrays. 
 pfolio_returns = np.array(pfolio_returns)
 pfolio_volatilities = np.array(pfolio_volatilities)
 pfolio_returns, pfolio_volatilities
-# In[22]:
+# In[21]:
 portfolios = pd.DataFrame({'Return': pfolio_returns, 'Volatility': pfolio_volatilities})
-# In[23]:
+portfolios.head()
+portfolios.tail()
+# In[24]:
 portfolios.plot(x='Volatility', y='Return', kind='scatter', figsize=(10, 6));
 plt.xlabel('Expected Volatility')
 plt.ylabel('Expected Return')

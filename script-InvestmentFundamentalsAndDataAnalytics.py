@@ -203,6 +203,7 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 data = pd.read_excel('Section-13_Housing.xlsx')
 data[['House Price', 'House Size (sq.ft.)']]
+# univarate regression
 X = data['House Size (sq.ft.)']
 Y = data['House Price']
 plt.scatter(X,Y)
@@ -298,3 +299,11 @@ pfolio_returns, pfolio_volatilities
 pfolio_returns = np.array(pfolio_returns)
 pfolio_volatilities = np.array(pfolio_volatilities)
 pfolio_returns, pfolio_volatilities
+# In[21]:
+portfolios = pd.DataFrame({'Return': pfolio_returns, 'Volatility': pfolio_volatilities})
+portfolios.head()
+portfolios.tail()
+# In[24]:
+portfolios.plot(x='Volatility', y='Return', kind='scatter', figsize=(10, 6));
+plt.xlabel('Expected Volatility')
+plt.ylabel('Expected Return')
