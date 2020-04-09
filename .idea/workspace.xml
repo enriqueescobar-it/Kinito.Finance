@@ -2,20 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/EESCOBAR.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/Dax.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/DowJones.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/Ftse.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/Nasdaq.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/Nikkei.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/Nyse.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/SnP.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MarketIndices/Tse.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/CalculatingAndComparingRisk-RateOfReturn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img/MeasuringInvestmentRisk-VARandSTD.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/01-Python-Crash-Course_PythonCrashCourse.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/01-Python-Crash-Course_PythonCrashCourseExercisesSolutions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/02-NumPy_NumpyExercises.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/02-NumPy_NumpyExercises.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,11 +43,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading\" />
       <recent name="H:\Disk_X\Kinito.Finance\DataReaders" />
       <recent name="H:\Disk_X\Kinito.Finance" />
       <recent name="H:\Disk_X\Kinito.Finance\FinViz" />
       <recent name="H:\Disk_X\Kinito.Finance\" />
-      <recent name="H:\Disk_X\Kinito.Finance\Data\TimeSeries" />
     </key>
   </component>
   <component name="RunManager" selected="Python.script-InvestmentFundamentalsAndDataAnalytics">
