@@ -603,3 +603,48 @@ $$
 $$
 where\  z = norm.ppf(np.random.rand(t\_intervals, iterations))
 $$
+
+1. Historical Data
+
+![MonteCarloSimulationAnalysis-Historical](img/MonteCarloSimulationAnalysis-Historical.png "MonteCarloSimulationAnalysis-Historical")
+
+2. Log Returns: LogReturns = log(1 + returns_pct_change)
+
+![MonteCarloSimulationAnalysis-LogReturns](img/MonteCarloSimulationAnalysis-LogReturns.png "MonteCarloSimulationAnalysis-LogReturns")
+
+3. Mean Calculation : Mean = mean(LogReturns)
+4. Variance Calculation : Variance = variance(LogReturns)
+5. Drift Calculation : Drift = Mean - (Variance / 2)
+6. Standard Deviation Calculation : Std = std(LogReturns)
+7. Drift into Array Conversion
+8. Set normalization at 95% norm.ppf(0.95)
+9. Set array 10x2 of random values
+8. Z Calculation : Z = norm.ppf(randomArray)
+9. Set intervals & interations (1000,10)
+10. r calculation : r = Drift + Std * Z
+11. Daily Returns Calculation : DailyReturns = e^r
+12. Price List Calculation : iterate to create matrix (first row has latest price value) m[t] = m[t-1] * DailyReturns[t]
+
+![MonteCarloSimulationAnalysis-Formulas](img/MonteCarloSimulationAnalysis-Formulas.png "MonteCarloSimulationAnalysis-Formulas")
+
+r = drift + stdev * Z
+Z = norm.ppf(np.random.rand(t_intervals, iterations)
+dailyReturns = exp(r) = exp(drift + stdev * Z) = exp(drift + stdev * norm.ppf(np.random.rand(tIntervals, iterations))
+
+![MonteCarloSimulationAnalysis-Iteration](img/MonteCarloSimulationAnalysis-Iteration.png "MonteCarloSimulationAnalysis-Iteration")
+
+###  Derivative Contracts
+
+1. Forwards: price preset, one sells in N time to another
+2. Futures: highly standardized foward contract on market place
+3. Swaps: echange cashflows in N times of an asset (interest rate, stock price, bond price, commodity)
+4. Options: owner buys (call options) or sells (put options) asset at a given price (strike price)
+
+#### Derivative Pricing aka Black-Sholes-Merton
+
+![MonteCarloSimulationAnalysis-Derivative-BlackSholes](img/MonteCarloSimulationAnalysis-Derivative-BlackSholes.png "MonteCarloSimulationAnalysis-Derivative-BlackSholes")
+
+1. d1 : how much can we expect
+2. d2 : how much we must pay
+
+
