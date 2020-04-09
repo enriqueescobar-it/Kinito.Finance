@@ -562,8 +562,6 @@ On revenues
 
 ![MonteCarloSimulationAnalysis-Opex](img/MonteCarloSimulationAnalysis-Opex.png "MonteCarloSimulationAnalysis-Opex")
 
-![MonteCarloSimulationAnalysis-OpexBinsManual](img/MonteCarloSimulationAnalysis-OpexBinsManual.png "MonteCarloSimulationAnalysis-OpexBinsManual")
-
 ![MonteCarloSimulationAnalysis-OpexBinsAuto](img/MonteCarloSimulationAnalysis-OpexBinsAuto.png "MonteCarloSimulationAnalysis-OpexBinsAuto")
 
 ### Price Evolution
@@ -578,13 +576,11 @@ $$
 Drift = \mu - \frac{1}{2} \cdot var = \mu - \frac{1}{2} \cdot \sigma^2
 $$
 
-Direction headed in the past (calculate average, standard deviation, and variance f daily returns) in the historical period. 
+Direction headed in the past (calculate average, standard deviation, and variance f daily returns) in the historical period.
 
 #### Volatility aka Random Variable
 
-$$
-Random Variable = \sigma \cdot Z(Random(0,1))
-$$
+$$Random Variable = \sigma \cdot Z(Random(0,1))$$
 
 * sigma is the historical variability
 * Zeta is the number of standard deviation from mean
@@ -597,4 +593,13 @@ $$
 
 $$
 ln(\frac{P_t}{P_{t-1}} ) = ln( \frac{P_t - P_{t-1}}{P_{t-1}} + \frac{P_{t-1}}{P_{t-1}}) = ln(\ simple.returns + 1)
+$$
+
+
+$$
+daily\_returns = exp({drift} + {stdev} * z)
+$$ 
+
+$$
+where\  z = norm.ppf(np.random.rand(t\_intervals, iterations))
 $$

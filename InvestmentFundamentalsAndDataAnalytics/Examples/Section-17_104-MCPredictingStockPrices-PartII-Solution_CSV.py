@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
-# ## Monte Carlo - Forecasting Stock Prices - Part II 
+## Monte Carlo - Forecasting Stock Prices - Part I
 # *Suggested Answers follow (usually there are multiple ways to solve a problem in Python).*
+# Load the data for Microsoft (‘MSFT’) for the period ‘2000-1-1’ until today.
 # Forecasting Future Stock Prices – continued:
-# In[1]:
 import numpy as np  
 import pandas as pd  
 from pandas_datareader import data as wb  
@@ -13,8 +13,16 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 data = pd.read_csv('D:/Python/MSFT_2000.csv', index_col = 'Date')
 log_returns = np.log(1 + data.pct_change())
 u = log_returns.mean()
+u
+# In[7]:
 var = log_returns.var()
+var
+# $$
+# drift = u - \frac{1}{2} \cdot var
+# $$
 drift = u - (0.5 * var)
+drift
+# In[9]:
 stdev = log_returns.std()
 # ******
 # Use “.values” to transform the *drift* and the *stdev* objects into arrays. 

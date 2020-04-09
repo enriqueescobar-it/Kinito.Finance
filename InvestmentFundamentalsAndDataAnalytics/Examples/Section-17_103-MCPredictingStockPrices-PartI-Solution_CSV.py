@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
-# ## Monte Carlo - Forecasting Stock Prices - Part I
+## Monte Carlo - Forecasting Stock Prices - Part I
 # *Suggested Answers follow (usually there are multiple ways to solve a problem in Python).*
 # Load the data for Microsoft (‘MSFT’) for the period ‘2000-1-1’ until today.
-# In[1]:
 import numpy as np  
 import pandas as pd  
 from pandas_datareader import data as wb  
