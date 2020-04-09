@@ -406,6 +406,10 @@ Annual Return = ((Daily Return + 1)^365)*100-1
 Logarithmic Rate of Return
 ![CalculatingAndComparingRisk-LogRateReturn](img/CalculatingAndComparingRisk-LogRateReturn.png "CalculatingAndComparingRisk-LogRateReturn")
 
+$$
+ln( \frac{P_t}{P_{t-1}} )
+$$
+
 #### Multiple Equities
 
 Simple Rate of Return
@@ -417,7 +421,9 @@ $$
 
 ##### Normalization to 100 to visualize
 
-P1 / P0 * 100
+$$
+\frac{P_1} {P_0} * 100
+$$
 
 ##### Dot Product from Average Retrurn by Weights
 
@@ -427,15 +433,15 @@ Run permutation calculations
 
 #### Popular Market Indices
 
-S&P500: 500 largest US companies reflects its diversity -> '^GSPC'
+S&P500: '^GSPC' 500 largest US companies reflects its diversity
 
-DowJones: Industrial Average 30 largest -> '^DJI'
+DowJones: '^DJI' Industrial Average 30 largest
 
-NASDAQ: Composite Grouped Securities & IT Companies -> '^IXIC'
+NASDAQ: '^IXIC' Composite Grouped Securities & IT Companies
 
-FTSE100: UK -> '^FTSE'
+FTSE100: '^FTSE' UK
 
-DAX30: GER -> '^GDAXI'
+DAX30: '^GDAXI' GER
 
 NIKKEI225: JPN
 
@@ -529,6 +535,7 @@ Sharpe = \frac{\overline{r_{stock}} - r_{free}}{\sigma_{stock}}
 $$
 
 CAPM alpha
+
 ![CapitalAssetPricingModel-CAPMalpha](img/CapitalAssetPricingModel-CAPMalpha.png "CapitalAssetPricingModel-CAPMalpha")
 
 ## Multivariate Regression Analysis
@@ -546,5 +553,48 @@ Multivariate regression has a multiple beta coefficients and multiple explanator
 ### Using historical data
 
 On revenues
-* cogs: Gross Profits
+* cogs: Gross Profits - cost of goods sold
 * opex: Operating Profits
+
+![MonteCarloSimulationAnalysis-Cogs](img/MonteCarloSimulationAnalysis-Cogs.png "MonteCarloSimulationAnalysis-Cogs")
+
+![MonteCarloSimulationAnalysis-CogsNormal](img/MonteCarloSimulationAnalysis-CogsNormal.png "MonteCarloSimulationAnalysis-CogsNormal")
+
+![MonteCarloSimulationAnalysis-Opex](img/MonteCarloSimulationAnalysis-Opex.png "MonteCarloSimulationAnalysis-Opex")
+
+![MonteCarloSimulationAnalysis-OpexBinsManual](img/MonteCarloSimulationAnalysis-OpexBinsManual.png "MonteCarloSimulationAnalysis-OpexBinsManual")
+
+![MonteCarloSimulationAnalysis-OpexBinsAuto](img/MonteCarloSimulationAnalysis-OpexBinsAuto.png "MonteCarloSimulationAnalysis-OpexBinsAuto")
+
+### Price Evolution
+
+![MonteCarloSimulationAnalysis-PriceEvolution](img/MonteCarloSimulationAnalysis-PriceEvolution.png "MonteCarloSimulationAnalysis-PriceEvolution")
+
+### Brownian Motion
+
+#### Drift aka Expected Daily Return
+
+$$
+Drift = \mu - \frac{1}{2} \cdot var = \mu - \frac{1}{2} \cdot \sigma^2
+$$
+
+Direction headed in the past (calculate average, standard deviation, and variance f daily returns) in the historical period. 
+
+#### Volatility aka Random Variable
+
+$$
+Random Variable = \sigma \cdot Z(Random(0,1))
+$$
+
+* sigma is the historical variability
+* Zeta is the number of standard deviation from mean
+
+![MonteCarloSimulationAnalysis-PriceEvolutionFormula](img/MonteCarloSimulationAnalysis-PriceEvolutionFormula.png "MonteCarloSimulationAnalysis-PriceEvolutionFormula")
+
+$$
+\frac{P_t - P_{t-2}}{P_{t-2}}
+$$
+
+$$
+ln(\frac{P_t}{P_{t-1}} ) = ln( \frac{P_t - P_{t-1}}{P_{t-1}} + \frac{P_{t-1}}{P_{t-1}}) = ln(\ simple.returns + 1)
+$$

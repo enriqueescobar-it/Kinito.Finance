@@ -604,3 +604,111 @@ stock_er
 SharpeRatio = (stock_er - 0.025) / (sec_returns['PG'].std() * 250 ** 0.5)
 #SharpeRatio = (stock_er - 0.025) / (sec_returns['MSFT'].std() * 250 ** 0.5)
 SharpeRatio
+## Monte Carlo - Predicting Gross Profit - Part I
+# *Suggested Answers follow (usually there are multiple ways to solve a problem in Python).*
+# Imagine you are an experienced manager and you have forecasted revenues of \$200mln, with an expected deviation of $10mln. You are convinced Cogs will be near 40% of the revenues, and their expected deviation is 20% of its own value. 
+# Use NumPys random.random function to simulate the potential revenue stream for 250 iterations (which is the number of trading days in a year) and then the predicted Cogs value. 
+import numpy as np
+import matplotlib.pyplot as plt
+# In[2]:
+rev_m = 170 # 200
+rev_stdev = 20 # 10
+iterations = 1000 # 250
+# In[3]:
+rev = np.random.normal(rev_m, rev_stdev, iterations)
+rev
+# Plot the obtained data for revenues and Cogs on a graph and observe the behavior of the obtained values.
+plt.figure(figsize=(15, 6))
+plt.plot(rev)
+plt.show()
+# In[5]:
+COGS = - (rev * np.random.normal(0.6,0.1)) # (0.4,0.2))
+plt.figure(figsize=(15, 6))
+plt.plot(COGS)
+plt.show()
+# Cogs mean:
+COGS.mean()
+# Cogs std:
+COGS.std()
+# ****
+# Based on the predicted revenue and Cogs values, estimate the expected Gross Profit of your company. 
+# *Reminder: Be careful about estimating the gross profit. If you have stored the Cogs value as a negative number, the gross profit will equal revenues plus Cogs. If you have created Cogs as a positive value, then gross profit would be equal to revenues minus Cogs. Either way, you will obtain the same result for gross profit.* 
+Gross_Profit = rev + COGS
+Gross_Profit
+plt.figure(figsize=(15, 6))
+plt.plot(Gross_Profit)
+plt.show()
+# What is the maximum and what is the minimum gross profit value you obtained?
+max(Gross_Profit)
+# In[10]:
+min(Gross_Profit)
+# What is its mean and standard deviation?
+Gross_Profit.mean()
+# In[12]:
+Gross_Profit.std()
+# Do you remember what a histogram is? Plot the gross profit data on a histogram. Use 20 bins directly to check the distribution of the data.
+plt.figure(figsize=(10, 6));
+plt.hist(Gross_Profit, bins = [40, 50, 60, 70, 80, 90, 100, 110, 120]);
+plt.show()
+# In[14]:
+plt.figure(figsize=(10, 6));
+plt.hist(Gross_Profit, bins = 20);
+plt.show()
+# ************
+# In all our analyses, we used estimations for either simple or logarithmic rates of return. <br/>
+# The formula for simple returns is
+# $$
+# \frac{P_t - P_{t-1}}{P_{t-1}}
+# $$
+# while the formula for log returns is
+# $$
+# ln( \frac{P_t}{P_{t-1}} )
+# $$
+# If our dataset is simply called "data", in Python, we could write the first formula as
+# *(data / data.shift(1)) - 1,*
+# and the second one as
+# *np.log(data / data.shift(1)).*
+# Instead of coding it this way, some professionals prefer using **Pandas.DataFrame.pct_change()** method, as it computes simple returns directly. We will briefly introduce it to you in this notebook document.
+# First, let's import NumPy, Pandas, and pandas_datareader.
+import numpy as np  
+import pandas as pd  
+from pandas_datareader import data as wb  
+# We will calculate returns of the Procter and Gamble stock, based on adjusted closing price data since the
+# 1st of January 2007.
+# 1st of January 2015.
+data = pd.read_csv('Section-17_PG_2007_2017.csv', index_col = 'Date')
+# ticker = 'PG' 
+# data = pd.DataFrame()
+# data[ticker] = wb.DataReader(ticker, data_source='yahoo', start='2007-1-1')['Adj Close']
+# data[ticker] = wb.DataReader(ticker, data_source='iex', start='2015-1-1')['close']
+# So far, we estimated simple returns in the following way.
+s_rets_1 = (data / data.shift(1)) - 1
+s_rets_1.head()
+# Observe the .pct_change() method can obtain an identical result.
+s_rets_2 = data.pct_change()
+s_rets_2.head()
+# Now, if you multiply the obtained values by 100, you will see the percentage change:
+s_rets_2.head() * 100
+# This means the close price on 2007-01-04 was 0.76% lower than the price on 2007-01-03, the price on 2007-01-05 was 0.85% lower than the price on 2007-01-04, and so on.
+# A few arguments can be used in the percentage change method. The most important one is 'period' as it specifies the difference between prices in the nominator. By default, it equals one, and that's why we obtained the same result for s_rets_1 and s_rets_2. Let's assume we would like to calculate simple returns with the following formula: 
+# $$
+# \frac{P_t - P_{t-2}}{P_{t-2}}
+# $$
+# Then, we should specify 'periods = 2' in parentheses:
+s_rets_3 = data.pct_change(periods=2)
+s_rets_3.head()
+# You can see there was no value obtained not only for the first, but also for the second observation. If we use the "old" formula, and not this method, *shift(2)* would lead us to the same output:
+s_rets_4 = (data / data.shift(2)) - 1
+s_rets_4.head()
+# Now, let's consider logarithmic returns. To this moment, we applied the following formula:
+log_rets_1 = np.log(data / data.shift(1))
+log_rets_1.tail()
+# You can calculate the same formula for log returns with the help of the .pct_change() method. Just be careful with the way you apply the formula! Mathematically, it will look like this:
+# $$
+# ln(\frac{P_t}{P_{t-1}} ) = ln( \frac{P_t - P_{t-1}}{P_{t-1}} + \frac{P_{t-1}}{P_{t-1}}) = ln(\ simple.returns + 1)
+# $$
+# In[9]:
+log_rets_2 = np.log(data.pct_change() + 1)
+log_rets_2.tail()
+# ***
+# The .pct_change() method is very popular. Whether you include it in your code or you go the other way around and type the formulas as we did in our analyses, you should obtain the correct value for the returns you need.
