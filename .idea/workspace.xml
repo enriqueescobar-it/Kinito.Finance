@@ -2,56 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/07-Stock-Market-Analysis-Capstone-Ford_Stock.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/07-Stock-Market-Analysis-Capstone-GM_Stock.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/07-Stock-Market-Analysis-Capstone-Tesla_Stock.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/EESCOBAR.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/EESCOBAR.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_AAPL_CLOSE.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_AMZN_CLOSE.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_CISCO_CLOSE.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_GOOG_CLOSE.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_IBM_CLOSE.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_walmart_stock.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/original.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasBuilt-inDataVisualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasBuilt-inDataVisualization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasDataVisualizationExercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasDataVisualizationExercise.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_VisualizingTimeSeriesData.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_VisualizingTimeSeriesData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-01-Matplotlib/Advanced Matplotlib Concepts.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-01-Matplotlib/Matplotlib Concepts Lecture.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-01-Matplotlib/Matplotlib Exercises - Solutions.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-01-Matplotlib/Matplotlib Exercises .ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-01-Matplotlib/filename.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/Pandas Built-in Data Visualization.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/Pandas Data Visualization Exercise - Solutions.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/Pandas Data Visualization Exercise .ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/Visualizing Time Series Data.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/df1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/df2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/df3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas/04-02-PandasVisualization/mcdonalds.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series/Datetime Index.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series/Rolling and Expanding.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series/Time Resampling.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series/Time Shifting.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series/time_data/walmart_stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/05-Pandas-with-Time-Series_walmart_stock.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series_DatetimeIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/05-Pandas-with-Time-Series_DatetimeIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series_RollingAndExpanding.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/05-Pandas-with-Time-Series_RollingAndExpanding.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series_TimeResampling.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/05-Pandas-with-Time-Series_TimeResampling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/05-Pandas-with-Time-Series_TimeShifting.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/05-Pandas-with-Time-Series_TimeShifting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/06-Data-Sources/01-Pandas-Datareader.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/06-Data-Sources/02-Quandl.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/06-Data-Sources_01-Pandas-Datareader.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/06-Data-Sources_01-Pandas-Datareader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/06-Data-Sources_02-Quandl.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/06-Data-Sources_02-Quandl.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/07-Stock-Market-Analysis-Capstone-Project/Ford_Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/07-Stock-Market-Analysis-Capstone-Project_Ford_Stock.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/07-Stock-Market-Analysis-Capstone-Project/GM_Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/07-Stock-Market-Analysis-Capstone-Project_GM_Stock.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/07-Stock-Market-Analysis-Capstone-Project/Stock Market Analysis Project SOLUTIONS.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/07-Stock-Market-Analysis-Capstone-Project/Stock Market Analysis Project.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/07-Stock-Market-Analysis-Capstone-Project/Tesla_Stock.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/07-Stock-Market-Analysis-Capstone-Project_Tesla_Stock.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/07-Stock-Market-Analysis-Capstone-Project_StockMarketAnalysisProject.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/07-Stock-Market-Analysis-Capstone-Project_StockMarketAnalysisProject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis/01-Introduction-to-Statsmodels.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis/02-EWMA-Exponentially-weighted-moving-average.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis/03-ETS-Decomposition.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis/04-ARIMA-and-Seasonal-ARIMA.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis/airline_passengers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/08-Time-Series-Analysis_airline_passengers.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis/monthly-milk-production-pounds-p.csv" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/08-Time-Series-Analysis_monthly-milk-production-pounds-p.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis_01-Introduction-to-Statsmodels.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/08-Time-Series-Analysis_01-Introduction-to-Statsmodels.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis_02-EWMA-Exponentially-weighted-moving-average.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/08-Time-Series-Analysis_02-EWMA-Exponentially-weighted-moving-average.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis_03-ETS-Decomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/08-Time-Series-Analysis_03-ETS-Decomposition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/08-Time-Series-Analysis_04-ARIMA-and-Seasonal-ARIMA.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/08-Time-Series-Analysis_04-ARIMA-and-Seasonal-ARIMA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/09-Python-Finance-Fundamentals_01-Portfolio-Allocation-and-Sharpe-Ratio.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_01-Portfolio-Allocation-and-Sharpe-Ratio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/09-Python-Finance-Fundamentals_02-Portfolio-Optimization.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_02-Portfolio-Optimization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/09-Python-Finance-Fundamentals_03-CAPM-Capital-Asset-Pricing-Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_03-CAPM-Capital-Asset-Pricing-Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_01-Quantopian-Research-Basics.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_01-Quantopian-Research-Basics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_02-Basic-Algorithm-Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_02-Basic-Algorithm-Methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_03-First-Trading-Algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_03-First-Trading-Algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_04-Trading-Algorithm-Exercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_04-Trading-Algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_05-Trading-Algorithm-Exercise-Solutions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_06-Pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_06-Pipelines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,8 +57,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading" />
       <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading\" />
+      <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading" />
       <recent name="H:\Disk_X\Kinito.Finance\DataReaders" />
       <recent name="H:\Disk_X\Kinito.Finance" />
       <recent name="H:\Disk_X\Kinito.Finance\FinViz" />
