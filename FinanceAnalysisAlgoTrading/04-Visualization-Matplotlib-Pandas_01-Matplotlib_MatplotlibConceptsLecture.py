@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 # coding: utf-8
-# ___
-# 
-# <a href='http://www.pieriandata.com'> <img src='../../Pierian_Data_Logo.png' /></a>
-# ___
 # # Matplotlib Overview Lecture
 # ## Introduction
 # Matplotlib is the "grandfather" library of data visualization with Python. It was created by John Hunter. He created it to try to replicate MatLab's (another programming language) plotting capabilities in Python. So if you happen to be familiar with matlab, matplotlib will feel natural to you.
@@ -19,32 +15,21 @@
 # * Very customizable in general
 # 
 # Matplotlib allows you to create reproducible figures programmatically. Let's learn how to use it! Before continuing this lecture, I encourage you just to explore the official Matplotlib web page: http://matplotlib.org/
-# 
 # ## Installation 
-# 
 # You'll need to install matplotlib first with either:
-# 
 #     conda install matplotlib
-# or
 #     pip install matplotlib
-#     
 # ## Importing
 # Import the `matplotlib.pyplot` module under the name `plt` (the tidy way):
-# In[1]:
 import matplotlib.pyplot as plt
 # You'll also need to use this line to see plots in the notebook:
-# In[2]:
 get_ipython().run_line_magic('matplotlib', 'inline')
 # That line is only for jupyter notebooks, if you are using another editor, you'll use: **plt.show()** at the end of all your plotting commands to have the figure pop up in another window.
 # # Basic Example
-# 
 # Let's walk through a very simple example using two numpy arrays:
 # ### Example
-# 
 # Let's walk through a very simple example using two numpy arrays. You can also use lists, but most likely you'll be passing numpy arrays or pandas columns (which essentially also behave like arrays).
-# 
 # ** The data we want to plot:**
-# In[3]:
 import numpy as np
 x = np.linspace(0, 5, 11)
 y = x ** 2
@@ -159,10 +144,10 @@ axes.set_title('title');
 # Matplotlib can generate high-quality output in a number formats, including PNG, JPG, EPS, SVG, PGF and PDF. 
 # To save a figure to a file we can use the `savefig` method in the `Figure` class:
 # In[17]:
-fig.savefig("filename.png")
+fig.savefig("04-Visualization-Matplotlib-Pandas_01-Matplotlib_MatplotlibConceptsLecture_filename.png")
 # Here we can also optionally specify the DPI and choose between different output formats:
 # In[18]:
-fig.savefig("filename.png", dpi=200)
+fig.savefig("04-Visualization-Matplotlib-Pandas_01-Matplotlib_MatplotlibConceptsLecture_filename.png", dpi=200)
 # ____
 # ## Legends, labels and titles
 # Now that we have covered the basics of how to create a figure canvas and add axes instances to the canvas, let's look at how decorate a figure with titles, axis labels, and legends.
@@ -270,7 +255,7 @@ plt.hist(data)
 # In[29]:
 data = [np.random.normal(0, std, 100) for std in range(1, 4)]
 # rectangular box plot
-plt.boxplot(data,vert=True,patch_artist=True);   
+plt.boxplot(data,vert=True,patch_artist=True);
 # ## Further reading
 # * http://www.matplotlib.org - The project web page for matplotlib.
 # * https://github.com/matplotlib/matplotlib - The source code for matplotlib.

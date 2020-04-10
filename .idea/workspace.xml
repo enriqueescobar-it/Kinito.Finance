@@ -2,10 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/03-GeneralPandas_banklist.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/03-GeneralPandas_example.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/01-Python-Crash-Course_PythonCrashCourse.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/01-Python-Crash-Course_PythonCrashCourseExercisesSolutions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/02-NumPy_NumpyExercises.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/02-NumPy_NumpyExercises.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/02-NumPy_NumpyExercises.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/02-NumPy_01-NumPy-Arrays.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/02-NumPy_02-Numpy-Indexing-and-Selection.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/02-NumPy_03-Numpy-Operations.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_01-Introduction-to-Pandas.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_02-Series.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_03-DataFrames.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_04-Missing-Data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_05-Groupby.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_06-Merging-Joining-and-Concatenating.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_07-Operations.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_08-Data-Input-and-Output.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/03-GeneralPandas_PandasExercise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas_01-Matplotlib_AdvancedMatplotlibConcepts.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_01-Matplotlib_AdvancedMatplotlibConcepts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas_01-Matplotlib_MatplotlibConceptsLecture.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_01-Matplotlib_MatplotlibConceptsLecture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas_01-Matplotlib_MatplotlibExercises .py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_01-Matplotlib_MatplotlibExercises .py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasBuilt-inDataVisualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasBuilt-inDataVisualization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasDataVisualizationExercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasDataVisualizationExercise.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_VisualizingTimeSeriesData.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_VisualizingTimeSeriesData.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,11 +61,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading" />
       <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading\" />
       <recent name="H:\Disk_X\Kinito.Finance\DataReaders" />
       <recent name="H:\Disk_X\Kinito.Finance" />
       <recent name="H:\Disk_X\Kinito.Finance\FinViz" />
-      <recent name="H:\Disk_X\Kinito.Finance\" />
     </key>
   </component>
   <component name="RunManager" selected="Python.script-InvestmentFundamentalsAndDataAnalytics">
