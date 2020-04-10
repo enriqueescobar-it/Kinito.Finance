@@ -2,24 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_AAPL_CLOSE.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_AMZN_CLOSE.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_CISCO_CLOSE.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_GOOG_CLOSE.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_IBM_CLOSE.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Data/09-Python-Finance-Fundamentals_walmart_stock.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/original.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/09-Python-Finance-Fundamentals_01-Portfolio-Allocation-and-Sharpe-Ratio.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_01-Portfolio-Allocation-and-Sharpe-Ratio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/09-Python-Finance-Fundamentals_02-Portfolio-Optimization.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_02-Portfolio-Optimization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/09-Python-Finance-Fundamentals_03-CAPM-Capital-Asset-Pricing-Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_03-CAPM-Capital-Asset-Pricing-Model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_01-Quantopian-Research-Basics.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_01-Quantopian-Research-Basics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_02-Basic-Algorithm-Methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_02-Basic-Algorithm-Methods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_03-First-Trading-Algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_03-First-Trading-Algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_04-Trading-Algorithm-Exercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_04-Trading-Algorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_05-Trading-Algorithm-Exercise-Solutions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/10-Quantopian-Platform_06-Pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_06-Pipelines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_00-Pipeline-Example-Walkthrough.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_00-Pipeline-Example-Walkthrough.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_01-Leverage.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_01-Leverage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_02-Hedging.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_02-Hedging.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_03-Portfolio-Analysis-with-Pyfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_03-Portfolio-Analysis-with-Pyfolio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_04-Stock-Sentiment-Analysis-Project.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_04-Stock-Sentiment-Analysis-Project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_05-Futures.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_05-Futures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
