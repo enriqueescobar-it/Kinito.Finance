@@ -18,7 +18,7 @@ Matplotlib Tutorial: https://matplotlib.org/tutorials/introductory/lifecycle.htm
 Many false positives on sideways market, to be used with others
 
 Typical made by 3 periods:
-- 12 Slow Moving Averga
+- 12 Slow Moving Average
 - 26 Fast Moving Average
 - 9 Signal
 
@@ -35,7 +35,7 @@ Momentum oscilation [0,100]
 - [70,100] overbought (Emerging markets use 80)
 - [0,30] oversold (Emerging markets use 80)
 
-![TechnicalIndicators-RSI](img/TechnicalIndicators-RSI.png "TechnicalIndicators-RSI")
+![TechnicalIndicators-RSI](../img/TechnicalIndicators-RSI.png "TechnicalIndicators-RSI")
 
 ### Average Directional IndeX - ADX
 
@@ -51,7 +51,7 @@ Volume preceeding price movement. Higher OBV price increase, lower OBV price dec
 False signals
 Used with MACD
 
-![TechnicalIndicators-OBV](img/TechnicalIndicators-OBV.png "TechnicalIndicators-OBV")
+![TechnicalIndicators-OBV](../img/TechnicalIndicators-OBV.png "TechnicalIndicators-OBV")
 
 ### Slope Charts - Supertrend
 
@@ -94,7 +94,7 @@ Good website on chart patterns: http://thepatternsite.com
 Comparison of different trading strategies for asset or portfolio.
 Does not reflect investment risk, use with volatility measure.
 
-![KPIs-CAGR](img/KPIs-CAGR.png "KPIs-CAGR")
+![KPIs-CAGR](../img/KPIs-CAGR.png "KPIs-CAGR")
 
 ### Volatility Ratio
 
@@ -117,14 +117,14 @@ Used to compare funds
 - [2,3] very good
 - [3,more] excellent
 
-![KPIs-SharpeRatio](img/KPIs-SharpeRatio.png "KPIs-SharpeRatio")
+![KPIs-SharpeRatio](../img/KPIs-SharpeRatio.png "KPIs-SharpeRatio")
 
 ### Sortino Ratio
 
 Similar to Sharpe Ratio but uses standard deviation of only negative returns.
 Used to dicern between upside and downside fluctuation => consider harmful volatility
 
-![KPIs-SortinoRatio](img/KPIs-SortinoRatio.png "KPIs-SortinoRatio")
+![KPIs-SortinoRatio](../img/KPIs-SortinoRatio.png "KPIs-SortinoRatio")
 
 ### Maximum Drawdown Ratio
 
@@ -211,15 +211,15 @@ https://www.nytimes.com/2014/04/06/magazine/flash-boys-michael-lewis.html
 Best seller ''The little book that beats the market'':
 - identify *wonderfull stocks* at *bargain price*
 
-![FundamentalIndicators-ROIC](img/FundamentalIndicators-ROIC.png "FundamentalIndicators-ROIC")
+![FundamentalIndicators-ROIC](../img/FundamentalIndicators-ROIC.png "FundamentalIndicators-ROIC")
 
 *Wonderful stocks* : Return On Invested Capital (ROIC) focussing on assets generating the return
 
-![FundamentalIndicators-EarningsYield](img/FundamentalIndicators-EarningsYield.png "FundamentalIndicators-EarningsYield")
+![FundamentalIndicators-EarningsYield](../img/FundamentalIndicators-EarningsYield.png "FundamentalIndicators-EarningsYield")
 
 *Bargain price*: Earning Yield is the ratio of EBIT to Enterprise Value (like P/E ratio but capital structure independent)
 
-![FundamentalIndicators-MagicFormula](img/FundamentalIndicators-MagicFormula.png "FundamentalIndicators-MagicFormula")
+![FundamentalIndicators-MagicFormula](../img/FundamentalIndicators-MagicFormula.png "FundamentalIndicators-MagicFormula")
 
 Invest in the top 20-30 companies (exclude finance & insurance), accumulating 2-3 positions per month over 12 months period and rebalance each year.
 
@@ -354,18 +354,18 @@ pip install --upgrade vaderSentiment textblob
 ### Machine Learning approach on Natural Language
 
 Probalility
-![SentimentIndicators-Probability](img/SentimentIndicators-Probability.png "SentimentIndicators-Probability")
+![SentimentIndicators-Probability](../img/SentimentIndicators-Probability.png "SentimentIndicators-Probability")
 
 Naive Bayes
-![SentimentIndicators-NaiveBayes](img/SentimentIndicators-NaiveBayes.png "SentimentIndicators-NaiveBayes")
+![SentimentIndicators-NaiveBayes](../img/SentimentIndicators-NaiveBayes.png "SentimentIndicators-NaiveBayes")
 
 Probability Prediction
-![SentimentIndicators-ProbabilityPredicting](img/SentimentIndicators-ProbabilityPredicting.png "SentimentIndicators-ProbabilityPredicting")
+![SentimentIndicators-ProbabilityPredicting](../img/SentimentIndicators-ProbabilityPredicting.png "SentimentIndicators-ProbabilityPredicting")
 
 #### Training Data (labeled data)
 
 Constructing feature matrix
-![SentimentIndicators-TrainingData](img/SentimentIndicators-TrainingData.png "SentimentIndicators-TrainingData")
+![SentimentIndicators-TrainingData](../img/SentimentIndicators-TrainingData.png "SentimentIndicators-TrainingData")
 
 ##### TF-IDF (Term Frequency - Inverse Document Frequency)
 
@@ -376,7 +376,7 @@ TF: number of times the term t appear in the doc / total number of words in the 
 IDF: log(total number of documents/ number of documents with the term t in it)
 
 TF-IDF: TF * IDF
-![SentimentIndicators-TF-IDF](img/SentimentIndicators-TF-IDF.png "SentimentIndicators-TF-IDF")
+![SentimentIndicators-TF-IDF](../img/SentimentIndicators-TF-IDF.png "SentimentIndicators-TF-IDF")
 
 ### Application
 
