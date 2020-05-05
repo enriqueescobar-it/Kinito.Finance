@@ -12,7 +12,7 @@ link = "https://financialmodelingprep.com/api/v3"
 tickers = ["AXP"]
 
 
-#list of tickers whose financial data needs to be extracted
+#list of tickerList whose financial data needs to be extracted
 financial_dir = {}
 
 for ticker in tickers:
@@ -61,4 +61,3 @@ for ticker in tickers:
         
 #storing information in pandas dataframe
 combined_financials = pd.DataFrame(financial_dir)
-  

@@ -2,13 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/script.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/snk/aws.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_00-Pipeline-Example-Walkthrough.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_00-Pipeline-Example-Walkthrough.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_01-Leverage.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_01-Leverage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_02-Hedging.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_02-Hedging.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_03-Portfolio-Analysis-with-Pyfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_03-Portfolio-Analysis-with-Pyfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_04-Stock-Sentiment-Analysis-Project.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_04-Stock-Sentiment-Analysis-Project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/Examples/11-Advanced-Quantopian-Topics_05-Futures.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/11-Advanced-Quantopian-Topics_05-Futures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/08_pandas_datareader.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/08_pandas_datareader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/14_webscraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/14_webscraping.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/15_webscraping_revised.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/15_webscraping_revised.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_fmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_fmp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_stockrow.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_stockrow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/19_basic_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/19_basic_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/21_Visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/21_Visualization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/39_talib.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/39_talib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/51_strategy1_portfolio_rebalance.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/51_strategy1_portfolio_rebalance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/53_strategy2_breakout.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/53_strategy2_breakout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/55_strategy3_renko_obv.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/55_strategy3_renko_obv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/57_strategy4_renko_macd.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/57_strategy4_renko_macd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/60_magic_formula.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/60_magic_formula.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/61_magic_formula_revised.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/61_magic_formula_revised.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/63_piotroski_fscore.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/63_piotroski_fscore.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/64_piotroski_fscore_revised.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/64_piotroski_fscore_revised.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +58,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/DataReaders" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -152,11 +169,11 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="468" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586222515871" />
-    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1586231044404">
+    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1588635755007">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
-    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1585238354579" />
+    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1588635755007" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom" timestamp="1586206549982">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -197,12 +214,12 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1453" height="255" key="GridCell.Tab.1.right/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
-    <state x="246" y="74" key="SettingsEditor" timestamp="1586205919129">
+    <state x="246" y="74" key="SettingsEditor" timestamp="1588635826482">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586205919129" />
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712869598" />
-    <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1585439945729" />
+    <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1588635826482" />
     <state x="394" y="197" key="run.anything.popup" timestamp="1585439941855">
       <screen x="0" y="0" width="1474" height="864" />
     </state>

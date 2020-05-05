@@ -10,7 +10,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-tickers = ["AAPL","MSFT"] #list of tickers whose financial data needs to be extracted
+tickers = ["AAPL","MSFT"] #list of tickerList whose financial data needs to be extracted
 financial_dir = {}
 
 

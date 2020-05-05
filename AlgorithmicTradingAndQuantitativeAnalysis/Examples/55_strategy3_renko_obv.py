@@ -109,7 +109,7 @@ key_path = "D:\\Udemy\\Quantitative Investing Using Python\\1_Getting Data\\Alph
 ts = TimeSeries(key=open(key_path,'r').read(), output_format='pandas')
 
 attempt = 0 # initializing passthrough variable
-drop = [] # initializing list to store tickers whose close price was successfully extracted
+drop = [] # initializing list to store tickerList whose close price was successfully extracted
 while len(tickers) != 0 and attempt <=300:
     tickers = [j for j in tickers if j not in drop]
     for i in range(len(tickers)):
@@ -123,7 +123,7 @@ while len(tickers) != 0 and attempt <=300:
     attempt+=1
 
  
-tickers = ohlc_intraday.keys() # redefine tickers variable after removing any tickers with corrupted data
+tickers = ohlc_intraday.keys() # redefine tickerList variable after removing any tickerList with corrupted data
 
 ################################Backtesting####################################
 

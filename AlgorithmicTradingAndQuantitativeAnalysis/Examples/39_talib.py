@@ -14,13 +14,13 @@ talib.get_function_groups() #get a list of talib functions by group
 
 tickers = ["MSFT","AAPL","FB","AMZN","INTC", "CSCO","VZ","IBM","QCOM","LYFT"]
 
-# Extract OHLCV data for the tickers
+# Extract OHLCV data for the tickerList
 ohlc_tech = {} # directory with ohlc value for each stock            
 key_path = "D:\\Udemy\\Quantitative Investing Using Python\\1_Getting Data\\AlphaVantage\\key.txt"
 ts = TimeSeries(key=open(key_path,'r').read(), output_format='pandas')
 
 attempt = 0 # initializing passthrough variable
-drop = [] # initializing list to store tickers whose close price was successfully extracted
+drop = [] # initializing list to store tickerList whose close price was successfully extracted
 while len(tickers) != 0 and attempt <=100:
     tickers = [j for j in tickers if j not in drop]
     for i in range(len(tickers)):
@@ -34,7 +34,7 @@ while len(tickers) != 0 and attempt <=100:
     attempt+=1
 
  
-tickers = ohlc_tech.keys() # redefine tickers variable after removing any tickers with corrupted data
+tickers = ohlc_tech.keys() # redefine tickerList variable after removing any tickerList with corrupted data
 ohlc_dict = copy.deepcopy(ohlc_tech) #create a copy of extracted data
 
 

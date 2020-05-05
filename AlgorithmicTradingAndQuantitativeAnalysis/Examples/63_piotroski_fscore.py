@@ -15,7 +15,7 @@ tickers = ["MMM","AXP","AAPL","BA","CAT","CVX","CSCO","KO","DIS","DWDP",
            "MSFT","NKE","PFE","PG","TRV","UTX","UNH","VZ","V","WMT"]
 
 
-#list of tickers whose financial data needs to be extracted
+#list of tickerList whose financial data needs to be extracted
 financial_dir_cy = {} #directory to store current year's information
 financial_dir_py = {} #directory to store last year's information
 financial_dir_py2 = {} #directory to store last to last year's information
@@ -81,7 +81,7 @@ combined_financials_py = pd.DataFrame(financial_dir_py)
 combined_financials_py.dropna(axis=1,inplace=True)
 combined_financials_py2 = pd.DataFrame(financial_dir_py2)
 combined_financials_py2.dropna(axis=1,inplace=True)
-tickers = combined_financials_cy.columns #updating the tickers list based on only those tickers whose values were successfully extracted
+tickers = combined_financials_cy.columns #updating the tickerList list based on only those tickerList whose values were successfully extracted
 
 # selecting relevant financial information for each stock using fundamental data
 stats = ["Net income applicable to common shares",

@@ -487,10 +487,10 @@ plt.ylabel('Expected Return')
 import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
-# tickers = ['PG', '^GSPC']
-# tickers = ['MSFT', '^GSPC']
+# tickerList = ['PG', '^GSPC']
+# tickerList = ['MSFT', '^GSPC']
 # data = pd.DataFrame()
-# for t in tickers:
+# for t in tickerList:
 #     data[t] = wb.DataReader(t, data_source='yahoo', start='2012-1-1', end='2016-12-31')['Adj Close']
 #     data[t] = wb.DataReader(t, data_source='yahoo', start='2012-1-1', end='2016-12-31')['Adj Close']
 data = pd.read_csv('Section-15_CAPM_Data.csv', index_col = 'Date')
@@ -524,10 +524,10 @@ stock_beta
 import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
-# tickers = ['PG', '^GSPC']
-# tickers = ['MSFT', '^GSPC']
+# tickerList = ['PG', '^GSPC']
+# tickerList = ['MSFT', '^GSPC']
 # data = pd.DataFrame()
-# for t in tickers:
+# for t in tickerList:
 #     data[t] = wb.DataReader(t, data_source='yahoo', start='2012-1-1', end='2016-12-31')['Adj Close']
 data = pd.read_csv('Section-15_CAPM_Data.csv', index_col = 'Date')
 # data = pd.read_csv('Section-15_CAPM_Exercise_Data.csv', index_col = 'Date')
@@ -566,10 +566,10 @@ stock_expectedReturn
 import numpy as np
 import pandas as pd
 from pandas_datareader import data as wb
-# tickers = ['PG', '^GSPC']
-# tickers = ['MSFT', '^GSPC']
+# tickerList = ['PG', '^GSPC']
+# tickerList = ['MSFT', '^GSPC']
 # data = pd.DataFrame()
-# for t in tickers:
+# for t in tickerList:
 #     data[t] = wb.DataReader(t, data_source='yahoo', start='2012-1-1', end='2016-12-31')['Adj Close']
 # data = pd.read_csv('Section-15_CAPM_Exercise_Data.csv', index_col = 'Date')
 data = pd.read_csv('Section-15_CAPM_Data.csv', index_col = 'Date')  

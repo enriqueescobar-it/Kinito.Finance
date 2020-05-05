@@ -8,7 +8,7 @@ import pandas as pd
 
 from enum import Enum
 
-tickers=["BA"] #list of tickers whose data needs to be extracted
+tickers=["BA"] #list of tickerList whose data needs to be extracted
 
 
 class Financials(Enum):

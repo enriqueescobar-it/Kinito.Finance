@@ -14,7 +14,7 @@ tickers = ["MMM","AXP","AAPL","BA","CAT","CVX","CSCO","KO","DIS","DWDP",
            "XOM","GE","GS","HD","IBM","INTC","JNJ","JPM","MCD","MRK",
            "MSFT","NKE","PFE","PG","TRV","UTX","UNH","VZ","V","WMT"]
 
-#list of tickers whose financial data needs to be extracted
+#list of tickerList whose financial data needs to be extracted
 financial_dir = {}
 
 
@@ -77,7 +77,7 @@ for ticker in tickers:
 #storing information in pandas dataframe
 combined_financials = pd.DataFrame(financial_dir)
 combined_financials.dropna(how='all',axis=1,inplace=True) #dropping columns with all NaN values
-tickers = combined_financials.columns #updating the tickers list based on only those tickers whose values were successfully extracted
+tickers = combined_financials.columns #updating the tickerList list based on only those tickerList whose values were successfully extracted
 
 # creating dataframe with relevant financial information for each stock using fundamental data
 stats = ["EarningDf before interest and taxes",

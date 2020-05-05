@@ -14,7 +14,7 @@ tickers = ["AXP","AAPL","BA","CAT","CVX","CSCO","DIS","DOW", "XOM",
            "HD","IBM","INTC","JNJ","KO","MCD","MMM","MRK","MSFT",
            "NKE","PFE","PG","TRV","UTX","UNH","VZ","V","WMT","WBA"]
 
-#list of tickers whose financial data needs to be extracted
+#list of tickerList whose financial data needs to be extracted
 financial_dir = {}
 
 for ticker in tickers:
@@ -74,7 +74,7 @@ for ticker in tickers:
 #storing information in pandas dataframe
 combined_financials = pd.DataFrame(financial_dir)
 combined_financials.dropna(how='all',axis=1,inplace=True) #dropping columns with all NaN values
-tickers = combined_financials.columns #updating the tickers list based on only those tickers whose values were successfully extracted
+tickers = combined_financials.columns #updating the tickerList list based on only those tickerList whose values were successfully extracted
 for ticker in tickers:
     combined_financials = combined_financials[~combined_financials[ticker].str.contains("[a-z]").fillna(False)]
 

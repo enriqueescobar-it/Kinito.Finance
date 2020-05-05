@@ -21,7 +21,7 @@ past_datetime = datetime.date.today()-datetime.timedelta(365)
 PyPrint.pprint(past_datetime)
 exit(0)
 attempt = 0 # initializing passthrough variable
-drop_list = [] # initializing list to store tickers whose close price was successfully extracted
+drop_list = [] # initializing list to store tickerList whose close price was successfully extracted
 while len(all_tickers) != 0 and attempt <= 5:
     all_tickers = [j for j in all_tickers if j not in drop_list] # removing stocks whose data has been extracted from the ticker list
     for i in range(len(all_tickers)):

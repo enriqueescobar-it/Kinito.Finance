@@ -52,7 +52,7 @@ tickers = ["MMM","AXP","T","BA","CAT","CVX","CSCO","KO", "XOM","GE","GS","HD",
 
 ohlc_mon = {} # directory with ohlc value for each stock            
 attempt = 0 # initializing passthrough variable
-drop = [] # initializing list to store tickers whose close price was successfully extracted
+drop = [] # initializing list to store tickerList whose close price was successfully extracted
 while len(tickers) != 0 and attempt <= 5:
     tickers = [j for j in tickers if j not in drop] # removing stocks whose data has been extracted from the ticker list
     for i in range(len(tickers)):
@@ -65,7 +65,7 @@ while len(tickers) != 0 and attempt <= 5:
             continue
     attempt+=1
  
-tickers = ohlc_mon.keys() # redefine tickers variable after removing any tickers with corrupted data
+tickers = ohlc_mon.keys() # redefine tickerList variable after removing any tickerList with corrupted data
 
 ################################Backtesting####################################
 
