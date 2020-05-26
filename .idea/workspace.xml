@@ -1,32 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/snk/aws.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/08_pandas_datareader.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/08_pandas_datareader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/14_webscraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/14_webscraping.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/15_webscraping_revised.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/15_webscraping_revised.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_fmp.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_fmp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_stockrow.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/16_stockrow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/19_basic_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/19_basic_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/21_Visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/21_Visualization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/39_talib.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/39_talib.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/51_strategy1_portfolio_rebalance.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/51_strategy1_portfolio_rebalance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/53_strategy2_breakout.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/53_strategy2_breakout.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/55_strategy3_renko_obv.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/55_strategy3_renko_obv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/57_strategy4_renko_macd.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/57_strategy4_renko_macd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/60_magic_formula.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/60_magic_formula.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/61_magic_formula_revised.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/61_magic_formula_revised.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/63_piotroski_fscore.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/63_piotroski_fscore.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/64_piotroski_fscore_revised.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/64_piotroski_fscore_revised.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" afterDir="false" />
-    </list>
+    <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
