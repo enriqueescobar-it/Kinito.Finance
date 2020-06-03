@@ -1,5 +1,3 @@
-import pandas as Pan
-import pandas_datareader as PanDR
 import os.path as PanOsPath
 
 class StockFileDataFrame(object):

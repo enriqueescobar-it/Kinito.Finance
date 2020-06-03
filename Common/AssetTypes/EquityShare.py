@@ -1,4 +1,4 @@
-from AssetTypes.BaseAsset import BaseAsset
+from Common.AssetTypes.BaseAsset import BaseAsset
 
 
 class EquityShare(BaseAsset):

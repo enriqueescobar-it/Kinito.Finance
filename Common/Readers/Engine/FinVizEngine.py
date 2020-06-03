@@ -1,6 +1,5 @@
 from typing import List
-
-import DataReaders.YahooTicker as YahooTicker
+import Common.Readers.YahooTicker as YahooTicker
 import finviz as FinViz
 
 

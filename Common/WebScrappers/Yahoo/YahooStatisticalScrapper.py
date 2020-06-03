@@ -1,4 +1,4 @@
-from WebScrappers.YahooScrapper import YahooScrapper
+from Common.WebScrappers.YahooScrapper import YahooScrapper
 
 
 class YahooStatisticalScrapper(YahooScrapper):

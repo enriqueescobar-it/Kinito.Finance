@@ -20,21 +20,97 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/rGraphicsSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/rSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/rpackages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Measures/Time/TimeSpan.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Measures/Time/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Measures/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Readers/Engine/AbstractEngine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Readers/Engine/PandaEngine.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Readers/Engine/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Readers/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/11_alphavantage.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/11_alphavantage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Common.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AssetTypes/BaseAsset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/AssetTypes/BaseAsset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AssetTypes/EquityShare.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/AssetTypes/EquityShare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AssetTypes/GovernmentBond.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/AssetTypes/GovernmentBond.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AssetTypes/InvestmentPortfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/AssetTypes/InvestmentPortfolio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AssetTypes/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/AssetTypes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooBalanceScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooBalanceScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooCashflowScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooCashflowScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooFinancialScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooFinancialScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooStatisticalScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooStatisticalScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataReaders/TickerCsvReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/TickerCsvReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataReaders/TickerNameList.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/TickerNameList.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataReaders/YahooPdrManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/YahooPdrManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataReaders/YahooTicker.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/YahooTicker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataReaders/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/FundamentalIndicators/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinViz/Example/StockFileDataFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinViz/Example/StockFileDataFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinViz/FinVizManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/Engine/FinVizEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ForYFinance/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FundamentalIndicators/FScoreManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/FundamentalIndicators/FScoreManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FundamentalIndicators/MagicFormulaManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/FundamentalIndicators/MagicFormulaManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FundamentalIndicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Measures/TradingDateTimes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/Dax.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/Dax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/DowJones.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/DowJones.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/Ftse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/Ftse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/Nasdaq.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/Nasdaq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/Nikkei.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/Nikkei.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/Nyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/Nyse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/SnP.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/SnP.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/Tse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/MarketIndices/Tse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MarketIndices/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/KPIs/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/AbstractMeasureManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/AbstractMeasureManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/CalmarRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/CalmarRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/CumulativeAnnualGrowthRateManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/CumulativeAnnualGrowthRateManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/KPIs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/MaximumDrawdownRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/MaximumDrawdownRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/SharpeRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/SharpeRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/SortinoRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/SortinoRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PerformanceIndicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/ReturnTerms/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReturnTerms/LogReturn.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/ReturnTerms/LogReturn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReturnTerms/SimpleReturn.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/ReturnTerms/SimpleReturn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReturnTerms/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/SentimentIndicators/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SentimentIndicators/NaiveBayesClassifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/SentimentIndicators/NaiveBayesClassifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SentimentIndicators/NaiveBayesManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/SentimentIndicators/NaiveBayesManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SentimentIndicators/NaiveBayesTrainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/SentimentIndicators/NaiveBayesTrainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SentimentIndicators/NltkManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/SentimentIndicators/NltkManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SentimentIndicators/VaderSentimentManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/SentimentIndicators/VaderSentimentManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SentimentIndicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockRow/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StockRow/FinancialEnums.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockRow/FinancialEnums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StockRow/TermEnums.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockRow/TermEnums.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StockRow/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategies/CalmarRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/CalmarRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategies/CompoundedAnnualGrowthRateManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/CompoundedAnnualGrowthRateManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategies/SharpeRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/SharpeRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategies/SortinoRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/SortinoRatioManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategies/VolatilityManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/VolatilityManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Strategies/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/AbstractIndicatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/AbstractIndicatorManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/AverageDirectionalIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/AverageDirectionalIndexManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/AverageTrueRangeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/AverageTrueRangeManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/BollingerBandsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/BollingerBandsManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/MovingAverageConvergenceDivergenceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/MovingAverageConvergenceDivergenceManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/OnBalanceVolumeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/OnBalanceVolumeManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/RelativeStrengthIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/RelativeStrengthIndexManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/RenkoManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/RenkoManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/SlopesManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/SlopesManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/AverageDirectionalIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/AverageDirectionalIndexIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/AverageTrueRangeIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/AverageTrueRangeIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/BollingerBandsIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/BollingerBandsIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/MovingAverageConvergenceDivergenceIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/MovingAverageConvergenceDivergenceIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/OnBalanceVolumeIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/OnBalanceVolumeIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/RelativeStrengthIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/RelativeStrengthIndexIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/RenkoIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/RenkoIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/SlopesIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/SlopesIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TechnicalIndicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/TradingStrategyLibraryManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechnicalIndicators/TradingStrategyLibraryManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TechnicalIndicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TimeSeries/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimeSeries/AlphaVantageManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TimeSeries/AlphaVantageManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimeSeries/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TimeSeries/alphavantage-key.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TimeSeries/alphavantage-key.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingDateTimes/PyDateTimes.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Measures/TradingDateTimes/PyDateTimes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingDateTimes/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScrappers/FmpScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/WebScrappers/FmpScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScrappers/StockRowScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/WebScrappers/StockRowScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScrappers/YahooScrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/WebScrappers/YahooScrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebScrappers/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/YahooFinance/FinanceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinanceEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YahooFinance/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/YahooFinancial/FinancialManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinancialEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YahooFinancial/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/script.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,19 +143,40 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/Measures/Time" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/Readers/Engine" />
     <property name="settings.editor.selected.configurable" value="aws" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Disk_X\Kinito.Finance\Common\Measures\Time" />
-      <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading\" />
-      <recent name="H:\Disk_X\Kinito.Finance\FinanceAnalysisAlgoTrading" />
-      <recent name="H:\Disk_X\Kinito.Finance\DataReaders" />
-      <recent name="H:\Disk_X\Kinito.Finance" />
+      <recent name="F:\Disk_X\Kinito.Finance\Common" />
+      <recent name="F:\Disk_X\Kinito.Finance\Common\Readers\Engine" />
+      <recent name="F:\Disk_X\Kinito.Finance\Common\Readers" />
+      <recent name="F:\Disk_X\Kinito.Finance\Common\WebScrappers" />
+      <recent name="F:\Disk_X\Kinito.Finance\Common\Measures" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-Common">
+  <component name="RunManager" selected="Python.YahooPdrManager">
+    <configuration name="YahooPdrManager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/Readers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/Readers/YahooPdrManager.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="YahooScrapper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -93,27 +190,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooScrapper.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="alphavantage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="C:/Python38/Lib/site-packages/alpha_vantage" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:/Python38/Lib/site-packages/alpha_vantage/alphavantage.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -187,11 +263,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.YahooPdrManager" />
         <item itemvalue="Python.script-Common" />
         <item itemvalue="Python.YahooScrapper" />
         <item itemvalue="Python.script-InvestmentFundamentalsAndDataAnalytics" />
         <item itemvalue="Python.script" />
-        <item itemvalue="Python.alphavantage" />
       </list>
     </recent_temporary>
   </component>
@@ -239,40 +315,41 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="468" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586222515871" />
-    <state x="2399" y="-266" key="FileChooserDialogImpl" timestamp="1591153425696">
-      <screen x="1920" y="-447" width="1362" height="900" />
+    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1591161424758">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161424758" />
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1588635755007" />
-    <state width="1431" height="232" key="GridCell.Tab.0.bottom" timestamp="1591158693363">
+    <state width="1431" height="232" key="GridCell.Tab.0.bottom" timestamp="1591161596424">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="232" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591158693363" />
+    <state width="1431" height="232" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161596424" />
     <state width="1319" height="244" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153881124" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1431" height="233" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1591074987262" />
-    <state width="1431" height="232" key="GridCell.Tab.0.center" timestamp="1591158693363">
+    <state width="1431" height="232" key="GridCell.Tab.0.center" timestamp="1591161596424">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="232" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591158693363" />
+    <state width="1431" height="232" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161596424" />
     <state width="1319" height="244" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153881124" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1431" height="233" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1591074987261" />
-    <state width="1431" height="232" key="GridCell.Tab.0.left" timestamp="1591158693362">
+    <state width="1431" height="232" key="GridCell.Tab.0.left" timestamp="1591161596424">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="232" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591158693362" />
+    <state width="1431" height="232" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161596424" />
     <state width="1319" height="244" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153881124" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
     <state width="1431" height="233" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1591074987261" />
-    <state width="1431" height="232" key="GridCell.Tab.0.right" timestamp="1591158693363">
+    <state width="1431" height="232" key="GridCell.Tab.0.right" timestamp="1591161596424">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="232" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591158693363" />
+    <state width="1431" height="232" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161596424" />
     <state width="1319" height="244" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153881124" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />

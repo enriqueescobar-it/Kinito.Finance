@@ -3,31 +3,29 @@ from pprint import pprint
 from typing import List, Any, Union
 import pandas as pd
 from pandas import DataFrame
-import TradingDateTimes.PyDateTimes as PyDays
-import DataReaders.TickerNameList as PyTickers
-import DataReaders.YahooTicker as PyTicker
-from TimeSeries import AlphaVantageManager
-from WebScrappers import FmpScrapper
-from WebScrappers import StockRowScrapper
-from WebScrappers import YahooScrapper
-from DataReaders.YahooTicker import YahooTicker
-from YahooFinancial import FinancialManager
-from YahooFinance.FinanceManager import FinanceManager
-from FinViz.FinVizManager import FinVizManager
-from DataReaders import YahooPdrManager
-from TechnicalIndicators.MovingAverageConvergenceDivergenceManager import MovingAverageConvergenceDivergenceManager
-from TechnicalIndicators.AverageTrueRangeManager import AverageTrueRangeManager
-from TechnicalIndicators.BollingerBandsManager import BollingerBandsManager
-from TechnicalIndicators.RelativeStrengthIndexManager import RelativeStrengthIndexManager
-from TechnicalIndicators.OnBalanceVolumeManager import OnBalanceVolumeManager
-from TechnicalIndicators.SlopesManager import SlopesManager
-from TechnicalIndicators.RenkoManager import RenkoManager
-from TechnicalIndicators.AverageDirectionalIndexManager import AverageDirectionalIndexManager
-from PerformanceIndicators.SortinoRatioManager import SortinoRatioManager
-from PerformanceIndicators.SharpeRatioManager import SharpeRatioManager
-from PerformanceIndicators.MaximumDrawdownRatioManager import MaximumDrawDownManager
-from PerformanceIndicators.CumulativeAnnualGrowthRateManager import CumulativeAnnualGrowthRateManager
-from PerformanceIndicators.CalmarRatioManager import CalmarRatioManager
+import Common.Measures.TradingDateTimes.PyDateTimes as PyDays
+import Common.Readers.TickerNameList as PyTickers
+import Common.Readers.YahooTicker as PyTicker
+from Common.TimeSeries import AlphaVantageManager
+from Common.WebScrappers import YahooScrapper, FmpScrapper, StockRowScrapper
+from Common.Readers.YahooTicker import YahooTicker
+from Common.Readers.Engine import YahooFinancialEngine
+from Common.Readers.Engine.YahooFinanceEngine import FinanceManager
+from Common.Readers.Engine.FinVizEngine import FinVizManager
+from Common.Readers import YahooPdrManager
+from Common.TechnicalIndicators.MovingAverageConvergenceDivergenceManager import MovingAverageConvergenceDivergenceManager
+from Common.TechnicalIndicators.AverageTrueRangeManager import AverageTrueRangeManager
+from Common.TechnicalIndicators import BollingerBandsManager
+from Common.TechnicalIndicators.RelativeStrengthIndexManager import RelativeStrengthIndexManager
+from Common.TechnicalIndicators.OnBalanceVolumeManager import OnBalanceVolumeManager
+from Common.TechnicalIndicators import SlopesManager
+from Common.TechnicalIndicators.RenkoManager import RenkoManager
+from Common.TechnicalIndicators.AverageDirectionalIndexManager import AverageDirectionalIndexManager
+from Common.PerformanceIndicators import SortinoRatioManager
+from Common.PerformanceIndicators.SharpeRatioManager import SharpeRatioManager
+from Common.PerformanceIndicators import MaximumDrawDownManager
+from Common.PerformanceIndicators.CumulativeAnnualGrowthRateManager import CumulativeAnnualGrowthRateManager
+from Common.PerformanceIndicators.CalmarRatioManager import CalmarRatioManager
 
 to_day: date = PyDays.DateTimeNow()
 to_day_s: str = to_day.strftime('%Y-%m-%d')
@@ -47,7 +45,7 @@ new_tickers = ticker_list
 yTicker = PyTicker.YahooTicker('NYSE', ticker_list[1], 26, 0)
 financeManager: FinanceManager = FinanceManager(yTicker)
 finVizManager: FinVizManager = FinVizManager(yTicker)
-financialManager: FinancialManager = FinancialManager(yTicker)
+financialManager: YahooFinancialEngine = YahooFinancialEngine(yTicker)
 yahooPdrManager: YahooPdrManager = YahooPdrManager(yTicker, ya_day, to_day)
 print('MACD')
 macdManager: MovingAverageConvergenceDivergenceManager = MovingAverageConvergenceDivergenceManager(yahooPdrManager.YahooData, ya_day, to_day)
@@ -123,7 +121,7 @@ while len(new_tickers) != 0 and counter <= 5:
             # new_financial: YahooFinancials = y_ticker.FinancialDf
             # new_dic = new_financial.get_historical_price_data(ya_day_s, to_day_s, "daily")[new_ticker]
             # new_dic = y_ticker.FinancialDf.get_historical_price_data(ya_day_s, to_day_s, "daily")[new_ticker]
-            fm = FinancialManager(y_ticker)
+            fm = YahooFinancialEngine(y_ticker)
             new_dic_field = fm.GetDailyHistoricalDataPrices(ya_day, to_day)
             new_data_frame = pd.DataFrame(new_dic_field)[["formatted_date", "adjclose"]]
             new_data_frame = new_data_frame.set_index("formatted_date", inplace=True)
