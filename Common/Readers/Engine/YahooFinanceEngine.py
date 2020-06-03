@@ -2,7 +2,7 @@ import yfinance as yf
 import pandas as pd
 from pandas import Series
 
-import DataReaders.YahooTicker as YahooTicker
+import Common.Readers.YahooTicker as YahooTicker
 
 
 class FinanceManager(object):

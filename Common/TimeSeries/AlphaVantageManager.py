@@ -1,6 +1,6 @@
 from typing import List
 from alpha_vantage.timeseries import TimeSeries
-import DataReaders.YahooTicker as YahooTicker
+import Common.Readers.YahooTicker as YahooTicker
 
 
 class AlphaVantageManager(object):
