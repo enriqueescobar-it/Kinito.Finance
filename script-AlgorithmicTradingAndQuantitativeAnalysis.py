@@ -10,8 +10,8 @@ from Common.TimeSeries import AlphaVantageManager
 from Common.WebScrappers import YahooScrapper, FmpScrapper, StockRowScrapper
 from Common.Readers.YahooTicker import YahooTicker
 from Common.Readers.Engine import YahooFinancialEngine
-from Common.Readers.Engine.YahooFinanceEngine import FinanceManager
-from Common.Readers.Engine.FinVizEngine import FinVizManager
+from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
+from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers import YahooPdrManager
 from Common.TechnicalIndicators.MovingAverageConvergenceDivergenceManager import MovingAverageConvergenceDivergenceManager
 from Common.TechnicalIndicators.AverageTrueRangeManager import AverageTrueRangeManager
@@ -43,8 +43,8 @@ drop_list: List[Union[str, Any]] = []
 py_tickers: List[YahooTicker] = []
 new_tickers = ticker_list
 yTicker = PyTicker.YahooTicker('NYSE', ticker_list[1], 26, 0)
-financeManager: FinanceManager = FinanceManager(yTicker)
-finVizManager: FinVizManager = FinVizManager(yTicker)
+financeManager: YahooFinanceEngine = YahooFinanceEngine(yTicker)
+finVizManager: FinVizEngine = FinVizEngine(yTicker)
 financialManager: YahooFinancialEngine = YahooFinancialEngine(yTicker)
 yahooPdrManager: YahooPdrManager = YahooPdrManager(yTicker, ya_day, to_day)
 print('MACD')

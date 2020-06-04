@@ -5,7 +5,7 @@ from pandas import Series
 import Common.Readers.YahooTicker as YahooTicker
 
 
-class FinanceManager(object):
+class YahooFinanceEngine(object):
     """description of class"""
     InfoDic: dict
     ActionsDf: pd.DataFrame

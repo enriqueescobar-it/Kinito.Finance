@@ -3,7 +3,7 @@ import Common.Readers.YahooTicker as YahooTicker
 import finviz as FinViz
 
 
-class FinVizManager(object):
+class FinVizEngine(object):
     """description of class"""
     StockName: str
     PeRatio: float

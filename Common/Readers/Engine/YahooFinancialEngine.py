@@ -3,7 +3,7 @@ import Common.Readers.YahooTicker as YahooTicker
 from datetime import date
 
 
-class FinancialManager(object):
+class YahooFinancialEngine(object):
     """description of class"""
     StockName: str
     PeRatio: float
