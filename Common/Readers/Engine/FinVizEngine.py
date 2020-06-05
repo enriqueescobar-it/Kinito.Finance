@@ -1,11 +1,16 @@
 from typing import List
-import Common.Readers.YahooTicker as YahooTicker
 import finviz as FinViz
+from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 
-class FinVizEngine(object):
+class FinVizEngine(AbstractEngine):
     """description of class"""
+    Volatility: str
+    Rsi14: str
     StockName: str
+    StockSector: str
+    StockIndustry: str
+    StockCountry: str
     PeRatio: float
     EpsTtm: float
     Dividend: str
@@ -14,8 +19,8 @@ class FinVizEngine(object):
     Price: float
     ShsOutstand: int
     MarketCap: int
-    High52Prcnt: str
-    Low52Prcnt: str
+    High52: str
+    Low52: str
     Range52: List[float]
     SalesQqPcnt: str
     EpsQqPcnt: str
@@ -28,13 +33,20 @@ class FinVizEngine(object):
     AvgVolume: int
     Volume: int
     ChangePcnt: str
+    _ticker: str
+    _fin_viz: FinViz
 
-    def __init__(self, yahoo_ticker: YahooTicker):
-        self.__yFinViz = FinViz.get_stock(yahoo_ticker.TickerName)
-        print(self.__yFinViz.keys())
-        print(self.__yFinViz.values())
+    def __init__(self, a_ticker: str = 'CNI'):
+        self._ticker = a_ticker
+        self._fin_viz = FinViz.get_stock(a_ticker)
+        print(self._fin_viz.keys())
+        print(self._fin_viz.values())
         self.__setStockName()
+        self.__setStockSector()
+        self.__setStockIndustry()
+        self.__setStockCountry()
         self.__setPeRatio()
+        self.__setEarning()
         self.__setEpsTtm()
         self.__setDividend()
         self.__setDividendPcnt()
@@ -45,17 +57,19 @@ class FinVizEngine(object):
         self.__set52wHight()
         self.__set52wLow()
         self.__set52wRange()
+        self.__setRsi14()
+        self.__setVolatility()
+        '''
         self.__setSalesQq()
         self.__setEpsQq()
         self.__setSma20()
         self.__setSma50()
         self.__setSma200()
-        self.__setEarning()
         self.__setPayout()
         self.__setRelVolume()
         self.__setAvgVolume()
         self.__setVolume()
-        self.__setChangePcnt()
+        self.__setChangePcnt()'''
 
     @staticmethod
     def __stringToFloat(s: str):
@@ -79,83 +93,98 @@ class FinVizEngine(object):
         return int(f * long)
 
     def __setStockName(self):
-        self.StockName = self.__yFinViz['Index']
+        self.StockName = self._fin_viz['Company']
+
+    def __setStockSector(self):
+        self.StockSector = self._fin_viz['Sector']
+
+    def __setStockIndustry(self):
+        self.StockIndustry = self._fin_viz['Industry']
+
+    def __setStockCountry(self):
+        self.StockCountry = self._fin_viz['Country']
 
     def __setPeRatio(self):
-        self.PeRatio = self.__stringToFloat(str(self.__yFinViz['P/E']))
+        self.PeRatio = self.__stringToFloat(str(self._fin_viz['P/E']))
 
     def __setEpsTtm(self):
-        self.EpsTtm = self.__stringToFloat(str(self.__yFinViz['EPS (ttm)']))
+        self.EpsTtm = self.__stringToFloat(str(self._fin_viz['EPS (ttm)']))
 
     def __setDividend(self):
-        self.Dividend = "NA" if self.__yFinViz['Dividend'] == "-" else self.__yFinViz['Dividend']
+        self.Dividend = "NA" if self._fin_viz['Dividend'] == "-" else self._fin_viz['Dividend']
 
     def __setDividendPcnt(self):
-        self.DividendPcnt = "NA" if self.__yFinViz['Dividend %'] == "-" else self.__yFinViz['Dividend %']
+        self.DividendPcnt = "NA" if self._fin_viz['Dividend %'] == "-" else self._fin_viz['Dividend %']
 
     def __setBeta(self):
-        self.Beta = float(str(self.__yFinViz['Beta']))
+        self.Beta = float(str(self._fin_viz['Beta']))
 
     def __setPrice(self):
-        self.Price = self.__stringToFloat(str(self.__yFinViz['Price']))
+        self.Price = self.__stringToFloat(str(self._fin_viz['Price']))
 
     def __setShOutstand(self):
-        s: str = str(self.__yFinViz['Shs Outstand'])
+        s: str = str(self._fin_viz['Shs Outstand'])
         if "K" in s or "M" in s or "G" in s or "B" in s:
             self.ShsOutstand = self.__unitsToInt(s)
         else:
             self.ShsOutstand = self.__stringToInt(s)
 
     def __setMarketCap(self):
-        s: str = str(self.__yFinViz['Market Cap'])
+        s: str = str(self._fin_viz['Market Cap'])
         if "K" in s or "M" in s or "G" in s or "B" in s:
             self.MarketCap = self.__unitsToInt(s)
         else:
             self.MarketCap = self.__stringToInt(s)
 
     def __set52wHight(self):
-        self.High52Prcnt = str(self.__yFinViz['52W High'])
+        self.High52 = str(self._fin_viz['52W High'])
 
     def __set52wLow(self):
-        self.High52Prcnt = str(self.__yFinViz['52W Low'])
+        self.Low52 = str(self._fin_viz['52W Low'])
 
     def __set52wRange(self):
-        li = str(self.__yFinViz['52W Range']).split()
+        li = str(self._fin_viz['52W Range']).split()
         self.Range52 = [float(li[0]), float(li[2])]
 
     def __setSalesQq(self):
-        self.SalesQqPcnt = str(self.__yFinViz['Sales Q/Q'])
+        self.SalesQqPcnt = str(self._fin_viz['Sales Q/Q'])
 
     def __setEpsQq(self):
-        self.EpsQqPcnt = str(self.__yFinViz['EPS Q/Q'])
+        self.EpsQqPcnt = str(self._fin_viz['EPS Q/Q'])
 
     def __setSma20(self):
-        self.Sma20 = str(self.__yFinViz['SMA20'])
+        self.Sma20 = str(self._fin_viz['SMA20'])
 
     def __setSma50(self):
-        self.Sma50 = str(self.__yFinViz['SMA50'])
+        self.Sma50 = str(self._fin_viz['SMA50'])
 
     def __setSma200(self):
-        self.Sma200 = str(self.__yFinViz['SMA200'])
+        self.Sma200 = str(self._fin_viz['SMA200'])
 
     def __setEarning(self):
-        self.EarningDate = str(self.__yFinViz['Earnings'])
+        self.EarningDate = str(self._fin_viz['Earnings'])
 
     def __setPayout(self):
-        self.PayoutPcnt = str(self.__yFinViz['Payout'])
+        self.PayoutPcnt = str(self._fin_viz['Payout'])
 
     def __setRelVolume(self):
-        self.RelVolume = self.__stringToFloat(str(self.__yFinViz['Rel Volume']))
+        self.RelVolume = self.__stringToFloat(str(self._fin_viz['Rel Volume']))
 
     def __setAvgVolume(self):
-        s: str = str(self.__yFinViz['Avg Volume'])
+        s: str = str(self._fin_viz['Avg Volume'])
         if "K" in s or "M" in s or "G" in s or "B" in s:
             self.AvgVolume = self.__unitsToInt(s)
         else:
             self.AvgVolume = self.__stringToInt(s)
 
     def __setVolume(self):
-        self.Volume = self.__stringToInt(str(self.__yFinViz['Volume']))
+        self.Volume = self.__stringToInt(str(self._fin_viz['Volume']))
 
     def __setChangePcnt(self):
-        self.ChangePcnt = str(self.__yFinViz['Change'])
+        self.ChangePcnt = str(self._fin_viz['Change'])
+
+    def __setRsi14(self):
+        self.Rsi14 = str(self._fin_viz['RSI (14)'])
+
+    def __setVolatility(self):
+        self.Volatility = str(self._fin_viz['Volatility'])
