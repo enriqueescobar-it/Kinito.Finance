@@ -59,17 +59,18 @@ class FinVizEngine(AbstractEngine):
         self.__set52wRange()
         self.__setRsi14()
         self.__setVolatility()
+        self.__setPayout()
+        self.__setVolume()
+        self.__setChangePcnt()
+        self.__setPrice()
         '''
         self.__setSalesQq()
         self.__setEpsQq()
         self.__setSma20()
         self.__setSma50()
         self.__setSma200()
-        self.__setPayout()
         self.__setRelVolume()
-        self.__setAvgVolume()
-        self.__setVolume()
-        self.__setChangePcnt()'''
+        self.__setAvgVolume()'''
 
     @staticmethod
     def __stringToFloat(s: str):

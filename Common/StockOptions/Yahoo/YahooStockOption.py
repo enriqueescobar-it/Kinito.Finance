@@ -10,18 +10,24 @@ import pandas as pd
 
 class YahooStockOption(AbstractStockOption):
     FvBeta: float
+    FvChangePercent: str
     FvCompanyCountry: str
     FvCompanyIndustry: str
     FvCompanyName: str
     FvCompanySector: str
+    FvDividend: str
+    FvDividendPercent: str
     FvEPS: float
     FvEarnings: str
     FvMarketCap: int
+    FvPayout: str
     FvPeRatio: float
     FvLow52: str
     FvHigh52: str
+    FvPrice: float
     FvRange52: List[float]
     FvRsi14: str
+    FvVolume: int
     HistoricalData: pd.DataFrame
     Ticker: str
     YahooSummaryScrapper: YahooSummaryScrapper
@@ -37,18 +43,24 @@ class YahooStockOption(AbstractStockOption):
         self._GetName()
         self._GetSector()
         self._GetIndustry()
-        self._GetCountry()
         self._GetBetaFv()
-        self._GetPeRatioFv()
-        self._GetMarketCapFv()
+        self._GetChangePercent()
+        self._GetCountry()
+        self._GetData()
+        self._GetDividend()
+        self._GetDividendPercent()
         self._GetEpsTtmFv()
         self._GetEarningsFv()
-        self._GetData()
-        self._GetLow52()
+        self._GetPeRatioFv()
         self._GetHigh52()
+        self._GetLow52()
+        self._GetMarketCapFv()
+        self._GetPayout()
+        self._GetPrice()
         self._GetRange52()
         self._GetRsi14()
         self._GetVolatility()
+        self._GetVolume()
         #self._DrawData()
 
     def _GetData(self):
@@ -98,3 +110,21 @@ class YahooStockOption(AbstractStockOption):
 
     def _GetVolatility(self):
         self.FvVolatility = self._fin_viz_engine.Volatility
+
+    def _GetPayout(self):
+        self.FvPayout = self._fin_viz_engine.PayoutPcnt
+
+    def _GetVolume(self):
+        self.FvVolume = self._fin_viz_engine.Volume
+
+    def _GetChangePercent(self):
+        self.FvChangePercent = self._fin_viz_engine.ChangePcnt
+
+    def _GetPrice(self):
+        self.FvPrice = self._fin_viz_engine.Price
+
+    def _GetDividend(self):
+        self.FvDividend = self._fin_viz_engine.Dividend
+
+    def _GetDividendPercent(self):
+        self.FvDividendPercent = self._fin_viz_engine.DividendPcnt
