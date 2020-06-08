@@ -1,8 +1,9 @@
 from typing import List
-from Common.Drawers.HistoricalDrawer import HistoricalDrawer
+from Common.Plotters.HistoricalPlotter import HistoricalDrawer
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
+from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
 import pandas as pd
@@ -29,102 +30,138 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
+    YePostalCode: str
     Ticker: str
-    YahooSummaryScrapper: YahooSummaryScrapper
-    _fin_viz_engine: FinVizEngine
+    YssBeta: str
+    YssEarningsDate: str
+    YssLink: str
+    YssMarketCap: str
+    YssPeRatio: str
+    __yahooSummaryScrapper: YahooSummaryScrapper
+    __fin_viz_engine: FinVizEngine
+    __y_finance_engine: YahooFinanceEngine
 
     def __init__(self, a_ticker: str = 'CNI'):
         self.Source = 'yahoo'
         self.Ticker = a_ticker
-        self._timeSpan = TimeSpan()
-        self.YahooSummaryScrapper = YahooSummaryScrapper(a_ticker)
-        self.YahooSummaryScrapper.ParseBody()
-        self._fin_viz_engine = FinVizEngine(a_ticker)
+        self.__timeSpan = TimeSpan()
+        self.__fin_viz_engine = FinVizEngine(a_ticker)
+        self.__y_finance_engine = YahooFinanceEngine(a_ticker)
+        self.__yahooSummaryScrapper = YahooSummaryScrapper(a_ticker)
+        self.__yahooSummaryScrapper.ParseBody()
         self._GetName()
         self._GetSector()
         self._GetIndustry()
         self._GetBetaFv()
+        self._GetBetaYss()
         self._GetChangePercent()
         self._GetCountry()
         self._GetData()
         self._GetDividend()
         self._GetDividendPercent()
         self._GetEpsTtmFv()
+        self._GetEpsYss()
         self._GetEarningsFv()
+        self._GetEarningsYss()
         self._GetPeRatioFv()
+        self._GetPeRatioYss()
         self._GetHigh52()
+        self._GetLinkYss()
         self._GetLow52()
         self._GetMarketCapFv()
+        self._GetMarketCapYss()
         self._GetPayout()
         self._GetPrice()
         self._GetRange52()
         self._GetRsi14()
         self._GetVolatility()
         self._GetVolume()
+        self._GetPostalCode()
         #self._DrawData()
 
     def _GetData(self):
-        self.HistoricalData = PandaEngine(self.Source, self._timeSpan, self.Ticker).DataFrame
+        self.HistoricalData = PandaEngine(self.Source, self.__timeSpan, self.Ticker).DataFrame
 
     def _DrawData(self):
-        HistoricalDrawer(self.HistoricalData, self.Source, self.Ticker, self._timeSpan)
+        HistoricalDrawer(self.HistoricalData, self.Source, self.Ticker, self.__timeSpan)
 
     def _GetName(self):
-        self.FvCompanyName = self._fin_viz_engine.StockName
+        self.FvCompanyName = self.__fin_viz_engine.StockName
 
     def _GetSector(self):
-        self.FvCompanySector = self._fin_viz_engine.StockSector
+        self.FvCompanySector = self.__fin_viz_engine.StockSector
 
     def _GetIndustry(self):
-        self.FvCompanyIndustry = self._fin_viz_engine.StockIndustry
+        self.FvCompanyIndustry = self.__fin_viz_engine.StockIndustry
 
     def _GetCountry(self):
-        self.FvCompanyCountry = self._fin_viz_engine.StockCountry
+        self.FvCompanyCountry = self.__fin_viz_engine.StockCountry
 
     def _GetPeRatioFv(self):
-        self.FvPeRatio = self._fin_viz_engine.PeRatio
+        self.FvPeRatio = self.__fin_viz_engine.PeRatio
+
+    def _GetPeRatioYss(self):
+        self.YssPeRatio = self.__yahooSummaryScrapper.PEratio
 
     def _GetMarketCapFv(self):
-        self.FvMarketCap = self._fin_viz_engine.MarketCap
+        self.FvMarketCap = self.__fin_viz_engine.MarketCap
+
+    def _GetMarketCapYss(self):
+        self.YssMarketCap = self.__yahooSummaryScrapper.MarketCap
+
+    def _GetEpsYss(self):
+        self.YssEPS = self.__yahooSummaryScrapper.EPS
 
     def _GetEpsTtmFv(self):
-        self.FvEPS = self._fin_viz_engine.EpsTtm
+        self.FvEPS = self.__fin_viz_engine.EpsTtm
 
     def _GetBetaFv(self):
-        self.FvBeta = self._fin_viz_engine.Beta
+        self.FvBeta = self.__fin_viz_engine.Beta
+
+    def _GetBetaYss(self):
+        self.YssBeta = self.__yahooSummaryScrapper.Beta
 
     def _GetEarningsFv(self):
-        self.FvEarnings = self._fin_viz_engine.EarningDate
+        self.FvEarnings = self.__fin_viz_engine.EarningDate
+
+    def _GetEarningsYss(self):
+        self.YssEarningsDate = self.__yahooSummaryScrapper.EarningsDate
+
+    def _GetLinkYss(self):
+        self.YssLink = self.__yahooSummaryScrapper.Link
 
     def _GetLow52(self):
-        self.FvLow52 = self._fin_viz_engine.Low52
+        self.FvLow52 = self.__fin_viz_engine.Low52
 
     def _GetHigh52(self):
-        self.FvHigh52 = self._fin_viz_engine.High52
+        self.FvHigh52 = self.__fin_viz_engine.High52
 
     def _GetRange52(self):
-        self.FvRange52 = self._fin_viz_engine.Range52
+        self.FvRange52 = self.__fin_viz_engine.Range52
 
     def _GetRsi14(self):
-        self.FvRsi14 = self._fin_viz_engine.Rsi14
+        self.FvRsi14 = self.__fin_viz_engine.Rsi14
 
     def _GetVolatility(self):
-        self.FvVolatility = self._fin_viz_engine.Volatility
+        self.FvVolatility = self.__fin_viz_engine.Volatility
 
     def _GetPayout(self):
-        self.FvPayout = self._fin_viz_engine.PayoutPcnt
+        self.FvPayout = self.__fin_viz_engine.PayoutPcnt
 
     def _GetVolume(self):
-        self.FvVolume = self._fin_viz_engine.Volume
+        self.FvVolume = self.__fin_viz_engine.Volume
 
     def _GetChangePercent(self):
-        self.FvChangePercent = self._fin_viz_engine.ChangePcnt
+        self.FvChangePercent = self.__fin_viz_engine.ChangePcnt
 
     def _GetPrice(self):
-        self.FvPrice = self._fin_viz_engine.Price
+        self.FvPrice = self.__fin_viz_engine.Price
 
     def _GetDividend(self):
-        self.FvDividend = self._fin_viz_engine.Dividend
+        self.FvDividend = self.__fin_viz_engine.Dividend
 
     def _GetDividendPercent(self):
-        self.FvDividendPercent = self._fin_viz_engine.DividendPcnt
+        self.FvDividendPercent = self.__fin_viz_engine.DividendPcnt
+
+    def _GetPostalCode(self):
+        self.YePostalCode = self.__y_finance_engine.PostalCode

@@ -1,9 +1,10 @@
 from yahoofinancials import YahooFinancials
 import Common.Readers.YahooTicker as YahooTicker
 from datetime import date
+from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 
-class YahooFinancialEngine(object):
+class YahooFinancialEngine(AbstractEngine):
     """description of class"""
     StockName: str
     PeRatio: float

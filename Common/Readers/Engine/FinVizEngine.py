@@ -5,34 +5,34 @@ from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 class FinVizEngine(AbstractEngine):
     """description of class"""
-    Volatility: str
+    AvgVolume: int
+    Beta: float
+    ChangePcnt: str
+    Dividend: str
+    DividendPcnt: str
+    EarningDate: str
+    EpsTtm: float
+    EpsQqPcnt: str
+    High52: str
+    Low52: str
+    MarketCap: int
+    PayoutPcnt: str
+    PeRatio: float
+    Price: float
+    Range52: List[float]
+    RelVolume: float
     Rsi14: str
     StockName: str
     StockSector: str
     StockIndustry: str
     StockCountry: str
-    PeRatio: float
-    EpsTtm: float
-    Dividend: str
-    DividendPcnt: str
-    Beta: float
-    Price: float
-    ShsOutstand: int
-    MarketCap: int
-    High52: str
-    Low52: str
-    Range52: List[float]
     SalesQqPcnt: str
-    EpsQqPcnt: str
+    ShsOutstand: int
     Sma20: str
     Sma50: str
     Sma200: str
-    EarningDate: str
-    PayoutPcnt: str
-    RelVolume: float
-    AvgVolume: int
     Volume: int
-    ChangePcnt: str
+    Volatility: str
     _ticker: str
     _fin_viz: FinViz
 
@@ -40,7 +40,6 @@ class FinVizEngine(AbstractEngine):
         self._ticker = a_ticker
         self._fin_viz = FinViz.get_stock(a_ticker)
         print(self._fin_viz.keys())
-        print(self._fin_viz.values())
         self.__setStockName()
         self.__setStockSector()
         self.__setStockIndustry()

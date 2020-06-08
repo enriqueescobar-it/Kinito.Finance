@@ -1,14 +1,15 @@
 import yfinance as yf
 import pandas as pd
 from pandas import Series
+from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
-import Common.Readers.YahooTicker as YahooTicker
 
-
-class YahooFinanceEngine(object):
+class YahooFinanceEngine(AbstractEngine):
     """description of class"""
+    _ticker: str
     InfoDic: dict
-    ActionsDf: pd.DataFrame
+    PostalCode: str
+    '''ActionsDf: pd.DataFrame
     Balance_SheetDf: pd.DataFrame
     Balance_SheetQDf: pd.DataFrame
     BalanceSheetDf: pd.DataFrame
@@ -24,12 +25,14 @@ class YahooFinanceEngine(object):
     OptionTuple: tuple
     RecommendationDf: pd.DataFrame
     SplitSeries: Series
-    SustainabilityDf: pd.DataFrame
+    SustainabilityDf: pd.DataFrame'''
 
-    def __init__(self, yahoo_ticker: YahooTicker):
-        self.__yFinance = yf.Ticker(yahoo_ticker.TickerName)
+    def __init__(self, a_ticker: str = 'CNI'):
+        self._ticker = a_ticker
+        self.__yFinance = yf.Ticker(a_ticker)
         self.InfoDic = self.__yFinance.info
-        print(self.InfoDic)
+        print(self.InfoDic['zip'])
+        self.__setPostalCode()
         self.ActionsDf = self.__yFinance.actions
         self.Balance_SheetDf = self.__yFinance.balance_sheet
         self.BalanceSheetDf = self.__yFinance.balancesheet
@@ -47,3 +50,6 @@ class YahooFinanceEngine(object):
         self.RecommendationDf = self.__yFinance.recommendations
         self.SplitSeries = self.__yFinance.splits
         self.SustainabilityDf = self.__yFinance.sustainability
+
+    def __setPostalCode(self):
+        self.PostalCode = self.InfoDic['zip']
