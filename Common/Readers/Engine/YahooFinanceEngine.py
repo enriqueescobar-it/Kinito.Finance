@@ -13,6 +13,11 @@ class YahooFinanceEngine(AbstractEngine):
     State: str
     PostalCode: str
     Country: str
+    Beta: float
+    Market: str
+    Currency: str
+    QuoteType: str
+    Exchange: str
     _ticker: str
     InfoDic: dict
     '''ActionsDf: pd.DataFrame
@@ -45,6 +50,11 @@ class YahooFinanceEngine(AbstractEngine):
         self.__setState()
         self.__setPostalCode()
         self.__setCountry()
+        self.__setBeta()
+        self.__setMarket()
+        self.__setCurrency()
+        self.__setQuoteType()
+        self.__setExchange()
         self.ActionsDf = self.__yFinance.actions
         self.Balance_SheetDf = self.__yFinance.balance_sheet
         self.BalanceSheetDf = self.__yFinance.balancesheet
@@ -83,3 +93,18 @@ class YahooFinanceEngine(AbstractEngine):
 
     def __setCountry(self):
         self.Country = self.InfoDic['country']
+
+    def __setBeta(self):
+        self.Beta = float(str(self.InfoDic['beta']))
+
+    def __setMarket(self):
+        self.Market = self.InfoDic['market']
+
+    def __setCurrency(self):
+        self.Currency = self.InfoDic['currency']
+
+    def __setQuoteType(self):
+        self.QuoteType = self.InfoDic['quoteType']
+
+    def __setExchange(self):
+        self.Exchange = self.InfoDic['exchange']

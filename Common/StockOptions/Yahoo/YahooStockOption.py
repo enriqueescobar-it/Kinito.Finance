@@ -37,6 +37,10 @@ class YahooStockOption(AbstractStockOption):
     YePostalCode: str
     YeState: str
     YeCountry: str
+    YeBeta: float
+    YeMarket: str
+    YeCurrency: str
+    YeExchange: str
     Ticker: str
     YssBeta: str
     YssEarningsDate: str
@@ -91,6 +95,11 @@ class YahooStockOption(AbstractStockOption):
         self._GetYeState()
         self._GetYePostalCode()
         self._GetYeCountry()
+        self._GetYeBeta()
+        self._GetYeMarket()
+        self._GetYeCurrency()
+        self._GetYeQuoteType()
+        self._GetYeExchange()
 
     def _GetData(self):
         self.HistoricalData = PandaEngine(self.Source, self.__timeSpan, self.Ticker).DataFrame
@@ -196,3 +205,18 @@ class YahooStockOption(AbstractStockOption):
 
     def _GetYeCountry(self):
         self.YeCountry = self.__y_finance_engine.Country
+
+    def _GetYeBeta(self):
+        self.YeBeta = self.__y_finance_engine.Beta
+
+    def _GetYeMarket(self):
+        self.YeMarket = self.__y_finance_engine.Market
+
+    def _GetYeCurrency(self):
+        self.YeCurrency = self.__y_finance_engine.Currency
+
+    def _GetYeQuoteType(self):
+        self.YeQuoteType = self.__y_finance_engine.QuoteType
+
+    def _GetYeExchange(self):
+        self.YeExchange = self.__y_finance_engine.Exchange
