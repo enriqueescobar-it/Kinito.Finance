@@ -30,7 +30,13 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
+    YeUrl: str
+    YeLogoUrl: str
+    YeAddress: str
+    YeCity: str
     YePostalCode: str
+    YeState: str
+    YeCountry: str
     Ticker: str
     YssBeta: str
     YssEarningsDate: str
@@ -76,8 +82,15 @@ class YahooStockOption(AbstractStockOption):
         self._GetRsi14()
         self._GetVolatility()
         self._GetVolume()
-        self._GetPostalCode()
+        self._GetYePostalCode()
         #self._DrawData()
+        self._GetYeUrl()
+        self._GetYeLogoUrl()
+        self._GetYeAddress()
+        self._GetYeCity()
+        self._GetYeState()
+        self._GetYePostalCode()
+        self._GetYeCountry()
 
     def _GetData(self):
         self.HistoricalData = PandaEngine(self.Source, self.__timeSpan, self.Ticker).DataFrame
@@ -163,5 +176,23 @@ class YahooStockOption(AbstractStockOption):
     def _GetDividendPercent(self):
         self.FvDividendPercent = self.__fin_viz_engine.DividendPcnt
 
-    def _GetPostalCode(self):
+    def _GetYeUrl(self):
+        self.YeUrl = self.__y_finance_engine.Url
+
+    def _GetYeLogoUrl(self):
+        self.YeLogoUrl = self.__y_finance_engine.LogoUrl
+
+    def _GetYeAddress(self):
+        self.YeAddress = self.__y_finance_engine.Address
+
+    def _GetYeCity(self):
+        self.YeCity = self.__y_finance_engine.City
+
+    def _GetYePostalCode(self):
         self.YePostalCode = self.__y_finance_engine.PostalCode
+
+    def _GetYeState(self):
+        self.YeState = self.__y_finance_engine.State
+
+    def _GetYeCountry(self):
+        self.YeCountry = self.__y_finance_engine.Country

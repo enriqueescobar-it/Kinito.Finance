@@ -6,9 +6,15 @@ from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 class YahooFinanceEngine(AbstractEngine):
     """description of class"""
+    Url: str
+    LogoUrl: str
+    Address: str
+    City: str
+    State: str
+    PostalCode: str
+    Country: str
     _ticker: str
     InfoDic: dict
-    PostalCode: str
     '''ActionsDf: pd.DataFrame
     Balance_SheetDf: pd.DataFrame
     Balance_SheetQDf: pd.DataFrame
@@ -31,8 +37,14 @@ class YahooFinanceEngine(AbstractEngine):
         self._ticker = a_ticker
         self.__yFinance = yf.Ticker(a_ticker)
         self.InfoDic = self.__yFinance.info
-        print(self.InfoDic['zip'])
+        print(self.InfoDic)
+        self.__setUrl()
+        self.__setLogoUrl()
+        self.__setAddress()
+        self.__setCity()
+        self.__setState()
         self.__setPostalCode()
+        self.__setCountry()
         self.ActionsDf = self.__yFinance.actions
         self.Balance_SheetDf = self.__yFinance.balance_sheet
         self.BalanceSheetDf = self.__yFinance.balancesheet
@@ -51,5 +63,23 @@ class YahooFinanceEngine(AbstractEngine):
         self.SplitSeries = self.__yFinance.splits
         self.SustainabilityDf = self.__yFinance.sustainability
 
+    def __setUrl(self):
+        self.Url = self.InfoDic['website']
+
+    def __setLogoUrl(self):
+        self.LogoUrl = self.InfoDic['logo_url']
+
+    def __setAddress(self):
+        self.Address = self.InfoDic['address1']
+
+    def __setCity(self):
+        self.City = self.InfoDic['city']
+
     def __setPostalCode(self):
         self.PostalCode = self.InfoDic['zip']
+
+    def __setState(self):
+        self.State = self.InfoDic['state']
+
+    def __setCountry(self):
+        self.Country = self.InfoDic['country']
