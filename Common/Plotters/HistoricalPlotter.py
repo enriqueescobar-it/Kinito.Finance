@@ -1,11 +1,11 @@
 from pyarrow.lib import null
-from Common.Plotters.AbstractPlotter import AbstractDrawer
+from Common.Plotters.AbstractPlotter import AbstractPlotter
 import pandas as pd
 from Common.Measures.Time.TimeSpan import TimeSpan
 import matplotlib.pyplot as plt
 
 
-class HistoricalDrawer(AbstractDrawer):
+class HistoricalPlotter(AbstractPlotter):
 
     def __init__(self, df: pd.DataFrame, src: str = 'yahoo', tick: str = 'CNI', ts: TimeSpan = null):
         if src == 'yahoo':

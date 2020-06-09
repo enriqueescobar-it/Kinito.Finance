@@ -4,7 +4,7 @@ from pyarrow.lib import null
 from Common.Measures.Time.TimeSpan import TimeSpan
 
 
-class AbstractDrawer(ABC):
+class AbstractPlotter(ABC):
     _dataFrame: pd.DataFrame
     _source: str
     _draw_col: str

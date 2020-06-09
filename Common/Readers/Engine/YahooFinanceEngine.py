@@ -18,7 +18,17 @@ class YahooFinanceEngine(AbstractEngine):
     Currency: str
     QuoteType: str
     Exchange: str
-    _ticker: str
+    High52: float
+    Low52: float
+    Average50: float
+    Average200: float
+    MarketCap: float
+    PayoutRatio: float
+    PegRatio: float
+    ShortRatio: float
+    BookValue: float
+    PriceToBook: float
+    __ticker: str
     InfoDic: dict
     '''ActionsDf: pd.DataFrame
     Balance_SheetDf: pd.DataFrame
@@ -39,7 +49,7 @@ class YahooFinanceEngine(AbstractEngine):
     SustainabilityDf: pd.DataFrame'''
 
     def __init__(self, a_ticker: str = 'CNI'):
-        self._ticker = a_ticker
+        self.__ticker = a_ticker
         self.__yFinance = yf.Ticker(a_ticker)
         self.InfoDic = self.__yFinance.info
         print(self.InfoDic)
@@ -55,6 +65,16 @@ class YahooFinanceEngine(AbstractEngine):
         self.__setCurrency()
         self.__setQuoteType()
         self.__setExchange()
+        self.__set52WeekHigh()
+        self.__set52WeekLow()
+        self.__set50DayAverage()
+        self.__set200DayAverage()
+        self.__setMarketCap()
+        self.__setPayoutRatio()
+        self.__setPegRatio()
+        self.__setShortRatio()
+        self.__setBookValue()
+        self.__setPriceToBook()
         self.ActionsDf = self.__yFinance.actions
         self.Balance_SheetDf = self.__yFinance.balance_sheet
         self.BalanceSheetDf = self.__yFinance.balancesheet
@@ -108,3 +128,33 @@ class YahooFinanceEngine(AbstractEngine):
 
     def __setExchange(self):
         self.Exchange = self.InfoDic['exchange']
+
+    def __set52WeekLow(self):
+        self.Low52 = self.InfoDic['fiftyTwoWeekLow']
+
+    def __set52WeekHigh(self):
+        self.High52 = self.InfoDic['fiftyTwoWeekHigh']
+
+    def __set50DayAverage(self):
+        self.Average50 = self.InfoDic['fiftyDayAverage']
+
+    def __set200DayAverage(self):
+        self.Average200 = self.InfoDic['twoHundredDayAverage']
+
+    def __setMarketCap(self):
+        self.MarketCap = self.InfoDic['marketCap']
+
+    def __setPayoutRatio(self):
+        self.PayoutRatio = self.InfoDic['payoutRatio']
+
+    def __setPegRatio(self):
+        self.PegRatio = self.InfoDic['pegRatio']
+
+    def __setShortRatio(self):
+        self.ShortRatio = self.InfoDic['shortRatio']
+
+    def __setBookValue(self):
+        self.BookValue = self.InfoDic['bookValue']
+
+    def __setPriceToBook(self):
+        self.PriceToBook = self.InfoDic['priceToBook']
