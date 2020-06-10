@@ -1,4 +1,6 @@
+from datetime import datetime
 import yfinance as yf
+import datetime
 import pandas as pd
 from pandas import Series
 from Common.Readers.Engine.AbstractEngine import AbstractEngine
@@ -28,6 +30,7 @@ class YahooFinanceEngine(AbstractEngine):
     ShortRatio: float
     BookValue: float
     PriceToBook: float
+    ExDividendDate: datetime
     __ticker: str
     InfoDic: dict
     '''ActionsDf: pd.DataFrame
@@ -53,28 +56,7 @@ class YahooFinanceEngine(AbstractEngine):
         self.__yFinance = yf.Ticker(a_ticker)
         self.InfoDic = self.__yFinance.info
         print(self.InfoDic)
-        self.__setUrl()
-        self.__setLogoUrl()
-        self.__setAddress()
-        self.__setCity()
-        self.__setState()
-        self.__setPostalCode()
-        self.__setCountry()
-        self.__setBeta()
-        self.__setMarket()
-        self.__setCurrency()
-        self.__setQuoteType()
-        self.__setExchange()
-        self.__set52WeekHigh()
-        self.__set52WeekLow()
-        self.__set50DayAverage()
-        self.__set200DayAverage()
-        self.__setMarketCap()
-        self.__setPayoutRatio()
-        self.__setPegRatio()
-        self.__setShortRatio()
-        self.__setBookValue()
-        self.__setPriceToBook()
+        self.__setInfo()
         self.ActionsDf = self.__yFinance.actions
         self.Balance_SheetDf = self.__yFinance.balance_sheet
         self.BalanceSheetDf = self.__yFinance.balancesheet
@@ -93,68 +75,27 @@ class YahooFinanceEngine(AbstractEngine):
         self.SplitSeries = self.__yFinance.splits
         self.SustainabilityDf = self.__yFinance.sustainability
 
-    def __setUrl(self):
+    def __setInfo(self):
         self.Url = self.InfoDic['website']
-
-    def __setLogoUrl(self):
         self.LogoUrl = self.InfoDic['logo_url']
-
-    def __setAddress(self):
         self.Address = self.InfoDic['address1']
-
-    def __setCity(self):
         self.City = self.InfoDic['city']
-
-    def __setPostalCode(self):
         self.PostalCode = self.InfoDic['zip']
-
-    def __setState(self):
         self.State = self.InfoDic['state']
-
-    def __setCountry(self):
         self.Country = self.InfoDic['country']
-
-    def __setBeta(self):
         self.Beta = float(str(self.InfoDic['beta']))
-
-    def __setMarket(self):
         self.Market = self.InfoDic['market']
-
-    def __setCurrency(self):
         self.Currency = self.InfoDic['currency']
-
-    def __setQuoteType(self):
         self.QuoteType = self.InfoDic['quoteType']
-
-    def __setExchange(self):
         self.Exchange = self.InfoDic['exchange']
-
-    def __set52WeekLow(self):
         self.Low52 = self.InfoDic['fiftyTwoWeekLow']
-
-    def __set52WeekHigh(self):
         self.High52 = self.InfoDic['fiftyTwoWeekHigh']
-
-    def __set50DayAverage(self):
         self.Average50 = self.InfoDic['fiftyDayAverage']
-
-    def __set200DayAverage(self):
         self.Average200 = self.InfoDic['twoHundredDayAverage']
-
-    def __setMarketCap(self):
         self.MarketCap = self.InfoDic['marketCap']
-
-    def __setPayoutRatio(self):
         self.PayoutRatio = self.InfoDic['payoutRatio']
-
-    def __setPegRatio(self):
         self.PegRatio = self.InfoDic['pegRatio']
-
-    def __setShortRatio(self):
         self.ShortRatio = self.InfoDic['shortRatio']
-
-    def __setBookValue(self):
         self.BookValue = self.InfoDic['bookValue']
-
-    def __setPriceToBook(self):
         self.PriceToBook = self.InfoDic['priceToBook']
+        self.ExDividendDate = datetime.datetime.fromtimestamp(self.InfoDic['exDividendDate'] / 1e3)

@@ -130,6 +130,7 @@ class YahooStockOption(AbstractStockOption):
         self.YeShortRatio = self.__y_finance_engine.ShortRatio
         self.YeBookValue = self.__y_finance_engine.BookValue
         self.YePriceToBook = self.__y_finance_engine.PriceToBook
+        self.YeExDividendDate = self.__y_finance_engine.ExDividendDate
 
     def __GetYss(self):
         self.__yahooSummaryScrapper = YahooSummaryScrapper(self.Ticker)
