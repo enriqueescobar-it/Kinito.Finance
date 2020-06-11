@@ -26,6 +26,8 @@ class YahooFinanceEngine(AbstractEngine):
     Average200: float
     MarketCap: float
     PayoutRatio: float
+    PEforward: float
+    PEtrailing: float
     PegRatio: float
     ShortRatio: float
     BookValue: float
@@ -95,6 +97,8 @@ class YahooFinanceEngine(AbstractEngine):
         self.MarketCap = self.InfoDic['marketCap']
         self.PayoutRatio = self.InfoDic['payoutRatio']
         self.PegRatio = self.InfoDic['pegRatio']
+        self.PEforward = self.InfoDic['forwardPE']
+        self.PEtrailing = self.InfoDic['trailingPE']
         self.ShortRatio = self.InfoDic['shortRatio']
         self.BookValue = self.InfoDic['bookValue']
         self.PriceToBook = self.InfoDic['priceToBook']

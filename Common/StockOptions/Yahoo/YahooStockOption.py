@@ -47,6 +47,8 @@ class YahooStockOption(AbstractStockOption):
     YeAverage200: float = -1.1
     YeMarketCap: float = -1.1
     YePayoutRatio: float = -1.1
+    YePeForward: float = -1.1
+    YePeTrailing: float = -1.1
     YePegRatio: float = -1.1
     YeShortRatio: float = -1.1
     YeBookValue: float = -1.1
@@ -60,22 +62,25 @@ class YahooStockOption(AbstractStockOption):
     __yahooSummaryScrapper: YahooSummaryScrapper
     __fin_viz_engine: FinVizEngine
     __y_finance_engine: YahooFinanceEngine
+    __historicalPlotter: HistoricalPlotter
 
     def __init__(self, a_ticker: str = 'CNI'):
         self.Source = 'yahoo'
         self.Ticker = a_ticker
         self.__timeSpan = TimeSpan()
         self.__GetData()
-        #self._DrawData()
         self.__GetFv()
         self.__GetYe()
         self.__GetYss()
+        self.__DrawData()
 
     def __GetData(self):
         self.HistoricalData = PandaEngine(self.Source, self.__timeSpan, self.Ticker).DataFrame
 
-    def _DrawData(self):
-        HistoricalPlotter(self.HistoricalData, self.Source, self.Ticker, self.__timeSpan)
+    def __DrawData(self):
+        self.__historicalPlotter = HistoricalPlotter(self.HistoricalData, self.Source, self.Ticker, self.__timeSpan)
+        self.__historicalPlotter.SetLow52(self.YeLow52)
+        self.__historicalPlotter.SetHigh52(self.YeHigh52)
 
     def __GetFv(self):
         self.__fin_viz_engine = FinVizEngine(self.Ticker)
@@ -126,6 +131,8 @@ class YahooStockOption(AbstractStockOption):
         self.YeAverage200 = self.__y_finance_engine.Average200
         self.YeMarketCap = self.__y_finance_engine.MarketCap
         self.YePayoutRatio = self.__y_finance_engine.PayoutRatio
+        self.YePeForward = self.__y_finance_engine.PEforward
+        self.YePeTrailing = self.__y_finance_engine.PEtrailing
         self.YePegRatio = self.__y_finance_engine.PegRatio
         self.YeShortRatio = self.__y_finance_engine.ShortRatio
         self.YeBookValue = self.__y_finance_engine.BookValue
