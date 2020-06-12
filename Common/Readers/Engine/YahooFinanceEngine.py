@@ -32,7 +32,7 @@ class YahooFinanceEngine(AbstractEngine):
     ShortRatio: float
     BookValue: float
     PriceToBook: float
-    ExDividendDate: datetime
+    ExDividendDate: datetime = datetime.date.min
     __ticker: str
     InfoDic: dict
     '''ActionsDf: pd.DataFrame
@@ -53,7 +53,7 @@ class YahooFinanceEngine(AbstractEngine):
     SplitSeries: Series
     SustainabilityDf: pd.DataFrame'''
 
-    def __init__(self, a_ticker: str = 'CNI'):
+    def __init__(self, a_ticker: str = 'AAPL'):
         self.__ticker = a_ticker
         self.__yFinance = yf.Ticker(a_ticker)
         self.InfoDic = self.__yFinance.info
@@ -102,4 +102,5 @@ class YahooFinanceEngine(AbstractEngine):
         self.ShortRatio = self.InfoDic['shortRatio']
         self.BookValue = self.InfoDic['bookValue']
         self.PriceToBook = self.InfoDic['priceToBook']
-        self.ExDividendDate = datetime.datetime.fromtimestamp(self.InfoDic['exDividendDate'] / 1e3)
+        if type(self.InfoDic['exDividendDate']) == type(1.1):
+            self.ExDividendDate = datetime.datetime.fromtimestamp(self.InfoDic['exDividendDate'] / 1e3)
