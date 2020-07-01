@@ -1,7 +1,7 @@
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.Readers.Engine.YahooFinEngine import YahooFinEngine
 
-yahooStockOption: YahooStockOption = YahooStockOption('CNI')
+yahooStockOption: YahooStockOption = YahooStockOption('TD')
 print("Source_fv: FinViz")
 print("Name_fv:", yahooStockOption.FvCompanyName)
 print("Sector_fv:", yahooStockOption.FvCompanySector)
@@ -56,7 +56,7 @@ print("PEratio_yss:", yahooStockOption.YssPeRatio)
 print("EPS_yss:", yahooStockOption.YssEPS)
 print("EarningsDate_yss:", yahooStockOption.YssEarningsDate)
 print(yahooStockOption.HistoricalData.describe(include='all'))
-yahooFinEngine: YahooFinEngine = YahooFinEngine('CNI')
+yahooFinEngine: YahooFinEngine = YahooFinEngine('TD')
 print("Yahoo Finance - Analysis")
 print("Yahoo Finance - Analysis - EarningsHistory")
 print(yahooFinEngine.AnalyseEarningsHistoryDf)

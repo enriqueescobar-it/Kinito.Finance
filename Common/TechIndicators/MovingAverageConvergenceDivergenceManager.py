@@ -1,8 +1,10 @@
 import datetime
 import pandas
 
+from Common.TechIndicators.AbstractIndicatorManager import AbstractIndicatorManager
 
-class MovingAverageConvergenceDivergenceManager(object):
+
+class MovingAverageConvergenceDivergenceManager(AbstractIndicatorManager):
     """ MACD indicator manager class"""
     IndicatorDf: pandas.DataFrame
 

@@ -19,7 +19,30 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="" />
+    <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/AbstractIndicatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractIndicatorManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/AverageDirectionalIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/AverageTrueRangeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/BollingerBandsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/MovingAverageConvergenceDivergenceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/OnBalanceVolumeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/RelativeStrengthIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/RenkoManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RenkoManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/SlopesManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SlopesManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/AverageDirectionalIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/AverageTrueRangeIndicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/BollingerBandsIndicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/MovingAverageConvergenceDivergenceIndicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/OnBalanceVolumeIndicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/RelativeStrengthIndexIndicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/RenkoIndicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/SlopesIndicator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TradingStrategyLibraryManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/TradingStrategyLibraryManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Common.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Common.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -206,9 +229,10 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="330" y="0" width="814" height="864" key="#Intentions/0.0.1474.864@0.0.1474.864" timestamp="1590989818026" />
-    <state x="2496" y="-447" width="230" height="595" key="#Notifications" timestamp="1591153918940">
-      <screen x="1920" y="-447" width="1362" height="900" />
+    <state x="623" y="0" width="230" height="595" key="#Notifications" timestamp="1593441389095">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
+    <state x="623" y="0" key="#Notifications/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1593441389095" />
     <state x="2496" y="-447" width="230" height="595" key="#Notifications/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153918940" />
     <state x="623" y="0" width="228" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1591066957624" />
     <state x="2311" y="-402" key="#YahooStockOption" timestamp="1591243378012">
@@ -238,46 +262,46 @@
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1588635755007" />
-    <state width="1431" height="418" key="GridCell.Tab.0.bottom" timestamp="1591941804754">
+    <state width="1431" height="418" key="GridCell.Tab.0.bottom" timestamp="1592115128471">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591674502838" />
+    <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
     <state width="1319" height="243" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1591941804754" />
-    <state width="1431" height="418" key="GridCell.Tab.0.center" timestamp="1591941804754">
+    <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
+    <state width="1431" height="418" key="GridCell.Tab.0.center" timestamp="1592115128471">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591674502837" />
+    <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
     <state width="1319" height="243" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1591941804754" />
-    <state width="1431" height="418" key="GridCell.Tab.0.left" timestamp="1591941804754">
+    <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
+    <state width="1431" height="418" key="GridCell.Tab.0.left" timestamp="1592115128471">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591674502837" />
+    <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
     <state width="1319" height="243" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1591941804754" />
-    <state width="1431" height="418" key="GridCell.Tab.0.right" timestamp="1591941804754">
+    <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
+    <state width="1431" height="418" key="GridCell.Tab.0.right" timestamp="1592115128471">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state width="1431" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591674502837" />
+    <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
     <state width="1319" height="243" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1591941804754" />
+    <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
     <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>

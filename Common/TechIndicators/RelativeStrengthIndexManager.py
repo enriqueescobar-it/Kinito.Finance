@@ -2,8 +2,10 @@ import pandas
 import pandas as pd
 import numpy as np
 
+from Common.TechIndicators.AbstractIndicatorManager import AbstractIndicatorManager
 
-class RelativeStrengthIndexManager(object):
+
+class RelativeStrengthIndexManager(AbstractIndicatorManager):
     """Relative Strength Index manager"""
     IndicatorDf: pandas.DataFrame
 
@@ -51,7 +53,6 @@ class RelativeStrengthIndexManager(object):
         # first value is sum of avg losses
         down_delta[down_delta.index[days_span - 1]] = np.mean(down_delta[:days_span])
         down_delta = down_delta.drop(down_delta.index[:(days_span - 1)])
-        rs = pd.stats.moments.ewma(up_delta, com=days_span - 1, adjust=False) / pd.stats.moments.ewma(down_delta,
-                                                                                                      com=days_span - 1,
-                                                                                                      adjust=False)
+        rs = pd.stats.moments.ewma(up_delta, com=days_span - 1, adjust=False)\
+             / pd.stats.moments.ewma(down_delta, com=days_span - 1, adjust=False)
         return 100 - 100 / (1 + rs)
