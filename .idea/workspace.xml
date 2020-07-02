@@ -20,28 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/AbstractTechIndicatorsPlotter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/AbstractIndicatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractIndicatorManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/AverageDirectionalIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/AverageTrueRangeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/BollingerBandsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/MovingAverageConvergenceDivergenceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/OnBalanceVolumeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/RelativeStrengthIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/RenkoManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RenkoManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/SlopesManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SlopesManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/AverageDirectionalIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/AverageTrueRangeIndicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/BollingerBandsIndicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/MovingAverageConvergenceDivergenceIndicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/OnBalanceVolumeIndicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/RelativeStrengthIndexIndicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/RenkoIndicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/SlopesIndicator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TechnicalIndicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/TradingStrategyLibraryManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/TradingStrategyLibraryManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechnicalIndicators/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Common.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,19 +57,40 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/Readers/Engine" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/Plotters/TechIndicators" />
     <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Disk_X\Kinito.Finance\Common\Plotters\TechIndicators" />
       <recent name="F:\Disk_X\Kinito.Finance\Common" />
       <recent name="F:\Disk_X\Kinito.Finance\Common\Readers\Engine" />
       <recent name="F:\Disk_X\Kinito.Finance\Common\Readers" />
       <recent name="F:\Disk_X\Kinito.Finance\Common\WebScrappers" />
-      <recent name="F:\Disk_X\Kinito.Finance\Common\Measures" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-Common">
+  <component name="RunManager" selected="Python.RsiPlotter">
+    <configuration name="RsiPlotter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/Plotters" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="F:\Disk_X\Kinito.Finance\Common\Plotters\TechIndicators\RsiPlotter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="YahooPdrManager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,34 +175,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script-InvestmentFundamentalsAndDataAnalytics" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.RsiPlotter" />
         <item itemvalue="Python.script-Common" />
         <item itemvalue="Python.YahooStockOption" />
         <item itemvalue="Python.YahooPdrManager" />
         <item itemvalue="Python.YahooScrapper" />
-        <item itemvalue="Python.script-InvestmentFundamentalsAndDataAnalytics" />
       </list>
     </recent_temporary>
   </component>
@@ -239,10 +222,6 @@
       <screen x="1920" y="-447" width="1362" height="900" />
     </state>
     <state x="2311" y="-402" key="#YahooStockOption/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243378012" />
-    <state x="507" y="222" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584814159571">
-      <screen x="0" y="0" width="1474" height="864" />
-    </state>
-    <state x="507" y="222" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1474.864@0.0.1474.864" timestamp="1584814159571" />
     <state x="418" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585281190396">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -255,14 +234,14 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="468" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586222515871" />
-    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1591161424758">
+    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1593670306589">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161424758" />
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
-    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1588635755007" />
-    <state width="1431" height="418" key="GridCell.Tab.0.bottom" timestamp="1592115128471">
+    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1593670306589" />
+    <state width="1431" height="300" key="GridCell.Tab.0.bottom" timestamp="1593672645157">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -271,8 +250,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
-    <state width="1431" height="418" key="GridCell.Tab.0.center" timestamp="1592115128471">
+    <state width="1431" height="300" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1593672645157" />
+    <state width="1431" height="300" key="GridCell.Tab.0.center" timestamp="1593672645156">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -281,8 +260,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
-    <state width="1431" height="418" key="GridCell.Tab.0.left" timestamp="1592115128471">
+    <state width="1431" height="300" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1593672645156" />
+    <state width="1431" height="300" key="GridCell.Tab.0.left" timestamp="1593672645156">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -291,8 +270,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
-    <state width="1431" height="418" key="GridCell.Tab.0.right" timestamp="1592115128471">
+    <state width="1431" height="300" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1593672645156" />
+    <state width="1431" height="300" key="GridCell.Tab.0.right" timestamp="1593672645156">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -301,7 +280,7 @@
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1592115128471" />
+    <state width="1431" height="300" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1593672645156" />
     <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
