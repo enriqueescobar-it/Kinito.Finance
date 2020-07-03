@@ -1,7 +1,7 @@
 import pandas
 from stocktrends import Renko
 
-from Common.TechIndicators.AbstractIndicatorManager import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
 
 
 class RenkoManager(AbstractIndicatorManager):

@@ -20,11 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/AbstractTechIndicatorsPlotter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractIndicatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RenkoManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RenkoIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/SlopesManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SlopesIndicator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

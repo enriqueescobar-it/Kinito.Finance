@@ -3,7 +3,7 @@ import pandas
 import numpy as np
 import statsmodels.api as sm
 
-from Common.TechIndicators.AbstractIndicatorManager import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
 
 
 class SlopesManager(AbstractIndicatorManager):

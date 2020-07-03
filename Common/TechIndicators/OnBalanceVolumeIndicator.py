@@ -1,7 +1,7 @@
 import pandas
 import numpy as np
 
-from Common.TechIndicators.AbstractIndicatorManager import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
 
 
 class OnBalanceVolumeManager(AbstractIndicatorManager):

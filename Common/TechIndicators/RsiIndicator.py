@@ -1,5 +1,5 @@
 import pandas as pd
-from Common.TechIndicators.AbstractIndicatorManager import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
 
 
 class RsiManager(AbstractIndicatorManager):
