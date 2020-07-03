@@ -1,6 +1,6 @@
 import pandas
 
-from Common.TechIndicators.AbstractIndicatorManager import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
 
 
 class BollingerBandsManager(AbstractIndicatorManager):
