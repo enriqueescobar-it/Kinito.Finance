@@ -1,10 +1,10 @@
 import pandas
 from stocktrends import Renko
 
-from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class RenkoManager(AbstractIndicatorManager):
+class RenkoIndicator(AbstractTechIndicator):
     """ Renko bricks manager class"""
     IndicatorDf: pandas.DataFrame
 

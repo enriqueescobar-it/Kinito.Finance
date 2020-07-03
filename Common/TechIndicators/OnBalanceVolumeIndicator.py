@@ -1,10 +1,10 @@
 import pandas
 import numpy as np
 
-from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class OnBalanceVolumeManager(AbstractIndicatorManager):
+class OnBalanceVolumeIndicator(AbstractTechIndicator):
     """On Balance Volume manager class"""
     IndicatorDf: pandas.DataFrame
 

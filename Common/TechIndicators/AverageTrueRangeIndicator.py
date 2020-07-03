@@ -1,9 +1,9 @@
 import pandas
 
-from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class AverageTrueRangeManager(AbstractIndicatorManager):
+class AverageTrueRangeIndicator(AbstractTechIndicator):
     """Average True Range class manager"""
     IndicatorDf: pandas.DataFrame
 

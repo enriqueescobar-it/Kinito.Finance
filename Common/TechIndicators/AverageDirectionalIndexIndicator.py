@@ -1,10 +1,10 @@
 import pandas
 import numpy as np
 
-from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class AverageDirectionalIndexManager(AbstractIndicatorManager):
+class AverageDirectionalIndexIndicator(AbstractTechIndicator):
     """ Average Directional Index manager class"""
     IndicatorDf: pandas.DataFrame
 

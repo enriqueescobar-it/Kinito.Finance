@@ -30,6 +30,9 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
+    Ticker: str
+    TimeSpan: TimeSpan
+    Source: str
     YeUrl: str = 'NA'
     YeLogoUrl: str = 'NA'
     YeAddress: str = 'NA'
@@ -53,21 +56,20 @@ class YahooStockOption(AbstractStockOption):
     YeShortRatio: float = -1.1
     YeBookValue: float = -1.1
     YePriceToBook: float = -1.1
-    Ticker: str
     YssBeta: str
     YssEarningsDate: str
     YssLink: str
     YssMarketCap: str
     YssPeRatio: str
-    __yahooSummaryScrapper: YahooSummaryScrapper
     __fin_viz_engine: FinVizEngine
-    __y_finance_engine: YahooFinanceEngine
     __historicalPlotter: HistoricalPlotter
+    __y_finance_engine: YahooFinanceEngine
+    __yahooSummaryScrapper: YahooSummaryScrapper
 
     def __init__(self, a_ticker: str = 'CNI'):
         self.Source = 'yahoo'
         self.Ticker = a_ticker
-        self.__timeSpan = TimeSpan()
+        self.TimeSpan = TimeSpan()
         self.__GetData()
         self.__GetFv()
         self.__GetYe()
@@ -75,10 +77,10 @@ class YahooStockOption(AbstractStockOption):
         self.__DrawData()
 
     def __GetData(self):
-        self.HistoricalData = PandaEngine(self.Source, self.__timeSpan, self.Ticker).DataFrame
+        self.HistoricalData = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
 
     def __DrawData(self):
-        self.__historicalPlotter = HistoricalPlotter(self.HistoricalData, self.Source, self.Ticker, self.__timeSpan)
+        self.__historicalPlotter = HistoricalPlotter(self.HistoricalData, self.Source, self.Ticker, self.TimeSpan)
         self.__historicalPlotter.SetLow52(self.YeLow52)
         self.__historicalPlotter.SetHigh52(self.YeHigh52)
 

@@ -1,5 +1,5 @@
 from abc import ABC
 
 
-class AbstractIndicatorManager(ABC):
+class AbstractTechIndicator(ABC):
     pass

@@ -3,10 +3,10 @@ import pandas
 import numpy as np
 import statsmodels.api as sm
 
-from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class SlopesManager(AbstractIndicatorManager):
+class SlopesIndicator(AbstractTechIndicator):
     """Slopes of n consecutive points on a plot manager class"""
     IndicatorDf: pandas.DataFrame
 

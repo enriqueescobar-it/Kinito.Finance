@@ -2,10 +2,10 @@ import pandas
 import pandas as pd
 import numpy as np
 
-from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class RelativeStrengthIndexManager(AbstractIndicatorManager):
+class RelativeStrengthIndexIndicator(AbstractTechIndicator):
     """Relative Strength Index manager"""
     IndicatorDf: pandas.DataFrame
 

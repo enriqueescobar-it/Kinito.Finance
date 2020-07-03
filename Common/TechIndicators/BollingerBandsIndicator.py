@@ -1,9 +1,9 @@
 import pandas
 
-from Common.TechIndicators.AbstractTechIndicator import AbstractIndicatorManager
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class BollingerBandsManager(AbstractIndicatorManager):
+class BollingerBandsIndicator(AbstractTechIndicator):
     """Bollinger Bands class manager"""
     IndicatorDf: pandas.DataFrame
 

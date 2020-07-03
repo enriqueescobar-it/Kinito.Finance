@@ -20,17 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scriptRsiIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractIndicatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RenkoManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RenkoIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/SlopesManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SlopesIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RenkoIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RenkoIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/SlopesIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SlopesIndicator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +78,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\WebScrappers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.RsiPlotter">
+  <component name="RunManager" selected="Python.scriptRsiIndicator">
     <configuration name="RsiPlotter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,27 +113,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/Readers/YahooPdrManager.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="YahooScrapper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/WebScrappers/Yahoo" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/WebScrappers/Yahoo/YahooScrapper.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -181,13 +163,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="scriptRsiIndicator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scriptRsiIndicator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.scriptRsiIndicator" />
         <item itemvalue="Python.RsiPlotter" />
         <item itemvalue="Python.script-Common" />
         <item itemvalue="Python.YahooStockOption" />
         <item itemvalue="Python.YahooPdrManager" />
-        <item itemvalue="Python.YahooScrapper" />
       </list>
     </recent_temporary>
   </component>
@@ -232,10 +235,11 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="418" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1474.864@0.0.1474.864" timestamp="1585281190396" />
-    <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591673351677">
+    <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1593782309585">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591673351677" />
+    <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1474.864@0.0.1474.864" timestamp="1593782309585" />
     <state x="468" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586222515871">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -247,7 +251,7 @@
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1593670306589" />
-    <state width="1431" height="300" key="GridCell.Tab.0.bottom" timestamp="1593672645157">
+    <state width="1431" height="300" key="GridCell.Tab.0.bottom" timestamp="1593786600493">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -256,8 +260,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1593672645157" />
-    <state width="1431" height="300" key="GridCell.Tab.0.center" timestamp="1593672645156">
+    <state width="1431" height="300" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
+    <state width="1431" height="300" key="GridCell.Tab.0.center" timestamp="1593786600493">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -266,8 +270,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1593672645156" />
-    <state width="1431" height="300" key="GridCell.Tab.0.left" timestamp="1593672645156">
+    <state width="1431" height="300" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
+    <state width="1431" height="300" key="GridCell.Tab.0.left" timestamp="1593786600493">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -276,8 +280,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1593672645156" />
-    <state width="1431" height="300" key="GridCell.Tab.0.right" timestamp="1593672645156">
+    <state width="1431" height="300" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
+    <state width="1431" height="300" key="GridCell.Tab.0.right" timestamp="1593786600493">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -286,7 +290,7 @@
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1593672645156" />
+    <state width="1431" height="300" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
     <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -315,10 +319,10 @@
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586205919129" />
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712869598" />
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1590903578083" />
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1591593101292">
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1593785230891">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1591593101292" />
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1593785230891" />
     <state x="394" y="197" key="run.anything.popup" timestamp="1591844504769">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
