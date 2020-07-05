@@ -20,20 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scriptRsiIndicator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageDirectionalIndexIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AverageTrueRangeIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/BollingerBandsIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MovingAverageConvergenceDivergenceIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/OnBalanceVolumeIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RelativeStrengthIndexIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RenkoIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RenkoIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/SlopesIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SlopesIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scriptRsiIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-RsiIndicator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +67,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\WebScrappers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.scriptRsiIndicator">
+  <component name="RunManager" selected="Python.script-RsiIndicator (1)">
     <configuration name="RsiPlotter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -92,27 +81,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="F:\Disk_X\Kinito.Finance\Common\Plotters\TechIndicators\RsiPlotter.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="YahooPdrManager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/Readers" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/Readers/YahooPdrManager.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -163,7 +131,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scriptRsiIndicator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="script-RsiIndicator (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -175,7 +143,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scriptRsiIndicator.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-RsiIndicator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="script-RsiIndicator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="F:\Disk_X\Kinito.Finance\script-RsiIndicator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -186,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.scriptRsiIndicator" />
+        <item itemvalue="Python.script-RsiIndicator (1)" />
+        <item itemvalue="Python.script-RsiIndicator" />
         <item itemvalue="Python.RsiPlotter" />
         <item itemvalue="Python.script-Common" />
         <item itemvalue="Python.YahooStockOption" />
-        <item itemvalue="Python.YahooPdrManager" />
       </list>
     </recent_temporary>
   </component>
@@ -221,20 +210,16 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="330" y="0" width="814" height="864" key="#Intentions/0.0.1474.864@0.0.1474.864" timestamp="1590989818026" />
-    <state x="623" y="0" width="230" height="595" key="#Notifications" timestamp="1593441389095">
+    <state x="623" y="0" width="230" height="595" key="#Notifications" timestamp="1593925128154">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="623" y="0" key="#Notifications/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1593441389095" />
     <state x="2496" y="-447" width="230" height="595" key="#Notifications/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153918940" />
-    <state x="623" y="0" width="228" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1591066957624" />
+    <state x="623" y="0" width="228" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1593925128154" />
     <state x="2311" y="-402" key="#YahooStockOption" timestamp="1591243378012">
       <screen x="1920" y="-447" width="1362" height="900" />
     </state>
     <state x="2311" y="-402" key="#YahooStockOption/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243378012" />
-    <state x="418" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585281190396">
-      <screen x="0" y="0" width="1474" height="864" />
-    </state>
-    <state x="418" y="160" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1474.864@0.0.1474.864" timestamp="1585281190396" />
     <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1593782309585">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -251,7 +236,7 @@
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1593670306589" />
-    <state width="1431" height="300" key="GridCell.Tab.0.bottom" timestamp="1593786600493">
+    <state width="1431" height="300" key="GridCell.Tab.0.bottom" timestamp="1593933613954">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -260,8 +245,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
-    <state width="1431" height="300" key="GridCell.Tab.0.center" timestamp="1593786600493">
+    <state width="1431" height="300" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1593933613954" />
+    <state width="1431" height="300" key="GridCell.Tab.0.center" timestamp="1593933613954">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -270,8 +255,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
-    <state width="1431" height="300" key="GridCell.Tab.0.left" timestamp="1593786600493">
+    <state width="1431" height="300" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1593933613954" />
+    <state width="1431" height="300" key="GridCell.Tab.0.left" timestamp="1593933613954">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -280,8 +265,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
-    <state width="1431" height="300" key="GridCell.Tab.0.right" timestamp="1593786600493">
+    <state width="1431" height="300" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1593933613954" />
+    <state width="1431" height="300" key="GridCell.Tab.0.right" timestamp="1593933613954">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -290,23 +275,7 @@
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1593786600493" />
-    <state width="1453" height="255" key="GridCell.Tab.1.bottom" timestamp="1585191259386">
-      <screen x="0" y="0" width="1474" height="864" />
-    </state>
-    <state width="1453" height="255" key="GridCell.Tab.1.bottom/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
-    <state width="1453" height="255" key="GridCell.Tab.1.center" timestamp="1585191259386">
-      <screen x="0" y="0" width="1474" height="864" />
-    </state>
-    <state width="1453" height="255" key="GridCell.Tab.1.center/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
-    <state width="1453" height="255" key="GridCell.Tab.1.left" timestamp="1585191259386">
-      <screen x="0" y="0" width="1474" height="864" />
-    </state>
-    <state width="1453" height="255" key="GridCell.Tab.1.left/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
-    <state width="1453" height="255" key="GridCell.Tab.1.right" timestamp="1585191259386">
-      <screen x="0" y="0" width="1474" height="864" />
-    </state>
-    <state width="1453" height="255" key="GridCell.Tab.1.right/0.0.1474.864@0.0.1474.864" timestamp="1585191259386" />
+    <state width="1431" height="300" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1593933613954" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>

@@ -40,4 +40,5 @@ class RsiPlotter(AbstractTechIndicatorsPlotter):
         plt.xticks(rotation=45)
         plt.ylabel(self.__rsiIndicator._col + ' in $USD')
         plt.legend(loc=self.__legendPlace)
-        plt.show()
+        #plt.show()
+        return plt

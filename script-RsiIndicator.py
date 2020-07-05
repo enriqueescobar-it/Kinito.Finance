@@ -10,5 +10,5 @@ yahooStockTicker = yahooStockOption.Ticker
 yahooStockTs = yahooStockOption.TimeSpan
 yahooStockRsi = RsiIndicator(yahooStockHistory, yahooStockSource)
 print(yahooStockRsi._RsiLabel)
-yahooStockRsiPlot = RsiPlotter(yahooStockHistory.index, yahooStockRsi, yahooStockSource, yahooStockTicker, yahooStockTs)
-yahooStockRsiPlot.Plot()
+yahooStockRsiPlot = RsiPlotter(yahooStockHistory.index, yahooStockRsi, yahooStockSource, yahooStockTicker, yahooStockTs).Plot()
+yahooStockRsiPlot.show()
