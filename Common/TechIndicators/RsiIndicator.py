@@ -1,5 +1,6 @@
 import pandas as pd
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
+from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class RsiIndicator(AbstractTechIndicator):
@@ -13,10 +14,10 @@ class RsiIndicator(AbstractTechIndicator):
     _rsi: pd.core.series.Series
     __src: str
 
-    def __init__(self, a_df: pd.DataFrame, src: str = 'yahoo'):
-        self.__src = src
-        self._col = 'Adj Close' if src == 'yahoo' else 'Close'
-        self.__delta = a_df[self._col].diff(1)
+    def __init__(self, y_stock_option: YahooStockOption):
+        self.__src = y_stock_option.Source
+        self._col = 'Adj Close' if self.__src == 'yahoo' else 'Close'
+        self.__delta = y_stock_option.HistoricalData[self._col].diff(1)
         self.__setPeriod(14)
         self._RsiLabel = 'RSI'
         self.__setUp()

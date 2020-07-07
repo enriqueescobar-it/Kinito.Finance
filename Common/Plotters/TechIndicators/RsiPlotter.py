@@ -1,10 +1,10 @@
+import pandas as pd
+import matplotlib.pyplot as plt
 from pandas import DatetimeIndex
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Plotters.TechIndicators.AbstractTechIndicatorsPlotter import AbstractTechIndicatorsPlotter
+from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.TechIndicators.RsiIndicator import RsiIndicator
-from pyarrow.lib import null
-import pandas as pd
-import matplotlib.pyplot as plt
 
 
 class RsiPlotter(AbstractTechIndicatorsPlotter):
@@ -14,14 +14,14 @@ class RsiPlotter(AbstractTechIndicatorsPlotter):
     __ticker: str
     __timeSpan: TimeSpan
 
-    def __init__(self, date_time_index: pd.DatetimeIndex, rsi_indicator: RsiIndicator, src: str = 'yahoo', tick: str = 'CNI', ts: TimeSpan = null):
-        self.__dateTimeIndex = date_time_index
+    def __init__(self, y_stock_option: YahooStockOption, rsi_indicator: RsiIndicator):
+        self.__dateTimeIndex = y_stock_option.HistoricalData.index
         self.__rsiIndicator = rsi_indicator
-        self.__src = src
+        self.__src = y_stock_option.Source
         self.__legendPlace = 'upper left'
-        self.__ticker = tick
-        self.__timeSpan = ts
-        self.__rsiLabel = src + tick + "_" + rsi_indicator._RsiLabel
+        self.__ticker = y_stock_option.Ticker
+        self.__timeSpan = y_stock_option.TimeSpan
+        self.__rsiLabel = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._RsiLabel
 
     def Plot(self):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
@@ -40,5 +40,4 @@ class RsiPlotter(AbstractTechIndicatorsPlotter):
         plt.xticks(rotation=45)
         plt.ylabel(self.__rsiIndicator._col + ' in $USD')
         plt.legend(loc=self.__legendPlace)
-        #plt.show()
         return plt
