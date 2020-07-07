@@ -21,7 +21,7 @@ class RsiPlotter(AbstractTechIndicatorsPlotter):
         self.__legendPlace = 'upper left'
         self.__ticker = y_stock_option.Ticker
         self.__timeSpan = y_stock_option.TimeSpan
-        self.__rsiLabel = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._RsiLabel
+        self.__rsiLabel = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
 
     def Plot(self):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
@@ -35,9 +35,9 @@ class RsiPlotter(AbstractTechIndicatorsPlotter):
         plt.axhline(80, linestyle='--', label='80%', alpha=0.50, color='orange')
         plt.axhline(90, linestyle='--', label='90%', alpha=0.50, color='gray')
         plt.title(
-            self.__rsiLabel + ' ' + self.__rsiIndicator._col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
+            self.__rsiLabel + ' ' + self.__rsiIndicator._Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.xticks(rotation=45)
-        plt.ylabel(self.__rsiIndicator._col + ' in $USD')
+        plt.ylabel(self.__rsiIndicator._Col + ' in $USD')
         plt.legend(loc=self.__legendPlace)
         return plt

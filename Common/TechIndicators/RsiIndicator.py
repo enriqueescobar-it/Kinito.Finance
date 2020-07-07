@@ -4,22 +4,23 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class RsiIndicator(AbstractTechIndicator):
-    _RsiLabel: str
+    _Label: str
+    _Col: str
+    __src: str
+
     __avgGain: pd.core.series.Series
     __avgLoss: pd.core.series.Series
-    _col: str
     __delta: pd.core.series.Series
     __period: int
     __rs: pd.core.series.Series
     _rsi: pd.core.series.Series
-    __src: str
 
     def __init__(self, y_stock_option: YahooStockOption):
         self.__src = y_stock_option.Source
-        self._col = 'Adj Close' if self.__src == 'yahoo' else 'Close'
-        self.__delta = y_stock_option.HistoricalData[self._col].diff(1)
+        self._Label = 'RSI'
+        self._Col = 'Adj Close' if self.__src == 'yahoo' else 'Close'
+        self.__delta = y_stock_option.HistoricalData[self._Col].diff(1)
         self.__setPeriod(14)
-        self._RsiLabel = 'RSI'
         self.__setUp()
         self.__setDown()
         self.__setRsi()

@@ -20,6 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script-MacdIndicator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiPlotter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" afterDir="false" />
@@ -90,27 +92,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="YahooStockOption" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/StockOptions/Yahoo" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="script-Common" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -124,6 +105,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Common.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="script-MacdIndicator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-MacdIndicator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -177,10 +179,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.script-RsiIndicator (1)" />
+        <item itemvalue="Python.script-MacdIndicator" />
         <item itemvalue="Python.script-RsiIndicator" />
         <item itemvalue="Python.RsiPlotter" />
         <item itemvalue="Python.script-Common" />
-        <item itemvalue="Python.YahooStockOption" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +239,7 @@
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586231044404" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1593670306589" />
-    <state width="1431" height="300" key="GridCell.Tab.0.bottom" timestamp="1594087960556">
+    <state width="1431" height="457" key="GridCell.Tab.0.bottom" timestamp="1594093576045">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -246,8 +248,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1594087960556" />
-    <state width="1431" height="300" key="GridCell.Tab.0.center" timestamp="1594087960556">
+    <state width="1431" height="457" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1594093576045" />
+    <state width="1431" height="457" key="GridCell.Tab.0.center" timestamp="1594093576045">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -256,8 +258,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.center/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1594087960556" />
-    <state width="1431" height="300" key="GridCell.Tab.0.left" timestamp="1594087960555">
+    <state width="1431" height="457" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1594093576045" />
+    <state width="1431" height="457" key="GridCell.Tab.0.left" timestamp="1594093576044">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -266,8 +268,8 @@
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.left/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1594087960555" />
-    <state width="1431" height="300" key="GridCell.Tab.0.right" timestamp="1594087960556">
+    <state width="1431" height="457" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1594093576044" />
+    <state width="1431" height="457" key="GridCell.Tab.0.right" timestamp="1594093576045">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -276,7 +278,7 @@
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586206549982" />
     <state width="1453" height="271" key="GridCell.Tab.0.right/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712871085" />
-    <state width="1431" height="300" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1594087960556" />
+    <state width="1431" height="457" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1594093576045" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -289,10 +291,10 @@
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-465.1202.720@0.0.1474.864" timestamp="1586205919129" />
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-465.1218.720@0.0.1474.864" timestamp="1585712869598" />
     <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1590903578083" />
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1593785230891">
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1594092293265">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1593785230891" />
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1594092293265" />
     <state x="394" y="197" key="run.anything.popup" timestamp="1591844504769">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
