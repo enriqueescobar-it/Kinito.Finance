@@ -4,7 +4,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class MacdIndicator(AbstractTechIndicator):
-    _SignalLineLabel: str
     _Label: str
     _Col: str
     __src: str
