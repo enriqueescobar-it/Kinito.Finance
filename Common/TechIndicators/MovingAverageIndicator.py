@@ -31,3 +31,7 @@ class MovingAverageIndicator(AbstractTechIndicator):
     def __getMA(self, y_stock_option: YahooStockOption, a_int: int = 12):
         # return last column as .iloc[:,-1] spaning rollng mean
         return y_stock_option.HistoricalData[self._Col].rolling(window=a_int, min_periods=0).mean()
+
+    @property
+    def MA005(self):
+        return self._MA005
