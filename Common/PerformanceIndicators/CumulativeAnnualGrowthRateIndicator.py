@@ -2,7 +2,7 @@ import pandas
 import numpy as np
 
 
-class CumulativeAnnualGrowthRateManager(object):
+class CumulativeAnnualGrowthRateIndicator(object):
     """ Cumulative Annual Growth Rate of a trading strategy KPI """
     KPIdf: np.float64
 

@@ -2,7 +2,7 @@ import pandas
 import numpy as np
 
 
-class SortinoRatioManager(object):
+class SortinoRatioIndicator(object):
     """ Sortino Ratio of a trading strategy KPI """
     KPIdf: np.float64
 

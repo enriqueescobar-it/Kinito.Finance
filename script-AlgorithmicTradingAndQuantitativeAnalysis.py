@@ -21,11 +21,11 @@ from Common.TechnicalIndicators.OnBalanceVolumeManager import OnBalanceVolumeMan
 from Common.TechnicalIndicators import SlopesManager
 from Common.TechnicalIndicators.RenkoManager import RenkoManager
 from Common.TechnicalIndicators.AverageDirectionalIndexManager import AverageDirectionalIndexManager
-from Common.PerformanceIndicators import SortinoRatioManager
-from Common.PerformanceIndicators.SharpeRatioManager import SharpeRatioManager
+from Common.PerformanceIndicators import SortinoRatioIndicator
+from Common.PerformanceIndicators.SharpeRatioIndicator import SharpeRatioIndicator
 from Common.PerformanceIndicators import MaximumDrawDownManager
-from Common.PerformanceIndicators.CumulativeAnnualGrowthRateManager import CumulativeAnnualGrowthRateManager
-from Common.PerformanceIndicators.CalmarRatioManager import CalmarRatioManager
+from Common.PerformanceIndicators.CumulativeAnnualGrowthRateIndicator import CumulativeAnnualGrowthRateIndicator
+from Common.PerformanceIndicators.CalmarRatioIndicator import CalmarRatioIndicator
 
 to_day: date = PyDays.DateTimeNow()
 to_day_s: str = to_day.strftime('%Y-%m-%d')
@@ -72,19 +72,19 @@ print('ADX')
 adxManager: AverageDirectionalIndexManager = AverageDirectionalIndexManager(yahooPdrManager.YahooData)
 pprint(adxManager.IndicatorDf.tail().iloc[:, -5:])
 print('SortinoRatio')
-sortinoRatioManage: SortinoRatioManager = SortinoRatioManager(yahooPdrManager.YahooData)
+sortinoRatioManage: SortinoRatioIndicator = SortinoRatioIndicator(yahooPdrManager.YahooData)
 print(sortinoRatioManage.KPIdf)
 print('SharpeRatio')
-sharpeRatioManager: SharpeRatioManager = SharpeRatioManager(yahooPdrManager.YahooData)
+sharpeRatioManager: SharpeRatioIndicator = SharpeRatioIndicator(yahooPdrManager.YahooData)
 print(sharpeRatioManager.KPIdf)
 print('MaximumDrawDown')
 mddManager: MaximumDrawDownManager = MaximumDrawDownManager(yahooPdrManager.YahooData)
 print(mddManager.KPIdf)
 print('CumulativeAnnualGrowthRate')
-cagrManager: CumulativeAnnualGrowthRateManager = CumulativeAnnualGrowthRateManager(yahooPdrManager.YahooData)
+cagrManager: CumulativeAnnualGrowthRateIndicator = CumulativeAnnualGrowthRateIndicator(yahooPdrManager.YahooData)
 print(cagrManager.KPIdf)
 print('CalmarRatio')
-crManager: CalmarRatioManager = CalmarRatioManager(yahooPdrManager.YahooData)
+crManager: CalmarRatioIndicator = CalmarRatioIndicator(yahooPdrManager.YahooData)
 print(crManager.KPIdf)
 avManager: AlphaVantageManager = AlphaVantageManager(alpha_key, yTicker)
 yahooScrapper: YahooScrapper = YahooScrapper(yTicker)

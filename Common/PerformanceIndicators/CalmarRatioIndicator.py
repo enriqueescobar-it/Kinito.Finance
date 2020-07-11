@@ -2,7 +2,7 @@ import pandas
 import numpy as np
 
 
-class CalmarRatioManager(object):
+class CalmarRatioIndicator(object):
     """ Calmar Ratio of a trading strategy KPI """
     KPIdf: np.float64
 

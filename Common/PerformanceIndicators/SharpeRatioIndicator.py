@@ -2,7 +2,7 @@ import pandas
 import numpy as np
 
 
-class SharpeRatioManager(object):
+class SharpeRatioIndicator(object):
     """ Sharpe Ratio of a trading strategy KPI """
     KPIdf: np.float64
 
