@@ -4,8 +4,16 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
+    __yeAverage200: float
+    __yeAverage50: float
+    __yeHigh52: float
+    __yeLow52: float
 
     def __init__(self, y_stockOption: YahooStockOption):
+        self.__yeHigh52 = y_stockOption.YeHigh52
+        self.__yeLow52 = y_stockOption.YeLow52
+        self.__yeAverage50 = y_stockOption.YeAverage50
+        self.__yeAverage200 = y_stockOption.YeAverage200
         if y_stockOption.Source == 'yahoo':
             self.__Col = "Adj Close"
         self.__dataFrame = y_stockOption.HistoricalData
@@ -33,7 +41,10 @@ class HistoricalPlotter(AbstractPlotter):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
         # Plot the grid lines
         plt.plot(self.__dataFrame[self.__Col], label=self.__ticker)
-        #plt.hlines(y=self.__low52, xmin=self._dataFrame[self._draw_col].index, xmax=?, colors='r', linestyles='--', lw=2)
+        plt.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52', alpha=0.50, color='gray')
+        plt.axhline(self.__yeLow52, linestyle='--', label='yeLow52', alpha=0.50, color='gray')
+        plt.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200', alpha=0.50, color='gray')
+        plt.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50', alpha=0.50, color='gray')
         plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
         plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
