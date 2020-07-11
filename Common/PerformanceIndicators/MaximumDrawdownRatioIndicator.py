@@ -2,7 +2,7 @@ import pandas
 import numpy as np
 
 
-class MaximumDrawDownManager(object):
+class MaximumDrawDownIndicator(object):
     """ Maximum Draw Down of a trading strategy KPI """
     KPIdf: np.float64
 
