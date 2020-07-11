@@ -7,12 +7,12 @@ class HistoricalPlotter(AbstractPlotter):
 
     def __init__(self, y_stockOption: YahooStockOption):
         if y_stockOption.Source == 'yahoo':
-            self._draw_col = "Adj Close"
-        self._dataFrame = y_stockOption.HistoricalData
-        self._src = y_stockOption.Source
-        self._legend_place = 'upper left'
-        self._ticker = y_stockOption.Ticker
-        self._timeSpan = y_stockOption.TimeSpan
+            self.__Col = "Adj Close"
+        self.__dataFrame = y_stockOption.HistoricalData
+        self.__src = y_stockOption.Source
+        self.__legendPlace = 'upper left'
+        self.__ticker = y_stockOption.Ticker
+        self.__timeSpan = y_stockOption.TimeSpan
         print('yyyy:', y_stockOption.TimeSpan.YearCount)
         print('MM:', y_stockOption.TimeSpan.MonthCount)
         print('ww:', y_stockOption.TimeSpan.WeekCount)
@@ -30,13 +30,13 @@ class HistoricalPlotter(AbstractPlotter):
         # visualize data
         plt.style.use('fivethirtyeight')
         # self._monthCount
-        plt.figure(figsize=(1920 / 200, 1080 / 200))
+        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
         # Plot the grid lines
-        plt.plot(self._dataFrame[self._draw_col], label=self._ticker)
+        plt.plot(self.__dataFrame[self.__Col], label=self.__ticker)
         #plt.hlines(y=self.__low52, xmin=self._dataFrame[self._draw_col].index, xmax=?, colors='r', linestyles='--', lw=2)
         plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
-        plt.title(self._ticker + ' ' + self._draw_col + ' History ' + str(self._timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self._timeSpan.StartDateStr + ' - ' + self._timeSpan.EndDateStr)
-        plt.ylabel(self._draw_col + ' in $USD')
-        plt.legend(loc=self._legend_place)
+        plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.ylabel(self.__Col + ' in $USD')
+        plt.legend(loc=self.__legendPlace)
         return plt
