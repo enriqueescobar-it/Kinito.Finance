@@ -74,15 +74,9 @@ class YahooStockOption(AbstractStockOption):
         self.__GetFv()
         self.__GetYe()
         self.__GetYss()
-        self.__DrawData()
 
     def __GetData(self):
         self.HistoricalData = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
-
-    def __DrawData(self):
-        self.__historicalPlotter = HistoricalPlotter(self.HistoricalData, self.Source, self.Ticker, self.TimeSpan)
-        self.__historicalPlotter.SetLow52(self.YeLow52)
-        self.__historicalPlotter.SetHigh52(self.YeHigh52)
 
     def __GetFv(self):
         self.__fin_viz_engine = FinVizEngine(self.Ticker)

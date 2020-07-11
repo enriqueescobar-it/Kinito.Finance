@@ -19,5 +19,5 @@ class AbstractPlotter(ABC):
         self._ticker = tick
         self._time_span = ts
 
-    def __draw(self):
+    def Plot(self):
         pass

@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 
 
 class HistoricalPlotter(AbstractPlotter):
-    __low52: float
-    __high52: float
 
     def __init__(self, df: pd.DataFrame, src: str = 'yahoo', tick: str = 'CNI', ts: TimeSpan = null):
         if src == 'yahoo':
@@ -20,7 +18,7 @@ class HistoricalPlotter(AbstractPlotter):
         print('hh:', ts.HourCount)
         # self.__draw()
 
-    def __draw(self):
+    def Plot(self):
         '''
         fig, ax = plt.subplots()
         -ax.plot(x, y)
@@ -41,11 +39,4 @@ class HistoricalPlotter(AbstractPlotter):
         plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
         plt.ylabel(self._draw_col + ' in $USD')
         plt.legend(loc=self._legend_place)
-        plt.show()
-
-    def SetLow52(self, low52: float = -1.1):
-        self.__low52 = low52
-
-    def SetHigh52(self, high52: float = -1.1):
-        self.__high52 = high52
-        #self.__draw()
+        return plt
