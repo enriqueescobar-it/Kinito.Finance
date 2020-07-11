@@ -20,13 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Common/Strategies/CompoundedAnnualGrowthRateStrategy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Strategies/SharpeRatioStrategy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Strategies/SortinoRatioStrategy.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Strategies/VolatilityStrategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/PerformanceIndicators/CalmarRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/CalmarRatioIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/PerformanceIndicators/CumulativeAnnualGrowthRateManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/CumulativeAnnualGrowthRateIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/PerformanceIndicators/MaximumDrawdownRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/MaximumDrawdownRatioIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/PerformanceIndicators/SharpeRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/SharpeRatioIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/PerformanceIndicators/SortinoRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/PerformanceIndicators/SortinoRatioIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-AlgorithmicTradingAndQuantitativeAnalysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/CalmarRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/AbstractReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/CompoundedAnnualGrowthRateManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/ReturnTerms/AbstractReturn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/SharpeRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/SentimentIndicators/AbstractSentimentIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/SortinoRatioManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/AbstractStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/VolatilityManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/CalmarRatioStrategy.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
