@@ -15,8 +15,6 @@ class HistoricalPlotter(AbstractPlotter):
         print('MM:', ts.MonthCount)
         print('ww:', ts.WeekCount)
         print('dd:', ts.DayCount)
-        print('hh:', ts.HourCount)
-        # self.__draw()
 
     def Plot(self):
         '''
