@@ -1,5 +1,4 @@
 from typing import List
-from Common.Plotters.HistoricalPlotter import HistoricalPlotter
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
@@ -62,7 +61,6 @@ class YahooStockOption(AbstractStockOption):
     YssMarketCap: str
     YssPeRatio: str
     __fin_viz_engine: FinVizEngine
-    __historicalPlotter: HistoricalPlotter
     __y_finance_engine: YahooFinanceEngine
     __yahooSummaryScrapper: YahooSummaryScrapper
 

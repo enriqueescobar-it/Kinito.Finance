@@ -1,20 +1,18 @@
-from pyarrow.lib import null
-from Common.Plotters.AbstractPlotter import AbstractPlotter
-import pandas as pd
-from Common.Measures.Time.TimeSpan import TimeSpan
 import matplotlib.pyplot as plt
+from Common.Plotters.AbstractPlotter import AbstractPlotter
+from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
 
-    def __init__(self, df: pd.DataFrame, src: str = 'yahoo', tick: str = 'CNI', ts: TimeSpan = null):
-        if src == 'yahoo':
+    def __init__(self, y_stockOption: YahooStockOption):
+        if y_stockOption.Source == 'yahoo':
             self._draw_col = "Adj Close"
-        super().__init__(df, src, tick, ts)
-        print('yyyy:', ts.YearCount)
-        print('MM:', ts.MonthCount)
-        print('ww:', ts.WeekCount)
-        print('dd:', ts.DayCount)
+        super().__init__(y_stockOption.HistoricalData, y_stockOption.Source, y_stockOption.Ticker, y_stockOption.TimeSpan)
+        print('yyyy:', y_stockOption.TimeSpan.YearCount)
+        print('MM:', y_stockOption.TimeSpan.MonthCount)
+        print('ww:', y_stockOption.TimeSpan.WeekCount)
+        print('dd:', y_stockOption.TimeSpan.DayCount)
 
     def Plot(self):
         '''
