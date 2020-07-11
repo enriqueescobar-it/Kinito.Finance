@@ -6,18 +6,18 @@ from Common.Measures.Time.TimeSpan import TimeSpan
 
 class AbstractPlotter(ABC):
     _dataFrame: pd.DataFrame
-    _source: str
+    _src: str
     _draw_col: str
     _legend_place: str
     _ticker: str
-    _time_span: TimeSpan
+    _timeSpan: TimeSpan
 
     def __init__(self, df: pd.DataFrame, src: str = 'yahoo', tick: str = 'CNI', ts: TimeSpan = null):
         self._dataFrame = df
-        self._source = src
+        self._src = src
         self._legend_place = 'upper left'
         self._ticker = tick
-        self._time_span = ts
+        self._timeSpan = ts
 
     def Plot(self):
         pass

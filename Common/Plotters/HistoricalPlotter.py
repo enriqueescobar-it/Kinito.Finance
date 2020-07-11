@@ -35,8 +35,8 @@ class HistoricalPlotter(AbstractPlotter):
         plt.plot(self._dataFrame[self._draw_col], label=self._ticker)
         #plt.hlines(y=self.__low52, xmin=self._dataFrame[self._draw_col].index, xmax=?, colors='r', linestyles='--', lw=2)
         plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
-        plt.title(self._ticker + ' ' + self._draw_col + ' History ' + str(self._time_span.MonthCount) + ' mts')
-        plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
+        plt.title(self._ticker + ' ' + self._draw_col + ' History ' + str(self._timeSpan.MonthCount) + ' mts')
+        plt.xlabel(self._timeSpan.StartDateStr + ' - ' + self._timeSpan.EndDateStr)
         plt.ylabel(self._draw_col + ' in $USD')
         plt.legend(loc=self._legend_place)
         return plt
