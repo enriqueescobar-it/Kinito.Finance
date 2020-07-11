@@ -1,20 +1,12 @@
 import matplotlib.pyplot as plt
-from pandas import DatetimeIndex
-from Common.Measures.Time.TimeSpan import TimeSpan
-from Common.Plotters.TechIndicators.AbstractTechIndicatorsPlotter import AbstractTechIndicatorsPlotter
+from Common.Plotters.TechIndicators.AbstractTechIndicatorPlotter import AbstractTechIndicatorPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
-from Common.TechIndicators.MacdIndicator import MacdIndicator
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class MacdPlotter(AbstractTechIndicatorsPlotter):
-    __dateTimeIndex: DatetimeIndex
-    _Indicator: MacdIndicator
-    __Label: str
-    __src: str
-    __ticker: str
-    __timeSpan: TimeSpan
+class MacdPlotter(AbstractTechIndicatorPlotter):
 
-    def __init__(self, y_stock_option: YahooStockOption, macd_indicator: MacdIndicator):
+    def __init__(self, y_stock_option: YahooStockOption, macd_indicator: AbstractTechIndicator):
         self.__dateTimeIndex = y_stock_option.HistoricalData.index
         self._Indicator = macd_indicator
         self.__src = y_stock_option.Source

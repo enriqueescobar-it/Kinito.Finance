@@ -4,10 +4,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class RsiIndicator(AbstractTechIndicator):
-    _Label: str
-    _Col: str
-    __src: str
-
     __avgGain: pd.core.series.Series
     __avgLoss: pd.core.series.Series
     __delta: pd.core.series.Series
@@ -16,9 +12,8 @@ class RsiIndicator(AbstractTechIndicator):
     _rsi: pd.core.series.Series
 
     def __init__(self, y_stock_option: YahooStockOption):
-        self.__src = y_stock_option.Source
+        super().__init__(y_stock_option)
         self._Label = 'RSI'
-        self._Col = 'Adj Close' if self.__src == 'yahoo' else 'Close'
         self.__delta = y_stock_option.HistoricalData[self._Col].diff(1)
         self.__setPeriod(14)
         self.__setUp()

@@ -1,20 +1,12 @@
 import matplotlib.pyplot as plt
-from pandas import DatetimeIndex
-from Common.Measures.Time.TimeSpan import TimeSpan
-from Common.Plotters.TechIndicators.AbstractTechIndicatorsPlotter import AbstractTechIndicatorsPlotter
+from Common.Plotters.TechIndicators.AbstractTechIndicatorPlotter import AbstractTechIndicatorPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
-from Common.TechIndicators.RsiIndicator import RsiIndicator
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class RsiPlotter(AbstractTechIndicatorsPlotter):
-    __dateTimeIndex: DatetimeIndex
-    _Indicator: RsiIndicator
-    __Label: str
-    __src: str
-    __ticker: str
-    __timeSpan: TimeSpan
+class RsiPlotter(AbstractTechIndicatorPlotter):
 
-    def __init__(self, y_stock_option: YahooStockOption, rsi_indicator: RsiIndicator):
+    def __init__(self, y_stock_option: YahooStockOption, rsi_indicator: AbstractTechIndicator):
         self.__dateTimeIndex = y_stock_option.HistoricalData.index
         self._Indicator = rsi_indicator
         self.__src = y_stock_option.Source

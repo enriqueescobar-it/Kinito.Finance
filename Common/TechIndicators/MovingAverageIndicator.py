@@ -4,10 +4,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class MovingAverageIndicator(AbstractTechIndicator):
-    _Label: str
-    _Col: str
-    __src: str
-
     _MA005: pd.core.series.Series
     _MA009: pd.core.series.Series
     _MA010: pd.core.series.Series
@@ -17,9 +13,8 @@ class MovingAverageIndicator(AbstractTechIndicator):
     _MA200: pd.core.series.Series
 
     def __init__(self, y_stock_option: YahooStockOption):
-        self.__src = y_stock_option.Source
+        super().__init__(y_stock_option)
         self._Label = 'MA'
-        self._Col = 'Adj Close' if self.__src == 'yahoo' else 'Close'
         self._MA005 = self.__getMA(y_stock_option, 5)
         self._MA009 = self.__getMA(y_stock_option, 9)
         self._MA010 = self.__getMA(y_stock_option, 10)
@@ -31,7 +26,3 @@ class MovingAverageIndicator(AbstractTechIndicator):
     def __getMA(self, y_stock_option: YahooStockOption, a_int: int = 12):
         # return last column as .iloc[:,-1] spaning rollng mean
         return y_stock_option.HistoricalData[self._Col].rolling(window=a_int, min_periods=0).mean()
-
-    @property
-    def MA005(self):
-        return self._MA005
