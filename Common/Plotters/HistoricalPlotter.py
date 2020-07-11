@@ -8,7 +8,11 @@ class HistoricalPlotter(AbstractPlotter):
     def __init__(self, y_stockOption: YahooStockOption):
         if y_stockOption.Source == 'yahoo':
             self._draw_col = "Adj Close"
-        super().__init__(y_stockOption.HistoricalData, y_stockOption.Source, y_stockOption.Ticker, y_stockOption.TimeSpan)
+        self._dataFrame = y_stockOption.HistoricalData
+        self._src = y_stockOption.Source
+        self._legend_place = 'upper left'
+        self._ticker = y_stockOption.Ticker
+        self._timeSpan = y_stockOption.TimeSpan
         print('yyyy:', y_stockOption.TimeSpan.YearCount)
         print('MM:', y_stockOption.TimeSpan.MonthCount)
         print('ww:', y_stockOption.TimeSpan.WeekCount)
