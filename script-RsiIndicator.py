@@ -4,7 +4,8 @@ from Common.TechIndicators.RsiIndicator import RsiIndicator
 
 yahooStockOption: YahooStockOption = YahooStockOption('TD')
 print(yahooStockOption.HistoricalData.describe(include='all'))
-yahooStockIndicator = RsiIndicator(yahooStockOption)
+yahooStockIndicator: RsiIndicator = RsiIndicator(yahooStockOption)
 print(yahooStockIndicator._Label)
-yahooStockPlotter = RsiIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
-yahooStockPlotter.show()
+yahooStockIndicatorPlotter: RsiIndicatorPlotter =\
+    RsiIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
+yahooStockIndicatorPlotter.show()

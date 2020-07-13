@@ -4,7 +4,8 @@ from Common.TechIndicators.MovingAverageIndicator import MovingAverageIndicator
 
 yahooStockOption: YahooStockOption = YahooStockOption('TD')
 print(yahooStockOption.HistoricalData.describe(include='all'))
-yahooStockIndicator = MovingAverageIndicator(yahooStockOption)
+yahooStockIndicator: MovingAverageIndicator = MovingAverageIndicator(yahooStockOption)
 print(yahooStockIndicator._Label)
-yahooStockPlotter = MovingAverageIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
-yahooStockPlotter.show()
+yahooStockIndicatorPlotter: MovingAverageIndicatorPlotter =\
+    MovingAverageIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
+yahooStockIndicatorPlotter.show()
