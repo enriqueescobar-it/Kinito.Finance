@@ -4,7 +4,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 
 
-class MacdPlotter(AbstractTechIndicatorPlotter):
+class MacdIndicatorPlotter(AbstractTechIndicatorPlotter):
 
     def __init__(self, y_stock_option: YahooStockOption, macd_indicator: AbstractTechIndicator):
         self.__dateTimeIndex = y_stock_option.HistoricalData.index
