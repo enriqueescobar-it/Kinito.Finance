@@ -2,4 +2,5 @@ from Common.Strategies.AbstractStrategy import AbstractStrategy
 
 
 class AbstractTechIndicatorStrategy(AbstractStrategy):
-    pass
+    _Label: str
+    _Col: str
