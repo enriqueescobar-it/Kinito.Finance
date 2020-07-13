@@ -1,5 +1,5 @@
 from abc import ABC
 
 
-class AbstractStrategy(ABC):
+class AbstractAssetType(ABC):
     pass

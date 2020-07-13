@@ -1,4 +1,7 @@
-class DowJones(object):
+from Common.AssetTypes.Funds.ExchangeTradedFund import ExchangeTradedFund
+
+
+class DowJones(ExchangeTradedFund):
     ShortName: str
     LongName: str
     YahooTicker: str

@@ -1,4 +1,7 @@
-class Nikkei(object):
+from Common.AssetTypes.Funds.ExchangeTradedFund import ExchangeTradedFund
+
+
+class Nikkei(ExchangeTradedFund):
     ShortName: str
     LongName: str
     YahooTicker: str

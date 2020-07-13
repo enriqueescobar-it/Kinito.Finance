@@ -1,4 +1,7 @@
-class Tse(object):
+from Common.AssetTypes.Funds.ExchangeTradedFund import ExchangeTradedFund
+
+
+class Tse(ExchangeTradedFund):
     ShortName: str
     LongName: str
     YahooTicker: str

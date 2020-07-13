@@ -1,4 +1,7 @@
-class SnP(object):
+from Common.AssetTypes.Funds.ExchangeTradedFund import ExchangeTradedFund
+
+
+class SnP(ExchangeTradedFund):
     ShortName: str
     LongName: str
     YahooTicker: str
