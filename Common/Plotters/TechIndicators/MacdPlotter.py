@@ -17,8 +17,8 @@ class MacdPlotter(AbstractTechIndicatorPlotter):
 
     def Plot(self):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
-        plt.plot(self.__dateTimeIndex, self._Indicator._Macd, label=self._Indicator._Label, color='red', alpha=0.7)
-        plt.plot(self.__dateTimeIndex, self._Indicator._SignalLine, label=self._Indicator._SignalLineLabel, color='blue', alpha=0.7)
+        plt.plot(self.__dateTimeIndex, self._Indicator._Macd, label=self._Indicator._Label, alpha=0.9)#, color='red'
+        plt.plot(self.__dateTimeIndex, self._Indicator._SignalLine, label=self._Indicator._SignalLineLabel, color='lightblue', alpha=0.9)
         plt.title(self.__Label + ' ' + self._Indicator._Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.xticks(rotation=45)
