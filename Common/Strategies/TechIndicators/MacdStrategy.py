@@ -9,10 +9,10 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
     _DataFrame: pd.DataFrame
     _BuyLabel: str
     _SellLabel: str
+    __ticker: str
     __macd: pd.core.series.Series
     __signal: pd.core.series.Series
     __signalLabel: str
-    __ticker: str
 
     def __init__(self, macd_indicator: MacdIndicator, y_stockOption: YahooStockOption):
         self._Col = macd_indicator._Col
