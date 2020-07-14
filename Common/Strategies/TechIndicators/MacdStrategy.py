@@ -6,14 +6,13 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class MacdStrategy(AbstractTechIndicatorStrategy):
-    __ticker: str
+    _DataFrame: pd.DataFrame
     _BuyLabel: str
     _SellLabel: str
-    _DataFrame: pd.DataFrame
     __macd: pd.core.series.Series
-
     __signal: pd.core.series.Series
     __signalLabel: str
+    __ticker: str
 
     def __init__(self, macd_indicator: MacdIndicator, y_stockOption: YahooStockOption):
         self._Col = macd_indicator._Col
