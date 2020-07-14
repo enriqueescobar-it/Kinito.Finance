@@ -14,7 +14,7 @@ class SmaIndicator(AbstractTechIndicator):
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
-        self._Label = 'MA'
+        self._Label = 'SMA'
         self._SMA005 = self.__getSma(y_stock_option, 5)
         self._SMA009 = self.__getSma(y_stock_option, 9)
         self._SMA010 = self.__getSma(y_stock_option, 10)

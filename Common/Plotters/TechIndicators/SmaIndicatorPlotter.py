@@ -19,12 +19,12 @@ class SmaIndicatorPlotter(AbstractTechIndicatorPlotter):
     def Plot(self):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
         plt.plot(self.__dateTimeIndex, self.__data, label=self.__Label, alpha=0.7)
-        plt.plot(self.__dateTimeIndex, self._Indicator._MA005, label=self.__Label + '5', alpha=0.50, color='gray')
-        plt.plot(self.__dateTimeIndex, self._Indicator._MA009, label=self.__Label + '9', alpha=0.50, color='orange')
-        plt.plot(self.__dateTimeIndex, self._Indicator._MA010, label=self.__Label + '10', alpha=0.50, color='green')
-        plt.plot(self.__dateTimeIndex, self._Indicator._MA020, label=self.__Label + '20', alpha=0.50, color='red')
-        plt.plot(self.__dateTimeIndex, self._Indicator._MA100, label=self.__Label + '100', alpha=0.50)
-        plt.plot(self.__dateTimeIndex, self._Indicator._MA200, label=self.__Label + '200', alpha=0.50)
+        plt.plot(self.__dateTimeIndex, self._Indicator._SMA005, label=self.__Label + '5', alpha=0.50, color='lightblue')
+        plt.plot(self.__dateTimeIndex, self._Indicator._SMA009, label=self.__Label + '9', alpha=0.50, color='lightgray')
+        plt.plot(self.__dateTimeIndex, self._Indicator._SMA010, label=self.__Label + '10', alpha=0.50, color='green')
+        plt.plot(self.__dateTimeIndex, self._Indicator._SMA020, label=self.__Label + '20', alpha=0.50, color='orange')
+        plt.plot(self.__dateTimeIndex, self._Indicator._SMA100, label=self.__Label + '100', alpha=0.50, color='red')
+        plt.plot(self.__dateTimeIndex, self._Indicator._SMA200, label=self.__Label + '200', alpha=0.50, color='violet')
         plt.title(
             self.__Label + ' ' + self._Indicator._Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
