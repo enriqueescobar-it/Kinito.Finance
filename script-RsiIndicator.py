@@ -2,7 +2,7 @@ from Common.Plotters.TechIndicators.RsiIndicatorPlotter import RsiIndicatorPlott
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('TD')
+yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: RsiIndicator = RsiIndicator(yahooStockOption)
 print(yahooStockIndicator._Label)

@@ -4,7 +4,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
 from Common.TechIndicators.MacdIndicator import MacdIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('TD')
+yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
 print(yahooStockIndicator._Label)

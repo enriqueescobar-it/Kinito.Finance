@@ -2,7 +2,7 @@ from Common.Plotters.TechIndicators.MovingAverageIndicatorPlotter import MovingA
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.TechIndicators.MovingAverageIndicator import MovingAverageIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('TD')
+yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: MovingAverageIndicator = MovingAverageIndicator(yahooStockOption)
 print(yahooStockIndicator._Label)
