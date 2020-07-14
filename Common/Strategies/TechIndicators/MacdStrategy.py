@@ -39,20 +39,21 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
 
         for i in range(len(self._DataFrame)):
             if self._DataFrame[self._Label][i] > self._DataFrame[self.__signalLabel][i]:
-              sellSignal.append(np.nan)
-              if flag != 1:
-                buySignal.append(self._DataFrame[self.__ticker][i])
-                flag = 1
-              else:
-                buySignal.append(np.nan)
-            elif self._DataFrame[self._Label][i] < self._DataFrame[self.__signalLabel][i]:
-              buySignal.append(np.nan)
-              if flag != 0:
-                sellSignal.append(self._DataFrame[self.__ticker][i])
-                flag = 0
-              else:
                 sellSignal.append(np.nan)
+                if flag != 1:
+                    buySignal.append(self._DataFrame[self.__ticker][i])
+                    flag = 1
+                else:
+                    buySignal.append(np.nan)
+            elif self._DataFrame[self._Label][i] < self._DataFrame[self.__signalLabel][i]:
+                buySignal.append(np.nan)
+                if flag != 0:
+                    sellSignal.append(self._DataFrame[self.__ticker][i])
+                    flag = 0
+                else:
+                    sellSignal.append(np.nan)
             else:
-              buySignal.append(np.nan)
-              sellSignal.append(np.nan)
-        return (buySignal, sellSignal)
+                buySignal.append(np.nan)
+                sellSignal.append(np.nan)
+
+        return buySignal, sellSignal
