@@ -24,9 +24,9 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         self._DataFrame[sma_indicator._Label + '009'] = sma_indicator._SMA009
         self._DataFrame[sma_indicator._Label + '010'] = sma_indicator._SMA010
         self._DataFrame[sma_indicator._Label + '020'] = sma_indicator._SMA020
-        self.__SMA20label = sma_indicator._Label + '020'
+        self.__LowerLabel = sma_indicator._Label + '020'
         self._DataFrame[sma_indicator._Label + '050'] = sma_indicator._SMA050
-        self.__SMA50label = sma_indicator._Label + '050'
+        self.__UpperLabel = sma_indicator._Label + '050'
         self._DataFrame[sma_indicator._Label + '100'] = sma_indicator._SMA100
         self._DataFrame[sma_indicator._Label + '200'] = sma_indicator._SMA200
         buyNsellTuple = self.__buyNsell()
@@ -40,7 +40,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         flag = -1
 
         for i in range(len(self._DataFrame)):
-            if self._DataFrame[self.__SMA20label][i] > self._DataFrame[self.__SMA50label][i]:#
+            if self._DataFrame[self.__LowerLabel][i] > self._DataFrame[self.__UpperLabel][i]:#
                 if flag != 1:
                     buySignal.append(self._DataFrame[self.__ticker][i])
                     sellSignal.append(np.nan)
@@ -48,7 +48,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
                 else:
                     buySignal.append(np.nan)
                     sellSignal.append(np.nan)
-            elif self._DataFrame[self.__SMA20label][i] < self._DataFrame[self.__SMA50label][i]:#
+            elif self._DataFrame[self.__LowerLabel][i] < self._DataFrame[self.__UpperLabel][i]:#
                 if flag != 0:
                     buySignal.append(np.nan)
                     sellSignal.append(self._DataFrame[self.__ticker][i])
