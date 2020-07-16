@@ -1,4 +1,4 @@
-#from Common.Plotters.TechIndicators.SmaStrategyPlotter import SmaStrategyPlotter
+from Common.Plotters.TechIndicators.SmaStrategyPlotter import SmaStrategyPlotter
 from Common.Plotters.TechIndicators.SmaIndicatorPlotter import SmaIndicatorPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
@@ -13,5 +13,6 @@ yahooStockIndicatorPlotter: SmaIndicatorPlotter =\
 yahooStockIndicatorPlotter.show()
 yahooStockStrategy: SmaStrategy =\
     SmaStrategy(yahooStockIndicator, yahooStockOption)
-yahooStockStrategyPlotter =\
-    1
+yahooStockStrategyPlotter: SmaStrategyPlotter =\
+    SmaStrategyPlotter(yahooStockOption, yahooStockStrategy).Plot()
+yahooStockStrategyPlotter.show()

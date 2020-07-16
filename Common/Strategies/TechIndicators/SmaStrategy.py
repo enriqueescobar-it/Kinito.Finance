@@ -10,6 +10,8 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
     _DataFrame: pd.DataFrame
     _BuyLabel: str
     _SellLabel: str
+    __LowerLabel: str
+    __UpperLabel: str
     __ticker: str
 
     def __init__(self, sma_indicator: SmaIndicator, y_stockOption: YahooStockOption):
@@ -18,6 +20,8 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         self._DataFrame = pd.DataFrame()
         self._BuyLabel = 'Buy_' + self._Label
         self._SellLabel = 'Sell_' + self._Label
+        self.__LowerLabel = sma_indicator._Label + '030'
+        self.__UpperLabel = sma_indicator._Label + '100'
         self.__ticker = y_stockOption.Ticker
         self._DataFrame[y_stockOption.Ticker] = y_stockOption.HistoricalData[self._Col]
         self._DataFrame[sma_indicator._Label + '005'] = sma_indicator._SMA005
@@ -25,10 +29,8 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         self._DataFrame[sma_indicator._Label + '010'] = sma_indicator._SMA010
         self._DataFrame[sma_indicator._Label + '020'] = sma_indicator._SMA020
         self._DataFrame[sma_indicator._Label + '030'] = sma_indicator._SMA030
-        self.__LowerLabel = sma_indicator._Label + '030'
         self._DataFrame[sma_indicator._Label + '050'] = sma_indicator._SMA050
         self._DataFrame[sma_indicator._Label + '100'] = sma_indicator._SMA100
-        self.__UpperLabel = sma_indicator._Label + '100'
         self._DataFrame[sma_indicator._Label + '200'] = sma_indicator._SMA200
         buyNsellTuple = self.__buyNsell()
         self._DataFrame[self._BuyLabel] = buyNsellTuple[0]
