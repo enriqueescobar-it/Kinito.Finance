@@ -15,3 +15,12 @@ class SmaStrategyPlotter(AbstractStrategyPlotter):
         self.__ticker = y_stock_option.Ticker
         self.__timeSpan = y_stock_option.TimeSpan
         self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + sma_strategy._Label
+
+    def Plot(self):
+        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.title(self.__Label + ' ' + self.__smaStrategy._Col + ' History ' + self.__smaStrategy._Label + ' BUY & SELL Signals')
+        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.xticks(rotation=45)
+        plt.ylabel(self.__smaStrategy._Col + ' in $USD')
+        plt.legend(loc=self.__legendPlace)
+        return plt

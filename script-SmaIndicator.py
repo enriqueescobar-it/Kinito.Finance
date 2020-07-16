@@ -1,4 +1,4 @@
-from Common.Plotters.TechIndicators.SmaStrategyPlotter import SmaStrategyPlotter
+from Common.Plotters.Strategies.SmaStrategyPlotter import SmaStrategyPlotter
 from Common.Plotters.TechIndicators.SmaIndicatorPlotter import SmaIndicatorPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
