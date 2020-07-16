@@ -24,10 +24,11 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         self._DataFrame[sma_indicator._Label + '009'] = sma_indicator._SMA009
         self._DataFrame[sma_indicator._Label + '010'] = sma_indicator._SMA010
         self._DataFrame[sma_indicator._Label + '020'] = sma_indicator._SMA020
-        self.__LowerLabel = sma_indicator._Label + '020'
+        self._DataFrame[sma_indicator._Label + '030'] = sma_indicator._SMA030
+        self.__LowerLabel = sma_indicator._Label + '030'
         self._DataFrame[sma_indicator._Label + '050'] = sma_indicator._SMA050
-        self.__UpperLabel = sma_indicator._Label + '050'
         self._DataFrame[sma_indicator._Label + '100'] = sma_indicator._SMA100
+        self.__UpperLabel = sma_indicator._Label + '100'
         self._DataFrame[sma_indicator._Label + '200'] = sma_indicator._SMA200
         buyNsellTuple = self.__buyNsell()
         self._DataFrame[self._BuyLabel] = buyNsellTuple[0]

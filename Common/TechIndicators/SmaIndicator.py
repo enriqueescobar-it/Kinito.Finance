@@ -8,6 +8,7 @@ class SmaIndicator(AbstractTechIndicator):
     _SMA009: pd.core.series.Series
     _SMA010: pd.core.series.Series
     _SMA020: pd.core.series.Series
+    _SMA030: pd.core.series.Series
     _SMA050: pd.core.series.Series
     _SMA100: pd.core.series.Series
     _SMA200: pd.core.series.Series
@@ -19,6 +20,7 @@ class SmaIndicator(AbstractTechIndicator):
         self._SMA009 = self.__getSma(y_stock_option, 9)
         self._SMA010 = self.__getSma(y_stock_option, 10)
         self._SMA020 = self.__getSma(y_stock_option, 20)
+        self._SMA030 = self.__getSma(y_stock_option, 30)
         self._SMA050 = self.__getSma(y_stock_option, 50)
         self._SMA100 = self.__getSma(y_stock_option, 100)
         self._SMA200 = self.__getSma(y_stock_option, 200)
