@@ -15,6 +15,11 @@ class MacdStrategyPlotter(AbstractStrategyPlotter):
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
         self.__TICKER = y_stock_option.Ticker
+        self.__TITLE = "{0}{1}_{2} {3} History {4} BUY & SELL Signals".format(y_stock_option.Source,
+                                                                              y_stock_option.Ticker,
+                                                                              macd_strategy._Label,
+                                                                              macd_strategy._Col,
+                                                                              macd_strategy._Label)
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self.__XTICKS_ANGLE = 45
         self.__YLABEL = macd_strategy._Col + ' in $USD'
@@ -29,7 +34,7 @@ class MacdStrategyPlotter(AbstractStrategyPlotter):
         plt.plot(self.__macdStrategy._DataFrame[self.__TICKER], label=self.__Label, alpha=0.6)
         plt.scatter(self.__dateTimeIndex, self.__macdStrategy._DataFrame[self.__macdStrategy._BuyLabel], label=self.__macdStrategy._BuyLabel, marker='^', color='green')
         plt.scatter(self.__dateTimeIndex, self.__macdStrategy._DataFrame[self.__macdStrategy._SellLabel], label=self.__macdStrategy._SellLabel, marker='v', color='red')
-        plt.title(self.__Label + ' ' + self.__macdStrategy._Col + ' History ' + self.__macdStrategy._Label + ' BUY & SELL Signals')
+        plt.title(self.__TITLE)
         plt.xlabel(self.__XLABEL)
         plt.xticks(rotation=self.__XTICKS_ANGLE)
         plt.ylabel(self.__YLABEL)
