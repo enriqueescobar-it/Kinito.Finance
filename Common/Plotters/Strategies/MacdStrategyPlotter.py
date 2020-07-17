@@ -7,6 +7,7 @@ from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
 
 class MacdStrategyPlotter(AbstractStrategyPlotter):
     __dateTimeIndex: pd.core.indexes.datetimes.DatetimeIndex
+    __label: str
     __macdStrategy: MacdStrategy
 
     def __init__(self, y_stock_option: YahooStockOption, macd_strategy: MacdStrategy):
@@ -25,13 +26,12 @@ class MacdStrategyPlotter(AbstractStrategyPlotter):
         self.__YLABEL = macd_strategy._Col + ' in $USD'
         self.__dateTimeIndex = y_stock_option.HistoricalData.index
         self.__macdStrategy = macd_strategy
-        self.__timeSpan = y_stock_option.TimeSpan
-        self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + macd_strategy._Label
+        self.__label = y_stock_option.Source + y_stock_option.Ticker + "_" + macd_strategy._Label
 
     def Plot(self):
         # plt.style.use(self.__PLOT_STYLE)
         plt.figure(figsize=(self.__FIG_SIZE))
-        plt.plot(self.__macdStrategy._DataFrame[self.__TICKER], label=self.__Label, alpha=0.6)
+        plt.plot(self.__macdStrategy._DataFrame[self.__TICKER], label=self.__label, alpha=0.6)
         plt.scatter(self.__dateTimeIndex, self.__macdStrategy._DataFrame[self.__macdStrategy._BuyLabel], label=self.__macdStrategy._BuyLabel, marker='^', color='green')
         plt.scatter(self.__dateTimeIndex, self.__macdStrategy._DataFrame[self.__macdStrategy._SellLabel], label=self.__macdStrategy._SellLabel, marker='v', color='red')
         plt.title(self.__TITLE)

@@ -7,6 +7,7 @@ from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
 
 class SmaStrategyPlotter(AbstractStrategyPlotter):
     __dateTimeIndex: pd.core.indexes.datetimes.DatetimeIndex
+    __label: str
     __smaStrategy: SmaStrategy
 
     def __init__(self, y_stock_option: YahooStockOption, sma_strategy: SmaStrategy):
@@ -25,13 +26,12 @@ class SmaStrategyPlotter(AbstractStrategyPlotter):
         self.__YLABEL = sma_strategy._Col + ' in $USD'
         self.__dateTimeIndex = y_stock_option.HistoricalData.index
         self.__smaStrategy = sma_strategy
-        self.__timeSpan = y_stock_option.TimeSpan
-        self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + sma_strategy._Label
+        self.__label = y_stock_option.Source + y_stock_option.Ticker + "_" + sma_strategy._Label
 
     def Plot(self):
         #plt.style.use(self.__PLOT_STYLE)
         plt.figure(figsize=(self.__FIG_SIZE))
-        plt.plot(self.__smaStrategy._DataFrame[self.__TICKER], label=self.__Label, alpha=0.7)
+        plt.plot(self.__smaStrategy._DataFrame[self.__TICKER], label=self.__label, alpha=0.7)
         plt.plot(self.__smaStrategy._DataFrame[self.__smaStrategy._Label + '005'], label=self.__smaStrategy._Label + '005', alpha=0.50, color='lightblue')
         plt.plot(self.__smaStrategy._DataFrame[self.__smaStrategy._Label + '009'], label=self.__smaStrategy._Label + '009', alpha=0.50, color='lightgray')
         plt.plot(self.__smaStrategy._DataFrame[self.__smaStrategy._Label + '010'], label=self.__smaStrategy._Label + '010', alpha=0.50, color='green')
