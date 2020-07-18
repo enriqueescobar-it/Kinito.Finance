@@ -10,6 +10,7 @@ class MacdIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__ABSTRACT_INDICATOR = macd_indicator
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__FIG_SIZE = (y_stock_option.TimeSpan.MonthCount / 2, 4.5)
+        self.__INDICATOR_DATA_FRAME = y_stock_option.HistoricalData
         self.__LEGEND_PLACE = 'upper left'
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
