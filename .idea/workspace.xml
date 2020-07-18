@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/Strategies/AbstractStrategyPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/Strategies/AbstractStrategyPlotter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/AbstractTechIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/AbstractTechIndicatorPlotter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" afterDir="false" />

@@ -17,7 +17,7 @@ class SmaIndicatorPlotter(AbstractTechIndicatorPlotter):
                                                                   ma_indicator._Label,
                                                                   ma_indicator._Col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
-        self.__dateTimeIndex = y_stock_option.HistoricalData.index
+        self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self._Indicator = ma_indicator
         self.__timeSpan = y_stock_option.TimeSpan
         self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + ma_indicator._Label
@@ -25,15 +25,15 @@ class SmaIndicatorPlotter(AbstractTechIndicatorPlotter):
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
-        plt.plot(self.__dateTimeIndex, self.__data, label=self.__Label, alpha=0.7)
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA005, label=self.__Label + '005', alpha=0.50, color='lightblue')
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA009, label=self.__Label + '009', alpha=0.50, color='lightgray')
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA010, label=self.__Label + '010', alpha=0.50, color='green')
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA020, label=self.__Label + '020', alpha=0.50, color='orange')
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA030, label=self.__Label + '030', alpha=0.50, color='violet')
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA050, label=self.__Label + '050', alpha=0.50, color='pink')
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA100, label=self.__Label + '100', alpha=0.50, color='red')
-        plt.plot(self.__dateTimeIndex, self._Indicator._SMA200, label=self.__Label + '200', alpha=0.50, color='yellow')
+        plt.plot(self.__DATE_TIME_INDEX, self.__data, label=self.__Label, alpha=0.7)
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA005, label=self.__Label + '005', alpha=0.50, color='lightblue')
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA009, label=self.__Label + '009', alpha=0.50, color='lightgray')
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA010, label=self.__Label + '010', alpha=0.50, color='green')
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA020, label=self.__Label + '020', alpha=0.50, color='orange')
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA030, label=self.__Label + '030', alpha=0.50, color='violet')
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA050, label=self.__Label + '050', alpha=0.50, color='pink')
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA100, label=self.__Label + '100', alpha=0.50, color='red')
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA200, label=self.__Label + '200', alpha=0.50, color='yellow')
         plt.title(self.__TITLE)
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.xticks(rotation=45)

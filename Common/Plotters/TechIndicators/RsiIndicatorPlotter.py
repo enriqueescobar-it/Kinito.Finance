@@ -17,14 +17,14 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
                                                                   rsi_indicator._Label,
                                                                   rsi_indicator._Col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
-        self.__dateTimeIndex = y_stock_option.HistoricalData.index
+        self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self._Indicator = rsi_indicator
         self.__timeSpan = y_stock_option.TimeSpan
         self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
-        plt.plot(self.__dateTimeIndex, self._Indicator._rsi, label=self.__Label, alpha=0.7)
+        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._rsi, label=self.__Label, alpha=0.7)
         plt.axhline(10, linestyle='--', label='10%', alpha=0.50, color='gray')
         plt.axhline(20, linestyle='--', label='20%', alpha=0.50, color='orange')
         plt.axhline(30, linestyle='--', label='30%', alpha=0.50, color='green')

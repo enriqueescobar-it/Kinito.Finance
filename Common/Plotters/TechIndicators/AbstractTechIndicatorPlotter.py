@@ -17,6 +17,6 @@ class AbstractTechIndicatorPlotter(ABC):
     __XTICKS_ANGLE: int
     __YLABEL: str
     _Indicator: AbstractTechIndicator
-    __dateTimeIndex: DatetimeIndex
+    __DATE_TIME_INDEX: DatetimeIndex
     __Label: str
     __timeSpan: TimeSpan
