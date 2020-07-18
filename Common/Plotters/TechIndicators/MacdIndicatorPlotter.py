@@ -19,6 +19,7 @@ class MacdIndicatorPlotter(AbstractTechIndicatorPlotter):
                                                                   str(y_stock_option.TimeSpan.MonthCount))
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
+        self.__XTICKS_ANGLE = 45
         self._Indicator = macd_indicator
         self.__timeSpan = y_stock_option.TimeSpan
         self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + macd_indicator._Label
@@ -29,7 +30,7 @@ class MacdIndicatorPlotter(AbstractTechIndicatorPlotter):
         plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SignalLine, label=self._Indicator._SignalLineLabel, color='lightblue', alpha=0.9)
         plt.title(self.__TITLE)
         plt.xlabel(self.__XLABEL)
-        plt.xticks(rotation=45)
+        plt.xticks(rotation=self.__XTICKS_ANGLE)
         plt.ylabel(self._Indicator._Col + ' in $USD')
         plt.legend(loc=self.__LEGEND_PLACE)
         return plt

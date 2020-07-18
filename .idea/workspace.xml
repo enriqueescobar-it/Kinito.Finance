@@ -68,7 +68,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\Readers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-Macd (1)">
+  <component name="RunManager" selected="Python.script-Sma (1)">
     <configuration name="script-Macd (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -176,8 +176,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.script-Macd (1)" />
         <item itemvalue="Python.script-Sma (1)" />
+        <item itemvalue="Python.script-Macd (1)" />
         <item itemvalue="Python.script-MacdIndicator" />
         <item itemvalue="Python.script-SmaIndicator (1)" />
         <item itemvalue="Python.script-SmaIndicator" />
