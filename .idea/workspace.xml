@@ -21,9 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-MacdIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Macd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-RsiIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Rsi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-SmaIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Sma.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/AbstractTechIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/AbstractTechIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/SmaIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/SmaIndicatorPlotter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +69,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\Readers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-MacdIndicator">
+  <component name="RunManager" selected="Python.script-Sma (1)">
     <configuration name="script-HistoricalPlotter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -111,7 +112,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script-Rsi" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="script-Sma (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -123,7 +124,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="F:\Disk_X\Kinito.Finance\script-Rsi.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Sma.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -176,11 +177,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.script-Sma (1)" />
         <item itemvalue="Python.script-MacdIndicator" />
         <item itemvalue="Python.script-SmaIndicator (1)" />
         <item itemvalue="Python.script-SmaIndicator" />
         <item itemvalue="Python.script-HistoricalPlotter" />
-        <item itemvalue="Python.script-RsiIndicator (1)" />
       </list>
     </recent_temporary>
   </component>
