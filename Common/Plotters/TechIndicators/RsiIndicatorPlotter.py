@@ -20,6 +20,7 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self.__XTICKS_ANGLE = 45
+        self.__YLABEL = rsi_indicator._Col + ' in $USD'
         self._Indicator = rsi_indicator
         self.__timeSpan = y_stock_option.TimeSpan
         self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
@@ -38,6 +39,6 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
         plt.title(self.__TITLE)
         plt.xlabel(self.__XLABEL)
         plt.xticks(rotation=self.__XTICKS_ANGLE)
-        plt.ylabel(self._Indicator._Col + ' in $USD')
+        plt.ylabel(self.__YLABEL)
         plt.legend(loc=self.__LEGEND_PLACE)
         return plt
