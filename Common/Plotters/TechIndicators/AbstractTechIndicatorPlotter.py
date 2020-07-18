@@ -11,6 +11,11 @@ class AbstractTechIndicatorPlotter(ABC):
     __PLOT_STYLE: str
     __SOURCE: str
     __TICKER: str
+    __TICKER_LABEL: str
+    __TITLE: str
+    __XLABEL: str
+    __XTICKS_ANGLE: int
+    __YLABEL: str
     _Indicator: AbstractTechIndicator
     __dateTimeIndex: DatetimeIndex
     __Label: str

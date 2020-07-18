@@ -12,10 +12,15 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
         self.__TICKER = y_stock_option.Ticker
+        self.__TITLE = "{0}{1}_{2} {3} History {4} months".format(y_stock_option.Source,
+                                                                  y_stock_option.Ticker,
+                                                                  rsi_indicator._Label,
+                                                                  rsi_indicator._Col,
+                                                                  str(y_stock_option.TimeSpan.MonthCount))
         self.__dateTimeIndex = y_stock_option.HistoricalData.index
         self._Indicator = rsi_indicator
         self.__timeSpan = y_stock_option.TimeSpan
-        self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + self._Indicator._Label
+        self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
@@ -28,8 +33,7 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
         plt.axhline(70, linestyle='--', label='70%', alpha=0.50, color='green')
         plt.axhline(80, linestyle='--', label='80%', alpha=0.50, color='orange')
         plt.axhline(90, linestyle='--', label='90%', alpha=0.50, color='gray')
-        plt.title(
-            self.__Label + ' ' + self._Indicator._Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.title(self.__TITLE)
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.xticks(rotation=45)
         plt.ylabel(self._Indicator._Col + ' in $USD')
