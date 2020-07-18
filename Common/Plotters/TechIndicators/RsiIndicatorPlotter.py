@@ -7,27 +7,26 @@ from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
 
     def __init__(self, y_stock_option: YahooStockOption, rsi_indicator: AbstractTechIndicator):
+        self.__ABSTRACT_INDICATOR = rsi_indicator
+        self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__FIG_SIZE = (y_stock_option.TimeSpan.MonthCount / 2, 4.5)
         self.__LEGEND_PLACE = 'upper left'
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
         self.__TICKER = y_stock_option.Ticker
+        self.__TICKER_LABEL = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
         self.__TITLE = "{0}{1}_{2} {3} History {4} months".format(y_stock_option.Source,
                                                                   y_stock_option.Ticker,
                                                                   rsi_indicator._Label,
                                                                   rsi_indicator._Col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
-        self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self.__XTICKS_ANGLE = 45
         self.__YLABEL = rsi_indicator._Col + ' in $USD'
-        self._Indicator = rsi_indicator
-        self.__timeSpan = y_stock_option.TimeSpan
-        self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
-        plt.plot(self.__DATE_TIME_INDEX, self._Indicator._rsi, label=self.__Label, alpha=0.7)
+        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._rsi, label=self.__TICKER_LABEL, alpha=0.7)
         plt.axhline(10, linestyle='--', label='10%', alpha=0.50, color='gray')
         plt.axhline(20, linestyle='--', label='20%', alpha=0.50, color='orange')
         plt.axhline(30, linestyle='--', label='30%', alpha=0.50, color='green')
