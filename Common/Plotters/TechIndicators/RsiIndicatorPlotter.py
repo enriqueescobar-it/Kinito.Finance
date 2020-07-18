@@ -18,6 +18,7 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
                                                                   rsi_indicator._Col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
+        self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self._Indicator = rsi_indicator
         self.__timeSpan = y_stock_option.TimeSpan
         self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
@@ -34,7 +35,7 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
         plt.axhline(80, linestyle='--', label='80%', alpha=0.50, color='orange')
         plt.axhline(90, linestyle='--', label='90%', alpha=0.50, color='gray')
         plt.title(self.__TITLE)
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.xlabel(self.__XLABEL)
         plt.xticks(rotation=45)
         plt.ylabel(self._Indicator._Col + ' in $USD')
         plt.legend(loc=self.__LEGEND_PLACE)

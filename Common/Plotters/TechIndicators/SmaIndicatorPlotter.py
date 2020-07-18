@@ -18,6 +18,7 @@ class SmaIndicatorPlotter(AbstractTechIndicatorPlotter):
                                                                   ma_indicator._Col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
+        self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self._Indicator = ma_indicator
         self.__timeSpan = y_stock_option.TimeSpan
         self.__Label = y_stock_option.Source + y_stock_option.Ticker + "_" + ma_indicator._Label
@@ -35,7 +36,7 @@ class SmaIndicatorPlotter(AbstractTechIndicatorPlotter):
         plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA100, label=self.__Label + '100', alpha=0.50, color='red')
         plt.plot(self.__DATE_TIME_INDEX, self._Indicator._SMA200, label=self.__Label + '200', alpha=0.50, color='yellow')
         plt.title(self.__TITLE)
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.xlabel(self.__XLABEL)
         plt.xticks(rotation=45)
         plt.ylabel(self._Indicator._Col + ' in $USD')
         plt.legend(loc=self.__LEGEND_PLACE)
