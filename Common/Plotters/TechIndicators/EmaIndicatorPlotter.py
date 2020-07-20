@@ -28,9 +28,9 @@ class EmaIndicatorPlotter(AbstractTechIndicatorPlotter):
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
         plt.plot(self.__DATE_TIME_INDEX, self.__INDICATOR_DATA_FRAME[self.__ABSTRACT_INDICATOR._Col], label=self.__TICKER_LABEL, alpha=0.7)
-        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA05, label=self.__TICKER_LABEL + '05', alpha=0.50, color='lightblue')
-        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA21, label=self.__TICKER_LABEL + '21', alpha=0.50, color='lightgray')
-        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA63, label=self.__TICKER_LABEL + '63', alpha=0.50, color='green')
+        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA05, label=self.__TICKER_LABEL + '05', alpha=0.50, color='cyan')
+        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA21, label=self.__TICKER_LABEL + '21', alpha=0.50, color='orange')
+        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA63, label=self.__TICKER_LABEL + '63', alpha=0.50, color='violet')
         plt.title(self.__TITLE)
         plt.xlabel(self.__XLABEL)
         plt.xticks(rotation=self.__XTICKS_ANGLE)
