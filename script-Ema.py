@@ -1,4 +1,4 @@
-
+from Common.Plotters.Strategies.EmaStrategyPlotter import EmaStrategyPlotter
 from Common.Plotters.TechIndicators.EmaIndicatorPlotter import EmaIndicatorPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
@@ -13,3 +13,6 @@ yahooStockIndicatorPlotter: EmaIndicatorPlotter =\
 yahooStockIndicatorPlotter.show()
 yahooStockStrategy: EmaStrategy =\
     EmaStrategy(yahooStockIndicator, yahooStockOption)
+yahooStockStrategyPlotter: EmaStrategyPlotter =\
+    EmaStrategyPlotter(yahooStockOption, yahooStockStrategy).Plot()
+yahooStockStrategyPlotter.show()
