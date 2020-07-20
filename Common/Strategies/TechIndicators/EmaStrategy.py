@@ -11,6 +11,7 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
     _BuyLabel: str
     _SellLabel: str
     __LowerLabel: str
+    __MediumLabel: str
     __UpperLabel: str
     __ticker: str
 
@@ -20,6 +21,44 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         self._DataFrame = pd.DataFrame()
         self._BuyLabel = 'Buy_' + self._Label
         self._SellLabel = 'Sell_' + self._Label
-        self.__LowerLabel = ema_indicator._Label + '030'
-        self.__UpperLabel = ema_indicator._Label + '100'
+        self.__LowerLabel = ema_indicator._Label + '05'
+        self.__MediumLabel = ema_indicator._Label + '21'
+        self.__UpperLabel = ema_indicator._Label + '63'
         self.__ticker = y_stockOption.Ticker
+        self._DataFrame[y_stockOption.Ticker] = y_stockOption.HistoricalData[self._Col]
+        self._DataFrame[self.__LowerLabel] = ema_indicator._EMA05
+        self._DataFrame[self.__MediumLabel] = ema_indicator._EMA21
+        self._DataFrame[self.__UpperLabel] = ema_indicator._EMA63
+        buyNsellTuple = self.__buyNsell()
+        self._DataFrame[self._BuyLabel] = buyNsellTuple[0]
+        self._DataFrame[self._SellLabel] = buyNsellTuple[1]
+        print(self._DataFrame)
+
+    def __buyNsell(self):
+        buySignal = []
+        sellSignal = []
+        flagLong = False
+        flagShort = False
+
+        for i in range(len(self._DataFrame)):
+            if self._DataFrame[self.__MediumLabel][i] < self._DataFrame[self.__UpperLabel][i] and self._DataFrame[self.__LowerLabel][i] < self._DataFrame[self.__MediumLabel][i] and flagLong == False:
+                buySignal.append(self._DataFrame[self.__ticker][i])
+                sellSignal.append(np.nan)
+                flagShort = True
+            elif flagShort == True and self._DataFrame[self.__LowerLabel][i] > self._DataFrame[self.__MediumLabel][i]:
+                buySignal.append(np.nan)
+                sellSignal.append(self._DataFrame[self.__ticker][i])
+                flagShort = False
+            elif self._DataFrame[self.__MediumLabel][i] > self._DataFrame[self.__UpperLabel][i] and self._DataFrame[self.__LowerLabel][i] > self._DataFrame[self.__MediumLabel][i] and flagLong == False:
+                buySignal.append(self._DataFrame[self.__ticker][i])
+                sellSignal.append(np.nan)
+                flagLong = True
+            elif flagLong == True and self._DataFrame[self.__LowerLabel][i] < self._DataFrame[self.__MediumLabel][i]:
+                buySignal.append(np.nan)
+                sellSignal.append(self._DataFrame[self.__ticker][i])
+                flagLong = False
+            else:
+                buySignal.append(np.nan)
+                sellSignal.append(np.nan)
+
+        return buySignal, sellSignal
