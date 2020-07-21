@@ -26,9 +26,9 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         self.__UpperLabel = ema_indicator._Label + '63'
         self.__ticker = y_stockOption.Ticker
         self._DataFrame[y_stockOption.Ticker] = y_stockOption.HistoricalData[self._Col]
-        self._DataFrame[self.__LowerLabel] = ema_indicator._EMA05
-        self._DataFrame[self.__MediumLabel] = ema_indicator._EMA21
-        self._DataFrame[self.__UpperLabel] = ema_indicator._EMA63
+        self._DataFrame[self.__LowerLabel] = ema_indicator._EMA005
+        self._DataFrame[self.__MediumLabel] = ema_indicator._EMA021
+        self._DataFrame[self.__UpperLabel] = ema_indicator._EMA063
         buyNsellTuple = self.__buyNsell()
         self._DataFrame[self._BuyLabel] = buyNsellTuple[0]
         self._DataFrame[self._SellLabel] = buyNsellTuple[1]
