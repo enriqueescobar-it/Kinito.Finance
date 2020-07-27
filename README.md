@@ -1,6 +1,10 @@
 # Kinito.Finance
 Kinito Finance Repository
 
+## pip install
+
+install -U arrow yfinance matplotlib Flask-Moment Delorean finviz pyarrow timeseries pandas-datareader Moments times moment
+
 ## Web Scrapping
 
 Medium Artcile Link: https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe
