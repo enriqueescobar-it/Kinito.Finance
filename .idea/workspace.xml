@@ -20,11 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/Strategies/EmaStrategyPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/Strategies/EmaStrategyPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/EmaIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/EmaIndicatorPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/EmaIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/EmaIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/Measures" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -69,7 +68,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\Readers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-Ema">
+  <component name="RunManager" selected="Python.script-Historical">
     <configuration name="script-Ema" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -83,6 +82,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Ema.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="script-Historical" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Historical.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -154,29 +174,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script-Sma" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="F:\Disk_X\Kinito.Finance\script-Sma.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.script-Historical" />
         <item itemvalue="Python.script-Ema" />
         <item itemvalue="Python.script-Sma (1)" />
         <item itemvalue="Python.script-Rsi" />
@@ -232,7 +232,7 @@
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161424758" />
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1594507825582" />
-    <state width="1431" height="320" key="GridCell.Tab.0.bottom" timestamp="1595296744801">
+    <state width="715" height="320" key="GridCell.Tab.0.bottom" timestamp="1596073747376">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -240,8 +240,8 @@
     <state width="1431" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1431" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161102" />
-    <state width="1431" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1595296744801" />
-    <state width="1431" height="320" key="GridCell.Tab.0.center" timestamp="1595296744801">
+    <state width="715" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1596073747376" />
+    <state width="715" height="320" key="GridCell.Tab.0.center" timestamp="1596073747376">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -249,8 +249,8 @@
     <state width="1431" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1431" height="320" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="320" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1595296744801" />
-    <state width="1431" height="320" key="GridCell.Tab.0.left" timestamp="1595296744801">
+    <state width="715" height="320" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1596073747376" />
+    <state width="715" height="320" key="GridCell.Tab.0.left" timestamp="1596073747376">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -258,8 +258,8 @@
     <state width="1431" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
     <state width="1431" height="320" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="320" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1595296744801" />
-    <state width="1431" height="320" key="GridCell.Tab.0.right" timestamp="1595296744801">
+    <state width="715" height="320" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1596073747376" />
+    <state width="715" height="320" key="GridCell.Tab.0.right" timestamp="1596073747376">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -267,17 +267,17 @@
     <state width="1431" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
     <state width="1431" height="320" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="320" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1595296744801" />
+    <state width="715" height="320" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1596073747376" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="427" y="127" key="PlantUMLSettings/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591157130386" />
     <state x="2315" y="-315" key="PlantUMLSettings/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591155470391" />
-    <state x="2147" y="-370" key="SettingsEditor" timestamp="1591241215274">
-      <screen x="1920" y="-447" width="1362" height="900" />
+    <state x="246" y="74" key="SettingsEditor" timestamp="1596069187044">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="2147" y="-370" key="SettingsEditor/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591241215274" />
-    <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1590903578083" />
+    <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1596069187044" />
     <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1594092293265">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
