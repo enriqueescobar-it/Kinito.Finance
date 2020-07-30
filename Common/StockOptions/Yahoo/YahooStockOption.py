@@ -78,6 +78,7 @@ class YahooStockOption(AbstractStockOption):
 
     def __GetFv(self):
         self.__fin_viz_engine = FinVizEngine(self.Ticker)
+        print('Range52', self.__fin_viz_engine.Range52)
         self.FvCompanyName = self.__fin_viz_engine.StockName
         self.FvCompanySector = self.__fin_viz_engine.StockSector
         self.FvCompanyIndustry = self.__fin_viz_engine.StockIndustry
