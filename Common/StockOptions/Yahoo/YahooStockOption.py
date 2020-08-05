@@ -31,6 +31,10 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
+    HistoricalDaily: pd.core.series.Series
+    HistoricalDailyCum: pd.core.series.Series
+    HistoricalMonthly: pd.core.series.Series
+    HistoricalMonthlyCum: pd.core.series.Series
     HistoricalStandardized: ndarray
     HistoricalScaled: ndarray
     HistoricalL1Normalized: ndarray
@@ -38,6 +42,7 @@ class YahooStockOption(AbstractStockOption):
     Ticker: str
     TimeSpan: TimeSpan
     Source: str
+    SourceColumn: str
     YeUrl: str = 'NA'
     YeLogoUrl: str = 'NA'
     YeAddress: str = 'NA'
@@ -72,9 +77,14 @@ class YahooStockOption(AbstractStockOption):
 
     def __init__(self, a_ticker: str = 'CNI'):
         self.Source = 'yahoo'
+        self.SourceColumn = 'Adj Close'
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self.__GetData()
+        self.__GetDataDaily()
+        self.__GetDataDailyCum()
+        self.__GetDataMonthly()
+        self.__GetDataMonthlyCum()
         self.__GetDataPreProcMeanRemove()
         self.__GetDataPreProcScale()
         self.__GetDataPreProcNormL1()
@@ -85,6 +95,20 @@ class YahooStockOption(AbstractStockOption):
 
     def __GetData(self):
         self.HistoricalData = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
+        self.HistoricalData.fillna(method='ffill', inplace=True)
+        self.HistoricalData.fillna(method='bfill', inplace=True)
+
+    def __GetDataDaily(self):
+        self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change()
+
+    def __GetDataDailyCum(self):
+        self.HistoricalDailyCum = (self.HistoricalDaily + 1).cumprod()
+
+    def __GetDataMonthly(self):
+        self.HistoricalMonthly = self.HistoricalData[self.SourceColumn].resample('M').ffill().pct_change()
+
+    def __GetDataMonthlyCum(self):
+        self.HistoricalMonthlyCum = (self.HistoricalMonthly + 1).cumprod()
 
     def __GetDataPreProcMeanRemove(self):
         self.HistoricalStandardized = preprocessing.scale(self.HistoricalData)

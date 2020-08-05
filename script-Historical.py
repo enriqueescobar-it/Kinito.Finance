@@ -7,6 +7,12 @@ yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
 yahooStockOptionPlotter.Distro().show()
+yahooStockOptionPlotter.Daily().show()
+yahooStockOptionPlotter.DailyHist().show()
+yahooStockOptionPlotter.DailyCum().show()
+yahooStockOptionPlotter.Monthly().show()
+yahooStockOptionPlotter.MonthlyHist().show()
+yahooStockOptionPlotter.MonthlyCum().show()
 # preprocessing
 ## Mean removal
 print('MEAN=', yahooStockOption.HistoricalStandardized.mean(axis=0))

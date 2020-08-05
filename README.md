@@ -3,7 +3,7 @@ Kinito Finance Repository
 
 ## pip install
 
-install -U arrow yfinance matplotlib Flask-Moment Delorean finviz pyarrow timeseries pandas-datareader Moments times moment sklearn seaborn flask freezegun bs4
+install -U arrow yfinance matplotlib Flask-Moment Delorean finviz pyarrow timeseries pandas-datareader Moments times moment sklearn seaborn flask freezegun bs4 bokeh
 
 ## Web Scrapping
 
