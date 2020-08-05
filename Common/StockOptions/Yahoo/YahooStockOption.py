@@ -1,11 +1,13 @@
 from typing import List
+import pandas as pd
+from numpy.core._multiarray_umath import ndarray
+from sklearn import preprocessing
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
-import pandas as pd
 
 
 class YahooStockOption(AbstractStockOption):
@@ -29,6 +31,10 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
+    HistoricalStandardized: ndarray
+    HistoricalScaled: ndarray
+    HistoricalL1Normalized: ndarray
+    HistoricalBinary: ndarray
     Ticker: str
     TimeSpan: TimeSpan
     Source: str
@@ -69,12 +75,28 @@ class YahooStockOption(AbstractStockOption):
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self.__GetData()
+        self.__GetDataPreProcMeanRemove()
+        self.__GetDataPreProcScale()
+        self.__GetDataPreProcNormL1()
+        self.__GetDataPreProcBinary()
         self.__GetFv()
         self.__GetYe()
         self.__GetYss()
 
     def __GetData(self):
         self.HistoricalData = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
+
+    def __GetDataPreProcMeanRemove(self):
+        self.HistoricalStandardized = preprocessing.scale(self.HistoricalData)
+
+    def __GetDataPreProcScale(self):
+        self.HistoricalScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self.HistoricalData)
+
+    def __GetDataPreProcNormL1(self):
+        self.HistoricalL1Normalized = preprocessing.normalize(self.HistoricalData, norm='l1')
+
+    def __GetDataPreProcBinary(self):
+        self.HistoricalBinary = preprocessing.Binarizer(threshold=1.4).transform(self.HistoricalData)
 
     def __GetFv(self):
         self.__fin_viz_engine = FinVizEngine(self.Ticker)

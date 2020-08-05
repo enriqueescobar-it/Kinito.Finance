@@ -20,8 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Kinito.Finance.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +59,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/Measures" />
+    <property name="last_opened_file_path" value="C:/tools/Anaconda3/Scripts/conda.exe" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -67,6 +72,27 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.script-Historical">
+    <configuration name="HistoricalPlotter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/Plotters" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="script-Ema" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,27 +127,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Historical.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="script-Macd (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Macd.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -175,13 +180,14 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.script-Historical" />
+        <item itemvalue="Python.HistoricalPlotter" />
         <item itemvalue="Python.script-Ema" />
         <item itemvalue="Python.script-Sma (1)" />
         <item itemvalue="Python.script-Rsi" />
-        <item itemvalue="Python.script-Macd (1)" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -209,12 +215,13 @@
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="330" y="0" width="814" height="864" key="#Intentions/0.0.1474.864@0.0.1474.864" timestamp="1590989818026" />
-    <state x="623" y="0" width="230" height="595" key="#Notifications" timestamp="1596426498750">
-      <screen x="0" y="0" width="1474" height="864" />
+    <state x="2313" y="-474" width="548" height="571" key="#Notifications" timestamp="1596587222083">
+      <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state x="623" y="0" key="#Notifications/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1593441389095" />
     <state x="2496" y="-447" width="230" height="595" key="#Notifications/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153918940" />
-    <state x="623" y="0" width="228" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1596426498750" />
+    <state x="2313" y="-474" key="#Notifications/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596587222083" />
+    <state x="358" y="0" width="548" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1596505853288" />
     <state x="2311" y="-402" key="#YahooStockOption" timestamp="1591243378012">
       <screen x="1920" y="-447" width="1362" height="900" />
     </state>
@@ -224,58 +231,69 @@
     </state>
     <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591673351677" />
     <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1474.864@0.0.1474.864" timestamp="1594700631358" />
-    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1594507825582">
-      <screen x="0" y="0" width="1474" height="864" />
+    <state x="2467" y="-267" key="FileChooserDialogImpl" timestamp="1596585688926">
+      <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161424758" />
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
+    <state x="2467" y="-267" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596585688926" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1594507825582" />
-    <state width="715" height="320" key="GridCell.Tab.0.bottom" timestamp="1596429311600">
-      <screen x="0" y="0" width="1474" height="864" />
+    <state width="786" height="401" key="GridCell.Tab.0.bottom" timestamp="1596591336252">
+      <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
     <state width="1319" height="243" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
+    <state width="1431" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1596576738833" />
+    <state width="786" height="401" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596591336252" />
     <state width="1431" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161102" />
-    <state width="715" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1596429311600" />
-    <state width="715" height="320" key="GridCell.Tab.0.center" timestamp="1596429311600">
-      <screen x="0" y="0" width="1474" height="864" />
+    <state width="1431" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1596516398846" />
+    <state width="786" height="401" key="GridCell.Tab.0.center" timestamp="1596591336252">
+      <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
     <state width="1319" height="243" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
+    <state width="1431" height="320" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1596576738833" />
+    <state width="786" height="401" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596591336252" />
     <state width="1431" height="320" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="715" height="320" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1596429311600" />
-    <state width="715" height="320" key="GridCell.Tab.0.left" timestamp="1596429311600">
-      <screen x="0" y="0" width="1474" height="864" />
+    <state width="1431" height="320" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1596516398846" />
+    <state width="786" height="401" key="GridCell.Tab.0.left" timestamp="1596591336252">
+      <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
     <state width="1319" height="243" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
+    <state width="1431" height="320" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1596576738832" />
+    <state width="786" height="401" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596591336252" />
     <state width="1431" height="320" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="715" height="320" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1596429311600" />
-    <state width="715" height="320" key="GridCell.Tab.0.right" timestamp="1596429311600">
-      <screen x="0" y="0" width="1474" height="864" />
+    <state width="1431" height="320" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1596516398846" />
+    <state width="786" height="401" key="GridCell.Tab.0.right" timestamp="1596591336252">
+      <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
     <state width="1319" height="243" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
+    <state width="1431" height="320" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1596576738833" />
+    <state width="786" height="401" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596591336252" />
     <state width="1431" height="320" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="715" height="320" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1596429311600" />
+    <state width="1431" height="320" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1596516398846" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="427" y="127" key="PlantUMLSettings/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591157130386" />
     <state x="2315" y="-315" key="PlantUMLSettings/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591155470391" />
-    <state x="246" y="74" key="SettingsEditor" timestamp="1596069187044">
-      <screen x="0" y="0" width="1474" height="864" />
+    <state x="2190" y="-384" key="SettingsEditor" timestamp="1596588363236">
+      <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state x="2147" y="-370" key="SettingsEditor/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591241215274" />
-    <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1596069187044" />
+    <state x="246" y="74" key="SettingsEditor/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1596584753170" />
+    <state x="2190" y="-384" key="SettingsEditor/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596588363236" />
+    <state x="246" y="74" key="SettingsEditor/0.0.1474.864@0.0.1474.864" timestamp="1596505963918" />
     <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1594092293265">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
