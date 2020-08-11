@@ -57,7 +57,7 @@ class YahooFinanceEngine(AbstractEngine):
         self.__ticker = a_ticker
         self.__yFinance = yf.Ticker(a_ticker)
         self.InfoDic = self.__yFinance.info
-        print(self.InfoDic)
+        print('InfoDic\r\n', self.InfoDic)
         self.__setInfo()
         self.ActionsDf = self.__yFinance.actions
         self.Balance_SheetDf = self.__yFinance.balance_sheet
@@ -78,29 +78,35 @@ class YahooFinanceEngine(AbstractEngine):
         self.SustainabilityDf = self.__yFinance.sustainability
 
     def __setInfo(self):
-        self.Url = self.InfoDic['website']
+        self.Url = self.__getValue('website')
         self.LogoUrl = self.InfoDic['logo_url']
-        self.Address = self.InfoDic['address1']
-        self.City = self.InfoDic['city']
-        self.PostalCode = self.InfoDic['zip']
-        self.State = self.InfoDic['state']
-        self.Country = self.InfoDic['country']
+        self.Address = self.__getValue('address1')
+        self.City = self.__getValue('city')
+        self.PostalCode = self.__getValue('zip')
+        self.State = self.__getValue('state')
+        self.Country = self.__getValue('country')
         self.Beta = float(str(self.InfoDic['beta']))
-        self.Market = self.InfoDic['market']
-        self.Currency = self.InfoDic['currency']
-        self.QuoteType = self.InfoDic['quoteType']
-        self.Exchange = self.InfoDic['exchange']
-        self.Low52 = self.InfoDic['fiftyTwoWeekLow']
-        self.High52 = self.InfoDic['fiftyTwoWeekHigh']
-        self.Average50 = self.InfoDic['fiftyDayAverage']
-        self.Average200 = self.InfoDic['twoHundredDayAverage']
-        self.MarketCap = self.InfoDic['marketCap']
-        self.PayoutRatio = self.InfoDic['payoutRatio']
-        self.PegRatio = self.InfoDic['pegRatio']
-        self.PEforward = self.InfoDic['forwardPE']
-        self.PEtrailing = self.InfoDic['trailingPE']
-        self.ShortRatio = self.InfoDic['shortRatio']
-        self.BookValue = self.InfoDic['bookValue']
-        self.PriceToBook = self.InfoDic['priceToBook']
+        self.Market = self.__getValue('market')
+        self.Currency = self.__getValue('currency')
+        self.QuoteType = self.__getValue('quoteType')
+        self.Exchange = self.__getValue('exchange')
+        self.Low52 = self.__getValue('fiftyTwoWeekLow')
+        self.High52 = self.__getValue('fiftyTwoWeekHigh')
+        self.Average50 = self.__getValue('fiftyDayAverage')
+        self.Average200 = self.__getValue('twoHundredDayAverage')
+        self.MarketCap = self.__getValue('marketCap')
+        self.PayoutRatio = self.__getValue('payoutRatio')
+        self.PegRatio = self.__getValue('pegRatio')
+        self.PEforward = self.__getValue('forwardPE')
+        self.PEtrailing = self.__getValue('trailingPE')
+        self.ShortRatio = self.__getValue('shortRatio')
+        self.BookValue = self.__getValue('bookValue')
+        self.PriceToBook = self.__getValue('priceToBook')
         if type(self.InfoDic['exDividendDate']) == type(1.1):
             self.ExDividendDate = datetime.datetime.fromtimestamp(self.InfoDic['exDividendDate'] / 1e3)
+
+    def __getValue(self, a_key: str = 'NA'):
+        if a_key in self.InfoDic:
+            return self.InfoDic[a_key]
+        else:
+            return 'NA'
