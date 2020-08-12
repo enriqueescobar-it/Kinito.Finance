@@ -20,9 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/StockMarketIndex/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinanceEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinanceEngine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/Dax.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Dax.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/DowJones.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/DowJones.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/Ftse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Ftse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/Nasdaq.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nasdaq.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/Nikkei.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nikkei.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/Nyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nyse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/SnP.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnP.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/Tse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Tse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/MarketIndices/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/AbstractStockMarketIndex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +65,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -68,11 +78,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Disk_X\Kinito.Finance\Common\StockMarketIndex\Yahoo" />
       <recent name="F:\Disk_X\Kinito.Finance\Common\Measures" />
       <recent name="F:\Disk_X\Kinito.Finance\Common\Plotters\TechIndicators" />
       <recent name="F:\Disk_X\Kinito.Finance\Common" />
       <recent name="F:\Disk_X\Kinito.Finance\Common\Readers\Engine" />
-      <recent name="F:\Disk_X\Kinito.Finance\Common\Readers" />
     </key>
   </component>
   <component name="RunManager" selected="Python.script-Historical">
@@ -235,14 +245,14 @@
     </state>
     <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591673351677" />
     <state x="255" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1474.864@0.0.1474.864" timestamp="1594700631358" />
-    <state x="2467" y="-267" key="FileChooserDialogImpl" timestamp="1596597850808">
-      <screen x="1920" y="-474" width="1618" height="1050" />
+    <state x="518" y="174" key="FileChooserDialogImpl" timestamp="1597203479329">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591161424758" />
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="2467" y="-267" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596597850808" />
-    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1594507825582" />
-    <state width="1431" height="214" key="GridCell.Tab.0.bottom" timestamp="1597173213283">
+    <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1597203479329" />
+    <state width="1431" height="214" key="GridCell.Tab.0.bottom" timestamp="1597203711548">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -253,8 +263,8 @@
     <state width="1575" height="272" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="1431" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161102" />
-    <state width="1431" height="214" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1597173213283" />
-    <state width="1431" height="214" key="GridCell.Tab.0.center" timestamp="1597173213283">
+    <state width="1431" height="214" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1597203711548" />
+    <state width="1431" height="214" key="GridCell.Tab.0.center" timestamp="1597203711548">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -265,8 +275,8 @@
     <state width="1575" height="272" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="1431" height="320" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="214" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1597173213283" />
-    <state width="1431" height="214" key="GridCell.Tab.0.left" timestamp="1597173213282">
+    <state width="1431" height="214" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1597203711548" />
+    <state width="1431" height="214" key="GridCell.Tab.0.left" timestamp="1597203711548">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -277,8 +287,8 @@
     <state width="1575" height="272" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266292" />
     <state width="1431" height="320" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="214" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1597173213282" />
-    <state width="1431" height="214" key="GridCell.Tab.0.right" timestamp="1597173213283">
+    <state width="1431" height="214" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1597203711548" />
+    <state width="1431" height="214" key="GridCell.Tab.0.right" timestamp="1597203711548">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -289,7 +299,7 @@
     <state width="1575" height="272" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="1431" height="320" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="214" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1597173213283" />
+    <state width="1431" height="214" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1597203711548" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>

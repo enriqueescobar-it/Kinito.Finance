@@ -16,12 +16,14 @@ class HistoricalPlotter(AbstractPlotter):
     __mean: ndarray
     __median: ndarray
     __std: ndarray
+    __price: float
     __yeAverage200: float
     __yeAverage50: float
     __yeHigh52: float
     __yeLow52: float
 
     def __init__(self, y_stockOption: YahooStockOption):
+        self.__price = np.round(y_stockOption.FvPrice, 2)
         self.__yeHigh52 = np.round(y_stockOption.YeHigh52, 2)
         self.__yeLow52 = np.round(y_stockOption.YeLow52, 2)
         self.__yeAverage50 = np.round(y_stockOption.YeAverage50, 2)
@@ -63,14 +65,12 @@ class HistoricalPlotter(AbstractPlotter):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
         # Plot the grid lines
         plt.plot(self.__dataFrame[self.__Col], label=self.__Col)
-        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), alpha=0.50, color='blue')
+        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue', alpha=0.50)
         plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Mean=' + str(self.__mean), color='orange')
-        plt.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), alpha=0.50, color='red')
-        plt.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), alpha=0.50, color='green')
-        plt.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200), alpha=0.50,
-                    color='yellow')
-        plt.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), alpha=0.50,
-                    color='orange')
+        plt.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
+        plt.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), color='green', alpha=0.50)
+        plt.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200), color='yellow', alpha=0.50)
+        plt.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
         plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
         plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
@@ -82,10 +82,10 @@ class HistoricalPlotter(AbstractPlotter):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
         plt.tight_layout()
         sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
-        plt.axhline(self.__median, alpha=0.50, color='blue', linestyle='--', label=self.__Col + '_Mean=' + str(self.__median))
-        plt.axhline(self.__mean, color='orange', linestyle='--', label=self.__Col + '_Median=' + str(self.__mean))
-        plt.axhline((self.__mean + self.__std), alpha=0.50, color='grey', linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std))
-        plt.axhline((self.__mean - self.__std), alpha=0.50, color='grey', linestyle='--', label=self.__Col + '_-Std=' + str(self.__mean - self.__std))
+        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue', alpha=0.50)
+        plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Median=' + str(self.__mean), color='orange')
+        plt.axhline((self.__mean + self.__std), linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
+        plt.axhline((self.__mean - self.__std), linestyle='--', label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
         plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' in $USD')
