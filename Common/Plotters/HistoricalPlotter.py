@@ -65,6 +65,7 @@ class HistoricalPlotter(AbstractPlotter):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
         # Plot the grid lines
         plt.plot(self.__dataFrame[self.__Col], label=self.__Col)
+        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
         plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue', alpha=0.50)
         plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Mean=' + str(self.__mean), color='orange')
         plt.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
@@ -82,6 +83,7 @@ class HistoricalPlotter(AbstractPlotter):
         plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
         plt.tight_layout()
         sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
+        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
         plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue', alpha=0.50)
         plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Median=' + str(self.__mean), color='orange')
         plt.axhline((self.__mean + self.__std), linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
