@@ -4,4 +4,4 @@ from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarket
 class SnPTSXCompositeIndex(AbstractStockMarketIndex):
 
     def __init__(self):
-        self.Ticker = '^GSPTSE'
+        self.__ticker = '^GSPTSE'
