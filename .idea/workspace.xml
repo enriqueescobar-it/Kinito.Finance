@@ -22,14 +22,8 @@
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/AbstractStockMarketIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/AbstractStockMarketIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Dax.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Dax.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/DowJones.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/DowJones.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Ftse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Ftse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nasdaq.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nasdaq.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nikkei.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nikkei.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nyse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnP.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnP.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnPTSXCompositeIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnPTSXComposite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnPTSXComposite.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnPTSXComposite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,10 +185,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.script-Historical" />
-        <item itemvalue="Python.HistoricalPlotter" />
-        <item itemvalue="Python.script-Ema" />
         <item itemvalue="Python.script-Sma (1)" />
         <item itemvalue="Python.script-Rsi" />
+        <item itemvalue="Python.script-Ema" />
+        <item itemvalue="Python.HistoricalPlotter" />
       </list>
     </recent_temporary>
   </component>
@@ -218,21 +212,21 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="330" y="90" key="#Inspections" timestamp="1590986004526">
+    <state x="330" y="90" key="#Inspections" timestamp="1597291640725">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="330" y="90" key="#Inspections/0.0.1474.864@0.0.1474.864" timestamp="1590986004526" />
+    <state x="330" y="90" key="#Inspections/0.0.1474.864@0.0.1474.864" timestamp="1597291640725" />
     <state x="330" y="0" width="814" height="864" key="#Intentions" timestamp="1590989818026">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="330" y="0" width="814" height="864" key="#Intentions/0.0.1474.864@0.0.1474.864" timestamp="1590989818026" />
-    <state x="2313" y="-474" width="548" height="571" key="#Notifications" timestamp="1596596200796">
-      <screen x="1920" y="-474" width="1618" height="1050" />
+    <state x="358" y="0" width="548" height="571" key="#Notifications" timestamp="1597296880778">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state x="623" y="0" key="#Notifications/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1593441389095" />
     <state x="2496" y="-447" width="230" height="595" key="#Notifications/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153918940" />
     <state x="2313" y="-474" key="#Notifications/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596596200796" />
-    <state x="358" y="0" width="548" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1596505853288" />
+    <state x="358" y="0" width="548" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1597296880778" />
     <state x="2311" y="-402" key="#YahooStockOption" timestamp="1591243378012">
       <screen x="1920" y="-447" width="1362" height="900" />
     </state>
@@ -249,7 +243,7 @@
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="2467" y="-267" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596597850808" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1597203479329" />
-    <state width="1431" height="214" key="GridCell.Tab.0.bottom" timestamp="1597205602139">
+    <state width="714" height="214" key="GridCell.Tab.0.bottom" timestamp="1597300067973">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -260,8 +254,8 @@
     <state width="1575" height="272" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="1431" height="320" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161102" />
-    <state width="1431" height="214" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1597205602139" />
-    <state width="1431" height="214" key="GridCell.Tab.0.center" timestamp="1597205602138">
+    <state width="714" height="214" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1597300067973" />
+    <state width="714" height="214" key="GridCell.Tab.0.center" timestamp="1597300067973">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -272,8 +266,8 @@
     <state width="1575" height="272" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="1431" height="320" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="214" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1597205602138" />
-    <state width="1431" height="214" key="GridCell.Tab.0.left" timestamp="1597205602138">
+    <state width="714" height="214" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1597300067973" />
+    <state width="714" height="214" key="GridCell.Tab.0.left" timestamp="1597300067973">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
@@ -284,8 +278,8 @@
     <state width="1575" height="272" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266292" />
     <state width="1431" height="320" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="214" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1597205602138" />
-    <state width="1431" height="214" key="GridCell.Tab.0.right" timestamp="1597205602138">
+    <state width="714" height="214" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1597300067973" />
+    <state width="714" height="214" key="GridCell.Tab.0.right" timestamp="1597300067973">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
@@ -296,7 +290,7 @@
     <state width="1575" height="272" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596608214927" />
     <state width="1815" height="281" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="1431" height="320" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1594187161101" />
-    <state width="1431" height="214" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1597205602138" />
+    <state width="714" height="214" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1597300067973" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -314,10 +308,10 @@
       <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state x="2459" y="-245" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596597367311" />
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1594092293265">
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1597296208886">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1594092293265" />
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1597296208886" />
     <state x="394" y="197" key="run.anything.popup" timestamp="1591844504769">
       <screen x="0" y="0" width="1474" height="864" />
     </state>

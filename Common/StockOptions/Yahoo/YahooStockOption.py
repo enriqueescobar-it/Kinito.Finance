@@ -6,6 +6,8 @@ from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
+from Common.StockMarketIndex import AbstractStockMarketIndex
+from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
 
@@ -39,6 +41,7 @@ class YahooStockOption(AbstractStockOption):
     HistoricalScaled: ndarray
     HistoricalL1Normalized: ndarray
     HistoricalBinary: ndarray
+    HistoricalMarketIndex: AbstractStockMarketIndex
     Ticker: str
     TimeSpan: TimeSpan
     Source: str
@@ -89,6 +92,7 @@ class YahooStockOption(AbstractStockOption):
         self.__GetDataPreProcScale()
         self.__GetDataPreProcNormL1()
         self.__GetDataPreProcBinary()
+        self.__GetDataIndex()
         self.__GetFv()
         self.__GetYe()
         self.__GetYss()
@@ -122,9 +126,11 @@ class YahooStockOption(AbstractStockOption):
     def __GetDataPreProcBinary(self):
         self.HistoricalBinary = preprocessing.Binarizer(threshold=1.4).transform(self.HistoricalData)
 
+    def __GetDataIndex(self):
+        self.HistoricalMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", self.TimeSpan)
+
     def __GetFv(self):
         self.__fin_viz_engine = FinVizEngine(self.Ticker)
-        print('Range52', self.__fin_viz_engine.Range52)
         self.FvCompanyName = self.__fin_viz_engine.StockName
         self.FvCompanySector = self.__fin_viz_engine.StockSector
         self.FvCompanyIndustry = self.__fin_viz_engine.StockIndustry
