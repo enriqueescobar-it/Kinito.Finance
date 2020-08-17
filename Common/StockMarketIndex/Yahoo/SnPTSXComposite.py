@@ -16,4 +16,3 @@ class SnPTSXComposite(AbstractStockMarketIndex):
         self.HistoricalData.fillna(method='bfill', inplace=True)
         self.HistoricalData = self.HistoricalData[self.__column].to_frame()
         self.HistoricalData.columns = [x.replace(self.__column, self.__ticker + self.__column) for x in self.HistoricalData.columns]
-        print(self.HistoricalData.head())

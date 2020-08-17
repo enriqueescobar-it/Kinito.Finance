@@ -2,12 +2,13 @@ from typing import List
 import pandas as pd
 from numpy.core._multiarray_umath import ndarray
 from sklearn import preprocessing
+
 from Common.Measures.Time.TimeSpan import TimeSpan
+from pyarrow.lib import null
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockMarketIndex import AbstractStockMarketIndex
-from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
 
@@ -92,7 +93,6 @@ class YahooStockOption(AbstractStockOption):
         self.__GetDataPreProcScale()
         self.__GetDataPreProcNormL1()
         self.__GetDataPreProcBinary()
-        self.__GetDataIndex()
         self.__GetFv()
         self.__GetYe()
         self.__GetYss()
@@ -126,9 +126,6 @@ class YahooStockOption(AbstractStockOption):
 
     def __GetDataPreProcBinary(self):
         self.HistoricalBinary = preprocessing.Binarizer(threshold=1.4).transform(self.HistoricalData)
-
-    def __GetDataIndex(self):
-        self.HistoricalMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", self.TimeSpan)
 
     def __GetFv(self):
         self.__fin_viz_engine = FinVizEngine(self.Ticker)
