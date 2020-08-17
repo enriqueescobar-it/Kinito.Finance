@@ -101,6 +101,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalData = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
         self.HistoricalData.fillna(method='ffill', inplace=True)
         self.HistoricalData.fillna(method='bfill', inplace=True)
+        #self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
 
     def __GetDataDaily(self):
         self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change()

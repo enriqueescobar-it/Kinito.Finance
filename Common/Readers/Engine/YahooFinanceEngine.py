@@ -79,13 +79,13 @@ class YahooFinanceEngine(AbstractEngine):
 
     def __setInfo(self):
         self.Url = self.__getValue('website')
-        self.LogoUrl = self.InfoDic['logo_url']
+        self.LogoUrl = self.__getValue('logo_url')
         self.Address = self.__getValue('address1')
         self.City = self.__getValue('city')
         self.PostalCode = self.__getValue('zip')
         self.State = self.__getValue('state')
         self.Country = self.__getValue('country')
-        self.Beta = float(str(self.InfoDic['beta']))
+        self.Beta = self.__getFloat('beta')
         self.Market = self.__getValue('market')
         self.Currency = self.__getValue('currency')
         self.QuoteType = self.__getValue('quoteType')
@@ -107,6 +107,13 @@ class YahooFinanceEngine(AbstractEngine):
 
     def __getValue(self, a_key: str = 'NA'):
         if a_key in self.InfoDic:
-            return self.InfoDic[a_key]
+            return 'None' if self.InfoDic[a_key] is None else self.InfoDic[a_key]
         else:
             return 'NA'
+
+    def __getFloat(self, a_key: str = 'NA'):
+        a_str = self.__getValue(a_key)
+        if a_str == 'NA' or a_str == '-' or a_str == 'None':
+            return -1.0
+        else:
+            return float(a_str)

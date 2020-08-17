@@ -6,10 +6,14 @@ from pyarrow.lib import null
 
 class SnPTSXComposite(AbstractStockMarketIndex):
 
-    def __init__(self, source: str = 'yahoo', ticker: str = '^GSPTSE', tm_spn: TimeSpan = null):
+    def __init__(self, source: str = 'yahoo', ticker: str = "^GSPTSE", tm_spn: TimeSpan = null):
+        self.__column = 'Adj Close'
         self.__source = source
-        self.__ticker = ticker
+        self.__ticker = "^GSPTSE" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn
-        self._historical_data = PandaEngine(source, tm_spn, ticker).DataFrame
-        self._historical_data.fillna(method='ffill', inplace=True)
-        self._historical_data.fillna(method='bfill', inplace=True)
+        self.HistoricalData = PandaEngine(source, tm_spn, ticker).DataFrame
+        self.HistoricalData.fillna(method='ffill', inplace=True)
+        self.HistoricalData.fillna(method='bfill', inplace=True)
+        self.HistoricalData = self.HistoricalData[self.__column].to_frame()
+        self.HistoricalData.columns = [x.replace(self.__column, self.__ticker + self.__column) for x in self.HistoricalData.columns]
+        print(self.HistoricalData.head())
