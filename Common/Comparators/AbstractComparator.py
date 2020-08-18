@@ -1,5 +1,5 @@
 from abc import ABC
 
 
-class AbstractComparer(ABC):
+class AbstractComparator(ABC):
     pass

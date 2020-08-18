@@ -1,3 +1,4 @@
+from Common.Comparators.Index.IndexComparator import IndexComparator
 from Common.Plotters.HistoricalPlotter import HistoricalPlotter
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
 from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
@@ -6,9 +7,12 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 yahooStockOption: YahooStockOption = YahooStockOption('SUN')
 print(yahooStockOption.HistoricalData.describe(include='all'))
-print(yahooStockOption.TimeSpan)
 marketIndex: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 print(marketIndex.HistoricalData.head())
+marketIndices = list()
+marketIndices.append(marketIndex)
+indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
+exit(666)
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()

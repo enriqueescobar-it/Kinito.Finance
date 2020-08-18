@@ -1,9 +1,9 @@
-from Common.Comparators.Index.AbstractIndexComparer import AbstractIndexComparator
+from Common.Comparators.Index.AbstractIndexComparator import AbstractIndexComparator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
-class IndexComparer(AbstractIndexComparator):
+class IndexComparator(AbstractIndexComparator):
     __stockOption: YahooStockOption
 
-    def __init__(self, stock_option: YahooStockOption, indices):
+    def __init__(self, stock_option: YahooStockOption, indices: list()):
         self.__stockOption = stock_option
