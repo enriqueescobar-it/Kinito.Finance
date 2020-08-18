@@ -4,7 +4,7 @@ from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarket
 from pyarrow.lib import null
 
 
-class SnP500(AbstractStockMarketIndex):
+class SnP500Index(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^GSPC", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
