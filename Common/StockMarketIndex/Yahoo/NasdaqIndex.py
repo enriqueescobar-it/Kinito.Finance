@@ -8,6 +8,7 @@ class NasdaqIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^IXIC", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
+        self.__name = 'Nasdaq'
         self.__source = source
         self.__ticker = "^IXIC" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn
@@ -15,4 +16,4 @@ class NasdaqIndex(AbstractStockMarketIndex):
         self.HistoricalData.fillna(method='ffill', inplace=True)
         self.HistoricalData.fillna(method='bfill', inplace=True)
         self.HistoricalData = self.HistoricalData[self.__column].to_frame()
-        self.HistoricalData.columns = [x.replace(self.__column, self.__ticker + self.__column) for x in self.HistoricalData.columns]
+        self.HistoricalData.columns = [x.replace(self.__column, self.__name + self.__column) for x in self.HistoricalData.columns]
