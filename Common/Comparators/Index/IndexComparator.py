@@ -8,17 +8,12 @@ import math
 
 
 class IndexComparator(AbstractIndexComparator):
-    __stockOption: YahooStockOption
-    __indexList: list
-    DataComparator: pd.DataFrame
-    DataNorma: pd.DataFrame
-    DataScaled: pd.DataFrame
 
     def __init__(self, stock_option: YahooStockOption, indices: list()):
         self.__stockOption = stock_option
         self.__indexList = indices
-        self.DataComparator = stock_option.HistoricalData[stock_option.SourceColumn].to_frame()
-        self.DataComparator.columns = stock_option.Ticker + self.DataComparator.columns
+        self.DataComparator = self.__initComparator
+        #df: pd.DataFrame = self.__initIndices(indices)
         df: pd.DataFrame = indices[0].HistoricalData
         for a_index in indices[1:]:
             df = df.merge(a_index.HistoricalData, left_index=True, right_index=True)
@@ -55,3 +50,14 @@ class IndexComparator(AbstractIndexComparator):
         s_h_m = sns.heatmap(self.DataSimpleReturnsCorr, cmap="RdYlGn", annot= True, fmt= '.2%') #YlOrRd
         s_h_m.set_xticklabels(s_h_m.get_xticklabels(), rotation=45, horizontalalignment='right')
         plt.show()
+
+    def __initComparator(self):
+        df: pd.DataFrame = self.__stockOption.HistoricalData[self.__stockOption.SourceColumn].to_frame()
+        df.columns = self.__stockOption.Ticker + df.columns
+        return df
+
+    def __initIndices(self, indices):
+        df: pd.DataFrame = indices[0].HistoricalData
+        for a_index in indices[1:]:
+            df = df.merge(a_index.HistoricalData, left_index=True, right_index=True)
+        return df
