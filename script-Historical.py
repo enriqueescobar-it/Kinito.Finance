@@ -1,15 +1,17 @@
 from Common.Comparators.Index.IndexComparator import IndexComparator
 from Common.Plotters.HistoricalPlotter import HistoricalPlotter
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
+from Common.StockMarketIndex.Yahoo.CrudeOilIndex import CrudeOilIndex
 from Common.StockMarketIndex.Yahoo.DaxIndex import DaxIndex
+from Common.StockMarketIndex.Yahoo.DowJonesIndex import DowJonesIndex
+from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
 from Common.StockMarketIndex.Yahoo.IbovespaIndex import IbovespaIndex
 from Common.StockMarketIndex.Yahoo.IpcMexicoIndex import IpcMexicoIndex
+from Common.StockMarketIndex.Yahoo.NasdaqIndex import NasdaqIndex
 from Common.StockMarketIndex.Yahoo.Nikkei225Index import Nikkei225Index
 from Common.StockMarketIndex.Yahoo.NyseComposite import NyseIndex
 from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
-from Common.StockMarketIndex.Yahoo.NasdaqIndex import NasdaqIndex
-from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
@@ -19,7 +21,9 @@ sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooSt
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
 nyseIndex: AbstractStockMarketIndex = NyseIndex('yahoo', "^NYA", yahooStockOption.TimeSpan)
+dowJonesIndex: AbstractStockMarketIndex = DowJonesIndex('yahoo', "^DJI", yahooStockOption.TimeSpan)
 goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOption.TimeSpan)
+crudeOilIndex: AbstractStockMarketIndex = CrudeOilIndex('yahoo', "CL=F", yahooStockOption.TimeSpan)
 daxIndex: AbstractStockMarketIndex = DaxIndex('yahoo', "^GDAXI", yahooStockOption.TimeSpan)
 nikkei225Index: AbstractStockMarketIndex = Nikkei225Index('yahoo', "^N225", yahooStockOption.TimeSpan)
 ibovespaIndex: AbstractStockMarketIndex = IbovespaIndex('yahoo', "^BVSP", yahooStockOption.TimeSpan)
@@ -28,8 +32,10 @@ marketIndices = list()
 marketIndices.append(sAndPTsx)
 marketIndices.append(sAnP500)
 marketIndices.append(nasdaqIndex)
-marketIndices.append(goldIndex)
 marketIndices.append(nyseIndex)
+marketIndices.append(dowJonesIndex)
+marketIndices.append(goldIndex)
+marketIndices.append(crudeOilIndex)
 marketIndices.append(daxIndex)
 marketIndices.append(nikkei225Index)
 marketIndices.append(ibovespaIndex)
