@@ -1,8 +1,13 @@
 from Common.Comparators.Index.IndexComparator import IndexComparator
 from Common.Plotters.HistoricalPlotter import HistoricalPlotter
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
+from Common.StockMarketIndex.Yahoo.IbovespaIndex import IbovespaIndex
+from Common.StockMarketIndex.Yahoo.IpcMexicoIndex import IpcMexicoIndex
+from Common.StockMarketIndex.Yahoo.Nikkei225Index import Nikkei225Index
 from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
+from Common.StockMarketIndex.Yahoo.NasdaqIndex import NasdaqIndex
+from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
@@ -10,10 +15,19 @@ yahooStockOption: YahooStockOption = YahooStockOption('SUN')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
-print(sAndPTsx.HistoricalData.head())
+nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
+goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOption.TimeSpan)
+nikkei225Index: AbstractStockMarketIndex = Nikkei225Index('yahoo', "^N225", yahooStockOption.TimeSpan)
+ibovespaIndex: AbstractStockMarketIndex = IbovespaIndex('yahoo', "^BVSP", yahooStockOption.TimeSpan)
+ipcMexicoIndex: AbstractStockMarketIndex = IpcMexicoIndex('yahoo', "^MXX", yahooStockOption.TimeSpan)
 marketIndices = list()
 marketIndices.append(sAndPTsx)
 marketIndices.append(sAnP500)
+marketIndices.append(nasdaqIndex)
+marketIndices.append(goldIndex)
+marketIndices.append(nikkei225Index)
+marketIndices.append(ibovespaIndex)
+marketIndices.append(ipcMexicoIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
 exit(666)
 yahooStockOptionPlotter: HistoricalPlotter = \

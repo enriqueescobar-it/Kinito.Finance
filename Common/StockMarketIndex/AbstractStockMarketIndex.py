@@ -10,4 +10,5 @@ class AbstractStockMarketIndex(ABC):
     __source: str
     __ticker: str
     __time_sp: TimeSpan
+    __toUsd: float
     HistoricalData: pd.DataFrame
