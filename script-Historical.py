@@ -1,6 +1,7 @@
 from Common.Comparators.Index.IndexComparator import IndexComparator
 from Common.Plotters.HistoricalPlotter import HistoricalPlotter
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
+from Common.StockMarketIndex.Yahoo.DaxIndex import DaxIndex
 from Common.StockMarketIndex.Yahoo.IbovespaIndex import IbovespaIndex
 from Common.StockMarketIndex.Yahoo.IpcMexicoIndex import IpcMexicoIndex
 from Common.StockMarketIndex.Yahoo.Nikkei225Index import Nikkei225Index
@@ -19,6 +20,7 @@ sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOpti
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
 nyseIndex: AbstractStockMarketIndex = NyseIndex('yahoo', "^NYA", yahooStockOption.TimeSpan)
 goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOption.TimeSpan)
+daxIndex: AbstractStockMarketIndex = DaxIndex('yahoo', "^GDAXI", yahooStockOption.TimeSpan)
 nikkei225Index: AbstractStockMarketIndex = Nikkei225Index('yahoo', "^N225", yahooStockOption.TimeSpan)
 ibovespaIndex: AbstractStockMarketIndex = IbovespaIndex('yahoo', "^BVSP", yahooStockOption.TimeSpan)
 ipcMexicoIndex: AbstractStockMarketIndex = IpcMexicoIndex('yahoo', "^MXX", yahooStockOption.TimeSpan)
@@ -28,6 +30,7 @@ marketIndices.append(sAnP500)
 marketIndices.append(nasdaqIndex)
 marketIndices.append(goldIndex)
 marketIndices.append(nyseIndex)
+marketIndices.append(daxIndex)
 marketIndices.append(nikkei225Index)
 marketIndices.append(ibovespaIndex)
 marketIndices.append(ipcMexicoIndex)
