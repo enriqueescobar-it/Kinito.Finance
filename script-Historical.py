@@ -4,6 +4,8 @@ from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarket
 from Common.StockMarketIndex.Yahoo.CrudeOilIndex import CrudeOilIndex
 from Common.StockMarketIndex.Yahoo.DaxIndex import DaxIndex
 from Common.StockMarketIndex.Yahoo.DowJonesIndex import DowJonesIndex
+from Common.StockMarketIndex.Yahoo.Estx50Index import Estx50Index
+from Common.StockMarketIndex.Yahoo.EuroNext100Index import EuroNext100Index
 from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
 from Common.StockMarketIndex.Yahoo.IbovespaIndex import IbovespaIndex
 from Common.StockMarketIndex.Yahoo.IpcMexicoIndex import IpcMexicoIndex
@@ -25,6 +27,8 @@ dowJonesIndex: AbstractStockMarketIndex = DowJonesIndex('yahoo', "^DJI", yahooSt
 goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOption.TimeSpan)
 crudeOilIndex: AbstractStockMarketIndex = CrudeOilIndex('yahoo', "CL=F", yahooStockOption.TimeSpan)
 daxIndex: AbstractStockMarketIndex = DaxIndex('yahoo', "^GDAXI", yahooStockOption.TimeSpan)
+euroNext100Index: AbstractStockMarketIndex = EuroNext100Index('yahoo', "^N100", yahooStockOption.TimeSpan)
+estx50Index: AbstractStockMarketIndex = Estx50Index('yahoo', "^N100", yahooStockOption.TimeSpan)
 nikkei225Index: AbstractStockMarketIndex = Nikkei225Index('yahoo', "^N225", yahooStockOption.TimeSpan)
 ibovespaIndex: AbstractStockMarketIndex = IbovespaIndex('yahoo', "^BVSP", yahooStockOption.TimeSpan)
 ipcMexicoIndex: AbstractStockMarketIndex = IpcMexicoIndex('yahoo', "^MXX", yahooStockOption.TimeSpan)
@@ -37,6 +41,8 @@ marketIndices.append(dowJonesIndex)
 marketIndices.append(goldIndex)
 marketIndices.append(crudeOilIndex)
 marketIndices.append(daxIndex)
+marketIndices.append(euroNext100Index)
+marketIndices.append(estx50Index)
 marketIndices.append(nikkei225Index)
 marketIndices.append(ibovespaIndex)
 marketIndices.append(ipcMexicoIndex)
