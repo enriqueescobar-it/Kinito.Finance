@@ -7,11 +7,14 @@ from Common.StockMarketIndex.Yahoo.DowJonesIndex import DowJonesIndex
 from Common.StockMarketIndex.Yahoo.Estx50Index import Estx50Index
 from Common.StockMarketIndex.Yahoo.EuroNext100Index import EuroNext100Index
 from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
+from Common.StockMarketIndex.Yahoo.HangSengIndex import HangSengIndex
 from Common.StockMarketIndex.Yahoo.IbovespaIndex import IbovespaIndex
 from Common.StockMarketIndex.Yahoo.IpcMexicoIndex import IpcMexicoIndex
+from Common.StockMarketIndex.Yahoo.MoexRussiaIndex import MoexRussiaIndex
 from Common.StockMarketIndex.Yahoo.NasdaqIndex import NasdaqIndex
 from Common.StockMarketIndex.Yahoo.Nikkei225Index import Nikkei225Index
 from Common.StockMarketIndex.Yahoo.NyseComposite import NyseIndex
+from Common.StockMarketIndex.Yahoo.ShenzhenComponentIndex import ShenzhenComponentIndex
 from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
@@ -30,6 +33,9 @@ daxIndex: AbstractStockMarketIndex = DaxIndex('yahoo', "^GDAXI", yahooStockOptio
 euroNext100Index: AbstractStockMarketIndex = EuroNext100Index('yahoo', "^N100", yahooStockOption.TimeSpan)
 estx50Index: AbstractStockMarketIndex = Estx50Index('yahoo', "^N100", yahooStockOption.TimeSpan)
 nikkei225Index: AbstractStockMarketIndex = Nikkei225Index('yahoo', "^N225", yahooStockOption.TimeSpan)
+moexRussiaIndex: AbstractStockMarketIndex = MoexRussiaIndex('yahoo', "IMOEX.ME", yahooStockOption.TimeSpan)
+hangSengIndex: AbstractStockMarketIndex = HangSengIndex('yahoo', "^HSI", yahooStockOption.TimeSpan)
+shenzhenComponentIndex: AbstractStockMarketIndex = ShenzhenComponentIndex('yahoo', "399001.SZ", yahooStockOption.TimeSpan)
 ibovespaIndex: AbstractStockMarketIndex = IbovespaIndex('yahoo', "^BVSP", yahooStockOption.TimeSpan)
 ipcMexicoIndex: AbstractStockMarketIndex = IpcMexicoIndex('yahoo', "^MXX", yahooStockOption.TimeSpan)
 marketIndices = list()
@@ -44,6 +50,9 @@ marketIndices.append(daxIndex)
 marketIndices.append(euroNext100Index)
 marketIndices.append(estx50Index)
 marketIndices.append(nikkei225Index)
+marketIndices.append(moexRussiaIndex)
+marketIndices.append(hangSengIndex)
+marketIndices.append(shenzhenComponentIndex)
 marketIndices.append(ibovespaIndex)
 marketIndices.append(ipcMexicoIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
