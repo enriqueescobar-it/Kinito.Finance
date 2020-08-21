@@ -16,9 +16,9 @@ class IndexComparator(AbstractIndexComparator):
         self.__stockOption = stock_option
         self.__indexList = indices
         self.Data = self.__setComparator(indices)
-        self.__boxPlot(self.Data, 'Flat', 'Price in USD')
+        self.__snsBoxPlot(self.Data, 'Flat', 'Price in USD')
         self.DataNormalized = self.__setNormalizer()
-        self.__boxPlot(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
+        self.__snsBoxPlot(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
         plt.figure(figsize=(3 * math.log(stock_option.TimeSpan.MonthCount), 4.5))
         for c in self.DataNormalized.columns.values:
             plt.plot(self.DataNormalized.index, self.DataNormalized[c], lw=2, label=c)
@@ -28,7 +28,7 @@ class IndexComparator(AbstractIndexComparator):
         plt.legend(loc='upper left', fontsize=10)
         plt.show()
         self.DataScaled = self.__setScaler()
-        self.__boxPlot(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
+        self.__snsBoxPlot(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
         plt.figure(figsize=(3 * math.log(stock_option.TimeSpan.MonthCount), 4.5))
         for c in self.DataNormalized.columns.values:
             plt.plot(self.DataScaled[c], label=c)
@@ -70,15 +70,11 @@ class IndexComparator(AbstractIndexComparator):
     def __setSimpleReturnsCorr(self):
         return self.DataSimpleReturns.corr()
 
-    def __boxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        # Create a list of y-axis column names: y_columns
-        y_columns = df.columns
-        # Generate a line plot
-        df[df.columns].plot(kind='box', rot=-45, subplots=False)
-        # Add the title
+    def __snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+        plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 4.5))
+        sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
         plt.title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
-        # Add the y-axis label
         plt.xlabel('Stock tickers')
+        plt.xticks(rotation=45)
         plt.ylabel(y_title)
-        # Display the plot
         plt.show()
