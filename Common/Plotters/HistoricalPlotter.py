@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 from numpy.core._multiarray_umath import ndarray
 from pandas import Series
-
+import math
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
@@ -61,17 +61,21 @@ class HistoricalPlotter(AbstractPlotter):
         '''
         # visualize data
         plt.style.use('fivethirtyeight')
-        # self._monthCount
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        # self._monthCount #3 * math.log(self.__stockOption.TimeSpan.MonthCount)
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # Plot the grid lines
         plt.plot(self.__dataFrame[self.__Col], label=self.__Col)
-        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
-        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue', alpha=0.50)
+        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
+                    alpha=0.50)
+        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue',
+                    alpha=0.50)
         plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Mean=' + str(self.__mean), color='orange')
         plt.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
         plt.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), color='green', alpha=0.50)
-        plt.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200), color='yellow', alpha=0.50)
-        plt.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
+        plt.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200),
+                    color='yellow', alpha=0.50)
+        plt.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange',
+                    alpha=0.50)
         plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
         plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
@@ -80,14 +84,18 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def Distro(self):
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
-        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
-        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue', alpha=0.50)
+        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
+                    alpha=0.50)
+        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue',
+                    alpha=0.50)
         plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Median=' + str(self.__mean), color='orange')
-        plt.axhline((self.__mean + self.__std), linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
-        plt.axhline((self.__mean - self.__std), linestyle='--', label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
+        plt.axhline((self.__mean + self.__std), linestyle='--',
+                    label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
+        plt.axhline((self.__mean - self.__std), linestyle='--',
+                    label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
         plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' in $USD')
@@ -95,7 +103,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def Daily(self):
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(self.__dataDaily, label=self.__Col)
         plt.title(self.__ticker + ' ' + self.__Col + ' Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
@@ -105,7 +113,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyHist(self):
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         sns.distplot(self.__dataDaily, vertical=False, rug=True)
         plt.title(self.__ticker + ' ' + self.__Col + ' Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
@@ -115,7 +123,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyCum(self):
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(self.__dataDailyCum, label=self.__Col)
         plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
@@ -125,7 +133,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def Monthly(self):
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(self.__dataMonthly, label=self.__Col)
         plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
@@ -135,7 +143,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def MonthlyHist(self):
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         sns.distplot(self.__dataMonthly, vertical=False, rug=True)
         plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
@@ -145,10 +153,11 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def MonthlyCum(self):
-        plt.figure(figsize=(self.__timeSpan.MonthCount / 2, 4.5))
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(self.__dataMonthlyCum, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.title(
+            self.__ticker + ' ' + self.__Col + ' Cumm. Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' 1$ Growth Investment')
         plt.legend(loc=self.__legendPlace)

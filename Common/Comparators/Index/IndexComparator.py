@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 from sklearn.preprocessing import MinMaxScaler
 
 from Common.Comparators.Index.AbstractIndexComparator import AbstractIndexComparator
@@ -18,6 +18,7 @@ class IndexComparator(AbstractIndexComparator):
         self.Data = self.__setComparator(indices)
         self.DataSimpleReturns = self.__setSimpleReturns(self.Data)
         self.DataSimpleReturnsCorr = self.__setSimpleReturnsCorr(self.Data)
+        self.DataLogReturns = self.__setLogReturns(self.Data)
         self.DataNormalized = self.__setNormalizer()
         self.DataScaled = self.__setScaler()
         self.__summaryPlot(self.Data, 'Flat', 'Price in USD')
@@ -43,7 +44,7 @@ class IndexComparator(AbstractIndexComparator):
         # scale to compare array from 0.0 to 100.0
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
-        stockArrayScaled: numpy.ndarray = minMaxScaler.fit_transform(self.Data)
+        stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(self.Data)
         return pd.DataFrame(stockArrayScaled, columns=self.Data.columns)
 
     def __setSimpleReturns(self, df: pd.DataFrame):
@@ -51,6 +52,9 @@ class IndexComparator(AbstractIndexComparator):
 
     def __setSimpleReturnsCorr(self, df: pd.DataFrame):
         return self.__setSimpleReturns(df).corr()
+
+    def __setLogReturns(self, df: pd.DataFrame):
+        return np.log(df/df.shift(1))
 
     def __snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 4.5))

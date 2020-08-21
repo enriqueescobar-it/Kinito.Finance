@@ -56,7 +56,6 @@ marketIndices.append(shenzhenComponentIndex)
 marketIndices.append(ibovespaIndex)
 marketIndices.append(ipcMexicoIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-exit(666)
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
