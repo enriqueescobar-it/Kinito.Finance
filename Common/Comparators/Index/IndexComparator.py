@@ -81,5 +81,5 @@ class IndexComparator(AbstractIndexComparator):
         s_h_m = sns.heatmap(df, cmap="RdYlGn", annot=True, fmt='.2%')  # YlOrRd
         s_h_m.set_xticklabels(s_h_m.get_xticklabels(), rotation=45, horizontalalignment='right')
         plt.show()
-        sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=False)
+        sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=True)
         plt.show()
