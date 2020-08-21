@@ -8,6 +8,6 @@ import pandas as pd
 class AbstractIndexComparator(AbstractComparator):
     __stockOption: YahooStockOption
     __indexList: list
-    DataComparator: pd.DataFrame
+    Data: pd.DataFrame
     DataNormalized: pd.DataFrame
     DataScaled: pd.DataFrame

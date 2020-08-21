@@ -15,8 +15,10 @@ class IndexComparator(AbstractIndexComparator):
     def __init__(self, stock_option: YahooStockOption, indices: list()):
         self.__stockOption = stock_option
         self.__indexList = indices
-        self.DataComparator = self.__setComparator(indices)
+        self.Data = self.__setComparator(indices)
+        self.__boxPlot(self.Data, 'Flat', 'Price in USD')
         self.DataNormalized = self.__setNormalizer()
+        self.__boxPlot(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
         plt.figure(figsize=(3 * math.log(stock_option.TimeSpan.MonthCount), 4.5))
         for c in self.DataNormalized.columns.values:
             plt.plot(self.DataNormalized.index, self.DataNormalized[c], lw=2, label=c)
@@ -26,19 +28,21 @@ class IndexComparator(AbstractIndexComparator):
         plt.legend(loc='upper left', fontsize=10)
         plt.show()
         self.DataScaled = self.__setScaler()
-        print(self.DataScaled.tail())
+        self.__boxPlot(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
         plt.figure(figsize=(3 * math.log(stock_option.TimeSpan.MonthCount), 4.5))
         for c in self.DataNormalized.columns.values:
             plt.plot(self.DataScaled[c], label=c)
         plt.title(stock_option.SourceColumn + ' Scaled ' + str(stock_option.TimeSpan.MonthCount) + ' months')
         plt.xlabel(stock_option.TimeSpan.StartDateStr + ' - ' + stock_option.TimeSpan.EndDateStr)
-        plt.ylabel('Base 100 scaled span since ' + stock_option.TimeSpan.StartDateStr)
+        plt.ylabel('Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
         plt.legend(loc='upper left', fontsize=10)
         plt.show()
-        self.DataSimpleReturnsCorr = self.DataComparator.pct_change(1).corr()
+        self.DataSimpleReturns = self.__setSimpleReturns()
+        self.DataSimpleReturnsCorr = self.__setSimpleReturnsCorr()
         # graph correlation
-        plt.subplots(figsize=(1.5*math.log(stock_option.TimeSpan.MonthCount), 1.5*math.log(stock_option.TimeSpan.MonthCount)))
-        s_h_m = sns.heatmap(self.DataSimpleReturnsCorr, cmap="RdYlGn", annot= True, fmt= '.2%') #YlOrRd
+        plt.subplots(figsize=(
+        1.5 * math.log(stock_option.TimeSpan.MonthCount), 1.5 * math.log(stock_option.TimeSpan.MonthCount)))
+        s_h_m = sns.heatmap(self.DataSimpleReturnsCorr, cmap="RdYlGn", annot=True, fmt='.2%')  # YlOrRd
         s_h_m.set_xticklabels(s_h_m.get_xticklabels(), rotation=45, horizontalalignment='right')
         plt.show()
 
@@ -51,11 +55,30 @@ class IndexComparator(AbstractIndexComparator):
         return df.merge(a_df, left_index=True, right_index=True)
 
     def __setNormalizer(self):
-        return self.DataComparator / self.DataComparator.iloc[0]
+        return self.Data / self.Data.iloc[0]
 
     def __setScaler(self):
-        # scale to compare array
+        # scale to compare array from 0.0 to 100.0
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
-        stockArrayScaled: numpy.ndarray = minMaxScaler.fit_transform(self.DataComparator)
-        return pd.DataFrame(stockArrayScaled, columns=self.DataComparator.columns)
+        stockArrayScaled: numpy.ndarray = minMaxScaler.fit_transform(self.Data)
+        return pd.DataFrame(stockArrayScaled, columns=self.Data.columns)
+
+    def __setSimpleReturns(self):
+        return self.Data.pct_change(1)
+
+    def __setSimpleReturnsCorr(self):
+        return self.DataSimpleReturns.corr()
+
+    def __boxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+        # Create a list of y-axis column names: y_columns
+        y_columns = df.columns
+        # Generate a line plot
+        df[df.columns].plot(kind='box', rot=-45, subplots=False)
+        # Add the title
+        plt.title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
+        # Add the y-axis label
+        plt.xlabel('Stock tickers')
+        plt.ylabel(y_title)
+        # Display the plot
+        plt.show()
