@@ -6,6 +6,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from sklearn import preprocessing
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 import seaborn as sns
 import math
 
@@ -21,13 +22,11 @@ class IndexComparator(AbstractIndexComparator):
         self.DataLogReturns = self.__setLogReturns(self.Data)
         self.DataNormalized = self.__setNormalizer()
         self.DataScaled = self.__setScaler()
-        self.__summaryPlot(self.Data, 'Flat', 'Price in USD')
-        self.__snsBoxPlot(self.Data, 'Flat', 'Price in USD')
+        self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
+        exit(-1)
         self.__heatMap(self.DataSimpleReturnsCorr)
-        self.__summaryPlot(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
-        self.__snsBoxPlot(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
-        self.__summaryPlot(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
-        self.__snsBoxPlot(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
+        self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
+        self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
 
     def __setComparator(self, indices):
         df: pd.DataFrame = self.__stockOption.HistoricalData[self.__stockOption.SourceColumn].to_frame()
@@ -57,23 +56,19 @@ class IndexComparator(AbstractIndexComparator):
         return np.log(df/df.shift(1))
 
     def __snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 4.5))
         sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
         plt.title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
         plt.xlabel('Stock tickers')
         plt.xticks(rotation=45)
         plt.ylabel(y_title)
-        plt.show()
 
     def __summaryPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 4.5))
         for c in df.columns.values:
             plt.plot(df.index, df[c], lw=2, label=c)
         plt.title(self.__stockOption.SourceColumn + ' ' + a_title + ' ' + str(self.__stockOption.TimeSpan.MonthCount) + ' months')
         plt.xlabel(self.__stockOption.TimeSpan.StartDateStr + ' - ' + self.__stockOption.TimeSpan.EndDateStr)
         plt.ylabel(y_title)
         plt.legend(loc='upper left', fontsize=10)
-        plt.show()
 
     def __heatMap(self, df: pd.DataFrame):
         fig_size = 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)
@@ -82,4 +77,13 @@ class IndexComparator(AbstractIndexComparator):
         s_h_m.set_xticklabels(s_h_m.get_xticklabels(), rotation=45, horizontalalignment='right')
         plt.show()
         sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=True)
+        plt.show()
+
+    def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+        gs1x2 = gridspec.GridSpec(1, 2)
+        plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
+        self.__summaryPlot(df, a_title, y_title)
+        plt.show()
+        plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
+        self.__snsBoxPlot(df, a_title, y_title)
         plt.show()
