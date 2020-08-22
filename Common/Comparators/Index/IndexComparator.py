@@ -80,7 +80,12 @@ class IndexComparator(AbstractIndexComparator):
         plt.legend(loc='upper left', fontsize=10)
 
     def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        gs1x2 = gridspec.GridSpec(1, 2)
+        fig2L1C = plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
+        gs2L1C = gridspec.GridSpec(2, 1)
+        ax1 = fig2L1C.add_subplot(gs2L1C[0, 0])
+        ax2 = fig2L1C.add_subplot(gs2L1C[0, 1])
+        plt.show()
+        exit(11)
         plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
         self.__summaryPlot(df, a_title, y_title)
         plt.show()
