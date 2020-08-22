@@ -23,8 +23,7 @@ class IndexComparator(AbstractIndexComparator):
         self.DataNormalized = self.__setNormalizer()
         self.DataScaled = self.__setScaler()
         self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
-        exit(-1)
-        self.__heatMap(self.DataSimpleReturnsCorr)
+        self.__plot1L2C(self.DataSimpleReturnsCorr)
         self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
         self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
 
@@ -55,7 +54,7 @@ class IndexComparator(AbstractIndexComparator):
     def __setLogReturns(self, df: pd.DataFrame):
         return np.log(df/df.shift(1))
 
-    def __heatMap(self, df: pd.DataFrame):
+    def __plot1L2C(self, df: pd.DataFrame):
         fig_size = 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)
         plt.subplots(figsize=(fig_size, fig_size))
         s_h_m = sns.heatmap(df, cmap="RdYlGn", annot=True, fmt='.2%')  # YlOrRd
@@ -63,21 +62,6 @@ class IndexComparator(AbstractIndexComparator):
         plt.show()
         sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=True)
         plt.show()
-
-    def __snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
-        plt.title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
-        plt.xlabel('Stock tickers')
-        plt.xticks(rotation=45)
-        plt.ylabel(y_title)
-
-    def __summaryPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        for c in df.columns.values:
-            plt.plot(df.index, df[c], lw=2, label=c)
-        plt.title(self.__stockOption.SourceColumn + ' ' + a_title + ' ' + str(self.__stockOption.TimeSpan.MonthCount) + ' months')
-        plt.xlabel(self.__stockOption.TimeSpan.StartDateStr + ' - ' + self.__stockOption.TimeSpan.EndDateStr)
-        plt.ylabel(y_title)
-        plt.legend(loc='upper left', fontsize=10)
 
     def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         fig2L1C = plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
@@ -98,10 +82,24 @@ class IndexComparator(AbstractIndexComparator):
         ax2.set_ylabel(y_title)
         plt.tight_layout()
         plt.show()
-        exit(11)
-        plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
-        self.__summaryPlot(df, a_title, y_title)
-        plt.show()
-        plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
-        self.__snsBoxPlot(df, a_title, y_title)
-        plt.show()
+        #plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
+        #self.__summaryPlot(df, a_title, y_title)
+        #plt.show()
+        #plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
+        #self.__snsBoxPlot(df, a_title, y_title)
+        #plt.show()
+
+    def __snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+        sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
+        plt.title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
+        plt.xlabel('Stock tickers')
+        plt.xticks(rotation=45)
+        plt.ylabel(y_title)
+
+    def __summaryPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+        for c in df.columns.values:
+            plt.plot(df.index, df[c], lw=2, label=c)
+        plt.title(self.__stockOption.SourceColumn + ' ' + a_title + ' ' + str(self.__stockOption.TimeSpan.MonthCount) + ' months')
+        plt.xlabel(self.__stockOption.TimeSpan.StartDateStr + ' - ' + self.__stockOption.TimeSpan.EndDateStr)
+        plt.ylabel(y_title)
+        plt.legend(loc='upper left', fontsize=10)
