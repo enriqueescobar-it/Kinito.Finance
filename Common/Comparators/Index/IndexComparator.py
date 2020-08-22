@@ -55,6 +55,15 @@ class IndexComparator(AbstractIndexComparator):
     def __setLogReturns(self, df: pd.DataFrame):
         return np.log(df/df.shift(1))
 
+    def __heatMap(self, df: pd.DataFrame):
+        fig_size = 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)
+        plt.subplots(figsize=(fig_size, fig_size))
+        s_h_m = sns.heatmap(df, cmap="RdYlGn", annot=True, fmt='.2%')  # YlOrRd
+        s_h_m.set_xticklabels(s_h_m.get_xticklabels(), rotation=45, horizontalalignment='right')
+        plt.show()
+        sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=True)
+        plt.show()
+
     def __snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
         plt.title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
@@ -69,15 +78,6 @@ class IndexComparator(AbstractIndexComparator):
         plt.xlabel(self.__stockOption.TimeSpan.StartDateStr + ' - ' + self.__stockOption.TimeSpan.EndDateStr)
         plt.ylabel(y_title)
         plt.legend(loc='upper left', fontsize=10)
-
-    def __heatMap(self, df: pd.DataFrame):
-        fig_size = 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)
-        plt.subplots(figsize=(fig_size, fig_size))
-        s_h_m = sns.heatmap(df, cmap="RdYlGn", annot=True, fmt='.2%')  # YlOrRd
-        s_h_m.set_xticklabels(s_h_m.get_xticklabels(), rotation=45, horizontalalignment='right')
-        plt.show()
-        sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=True)
-        plt.show()
 
     def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         gs1x2 = gridspec.GridSpec(1, 2)
