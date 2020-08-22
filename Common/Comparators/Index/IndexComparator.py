@@ -23,7 +23,7 @@ class IndexComparator(AbstractIndexComparator):
         self.DataNormalized = self.__setNormalizer()
         self.DataScaled = self.__setScaler()
         self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
-        self.__plot1L2C(self.DataSimpleReturnsCorr)
+        self.__heatMap(self.DataSimpleReturnsCorr)
         self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
         self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
 
@@ -54,12 +54,8 @@ class IndexComparator(AbstractIndexComparator):
     def __setLogReturns(self, df: pd.DataFrame):
         return np.log(df/df.shift(1))
 
-    def __plot1L2C(self, df: pd.DataFrame):
-        fig_size = 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)
-        plt.subplots(figsize=(fig_size, fig_size))
-        s_h_m = sns.heatmap(df, cmap="RdYlGn", annot=True, fmt='.2%')  # YlOrRd
-        s_h_m.set_xticklabels(s_h_m.get_xticklabels(), rotation=45, horizontalalignment='right')
-        plt.show()
+    def __heatMap(self, df: pd.DataFrame):
+        #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
         sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=True)
         plt.show()
 
