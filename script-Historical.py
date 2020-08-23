@@ -58,7 +58,6 @@ marketIndices.append(ipcMexicoIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)'''
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
-yahooStockOptionPlotter.Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Daily().show()
 yahooStockOptionPlotter.DailyHist().show()
