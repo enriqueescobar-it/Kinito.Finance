@@ -66,7 +66,7 @@ class HistoricalPlotter(AbstractPlotter):
         plt.tight_layout()
         return plt
 
-    def __plot(self, ax):
+    def __plot(self, ax: object):
         '''
         fig, ax = plt.subplots()
         -ax.plot(x, y)
@@ -91,6 +91,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
         ax.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
         ax.legend(loc='upper left', fontsize=8)
+        ax.axis('tight')
         return ax
 
     def __distroPlot(self, ax: object):
@@ -101,6 +102,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax.axhline((self.__mean + self.__std), linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
         ax.axhline((self.__mean - self.__std), linestyle='--', label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
         ax.legend(loc='upper left', fontsize=8)
+        ax.axis('tight')
         return ax
 
     def Daily(self):
