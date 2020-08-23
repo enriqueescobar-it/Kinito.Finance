@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 import numpy as np
 import seaborn as sns
 from numpy.core._multiarray_umath import ndarray
@@ -49,6 +50,18 @@ class HistoricalPlotter(AbstractPlotter):
         print('MM:', y_stockOption.TimeSpan.MonthCount)
         print('ww:', y_stockOption.TimeSpan.WeekCount)
         print('dd:', y_stockOption.TimeSpan.DayCount)
+        self.__stockOption = y_stockOption
+
+    def GraphPlot(self):
+        fig1L2C = plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
+        gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2])
+        plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' months')
+        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        ax1 = fig1L2C.add_subplot(gs1L2C[0, 0])
+        ax2 = fig1L2C.add_subplot(gs1L2C[0, 1])
+        ax2 = self.__distroPlot(ax2)
+        plt.tight_layout()
+        return plt
 
     def Plot(self):
         '''
@@ -63,44 +76,32 @@ class HistoricalPlotter(AbstractPlotter):
         plt.style.use('fivethirtyeight')
         # self._monthCount #3 * math.log(self.__stockOption.TimeSpan.MonthCount)
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
         # Plot the grid lines
         plt.plot(self.__dataFrame[self.__Col], label=self.__Col)
-        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
-                    alpha=0.50)
-        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue',
-                    alpha=0.50)
+        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
+        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue', alpha=0.50)
         plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Mean=' + str(self.__mean), color='orange')
         plt.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
         plt.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), color='green', alpha=0.50)
-        plt.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200),
-                    color='yellow', alpha=0.50)
-        plt.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange',
-                    alpha=0.50)
+        plt.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200), color='yellow', alpha=0.50)
+        plt.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
         plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
-        plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' months')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' in $USD')
         plt.legend(loc=self.__legendPlace)
         return plt
 
-    def Distro(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
-        plt.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
-                    alpha=0.50)
-        plt.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue',
-                    alpha=0.50)
-        plt.axhline(self.__mean, linestyle='--', label=self.__Col + '_Median=' + str(self.__mean), color='orange')
-        plt.axhline((self.__mean + self.__std), linestyle='--',
-                    label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
-        plt.axhline((self.__mean - self.__std), linestyle='--',
-                    label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
-        plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' in $USD')
-        plt.legend(loc=self.__legendPlace)
-        return plt
+    def __distroPlot(self, ax: object):
+        ax = sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
+        ax.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
+        ax.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue', alpha=0.50)
+        ax.axhline(self.__mean, linestyle='--', label=self.__Col + '_Median=' + str(self.__mean), color='orange')
+        ax.axhline((self.__mean + self.__std), linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
+        ax.axhline((self.__mean - self.__std), linestyle='--', label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
+        ax.legend(loc='upper left', fontsize=8)
+        return ax
 
     def Daily(self):
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
