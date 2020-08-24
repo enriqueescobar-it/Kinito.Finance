@@ -117,7 +117,7 @@ class FinVizEngine(AbstractEngine):
         self.DividendPcnt = "NA" if self._fin_viz['Dividend %'] == "-" else self._fin_viz['Dividend %']
 
     def __setBeta(self):
-        self.Beta = float(str(self._fin_viz['Beta']))
+        self.Beta = -1.1 if self._fin_viz['Beta'] == "-" else float(str(self._fin_viz['Beta']))
 
     def __setPrice(self):
         self.Price = self.__stringToFloat(str(self._fin_viz['Price']))
