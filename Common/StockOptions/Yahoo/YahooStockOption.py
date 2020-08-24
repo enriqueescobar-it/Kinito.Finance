@@ -34,9 +34,9 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
-    HistoricalDaily: pd.core.series.Series
+    HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
-    HistoricalMonthly: pd.core.series.Series
+    HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
     HistoricalStandardized: ndarray
     HistoricalScaled: ndarray
@@ -104,13 +104,13 @@ class YahooStockOption(AbstractStockOption):
         #self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
 
     def __GetDataDaily(self):
-        self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change()
+        self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
 
     def __GetDataDailyCum(self):
         self.HistoricalDailyCum = (self.HistoricalDaily + 1).cumprod()
 
     def __GetDataMonthly(self):
-        self.HistoricalMonthly = self.HistoricalData[self.SourceColumn].resample('M').ffill().pct_change()
+        self.HistoricalMonthly = self.HistoricalData[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
 
     def __GetDataMonthlyCum(self):
         self.HistoricalMonthlyCum = (self.HistoricalMonthly + 1).cumprod()
