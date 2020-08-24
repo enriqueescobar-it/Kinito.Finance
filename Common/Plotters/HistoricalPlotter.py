@@ -53,12 +53,9 @@ class HistoricalPlotter(AbstractPlotter):
         self.__stockOption = y_stockOption
 
     def GraphPlot(self):
-        fig1L2C = plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
-        gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2])
+        fig1L2C = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
+        gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig1L2C)
         plt.style.use('fivethirtyeight')
-        plt.title(self.__ticker + ' ' + self.__Col + ' History ' + str(self.__timeSpan.MonthCount) + ' months')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' in $USD')
         ax1 = fig1L2C.add_subplot(gs1L2C[0, 0])
         ax1 = self.__plot(ax1)
         ax2 = fig1L2C.add_subplot(gs1L2C[0, 1])
@@ -91,7 +88,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
         ax.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
         ax.legend(loc='upper left', fontsize=8)
-        ax.axis('tight')
+        #ax.axis('tight')
         return ax
 
     def __distroPlot(self, ax: object):
@@ -101,8 +98,12 @@ class HistoricalPlotter(AbstractPlotter):
         ax.axhline(self.__mean, linestyle='--', label=self.__Col + '_Median=' + str(self.__mean), color='orange')
         ax.axhline((self.__mean + self.__std), linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
         ax.axhline((self.__mean - self.__std), linestyle='--', label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
+        ax.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
+        ax.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), color='green', alpha=0.50)
+        ax.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200), color='yellow', alpha=0.50)
+        ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
         ax.legend(loc='upper left', fontsize=8)
-        ax.axis('tight')
+        #ax.axis('tight')
         return ax
 
     def Daily(self):
