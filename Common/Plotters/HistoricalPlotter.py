@@ -57,15 +57,17 @@ class HistoricalPlotter(AbstractPlotter):
         print('dd:', y_stockOption.TimeSpan.DayCount)
         self.__stockOption = y_stockOption
 
-    def GraphPlot(self):
-        fig, ax = plt.subplots(3, 1, figsize=(24, 20), sharex=True)
+    def Plot(self):
+        fig, ax = plt.subplots(3, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
         self.__dataFrame[self.__Col].plot(ax=ax[0])
-        ax[0].set(title='MSFT time series', ylabel='Stock price ($)')
+        ax[0].set(ylabel='Stock price ($)', title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
         self.__dataSimpleReturns.plot(ax=ax[1])
         ax[1].set(ylabel='Simple returns (%)')
         self.__dataLogReturns.plot(ax=ax[2])
-        ax[2].set(xlabel='Date', ylabel = 'Log returns (%)')
-        plt.show()
+        ax[2].set(ylabel='Log returns (%)', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        return plt
+
+    def GraphPlot(self):
         fig1L2C = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
         gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig1L2C)
         plt.style.use('fivethirtyeight')
