@@ -1,5 +1,6 @@
 from typing import List
 import pandas as pd
+import numpy as np
 from numpy.core._multiarray_umath import ndarray
 from sklearn import preprocessing
 
@@ -34,6 +35,8 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
+    HistoricalSimpleReturns: pd.DataFrame
+    HistoricalLogReturns: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
     HistoricalMonthly: pd.DataFrame
@@ -85,6 +88,8 @@ class YahooStockOption(AbstractStockOption):
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self.__GetData()
+        self.__GetDataSimpleReturns()
+        self.__GetDataLogReturns()
         self.__GetDataDaily()
         self.__GetDataDailyCum()
         self.__GetDataMonthly()
@@ -102,6 +107,13 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalData.fillna(method='ffill', inplace=True)
         self.HistoricalData.fillna(method='bfill', inplace=True)
         #self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
+
+    def __GetDataSimpleReturns(self):
+        self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
+
+    def __GetDataLogReturns(self):
+        a_var = np.log(self.HistoricalData[self.SourceColumn]/self.HistoricalData[self.SourceColumn].shift(1))
+        self.HistoricalLogReturns = a_var.to_frame()
 
     def __GetDataDaily(self):
         self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
