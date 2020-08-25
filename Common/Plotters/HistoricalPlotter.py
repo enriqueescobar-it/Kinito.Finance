@@ -4,15 +4,18 @@ import numpy as np
 import seaborn as sns
 from numpy.core._multiarray_umath import ndarray
 from pandas import Series
+from pandas import DataFrame
 import math
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
-    __dataDaily: Series
+    __dataSimpleReturns: DataFrame
+    __dataLogReturns: DataFrame
+    __dataDaily: DataFrame
     __dataDailyCum: Series
-    __dataMonthly: Series
+    __dataMonthly: DataFrame
     __dataMonthlyCum: Series
     __mean: ndarray
     __median: ndarray
@@ -32,6 +35,8 @@ class HistoricalPlotter(AbstractPlotter):
         if y_stockOption.Source == 'yahoo':
             self.__Col = "Adj Close"
         self.__dataFrame = y_stockOption.HistoricalData
+        self.__dataSimpleReturns = y_stockOption.HistoricalSimpleReturns
+        self.__dataLogReturns = y_stockOption.HistoricalLogReturns
         self.__dataDaily = y_stockOption.HistoricalDaily
         self.__dataDailyCum = y_stockOption.HistoricalDailyCum
         self.__dataMonthly = y_stockOption.HistoricalMonthly
@@ -53,6 +58,14 @@ class HistoricalPlotter(AbstractPlotter):
         self.__stockOption = y_stockOption
 
     def GraphPlot(self):
+        fig, ax = plt.subplots(3, 1, figsize=(24, 20), sharex=True)
+        self.__dataFrame[self.__Col].plot(ax=ax[0])
+        ax[0].set(title='MSFT time series', ylabel='Stock price ($)')
+        self.__dataSimpleReturns.plot(ax=ax[1])
+        ax[1].set(ylabel='Simple returns (%)')
+        self.__dataLogReturns.plot(ax=ax[2])
+        ax[2].set(xlabel='Date', ylabel = 'Log returns (%)')
+        plt.show()
         fig1L2C = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
         gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig1L2C)
         plt.style.use('fivethirtyeight')
