@@ -1,15 +1,17 @@
-from pandas import Series
-from pandas import DataFrame
-from numpy.core._multiarray_umath import ndarray
-from Common.Plotters.AbstractPlotter import AbstractPlotter
-from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 import math
-import matplotlib.pyplot as plt
+
 import matplotlib.gridspec as gridspec
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as scs
 import seaborn as sns
 import statsmodels.api as sm
+from numpy.core._multiarray_umath import ndarray
+from pandas import DataFrame
+from pandas import Series
+
+from Common.Plotters.AbstractPlotter import AbstractPlotter
+from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
@@ -137,7 +139,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma**2:.4f})')
         ax[0].legend(loc=self.__legendPlace)
         # Q-Q plot
-        qq = sm.qqplot(a_df[self.__Col].values, line='s', ax=ax[1])
+        qq = sm.qqplot(a_df[self.__Col].values, line='q', ax=ax[1])
         ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' ' + timely + ' Returns', fontsize=16)
         return plt
 
@@ -145,11 +147,10 @@ class HistoricalPlotter(AbstractPlotter):
         fig, ax = plt.subplots(3, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
         plt.style.use('fivethirtyeight')
         self.__dataFrame[self.__Col].plot(ax=ax[0])
-        ax[0].set(ylabel='Stock price ($)',
-                  title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
-        self.__dataSimpleReturns.plot(ax=ax[1])
+        ax[0].set(ylabel='Stock price ($)', title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
+        self.__dataSimpleReturns[self.__Col].plot(ax=ax[1])
         ax[1].set(ylabel='Simple returns (%)')
-        self.__dataLogReturns.plot(ax=ax[2])
+        self.__dataLogReturns[self.__Col].plot(ax=ax[2])
         ax[2].set(ylabel='Log returns (%)', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         return plt
 

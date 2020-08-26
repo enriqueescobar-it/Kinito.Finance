@@ -67,6 +67,7 @@ class YahooFinanceEngine(AbstractEngine):
         self.EarningDf = self.__yFinance.earnings
         self.FinancialDf = self.__yFinance.financials
         self.IsIn = "NA" if self.__yFinance.isin == "-" else self.__yFinance.isin
+        #print('TYPE', self.__yFinance.options) TYPE ('2020-09-17', '2020-10-15', '2020-11-19', '2020-12-17', '2021-02-18')
         #self.OptionTuple = self.__yFinance.options#
         self.Balance_SheetQDf = self.__yFinance.quarterly_balance_sheet
         self.BalanceSheetQDf = self.__yFinance.quarterly_balancesheet

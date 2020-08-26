@@ -20,7 +20,7 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('AQN')#KL WCN OTEX AQN TFII
+yahooStockOption: YahooStockOption = YahooStockOption('CP')#KL WCN OTEX AQN TFII
 print(yahooStockOption.HistoricalData.describe(include='all'))
 '''sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)

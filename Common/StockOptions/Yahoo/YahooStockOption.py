@@ -114,6 +114,8 @@ class YahooStockOption(AbstractStockOption):
     def __GetDataLogReturns(self):
         a_var = np.log(self.HistoricalData[self.SourceColumn]/self.HistoricalData[self.SourceColumn].shift(1))
         self.HistoricalLogReturns = a_var.to_frame()
+        self.HistoricalLogReturns['MovingStd252'] = self.HistoricalLogReturns[self.SourceColumn].rolling(window=252).std().to_frame()
+        self.HistoricalLogReturns['MovingStd21'] = self.HistoricalLogReturns[self.SourceColumn].rolling(window=21).std().to_frame()
 
     def __GetDataDaily(self):
         self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
