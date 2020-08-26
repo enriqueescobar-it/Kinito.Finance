@@ -67,7 +67,7 @@ class YahooFinanceEngine(AbstractEngine):
         self.EarningDf = self.__yFinance.earnings
         self.FinancialDf = self.__yFinance.financials
         self.IsIn = "NA" if self.__yFinance.isin == "-" else self.__yFinance.isin
-        self.OptionTuple = self.__yFinance.options
+        #self.OptionTuple = self.__yFinance.options#
         self.Balance_SheetQDf = self.__yFinance.quarterly_balance_sheet
         self.BalanceSheetQDf = self.__yFinance.quarterly_balancesheet
         self.CashFlowQDf = self.__yFinance.quarterly_cashflow

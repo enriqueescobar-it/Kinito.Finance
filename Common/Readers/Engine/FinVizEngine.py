@@ -73,7 +73,7 @@ class FinVizEngine(AbstractEngine):
 
     @staticmethod
     def __stringToFloat(s: str):
-        return float(s)
+        return float(s)#
 
     @staticmethod
     def __stringToInt(s: str):
@@ -105,10 +105,12 @@ class FinVizEngine(AbstractEngine):
         self.StockCountry = self._fin_viz['Country']
 
     def __setPeRatio(self):
-        self.PeRatio = self.__stringToFloat(str(self._fin_viz['P/E']))
+        a_str: str = '-1.1' if str(self._fin_viz['P/E']) == '-' else str(self._fin_viz['P/E'])
+        self.PeRatio = self.__stringToFloat(a_str)#
 
     def __setEpsTtm(self):
-        self.EpsTtm = self.__stringToFloat(str(self._fin_viz['EPS (ttm)']))
+        a_str: str = '-1.1' if str(self._fin_viz['EPS (ttm)']) == '-' else str(self._fin_viz['EPS (ttm)'])
+        self.EpsTtm = self.__stringToFloat(a_str)#
 
     def __setDividend(self):
         self.Dividend = "NA" if self._fin_viz['Dividend'] == "-" else self._fin_viz['Dividend']
