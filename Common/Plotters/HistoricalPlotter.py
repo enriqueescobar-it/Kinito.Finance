@@ -144,14 +144,18 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def Plot(self):
-        fig, ax = plt.subplots(3, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
+        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
         plt.style.use('fivethirtyeight')
         self.__dataFrame[self.__Col].plot(ax=ax[0])
         ax[0].set(ylabel='Stock price ($)', title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
         self.__dataSimpleReturns[self.__Col].plot(ax=ax[1])
         ax[1].set(ylabel='Simple returns (%)')
         self.__dataLogReturns[self.__Col].plot(ax=ax[2])
-        ax[2].set(ylabel='Log returns (%)', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        ax[2].set(ylabel='Log returns (%)')
+        self.__dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252d')
+        self.__dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21d')
+        ax[3].set(ylabel='Moving Volatility', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        ax[3].legend(loc=self.__legendPlace)
         return plt
 
     def GraphPlot(self):
