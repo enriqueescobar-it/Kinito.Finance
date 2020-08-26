@@ -190,7 +190,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -225,6 +224,10 @@
     <state x="2496" y="-447" width="230" height="595" key="#Notifications/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153918940" />
     <state x="2313" y="-474" key="#Notifications/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596596200796" />
     <state x="358" y="0" width="548" height="571" key="#Notifications/0.0.1474.864@0.0.1474.864" timestamp="1597296880778" />
+    <state x="330" y="73" key="#Plugins" timestamp="1598403121950">
+      <screen x="0" y="0" width="1474" height="864" />
+    </state>
+    <state x="330" y="73" key="#Plugins/0.0.1474.864@0.0.1474.864" timestamp="1598403121950" />
     <state x="2311" y="-402" key="#YahooStockOption" timestamp="1591243378012">
       <screen x="1920" y="-447" width="1362" height="900" />
     </state>
@@ -242,7 +245,7 @@
     <state x="2399" y="-266" key="FileChooserDialogImpl/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591153425696" />
     <state x="2467" y="-267" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596597850808" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1597203479329" />
-    <state width="712" height="129" key="GridCell.Tab.0.bottom" timestamp="1598331154740">
+    <state width="1431" height="248" key="GridCell.Tab.0.bottom" timestamp="1598409175021">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.bottom/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783410" />
@@ -255,8 +258,8 @@
     <state width="712" height="129" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1598294703003" />
     <state width="1815" height="281" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="712" height="129" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="712" height="129" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1598331154740" />
-    <state width="712" height="129" key="GridCell.Tab.0.center" timestamp="1598331154740">
+    <state width="1431" height="248" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1598409175021" />
+    <state width="1431" height="248" key="GridCell.Tab.0.center" timestamp="1598409175021">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.center/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783410" />
@@ -269,8 +272,8 @@
     <state width="712" height="129" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1598294703002" />
     <state width="1815" height="281" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="712" height="129" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="712" height="129" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1598331154740" />
-    <state width="712" height="129" key="GridCell.Tab.0.left" timestamp="1598331154740">
+    <state width="1431" height="248" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1598409175021" />
+    <state width="1431" height="248" key="GridCell.Tab.0.left" timestamp="1598409175021">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.left/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783409" />
@@ -283,8 +286,8 @@
     <state width="712" height="129" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1598294703002" />
     <state width="1815" height="281" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266292" />
     <state width="712" height="129" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="712" height="129" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1598331154740" />
-    <state width="712" height="129" key="GridCell.Tab.0.right" timestamp="1598331154740">
+    <state width="1431" height="248" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1598409175021" />
+    <state width="1431" height="248" key="GridCell.Tab.0.right" timestamp="1598409175021">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.right/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783410" />
@@ -297,7 +300,7 @@
     <state width="712" height="129" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1598294703002" />
     <state width="1815" height="281" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="712" height="129" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="712" height="129" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1598331154740" />
+    <state width="1431" height="248" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1598409175021" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
@@ -315,10 +318,10 @@
       <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state x="2459" y="-245" key="com.intellij.execution.console.ConsoleHistoryController$MyBrowseAction$1/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1596597367311" />
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1597977761137">
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog" timestamp="1598406380092">
       <screen x="0" y="0" width="1474" height="864" />
     </state>
-    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1597977761137" />
+    <state x="580" y="204" key="refactoring.ChangeSignatureDialog/0.0.1474.864@0.0.1474.864" timestamp="1598406380092" />
     <state x="394" y="197" key="run.anything.popup" timestamp="1591844504769">
       <screen x="0" y="0" width="1474" height="864" />
     </state>

@@ -1,13 +1,15 @@
+from pandas import Series
+from pandas import DataFrame
+from numpy.core._multiarray_umath import ndarray
+from Common.Plotters.AbstractPlotter import AbstractPlotter
+from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
+import math
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
+import scipy.stats as scs
 import seaborn as sns
-from numpy.core._multiarray_umath import ndarray
-from pandas import Series
-from pandas import DataFrame
-import math
-from Common.Plotters.AbstractPlotter import AbstractPlotter
-from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
+import statsmodels.api as sm
 
 
 class HistoricalPlotter(AbstractPlotter):
@@ -57,11 +59,18 @@ class HistoricalPlotter(AbstractPlotter):
         print('dd:', y_stockOption.TimeSpan.DayCount)
         self.__stockOption = y_stockOption
 
+    def __GetRankRange(self, a_df: DataFrame):
+        return np.linspace(min(a_df[self.__Col]), max(a_df[self.__Col]), num=1000)
+
+    def __GetProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
+        return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
+
     def Plot(self):
         fig, ax = plt.subplots(3, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
         plt.style.use('fivethirtyeight')
         self.__dataFrame[self.__Col].plot(ax=ax[0])
-        ax[0].set(ylabel='Stock price ($)', title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
+        ax[0].set(ylabel='Stock price ($)',
+                  title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
         self.__dataSimpleReturns.plot(ax=ax[1])
         ax[1].set(ylabel='Simple returns (%)')
         self.__dataLogReturns.plot(ax=ax[2])
@@ -89,37 +98,47 @@ class HistoricalPlotter(AbstractPlotter):
         plt.savefig(file.jpeg, edgecolor='black', dpi=400, facecolor='black', transparent=True)
         '''
         # visualize data
-        #plt.style.use('fivethirtyeight')
+        # plt.style.use('fivethirtyeight')
         # self._monthCount #3 * math.log(self.__stockOption.TimeSpan.MonthCount)
-        #plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        #plt.tight_layout()
+        # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        # plt.tight_layout()
         # Plot the grid lines
         ax.plot(self.__dataFrame[self.__Col], label=self.__Col)
-        ax.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
-        ax.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue', alpha=0.50)
+        ax.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
+                   alpha=0.50)
+        ax.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue',
+                   alpha=0.50)
         ax.axhline(self.__mean, linestyle='--', label=self.__Col + '_Mean=' + str(self.__mean), color='orange')
         ax.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
         ax.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), color='green', alpha=0.50)
-        ax.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200), color='yellow', alpha=0.50)
-        ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
+        ax.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200),
+                   color='yellow', alpha=0.50)
+        ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange',
+                   alpha=0.50)
         ax.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
         ax.legend(loc='upper left', fontsize=8)
-        #ax.axis('tight')
+        # ax.axis('tight')
         return ax
 
     def __distroPlot(self, ax: object):
         ax = sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
-        ax.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan', alpha=0.50)
-        ax.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue', alpha=0.50)
+        ax.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
+                   alpha=0.50)
+        ax.axhline(self.__median, linestyle='--', label=self.__Col + '_Mean=' + str(self.__median), color='blue',
+                   alpha=0.50)
         ax.axhline(self.__mean, linestyle='--', label=self.__Col + '_Median=' + str(self.__mean), color='orange')
-        ax.axhline((self.__mean + self.__std), linestyle='--', label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
-        ax.axhline((self.__mean - self.__std), linestyle='--', label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
+        ax.axhline((self.__mean + self.__std), linestyle='--',
+                   label=self.__Col + '_+Std=' + str(self.__mean + self.__std), color='grey', alpha=0.50)
+        ax.axhline((self.__mean - self.__std), linestyle='--',
+                   label=self.__Col + '_-Std=' + str(self.__mean - self.__std), color='grey', alpha=0.50)
         ax.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
         ax.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), color='green', alpha=0.50)
-        ax.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200), color='yellow', alpha=0.50)
-        ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange', alpha=0.50)
+        ax.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200),
+                   color='yellow', alpha=0.50)
+        ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange',
+                   alpha=0.50)
         ax.legend(loc='upper left', fontsize=8)
-        #ax.axis('tight')
+        # ax.axis('tight')
         return ax
 
     def Daily(self):
@@ -133,13 +152,25 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyHist(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        sns.distplot(self.__dataDaily, vertical=False, rug=True)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.xlabel(self.__Col + ' Percent Base=1')
-        plt.legend(loc=self.__legendPlace)
+        r_range: ndarray = self.__GetRankRange(self.__dataDaily)
+        mu: float = self.__dataDaily[self.__Col].mean()
+        sigma: float = self.__dataDaily[self.__Col].std()
+        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
+        fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        #plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        #plt.tight_layout()
+        # histogram
+        sns.distplot(self.__dataDaily, vertical=False, rug=True, kde=False, norm_hist=True, ax=ax[0])
+        ax[0].set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
+        #plt.title(self.__ticker + ' ' + self.__Col + ' Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        #plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        #plt.xlabel(self.__Col + ' Percent Base=1')
+        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma**2:.4f})')
+        ax[0].legend(loc=self.__legendPlace)
+        #plt.legend(loc=self.__legendPlace)
+        # Q-Q plot
+        qq = sm.qqplot(self.__dataDaily[self.__Col].values, line='s', ax=ax[1])
+        ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
         return plt
 
     def DailyCum(self):
