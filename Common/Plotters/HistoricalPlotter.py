@@ -151,6 +151,36 @@ class HistoricalPlotter(AbstractPlotter):
         plt.legend(loc=self.__legendPlace)
         return plt
 
+    def Monthly(self):
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.plot(self.__dataMonthly, label=self.__Col)
+        plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.ylabel(self.__Col + ' Percent Base=1')
+        plt.legend(loc=self.__legendPlace)
+        return plt
+
+    def DailyCum(self):
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.plot(self.__dataDailyCum, label=self.__Col)
+        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.ylabel(self.__Col + ' 1$ Growth Investment')
+        plt.legend(loc=self.__legendPlace)
+        return plt
+
+    def MonthlyCum(self):
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.plot(self.__dataMonthlyCum, label=self.__Col)
+        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.ylabel(self.__Col + ' 1$ Growth Investment')
+        plt.legend(loc=self.__legendPlace)
+        return plt
+
     def DailyHist(self):
         r_range: ndarray = self.__GetRankRange(self.__dataDaily)
         mu: float = self.__dataDaily[self.__Col].mean()
@@ -173,43 +203,25 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
         return plt
 
-    def DailyCum(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.plot(self.__dataDailyCum, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' 1$ Growth Investment')
-        plt.legend(loc=self.__legendPlace)
-        return plt
-
-    def Monthly(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.plot(self.__dataMonthly, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' Percent Base=1')
-        plt.legend(loc=self.__legendPlace)
-        return plt
-
     def MonthlyHist(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        sns.distplot(self.__dataMonthly, vertical=False, rug=True)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.xlabel(self.__Col + ' Percent Base=1')
-        plt.legend(loc=self.__legendPlace)
-        return plt
-
-    def MonthlyCum(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.plot(self.__dataMonthlyCum, label=self.__Col)
-        plt.title(
-            self.__ticker + ' ' + self.__Col + ' Cumm. Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' 1$ Growth Investment')
-        plt.legend(loc=self.__legendPlace)
+        r_range: ndarray = self.__GetRankRange(self.__dataMonthly)
+        mu: float = self.__dataMonthly[self.__Col].mean()
+        sigma: float = self.__dataMonthly[self.__Col].std()
+        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
+        fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        #plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        #plt.tight_layout()
+        # histogram
+        sns.distplot(self.__dataMonthly, vertical=False, rug=True, kde=False, norm_hist=True, ax=ax[0])
+        ax[0].set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
+        #sns.distplot(self.__dataMonthly, vertical=False, rug=True)
+        #plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        #plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        #plt.xlabel(self.__Col + ' Percent Base=1')
+        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma**2:.4f})')
+        ax[0].legend(loc=self.__legendPlace)
+        #plt.legend(loc=self.__legendPlace)
+        # Q-Q plot
+        qq = sm.qqplot(self.__dataMonthly[self.__Col].values, line='s', ax=ax[1])
+        ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
         return plt
