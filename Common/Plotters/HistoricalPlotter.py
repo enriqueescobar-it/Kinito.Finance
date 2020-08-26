@@ -65,29 +65,6 @@ class HistoricalPlotter(AbstractPlotter):
     def __GetProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
         return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
 
-    def Plot(self):
-        fig, ax = plt.subplots(3, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
-        plt.style.use('fivethirtyeight')
-        self.__dataFrame[self.__Col].plot(ax=ax[0])
-        ax[0].set(ylabel='Stock price ($)',
-                  title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
-        self.__dataSimpleReturns.plot(ax=ax[1])
-        ax[1].set(ylabel='Simple returns (%)')
-        self.__dataLogReturns.plot(ax=ax[2])
-        ax[2].set(ylabel='Log returns (%)', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        return plt
-
-    def GraphPlot(self):
-        fig1L2C = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
-        gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig1L2C)
-        plt.style.use('fivethirtyeight')
-        ax1 = fig1L2C.add_subplot(gs1L2C[0, 0])
-        ax1 = self.__plot(ax1)
-        ax2 = fig1L2C.add_subplot(gs1L2C[0, 1])
-        ax2 = self.__distroPlot(ax2)
-        plt.tight_layout()
-        return plt
-
     def __plot(self, ax: object):
         '''
         fig, ax = plt.subplots()
@@ -120,7 +97,7 @@ class HistoricalPlotter(AbstractPlotter):
         # ax.axis('tight')
         return ax
 
-    def __distroPlot(self, ax: object):
+    def __plotDistro(self, ax: object):
         ax = sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
         ax.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
                    alpha=0.50)
@@ -140,6 +117,52 @@ class HistoricalPlotter(AbstractPlotter):
         ax.legend(loc='upper left', fontsize=8)
         # ax.axis('tight')
         return ax
+
+    def __plotHist(self, a_df: DataFrame, timely: str = 'Daily'):
+        r_range: ndarray = self.__GetRankRange(a_df)
+        mu: float = a_df[self.__Col].mean()
+        sigma: float = a_df[self.__Col].std()
+        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
+        #plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        #plt.tight_layout()
+        fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        # histogram
+        #sns.distplot(self.__dataMonthly, vertical=False, rug=True)
+        #plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        #plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        #plt.xlabel(self.__Col + ' Percent Base=1')
+        #plt.legend(loc=self.__legendPlace)
+        sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=ax[0])
+        ax[0].set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' ' + timely + ' Returns', fontsize=16)
+        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma**2:.4f})')
+        ax[0].legend(loc=self.__legendPlace)
+        # Q-Q plot
+        qq = sm.qqplot(a_df[self.__Col].values, line='s', ax=ax[1])
+        ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' ' + timely + ' Returns', fontsize=16)
+        return plt
+
+    def Plot(self):
+        fig, ax = plt.subplots(3, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
+        plt.style.use('fivethirtyeight')
+        self.__dataFrame[self.__Col].plot(ax=ax[0])
+        ax[0].set(ylabel='Stock price ($)',
+                  title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
+        self.__dataSimpleReturns.plot(ax=ax[1])
+        ax[1].set(ylabel='Simple returns (%)')
+        self.__dataLogReturns.plot(ax=ax[2])
+        ax[2].set(ylabel='Log returns (%)', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        return plt
+
+    def GraphPlot(self):
+        fig1L2C = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
+        gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig1L2C)
+        plt.style.use('fivethirtyeight')
+        ax1 = fig1L2C.add_subplot(gs1L2C[0, 0])
+        ax1 = self.__plot(ax1)
+        ax2 = fig1L2C.add_subplot(gs1L2C[0, 1])
+        ax2 = self.__plotDistro(ax2)
+        plt.tight_layout()
+        return plt
 
     def Daily(self):
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
@@ -182,46 +205,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyHist(self):
-        r_range: ndarray = self.__GetRankRange(self.__dataDaily)
-        mu: float = self.__dataDaily[self.__Col].mean()
-        sigma: float = self.__dataDaily[self.__Col].std()
-        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
-        fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        #plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        #plt.tight_layout()
-        # histogram
-        sns.distplot(self.__dataDaily, vertical=False, rug=True, kde=False, norm_hist=True, ax=ax[0])
-        ax[0].set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
-        #plt.title(self.__ticker + ' ' + self.__Col + ' Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        #plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        #plt.xlabel(self.__Col + ' Percent Base=1')
-        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma**2:.4f})')
-        ax[0].legend(loc=self.__legendPlace)
-        #plt.legend(loc=self.__legendPlace)
-        # Q-Q plot
-        qq = sm.qqplot(self.__dataDaily[self.__Col].values, line='s', ax=ax[1])
-        ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
-        return plt
+        return self.__plotHist(self.__dataDaily, 'Daily')
 
     def MonthlyHist(self):
-        r_range: ndarray = self.__GetRankRange(self.__dataMonthly)
-        mu: float = self.__dataMonthly[self.__Col].mean()
-        sigma: float = self.__dataMonthly[self.__Col].std()
-        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
-        fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        #plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        #plt.tight_layout()
-        # histogram
-        sns.distplot(self.__dataMonthly, vertical=False, rug=True, kde=False, norm_hist=True, ax=ax[0])
-        ax[0].set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
-        #sns.distplot(self.__dataMonthly, vertical=False, rug=True)
-        #plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        #plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        #plt.xlabel(self.__Col + ' Percent Base=1')
-        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma**2:.4f})')
-        ax[0].legend(loc=self.__legendPlace)
-        #plt.legend(loc=self.__legendPlace)
-        # Q-Q plot
-        qq = sm.qqplot(self.__dataMonthly[self.__Col].values, line='s', ax=ax[1])
-        ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' Daily Returns', fontsize=16)
-        return plt
+        return self.__plotHist(self.__dataMonthly, 'Monthly')
