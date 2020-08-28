@@ -102,20 +102,38 @@ class YahooStockOption(AbstractStockOption):
         self.__GetYe()
         self.__GetYss()
 
+    def __GetOutliers(self, a_df: pd.DataFrame, n_sigmas: int = 3):
+        a_df['IsOutlier'] = pd.Series(dtype=int)
+        a_df['Outliers'] = pd.Series(dtype=float)
+        for ind in a_df.index:
+            x = a_df[self.SourceColumn][ind]
+            mu = a_df['mean'][ind]
+            sigma = a_df['std'][ind]
+            a_df['IsOutlier'][ind] = 1 if (x > mu + n_sigmas * sigma) | (x < mu - n_sigmas * sigma) else 0
+            if a_df['IsOutlier'][ind] == 1:
+                a_df['Outliers'][ind] = x
+        return a_df
+
     def __GetData(self):
         self.HistoricalData = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
         self.HistoricalData.fillna(method='ffill', inplace=True)
         self.HistoricalData.fillna(method='bfill', inplace=True)
-        #self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
+        # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
 
     def __GetDataSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
+        df_rolling = self.HistoricalSimpleReturns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
+        self.HistoricalSimpleReturns = self.HistoricalSimpleReturns.join(df_rolling)
+        self.HistoricalSimpleReturns = self.__GetOutliers(self.HistoricalSimpleReturns)
+        print('rolling', self.HistoricalSimpleReturns.head())
 
     def __GetDataLogReturns(self):
-        a_var = np.log(self.HistoricalData[self.SourceColumn]/self.HistoricalData[self.SourceColumn].shift(1))
+        a_var = np.log(self.HistoricalData[self.SourceColumn] / self.HistoricalData[self.SourceColumn].shift(1))
         self.HistoricalLogReturns = a_var.to_frame()
-        self.HistoricalLogReturns['MovingStd252'] = self.HistoricalLogReturns[self.SourceColumn].rolling(window=252).std().to_frame()
-        self.HistoricalLogReturns['MovingStd21'] = self.HistoricalLogReturns[self.SourceColumn].rolling(window=21).std().to_frame()
+        self.HistoricalLogReturns['MovingStd252'] = self.HistoricalLogReturns[self.SourceColumn].rolling(
+            window=252).std().to_frame()
+        self.HistoricalLogReturns['MovingStd21'] = self.HistoricalLogReturns[self.SourceColumn].rolling(
+            window=21).std().to_frame()
 
     def __GetDataDaily(self):
         self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
