@@ -187,6 +187,21 @@ class HistoricalPlotter(AbstractPlotter):
         plt.legend(loc=self.__legendPlace)
         return plt
 
+    def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
+        modelDailyDrop = a_df[self.__Col].dropna()
+        print(f'Average return: {100 * modelDailyDrop.mean():.2f}%')
+        modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
+        modelDailyFitted = modelDailyModel.fit(disp='off')
+        # modelDailyFitted.plot(annualize='D')
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.plot(a_df, label=self.__Col)
+        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. ' + a_period + ' Returns ' + str(self.__timeSpan.MonthCount) + ' months')
+        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        plt.ylabel(self.__Col + ' 1$ Growth Investment')
+        plt.legend(loc=self.__legendPlace)
+        return plt
+
     def Daily(self):
         return self.__plotPeriod(self.__dataDaily, 'Daily')
 
@@ -194,29 +209,10 @@ class HistoricalPlotter(AbstractPlotter):
         return self.__plotPeriod(self.__dataMonthly, 'Monthly')
 
     def DailyCum(self):
-        modelDailyDrop = self.__dataDailyCum[self.__Col].dropna()
-        modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
-        modelDailyFitted = modelDailyModel.fit(disp='off')
-        # modelDailyFitted.plot(annualize='D')
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.plot(self.__dataDailyCum, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' 1$ Growth Investment')
-        plt.legend(loc=self.__legendPlace)
-        return plt
+        return self.__plotPeriodCum(self.__dataDailyCum, 'Daily')
 
     def MonthlyCum(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.plot(self.__dataMonthlyCum, label=self.__Col)
-        plt.title(
-            self.__ticker + ' ' + self.__Col + ' Cumm. Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' 1$ Growth Investment')
-        plt.legend(loc=self.__legendPlace)
-        return plt
+        return self.__plotPeriodCum(self.__dataMonthlyCum, 'Monthly')
 
     def DailyHist(self):
         return self.__plotHist(self.__dataDaily, 'Daily')
