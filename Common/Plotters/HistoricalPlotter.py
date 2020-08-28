@@ -158,16 +158,16 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def Plot(self):
+        a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
+        x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
         fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
         plt.style.use('fivethirtyeight')
         # ax0
         self.__dataFrame[self.__Col].plot(ax=ax[0])
-        ax[0].set(ylabel='Stock price ($)',
-                  title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
+        ax[0].set(ylabel='Stock price ($)', title=a_title)
         # ax1
         self.__dataSimpleReturns[self.__Col].plot(ax=ax[1], label='Normal')
-        ax[1].scatter(self.__dataSimpleReturns.index, self.__dataSimpleReturns['Outliers'], color='red',
-                      label='Anomaly')
+        ax[1].scatter(self.__dataSimpleReturns.index, self.__dataSimpleReturns['Outliers'], color='red', label='Anomaly')
         ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
         ax[1].legend(loc=self.__legendPlace)
         # ax2
@@ -176,7 +176,7 @@ class HistoricalPlotter(AbstractPlotter):
         # ax3
         self.__dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
         self.__dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
-        ax[3].set(ylabel='Moving Volatility', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[3].legend(loc=self.__legendPlace)
         return plt
 
@@ -192,10 +192,11 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def __plotPeriod(self, a_df: DataFrame, period_str: str = 'Daily'):
+        a_title: str = self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns ' + str(self.__timeSpan.MonthCount) + ' months'
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(a_df, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns ' + str(self.__timeSpan.MonthCount) + ' mtonths')
+        plt.title(a_title)
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' Percent Base=1')
         plt.legend(loc=self.__legendPlace)
@@ -203,14 +204,17 @@ class HistoricalPlotter(AbstractPlotter):
 
     def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
         modelDailyDrop = a_df[self.__Col].dropna()
-        print(f'Average return: {100 * modelDailyDrop.mean():.2f}%')
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
         modelDailyFitted = modelDailyModel.fit(disp='off')
         # modelDailyFitted.plot(annualize='D')
+        avg_return = 100 * modelDailyDrop.mean()
+        avg_return_str: str = f'{avg_return:.2f}%'
+        print(f'Average return: {100 * modelDailyDrop.mean():.2f}%')
+        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cummulative {a_period} Returns {self.__timeSpan.MonthCount} months'
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(a_df, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. ' + a_period + ' Returns ' + str(self.__timeSpan.MonthCount) + ' months')
+        plt.title(a_title)
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' 1$ Growth Investment')
         plt.legend(loc=self.__legendPlace)
