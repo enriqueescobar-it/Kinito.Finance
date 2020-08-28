@@ -125,18 +125,18 @@ class HistoricalPlotter(AbstractPlotter):
         mu: float = a_df[self.__Col].mean()
         sigma: float = a_df[self.__Col].std()
         norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
-        #plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        #plt.tight_layout()
+        # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        # plt.tight_layout()
         fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # histogram
-        #sns.distplot(self.__dataMonthly, vertical=False, rug=True)
-        #plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        #plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        #plt.xlabel(self.__Col + ' Percent Base=1')
-        #plt.legend(loc=self.__legendPlace)
+        # sns.distplot(self.__dataMonthly, vertical=False, rug=True)
+        # plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        # plt.ylabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
+        # plt.xlabel(self.__Col + ' Percent Base=1')
+        # plt.legend(loc=self.__legendPlace)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=ax[0])
         ax[0].set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' ' + timely + ' Returns', fontsize=16)
-        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma**2:.4f})')
+        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
         ax[0].legend(loc=self.__legendPlace)
         # Q-Q plot
         qq = sm.qqplot(a_df[self.__Col].values, line='q', ax=ax[1])
@@ -146,18 +146,20 @@ class HistoricalPlotter(AbstractPlotter):
     def Plot(self):
         fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
         plt.style.use('fivethirtyeight')
-        #ax0
+        # ax0
         self.__dataFrame[self.__Col].plot(ax=ax[0])
-        ax[0].set(ylabel='Stock price ($)', title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
-        #ax1
+        ax[0].set(ylabel='Stock price ($)',
+                  title=self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months')
+        # ax1
         self.__dataSimpleReturns[self.__Col].plot(ax=ax[1], label='Normal')
-        ax[1].scatter(self.__dataSimpleReturns.index, self.__dataSimpleReturns['Outliers'], color='red', label='Anomaly')
+        ax[1].scatter(self.__dataSimpleReturns.index, self.__dataSimpleReturns['Outliers'], color='red',
+                      label='Anomaly')
         ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
         ax[1].legend(loc=self.__legendPlace)
-        #ax2
+        # ax2
         self.__dataLogReturns[self.__Col].plot(ax=ax[2])
         ax[2].set(ylabel='Log returns (%)')
-        #ax3
+        # ax3
         self.__dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
         self.__dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
         ax[3].set(ylabel='Moving Volatility', xlabel=self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
@@ -175,31 +177,27 @@ class HistoricalPlotter(AbstractPlotter):
         plt.tight_layout()
         return plt
 
-    def Daily(self):
+    def __plotPeriod(self, a_df: DataFrame, period_str: str = 'Daily'):
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
-        plt.plot(self.__dataDaily, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Daily Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.plot(a_df, label=self.__Col)
+        plt.title(self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns ' + str(self.__timeSpan.MonthCount) + ' mtonths')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' Percent Base=1')
         plt.legend(loc=self.__legendPlace)
         return plt
 
+    def Daily(self):
+        return self.__plotPeriod(self.__dataDaily, 'Daily')
+
     def Monthly(self):
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.plot(self.__dataMonthly, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' Percent Base=1')
-        plt.legend(loc=self.__legendPlace)
-        return plt
+        return self.__plotPeriod(self.__dataMonthly, 'Monthly')
 
     def DailyCum(self):
         modelDailyDrop = self.__dataDailyCum[self.__Col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
         modelDailyFitted = modelDailyModel.fit(disp='off')
-        #modelDailyFitted.plot(annualize='D')
+        # modelDailyFitted.plot(annualize='D')
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(self.__dataDailyCum, label=self.__Col)
@@ -213,7 +211,8 @@ class HistoricalPlotter(AbstractPlotter):
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(self.__dataMonthlyCum, label=self.__Col)
-        plt.title(self.__ticker + ' ' + self.__Col + ' Cumm. Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
+        plt.title(
+            self.__ticker + ' ' + self.__Col + ' Cumm. Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
         plt.ylabel(self.__Col + ' 1$ Growth Investment')
         plt.legend(loc=self.__legendPlace)
