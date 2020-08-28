@@ -83,19 +83,22 @@ class HistoricalPlotter(AbstractPlotter):
         # plt.tight_layout()
         # Plot the grid lines
         ax.plot(self.__dataFrame[self.__Col], label=self.__Col)
-        ax.axhline(self.__price, linestyle='--', label=self.__Col + '_Price=' + str(self.__price), color='cyan',
-                   alpha=0.50)
-        ax.axhline(self.__median, linestyle='--', label=self.__Col + '_Median=' + str(self.__median), color='blue',
-                   alpha=0.50)
-        ax.axhline(self.__mean, linestyle='--', label=self.__Col + '_Mean=' + str(self.__mean), color='orange')
-        ax.axhline(self.__yeHigh52, linestyle='--', label='yeHigh52=' + str(self.__yeHigh52), color='red', alpha=0.50)
-        ax.axhline(self.__yeLow52, linestyle='--', label='yeLow52=' + str(self.__yeLow52), color='green', alpha=0.50)
-        ax.axhline(self.__yeAverage200, linestyle='-.', label='yeAverage200=' + str(self.__yeAverage200),
-                   color='yellow', alpha=0.50)
-        ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange',
-                   alpha=0.50)
+        price_label: str = self.__Col + '_Price=' + str(self.__price)
+        ax.axhline(self.__price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
+        median_label: str = self.__Col + '_Median=' + str(self.__median)
+        ax.axhline(self.__median, linestyle='--', label=median_label, color='blue', alpha=0.50)
+        mean_label: str = self.__Col + '_Mean=' + str(self.__mean)
+        ax.axhline(self.__mean, linestyle='--', label=mean_label, color='orange')
+        high52_label: str = 'High52=' + str(self.__yeHigh52)
+        ax.axhline(self.__yeHigh52, linestyle='--', label=high52_label, color='red', alpha=0.50)
+        low52_label: str = 'Low52=' + str(self.__yeLow52)
+        ax.axhline(self.__yeLow52, linestyle='--', label=low52_label, color='green', alpha=0.50)
+        mean200_label: str = 'Average200=' + str(self.__yeAverage200)
+        ax.axhline(self.__yeAverage200, linestyle='-.', label=mean200_label, color='yellow', alpha=0.50)
+        mean50_label: str = 'Average50=' + str(self.__yeAverage50)
+        ax.axhline(self.__yeAverage50, linestyle='-.', label=mean50_label, color='orange', alpha=0.50)
         ax.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
-        ax.legend(loc='upper left', fontsize=8)
+        ax.legend(loc=self.__legendPlace, fontsize=8)
         # ax.axis('tight')
         return ax
 
@@ -116,7 +119,7 @@ class HistoricalPlotter(AbstractPlotter):
                    color='yellow', alpha=0.50)
         ax.axhline(self.__yeAverage50, linestyle='-.', label='yeAverage50=' + str(self.__yeAverage50), color='orange',
                    alpha=0.50)
-        ax.legend(loc='upper left', fontsize=8)
+        ax.legend(loc=self.__legendPlace, fontsize=8)
         # ax.axis('tight')
         return ax
 
