@@ -22,7 +22,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 yahooStockOption: YahooStockOption = YahooStockOption('CNI')#KL WCN OTEX AQN TFII
 print(yahooStockOption.HistoricalData.describe(include='all'))
-sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
+'''sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
 nyseIndex: AbstractStockMarketIndex = NyseIndex('yahoo', "^NYA", yahooStockOption.TimeSpan)
@@ -55,7 +55,7 @@ marketIndices.append(hangSengIndex)
 marketIndices.append(shenzhenComponentIndex)
 marketIndices.append(ibovespaIndex)
 marketIndices.append(ipcMexicoIndex)
-indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
+indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)'''
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()

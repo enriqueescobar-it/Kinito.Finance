@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 from numpy.core._multiarray_umath import ndarray
 from sklearn import preprocessing
-
-from Common.Measures.Time.TimeSpan import TimeSpan
 from pyarrow.lib import null
+from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
@@ -125,7 +124,6 @@ class YahooStockOption(AbstractStockOption):
         df_rolling = self.HistoricalSimpleReturns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
         self.HistoricalSimpleReturns = self.HistoricalSimpleReturns.join(df_rolling)
         self.HistoricalSimpleReturns = self.__GetOutliers(self.HistoricalSimpleReturns)
-        print('rolling', self.HistoricalSimpleReturns.head())
 
     def __GetDataLogReturns(self):
         a_var = np.log(self.HistoricalData[self.SourceColumn] / self.HistoricalData[self.SourceColumn].shift(1))

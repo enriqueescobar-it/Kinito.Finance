@@ -9,7 +9,7 @@ import statsmodels.api as sm
 from numpy.core._multiarray_umath import ndarray
 from pandas import DataFrame
 from pandas import Series
-
+from arch import arch_model
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
@@ -196,6 +196,10 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyCum(self):
+        modelDailyDrop = self.__dataDailyCum[self.__Col].dropna()
+        modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
+        modelDailyFitted = modelDailyModel.fit(disp='off')
+        #modelDailyFitted.plot(annualize='D')
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(self.__dataDailyCum, label=self.__Col)
