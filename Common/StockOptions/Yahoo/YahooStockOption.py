@@ -47,11 +47,12 @@ class YahooStockOption(AbstractStockOption):
     HistoricalDailyCum: pd.core.series.Series
     HistoricalL1Normalized: ndarray
     HistoricalLinReg: LinearRegression
+    HistoricalLinRegScore: float = -1.1
+    HistoricalLinRegPrediction: ndarray
     HistoricalLogReturns: pd.DataFrame
     HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalPred: pd.DataFrame
     HistoricalPrediction: pd.DataFrame
     HistoricalScaled: ndarray
     HistoricalSimpleReturns: pd.DataFrame
@@ -135,76 +136,55 @@ class YahooStockOption(AbstractStockOption):
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
 
     def __GetDataPrediction(self):
-        #self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].shift(-1).to_frame()
-        self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
-        self.HistoricalPrediction.dropna(inplace=True)
-        self.HistoricalPrediction.columns = ['Prediction']
-        print('HIST', self.HistoricalData.shape)
-        print('PRED', self.HistoricalPrediction.shape)
-        X = np.array(self.HistoricalData)
-        Y = np.array(self.HistoricalPrediction)
-        X = preprocessing.scale(X)
-        print(self.TimeSpan.DayCount)
-        forecast_time: int = int(round(len(self.HistoricalData)*0.9))
-        X_prediction = X[-forecast_time:]
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.5)
-        clf = LinearRegression()
-        clf.fit(X_train, Y_train)
-        prediction: ndarray = (clf.predict(X_prediction))
-        print('~~~', prediction.shape)
-        df = self.HistoricalData.head(len(self.HistoricalData)-1)
-        df = df[[self.SourceColumn]]
         #into the future
         self.FutureForecast = 30
         self.FutureColumn = 'Prediction' + str(self.FutureForecast)
-        self.HistoricalPred = self.HistoricalData[self.SourceColumn].to_frame()
-        self.HistoricalPred[self.FutureColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.FutureForecast)
+        self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
+        self.HistoricalPrediction[self.FutureColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.FutureForecast)
         self.HistoricalLinReg = LinearRegression()
-        #add future column
-        df[self.FutureColumn] = df[[self.SourceColumn]].shift(-self.FutureForecast)
         #independent X
         #convert to ndarray & remove last NaN rows
-        Xarray = np.array(df.drop([self.FutureColumn], 1))
+        Xarray = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))
         Xarray = Xarray[:-self.FutureForecast]
         #dependent Y
         #convert to ndarray & remove last NaN rows
-        Yarray = np.array(df[self.FutureColumn])
+        Yarray = np.array(self.HistoricalPrediction[self.FutureColumn])
         Yarray = Yarray[:-self.FutureForecast]
         #split into 80% train / 20% test => 0.2
         X_train, X_test, Y_train, Y_test = train_test_split(Xarray, Yarray, test_size=0.2)
         #LIN
         self.HistoricalLinReg.fit(X_train, Y_train)
-        clf_confidence: float = self.HistoricalLinReg.score(X_test, Y_test)
-        print('clf confidence', clf_confidence)
-        print('clf confidence', type(clf))
+        self.HistoricalLinRegScore = self.HistoricalLinReg.score(X_test, Y_test)
+        print('clf confidence', self.HistoricalLinRegScore)
         #SVR_LIN
-        svr_lin = SVR(kernel='linear', C=1e3)
+        svr_lin: SVR = SVR(kernel='linear', C=1e3)
         svr_lin.fit(X_test, Y_test)
         svr_lin_confidence = svr_lin.score(X_test, Y_test)
         print('svr_lin confidence', svr_lin_confidence)
         #SVR_POLY
-        svr_poly = SVR(kernel='poly', C=1e3, degree=2)
+        svr_poly: SVR = SVR(kernel='poly', C=1e3, degree=2)
         svr_poly.fit(X_test, Y_test)
         svr_poly_confidence = svr_poly.score(X_test, Y_test)
         print('svr_poly confidence', svr_poly_confidence)
         #SVR_RBF
-        svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
+        svr_rbf: SVR = SVR(kernel='rbf', C=1e3, gamma=0.1)
         svr_rbf.fit(X_test, Y_test)
         svr_rbf_confidence = svr_rbf.score(X_test, Y_test)
         print('svr_rbf confidence', svr_rbf_confidence)
         # x_forecast equal to last 30 days
-        x_forecast = np.array(df.drop([self.FutureColumn], 1))[-self.FutureForecast:]
+        x_forecast = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))[-self.FutureForecast:]
         #LIN predict n days
-        clf_prediction = self.HistoricalLinReg.predict(x_forecast)
-        print('clf_prediction', clf_prediction)
+        self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(x_forecast)
+        print('clf_prediction', self.HistoricalLinRegPrediction)
         #SVR_LIN predict n days
-        svr_lin_prediction = svr_lin.predict(x_forecast)
+        svr_lin_prediction: ndarray = svr_lin.predict(x_forecast)
         print('svr_rbf_prediction', svr_lin_prediction)
+        print('svr_rbf_prediction', type(svr_lin_prediction))
         #SVR_POLY predict n days
-        svr_poly_prediction = svr_poly.predict(x_forecast)
+        svr_poly_prediction: ndarray = svr_poly.predict(x_forecast)
         print('svr_poly_prediction', svr_poly_prediction)
         #SVR_RBF predict n days
-        svr_rbf_prediction = svr_rbf.predict(x_forecast)
+        svr_rbf_prediction: ndarray = svr_rbf.predict(x_forecast)
         print('svr_rbf_prediction', svr_rbf_prediction)
         exit(-111)
 
