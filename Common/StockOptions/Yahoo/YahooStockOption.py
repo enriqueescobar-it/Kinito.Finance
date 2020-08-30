@@ -59,6 +59,7 @@ class YahooStockOption(AbstractStockOption):
     HistoricalStandardized: ndarray
     HistoricalSVRLinear: SVR
     HistoricalSVRPoly: SVR
+    HistoricalSVRRbf: SVR
     RMSE: float = -1.1
     Source: str
     SourceColumn: str
@@ -146,6 +147,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalLinReg = LinearRegression()
         self.HistoricalSVRLinear = SVR(kernel='linear', C=1e3)
         self.HistoricalSVRPoly = SVR(kernel='poly', C=1e3, degree=2)
+        self.HistoricalSVRRbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
         #independent X
         #convert to ndarray & remove last NaN rows
         Xarray = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))
@@ -169,9 +171,8 @@ class YahooStockOption(AbstractStockOption):
         svr_poly_confidence = self.HistoricalSVRPoly.score(X_test, Y_test)
         print('svr_poly confidence', svr_poly_confidence)
         #SVR_RBF
-        svr_rbf: SVR = SVR(kernel='rbf', C=1e3, gamma=0.1)
-        svr_rbf.fit(X_test, Y_test)
-        svr_rbf_confidence = svr_rbf.score(X_test, Y_test)
+        self.HistoricalSVRRbf.fit(X_test, Y_test)
+        svr_rbf_confidence = self.HistoricalSVRRbf.score(X_test, Y_test)
         print('svr_rbf confidence', svr_rbf_confidence)
         # x_forecast equal to last 30 days
         x_forecast = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))[-self.FutureForecast:]
@@ -186,7 +187,7 @@ class YahooStockOption(AbstractStockOption):
         svr_poly_prediction: ndarray = self.HistoricalSVRPoly.predict(x_forecast)
         print('svr_poly_prediction', svr_poly_prediction)
         #SVR_RBF predict n days
-        svr_rbf_prediction: ndarray = svr_rbf.predict(x_forecast)
+        svr_rbf_prediction: ndarray = self.HistoricalSVRRbf.predict(x_forecast)
         print('svr_rbf_prediction', svr_rbf_prediction)
         exit(-111)
 
