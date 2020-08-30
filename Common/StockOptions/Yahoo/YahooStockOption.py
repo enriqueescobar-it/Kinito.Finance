@@ -39,8 +39,9 @@ class YahooStockOption(AbstractStockOption):
     FvRange52: List[float]
     FvRsi14: str
     FvVolume: int
-    FutureForecast: int = 30
-    FutureColumn: str = 'Prediction'
+    ForecastSpan: int = 30
+    ForecastArray: ndarray
+    HistoricalColumn: str = 'Prediction'
     HistoricalBinary: ndarray
     HistoricalData: pd.DataFrame
     HistoricalDaily: pd.DataFrame
@@ -59,10 +60,13 @@ class YahooStockOption(AbstractStockOption):
     HistoricalStandardized: ndarray
     HistoricalSVRLinear: SVR
     HistoricalSVRLinearScore: float = -1.1
+    HistoricalSVRLinearPrediction: ndarray
     HistoricalSVRPoly: SVR
     HistoricalSVRPolyScore: float = -1.1
+    HistoricalSVRPolyScorePrediction: ndarray
     HistoricalSVRRbf: SVR
     HistoricalSVRRbfScore: float = -1.1
+    HistoricalSVRRbfScorePrediction: ndarray
     RMSE: float = -1.1
     Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
@@ -143,22 +147,23 @@ class YahooStockOption(AbstractStockOption):
 
     def __GetDataPrediction(self):
         #into the future
-        self.FutureForecast = 30
-        self.FutureColumn = 'Prediction' + str(self.FutureForecast)
+        self.ForecastSpan = 30
+        self.HistoricalColumn = 'Prediction' + str(self.ForecastSpan)
         self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
-        self.HistoricalPrediction[self.FutureColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.FutureForecast)
+        self.HistoricalPrediction[self.HistoricalColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.ForecastSpan)
         self.HistoricalLinReg = LinearRegression()
         self.HistoricalSVRLinear = SVR(kernel='linear', C=1e3)
         self.HistoricalSVRPoly = SVR(kernel='poly', C=1e3, degree=2)
         self.HistoricalSVRRbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
+        self.ForecastArray = np.array(self.HistoricalPrediction.drop([self.HistoricalColumn], 1))[-self.ForecastSpan:]
         #independent X
         #convert to ndarray & remove last NaN rows
-        self.Xarray = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))
-        self.Xarray = self.Xarray[:-self.FutureForecast]
+        self.Xarray = np.array(self.HistoricalPrediction.drop([self.HistoricalColumn], 1))
+        self.Xarray = self.Xarray[:-self.ForecastSpan]
         #dependent Y
         #convert to ndarray & remove last NaN rows
-        self.Yarray = np.array(self.HistoricalPrediction[self.FutureColumn])
-        self.Yarray = self.Yarray[:-self.FutureForecast]
+        self.Yarray = np.array(self.HistoricalPrediction[self.HistoricalColumn])
+        self.Yarray = self.Yarray[:-self.ForecastSpan]
         #split into 80% train / 20% test => 0.2
         X_train, X_test, Y_train, Y_test = train_test_split(self.Xarray, self.Yarray, test_size=0.2)
         #LIN
@@ -178,19 +183,18 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalSVRRbfScore = self.HistoricalSVRRbf.score(X_test, Y_test)
         print('svr_rbf confidence', self.HistoricalSVRRbfScore)
         # x_forecast equal to last 30 days
-        x_forecast = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))[-self.FutureForecast:]
         #LIN predict n days
-        self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(x_forecast)
+        self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(self.ForecastArray)
         print('clf_prediction', self.HistoricalLinRegPrediction)
         #SVR_LIN predict n days
-        svr_lin_prediction: ndarray = self.HistoricalSVRLinear.predict(x_forecast)
-        print('svr_rbf_prediction', svr_lin_prediction)
+        self.HistoricalSVRLinearPrediction = self.HistoricalSVRLinear.predict(self.ForecastArray)
+        print('svr_rbf_prediction', self.HistoricalSVRLinearPrediction)
         #SVR_POLY predict n days
-        svr_poly_prediction: ndarray = self.HistoricalSVRPoly.predict(x_forecast)
-        print('svr_poly_prediction', svr_poly_prediction)
+        self.HistoricalSVRPolyPrediction = self.HistoricalSVRPoly.predict(self.ForecastArray)
+        print('svr_poly_prediction', self.HistoricalSVRPolyPrediction)
         #SVR_RBF predict n days
-        svr_rbf_prediction: ndarray = self.HistoricalSVRRbf.predict(x_forecast)
-        print('svr_rbf_prediction', svr_rbf_prediction)
+        self.HistoricalSVRRbfPrediction = self.HistoricalSVRRbf.predict(self.ForecastArray)
+        print('svr_rbf_prediction', self.HistoricalSVRRbfPrediction)
         exit(-111)
 
     def __GetDataSimpleReturns(self):
