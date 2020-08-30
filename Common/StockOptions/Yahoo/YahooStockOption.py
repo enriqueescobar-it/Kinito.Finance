@@ -58,12 +58,15 @@ class YahooStockOption(AbstractStockOption):
     HistoricalSimpleReturns: pd.DataFrame
     HistoricalStandardized: ndarray
     HistoricalSVRLinear: SVR
+    HistoricalSVRLinearScore: float = -1.1
     HistoricalSVRPoly: SVR
+    HistoricalSVRPolyScore: float = -1.1
     HistoricalSVRRbf: SVR
+    HistoricalSVRRbfScore: float = -1.1
     RMSE: float = -1.1
-    Source: str
-    SourceColumn: str
-    Ticker: str
+    Source: str = 'yahoo'
+    SourceColumn: str = 'Adj Close'
+    Ticker: str = 'TD'
     TimeSpan: TimeSpan
     Xarray: ndarray
     Yarray: ndarray
@@ -150,30 +153,30 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalSVRRbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
         #independent X
         #convert to ndarray & remove last NaN rows
-        Xarray = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))
-        Xarray = Xarray[:-self.FutureForecast]
+        self.Xarray = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))
+        self.Xarray = self.Xarray[:-self.FutureForecast]
         #dependent Y
         #convert to ndarray & remove last NaN rows
-        Yarray = np.array(self.HistoricalPrediction[self.FutureColumn])
-        Yarray = Yarray[:-self.FutureForecast]
+        self.Yarray = np.array(self.HistoricalPrediction[self.FutureColumn])
+        self.Yarray = self.Yarray[:-self.FutureForecast]
         #split into 80% train / 20% test => 0.2
-        X_train, X_test, Y_train, Y_test = train_test_split(Xarray, Yarray, test_size=0.2)
+        X_train, X_test, Y_train, Y_test = train_test_split(self.Xarray, self.Yarray, test_size=0.2)
         #LIN
         self.HistoricalLinReg.fit(X_train, Y_train)
         self.HistoricalLinRegScore = self.HistoricalLinReg.score(X_test, Y_test)
         print('clf confidence', self.HistoricalLinRegScore)
         #SVR_LIN
         self.HistoricalSVRLinear.fit(X_test, Y_test)
-        svr_lin_confidence = self.HistoricalSVRLinear.score(X_test, Y_test)
-        print('svr_lin confidence', svr_lin_confidence)
+        self.HistoricalSVRLinearScore = self.HistoricalSVRLinear.score(X_test, Y_test)
+        print('svr_lin_confidence', self.HistoricalSVRLinearScore)
         #SVR_POLY
         self.HistoricalSVRPoly.fit(X_test, Y_test)
-        svr_poly_confidence = self.HistoricalSVRPoly.score(X_test, Y_test)
-        print('svr_poly confidence', svr_poly_confidence)
+        self.HistoricalSVRPolyScore = self.HistoricalSVRPoly.score(X_test, Y_test)
+        print('svr_poly confidence', self.HistoricalSVRPolyScore)
         #SVR_RBF
         self.HistoricalSVRRbf.fit(X_test, Y_test)
-        svr_rbf_confidence = self.HistoricalSVRRbf.score(X_test, Y_test)
-        print('svr_rbf confidence', svr_rbf_confidence)
+        self.HistoricalSVRRbfScore = self.HistoricalSVRRbf.score(X_test, Y_test)
+        print('svr_rbf confidence', self.HistoricalSVRRbfScore)
         # x_forecast equal to last 30 days
         x_forecast = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))[-self.FutureForecast:]
         #LIN predict n days
@@ -182,7 +185,6 @@ class YahooStockOption(AbstractStockOption):
         #SVR_LIN predict n days
         svr_lin_prediction: ndarray = self.HistoricalSVRLinear.predict(x_forecast)
         print('svr_rbf_prediction', svr_lin_prediction)
-        print('svr_rbf_prediction', type(svr_lin_prediction))
         #SVR_POLY predict n days
         svr_poly_prediction: ndarray = self.HistoricalSVRPoly.predict(x_forecast)
         print('svr_poly_prediction', svr_poly_prediction)
