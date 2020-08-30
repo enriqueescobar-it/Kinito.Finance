@@ -1,8 +1,10 @@
 from typing import List
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from numpy.core._multiarray_umath import ndarray
 from sklearn import preprocessing
+from sklearn.svm import SVR
 from pyarrow.lib import null
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
@@ -11,6 +13,10 @@ from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockMarketIndex import AbstractStockMarketIndex
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
+#For Prediction
+from sklearn.linear_model import LinearRegression
+from sklearn import preprocessing, svm
+from sklearn.model_selection import train_test_split
 
 
 class YahooStockOption(AbstractStockOption):
@@ -34,6 +40,7 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     HistoricalData: pd.DataFrame
+    HistoricalPrediction: pd.DataFrame
     HistoricalSimpleReturns: pd.DataFrame
     HistoricalLogReturns: pd.DataFrame
     HistoricalDaily: pd.DataFrame
@@ -45,6 +52,7 @@ class YahooStockOption(AbstractStockOption):
     HistoricalL1Normalized: ndarray
     HistoricalBinary: ndarray
     HistoricalMarketIndex: AbstractStockMarketIndex
+    RMSE: float
     Ticker: str
     TimeSpan: TimeSpan
     Source: str
@@ -87,6 +95,7 @@ class YahooStockOption(AbstractStockOption):
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self.__GetData()
+        self.__GetDataPrediction()
         self.__GetDataSimpleReturns()
         self.__GetDataLogReturns()
         self.__GetDataDaily()
@@ -119,11 +128,139 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalData.fillna(method='bfill', inplace=True)
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
 
+    def __GetDataPrediction(self):
+        #self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].shift(-1).to_frame()
+        self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
+        self.HistoricalPrediction.dropna(inplace=True)
+        self.HistoricalPrediction.columns = ['Prediction']
+        print('HIST', self.HistoricalData.shape)
+        print('PRED', self.HistoricalPrediction.shape)
+        X = np.array(self.HistoricalData)
+        Y = np.array(self.HistoricalPrediction)
+        X = preprocessing.scale(X)
+        print(self.TimeSpan.DayCount)
+        forecast_time: int = int(round(len(self.HistoricalData)*0.9))
+        X_prediction = X[-forecast_time:]
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.5)
+        clf = LinearRegression()
+        clf.fit(X_train, Y_train)
+        prediction: ndarray = (clf.predict(X_prediction))
+        print('~~~', prediction.shape)
+        df = self.HistoricalData.head(len(self.HistoricalData)-1)
+        df = df[[self.SourceColumn]]
+        #into the future
+        forecast_out: int = 30
+        prediction_col: str = 'Prediction' + str(forecast_out)
+        #add future column
+        df[prediction_col] = df[[self.SourceColumn]].shift(-forecast_out)
+        #independent X
+        #convert to ndarray & remove last NaN rows
+        X: ndarray = np.array(df.drop([prediction_col], 1))
+        X = X[:-forecast_out]
+        #dependent Y
+        #convert to ndarray & remove last NaN rows
+        Y: ndarray = np.array(df[prediction_col])
+        Y = Y[:-forecast_out]
+        #split into 80% train / 20% test => 0.2
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+        #LIN
+        clf = LinearRegression()
+        clf.fit(X_train, Y_train)
+        clf_confidence = clf.score(X_test, Y_test)
+        print('clf confidence', clf_confidence)
+        #SVR_LIN
+        svr_lin = SVR(kernel='linear', C=1e3)
+        svr_lin.fit(X_test, Y_test)
+        svr_lin_confidence = svr_lin.score(X_test, Y_test)
+        print('svr_lin confidence', svr_lin_confidence)
+        #SVR_POLY
+        svr_poly = SVR(kernel='poly', C=1e3, degree=2)
+        svr_poly.fit(X_test, Y_test)
+        svr_poly_confidence = svr_poly.score(X_test, Y_test)
+        print('svr_poly confidence', svr_poly_confidence)
+        #SVR_RBF
+        svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
+        svr_rbf.fit(X_test, Y_test)
+        svr_rbf_confidence = svr_rbf.score(X_test, Y_test)
+        print('svr_rbf confidence', svr_rbf_confidence)
+        # x_forecast equal to last 30 days
+        x_forecast = np.array(df.drop([prediction_col], 1))[-forecast_out:]
+        #LIN predict n days
+        clf_prediction = clf.predict(x_forecast)
+        print('clf_prediction', clf_prediction)
+        #SVR_LIN predict n days
+        svr_lin_prediction = svr_lin.predict(x_forecast)
+        print('svr_rbf_prediction', svr_lin_prediction)
+        #SVR_POLY predict n days
+        svr_poly_prediction = svr_poly.predict(x_forecast)
+        print('svr_poly_prediction', svr_poly_prediction)
+        #SVR_RBF predict n days
+        svr_rbf_prediction = svr_rbf.predict(x_forecast)
+        print('svr_rbf_prediction', svr_rbf_prediction)
+        exit(-111)
+
     def __GetDataSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
         df_rolling = self.HistoricalSimpleReturns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
         self.HistoricalSimpleReturns = self.HistoricalSimpleReturns.join(df_rolling)
         self.HistoricalSimpleReturns = self.__GetOutliers(self.HistoricalSimpleReturns)
+        df = self.HistoricalSimpleReturns[self.SourceColumn].dropna()
+        dfLength = len(df)
+        dfLength80 = int(round(dfLength*0.8))
+        dfLength20 = dfLength - dfLength80
+        train = df[:dfLength80].to_frame()
+        test = df[dfLength80:].to_frame()
+        ##
+        print(train.shape)
+        print(dfLength80)
+        print(test.shape)
+        print(dfLength20)
+        preds = []
+        for i in range(0, test.shape[0]):
+            a = train[self.SourceColumn][len(train)-dfLength20+i:].sum() + sum(preds)
+            b = a/dfLength20
+            preds.append(b)
+        self.RMSE = np.sqrt(np.mean(np.power((np.array(test[self.SourceColumn])-preds), 2)))
+        print('\n RMSE value on validation set:', self.RMSE)
+        lin_svr = SVR(kernel='linear', C=1000.0)
+        #lin_svr.fit(self.HistoricalSimpleReturns.index, self.HistoricalSimpleReturns[self.SourceColumn])
+        ##
+        #T = len(test)
+        #N = len(test)
+        #S_0 = df[train.index[-1]]#.date()]
+        #N_SIM = 100
+        #mu = train.mean()
+        #sigma = train.std()
+        #gbm_simulations: ndarray = self.simulate_gbm(S_0, mu, sigma, N_SIM, T, N)
+        #gbm_simulationsT: ndarray = np.transpose(gbm_simulations)
+        #print('gbm_simulationsT', gbm_simulationsT.shape)
+        # prepare objects for plotting
+        #LAST_TRAIN_DATE = train.index[-1].date()
+        #FIRST_TEST_DATE = test.index[0].date()
+        #LAST_TEST_DATE = test.index[-1].date()
+        #PLOT_TITLE = f'{self.Ticker} Simulation ({FIRST_TEST_DATE}:{LAST_TEST_DATE})'
+        #selected_indices = self.HistoricalData[self.SourceColumn][LAST_TRAIN_DATE:LAST_TEST_DATE].index
+        #a_index = [date.date() for date in selected_indices]
+        #print('a_index', len(a_index))
+        #gbm_simulationsDf = pd.DataFrame(data=gbm_simulationsT, index=a_index)
+        #print('gbm_simulationsDf', gbm_simulationsDf.shape)
+        # plotting
+        #ax = gbm_simulationsDf.plot(alpha=0.2, legend=False)
+        #line_1, = ax.plot(a_index, gbm_simulationsDf.mean(axis=1), color='red')
+        #line_2, = ax.plot(a_index, self.HistoricalData[self.SourceColumn][LAST_TRAIN_DATE:LAST_TEST_DATE], color='blue')
+        #ax.set_title(PLOT_TITLE, fontsize=16)
+        #ax.legend((line_1, line_2), ('mean', 'actual'))
+        #plt.show()
+
+    def simulate_gbm(self, s_0, mu, sigma, n_sims, T, N):
+        dt = T/N
+        dW = np.random.normal(scale = np.sqrt(dt), size=(n_sims, N))
+        W = np.cumsum(dW, axis=1)
+        time_step = np.linspace(dt, T, N)
+        time_steps = np.broadcast_to(time_step, (n_sims, N))
+        S_t = s_0 * np.exp((mu - 0.5 * sigma ** 2) * time_steps + sigma * W)
+        S_t = np.insert(S_t, 0, s_0, axis=1)
+        return S_t
 
     def __GetDataLogReturns(self):
         a_var = np.log(self.HistoricalData[self.SourceColumn] / self.HistoricalData[self.SourceColumn].shift(1))
