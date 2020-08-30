@@ -39,24 +39,30 @@ class YahooStockOption(AbstractStockOption):
     FvRange52: List[float]
     FvRsi14: str
     FvVolume: int
+    FutureForecast: int = 30
+    FutureColumn: str = 'Prediction'
+    HistoricalBinary: ndarray
     HistoricalData: pd.DataFrame
-    HistoricalPrediction: pd.DataFrame
-    HistoricalSimpleReturns: pd.DataFrame
-    HistoricalLogReturns: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
+    HistoricalL1Normalized: ndarray
+    HistoricalLinReg: LinearRegression
+    HistoricalLogReturns: pd.DataFrame
+    HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalStandardized: ndarray
+    HistoricalPred: pd.DataFrame
+    HistoricalPrediction: pd.DataFrame
     HistoricalScaled: ndarray
-    HistoricalL1Normalized: ndarray
-    HistoricalBinary: ndarray
-    HistoricalMarketIndex: AbstractStockMarketIndex
-    RMSE: float
-    Ticker: str
-    TimeSpan: TimeSpan
+    HistoricalSimpleReturns: pd.DataFrame
+    HistoricalStandardized: ndarray
+    RMSE: float = -1.1
     Source: str
     SourceColumn: str
+    Ticker: str
+    TimeSpan: TimeSpan
+    Xarray: ndarray
+    Yarray: ndarray
     YeUrl: str = 'NA'
     YeLogoUrl: str = 'NA'
     YeAddress: str = 'NA'
@@ -149,25 +155,28 @@ class YahooStockOption(AbstractStockOption):
         df = self.HistoricalData.head(len(self.HistoricalData)-1)
         df = df[[self.SourceColumn]]
         #into the future
-        forecast_out: int = 30
-        prediction_col: str = 'Prediction' + str(forecast_out)
+        self.FutureForecast = 30
+        self.FutureColumn = 'Prediction' + str(self.FutureForecast)
+        self.HistoricalPred = self.HistoricalData[self.SourceColumn].to_frame()
+        self.HistoricalPred[self.FutureColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.FutureForecast)
+        self.HistoricalLinReg = LinearRegression()
         #add future column
-        df[prediction_col] = df[[self.SourceColumn]].shift(-forecast_out)
+        df[self.FutureColumn] = df[[self.SourceColumn]].shift(-self.FutureForecast)
         #independent X
         #convert to ndarray & remove last NaN rows
-        X: ndarray = np.array(df.drop([prediction_col], 1))
-        X = X[:-forecast_out]
+        Xarray = np.array(df.drop([self.FutureColumn], 1))
+        Xarray = Xarray[:-self.FutureForecast]
         #dependent Y
         #convert to ndarray & remove last NaN rows
-        Y: ndarray = np.array(df[prediction_col])
-        Y = Y[:-forecast_out]
+        Yarray = np.array(df[self.FutureColumn])
+        Yarray = Yarray[:-self.FutureForecast]
         #split into 80% train / 20% test => 0.2
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
+        X_train, X_test, Y_train, Y_test = train_test_split(Xarray, Yarray, test_size=0.2)
         #LIN
-        clf = LinearRegression()
-        clf.fit(X_train, Y_train)
-        clf_confidence = clf.score(X_test, Y_test)
+        self.HistoricalLinReg.fit(X_train, Y_train)
+        clf_confidence: float = self.HistoricalLinReg.score(X_test, Y_test)
         print('clf confidence', clf_confidence)
+        print('clf confidence', type(clf))
         #SVR_LIN
         svr_lin = SVR(kernel='linear', C=1e3)
         svr_lin.fit(X_test, Y_test)
@@ -184,9 +193,9 @@ class YahooStockOption(AbstractStockOption):
         svr_rbf_confidence = svr_rbf.score(X_test, Y_test)
         print('svr_rbf confidence', svr_rbf_confidence)
         # x_forecast equal to last 30 days
-        x_forecast = np.array(df.drop([prediction_col], 1))[-forecast_out:]
+        x_forecast = np.array(df.drop([self.FutureColumn], 1))[-self.FutureForecast:]
         #LIN predict n days
-        clf_prediction = clf.predict(x_forecast)
+        clf_prediction = self.HistoricalLinReg.predict(x_forecast)
         print('clf_prediction', clf_prediction)
         #SVR_LIN predict n days
         svr_lin_prediction = svr_lin.predict(x_forecast)
