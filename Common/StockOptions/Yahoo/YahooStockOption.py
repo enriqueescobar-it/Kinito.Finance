@@ -57,6 +57,8 @@ class YahooStockOption(AbstractStockOption):
     HistoricalScaled: ndarray
     HistoricalSimpleReturns: pd.DataFrame
     HistoricalStandardized: ndarray
+    HistoricalSVRLinear: SVR
+    HistoricalSVRPoly: SVR
     RMSE: float = -1.1
     Source: str
     SourceColumn: str
@@ -142,6 +144,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
         self.HistoricalPrediction[self.FutureColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.FutureForecast)
         self.HistoricalLinReg = LinearRegression()
+        self.HistoricalSVRLinear = SVR(kernel='linear', C=1e3)
         #independent X
         #convert to ndarray & remove last NaN rows
         Xarray = np.array(self.HistoricalPrediction.drop([self.FutureColumn], 1))
@@ -157,9 +160,8 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalLinRegScore = self.HistoricalLinReg.score(X_test, Y_test)
         print('clf confidence', self.HistoricalLinRegScore)
         #SVR_LIN
-        svr_lin: SVR = SVR(kernel='linear', C=1e3)
-        svr_lin.fit(X_test, Y_test)
-        svr_lin_confidence = svr_lin.score(X_test, Y_test)
+        self.HistoricalSVRLinear.fit(X_test, Y_test)
+        svr_lin_confidence = self.HistoricalSVRLinear.score(X_test, Y_test)
         print('svr_lin confidence', svr_lin_confidence)
         #SVR_POLY
         svr_poly: SVR = SVR(kernel='poly', C=1e3, degree=2)
@@ -177,7 +179,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(x_forecast)
         print('clf_prediction', self.HistoricalLinRegPrediction)
         #SVR_LIN predict n days
-        svr_lin_prediction: ndarray = svr_lin.predict(x_forecast)
+        svr_lin_prediction: ndarray = self.HistoricalSVRLinear.predict(x_forecast)
         print('svr_rbf_prediction', svr_lin_prediction)
         print('svr_rbf_prediction', type(svr_lin_prediction))
         #SVR_POLY predict n days
