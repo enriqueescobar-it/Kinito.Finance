@@ -15,6 +15,9 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
+    __dataSVRrbfPrediction: ndarray
+    __dataSVRPolyPrediction: ndarray
+    __dataSVRLinearPrediction: ndarray
     __dataLinearRegPrediction: ndarray
     __dataTreeRegPrediction: ndarray
     __dataXarray: ndarray
@@ -44,6 +47,9 @@ class HistoricalPlotter(AbstractPlotter):
         self.__dataFrame = y_stockOption.HistoricalData
         self.__dataTreeRegPrediction = y_stockOption.HistoricalTreeRegPrediction
         self.__dataLinearRegPrediction = y_stockOption.HistoricalLinRegPrediction
+        self.__dataSVRLinearPrediction = y_stockOption.HistoricalSVRLinearPrediction
+        self.__dataSVRPolyPrediction = y_stockOption.HistoricalSVRPolyPrediction
+        self.__dataSVRrbfPrediction = y_stockOption.HistoricalSVRRbfPrediction
         self.__dataXarray = y_stockOption.Xarray
         self.__dataSimpleReturns = y_stockOption.HistoricalSimpleReturns
         self.__dataLogReturns = y_stockOption.HistoricalLogReturns
@@ -212,6 +218,42 @@ class HistoricalPlotter(AbstractPlotter):
         plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
         plt.plot(self.__dataFrame[self.__Col])
         forecast_df[label] = self.__dataLinearRegPrediction
+        plt.plot(forecast_df[[self.__Col, label]])
+        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.show()
+        #
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.title('SVR Linear Regression Prediction' + title)
+        plt.xlabel(x_label)
+        plt.ylabel(self.__Col)
+        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
+        plt.plot(self.__dataFrame[self.__Col])
+        forecast_df[label] = self.__dataSVRLinearPrediction
+        plt.plot(forecast_df[[self.__Col, label]])
+        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.show()
+        #
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.title('SVR Polynomial Regression Prediction' + title)
+        plt.xlabel(x_label)
+        plt.ylabel(self.__Col)
+        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
+        plt.plot(self.__dataFrame[self.__Col])
+        forecast_df[label] = self.__dataSVRPolyPrediction
+        plt.plot(forecast_df[[self.__Col, label]])
+        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.show()
+        #
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.title('SVR RBF Regression Prediction' + title)
+        plt.xlabel(x_label)
+        plt.ylabel(self.__Col)
+        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
+        plt.plot(self.__dataFrame[self.__Col])
+        forecast_df[label] = self.__dataSVRrbfPrediction
         plt.plot(forecast_df[[self.__Col, label]])
         plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
         return plt
