@@ -211,14 +211,13 @@ class YahooStockOption(AbstractStockOption):
         #plot(days, self.HistoricalSVRRbf.predict(days), color='green', label='RBFmodel')
         #print('SVR RBF preiced', self.HistoricalSVRRbf.predict(self.ForecastArray))
         #exit(-111)
-        predictions = self.HistoricalTreeRegPrediction
         valid = self.HistoricalData[self.Xarray.shape[0]:]
-        valid['Predictions'] = predictions
         valid['Predictions'] = self.HistoricalTreeRegPrediction
         plt.figure(figsize=(8, 6))
         plt.title('Model')
         plt.xlabel('Days')
         plt.ylabel(self.SourceColumn)
+        plt.scatter(self.HistoricalData.index, self.HistoricalData[self.SourceColumn], color='black')
         plt.plot(self.HistoricalData[self.SourceColumn])
         plt.plot(valid[[self.SourceColumn, 'Predictions']])
         plt.legend([self.SourceColumn, self.SourceColumn + 'Training', self.SourceColumn + 'Predicted'])
