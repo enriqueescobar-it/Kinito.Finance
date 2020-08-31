@@ -20,8 +20,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.svm import SVR
-#from keras.models import Sequential
-#from keras.layers import Dense, LSTM
+from keras.models import Sequential
+from keras.layers import Dense, LSTM
 
 
 class YahooStockOption(AbstractStockOption):
@@ -214,7 +214,7 @@ class YahooStockOption(AbstractStockOption):
         #plot(days, self.HistoricalSVRRbf.predict(days), color='green', label='RBFmodel')
         #print('SVR RBF preiced', self.HistoricalSVRRbf.predict(self.ForecastArray))
         #exit(-111)
-        valid = self.HistoricalData[self.Xarray.shape[0]:]
+        '''valid = self.HistoricalData[self.Xarray.shape[0]:]
         valid['Predictions'] = self.HistoricalTreeRegPrediction
         plt.figure(figsize=(8, 6))
         plt.title('Model')
@@ -224,8 +224,7 @@ class YahooStockOption(AbstractStockOption):
         plt.plot(self.HistoricalData[self.SourceColumn])
         plt.plot(valid[[self.SourceColumn, 'Predictions']])
         plt.legend([self.SourceColumn, self.SourceColumn + 'Training', self.SourceColumn + 'Predicted'])
-        plt.show()
-        exit(220)
+        plt.show()'''
 
     def __GetDataSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()

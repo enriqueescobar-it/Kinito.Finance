@@ -61,6 +61,7 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
+yahooStockOptionPlotter.PlotForecast().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Daily().show()
 yahooStockOptionPlotter.DailyCum().show()

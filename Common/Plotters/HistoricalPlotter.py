@@ -15,6 +15,9 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
+    __dataLinearRegPrediction: ndarray
+    __dataTreeRegPrediction: ndarray
+    __dataXarray: ndarray
     __dataSimpleReturns: DataFrame
     __dataLogReturns: DataFrame
     __dataDaily: DataFrame
@@ -39,6 +42,9 @@ class HistoricalPlotter(AbstractPlotter):
         if y_stockOption.Source == 'yahoo':
             self.__Col = "Adj Close"
         self.__dataFrame = y_stockOption.HistoricalData
+        self.__dataTreeRegPrediction = y_stockOption.HistoricalTreeRegPrediction
+        self.__dataLinearRegPrediction = y_stockOption.HistoricalLinRegPrediction
+        self.__dataXarray = y_stockOption.Xarray
         self.__dataSimpleReturns = y_stockOption.HistoricalSimpleReturns
         self.__dataLogReturns = y_stockOption.HistoricalLogReturns
         self.__dataDaily = y_stockOption.HistoricalDaily
@@ -178,6 +184,36 @@ class HistoricalPlotter(AbstractPlotter):
         self.__dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
         ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[3].legend(loc=self.__legendPlace)
+        return plt
+
+    def PlotForecast(self):
+        forecast_df: DataFrame = self.__dataFrame[self.__dataXarray.shape[0]:]
+        title: str = ' Model'
+        x_label: str = 'Days'
+        label: str = 'Predictions'
+        #
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.title('Tree Regression Prediction' + title)
+        plt.xlabel(x_label)
+        plt.ylabel(self.__Col)
+        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
+        plt.plot(self.__dataFrame[self.__Col])
+        forecast_df[label] = self.__dataTreeRegPrediction
+        plt.plot(forecast_df[[self.__Col, label]])
+        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.show()
+        #
+        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.title('Linear Regression Prediction' + title)
+        plt.xlabel(x_label)
+        plt.ylabel(self.__Col)
+        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
+        plt.plot(self.__dataFrame[self.__Col])
+        forecast_df[label] = self.__dataLinearRegPrediction
+        plt.plot(forecast_df[[self.__Col, label]])
+        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
         return plt
 
     def GraphPlot(self):
