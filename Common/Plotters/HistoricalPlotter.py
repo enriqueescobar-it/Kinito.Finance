@@ -15,6 +15,11 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
+    __dataSVRrbfScore: float
+    __dataSVRPolyScore: float
+    __dataSVRLinearScore: float
+    __dataTreeRegScore: float
+    __dataLinearRegScore: float
     __dataSVRrbfPrediction: ndarray
     __dataSVRPolyPrediction: ndarray
     __dataSVRLinearPrediction: ndarray
@@ -46,10 +51,15 @@ class HistoricalPlotter(AbstractPlotter):
             self.__Col = "Adj Close"
         self.__dataFrame = y_stockOption.HistoricalData
         self.__dataTreeRegPrediction = y_stockOption.HistoricalTreeRegPrediction
+        self.__dataTreeRegScore = round(y_stockOption.HistoricalTreeRegScore, 5)
         self.__dataLinearRegPrediction = y_stockOption.HistoricalLinRegPrediction
+        self.__dataLinearRegScore = round(y_stockOption.HistoricalLinRegScore, 5)
         self.__dataSVRLinearPrediction = y_stockOption.HistoricalSVRLinearPrediction
+        self.__dataSVRLinearScore = round(y_stockOption.HistoricalSVRLinearScore, 5)
         self.__dataSVRPolyPrediction = y_stockOption.HistoricalSVRPolyPrediction
+        self.__dataSVRPolyScore = round(y_stockOption.HistoricalSVRPolyScore, 5)
         self.__dataSVRrbfPrediction = y_stockOption.HistoricalSVRRbfPrediction
+        self.__dataSVRrbfScore = round(y_stockOption.HistoricalSVRRbfScore, 5)
         self.__dataXarray = y_stockOption.Xarray
         self.__dataSimpleReturns = y_stockOption.HistoricalSimpleReturns
         self.__dataLogReturns = y_stockOption.HistoricalLogReturns
@@ -194,13 +204,13 @@ class HistoricalPlotter(AbstractPlotter):
 
     def PlotForecast(self):
         forecast_df: DataFrame = self.__dataFrame[self.__dataXarray.shape[0]:]
-        title: str = ' Model'
+        title: str = ' Model '
         x_label: str = 'Days'
         label: str = 'Predictions'
         #
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
-        plt.title('Tree Regression Prediction' + title)
+        plt.title('Tree Regression Prediction' + title + 'Score=' + str(self.__dataTreeRegScore))
         plt.xlabel(x_label)
         plt.ylabel(self.__Col)
         plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
@@ -212,7 +222,7 @@ class HistoricalPlotter(AbstractPlotter):
         #
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
-        plt.title('Linear Regression Prediction' + title)
+        plt.title('Linear Regression Prediction' + title + 'Score=' + str(self.__dataLinearRegScore))
         plt.xlabel(x_label)
         plt.ylabel(self.__Col)
         plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
@@ -224,7 +234,7 @@ class HistoricalPlotter(AbstractPlotter):
         #
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
-        plt.title('SVR Linear Regression Prediction' + title)
+        plt.title('SVR Linear Regression Prediction' + title + 'Score=' + str(self.__dataSVRLinearScore))
         plt.xlabel(x_label)
         plt.ylabel(self.__Col)
         plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
@@ -236,7 +246,7 @@ class HistoricalPlotter(AbstractPlotter):
         #
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
-        plt.title('SVR Polynomial Regression Prediction' + title)
+        plt.title('SVR Polynomial Regression Prediction' + title + 'Score=' + str(self.__dataSVRPolyScore))
         plt.xlabel(x_label)
         plt.ylabel(self.__Col)
         plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
@@ -248,7 +258,7 @@ class HistoricalPlotter(AbstractPlotter):
         #
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
-        plt.title('SVR RBF Regression Prediction' + title)
+        plt.title('SVR RBF Regression Prediction' + title + 'Score=' + str(self.__dataSVRrbfScore))
         plt.xlabel(x_label)
         plt.ylabel(self.__Col)
         plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')

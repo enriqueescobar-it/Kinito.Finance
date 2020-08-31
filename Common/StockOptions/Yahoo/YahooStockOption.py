@@ -198,19 +198,14 @@ class YahooStockOption(AbstractStockOption):
         # x_forecast equal to last 30 days
         #TREE predict n days
         self.HistoricalTreeRegPrediction = self.HistoricalTreeReg.predict(self.ForecastArray)
-        print('tree_prediction', self.HistoricalTreeRegPrediction)
         #LIN predict n days
         self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(self.ForecastArray)
-        print('clf_prediction', self.HistoricalLinRegPrediction)
         #SVR_LIN predict n days
         self.HistoricalSVRLinearPrediction = self.HistoricalSVRLinear.predict(self.ForecastArray)
-        print('svr_rbf_prediction', self.HistoricalSVRLinearPrediction)
         #SVR_POLY predict n days
         self.HistoricalSVRPolyPrediction = self.HistoricalSVRPoly.predict(self.ForecastArray)
-        print('svr_poly_prediction', self.HistoricalSVRPolyPrediction)
         #SVR_RBF predict n days
         self.HistoricalSVRRbfPrediction = self.HistoricalSVRRbf.predict(self.ForecastArray)
-        print('svr_rbf_prediction', self.HistoricalSVRRbfPrediction)
 
     def __GetDataSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()

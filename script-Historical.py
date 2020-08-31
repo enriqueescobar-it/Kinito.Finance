@@ -20,8 +20,8 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('RY')
-#KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B
+yahooStockOption: YahooStockOption = YahooStockOption('GNW')
+#KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B GNW
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
 print(yahooStockOption.HistoricalData.describe(include='all'))
 '''sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
@@ -61,7 +61,7 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
-yahooStockOptionPlotter.PlotForecast().show()
+#yahooStockOptionPlotter.PlotForecast().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Daily().show()
 yahooStockOptionPlotter.DailyCum().show()
