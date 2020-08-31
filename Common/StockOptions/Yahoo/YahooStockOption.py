@@ -120,7 +120,6 @@ class YahooStockOption(AbstractStockOption):
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self.__GetData()
-        self.__GetDataPrediction()
         self.__GetDataSimpleReturns()
         self.__GetDataLogReturns()
         self.__GetDataDaily()
@@ -131,6 +130,7 @@ class YahooStockOption(AbstractStockOption):
         self.__GetDataPreProcScale()
         self.__GetDataPreProcNormL1()
         self.__GetDataPreProcBinary()
+        self.__GetDataPrediction()
         self.__GetFv()
         self.__GetYe()
         self.__GetYss()
