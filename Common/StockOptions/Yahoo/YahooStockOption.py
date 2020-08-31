@@ -195,6 +195,7 @@ class YahooStockOption(AbstractStockOption):
         # x_forecast equal to last 30 days
         #TREE predict n days
         self.HistoricalTreeRegPrediction = self.HistoricalTreeReg.predict(self.ForecastArray)
+        print('tree_prediction', self.HistoricalTreeRegPrediction)
         #LIN predict n days
         self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(self.ForecastArray)
         print('clf_prediction', self.HistoricalLinRegPrediction)
@@ -209,7 +210,20 @@ class YahooStockOption(AbstractStockOption):
         print('svr_rbf_prediction', self.HistoricalSVRRbfPrediction)
         #plot(days, self.HistoricalSVRRbf.predict(days), color='green', label='RBFmodel')
         #print('SVR RBF preiced', self.HistoricalSVRRbf.predict(self.ForecastArray))
-        exit(-111)
+        #exit(-111)
+        predictions = self.HistoricalTreeRegPrediction
+        valid = self.HistoricalData[self.Xarray.shape[0]:]
+        valid['Predictions'] = predictions
+        valid['Predictions'] = self.HistoricalTreeRegPrediction
+        plt.figure(figsize=(8, 6))
+        plt.title('Model')
+        plt.xlabel('Days')
+        plt.ylabel(self.SourceColumn)
+        plt.plot(self.HistoricalData[self.SourceColumn])
+        plt.plot(valid[[self.SourceColumn, 'Predictions']])
+        plt.legend([self.SourceColumn, self.SourceColumn + 'Training', self.SourceColumn + 'Predicted'])
+        plt.show()
+        exit(220)
 
     def __GetDataSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()

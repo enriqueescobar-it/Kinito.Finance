@@ -22,6 +22,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 yahooStockOption: YahooStockOption = YahooStockOption('RY')
 #KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B
+#BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
 print(yahooStockOption.HistoricalData.describe(include='all'))
 '''sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
