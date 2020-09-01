@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from numpy.core._multiarray_umath import ndarray
 from pyarrow.lib import null
-
+import math
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
@@ -206,6 +206,25 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalSVRPolyPrediction = self.HistoricalSVRPoly.predict(self.ForecastArray)
         #SVR_RBF predict n days
         self.HistoricalSVRRbfPrediction = self.HistoricalSVRRbf.predict(self.ForecastArray)
+        #
+        training_len: int = math.ceil(self.HistoricalScaled.shape[0] * 0.8)
+        print(training_len)
+        scaled_data = self.HistoricalScaled
+        train_data = scaled_data[0:training_len, :]
+        X_train = []
+        Y_train = []
+        for i in range(60, len(train_data)):
+            X_train.append(train_data[i-60:i, 0])
+            Y_train.append(train_data[i, 0])
+        X_train, Y_train = np.array(X_train), np.array(Y_train)
+        X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
+        #LSTM model
+        model = Sequential()
+        model.add(LSTM(50, return_sequences=True, input_shape=(X_train.shape[1], 1)))
+        model.add(LSTM(50, return_sequences=False))
+        model.add(Dense(25))
+        model.add(Dense(1))
+        exit(-111)
 
     def __GetDataSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
