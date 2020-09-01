@@ -206,8 +206,8 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalSVRPolyPrediction = self.HistoricalSVRPoly.predict(self.ForecastArray)
         #SVR_RBF predict n days
         self.HistoricalSVRRbfPrediction = self.HistoricalSVRRbf.predict(self.ForecastArray)
-        #
-        training_len: int = math.ceil(self.HistoricalScaled.shape[0] * 0.8)
+        #'''
+        '''training_len: int = math.ceil(self.HistoricalScaled.shape[0] * 0.8)
         print(training_len)
         scaled_data = self.HistoricalScaled
         train_data = scaled_data[0:training_len, :]
@@ -224,7 +224,7 @@ class YahooStockOption(AbstractStockOption):
         model.add(LSTM(50, return_sequences=False))
         model.add(Dense(25))
         model.add(Dense(1))
-        exit(-111)
+        exit(-111)'''
 
     def __GetDataSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()

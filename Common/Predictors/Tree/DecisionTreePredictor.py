@@ -7,6 +7,6 @@ class DecisionTreePredictor(AbstractPredictor):
 
     def __init__(self, span: int = 60):
         self.__model = DecisionTreeRegressor()
-        self.__span = span
+        self.__forward_span = span
         self.__name = 'DecisionTree'
         self.__column = 'Prediction' + self.__name + str(span)
