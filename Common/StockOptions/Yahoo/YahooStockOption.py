@@ -6,6 +6,7 @@ from numpy.core._multiarray_umath import ndarray
 from pyarrow.lib import null
 import math
 from Common.Measures.Time.TimeSpan import TimeSpan
+from Common.Predictors.Tree.DecisionTreePredictor import DecisionTreePredictor
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
@@ -160,6 +161,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
         self.HistoricalPrediction[self.HistoricalColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.ForecastSpan)
         self.HistoricalTreeReg = DecisionTreeRegressor()
+        decisionTreePredictor = DecisionTreePredictor(30, self.SourceColumn, self.HistoricalData)
         self.HistoricalLinReg = LinearRegression()
         self.HistoricalSVRLinear = SVR(kernel='linear', C=1e3)
         self.HistoricalSVRPoly = SVR(kernel='poly', C=1e3, degree=2)
@@ -183,6 +185,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalLinReg.fit(X_train, Y_train)
         self.HistoricalLinRegScore = self.HistoricalLinReg.score(X_test, Y_test)
         print('CLF confidence', self.HistoricalLinRegScore)
+        exit(220)
         #SVR_LIN
         self.HistoricalSVRLinear.fit(X_test, Y_test)
         self.HistoricalSVRLinearScore = self.HistoricalSVRLinear.score(X_test, Y_test)
