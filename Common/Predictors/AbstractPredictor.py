@@ -8,4 +8,8 @@ class AbstractPredictor(ABC):
     __forward_array: np.ndarray
     __column: str
     __name: str
+    __x_array: np.ndarray
+    __y_array: np.ndarray
     Data: DataFrame
+    Score: float
+    Prediction: np.ndarray
