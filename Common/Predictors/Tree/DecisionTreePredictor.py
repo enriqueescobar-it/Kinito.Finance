@@ -20,7 +20,7 @@ class DecisionTreePredictor(AbstractPredictor):
         self._src_col = a_col
         self._src_data = a_df
         self._setData()
-        self._TimeSpan = t_s
+        self._time_span = t_s
         self._forward_array = np.array(self._data.drop([self._column], 1))[-self._forward_span:]
         self._setIndependent()
         self._setDependent()
@@ -29,7 +29,7 @@ class DecisionTreePredictor(AbstractPredictor):
         # fit model TRAINED
         self.__model.fit(X_train, Y_train)
         # score TESTED
-        self._Score = round(self.__model.score(X_test, Y_test), 7)
+        self._score = round(self.__model.score(X_test, Y_test), 7)
         self._prediction = self.__model.predict(self._forward_array)
         self._setForecast()
 
@@ -52,9 +52,9 @@ class DecisionTreePredictor(AbstractPredictor):
         self._y_array = self._y_array[:-self._forward_span]
 
     def Plot(self):
-        plt.figure(figsize=(3 * np.math.log(self._TimeSpan.MonthCount), 4.5))
+        plt.figure(figsize=(3 * np.math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
-        plt.title(self._name + ' ' + self._label + self._title + 'Score=' + str(self._Score))
+        plt.title(self._name + ' ' + self._label + self._title + 'Score=' + str(self._score))
         plt.xlabel(self._x_label)
         plt.ylabel(self._src_col)
         plt.scatter(self._src_data.index, self._src_data[self._src_col], color='black')
