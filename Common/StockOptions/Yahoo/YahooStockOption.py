@@ -159,7 +159,8 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalColumn = 'Prediction' + str(self.ForecastSpan)
         self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
         self.HistoricalPrediction[self.HistoricalColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.ForecastSpan)
-        decisionTreePredictor: DecisionTreePredictor = DecisionTreePredictor(30, self.SourceColumn, self.HistoricalData)
+        decisionTreePredictor: DecisionTreePredictor =\
+            DecisionTreePredictor(30, self.SourceColumn, self.HistoricalData)
         self.HistoricalLinReg = LinearRegression()
         self.HistoricalSVRLinear = SVR(kernel='linear', C=1e3)
         self.HistoricalSVRPoly = SVR(kernel='poly', C=1e3, degree=2)
@@ -198,7 +199,7 @@ class YahooStockOption(AbstractStockOption):
         #TREE predict n days
         self.HistoricalTreeRegPrediction = decisionTreePredictor.Prediction
         print(self.HistoricalTreeRegPrediction)
-        decisionTreePredictor.Plot(self.TimeSpan).show()
+        decisionTreePredictor.Plot().show()
         exit(220)
         #LIN predict n days
         self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(self.ForecastArray)
