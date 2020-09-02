@@ -20,8 +20,8 @@ class AbstractPredictor(ABC):
     _label: str = 'Prediction'
     _x_label: str = 'Days'
     _legendPlace: str = 'upper left'
-    _Score: float
-    _TimeSpan: TimeSpan
+    _score: float
+    _time_span: TimeSpan
 
     @abstractmethod
     def _setData(self):
@@ -40,7 +40,7 @@ class AbstractPredictor(ABC):
         pass
 
     def GetScore(self):
-        return self._Score
+        return self._score
 
     def GetPrediction(self):
         return self._prediction
