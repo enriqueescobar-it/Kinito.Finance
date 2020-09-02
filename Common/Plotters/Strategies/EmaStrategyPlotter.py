@@ -1,3 +1,4 @@
+import math
 import matplotlib.pyplot as plt
 from Common.Plotters.Strategies.AbstractStrategyPlotter import AbstractStrategyPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
@@ -7,7 +8,7 @@ from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
 class EmaStrategyPlotter(AbstractStrategyPlotter):
 
     def __init__(self, y_stock_option: YahooStockOption, ema_strategy: EmaStrategy):
-        self.__FIG_SIZE = (y_stock_option.TimeSpan.MonthCount / 2, 4.5)
+        self.__FIG_SIZE = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
         self.__LEGEND_PLACE = 'upper left'
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
