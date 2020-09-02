@@ -150,7 +150,7 @@ class YahooStockOption(AbstractStockOption):
         #into the future
         self.ForecastSpan = 30
         #TREE
-        decisionTreePredictor: DecisionTreePredictor =\
+        '''decisionTreePredictor: DecisionTreePredictor =\
             DecisionTreePredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
         self.HistoricalTreeRegScore = decisionTreePredictor.GetScore()
         print('TREE confidence', self.HistoricalTreeRegScore)
@@ -194,8 +194,8 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalSVRRbfPrediction = rbfSvrPredictor.GetPrediction()
         print(self.HistoricalSVRRbfPrediction.shape[0])
         rbfSvrPredictor.Plot().show()
-        #'''
-        '''training_len: int = math.ceil(self.HistoricalScaled.shape[0] * 0.8)
+        #
+        training_len: int = math.ceil(self.HistoricalScaled.shape[0] * 0.8)
         print(training_len)
         scaled_data = self.HistoricalScaled
         train_data = scaled_data[0:training_len, :]
