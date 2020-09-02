@@ -17,16 +17,15 @@ class DecisionTreePredictor(AbstractPredictor):
         self.__column = 'Prediction' + self.__name + str(span)
         self.Data = a_df[a_col].to_frame()
         self.Data[self.__column] = a_df[[a_col]].shift(-span)
-        print(a_col)
-        print(self.__column)
-        print(self.Data.shape)
+        self.__forward_array = np.array(self.Data.drop([self.__column], 1))[-self.__forward_span:]
         self.__setIndependant()
         self.__setDependant()
         #split into 80% train / 20% test => 0.2
         X_train, X_test, Y_train, Y_test = train_test_split(self.Xarray, self.Yarray, test_size=0.2)
         #fit model
         self.__model.fit(self.Xarray, self.Yarray)
-        print('TREE_SCORE', self.__model.score(X_test, Y_test))
+        self.Score = round(self.__model.score(X_test, Y_test), 5)
+        self.Prediction = self.__model.predict(self.__forward_array)
 
     def __setIndependant(self):
         #convert to ndarray & remove last NaN rows
