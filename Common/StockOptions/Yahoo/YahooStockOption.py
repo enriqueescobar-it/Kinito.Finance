@@ -9,6 +9,7 @@ from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Predictors.Linear.LinearPredictor import LinearPredictor
 from Common.Predictors.Svr.LinearSvrPredictor import LinearSvrPredictor
 from Common.Predictors.Svr.PolySvrPredictor import PolySvrPredictor
+from Common.Predictors.Svr.RbfSvrPredictor import RbfSvrPredictor
 from Common.Predictors.Tree.DecisionTreePredictor import DecisionTreePredictor
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
@@ -47,8 +48,6 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     ForecastSpan: int = 30
-    ForecastArray: ndarray
-    HistoricalColumn: str = 'Prediction'
     HistoricalBinary: ndarray
     HistoricalData: pd.DataFrame
     HistoricalDaily: pd.DataFrame
@@ -60,7 +59,6 @@ class YahooStockOption(AbstractStockOption):
     HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalPrediction: pd.DataFrame
     HistoricalScaled: ndarray
     HistoricalSimpleReturns: pd.DataFrame
     HistoricalStandardized: ndarray
@@ -68,7 +66,6 @@ class YahooStockOption(AbstractStockOption):
     HistoricalSVRLinearPrediction: ndarray
     HistoricalSVRPolyScore: float = -1.1
     HistoricalSVRPolyPrediction: ndarray
-    HistoricalSVRRbf: SVR
     HistoricalSVRRbfScore: float = -1.1
     HistoricalSVRRbfPrediction: ndarray
     HistoricalTreeRegScore: float = -1.1
@@ -78,8 +75,6 @@ class YahooStockOption(AbstractStockOption):
     SourceColumn: str = 'Adj Close'
     Ticker: str = 'TD'
     TimeSpan: TimeSpan
-    Xarray: ndarray
-    Yarray: ndarray
     YeUrl: str = 'NA'
     YeLogoUrl: str = 'NA'
     YeAddress: str = 'NA'
@@ -154,65 +149,51 @@ class YahooStockOption(AbstractStockOption):
     def __GetDataPrediction(self):
         #into the future
         self.ForecastSpan = 30
-        self.HistoricalColumn = 'Prediction' + str(self.ForecastSpan)
-        self.HistoricalPrediction = self.HistoricalData[self.SourceColumn].to_frame()
-        self.HistoricalPrediction[self.HistoricalColumn] = self.HistoricalData[[self.SourceColumn]].shift(-self.ForecastSpan)
-        decisionTreePredictor: DecisionTreePredictor =\
-            DecisionTreePredictor(30, self.SourceColumn, self.HistoricalData)
-        linearPredictor: LinearPredictor =\
-            LinearPredictor(30, self.SourceColumn, self.HistoricalData)
-        linearSvrPredictor: LinearSvrPredictor =\
-            LinearSvrPredictor(30, self.SourceColumn, self.HistoricalData)
-        polySvrPredictor: PolySvrPredictor =\
-            PolySvrPredictor(30, self.SourceColumn, self.HistoricalData)
-        self.HistoricalSVRRbf = SVR(kernel='rbf', C=1e3, gamma=0.2)#percent 80/20 = 0.2
-        self.ForecastArray = np.array(self.HistoricalPrediction.drop([self.HistoricalColumn], 1))[-self.ForecastSpan:]
-        #independent X
-        #convert to ndarray & remove last NaN rows
-        self.Xarray = np.array(self.HistoricalPrediction.drop([self.HistoricalColumn], 1))
-        self.Xarray = self.Xarray[:-self.ForecastSpan]
-        #dependent Y
-        #convert to ndarray & remove last NaN rows
-        self.Yarray = np.array(self.HistoricalPrediction[self.HistoricalColumn])
-        self.Yarray = self.Yarray[:-self.ForecastSpan]
-        #split into 80% train / 20% test => 0.2
-        X_train, X_test, Y_train, Y_test = train_test_split(self.Xarray, self.Yarray, test_size=0.2)
         #TREE
+        decisionTreePredictor: DecisionTreePredictor =\
+            DecisionTreePredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
         self.HistoricalTreeRegScore = decisionTreePredictor.GetScore()
         print('TREE confidence', self.HistoricalTreeRegScore)
-        #LIN
-        self.HistoricalLinRegScore = linearPredictor.GetScore()
-        print('LINEAR confidence', self.HistoricalLinRegScore)
-        #SVR_LIN
-        self.HistoricalSVRLinearScore = linearSvrPredictor.GetScore()
-        print('SVR_LIN confidence', self.HistoricalSVRLinearScore)
-        #SVR_POLY
-        self.HistoricalSVRPolyScore = polySvrPredictor.GetScore()
-        print('SVR_POLY confidence', self.HistoricalSVRPolyScore)
-        #SVR_RBF
-        self.HistoricalSVRRbf.fit(X_train, Y_train)
-        self.HistoricalSVRRbfScore = self.HistoricalSVRRbf.score(X_test, Y_test)
-        print('SVR_RBF confidence', self.HistoricalSVRRbfScore)
-        # x_forecast equal to last 30 days
         #TREE predict n days
         self.HistoricalTreeRegPrediction = decisionTreePredictor.GetPrediction()
         print(self.HistoricalTreeRegPrediction.shape[0])
         decisionTreePredictor.Plot().show()
+        #LIN
+        linearPredictor: LinearPredictor =\
+            LinearPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
+        self.HistoricalLinRegScore = linearPredictor.GetScore()
+        print('LINEAR confidence', self.HistoricalLinRegScore)
         #LIN predict n days
         self.HistoricalLinRegPrediction = linearPredictor.GetPrediction()
         print(self.HistoricalLinRegPrediction.shape[0])
         linearPredictor.Plot().show()
+        #SVR_LIN
+        linearSvrPredictor: LinearSvrPredictor =\
+            LinearSvrPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
+        self.HistoricalSVRLinearScore = linearSvrPredictor.GetScore()
+        print('SVR_LIN confidence', self.HistoricalSVRLinearScore)
         #SVR_LIN predict n days
         self.HistoricalSVRLinearPrediction = linearSvrPredictor.GetPrediction()
-        print(self.HistoricalLinRegPrediction.shape[0])
+        print(self.HistoricalSVRLinearPrediction.shape[0])
         linearSvrPredictor.Plot().show()
+        #SVR_POLY
+        polySvrPredictor: PolySvrPredictor =\
+            PolySvrPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
+        self.HistoricalSVRPolyScore = polySvrPredictor.GetScore()
+        print('SVR_POLY confidence', self.HistoricalSVRPolyScore)
         #SVR_POLY predict n days
         self.HistoricalSVRPolyPrediction = polySvrPredictor.GetPrediction()
-        print(self.HistoricalLinRegPrediction.shape[0])
+        print(self.HistoricalSVRPolyPrediction.shape[0])
         polySvrPredictor.Plot().show()
-        exit(0)
+        #SVR_RBF
+        rbfSvrPredictor: RbfSvrPredictor =\
+            RbfSvrPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
+        self.HistoricalSVRRbfScore = rbfSvrPredictor.GetScore()
+        print('SVR_RBF confidence', self.HistoricalSVRRbfScore)
         #SVR_RBF predict n days
-        self.HistoricalSVRRbfPrediction = self.HistoricalSVRRbf.predict(self.ForecastArray)
+        self.HistoricalSVRRbfPrediction = rbfSvrPredictor.GetPrediction()
+        print(self.HistoricalSVRRbfPrediction.shape[0])
+        rbfSvrPredictor.Plot().show()
         #'''
         '''training_len: int = math.ceil(self.HistoricalScaled.shape[0] * 0.8)
         print(training_len)
