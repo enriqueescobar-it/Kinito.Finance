@@ -1,3 +1,4 @@
+import math
 import matplotlib.pyplot as plt
 from Common.Plotters.TechIndicators.AbstractTechIndicatorPlotter import AbstractTechIndicatorPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
@@ -9,7 +10,7 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
     def __init__(self, y_stock_option: YahooStockOption, rsi_indicator: AbstractTechIndicator):
         self.__ABSTRACT_INDICATOR = rsi_indicator
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
-        self.__FIG_SIZE = (y_stock_option.TimeSpan.MonthCount / 2, 4.5)
+        self.__FIG_SIZE = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
         self.__INDICATOR_DATA_FRAME = y_stock_option.HistoricalData
         self.__LEGEND_PLACE = 'upper left'
         self.__PLOT_STYLE = 'fivethirtyeight'
