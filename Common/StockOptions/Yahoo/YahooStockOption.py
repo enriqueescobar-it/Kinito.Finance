@@ -7,6 +7,7 @@ from pyarrow.lib import null
 import math
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Predictors.Linear.LinearPredictor import LinearPredictor
+from Common.Predictors.Svr.LinearSvrPredictor import LinearSvrPredictor
 from Common.Predictors.Tree.DecisionTreePredictor import DecisionTreePredictor
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
@@ -62,7 +63,6 @@ class YahooStockOption(AbstractStockOption):
     HistoricalScaled: ndarray
     HistoricalSimpleReturns: pd.DataFrame
     HistoricalStandardized: ndarray
-    HistoricalSVRLinear: SVR
     HistoricalSVRLinearScore: float = -1.1
     HistoricalSVRLinearPrediction: ndarray
     HistoricalSVRPoly: SVR
@@ -161,7 +161,8 @@ class YahooStockOption(AbstractStockOption):
             DecisionTreePredictor(30, self.SourceColumn, self.HistoricalData)
         linearPredictor: LinearPredictor =\
             LinearPredictor(30, self.SourceColumn, self.HistoricalData)
-        self.HistoricalSVRLinear = SVR(kernel='linear', C=1e3)
+        linearSvrPredictor: LinearSvrPredictor =\
+            LinearSvrPredictor(30, self.SourceColumn, self.HistoricalData)
         self.HistoricalSVRPoly = SVR(kernel='poly', C=1e3, degree=2)
         self.HistoricalSVRRbf = SVR(kernel='rbf', C=1e3, gamma=0.2)#percent 80/20 = 0.2
         self.ForecastArray = np.array(self.HistoricalPrediction.drop([self.HistoricalColumn], 1))[-self.ForecastSpan:]
@@ -182,8 +183,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalLinRegScore = linearPredictor.GetScore()
         print('LINEAR confidence', self.HistoricalLinRegScore)
         #SVR_LIN
-        self.HistoricalSVRLinear.fit(X_train, Y_train)
-        self.HistoricalSVRLinearScore = self.HistoricalSVRLinear.score(X_test, Y_test)
+        self.HistoricalSVRLinearScore = linearSvrPredictor.GetScore()
         print('SVR_LIN confidence', self.HistoricalSVRLinearScore)
         #SVR_POLY
         self.HistoricalSVRPoly.fit(X_train, Y_train)
@@ -202,9 +202,11 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalLinRegPrediction = linearPredictor.GetPrediction()
         print(self.HistoricalLinRegPrediction.shape[0])
         linearPredictor.Plot().show()
-        exit(0)
         #SVR_LIN predict n days
-        self.HistoricalSVRLinearPrediction = self.HistoricalSVRLinear.predict(self.ForecastArray)
+        self.HistoricalSVRLinearPrediction = linearSvrPredictor.GetPrediction()
+        print(self.HistoricalLinRegPrediction.shape[0])
+        linearPredictor.Plot().show()
+        exit(0)
         #SVR_POLY predict n days
         self.HistoricalSVRPolyPrediction = self.HistoricalSVRPoly.predict(self.ForecastArray)
         #SVR_RBF predict n days
