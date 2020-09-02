@@ -18,9 +18,7 @@ from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 from sklearn import svm
-from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeRegressor
 from sklearn.svm import SVR
 from keras.models import Sequential
 from keras.layers import Dense, LSTM
