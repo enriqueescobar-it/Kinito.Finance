@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import *
 from pandas import DataFrame
 import numpy as np
 from Common.Measures.Time.TimeSpan import TimeSpan
@@ -18,3 +18,17 @@ class AbstractPredictor(ABC):
     Score: float
     Prediction: np.ndarray
     TimeSpan: TimeSpan
+
+    def __setData(self):
+        pass
+
+    def __setForecast(self):
+        pass
+
+    #@abstractmethod
+    def __setIndependent(self):
+        pass
+
+    #@abstractmethod
+    def __setDependent(self):
+        pass
