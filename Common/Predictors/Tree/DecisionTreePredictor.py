@@ -16,6 +16,7 @@ class DecisionTreePredictor(AbstractPredictor):
         self._forward_span = span
         print(self._label)
         self._column = self._label + self._name + str(span)
+        print(self._column)
         self._src_col = a_col
         self._src_data = a_df
         self._setData()
@@ -25,8 +26,9 @@ class DecisionTreePredictor(AbstractPredictor):
         self._setDependent()
         # split into 80% train / 20% test => 0.2
         X_train, X_test, Y_train, Y_test = train_test_split(self._x_array, self._y_array, test_size=0.2)
-        # fit model
-        self.__model.fit(self._x_array, self._y_array)
+        # fit model TRAINED
+        self.__model.fit(X_train, Y_train)
+        # score TESTED
         self._Score = round(self.__model.score(X_test, Y_test), 7)
         self._prediction = self.__model.predict(self._forward_array)
         self._setForecast()

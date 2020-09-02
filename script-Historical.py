@@ -20,11 +20,12 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CP')
+yahooStockOption: YahooStockOption = YahooStockOption('WMT')
 #KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B GNW OTEX BPY
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
 #ETFs:ARKK TEC.TO, VFV and ACES XEI ARKF QQC-f ZQQ XIT HQU SOXL QQQ HZU JNUG FIE
 #BRTXQ
+#CCA CGO RCI.B
 # FZROX FZILX FSRNX VTSAX
 # 60% StockMarketFund (FZROX~SWTSX~VTSAX) 20% InternationalFund (FZILX~SWISX~VTIAX) 20% REITFund (FSRNX)
 # Sector ETFs: VGT VPU VDC VYM
