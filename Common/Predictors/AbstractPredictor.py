@@ -5,30 +5,42 @@ from Common.Measures.Time.TimeSpan import TimeSpan
 
 
 class AbstractPredictor(ABC):
-    __forward_span: int
-    __forward_array: np.ndarray
-    __column: str
-    __src_col: str
-    __name: str
-    __x_array: np.ndarray
-    __y_array: np.ndarray
-    __src_data: DataFrame
-    Data: DataFrame
-    Forecast: DataFrame
-    Score: float
-    Prediction: np.ndarray
-    TimeSpan: TimeSpan
+    _column: str
+    _src_col: str
+    _name: str
+    _forward_span: int
+    _forward_array: np.ndarray
+    _prediction: np.ndarray
+    _x_array: np.ndarray
+    _y_array: np.ndarray
+    _data: DataFrame
+    _forecast: DataFrame
+    _src_data: DataFrame
+    _title: str = ' Model '
+    _label: str = 'Prediction'
+    _x_label: str = 'Days'
+    _legendPlace: str = 'upper left'
+    _Score: float
+    _TimeSpan: TimeSpan
 
-    def __setData(self):
+    @abstractmethod
+    def _setData(self):
         pass
 
-    def __setForecast(self):
+    @abstractmethod
+    def _setForecast(self):
         pass
 
-    #@abstractmethod
-    def __setIndependent(self):
+    @abstractmethod
+    def _setIndependent(self):
         pass
 
-    #@abstractmethod
-    def __setDependent(self):
+    @abstractmethod
+    def _setDependent(self):
         pass
+
+    def GetScore(self):
+        return self._Score
+
+    def GetPrediction(self):
+        return self._prediction

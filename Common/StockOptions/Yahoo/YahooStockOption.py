@@ -177,7 +177,7 @@ class YahooStockOption(AbstractStockOption):
         #split into 80% train / 20% test => 0.2
         X_train, X_test, Y_train, Y_test = train_test_split(self.Xarray, self.Yarray, test_size=0.2)
         #TREE
-        self.HistoricalTreeRegScore = decisionTreePredictor.Score
+        self.HistoricalTreeRegScore = decisionTreePredictor.GetScore()
         print('TREE confidence', self.HistoricalTreeRegScore)
         #LIN
         self.HistoricalLinReg.fit(X_train, Y_train)
@@ -197,8 +197,8 @@ class YahooStockOption(AbstractStockOption):
         print('SVR_RBF confidence', self.HistoricalSVRRbfScore)
         # x_forecast equal to last 30 days
         #TREE predict n days
-        self.HistoricalTreeRegPrediction = decisionTreePredictor.Prediction
-        print(self.HistoricalTreeRegPrediction)
+        self.HistoricalTreeRegPrediction = decisionTreePredictor.GetPrediction()
+        print(self.HistoricalTreeRegPrediction.shape[0])
         decisionTreePredictor.Plot().show()
         #LIN predict n days
         self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(self.ForecastArray)
