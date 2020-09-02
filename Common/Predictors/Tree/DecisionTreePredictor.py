@@ -49,8 +49,8 @@ class DecisionTreePredictor(AbstractPredictor):
         self.Yarray = self.Yarray[:-self.__forward_span]
 
     def Plot(self):
-        forecast_df: DataFrame = self.__src_data[self.Xarray.shape[0]:]
-        forecast_df[self.__label] = self.Prediction
+        self.Forecast: DataFrame = self.__src_data[self.Xarray.shape[0]:]
+        self.Forecast[self.__label] = self.Prediction
         plt.figure(figsize=(3 * np.math.log(self.TimeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.title(self.__name + ' ' + self.__label + self.__title + 'Score=' + str(self.Score))
@@ -58,7 +58,7 @@ class DecisionTreePredictor(AbstractPredictor):
         plt.ylabel(self.__src_col)
         plt.scatter(self.__src_data.index, self.__src_data[self.__src_col], color='black')
         plt.plot(self.__src_data[self.__src_col])
-        plt.plot(forecast_df[[self.__src_col, self.__label]])
+        plt.plot(self.Forecast[[self.__src_col, self.__label]])
         plt.legend(loc=self.__legendPlace,
                    labels=[self.__src_col, self.__src_col + 'Training', self.__src_col + 'Predicted'])
         return plt

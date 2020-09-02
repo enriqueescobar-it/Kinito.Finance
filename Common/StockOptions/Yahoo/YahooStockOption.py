@@ -200,7 +200,6 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalTreeRegPrediction = decisionTreePredictor.Prediction
         print(self.HistoricalTreeRegPrediction)
         decisionTreePredictor.Plot().show()
-        exit(220)
         #LIN predict n days
         self.HistoricalLinRegPrediction = self.HistoricalLinReg.predict(self.ForecastArray)
         #SVR_LIN predict n days

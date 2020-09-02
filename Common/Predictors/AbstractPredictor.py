@@ -14,6 +14,7 @@ class AbstractPredictor(ABC):
     __y_array: np.ndarray
     __src_data: DataFrame
     Data: DataFrame
+    Forecast: DataFrame
     Score: float
     Prediction: np.ndarray
     TimeSpan: TimeSpan
