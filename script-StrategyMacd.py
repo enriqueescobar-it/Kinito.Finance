@@ -7,7 +7,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
-print(yahooStockIndicator._label)
+print(yahooStockIndicator.GetLabel())
 yahooStockIndicatorPlotter: MacdIndicatorPlotter = MacdIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
 yahooStockIndicatorPlotter.show()
 yahooStockStrategy: MacdStrategy = MacdStrategy(yahooStockIndicator, yahooStockOption)
