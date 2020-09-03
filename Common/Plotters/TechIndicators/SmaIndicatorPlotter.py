@@ -20,15 +20,15 @@ class SmaIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__TITLE = "{0}{1}_{2} {3} History {4} months".format(y_stock_option.Source,
                                                                   y_stock_option.Ticker,
                                                                   sma_indicator._Label,
-                                                                  sma_indicator._Col,
+                                                                  sma_indicator._col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self.__XTICKS_ANGLE = 45
-        self.__YLABEL = sma_indicator._Col + ' in $USD'
+        self.__YLABEL = sma_indicator._col + ' in $USD'
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
-        plt.plot(self.__DATE_TIME_INDEX, self.__INDICATOR_DATA_FRAME[self.__ABSTRACT_INDICATOR._Col], label=self.__TICKER_LABEL, alpha=0.7)
+        plt.plot(self.__DATE_TIME_INDEX, self.__INDICATOR_DATA_FRAME[self.__ABSTRACT_INDICATOR._col], label=self.__TICKER_LABEL, alpha=0.7)
         plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._SMA005, label=self.__TICKER_LABEL + '005', alpha=0.50, color='lightblue')
         plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._SMA009, label=self.__TICKER_LABEL + '009', alpha=0.50, color='lightgray')
         plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._SMA010, label=self.__TICKER_LABEL + '010', alpha=0.50, color='green')

@@ -20,4 +20,4 @@ class MacdIndicator(AbstractTechIndicator):
         self._SignalLineLabel = 'SignalLine'
 
     def __getEMA(self, y_stock_option: YahooStockOption, a_int: int = 12):
-        return y_stock_option.HistoricalData[self._Col].ewm(span=a_int, adjust=False).mean()
+        return y_stock_option.HistoricalData[self._col].ewm(span=a_int, adjust=False).mean()

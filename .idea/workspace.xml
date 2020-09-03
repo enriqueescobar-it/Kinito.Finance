@@ -21,10 +21,18 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/Strategies/AbstractStrategyPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/Strategies/AbstractStrategyPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/Strategies/EmaStrategyPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/Strategies/EmaStrategyPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/Strategies/MacdStrategyPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/Strategies/MacdStrategyPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/Strategies/SmaStrategyPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/Strategies/SmaStrategyPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/EmaIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/EmaIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/SmaIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/SmaIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/EmaIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/EmaIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

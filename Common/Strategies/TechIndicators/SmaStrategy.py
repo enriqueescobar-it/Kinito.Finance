@@ -15,7 +15,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
     __ticker: str
 
     def __init__(self, sma_indicator: SmaIndicator, y_stockOption: YahooStockOption):
-        self._Col = sma_indicator._Col
+        self._Col = sma_indicator._col
         self._Label = sma_indicator._Label
         self._DataFrame = pd.DataFrame()
         self._BuyLabel = 'Buy_' + self._Label

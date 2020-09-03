@@ -20,11 +20,11 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__TITLE = "{0}{1}_{2} {3} History {4} months".format(y_stock_option.Source,
                                                                   y_stock_option.Ticker,
                                                                   rsi_indicator._Label,
-                                                                  rsi_indicator._Col,
+                                                                  rsi_indicator._col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self.__XTICKS_ANGLE = 45
-        self.__YLABEL = rsi_indicator._Col + ' in $USD'
+        self.__YLABEL = rsi_indicator._col + ' in $USD'
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)

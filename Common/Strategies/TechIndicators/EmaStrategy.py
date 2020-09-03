@@ -16,7 +16,7 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
     __ticker: str
 
     def __init__(self, ema_indicator: EmaIndicator, y_stockOption: YahooStockOption):
-        self._Col = ema_indicator._Col
+        self._Col = ema_indicator._col
         self._Label = ema_indicator._Label
         self._DataFrame = pd.DataFrame()
         self._BuyLabel = 'Buy_' + self._Label

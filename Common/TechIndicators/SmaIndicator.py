@@ -27,4 +27,4 @@ class SmaIndicator(AbstractTechIndicator):
 
     def __getSma(self, y_stock_option: YahooStockOption, a_int: int = 12):
         # return last column as .iloc[:,-1] spaning rollng mean
-        return y_stock_option.HistoricalData[self._Col].rolling(window=a_int, min_periods=0).mean()
+        return y_stock_option.HistoricalData[self._col].rolling(window=a_int, min_periods=0).mean()
