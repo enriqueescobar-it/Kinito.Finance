@@ -8,7 +8,7 @@ from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
 class SmaStrategyPlotter(AbstractStrategyPlotter):
 
     def __init__(self, y_stock_option: YahooStockOption, sma_strategy: SmaStrategy):
-        self.__FIG_SIZE = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
+        self._FIG_SIZE = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
         self.__LEGEND_PLACE = 'upper left'
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
@@ -32,7 +32,7 @@ class SmaStrategyPlotter(AbstractStrategyPlotter):
 
     def Plot(self):
         #plt.style.use(self.__PLOT_STYLE)
-        plt.figure(figsize=self.__FIG_SIZE)
+        plt.figure(figsize=self._FIG_SIZE)
         plt.plot(self.__STRATEGY_DATA_FRAME[self.__TICKER], label=self.__TICKER_LABEL, alpha=0.7)
         plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '005'], label=self.__STRATEGY_LABEL + '005', alpha=0.50, color='lightblue')
         plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '009'], label=self.__STRATEGY_LABEL + '009', alpha=0.50, color='lightgray')

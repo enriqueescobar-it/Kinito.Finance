@@ -8,7 +8,7 @@ from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
 class EmaStrategyPlotter(AbstractStrategyPlotter):
 
     def __init__(self, y_stock_option: YahooStockOption, ema_strategy: EmaStrategy):
-        self.__FIG_SIZE = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
+        self._FIG_SIZE = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
         self.__LEGEND_PLACE = 'upper left'
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
@@ -32,7 +32,7 @@ class EmaStrategyPlotter(AbstractStrategyPlotter):
 
     def Plot(self):
         #plt.style.use(self.__PLOT_STYLE)
-        plt.figure(figsize=self.__FIG_SIZE)
+        plt.figure(figsize=self._FIG_SIZE)
         plt.plot(self.__STRATEGY_DATA_FRAME[self.__TICKER], label=self.__TICKER_LABEL, alpha=0.7)
         plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '05'], label=self.__STRATEGY_LABEL + '05', alpha=0.50, color='cyan')
         plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '21'], label=self.__STRATEGY_LABEL + '21', alpha=0.50, color='violet')

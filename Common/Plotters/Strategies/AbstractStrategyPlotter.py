@@ -4,7 +4,7 @@ import pandas as pd
 
 
 class AbstractStrategyPlotter(ABC):
-    __FIG_SIZE: Tuple[float, float]
+    _FIG_SIZE: Tuple[float, float]
     __LEGEND_PLACE: str
     __PLOT_STYLE: str
     __SOURCE: str
