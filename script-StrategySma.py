@@ -7,7 +7,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
-print(yahooStockIndicator._Label)
+print(yahooStockIndicator._label)
 yahooStockIndicatorPlotter: SmaIndicatorPlotter = SmaIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
 yahooStockIndicatorPlotter.show()
 yahooStockStrategy: SmaStrategy = SmaStrategy(yahooStockIndicator, yahooStockOption)

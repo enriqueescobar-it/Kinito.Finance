@@ -7,7 +7,7 @@ from Common.TechIndicators.RsiIndicator import RsiIndicator
 yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: RsiIndicator = RsiIndicator(yahooStockOption)
-print(yahooStockIndicator._Label)
+print(yahooStockIndicator._label)
 #yahooStockIndicatorPlotter: RsiIndicatorPlotter = RsiIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
 #yahooStockIndicatorPlotter.show()
 #yahooStockStrategy: RsiStrategy = RsiStrategy(yahooStockIndicator, yahooStockOption)

@@ -17,7 +17,7 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
     def __init__(self, macd_indicator: MacdIndicator, y_stockOption: YahooStockOption):
         self._Col = macd_indicator._col
         self._DataFrame = pd.DataFrame()
-        self._Label = macd_indicator._Label
+        self._Label = macd_indicator._label
         self.__macd = macd_indicator._Macd
         self.__signal = macd_indicator._SignalLine
         self.__signalLabel = macd_indicator._SignalLineLabel

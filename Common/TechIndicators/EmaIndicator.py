@@ -16,7 +16,7 @@ class EmaIndicator(AbstractTechIndicator):
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
-        self._Label = 'EMA'
+        self._label += 'EMA'
         self._EMA005 = self.__getEma(y_stock_option, 5)
         self._EMA010 = self.__getEma(y_stock_option, 10)
         self._EMA020 = self.__getEma(y_stock_option, 20)

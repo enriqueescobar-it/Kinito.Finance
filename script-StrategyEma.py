@@ -7,7 +7,7 @@ from Common.TechIndicators.EmaIndicator import EmaIndicator
 yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: EmaIndicator = EmaIndicator(yahooStockOption)
-print(yahooStockIndicator._Label)
+print(yahooStockIndicator._label)
 yahooStockIndicatorPlotter: EmaIndicatorPlotter = EmaIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
 yahooStockIndicatorPlotter.show()
 yahooStockStrategy: EmaStrategy = EmaStrategy(yahooStockIndicator, yahooStockOption)

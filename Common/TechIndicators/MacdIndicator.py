@@ -12,7 +12,7 @@ class MacdIndicator(AbstractTechIndicator):
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
-        self._Label = 'MACD'
+        self._label += 'MACD'
         self.__ShortExponentialMovingAverage = self.__getEMA(y_stock_option, 12)
         self.__LongExponentialMovingAverage = self.__getEMA(y_stock_option, 26)
         self._Macd = self.__ShortExponentialMovingAverage - self.__LongExponentialMovingAverage

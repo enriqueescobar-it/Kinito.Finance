@@ -3,7 +3,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class AbstractTechIndicator(ABC):
-    _Label: str
+    _label: str = 'Indicator'
     _col: str
     __src: str
 

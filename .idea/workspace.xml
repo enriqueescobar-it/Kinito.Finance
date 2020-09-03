@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/EmaIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/EmaIndicatorPlotter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/MacdIndicatorPlotter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/RsiIndicatorPlotter.py" afterDir="false" />
@@ -33,6 +32,10 @@
       <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/RsiIndicator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-StrategyEma.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-StrategyEma.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-StrategyMacd.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-StrategyMacd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-StrategyRsi.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-StrategyRsi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-StrategySma.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-StrategySma.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

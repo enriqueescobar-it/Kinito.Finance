@@ -17,13 +17,13 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
 
     def __init__(self, ema_indicator: EmaIndicator, y_stockOption: YahooStockOption):
         self._Col = ema_indicator._col
-        self._Label = ema_indicator._Label
+        self._Label = ema_indicator._label
         self._DataFrame = pd.DataFrame()
         self._BuyLabel = 'Buy_' + self._Label
         self._SellLabel = 'Sell_' + self._Label
-        self.__LowerLabel = ema_indicator._Label + '05'
-        self.__MediumLabel = ema_indicator._Label + '21'
-        self.__UpperLabel = ema_indicator._Label + '63'
+        self.__LowerLabel = ema_indicator._label + '05'
+        self.__MediumLabel = ema_indicator._label + '21'
+        self.__UpperLabel = ema_indicator._label + '63'
         self.__ticker = y_stockOption.Ticker
         self._DataFrame[y_stockOption.Ticker] = y_stockOption.HistoricalData[self._Col]
         self._DataFrame[self.__LowerLabel] = ema_indicator._EMA005

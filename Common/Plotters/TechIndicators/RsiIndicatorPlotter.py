@@ -16,10 +16,10 @@ class RsiIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
         self.__TICKER = y_stock_option.Ticker
-        self.__TICKER_LABEL = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._Label
+        self.__TICKER_LABEL = y_stock_option.Source + y_stock_option.Ticker + "_" + rsi_indicator._label
         self.__TITLE = "{0}{1}_{2} {3} History {4} months".format(y_stock_option.Source,
                                                                   y_stock_option.Ticker,
-                                                                  rsi_indicator._Label,
+                                                                  rsi_indicator._label,
                                                                   rsi_indicator._col,
                                                                   str(y_stock_option.TimeSpan.MonthCount))
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
