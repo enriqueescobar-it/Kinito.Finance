@@ -16,7 +16,7 @@ class SmaIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
         self.__TICKER = y_stock_option.Ticker
-        self.__TICKER_LABEL = sma_indicator.GetLabel() # y_stock_option.Source + y_stock_option.Ticker + "_" +
+        self.__TICKER_LABEL = sma_indicator.GetLabel()# y_stock_option.Source + y_stock_option.Ticker + "_" +
         self.__TITLE = "{0}{1}_{2} {3} History {4} months".format(y_stock_option.Source,
                                                                   y_stock_option.Ticker,
                                                                   sma_indicator.GetLabel(),

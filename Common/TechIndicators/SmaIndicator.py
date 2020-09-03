@@ -15,7 +15,8 @@ class SmaIndicator(AbstractTechIndicator):
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
-        self._label += 'SMA'
+        self._name = 'SMA'
+        self._label += self._name
         self._SMA005 = self.__getSma(y_stock_option, 5)
         self._SMA009 = self.__getSma(y_stock_option, 9)
         self._SMA010 = self.__getSma(y_stock_option, 10)
@@ -24,6 +25,15 @@ class SmaIndicator(AbstractTechIndicator):
         self._SMA050 = self.__getSma(y_stock_option, 50)
         self._SMA100 = self.__getSma(y_stock_option, 100)
         self._SMA200 = self.__getSma(y_stock_option, 200)
+        self._data[self._name + '005'] = self._SMA005
+        self._data[self._name + '009'] = self._SMA009
+        self._data[self._name + '010'] = self._SMA010
+        self._data[self._name + '020'] = self._SMA020
+        self._data[self._name + '030'] = self._SMA030
+        self._data[self._name + '050'] = self._SMA050
+        self._data[self._name + '100'] = self._SMA100
+        self._data[self._name + '200'] = self._SMA200
+        print(self._data.tail())
 
     def __getSma(self, y_stock_option: YahooStockOption, a_int: int = 12):
         # return last column as .iloc[:,-1] spaning rollng mean
