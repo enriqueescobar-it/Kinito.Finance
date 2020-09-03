@@ -28,8 +28,8 @@ class MacdIndicatorPlotter(AbstractTechIndicatorPlotter):
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
-        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._Macd, label=self.__TICKER_LABEL, alpha=0.9)#, color='red'
-        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._SignalLine, label=self.__ABSTRACT_INDICATOR._SignalLineLabel, color='lightblue', alpha=0.9)
+        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._macd, label=self.__TICKER_LABEL, alpha=0.9)#, color='red'
+        plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._signal_line, label=self.__ABSTRACT_INDICATOR._SignalLineLabel, color='lightblue', alpha=0.9)
         plt.title(self.__TITLE)
         plt.xlabel(self.__XLABEL)
         plt.xticks(rotation=self.__XTICKS_ANGLE)
