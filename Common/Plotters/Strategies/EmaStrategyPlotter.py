@@ -9,8 +9,6 @@ class EmaStrategyPlotter(AbstractStrategyPlotter):
 
     def __init__(self, y_stock_option: YahooStockOption, ema_strategy: EmaStrategy):
         self._FIG_SIZE = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
-        self.__LEGEND_PLACE = 'upper left'
-        self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
         self.__TICKER = y_stock_option.Ticker
         self.__TICKER_LABEL = y_stock_option.Source + y_stock_option.Ticker + "_" + ema_strategy._Col
@@ -20,7 +18,6 @@ class EmaStrategyPlotter(AbstractStrategyPlotter):
                                                                               ema_strategy._Col,
                                                                               ema_strategy._Label)
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
-        self.__XTICKS_ANGLE = 45
         self.__YLABEL = ema_strategy._Col + ' in $USD'
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__STRATEGY_DATA_FRAME = ema_strategy._DataFrame
@@ -41,7 +38,7 @@ class EmaStrategyPlotter(AbstractStrategyPlotter):
         plt.scatter(self.__DATE_TIME_INDEX, self.__STRATEGY_DATA_SELL, label=self.__STRATEGY_LABEL_SELL, marker='v', color='red')
         plt.title(self.__TITLE)
         plt.xlabel(self.__XLABEL)
-        plt.xticks(rotation=self.__XTICKS_ANGLE)
+        plt.xticks(rotation=self._XTICKS_ANGLE)
         plt.ylabel(self.__YLABEL)
-        plt.legend(loc=self.__LEGEND_PLACE)
+        plt.legend(loc=self._LEGEND_PLACE)
         return plt
