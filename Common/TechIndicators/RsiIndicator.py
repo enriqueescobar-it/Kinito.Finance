@@ -13,12 +13,19 @@ class RsiIndicator(AbstractTechIndicator):
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
-        self._label += 'RSI'
+        self._name = 'RSI'
+        self._label += self._name
         self.__delta = y_stock_option.HistoricalData[self._col].diff(1)
         self.__setPeriod(14)
         self.__setUp()
         self.__setDown()
         self.__setRsi()
+        self._data['Delta'] = self.__delta
+        self._data['AverageGain'] = self.__avgGain
+        self._data['AverageLoss'] = self.__avgLoss
+        self._data['RelativeStrength'] = self.__rs
+        self._data[self._name] = self._rsi
+        print(self._data.tail())
 
     def __setUp(self):
         up = self.__delta.copy()
