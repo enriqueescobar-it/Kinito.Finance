@@ -16,19 +16,19 @@ class EmaIndicatorPlotter(AbstractTechIndicatorPlotter):
         self.__PLOT_STYLE = 'fivethirtyeight'
         self.__SOURCE = y_stock_option.Source
         self.__TICKER = y_stock_option.Ticker
-        self.__TICKER_LABEL = ema_indicator._label # y_stock_option.Source + y_stock_option.Ticker + "_" +
+        self.__TICKER_LABEL = ema_indicator.GetLabel()# y_stock_option.Source + y_stock_option.Ticker + "_" +
         self.__TITLE = "{0}{1}_{2} {3} History {4} months".format(y_stock_option.Source,
                                                                   y_stock_option.Ticker,
-                                                                  ema_indicator._label,
-                                                                  ema_indicator._col,
+                                                                  ema_indicator.GetLabel(),
+                                                                  ema_indicator.GetCol(),
                                                                   str(y_stock_option.TimeSpan.MonthCount))
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self.__XTICKS_ANGLE = 45
-        self.__YLABEL = ema_indicator._col + ' in $USD'
+        self.__YLABEL = ema_indicator.GetCol() + ' in $USD'
 
     def Plot(self):
         plt.figure(figsize=self.__FIG_SIZE)
-        plt.plot(self.__DATE_TIME_INDEX, self.__INDICATOR_DATA_FRAME[self.__ABSTRACT_INDICATOR._col], label=self.__TICKER_LABEL, alpha=0.7)
+        plt.plot(self.__DATE_TIME_INDEX, self.__INDICATOR_DATA_FRAME[self.__ABSTRACT_INDICATOR.GetCol()], label=self.__TICKER_LABEL, alpha=0.7)
         plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA005, label=self.__TICKER_LABEL + '05', alpha=0.50, color='cyan')
         plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA021, label=self.__TICKER_LABEL + '21', alpha=0.50, color='violet')
         plt.plot(self.__DATE_TIME_INDEX, self.__ABSTRACT_INDICATOR._EMA063, label=self.__TICKER_LABEL + '63', alpha=0.50, color='orange')

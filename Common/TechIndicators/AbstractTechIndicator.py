@@ -13,3 +13,6 @@ class AbstractTechIndicator(ABC):
 
     def GetCol(self):
         return self._col
+
+    def GetLabel(self):
+        return self._label
