@@ -18,8 +18,8 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         self._Col = macd_indicator._col
         self._DataFrame = pd.DataFrame()
         self._Label = macd_indicator._label
-        self.__macd = macd_indicator._Macd
-        self.__signal = macd_indicator._SignalLine
+        self.__macd = macd_indicator._macd
+        self.__signal = macd_indicator._signal_line
         self.__signalLabel = macd_indicator._SignalLineLabel
         self.__ticker = y_stockOption.Ticker
         self._DataFrame[y_stockOption.Ticker] = y_stockOption.HistoricalData[self._Col]

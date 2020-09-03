@@ -20,8 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/TechIndicators/SmaIndicatorPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/TechIndicators/SmaIndicatorPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
