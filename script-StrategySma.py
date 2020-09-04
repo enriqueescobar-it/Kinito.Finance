@@ -8,8 +8,9 @@ yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
 print(yahooStockIndicator.GetLabel())
+'''
 yahooStockIndicatorPlotter: SmaIndicatorPlotter = SmaIndicatorPlotter(yahooStockOption, yahooStockIndicator).Plot()
 yahooStockIndicatorPlotter.show()
 yahooStockStrategy: SmaStrategy = SmaStrategy(yahooStockIndicator, yahooStockOption)
 yahooStockStrategyPlotter: SmaStrategyPlotter = SmaStrategyPlotter(yahooStockOption, yahooStockStrategy).Plot()
-yahooStockStrategyPlotter.show()
+yahooStockStrategyPlotter.show()'''

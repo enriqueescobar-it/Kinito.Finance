@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import *
 from typing import Tuple
 from pandas import DatetimeIndex
 import pandas as pd
