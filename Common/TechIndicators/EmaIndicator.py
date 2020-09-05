@@ -1,40 +1,47 @@
-import pandas as pd
+import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+from Common.Plotters.TechIndicators.AbstractTechIndicatorPlotter import AbstractTechIndicatorPlotter
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
-class EmaIndicator(AbstractTechIndicator):
-    _EMA005: pd.core.series.Series
-    _EMA010: pd.core.series.Series
-    _EMA020: pd.core.series.Series
-    _EMA021: pd.core.series.Series
-    _EMA050: pd.core.series.Series
-    _EMA063: pd.core.series.Series
-    _EMA100: pd.core.series.Series
-    _EMA200: pd.core.series.Series
+class EmaIndicator(AbstractTechIndicator, AbstractTechIndicatorPlotter):
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
         self._name = 'EMA'
         self._label += self._name
-        self._EMA005 = self.__getEma(y_stock_option, 5)
-        self._EMA010 = self.__getEma(y_stock_option, 10)
-        self._EMA020 = self.__getEma(y_stock_option, 20)
-        self._EMA021 = self.__getEma(y_stock_option, 21)
-        self._EMA050 = self.__getEma(y_stock_option, 50)
-        self._EMA063 = self.__getEma(y_stock_option, 63)
-        self._EMA100 = self.__getEma(y_stock_option, 100)
-        self._EMA200 = self.__getEma(y_stock_option, 200)
-        self._data[self._name + '005'] = self._EMA005
-        self._data[self._name + '010'] = self._EMA010
-        self._data[self._name + '020'] = self._EMA020
-        self._data[self._name + '021'] = self._EMA021
-        self._data[self._name + '050'] = self._EMA050
-        self._data[self._name + '063'] = self._EMA063
-        self._data[self._name + '100'] = self._EMA100
-        self._data[self._name + '200'] = self._EMA200
-        print(self._data.tail())
+        self._main_label += ' ' + self._label
+        self._setData(y_stock_option)
 
     def __getEma(self, y_stock_option: YahooStockOption, a_int: int = 21):
         # return last column as .iloc[:,-1] spaning ewm mean
         return y_stock_option.HistoricalData[self._col].ewm(span=a_int, adjust=False).mean()
+
+    def _setData(self, y_stock_option: YahooStockOption):
+        self._data[self._col] = y_stock_option.HistoricalData[self._col]
+        self._data[self._name + '005'] = self.__getEma(y_stock_option, 5)
+        self._data[self._name + '010'] = self.__getEma(y_stock_option, 10)
+        self._data[self._name + '020'] = self.__getEma(y_stock_option, 20)
+        self._data[self._name + '021'] = self.__getEma(y_stock_option, 21)
+        self._data[self._name + '050'] = self.__getEma(y_stock_option, 50)
+        self._data[self._name + '063'] = self.__getEma(y_stock_option, 63)
+        self._data[self._name + '100'] = self.__getEma(y_stock_option, 100)
+        self._data[self._name + '200'] = self.__getEma(y_stock_option, 200)
+        print(self._data.tail())
+
+    def PlotData(self) -> plt:
+        plt.figure(figsize=self._fig_size)
+        plt.style.use(self._plot_style)
+        colors = cm.coolwarm
+        for a_ind, col in enumerate(self._data.columns):
+            an_alpha: float = 0.5 if a_ind != 0 else 1.0
+            self._data[col].plot(alpha=an_alpha)
+            print('i', a_ind)
+        plt.title(self._main_label)
+        plt.xlabel(self._x_label)
+        plt.xticks(rotation=self._x_ticks_angle)
+        plt.ylabel(self._y_label)
+        plt.legend(loc=self._legend_place)
+        plt.grid(True)
+        return plt
