@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-from Common.Plotters.TechIndicators.AbstractTechIndicatorPlotter import AbstractTechIndicatorPlotter
+
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
-class EmaIndicator(AbstractTechIndicator, AbstractTechIndicatorPlotter):
+class EmaIndicator(AbstractTechIndicator):
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)

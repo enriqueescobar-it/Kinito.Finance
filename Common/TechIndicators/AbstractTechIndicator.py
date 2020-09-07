@@ -11,6 +11,10 @@ class AbstractTechIndicator(ABC):
     _label: str = 'Indicator'
     _name: str
     _src: str == 'yahoo'
+    _legend_place: str = 'upper left'
+    #['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark', 'seaborn-dark-palette', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid', 'tableau-colorblind10']
+    _plot_style: str = 'seaborn'
+    _x_ticks_angle: int = 45
     _data: DataFrame = DataFrame()
     _strategy: AbstractTechIndicatorStrategy
     _fig_size: Tuple[float, float]

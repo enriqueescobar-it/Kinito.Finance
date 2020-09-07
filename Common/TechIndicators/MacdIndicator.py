@@ -1,12 +1,12 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-from Common.Plotters.TechIndicators.AbstractTechIndicatorPlotter import AbstractTechIndicatorPlotter
+
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
-class MacdIndicator(AbstractTechIndicator, AbstractTechIndicatorPlotter):
+class MacdIndicator(AbstractTechIndicator):
     _macd: pd.core.series.Series
     _signal_line: pd.core.series.Series
     _SignalLineLabel: str = 'SignalLine'

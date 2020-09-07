@@ -21,7 +21,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
 yahooStockOption: YahooStockOption = YahooStockOption('GRWG')
-#MWK YCBD GRWG
+#MWK YCBD GRWG FSZ
 #KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B GNW OTEX BPY
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
 #ETFs:ARKK TEC.TO, VFV and ACES XEI ARKF QQC-f ZQQ XIT HQU SOXL QQQ HZU JNUG FIE

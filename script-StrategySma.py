@@ -3,7 +3,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
 from Common.Plotters.Strategies.SmaStrategyPlotter import SmaStrategyPlotter
 
-yahooStockOption: YahooStockOption = YahooStockOption('CNI')
+yahooStockOption: YahooStockOption = YahooStockOption('AAPL')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
 print(yahooStockIndicator.GetLabel())

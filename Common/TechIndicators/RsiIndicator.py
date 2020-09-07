@@ -2,12 +2,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
-from Common.Plotters.TechIndicators.AbstractTechIndicatorPlotter import AbstractTechIndicatorPlotter
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
-class RsiIndicator(AbstractTechIndicator, AbstractTechIndicatorPlotter):
+class RsiIndicator(AbstractTechIndicator):
     __period: int
 
     def __init__(self, y_stock_option: YahooStockOption):
