@@ -37,10 +37,6 @@ class LinearPredictor(AbstractPredictor):
         self._data = self._src_data[self._src_col].to_frame()
         self._data[self._column] = self._src_data[[self._src_col]].shift(-self._forward_span)
 
-    def _setForecast(self):
-        self._forecast = self._src_data[self._x_array.shape[0]:]
-        self._forecast[self._label] = self._prediction
-
     def _setIndependent(self):
         # convert to ndarray & remove last NaN rows
         self._x_array = np.array(self._data.drop([self._column], 1))
@@ -50,6 +46,10 @@ class LinearPredictor(AbstractPredictor):
         # convert to ndarray & remove last NaN rows
         self._y_array = np.array(self._data[self._column])
         self._y_array = self._y_array[:-self._forward_span]
+
+    def _setForecast(self):
+        self._forecast = self._src_data[self._x_array.shape[0]:]
+        self._forecast[self._label] = self._prediction
 
     def Plot(self):
         plt.figure(figsize=(3 * np.math.log(self._time_span.MonthCount), 4.5))

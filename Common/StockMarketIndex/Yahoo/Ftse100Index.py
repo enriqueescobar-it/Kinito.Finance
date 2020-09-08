@@ -8,7 +8,7 @@ class Ftse100Index(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^FTSE", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'FTSE 100'
+        self.__name = 'Ftse100'
         self.__source = source
         self.__ticker = "^FTSE" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

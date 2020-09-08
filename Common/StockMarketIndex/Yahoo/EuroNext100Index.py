@@ -8,7 +8,7 @@ class EuroNext100Index(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^N100", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'EURONEXT 100'
+        self.__name = 'EuroNext100'
         self.__source = source
         self.__ticker = "^N100" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

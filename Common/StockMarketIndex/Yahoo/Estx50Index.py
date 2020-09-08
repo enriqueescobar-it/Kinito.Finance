@@ -8,7 +8,7 @@ class Estx50Index(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^STOXX50E", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'ESTX 50 PR.EUR'
+        self.__name = 'EuroStoxx50'
         self.__source = source
         self.__ticker = "^STOXX50E" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

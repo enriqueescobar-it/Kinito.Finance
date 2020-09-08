@@ -8,7 +8,7 @@ class CrudeOilIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "CL=F", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'Crude Oil Sep 20'
+        self.__name = 'CrudeOil Sep20'
         self.__source = source
         self.__ticker = "CL=F" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

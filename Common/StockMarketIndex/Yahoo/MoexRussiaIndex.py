@@ -8,7 +8,7 @@ class MoexRussiaIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "IMOEX.ME", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'MOEX Russia Index'
+        self.__name = 'Moex Russia'
         self.__source = source
         self.__ticker = "IMOEX.ME" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

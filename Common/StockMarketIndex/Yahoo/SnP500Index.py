@@ -8,7 +8,7 @@ class SnP500Index(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^GSPC", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'S&P 500'
+        self.__name = 'S&P500'
         self.__source = source
         self.__ticker = "^GSPC" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

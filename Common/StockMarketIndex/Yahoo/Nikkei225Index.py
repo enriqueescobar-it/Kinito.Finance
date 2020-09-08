@@ -8,7 +8,7 @@ class Nikkei225Index(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^N225", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'Nikkei 225'
+        self.__name = 'Nikkei225'
         self.__source = source
         self.__ticker = "^N225" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

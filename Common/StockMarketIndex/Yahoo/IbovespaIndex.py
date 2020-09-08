@@ -8,7 +8,7 @@ class IbovespaIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^BVSP", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'IBOVESPA'
+        self.__name = 'Brasil Bolsa Balcão'
         self.__source = source
         self.__ticker = "^BVSP" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

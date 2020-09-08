@@ -8,7 +8,7 @@ class IpcMexicoIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^MXX", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'IPC MEXICO'
+        self.__name = 'Ipc Mexico'
         self.__source = source
         self.__ticker = "^MXX" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

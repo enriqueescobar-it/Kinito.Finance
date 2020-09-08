@@ -8,7 +8,7 @@ class ShenzhenComponentIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "399001.SZ", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'Shenzhen Component'
+        self.__name = 'Shenzhen500'
         self.__source = source
         self.__ticker = "399001.SZ" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

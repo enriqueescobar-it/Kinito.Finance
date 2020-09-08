@@ -8,7 +8,7 @@ class SnPTSXComposite(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^GSPTSE", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'S&P/TSX Composite'
+        self.__name = 'S&P/TSXCompo'
         self.__source = source
         self.__ticker = "^GSPTSE" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

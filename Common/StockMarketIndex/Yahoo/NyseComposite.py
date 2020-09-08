@@ -8,7 +8,7 @@ class NyseIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^NYA", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'NYSE COMPOSITE'
+        self.__name = 'NyseCompo'
         self.__source = source
         self.__ticker = "^NYA" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

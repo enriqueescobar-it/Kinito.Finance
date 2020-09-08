@@ -8,7 +8,7 @@ class HangSengIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^HSI", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'HANG SENG INDEX'
+        self.__name = 'HangSeng'
         self.__source = source
         self.__ticker = "^HSI" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn

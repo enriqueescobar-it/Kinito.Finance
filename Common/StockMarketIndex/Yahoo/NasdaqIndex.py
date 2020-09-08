@@ -8,7 +8,7 @@ class NasdaqIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^IXIC", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'Nasdaq'
+        self.__name = 'NasdaqCompo'
         self.__source = source
         self.__ticker = "^IXIC" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn
