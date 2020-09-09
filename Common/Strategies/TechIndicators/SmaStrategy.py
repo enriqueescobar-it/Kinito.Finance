@@ -56,17 +56,10 @@ class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
     def Plot(self):
         plt.figure(figsize=self.__sma_indicator.GetFigSize())
         plt.style.use(self.__sma_indicator.GetPlotStyle())
-        plt.plot(self._data[self._col], label=self._col, alpha=0.7)
-        '''
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '005'], label=self.__sma_indicator.GetLabel() + '005', alpha=0.50, color='lightblue')
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '009'], label=self.__sma_indicator.GetLabel() + '009', alpha=0.50, color='lightgray')
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '010'], label=self.__sma_indicator.GetLabel() + '010', alpha=0.50, color='green')
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '020'], label=self.__sma_indicator.GetLabel() + '020', alpha=0.50, color='orange')
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '030'], label=self.__sma_indicator.GetLabel() + '030', alpha=0.50, color='violet')
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '050'], label=self.__sma_indicator.GetLabel() + '050', alpha=0.50, color='pink')
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '100'], label=self.__sma_indicator.GetLabel() + '100', alpha=0.50, color='red')
-        plt.plot(self._data[self.__sma_indicator.GetLabel() + '200'], label=self.__sma_indicator.GetLabel() + '200', alpha=0.50, color='yellow')
-        '''
+        for a_ind, col in enumerate(self._data.columns[0:3]):
+            an_alpha: float = 1.0 if a_ind == 0 else 0.3
+            self._data[col].plot(alpha=an_alpha)
+            print('i', an_alpha)
         plt.scatter(self.__sma_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^', color='green')
         plt.scatter(self.__sma_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label, marker='v', color='red')
         plt.title(self.__sma_indicator.GetMainLabel())
