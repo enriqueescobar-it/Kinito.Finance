@@ -27,8 +27,6 @@ class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
         print('DATA', self._data.describe())
         self.__SOURCE = y_stock_option.Source
         self.__TICKER_LABEL = y_stock_option.Source + y_stock_option.Ticker + "_" + self._col
-        self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
-        self.__YLABEL = self._col + ' in $USD'
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__STRATEGY_DATA_FRAME = self._data
         self.__STRATEGY_LABEL = self.__sma_indicator.GetLabel()
@@ -81,8 +79,8 @@ class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
         plt.scatter(self.__DATE_TIME_INDEX, self.__STRATEGY_DATA_BUY, label=self.__STRATEGY_LABEL_BUY, marker='^', color='green')
         plt.scatter(self.__DATE_TIME_INDEX, self.__STRATEGY_DATA_SELL, label=self.__STRATEGY_LABEL_SELL, marker='v', color='red')
         plt.title(self.__sma_indicator.GetMainLabel())
-        plt.xlabel(self.__XLABEL)
-        plt.xticks(rotation=self._XTICKS_ANGLE)
-        plt.ylabel(self.__YLABEL)
-        plt.legend(loc=self._LEGEND_PLACE)
+        plt.xlabel(self.__sma_indicator.GetXLabel())
+        plt.xticks(rotation=self.__sma_indicator.GetXticksAngle())
+        plt.ylabel(self.__sma_indicator.GetYLabel())
+        plt.legend(loc=self.__sma_indicator.GetLegendPlace())
         return plt

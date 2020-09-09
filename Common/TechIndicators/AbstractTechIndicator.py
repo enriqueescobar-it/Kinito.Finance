@@ -50,6 +50,9 @@ class AbstractTechIndicator(ABC):
     def GetLabel(self) -> str:
         return self._label
 
+    def GetLegendPlace(self) -> str:
+        return self._legend_place
+
     def GetLowHigh(self) -> Tuple[int, int]:
         return self._low_high
 
@@ -61,3 +64,12 @@ class AbstractTechIndicator(ABC):
 
     def GetSource(self) -> str:
         return self._src
+
+    def GetXLabel(self) -> str:
+        return self._x_label
+
+    def GetXticksAngle(self) -> int:
+        return self._x_ticks_angle
+
+    def GetYLabel(self) -> str:
+        return self._y_label
