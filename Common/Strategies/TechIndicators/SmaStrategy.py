@@ -28,7 +28,6 @@ class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
         self.__SOURCE = y_stock_option.Source
         self.__TICKER_LABEL = y_stock_option.Source + y_stock_option.Ticker + "_" + self._col
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
-        self.__STRATEGY_DATA_FRAME = self._data
         self.__STRATEGY_LABEL = self.__sma_indicator.GetLabel()
         self.__STRATEGY_LABEL_BUY = self._buy_label
         self.__STRATEGY_DATA_BUY = self._data[self._buy_label]
@@ -64,17 +63,18 @@ class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
         return buySignal, sellSignal
 
     def Plot(self):
-        #plt.style.use(self.__PLOT_STYLE)
         plt.figure(figsize=self.__sma_indicator.GetFigSize())
-        plt.plot(self.__STRATEGY_DATA_FRAME[self._col], label=self.__TICKER_LABEL, alpha=0.7)
-        '''plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '005'], label=self.__STRATEGY_LABEL + '005', alpha=0.50, color='lightblue')
-        plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '009'], label=self.__STRATEGY_LABEL + '009', alpha=0.50, color='lightgray')
-        plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '010'], label=self.__STRATEGY_LABEL + '010', alpha=0.50, color='green')
-        plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '020'], label=self.__STRATEGY_LABEL + '020', alpha=0.50, color='orange')
-        plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '030'], label=self.__STRATEGY_LABEL + '030', alpha=0.50, color='violet')
-        plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '050'], label=self.__STRATEGY_LABEL + '050', alpha=0.50, color='pink')
-        plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '100'], label=self.__STRATEGY_LABEL + '100', alpha=0.50, color='red')
-        plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '200'], label=self.__STRATEGY_LABEL + '200', alpha=0.50, color='yellow')
+        plt.style.use(self.__sma_indicator.GetPlotStyle())
+        plt.plot(self._data[self._col], label=self.__TICKER_LABEL, alpha=0.7)
+        '''
+        plt.plot(self._data[self.__STRATEGY_LABEL + '005'], label=self.__STRATEGY_LABEL + '005', alpha=0.50, color='lightblue')
+        plt.plot(self._data[self.__STRATEGY_LABEL + '009'], label=self.__STRATEGY_LABEL + '009', alpha=0.50, color='lightgray')
+        plt.plot(self._data[self.__STRATEGY_LABEL + '010'], label=self.__STRATEGY_LABEL + '010', alpha=0.50, color='green')
+        plt.plot(self._data[self.__STRATEGY_LABEL + '020'], label=self.__STRATEGY_LABEL + '020', alpha=0.50, color='orange')
+        plt.plot(self._data[self.__STRATEGY_LABEL + '030'], label=self.__STRATEGY_LABEL + '030', alpha=0.50, color='violet')
+        plt.plot(self._data[self.__STRATEGY_LABEL + '050'], label=self.__STRATEGY_LABEL + '050', alpha=0.50, color='pink')
+        plt.plot(self._data[self.__STRATEGY_LABEL + '100'], label=self.__STRATEGY_LABEL + '100', alpha=0.50, color='red')
+        plt.plot(self._data[self.__STRATEGY_LABEL + '200'], label=self.__STRATEGY_LABEL + '200', alpha=0.50, color='yellow')
         '''
         plt.scatter(self.__DATE_TIME_INDEX, self.__STRATEGY_DATA_BUY, label=self.__STRATEGY_LABEL_BUY, marker='^', color='green')
         plt.scatter(self.__DATE_TIME_INDEX, self.__STRATEGY_DATA_SELL, label=self.__STRATEGY_LABEL_SELL, marker='v', color='red')

@@ -62,6 +62,9 @@ class AbstractTechIndicator(ABC):
     def GetName(self) -> str:
         return self._name
 
+    def GetPlotStyle(self) -> str:
+        return self._plot_style
+
     def GetSource(self) -> str:
         return self._src
 

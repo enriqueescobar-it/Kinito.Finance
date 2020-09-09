@@ -8,7 +8,6 @@ class AbstractStrategyPlotter(ABC):
     __TICKER: str
     __TICKER_LABEL: str
     __DATE_TIME_INDEX: pd.core.indexes.datetimes.DatetimeIndex
-    __STRATEGY_DATA_FRAME: pd.DataFrame
     __STRATEGY_DATA_BUY: pd.core.series.Series
     __STRATEGY_DATA_SELL: pd.core.series.Series
     __STRATEGY_LABEL: str
