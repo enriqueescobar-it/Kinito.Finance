@@ -47,6 +47,9 @@ class AbstractTechIndicator(ABC):
     def GetLabel(self) -> str:
         return self._label
 
+    def GetMainLabel(self) -> str:
+        return self._main_label
+
     def GetName(self) -> str:
         return self._name
 

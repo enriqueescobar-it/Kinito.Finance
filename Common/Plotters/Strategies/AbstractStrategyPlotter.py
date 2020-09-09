@@ -11,7 +11,6 @@ class AbstractStrategyPlotter(ABC):
     __SOURCE: str
     __TICKER: str
     __TICKER_LABEL: str
-    __TITLE: str
     __XLABEL: str
     __YLABEL: str
     __DATE_TIME_INDEX: pd.core.indexes.datetimes.DatetimeIndex
