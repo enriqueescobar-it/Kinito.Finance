@@ -28,6 +28,7 @@ class EmaIndicator(AbstractTechIndicator):
         self._data[self._name + '063'] = self.__getEma(y_stock_option, 63)
         self._data[self._name + '100'] = self.__getEma(y_stock_option, 100)
         self._data[self._name + '200'] = self.__getEma(y_stock_option, 200)
+        self._low_high = (1, 4, 6)
         print(self._data.tail())
 
     def PlotData(self) -> plt:
@@ -35,9 +36,9 @@ class EmaIndicator(AbstractTechIndicator):
         plt.style.use(self._plot_style)
         colors = cm.coolwarm
         for a_ind, col in enumerate(self._data.columns):
-            an_alpha: float = 0.5 if a_ind != 0 else 1.0
+            an_alpha: float = 1.0 if (a_ind == 0 or a_ind in self._low_high) else 0.3
             self._data[col].plot(alpha=an_alpha)
-            print('i', a_ind)
+            print('i', an_alpha)
         plt.title(self._main_label)
         plt.xlabel(self._x_label)
         plt.xticks(rotation=self._x_ticks_angle)
