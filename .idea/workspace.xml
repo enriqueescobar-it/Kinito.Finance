@@ -21,24 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Predictors/Keras/KerasPredictor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Predictors/Keras/KerasPredictor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Predictors/Linear/LinearPredictor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Predictors/Linear/LinearPredictor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/CrudeOilIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/CrudeOilIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/DowJonesIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/DowJonesIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Estx50Index.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Estx50Index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/EuroNext100Index.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/EuroNext100Index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Ftse100Index.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Ftse100Index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/HangSengIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/HangSengIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/IbovespaIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/IbovespaIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/IpcMexicoIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/IpcMexicoIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/MoexRussiaIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/MoexRussiaIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/NasdaqIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/NasdaqIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nikkei225Index.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/Nikkei225Index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/NyseComposite.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/NyseComposite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/ShenzhenComponentIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/ShenzhenComponentIndex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnP500Index.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnP500Index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnPTSXComposite.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockMarketIndex/Yahoo/SnPTSXComposite.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/Strategies/SmaStrategyPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/Strategies/SmaStrategyPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/AbstractTechIndicatorStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/AbstractTechIndicatorStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-StrategySma.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-StrategySma.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +79,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\StockMarketIndex\Yahoo" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-Historical">
+  <component name="RunManager" selected="Python.script-StrategySma">
     <configuration name="script-Historical" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -126,27 +114,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Predictors.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="script-StrategyEma (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-StrategyEma.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -197,13 +164,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="script-StrategySma" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-StrategySma.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.script-StrategySma" />
         <item itemvalue="Python.script-Historical" />
         <item itemvalue="Python.script-Predictors" />
         <item itemvalue="Python.script-StrategyRsi" />
         <item itemvalue="Python.script-StrategyMacd" />
-        <item itemvalue="Python.script-StrategyEma (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -273,62 +261,62 @@
     <state x="498" y="170" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599585919164" />
     <state x="2467" y="-267" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599578410124" />
     <state x="518" y="174" key="FileChooserDialogImpl/0.0.1474.864@0.0.1474.864" timestamp="1597203479329" />
-    <state width="1575" height="354" key="GridCell.Tab.0.bottom" timestamp="1599592215691">
-      <screen x="1920" y="-474" width="1618" height="1050" />
+    <state width="1431" height="281" key="GridCell.Tab.0.bottom" timestamp="1599616504906">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.bottom/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783410" />
     <state width="1431" height="418" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
     <state width="1319" height="243" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
-    <state width="1431" height="282" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599335398207" />
-    <state width="1575" height="354" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599592215691" />
+    <state width="1431" height="281" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599616504906" />
+    <state width="1575" height="354" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599595994647" />
     <state width="1431" height="282" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1815" height="281" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="712" height="129" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="1431" height="282" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1599543786143" />
-    <state width="1575" height="354" key="GridCell.Tab.0.center" timestamp="1599592215691">
-      <screen x="1920" y="-474" width="1618" height="1050" />
+    <state width="1431" height="281" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1599612783345" />
+    <state width="1431" height="281" key="GridCell.Tab.0.center" timestamp="1599616504906">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.center/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783410" />
     <state width="1431" height="418" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
     <state width="1319" height="243" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.center/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
-    <state width="1431" height="282" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599335398206" />
-    <state width="1575" height="354" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599592215691" />
+    <state width="1431" height="281" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599616504906" />
+    <state width="1575" height="354" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599595994647" />
     <state width="1431" height="282" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1815" height="281" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="712" height="129" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="1431" height="282" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1599543786143" />
-    <state width="1575" height="354" key="GridCell.Tab.0.left" timestamp="1599592215691">
-      <screen x="1920" y="-474" width="1618" height="1050" />
+    <state width="1431" height="281" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1599612783345" />
+    <state width="1431" height="281" key="GridCell.Tab.0.left" timestamp="1599616504906">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.left/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783409" />
     <state width="1431" height="418" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234871" />
     <state width="1319" height="243" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.left/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438763" />
-    <state width="1431" height="282" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599335398206" />
-    <state width="1575" height="354" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599592215691" />
+    <state width="1431" height="281" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599616504906" />
+    <state width="1575" height="354" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599595994646" />
     <state width="1431" height="282" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1815" height="281" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266292" />
     <state width="712" height="129" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="1431" height="282" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1599543786143" />
-    <state width="1575" height="354" key="GridCell.Tab.0.right" timestamp="1599592215691">
-      <screen x="1920" y="-474" width="1618" height="1050" />
+    <state width="1431" height="281" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1599612783345" />
+    <state width="1431" height="281" key="GridCell.Tab.0.right" timestamp="1599616504906">
+      <screen x="0" y="0" width="1474" height="864" />
     </state>
     <state width="714" height="214" key="GridCell.Tab.0.right/0.0.1474.864/-1920.-312.1858.1080@0.0.1474.864" timestamp="1597670783410" />
     <state width="1431" height="418" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@0.0.1474.864" timestamp="1591968234872" />
     <state width="1319" height="243" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1362.900@1920.-447.1362.900" timestamp="1591243130923" />
     <state width="1431" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@0.0.1474.864" timestamp="1591336124475" />
     <state width="1559" height="365" key="GridCell.Tab.0.right/0.0.1474.864/1920.-447.1602.1050@1920.-447.1602.1050" timestamp="1591324438764" />
-    <state width="1431" height="282" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599335398206" />
-    <state width="1575" height="354" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599592215691" />
+    <state width="1431" height="281" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1599616504906" />
+    <state width="1575" height="354" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599595994647" />
     <state width="1431" height="282" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1815" height="281" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@1920.0.1858.1080" timestamp="1597166266293" />
     <state width="712" height="129" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1598073611536" />
-    <state width="1431" height="282" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1599543786143" />
+    <state width="1431" height="281" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1599612783345" />
     <state x="427" y="127" key="PlantUMLSettings" timestamp="1591157130386">
       <screen x="0" y="0" width="1474" height="864" />
     </state>

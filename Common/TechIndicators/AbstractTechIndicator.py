@@ -18,6 +18,7 @@ class AbstractTechIndicator(ABC):
     _data: DataFrame = DataFrame()
     _strategy: AbstractTechIndicatorStrategy
     _fig_size: Tuple[float, float]
+    _low_high: Tuple[int, int]
     _main_label: str
     _x_label: str
     _y_label: str
@@ -39,6 +40,9 @@ class AbstractTechIndicator(ABC):
 
     def GetCol(self) -> str:
         return self._col
+
+    def GetLowHigh(self) -> Tuple[int, int]:
+        return self._low_high
 
     def GetLabel(self) -> str:
         return self._label

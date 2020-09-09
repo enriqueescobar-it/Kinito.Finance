@@ -1,6 +1,11 @@
+from pandas import DataFrame
 from Common.Strategies.AbstractStrategy import AbstractStrategy
 
 
 class AbstractTechIndicatorStrategy(AbstractStrategy):
-    _Label: str
-    _Col: str
+    _buy_label: str = 'Buy'
+    _sell_label: str = 'Sell'
+    _col: str
+    _lower_label: str
+    _upper_label: str
+    _data: DataFrame

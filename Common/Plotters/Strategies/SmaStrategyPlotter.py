@@ -22,10 +22,10 @@ class SmaStrategyPlotter(AbstractStrategyPlotter):
         self.__DATE_TIME_INDEX = y_stock_option.HistoricalData.index
         self.__STRATEGY_DATA_FRAME = sma_strategy._DataFrame
         self.__STRATEGY_LABEL = sma_strategy._Label
-        self.__STRATEGY_LABEL_BUY = sma_strategy._BuyLabel
-        self.__STRATEGY_DATA_BUY = sma_strategy._DataFrame[sma_strategy._BuyLabel]
-        self.__STRATEGY_LABEL_SELL = sma_strategy._SellLabel
-        self.__STRATEGY_DATA_SELL = sma_strategy._DataFrame[sma_strategy._SellLabel]
+        self.__STRATEGY_LABEL_BUY = sma_strategy._buy_label
+        self.__STRATEGY_DATA_BUY = sma_strategy._DataFrame[sma_strategy._buy_label]
+        self.__STRATEGY_LABEL_SELL = sma_strategy._sell_label
+        self.__STRATEGY_DATA_SELL = sma_strategy._DataFrame[sma_strategy._sell_label]
 
     def Plot(self):
         #plt.style.use(self.__PLOT_STYLE)
