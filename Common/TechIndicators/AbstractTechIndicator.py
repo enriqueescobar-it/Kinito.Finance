@@ -38,14 +38,20 @@ class AbstractTechIndicator(ABC):
     def _setData(self, y_stock_option: YahooStockOption):
         pass
 
+    def GetData(self) -> DataFrame:
+        return self._data
+
     def GetCol(self) -> str:
         return self._col
 
-    def GetLowHigh(self) -> Tuple[int, int]:
-        return self._low_high
+    def GetFigSize(self) -> Tuple[float, float]:
+        return self._fig_size
 
     def GetLabel(self) -> str:
         return self._label
+
+    def GetLowHigh(self) -> Tuple[int, int]:
+        return self._low_high
 
     def GetMainLabel(self) -> str:
         return self._main_label
@@ -55,6 +61,3 @@ class AbstractTechIndicator(ABC):
 
     def GetSource(self) -> str:
         return self._src
-
-    def GetData(self) -> DataFrame:
-        return self._data

@@ -4,7 +4,6 @@ import pandas as pd
 
 
 class AbstractStrategyPlotter(ABC):
-    _FIG_SIZE: Tuple[float, float] = (8.2, 4.5)
     _LEGEND_PLACE: str = 'upper left'
     _PLOT_STYLE: str = 'fivethirtyeight'
     _XTICKS_ANGLE: int = 45

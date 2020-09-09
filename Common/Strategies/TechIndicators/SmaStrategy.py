@@ -25,7 +25,6 @@ class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
         self._data[self._buy_label] = buyNsellTuple[0]
         self._data[self._sell_label] = buyNsellTuple[1]
         print('DATA', self._data.describe())
-        self._FIG_SIZE = (3 * np.math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
         self.__SOURCE = y_stock_option.Source
         self.__TICKER_LABEL = y_stock_option.Source + y_stock_option.Ticker + "_" + self._col
         self.__XLABEL = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
@@ -68,7 +67,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
 
     def Plot(self):
         #plt.style.use(self.__PLOT_STYLE)
-        plt.figure(figsize=self._FIG_SIZE)
+        plt.figure(figsize=self.__sma_indicator.GetFigSize())
         plt.plot(self.__STRATEGY_DATA_FRAME[self._col], label=self.__TICKER_LABEL, alpha=0.7)
         '''plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '005'], label=self.__STRATEGY_LABEL + '005', alpha=0.50, color='lightblue')
         plt.plot(self.__STRATEGY_DATA_FRAME[self.__STRATEGY_LABEL + '009'], label=self.__STRATEGY_LABEL + '009', alpha=0.50, color='lightgray')
