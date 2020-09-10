@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -50,7 +52,8 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
 
         return buySignal, sellSignal
 
-    def Plot(self):
+    def Plot(self) -> plt:
+        self.__macd_indicator.PlotData().show()
         plt.figure(figsize=self.__macd_indicator.GetFigSize())
         plt.style.use(self.__macd_indicator.GetPlotStyle())
         for a_ind, col in enumerate(self._data.columns[0:1]):
@@ -64,4 +67,18 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         plt.xticks(rotation=self.__macd_indicator.GetXticksAngle())
         plt.ylabel(self.__macd_indicator.GetYLabel())
         plt.legend(loc=self.__macd_indicator.GetLegendPlace())
+        return plt
+
+    def PlotAll(self) -> plt:
+        n_col: int = 1
+        n_row: int = 2
+        a_title: str = self.__macd_indicator.GetMainLabel()
+        x_title: str = self.__macd_indicator.GetXLabel()
+        y_title: str = self.__macd_indicator.GetYLabel()
+        f_size: Tuple[float, float] = (self.__macd_indicator.GetFigSize()[0], self.__macd_indicator.GetFigSize()[0])
+        fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
+        plt.style.use(self.__macd_indicator.GetPlotStyle())
+        print('AX', type(ax))
+        #ax0
+        #ax1
         return plt
