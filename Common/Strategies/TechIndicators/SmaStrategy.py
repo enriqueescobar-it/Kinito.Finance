@@ -53,6 +53,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         return buySignal, sellSignal
 
     def Plot(self):
+        self.__sma_indicator.PlotData().show()
         plt.figure(figsize=self.__sma_indicator.GetFigSize())
         plt.style.use(self.__sma_indicator.GetPlotStyle())
         for a_ind, col in enumerate(self._data.columns[0:3]):

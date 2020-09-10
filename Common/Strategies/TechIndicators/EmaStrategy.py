@@ -56,6 +56,7 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         return buySignal, sellSignal
 
     def Plot(self):
+        self.__ema_indicator.PlotData().show()
         plt.figure(figsize=self.__ema_indicator.GetFigSize())
         plt.style.use(self.__ema_indicator.GetPlotStyle())
         for a_ind, col in enumerate(self._data.columns[0:4]):
