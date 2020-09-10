@@ -55,7 +55,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
     def Plot(self):
         plt.figure(figsize=self.__sma_indicator.GetFigSize())
         plt.style.use(self.__sma_indicator.GetPlotStyle())
-        for a_ind, col in enumerate(self._data.columns[0:4]):
+        for a_ind, col in enumerate(self._data.columns[0:3]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3
             self._data[col].plot(alpha=an_alpha)
             print('i', an_alpha)
