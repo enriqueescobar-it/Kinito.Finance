@@ -1,5 +1,6 @@
 from abc import *
 from pandas import DataFrame
+import matplotlib.pyplot as plt
 from Common.Strategies.AbstractStrategy import AbstractStrategy
 
 
@@ -17,5 +18,9 @@ class AbstractTechIndicatorStrategy(AbstractStrategy):
         pass
 
     @abstractmethod
-    def Plot(self):
+    def Plot(self) -> plt:
+        pass
+
+    @abstractmethod
+    def PlotAll(self) -> plt:
         pass
