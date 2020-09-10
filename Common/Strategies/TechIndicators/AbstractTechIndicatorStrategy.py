@@ -15,3 +15,7 @@ class AbstractTechIndicatorStrategy(AbstractStrategy):
     @abstractmethod
     def _buyNsell(self):
         pass
+
+    @abstractmethod
+    def Plot(self):
+        pass

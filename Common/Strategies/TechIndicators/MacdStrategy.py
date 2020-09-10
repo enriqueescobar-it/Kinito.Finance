@@ -1,54 +1,46 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
 from Common.TechIndicators.MacdIndicator import MacdIndicator
-from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class MacdStrategy(AbstractTechIndicatorStrategy):
-    _DataFrame: pd.DataFrame
-    _BuyLabel: str
-    _SellLabel: str
-    __ticker: str
-    __macd: pd.core.series.Series
-    __signal: pd.core.series.Series
-    __signalLabel: str
+    __macd_indicator: MacdIndicator
 
-    def __init__(self, macd_indicator: MacdIndicator, y_stockOption: YahooStockOption):
-        self._Col = macd_indicator._col
-        self._DataFrame = pd.DataFrame()
-        self._Label = macd_indicator._label
-        self.__macd = macd_indicator._macd
-        self.__signal = macd_indicator._signal_line
-        self.__signalLabel = macd_indicator._SignalLineLabel
-        self.__ticker = y_stockOption.Ticker
-        self._DataFrame[y_stockOption.Ticker] = y_stockOption.HistoricalData[self._Col]
-        self._DataFrame[self._Label] = self.__macd
-        self._DataFrame[self.__signalLabel] = self.__signal
-        self._BuyLabel = 'Buy_' + self._Label
-        self._SellLabel = 'Sell_' + self._Label
-        buyNsellTuple = self.__buyNsell()
-        self._DataFrame[self._BuyLabel] = buyNsellTuple[0]
-        self._DataFrame[self._SellLabel] = buyNsellTuple[1]
-        print(self._DataFrame.head())
+    def __init__(self, macd_indicator: MacdIndicator):
+        self.__macd_indicator = macd_indicator
+        a_df: pd.DataFrame = self.__macd_indicator.GetData()
+        self._col = self.__macd_indicator.GetCol()
+        self._lower_label = a_df.columns[self.__macd_indicator.GetLowHigh()[0]]
+        self._upper_label = a_df.columns[self.__macd_indicator.GetLowHigh()[1]]
+        self._data = a_df[self.__macd_indicator.GetCol()].to_frame()
+        self._data[self._lower_label] = a_df[self._lower_label]
+        self._data[self._upper_label] = a_df[self._upper_label]
+        self._buy_label = self.__macd_indicator.GetLabel() + self._buy_label
+        self._sell_label = self.__macd_indicator.GetLabel() + self._sell_label
+        buyNsellTuple = self._buyNsell()
+        self._data[self._buy_label] = buyNsellTuple[0]
+        self._data[self._sell_label] = buyNsellTuple[1]
+        print('DATA', self._data.describe())
 
-    def __buyNsell(self):
+    def _buyNsell(self):
         buySignal = []
         sellSignal = []
         flag = -1
 
-        for i in range(len(self._DataFrame)):
-            if self._DataFrame[self._Label][i] > self._DataFrame[self.__signalLabel][i]:
+        for i in range(len(self._data)):
+            if self._data[self._lower_label][i] > self._data[self._upper_label][i]:
                 sellSignal.append(np.nan)
                 if flag != 1:
-                    buySignal.append(self._DataFrame[self.__ticker][i])
+                    buySignal.append(self._data[self._col][i])
                     flag = 1
                 else:
                     buySignal.append(np.nan)
-            elif self._DataFrame[self._Label][i] < self._DataFrame[self.__signalLabel][i]:
+            elif self._data[self._lower_label][i] < self._data[self._upper_label][i]:
                 buySignal.append(np.nan)
                 if flag != 0:
-                    sellSignal.append(self._DataFrame[self.__ticker][i])
+                    sellSignal.append(self._data[self._col][i])
                     flag = 0
                 else:
                     sellSignal.append(np.nan)
@@ -57,3 +49,19 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
                 sellSignal.append(np.nan)
 
         return buySignal, sellSignal
+
+    def Plot(self):
+        plt.figure(figsize=self.__macd_indicator.GetFigSize())
+        plt.style.use(self.__macd_indicator.GetPlotStyle())
+        for a_ind, col in enumerate(self._data.columns[0:1]):
+            an_alpha: float = 1.0 if a_ind == 0 else 0.3
+            self._data[col].plot(alpha=an_alpha)
+            print('i', an_alpha)
+        plt.scatter(self.__macd_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^', color='green')
+        plt.scatter(self.__macd_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label, marker='v', color='red')
+        plt.title(self.__macd_indicator.GetMainLabel())
+        plt.xlabel(self.__macd_indicator.GetXLabel())
+        plt.xticks(rotation=self.__macd_indicator.GetXticksAngle())
+        plt.ylabel(self.__macd_indicator.GetYLabel())
+        plt.legend(loc=self.__macd_indicator.GetLegendPlace())
+        return plt

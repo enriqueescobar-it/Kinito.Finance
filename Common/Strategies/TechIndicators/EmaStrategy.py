@@ -1,12 +1,11 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from Common.Plotters.Strategies.AbstractStrategyPlotter import AbstractStrategyPlotter
 from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
 from Common.TechIndicators.EmaIndicator import EmaIndicator
 
 
-class EmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
+class EmaStrategy(AbstractTechIndicatorStrategy):
     __ema_indicator: EmaIndicator
 
     def __init__(self, ema_indicator: EmaIndicator):

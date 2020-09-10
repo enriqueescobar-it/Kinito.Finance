@@ -1,12 +1,11 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from Common.Plotters.Strategies.AbstractStrategyPlotter import AbstractStrategyPlotter
 from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
 
-class SmaStrategy(AbstractTechIndicatorStrategy, AbstractStrategyPlotter):
+class SmaStrategy(AbstractTechIndicatorStrategy):
     __sma_indicator: SmaIndicator
 
     def __init__(self, sma_indicator: SmaIndicator):

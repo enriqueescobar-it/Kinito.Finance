@@ -1,4 +1,3 @@
-import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
@@ -7,11 +6,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class MacdIndicator(AbstractTechIndicator):
-    _macd: pd.core.series.Series
-    _signal_line: pd.core.series.Series
-    _SignalLineLabel: str = 'SignalLine'
-    __ShortExponentialMovingAverage: pd.core.series.Series
-    __LongExponentialMovingAverage: pd.core.series.Series
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
@@ -40,6 +34,7 @@ class MacdIndicator(AbstractTechIndicator):
         macd = shortEma - longEma
         self._data[self._name] = macd
         self._data['SignalLine'] = macd.ewm(span=9, adjust=False).mean()
+        self._low_high = (3, 4)
         print(self._data.tail())
 
     def PlotData(self) -> plt:
