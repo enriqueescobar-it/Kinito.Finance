@@ -80,5 +80,15 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         plt.style.use(self.__macd_indicator.GetPlotStyle())
         print('AX', type(ax))
         #ax0
+        ax[0].set(ylabel=y_title, title=a_title)
+        ax[0].legend(loc=self.__macd_indicator.GetLegendPlace())
         #ax1
+        for a_ind, col in enumerate(self._data.columns[0:1]):
+            an_alpha: float = 1.0 if a_ind == 0 else 0.3
+            ax[1].plot(self._data[col], alpha=an_alpha, label=col)
+        ax[1].scatter(self.__macd_indicator.GetData().index, self._data[self._buy_label], marker='^', color='green', label=self._buy_label)
+        ax[1].scatter(self.__macd_indicator.GetData().index, self._data[self._sell_label], marker='v', color='red', label=self._sell_label)
+        ax[1].xaxis.set_tick_params(rotation=self.__macd_indicator.GetXticksAngle())
+        ax[1].set(ylabel=y_title, xlabel=x_title)
+        ax[1].legend(loc=self.__macd_indicator.GetLegendPlace())
         return plt
