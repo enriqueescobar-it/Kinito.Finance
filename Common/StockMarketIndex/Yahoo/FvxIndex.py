@@ -4,13 +4,13 @@ from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarket
 from pyarrow.lib import null
 
 
-class TnxIndex(AbstractStockMarketIndex):
+class FvxIndex(AbstractStockMarketIndex):
 
-    def __init__(self, source: str = 'yahoo', ticker: str = "^TNX", tm_spn: TimeSpan = null):
+    def __init__(self, source: str = 'yahoo', ticker: str = "^FVX", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
-        self.__name = 'Cboe10'
+        self.__name = 'Cboe5'
         self.__source = source
-        self.__ticker = "^TNX" if source == 'yahoo' else ticker
+        self.__ticker = "^FVX" if source == 'yahoo' else ticker
         self.__time_sp = tm_spn
         self.HistoricalData = PandaEngine(source, tm_spn, ticker).DataFrame
         self.HistoricalData.fillna(method='ffill', inplace=True)

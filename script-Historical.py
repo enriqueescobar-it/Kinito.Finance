@@ -21,7 +21,7 @@ from Common.StockMarketIndex.Yahoo.ShenzhenComponentIndex import ShenzhenCompone
 from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.NseIndex import NseIndex
-from Common.StockMarketIndex.Yahoo.TnxIndex import TnxIndex
+from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
@@ -55,7 +55,7 @@ bovespaIndex: AbstractStockMarketIndex = BovespaIndex('yahoo', "^BVSP", yahooSto
 ipcMexicoIndex: AbstractStockMarketIndex = IpcMexicoIndex('yahoo', "^MXX", yahooStockOption.TimeSpan)
 nifty50Index: AbstractStockMarketIndex = NseIndex('yahoo', "^NSEI", yahooStockOption.TimeSpan)
 ipsaIndex: AbstractStockMarketIndex = IpsaIndex('yahoo', "^IPSA", yahooStockOption.TimeSpan)
-tnxIndex: AbstractStockMarketIndex = TnxIndex('yahoo', "^TNX", yahooStockOption.TimeSpan)
+fvxIndex: AbstractStockMarketIndex = FvxIndex('yahoo', "^FVX", yahooStockOption.TimeSpan)
 jkseIndex: AbstractStockMarketIndex = JkseIndex('yahoo', "^JKSE", yahooStockOption.TimeSpan)
 kospIndex: AbstractStockMarketIndex = KospIndex('yahoo', "^KS11", yahooStockOption.TimeSpan)
 marketIndices = list()
@@ -77,7 +77,7 @@ marketIndices.append(bovespaIndex)
 marketIndices.append(ipcMexicoIndex)
 marketIndices.append(nifty50Index)
 marketIndices.append(ipsaIndex)
-marketIndices.append(tnxIndex)
+marketIndices.append(fvxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
