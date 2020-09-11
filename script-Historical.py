@@ -8,9 +8,11 @@ from Common.StockMarketIndex.Yahoo.Estx50Index import Estx50Index
 from Common.StockMarketIndex.Yahoo.EuroNext100Index import EuroNext100Index
 from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
 from Common.StockMarketIndex.Yahoo.HangSengIndex import HangSengIndex
-from Common.StockMarketIndex.Yahoo.IbovespaIndex import IbovespaIndex
+from Common.StockMarketIndex.Yahoo.BovespaIndex import BovespaIndex
 from Common.StockMarketIndex.Yahoo.IpcMexicoIndex import IpcMexicoIndex
 from Common.StockMarketIndex.Yahoo.IpsaIndex import IpsaIndex
+from Common.StockMarketIndex.Yahoo.JkseIndex import JkseIndex
+from Common.StockMarketIndex.Yahoo.KospIndex import KospIndex
 from Common.StockMarketIndex.Yahoo.MoexRussiaIndex import MoexRussiaIndex
 from Common.StockMarketIndex.Yahoo.NasdaqIndex import NasdaqIndex
 from Common.StockMarketIndex.Yahoo.Nikkei225Index import Nikkei225Index
@@ -19,6 +21,7 @@ from Common.StockMarketIndex.Yahoo.ShenzhenComponentIndex import ShenzhenCompone
 from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.NseIndex import NseIndex
+from Common.StockMarketIndex.Yahoo.TnxIndex import TnxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
@@ -48,10 +51,13 @@ nikkei225Index: AbstractStockMarketIndex = Nikkei225Index('yahoo', "^N225", yaho
 moexRussiaIndex: AbstractStockMarketIndex = MoexRussiaIndex('yahoo', "IMOEX.ME", yahooStockOption.TimeSpan)
 hangSengIndex: AbstractStockMarketIndex = HangSengIndex('yahoo', "^HSI", yahooStockOption.TimeSpan)
 shenzhenComponentIndex: AbstractStockMarketIndex = ShenzhenComponentIndex('yahoo', "399001.SZ", yahooStockOption.TimeSpan)
-ibovespaIndex: AbstractStockMarketIndex = IbovespaIndex('yahoo', "^BVSP", yahooStockOption.TimeSpan)
+bovespaIndex: AbstractStockMarketIndex = BovespaIndex('yahoo', "^BVSP", yahooStockOption.TimeSpan)
 ipcMexicoIndex: AbstractStockMarketIndex = IpcMexicoIndex('yahoo', "^MXX", yahooStockOption.TimeSpan)
 nifty50Index: AbstractStockMarketIndex = NseIndex('yahoo', "^NSEI", yahooStockOption.TimeSpan)
 ipsaIndex: AbstractStockMarketIndex = IpsaIndex('yahoo', "^IPSA", yahooStockOption.TimeSpan)
+tnxIndex: AbstractStockMarketIndex = TnxIndex('yahoo', "^TNX", yahooStockOption.TimeSpan)
+jkseIndex: AbstractStockMarketIndex = JkseIndex('yahoo', "^JKSE", yahooStockOption.TimeSpan)
+kospIndex: AbstractStockMarketIndex = KospIndex('yahoo', "^KS11", yahooStockOption.TimeSpan)
 marketIndices = list()
 marketIndices.append(sAndPTsx)
 marketIndices.append(sAnP500)
@@ -67,10 +73,13 @@ marketIndices.append(nikkei225Index)
 marketIndices.append(moexRussiaIndex)
 marketIndices.append(hangSengIndex)
 marketIndices.append(shenzhenComponentIndex)
-marketIndices.append(ibovespaIndex)
+marketIndices.append(bovespaIndex)
 marketIndices.append(ipcMexicoIndex)
 marketIndices.append(nifty50Index)
 marketIndices.append(ipsaIndex)
+marketIndices.append(tnxIndex)
+marketIndices.append(jkseIndex)
+marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
 #'''
 yahooStockOptionPlotter: HistoricalPlotter = \

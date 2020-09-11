@@ -4,7 +4,7 @@ from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarket
 from pyarrow.lib import null
 
 
-class IbovespaIndex(AbstractStockMarketIndex):
+class BovespaIndex(AbstractStockMarketIndex):
 
     def __init__(self, source: str = 'yahoo', ticker: str = "^BVSP", tm_spn: TimeSpan = null):
         self.__column = 'Adj Close'
