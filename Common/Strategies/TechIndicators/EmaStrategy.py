@@ -71,3 +71,6 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         plt.ylabel(self.__ema_indicator.GetYLabel())
         plt.legend(loc=self.__ema_indicator.GetLegendPlace())
         return plt
+
+    def PlotAll(self) -> plt:
+        return self.Plot()

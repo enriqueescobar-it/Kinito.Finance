@@ -68,3 +68,6 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         plt.ylabel(self.__sma_indicator.GetYLabel())
         plt.legend(loc=self.__sma_indicator.GetLegendPlace())
         return plt
+
+    def PlotAll(self) -> plt:
+        return self.Plot()
