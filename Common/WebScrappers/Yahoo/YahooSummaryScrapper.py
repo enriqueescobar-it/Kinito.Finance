@@ -28,6 +28,12 @@ class YahooSummaryScrapper(YahooScrapper):
     def __setHtmlBody(self):
         self.__htmlBody = self.__htmlParser.find_all("tbody")
 
+    def __isKeyInDict(self, a_dict: dict, a_key: str = ''):
+        return a_key in a_dict
+
+    def __getKeyFromDict(self, a_dict: dict, a_key: str = ''):
+        return 'NA' if not self.__isKeyInDict(a_dict, a_key) else str(a_dict[a_key])
+
     def ParseBody(self):
         l = {}
         u = list()
@@ -55,8 +61,8 @@ class YahooSummaryScrapper(YahooScrapper):
             l[table2_td[0].text] = table2_td[1].text
             u.append(l)
             l = {}
-        self.MarketCap = str(u[:][8]['Market Cap'])
-        self.Beta = str(u[:][9]['Beta (5Y Monthly)'])
-        self.PEratio = str(u[:][10]['PE Ratio (TTM)'])
-        self.EPS = str(u[:][11]['EPS (TTM)'])
-        self.EarningsDate = str(u[:][12]['Earnings Date'])
+        self.MarketCap = self.__getKeyFromDict(u[:][8], 'Market Cap')
+        self.Beta = self.__getKeyFromDict(u[:][9], 'Beta (5Y Monthly)')
+        self.PEratio = self.__getKeyFromDict(u[:][10], 'PE Ratio (TTM)')
+        self.EPS = self.__getKeyFromDict(u[:][11], 'EPS (TTM)')
+        self.EarningsDate = self.__getKeyFromDict(u[:][12], 'Earnings Date')
