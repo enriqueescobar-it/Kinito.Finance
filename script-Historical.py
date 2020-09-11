@@ -36,7 +36,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 # 60% StockMarketFund (FZROX~SWTSX~VTSAX) 20% InternationalFund (FZILX~SWISX~VTIAX) 20% REITFund (FSRNX)
 # Sector ETFs: VGT VPU VDC VYM
 print(yahooStockOption.HistoricalData.describe(include='all'))
-#'''
+'''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
@@ -81,7 +81,7 @@ marketIndices.append(fvxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-#'''
+'''
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()

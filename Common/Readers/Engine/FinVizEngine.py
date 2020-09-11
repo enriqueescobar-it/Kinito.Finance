@@ -77,7 +77,9 @@ class FinVizEngine(AbstractEngine):
 
     @staticmethod
     def __stringToInt(s: str):
-        return int(s.replace(',', ''))
+        s = s.replace('-', '')
+        s = s.replace(',', '')
+        return -1 if s == '' else int(s)
 
     @staticmethod
     def __unitsToInt(s: str):
@@ -102,7 +104,7 @@ class FinVizEngine(AbstractEngine):
         self.StockIndustry = self._fin_viz['Industry']
 
     def __setStockCountry(self):
-        self.StockCountry = self._fin_viz['Country']
+        self.StockCountry = self._fin_viz['Country'] if 'Country' in self._fin_viz else 'NA'
 
     def __setPeRatio(self):
         a_str: str = '-1.1' if str(self._fin_viz['P/E']) == '-' else str(self._fin_viz['P/E'])
