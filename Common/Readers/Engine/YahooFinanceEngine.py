@@ -56,9 +56,9 @@ class YahooFinanceEngine(AbstractEngine):
     def __init__(self, a_ticker: str = 'AAPL'):
         self.__ticker = a_ticker
         self.__yFinance = yf.Ticker(a_ticker)
-        self.InfoDic = self.__yFinance.info
-        print('InfoDic\r\n', self.InfoDic)
-        self.__setInfo()
+        print('INFO:', self.__yFinance.__dict__['_info'])
+        if '_info' in self.__yFinance.__dict__:
+            self.__setInfo()
         self.ActionsDf = self.__yFinance.actions
         self.Balance_SheetDf = self.__yFinance.balance_sheet
         self.BalanceSheetDf = self.__yFinance.balancesheet
@@ -79,6 +79,8 @@ class YahooFinanceEngine(AbstractEngine):
         self.SustainabilityDf = self.__yFinance.sustainability
 
     def __setInfo(self):
+        self.InfoDic = self.__yFinance.info
+        print('InfoDic\r\n', self.InfoDic)
         self.Url = self.__getValue('website')
         self.LogoUrl = self.__getValue('logo_url')
         self.Address = self.__getValue('address1')
