@@ -167,6 +167,23 @@ class HistoricalPlotter(AbstractPlotter):
         # ax.axis('tight')
         return ax
 
+    def __newPeriodDist(self, an_ax, a_df: DataFrame, period_str: str):
+        r_range: ndarray = self.__GetRankRange(a_df)
+        mu: float = a_df[self.__Col].mean()
+        sigma: float = a_df[self.__Col].std()
+        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
+        sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=an_ax)
+        an_ax.set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns', fontsize=12)
+        an_ax.plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
+        an_ax.legend(loc=self.__legendPlace)
+        plt.tight_layout()
+        return an_ax
+
+    def __newPeriodQqPlot(self, an_ax, a_df: DataFrame, period_str: str):
+        sm.qqplot(a_df[self.__Col].values, line='q', ax=an_ax)
+        an_ax.set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns', fontsize=12)
+        return an_ax
+
     def __plotHist(self, a_df: DataFrame, timely: str = 'Daily'):
         r_range: ndarray = self.__GetRankRange(a_df)
         mu: float = a_df[self.__Col].mean()
@@ -193,7 +210,7 @@ class HistoricalPlotter(AbstractPlotter):
     def Plot(self):
         a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
         x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
-        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7), sharex=True)
+        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
         plt.style.use('fivethirtyeight')
         # ax0
         self.__dataFrame[self.__Col].plot(ax=ax[0])
@@ -211,6 +228,7 @@ class HistoricalPlotter(AbstractPlotter):
         self.__dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
         ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[3].legend(loc=self.__legendPlace)
+        plt.tight_layout()
         return plt
 
     def PlotForecast(self):
@@ -280,7 +298,9 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def GraphPlot(self):
+        a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
         fig = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
+        fig.suptitle(a_title)
         gs = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig)
         plt.style.use('fivethirtyeight')
         ax1 = fig.add_subplot(gs[0, 0])
@@ -289,6 +309,30 @@ class HistoricalPlotter(AbstractPlotter):
         ax2 = self.__plotDistro(ax2)
         plt.tight_layout()
         return plt
+
+    def __newPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
+        a_title: str = self.__ticker + ' ' + self.__Col + ' ' + period_str + ' ' + str(self.__timeSpan.MonthCount) + ' months'
+        x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
+        a_float: float = 3 * math.log(self.__stockOption.TimeSpan.MonthCount)
+        fig, ax = plt.subplots(2, 2, figsize=(a_float, a_float), sharex=False)
+        fig.suptitle(a_title)
+        plt.style.use('fivethirtyeight')
+        # ax0
+        ax[0, 0] = self.__newPeriod(ax[0, 0], df_period, period_str)
+        # ax1
+        ax[0, 1] = self.__newPeriodCum(ax[0, 1], df_periodCum, period_str)
+        # ax2
+        ax[1, 0] = self.__newPeriodDist(ax[1, 0], df_period, period_str)
+        # ax3
+        ax[1, 1] = self.__newPeriodQqPlot(ax[1, 1], df_period, period_str)
+        plt.tight_layout()
+        return plt
+
+    def __newPeriod(self, an_ax, a_df: DataFrame, period_str: str):
+        an_ax.plot(a_df, label=self.__Col)
+        an_ax.legend(loc=self.__legendPlace)
+        an_ax.set(ylabel=self.__Col + ' Percent Base=1')
+        return an_ax
 
     def __plotPeriod(self, a_df: DataFrame, period_str: str = 'Daily'):
         a_title: str = self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns ' + str(self.__timeSpan.MonthCount) + ' months'
@@ -301,6 +345,20 @@ class HistoricalPlotter(AbstractPlotter):
         plt.legend(loc=self.__legendPlace)
         return plt
 
+    def __newPeriodCum(self, an_ax, a_df: DataFrame, period_str: str):
+        modelDailyDrop = a_df[self.__Col].dropna()
+        modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
+        modelDailyFitted = modelDailyModel.fit(disp='off')
+        # modelDailyFitted.plot(annualize='D')
+        avg_return = 100 * modelDailyDrop.mean()
+        avg_return_str: str = f'{avg_return:.2f}%'
+        print(f'Average return: {100 * modelDailyDrop.mean():.2f}%')
+        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cumulative {period_str} Returns {self.__timeSpan.MonthCount} months'
+        an_ax.plot(a_df, label=self.__Col)
+        an_ax.legend(loc=self.__legendPlace)
+        an_ax.set(ylabel=self.__Col + ' 1$ Growth Invested')
+        return an_ax
+
     def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
         modelDailyDrop = a_df[self.__Col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
@@ -309,13 +367,13 @@ class HistoricalPlotter(AbstractPlotter):
         avg_return = 100 * modelDailyDrop.mean()
         avg_return_str: str = f'{avg_return:.2f}%'
         print(f'Average return: {100 * modelDailyDrop.mean():.2f}%')
-        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cummulative {a_period} Returns {self.__timeSpan.MonthCount} months'
+        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cumulative {a_period} Returns {self.__timeSpan.MonthCount} months'
         plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(a_df, label=self.__Col)
         plt.title(a_title)
         plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' 1$ Growth Investment')
+        plt.ylabel(self.__Col + ' 1$ Growth Invested')
         plt.legend(loc=self.__legendPlace)
         return plt
 
@@ -336,3 +394,9 @@ class HistoricalPlotter(AbstractPlotter):
 
     def MonthlyHist(self):
         return self.__plotHist(self.__dataMonthly, 'Monthly')
+
+    def PlotDaily(self):
+        return self.__newPlot(self.__dataDaily, self.__dataDailyCum, 'Daily')
+
+    def PlotMonthly(self):
+        return self.__newPlot(self.__dataMonthly, self.__dataMonthlyCum, 'Monthly')
