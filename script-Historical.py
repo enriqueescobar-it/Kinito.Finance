@@ -25,7 +25,7 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CNI')
+yahooStockOption: YahooStockOption = YahooStockOption('CP')
 #MWK YCBD GRWG FSZ AMZN
 #KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B GNW OTEX BPY
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
@@ -34,6 +34,10 @@ yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 # FZROX FZILX FSRNX VTSAX
 # 60% StockMarketFund (FZROX~SWTSX~VTSAX) 20% InternationalFund (FZILX~SWISX~VTIAX) 20% REITFund (FSRNX)
 # Sector ETFs: VGT VPU VDC VYM
+# MWK YCBD GRWG FSZ AMZN CGO RCI PPL SJR.B AQN CP CNI TD KL WCN BPY OTEX
+# BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
+#ETFs# BRTXQ FZILX FSRNX VTSAX
+# TFII LSPD T FTS RY SHOP
 print(yahooStockOption.HistoricalData.describe(include='all'))
 '''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)

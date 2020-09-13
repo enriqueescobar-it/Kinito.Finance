@@ -8,57 +8,57 @@ from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 class YahooFinanceEngine(AbstractEngine):
     """description of class"""
-    Url: str = 'NA'
-    LogoUrl: str = 'NA'
-    Address: str = 'NA'
-    City: str = 'NA'
-    State: str = 'NA'
-    PostalCode: str = 'NA'
-    Country: str = 'NA'
-    Beta: float = -1.1
-    Market: str = 'NA'
-    Currency: str = 'NA'
-    QuoteType: str = 'NA'
-    Exchange: str = 'NA'
-    High52: float = -1.1
-    Low52: float = -1.1
-    Average50: float = -1.1
-    Average200: float = -1.1
-    MarketCap: float = -1.1
-    PayoutRatio: float = -1.1
-    PEforward: float = -1.1
-    PEtrailing: float = -1.1
-    PegRatio: float = -1.1
-    ShortRatio: float = -1.1
-    BookValue: float = -1.1
-    PriceToBook: float = -1.1
+    Url: str #= 'NA'
+    LogoUrl: str #= 'NA'
+    Address: str #= 'NA'
+    City: str #= 'NA'
+    State: str #= 'NA'
+    PostalCode: str #= 'NA'
+    Country: str #= 'NA'
+    Beta: float #= -1.1
+    Market: str #= 'NA'
+    Currency: str #= 'NA'
+    QuoteType: str #= 'NA'
+    Exchange: str #= 'NA'
+    High52: float #= -1.1
+    Low52: float #= -1.1
+    Average50: float #= -1.1
+    Average200: float #= -1.1
+    MarketCap: float #= -1.1
+    PayoutRatio: float #= -1.1
+    PEforward: float #= -1.1
+    PEtrailing: float #= -1.1
+    PegRatio: float #= -1.1
+    ShortRatio: float #= -1.1
+    BookValue: float #= -1.1
+    PriceToBook: float #= -1.1
     ExDividendDate: datetime = datetime.date.min
-    __ticker: str = 'NA'
-    InfoDic: dict = dict()
-    ActionsDf: pd.DataFrame = pd.DataFrame()
-    Balance_SheetDf: pd.DataFrame = pd.DataFrame()
-    BalanceSheetDf: pd.DataFrame = pd.DataFrame()
-    CalendarDf: pd.DataFrame = pd.DataFrame()
-    CashFlowDf: pd.DataFrame = pd.DataFrame()
-    EarningDf:pd.DataFrame = pd.DataFrame()
-    FinancialDf: pd.DataFrame = pd.DataFrame()
-    IsIn: str = 'NA'
-    Balance_SheetQDf: pd.DataFrame = pd.DataFrame()
-    BalanceSheetQDf: pd.DataFrame = pd.DataFrame()
-    CashFlowQDf: pd.DataFrame = pd.DataFrame()
-    EarningQDf: pd.DataFrame = pd.DataFrame()
-    FinancialQDf: pd.DataFrame = pd.DataFrame()
-    RecommendationDf: pd.DataFrame = pd.DataFrame()
+    __ticker: str #= 'NA'
+    InfoDic: dict #= dict()
+    ActionsDf: pd.DataFrame #= pd.DataFrame()
+    Balance_SheetDf: pd.DataFrame #= pd.DataFrame()
+    BalanceSheetDf: pd.DataFrame #= pd.DataFrame()
+    CalendarDf: pd.DataFrame #= pd.DataFrame()
+    CashFlowDf: pd.DataFrame #= pd.DataFrame()
+    EarningDf:pd.DataFrame #= pd.DataFrame()
+    FinancialDf: pd.DataFrame #= pd.DataFrame()
+    IsIn: str #= 'NA'
+    Balance_SheetQDf: pd.DataFrame #= pd.DataFrame()
+    BalanceSheetQDf: pd.DataFrame #= pd.DataFrame()
+    CashFlowQDf: pd.DataFrame #= pd.DataFrame()
+    EarningQDf: pd.DataFrame #= pd.DataFrame()
+    FinancialQDf: pd.DataFrame #= pd.DataFrame()
+    RecommendationDf: pd.DataFrame #= pd.DataFrame()
     SplitSeries: Series
-    SustainabilityDf: pd.DataFrame = pd.DataFrame()
+    SustainabilityDf: pd.DataFrame #= pd.DataFrame()
     OptionTuple: tuple
 
     def __init__(self, a_ticker: str = 'AAPL'):
         self.__ticker = a_ticker
         self.__yFinance = yf.Ticker(a_ticker)
         if '_info' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_info'):
-            if self.__yFinance.__dict__['_info'] is not None:
-                self.__setInfo()
+            #if self.__yFinance.__dict__['_info'] is not None:
+            self.__setInfo()
         self.ActionsDf = self.__yFinance.actions
         if '_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_balance_sheet'):
             self.Balance_SheetDf = self.__yFinance.balance_sheet
