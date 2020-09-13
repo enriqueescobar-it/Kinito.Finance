@@ -25,7 +25,7 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CP')
+yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 #MWK YCBD GRWG FSZ AMZN
 #KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B GNW OTEX BPY
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
@@ -93,6 +93,7 @@ yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Daily().show()
 yahooStockOptionPlotter.DailyCum().show()
 yahooStockOptionPlotter.DailyHist().show()
+exit(111)
 yahooStockOptionPlotter.Monthly().show()
 yahooStockOptionPlotter.MonthlyCum().show()
 yahooStockOptionPlotter.MonthlyHist().show()

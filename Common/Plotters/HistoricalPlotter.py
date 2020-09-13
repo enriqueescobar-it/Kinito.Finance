@@ -1,5 +1,4 @@
 import math
-
 import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
 import numpy as np
@@ -281,12 +280,12 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def GraphPlot(self):
-        fig1L2C = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
-        gs1L2C = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig1L2C)
+        fig = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
+        gs = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig)
         plt.style.use('fivethirtyeight')
-        ax1 = fig1L2C.add_subplot(gs1L2C[0, 0])
+        ax1 = fig.add_subplot(gs[0, 0])
         ax1 = self.__plot(ax1)
-        ax2 = fig1L2C.add_subplot(gs1L2C[0, 1])
+        ax2 = fig.add_subplot(gs[0, 1])
         ax2 = self.__plotDistro(ax2)
         plt.tight_layout()
         return plt
