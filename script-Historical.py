@@ -25,7 +25,7 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CNI')
+yahooStockOption: YahooStockOption = YahooStockOption('OTEX')
 #MWK YCBD GRWG FSZ AMZN
 #KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B GNW OTEX BPY
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
@@ -39,7 +39,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 #ETFs# BRTXQ FZILX FSRNX VTSAX
 # TFII LSPD T FTS RY SHOP
 print(yahooStockOption.HistoricalData.describe(include='all'))
-#'''
+'''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
@@ -84,7 +84,7 @@ marketIndices.append(fvxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-#'''
+'''
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
