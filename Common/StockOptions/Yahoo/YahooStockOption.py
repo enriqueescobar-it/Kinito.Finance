@@ -114,15 +114,15 @@ class YahooStockOption(AbstractStockOption):
         self.TimeSpan = TimeSpan()
         self.__GetData()
         self.__GetDataSimpleReturns()
-        self.__GetDataLogReturns()
+        self._setDataLogReturns()
         self.__GetDataDaily()
         self.__GetDataDailyCum()
         self.__GetDataMonthly()
         self.__GetDataMonthlyCum()
-        self.__GetDataPreProcMeanRemove()
-        self.__GetDataPreProcScale()
-        self.__GetDataPreProcNormL1()
-        self.__GetDataPreProcBinary()
+        self._setDataMeanRemove()
+        self._setDataScaled()
+        self._setDataNormL1()
+        self._setDataBinary()
         self.__GetDataPrediction()
         self.__GetFv()
         self.__GetYe()
@@ -277,13 +277,13 @@ class YahooStockOption(AbstractStockOption):
         S_t = np.insert(S_t, 0, s_0, axis=1)
         return S_t
 
-    def __GetDataLogReturns(self):
+    def _setDataLogReturns(self):
         a_var = np.log(self.HistoricalData[self.SourceColumn] / self.HistoricalData[self.SourceColumn].shift(1))
         self.HistoricalLogReturns = a_var.to_frame()
-        self.HistoricalLogReturns['MovingStd252'] = self.HistoricalLogReturns[self.SourceColumn].rolling(
-            window=252).std().to_frame()
-        self.HistoricalLogReturns['MovingStd21'] = self.HistoricalLogReturns[self.SourceColumn].rolling(
-            window=21).std().to_frame()
+        self.HistoricalLogReturns['MovingStd252'] =\
+            self.HistoricalLogReturns[self.SourceColumn].rolling(window=252).std().to_frame()
+        self.HistoricalLogReturns['MovingStd21'] =\
+            self.HistoricalLogReturns[self.SourceColumn].rolling(window=21).std().to_frame()
 
     def __GetDataDaily(self):
         self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
@@ -297,16 +297,16 @@ class YahooStockOption(AbstractStockOption):
     def __GetDataMonthlyCum(self):
         self.HistoricalMonthlyCum = (self.HistoricalMonthly + 1).cumprod()
 
-    def __GetDataPreProcMeanRemove(self):
+    def _setDataMeanRemove(self):
         self.HistoricalStandardized = preprocessing.scale(self.HistoricalData)
 
-    def __GetDataPreProcScale(self):
+    def _setDataScaled(self):
         self.HistoricalScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self.HistoricalData)
 
-    def __GetDataPreProcNormL1(self):
+    def _setDataNormL1(self):
         self.HistoricalL1Normalized = preprocessing.normalize(self.HistoricalData, norm='l1')
 
-    def __GetDataPreProcBinary(self):
+    def _setDataBinary(self):
         self.HistoricalBinary = preprocessing.Binarizer(threshold=1.4).transform(self.HistoricalData)
 
     def __GetFv(self):
