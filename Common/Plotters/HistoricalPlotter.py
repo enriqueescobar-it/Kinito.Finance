@@ -25,27 +25,27 @@ class HistoricalPlotter(AbstractPlotter):
     __dataLinearRegPrediction: ndarray
     __dataTreeRegPrediction: ndarray
     __dataXarray: ndarray
-    __dataSimpleReturns: DataFrame
-    __dataLogReturns: DataFrame
-    __dataDaily: DataFrame
-    __dataDailyCum: Series
-    __dataMonthly: DataFrame
-    __dataMonthlyCum: Series
-    __mean: ndarray
-    __median: ndarray
-    __std: ndarray
-    __price: float
-    __yeAverage200: float
-    __yeAverage50: float
-    __yeHigh52: float
-    __yeLow52: float
+    _dataSimpleReturns: DataFrame
+    _dataLogReturns: DataFrame
+    _dataDaily: DataFrame
+    _dataDailyCum: Series
+    _dataMonthly: DataFrame
+    _dataMonthlyCum: Series
+    _mean: ndarray
+    _median: ndarray
+    _std: ndarray
+    _price: float
+    _yeAverage200: float
+    _yeAverage50: float
+    _yeHigh52: float
+    _yeLow52: float
 
     def __init__(self, y_stockOption: YahooStockOption):
-        self.__price = np.round(y_stockOption.FvPrice, 2)
-        self.__yeHigh52 = np.round(y_stockOption.YeHigh52, 2)
-        self.__yeLow52 = np.round(y_stockOption.YeLow52, 2)
-        self.__yeAverage50 = np.round(y_stockOption.YeAverage50, 2)
-        self.__yeAverage200 = np.round(y_stockOption.YeAverage200, 2)
+        self._price = np.round(y_stockOption.FvPrice, 2)
+        self._yeHigh52 = np.round(y_stockOption.YeHigh52, 2)
+        self._yeLow52 = np.round(y_stockOption.YeLow52, 2)
+        self._yeAverage50 = np.round(y_stockOption.YeAverage50, 2)
+        self._yeAverage200 = np.round(y_stockOption.YeAverage200, 2)
         if y_stockOption.Source == 'yahoo':
             self.__Col = "Adj Close"
         self.__dataFrame = y_stockOption.HistoricalData
@@ -60,18 +60,18 @@ class HistoricalPlotter(AbstractPlotter):
         self.__dataSVRrbfPrediction = y_stockOption.HistoricalSVRRbfPrediction
         self.__dataSVRrbfScore = round(y_stockOption.HistoricalSVRRbfScore, 5)
         self.__dataXarray = y_stockOption.Xarray'''
-        self.__dataSimpleReturns = y_stockOption.HistoricalSimpleReturns
-        self.__dataLogReturns = y_stockOption.HistoricalLogReturns
-        self.__dataDaily = y_stockOption.HistoricalDaily
-        self.__dataDailyCum = y_stockOption.HistoricalDailyCum
-        self.__dataMonthly = y_stockOption.HistoricalMonthly
-        self.__dataMonthlyCum = y_stockOption.HistoricalMonthlyCum
-        self.__mean = np.mean(y_stockOption.HistoricalData[self.__Col])
-        self.__mean = np.round(self.__mean, 2)
-        self.__median = np.median(y_stockOption.HistoricalData[self.__Col])
-        self.__median = np.round(self.__median, 2)
-        self.__std = np.std(y_stockOption.HistoricalData[self.__Col])
-        self.__std = np.round(self.__std, 2)
+        self._dataSimpleReturns = y_stockOption.HistoricalSimpleReturns
+        self._dataLogReturns = y_stockOption.HistoricalLogReturns
+        self._dataDaily = y_stockOption.HistoricalDaily
+        self._dataDailyCum = y_stockOption.HistoricalDailyCum
+        self._dataMonthly = y_stockOption.HistoricalMonthly
+        self._dataMonthlyCum = y_stockOption.HistoricalMonthlyCum
+        self._mean = np.mean(y_stockOption.HistoricalData[self.__Col])
+        self._mean = np.round(self._mean, 2)
+        self._median = np.median(y_stockOption.HistoricalData[self.__Col])
+        self._median = np.round(self._median, 2)
+        self._std = np.std(y_stockOption.HistoricalData[self.__Col])
+        self._std = np.round(self._std, 2)
         self.__src = y_stockOption.Source
         self.__legendPlace = 'upper left'
         self.__ticker = y_stockOption.Ticker
@@ -80,7 +80,7 @@ class HistoricalPlotter(AbstractPlotter):
         print('MM:', y_stockOption.TimeSpan.MonthCount)
         print('ww:', y_stockOption.TimeSpan.WeekCount)
         print('dd:', y_stockOption.TimeSpan.DayCount)
-        self.__stockOption = y_stockOption
+        self._stockOption = y_stockOption
 
     def __GetRankRange(self, a_df: DataFrame):
         return np.linspace(min(a_df[self.__Col]), max(a_df[self.__Col]), num=1000)
@@ -103,66 +103,66 @@ class HistoricalPlotter(AbstractPlotter):
         # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # plt.tight_layout()
         # Plot the grid lines
-        plus1sd = np.round(self.__mean + self.__std, 2)
-        plus2sd = np.round(self.__mean + 2*self.__std, 2)
-        minus1sd = np.round(self.__mean - self.__std, 2)
-        minus2sd = np.round(self.__mean - 2*self.__std, 2)
-        price_label: str = self.__Col + '_Price=' + str(self.__price)
-        median_label: str = self.__Col + '_Median=' + str(self.__median)
-        mean_label: str = self.__Col + '_Mean=' + str(self.__mean)
-        high52_label: str = 'High52=' + str(self.__yeHigh52)
-        low52_label: str = 'Low52=' + str(self.__yeLow52)
-        mean200_label: str = 'Average200=' + str(self.__yeAverage200)
-        mean50_label: str = 'Average50=' + str(self.__yeAverage50)
+        plus1sd = np.round(self._mean + self._std, 2)
+        plus2sd = np.round(self._mean + 2 * self._std, 2)
+        minus1sd = np.round(self._mean - self._std, 2)
+        minus2sd = np.round(self._mean - 2 * self._std, 2)
+        price_label: str = self.__Col + '_Price=' + str(self._price)
+        median_label: str = self.__Col + '_Median=' + str(self._median)
+        mean_label: str = self.__Col + '_Mean=' + str(self._mean)
+        high52_label: str = 'High52=' + str(self._yeHigh52)
+        low52_label: str = 'Low52=' + str(self._yeLow52)
+        mean200_label: str = 'Average200=' + str(self._yeAverage200)
+        mean50_label: str = 'Average50=' + str(self._yeAverage50)
         plus1_label: str = self.__Col + '_+1Std=' + str(plus1sd)
         plus2_label: str = self.__Col + '_+2Std=' + str(plus2sd)
         minus1_label: str = self.__Col + '_-1Std=' + str(minus1sd)
         minus2_label: str = self.__Col + '_-2Std=' + str(minus2sd)
         ax.plot(self.__dataFrame[self.__Col], label=self.__Col)
-        ax.axhline(self.__price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
-        ax.axhline(self.__median, linestyle='--', label=median_label, color='blue', alpha=0.50)
-        ax.axhline(self.__mean, linestyle='--', label=mean_label, color='orange')
+        ax.axhline(self._price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
+        ax.axhline(self._median, linestyle='--', label=median_label, color='blue', alpha=0.50)
+        ax.axhline(self._mean, linestyle='--', label=mean_label, color='orange')
         ax.axhline(plus1sd, linestyle='--', label=plus1_label, color='grey', alpha=0.50)
         ax.axhline(plus2sd, linestyle='--', label=plus2_label, color='grey', alpha=0.35)
         ax.axhline(minus1sd, linestyle='--', label=minus1_label, color='grey', alpha=0.50)
         ax.axhline(minus2sd, linestyle='--', label=minus2_label, color='grey', alpha=0.35)
-        ax.axhline(self.__yeHigh52, linestyle='--', label=high52_label, color='red', alpha=0.50)
-        ax.axhline(self.__yeLow52, linestyle='--', label=low52_label, color='green', alpha=0.50)
-        ax.axhline(self.__yeAverage200, linestyle='-.', label=mean200_label, color='yellow', alpha=0.50)
-        ax.axhline(self.__yeAverage50, linestyle='-.', label=mean50_label, color='orange', alpha=0.50)
+        ax.axhline(self._yeHigh52, linestyle='--', label=high52_label, color='red', alpha=0.50)
+        ax.axhline(self._yeLow52, linestyle='--', label=low52_label, color='green', alpha=0.50)
+        ax.axhline(self._yeAverage200, linestyle='-.', label=mean200_label, color='yellow', alpha=0.50)
+        ax.axhline(self._yeAverage50, linestyle='-.', label=mean50_label, color='orange', alpha=0.50)
         ax.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
         ax.legend(loc=self.__legendPlace, fontsize=8)
         # ax.axis('tight')
         return ax
 
     def __plotDistro(self, ax: object):
-        plus1sd = np.round(self.__mean + self.__std, 2)
-        plus2sd = np.round(self.__mean + 2*self.__std, 2)
-        minus1sd = np.round(self.__mean - self.__std, 2)
-        minus2sd = np.round(self.__mean - 2*self.__std, 2)
-        price_label: str = self.__Col + '_Price=' + str(self.__price)
-        median_label: str = self.__Col + '_Median=' + str(self.__median)
-        mean_label: str = self.__Col + '_Mean=' + str(self.__mean)
-        high52_label: str = 'High52=' + str(self.__yeHigh52)
-        low52_label: str = 'Low52=' + str(self.__yeLow52)
-        mean200_label: str = 'Average200=' + str(self.__yeAverage200)
-        mean50_label: str = 'Average50=' + str(self.__yeAverage50)
+        plus1sd = np.round(self._mean + self._std, 2)
+        plus2sd = np.round(self._mean + 2 * self._std, 2)
+        minus1sd = np.round(self._mean - self._std, 2)
+        minus2sd = np.round(self._mean - 2 * self._std, 2)
+        price_label: str = self.__Col + '_Price=' + str(self._price)
+        median_label: str = self.__Col + '_Median=' + str(self._median)
+        mean_label: str = self.__Col + '_Mean=' + str(self._mean)
+        high52_label: str = 'High52=' + str(self._yeHigh52)
+        low52_label: str = 'Low52=' + str(self._yeLow52)
+        mean200_label: str = 'Average200=' + str(self._yeAverage200)
+        mean50_label: str = 'Average50=' + str(self._yeAverage50)
         plus1_label: str = self.__Col + '_+1Std=' + str(plus1sd)
         plus2_label: str = self.__Col + '_+2Std=' + str(plus2sd)
         minus1_label: str = self.__Col + '_-1Std=' + str(minus1sd)
         minus2_label: str = self.__Col + '_-2Std=' + str(minus2sd)
         ax = sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
-        ax.axhline(self.__price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
-        ax.axhline(self.__median, linestyle='--', label=median_label, color='blue', alpha=0.50)
-        ax.axhline(self.__mean, linestyle='--', label=mean_label, color='orange')
+        ax.axhline(self._price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
+        ax.axhline(self._median, linestyle='--', label=median_label, color='blue', alpha=0.50)
+        ax.axhline(self._mean, linestyle='--', label=mean_label, color='orange')
         ax.axhline(plus1sd, linestyle='--', label=plus1_label, color='grey', alpha=0.50)
         ax.axhline(plus2sd, linestyle='--', label=plus2_label, color='grey', alpha=0.35)
         ax.axhline(minus1sd, linestyle='--', label=minus1_label, color='grey', alpha=0.50)
         ax.axhline(minus2sd, linestyle='--', label=minus2_label, color='grey', alpha=0.35)
-        ax.axhline(self.__yeHigh52, linestyle='--', label=high52_label, color='red', alpha=0.50)
-        ax.axhline(self.__yeLow52, linestyle='--', label=low52_label, color='green', alpha=0.50)
-        ax.axhline(self.__yeAverage200, linestyle='-.', label=mean200_label, color='yellow', alpha=0.50)
-        ax.axhline(self.__yeAverage50, linestyle='-.', label=mean50_label, color='orange', alpha=0.50)
+        ax.axhline(self._yeHigh52, linestyle='--', label=high52_label, color='red', alpha=0.50)
+        ax.axhline(self._yeLow52, linestyle='--', label=low52_label, color='green', alpha=0.50)
+        ax.axhline(self._yeAverage200, linestyle='-.', label=mean200_label, color='yellow', alpha=0.50)
+        ax.axhline(self._yeAverage50, linestyle='-.', label=mean50_label, color='orange', alpha=0.50)
         ax.legend(loc=self.__legendPlace, fontsize=8)
         # ax.axis('tight')
         return ax
@@ -210,22 +210,22 @@ class HistoricalPlotter(AbstractPlotter):
     def Plot(self):
         a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
         x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
-        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
+        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
         plt.style.use('fivethirtyeight')
         # ax0
         self.__dataFrame[self.__Col].plot(ax=ax[0])
         ax[0].set(ylabel='Stock price ($)', title=a_title)
         # ax1
-        self.__dataSimpleReturns[self.__Col].plot(ax=ax[1], label='Normal')
-        ax[1].scatter(self.__dataSimpleReturns.index, self.__dataSimpleReturns['Outliers'], color='red', label='Anomaly')
+        self._dataSimpleReturns[self.__Col].plot(ax=ax[1], label='Normal')
+        ax[1].scatter(self._dataSimpleReturns.index, self._dataSimpleReturns['Outliers'], color='red', label='Anomaly')
         ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
         ax[1].legend(loc=self.__legendPlace)
         # ax2
-        self.__dataLogReturns[self.__Col].plot(ax=ax[2])
+        self._dataLogReturns[self.__Col].plot(ax=ax[2])
         ax[2].set(ylabel='Log returns (%)')
         # ax3
-        self.__dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
-        self.__dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
+        self._dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
+        self._dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
         ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[3].legend(loc=self.__legendPlace)
         plt.tight_layout()
@@ -299,7 +299,7 @@ class HistoricalPlotter(AbstractPlotter):
 
     def GraphPlot(self):
         a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
-        fig = plt.figure(constrained_layout=True, figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
+        fig = plt.figure(constrained_layout=True, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 7))
         fig.suptitle(a_title)
         gs = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig)
         plt.style.use('fivethirtyeight')
@@ -313,7 +313,7 @@ class HistoricalPlotter(AbstractPlotter):
     def __newPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
         a_title: str = self.__ticker + ' ' + self.__Col + ' ' + period_str + ' ' + str(self.__timeSpan.MonthCount) + ' months'
         x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
-        a_float: float = 3 * math.log(self.__stockOption.TimeSpan.MonthCount)
+        a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
         fig, ax = plt.subplots(2, 2, figsize=(a_float, a_float), sharex=False)
         fig.suptitle(a_title)
         plt.style.use('fivethirtyeight')
@@ -378,25 +378,25 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def Daily(self):
-        return self.__plotPeriod(self.__dataDaily, 'Daily')
+        return self.__plotPeriod(self._dataDaily, 'Daily')
 
     def Monthly(self):
-        return self.__plotPeriod(self.__dataMonthly, 'Monthly')
+        return self.__plotPeriod(self._dataMonthly, 'Monthly')
 
     def DailyCum(self):
-        return self.__plotPeriodCum(self.__dataDailyCum, 'Daily')
+        return self.__plotPeriodCum(self._dataDailyCum, 'Daily')
 
     def MonthlyCum(self):
-        return self.__plotPeriodCum(self.__dataMonthlyCum, 'Monthly')
+        return self.__plotPeriodCum(self._dataMonthlyCum, 'Monthly')
 
     def DailyHist(self):
-        return self.__plotHist(self.__dataDaily, 'Daily')
+        return self.__plotHist(self._dataDaily, 'Daily')
 
     def MonthlyHist(self):
-        return self.__plotHist(self.__dataMonthly, 'Monthly')
+        return self.__plotHist(self._dataMonthly, 'Monthly')
 
     def PlotDaily(self):
-        return self.__newPlot(self.__dataDaily, self.__dataDailyCum, 'Daily')
+        return self.__newPlot(self._dataDaily, self._dataDailyCum, 'Daily')
 
     def PlotMonthly(self):
-        return self.__newPlot(self.__dataMonthly, self.__dataMonthlyCum, 'Monthly')
+        return self.__newPlot(self._dataMonthly, self._dataMonthlyCum, 'Monthly')
