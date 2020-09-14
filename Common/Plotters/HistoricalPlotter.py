@@ -14,17 +14,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
-    __dataSVRrbfScore: float
-    __dataSVRPolyScore: float
-    __dataSVRLinearScore: float
-    __dataTreeRegScore: float
-    __dataLinearRegScore: float
-    __dataSVRrbfPrediction: ndarray
-    __dataSVRPolyPrediction: ndarray
-    __dataSVRLinearPrediction: ndarray
-    __dataLinearRegPrediction: ndarray
-    __dataTreeRegPrediction: ndarray
-    __dataXarray: ndarray
     _dataSimpleReturns: DataFrame
     _dataLogReturns: DataFrame
     _dataDaily: DataFrame
@@ -40,15 +29,15 @@ class HistoricalPlotter(AbstractPlotter):
     _yeHigh52: float
     _yeLow52: float
 
-    def __init__(self, y_stockOption: YahooStockOption):
-        self._price = np.round(y_stockOption.FvPrice, 2)
-        self._yeHigh52 = np.round(y_stockOption.YeHigh52, 2)
-        self._yeLow52 = np.round(y_stockOption.YeLow52, 2)
-        self._yeAverage50 = np.round(y_stockOption.YeAverage50, 2)
-        self._yeAverage200 = np.round(y_stockOption.YeAverage200, 2)
-        if y_stockOption.Source == 'yahoo':
+    def __init__(self, stock_option: YahooStockOption):
+        self._price = np.round(stock_option.FvPrice, 2)
+        self._yeHigh52 = np.round(stock_option.YeHigh52, 2)
+        self._yeLow52 = np.round(stock_option.YeLow52, 2)
+        self._yeAverage50 = np.round(stock_option.YeAverage50, 2)
+        self._yeAverage200 = np.round(stock_option.YeAverage200, 2)
+        if stock_option.Source == 'yahoo':
             self.__Col = "Adj Close"
-        self.__dataFrame = y_stockOption.HistoricalData
+        self.__dataFrame = stock_option.HistoricalData
         '''self.__dataTreeRegPrediction = y_stockOption.HistoricalTreeRegPrediction
         self.__dataTreeRegScore = round(y_stockOption.HistoricalTreeRegScore, 5)
         self.__dataLinearRegPrediction = y_stockOption.HistoricalLinRegPrediction
@@ -60,27 +49,23 @@ class HistoricalPlotter(AbstractPlotter):
         self.__dataSVRrbfPrediction = y_stockOption.HistoricalSVRRbfPrediction
         self.__dataSVRrbfScore = round(y_stockOption.HistoricalSVRRbfScore, 5)
         self.__dataXarray = y_stockOption.Xarray'''
-        self._dataSimpleReturns = y_stockOption.HistoricalSimpleReturns
-        self._dataLogReturns = y_stockOption.HistoricalLogReturns
-        self._dataDaily = y_stockOption.HistoricalDaily
-        self._dataDailyCum = y_stockOption.HistoricalDailyCum
-        self._dataMonthly = y_stockOption.HistoricalMonthly
-        self._dataMonthlyCum = y_stockOption.HistoricalMonthlyCum
-        self._mean = np.mean(y_stockOption.HistoricalData[self.__Col])
+        self._dataSimpleReturns = stock_option.HistoricalSimpleReturns
+        self._dataLogReturns = stock_option.HistoricalLogReturns
+        self._dataDaily = stock_option.HistoricalDaily
+        self._dataDailyCum = stock_option.HistoricalDailyCum
+        self._dataMonthly = stock_option.HistoricalMonthly
+        self._dataMonthlyCum = stock_option.HistoricalMonthlyCum
+        self._mean = np.mean(stock_option.HistoricalData[self.__Col])
         self._mean = np.round(self._mean, 2)
-        self._median = np.median(y_stockOption.HistoricalData[self.__Col])
+        self._median = np.median(stock_option.HistoricalData[self.__Col])
         self._median = np.round(self._median, 2)
-        self._std = np.std(y_stockOption.HistoricalData[self.__Col])
+        self._std = np.std(stock_option.HistoricalData[self.__Col])
         self._std = np.round(self._std, 2)
-        self.__src = y_stockOption.Source
+        self.__src = stock_option.Source
         self.__legendPlace = 'upper left'
-        self.__ticker = y_stockOption.Ticker
-        self.__timeSpan = y_stockOption.TimeSpan
-        print('yyyy:', y_stockOption.TimeSpan.YearCount)
-        print('MM:', y_stockOption.TimeSpan.MonthCount)
-        print('ww:', y_stockOption.TimeSpan.WeekCount)
-        print('dd:', y_stockOption.TimeSpan.DayCount)
-        self._stockOption = y_stockOption
+        self.__ticker = stock_option.Ticker
+        self.__timeSpan = stock_option.TimeSpan
+        self._stockOption = stock_option
 
     def __GetRankRange(self, a_df: DataFrame):
         return np.linspace(min(a_df[self.__Col]), max(a_df[self.__Col]), num=1000)
