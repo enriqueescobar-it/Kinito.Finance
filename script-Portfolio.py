@@ -8,4 +8,4 @@ for yahooTicker in yahooTickers:
     print(yahooTicker)
 
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
-yahooPc.PlotAllData()
+yahooPc.PlotAllData().show()
