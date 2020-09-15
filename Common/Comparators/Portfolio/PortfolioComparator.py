@@ -25,6 +25,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataSimpleVolatility: DataFrame = DataFrame()
     _dataSimpleDaily: DataFrame = DataFrame()
     _dataSimpleCorrelation: DataFrame = DataFrame()
+    _dataSimpleVariance: DataFrame = DataFrame()
     _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
     _dataSimpleReturnsCumulative: DataFrame = DataFrame()
     _arrayNorm: ndarray
@@ -60,6 +61,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleVolatility = self._dataSimpleReturns.std().to_frame()
         self._dataSimpleDaily = self._dataSimpleReturns.mean().to_frame()
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
+        self._dataSimpleVariance = self._dataSimpleReturns.var()
         self._dataSimpleCovarianceAnnual = self._dataSimpleReturns.cov() * 252
         self._dataSimpleReturnsCumulative = (self._dataSimpleReturns + 1).cumprod()
         port_annual_var: float = np.dot(self._weights.T, np.dot(self._dataSimpleCovarianceAnnual, self._weights))
@@ -126,11 +128,11 @@ class PortfolioComparator(AbstractPortfolioComparator):
             ax.annotate(txt, (vols[i], avg_return[i]))
         plt.tight_layout()
         plt.show()
-        sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
+        sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True, fmt='.2%')
         #cm = sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
         #print('CM', cm) CM <seaborn.matrix.ClusterGrid object at 0x000001B927DDD520>
         plt.tight_layout()
         plt.show()
-        sns.clustermap(self._dataSimpleCovarianceAnnual, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
+        sns.clustermap(self._dataSimpleCovarianceAnnual, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True, fmt='.2%')
         plt.tight_layout()
         return plt
