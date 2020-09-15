@@ -11,6 +11,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _a_float: float
     _stocks: list
     _weights: list
+    _legend_place: str = 'upper left'
     _data: DataFrame = DataFrame()
     _dataNorm: DataFrame = DataFrame()
     _dataScaled: DataFrame = DataFrame()
@@ -71,7 +72,13 @@ class PortfolioComparator(AbstractPortfolioComparator):
     def PlotAllData(self):
         fig, ax = plt.subplots(4, 1, figsize=(self._a_float, self._a_float), sharex=True)
         self._data.plot(ax=ax[0], label=self._data.columns)
-        #ax[0].legend(loc=self.__legendPlace)
+        ax[0].legend(loc=self._legend_place)
+        self._dataNorm.plot(ax=ax[1], label=self._dataNorm.columns)
+        ax[1].legend(loc=self._legend_place)
+        self._dataScaled.plot(ax=ax[2], label=self._dataScaled.columns)
+        ax[2].legend(loc=self._legend_place)
+        self._dataBin.plot(ax=ax[3], label=self._dataBin.columns)
+        ax[3].legend(loc=self._legend_place)
         plt.style.use('fivethirtyeight')
         plt.tight_layout()
         return plt
