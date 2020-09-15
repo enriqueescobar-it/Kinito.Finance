@@ -8,7 +8,9 @@ import matplotlib.pyplot as plt
 
 
 class PortfolioComparator(AbstractPortfolioComparator):
-    _a_float: float
+    _a_float: float = -1.1
+    _a_int: int = -1
+    _a_title: str = 'Portfolio: '
     _stocks: list
     _weights: list
     _legend_place: str = 'upper left'
@@ -16,13 +18,19 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataNorm: DataFrame = DataFrame()
     _dataScaled: DataFrame = DataFrame()
     _dataBin: DataFrame = DataFrame()
-    _returns: DataFrame = DataFrame()
+    _dataReturns: DataFrame = DataFrame()
+    _dataSimpleReturns: DataFrame = DataFrame()
+    _dataSimpleVolatility: DataFrame = DataFrame()
+    _dataSimpleDaily: DataFrame = DataFrame()
+    _dataSimpleCorrelation: DataFrame = DataFrame()
+    _dataSimpleReturnsCumulative: DataFrame = DataFrame()
     _arrayNorm: ndarray
     _arrayScaled: ndarray
     _arrayBin: ndarray
 
     def __init__(self, y_stocks: list):
         self._a_float = 3 * math.log(y_stocks[0].TimeSpan.MonthCount)
+        self._a_int = len(y_stocks)
         iso_weight: float = 1.0 / len(y_stocks)
         self._stocks = y_stocks
         self._weights = iso_weight * 4
@@ -39,12 +47,13 @@ class PortfolioComparator(AbstractPortfolioComparator):
         #plt.ylabel(y_stocks[0].SourceColumn + ' in USD')
         #plt.legend(loc='upper left', labels=self._data.columns)
         #plt.show()
-        self._setReturns(len(y_stocks), y_stocks[0].SourceColumn, y_stocks[0].TimeSpan.MonthCount)
-        print('SR', self._returns.head())
+        self._setReturns()
+        print('SR', self._dataReturns.head())
 
     def _setAllData(self, y_stocks):
         for y_stock in y_stocks:
             print('stock EPS:', y_stock.FvEPS)
+            self._a_title += y_stock.Ticker + ' '
             self._data[y_stock.Ticker + y_stock.SourceColumn] = y_stock.HistoricalData[y_stock.SourceColumn]
         self._arrayNorm = preprocessing.normalize(self._data, norm='l1')
         self._dataNorm = DataFrame(self._arrayNorm, columns=self._data.columns, index=self._data.index)
@@ -52,33 +61,50 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataScaled = DataFrame(self._arrayScaled, columns=self._data.columns, index=self._data.index)
         self._arrayBin = preprocessing.Binarizer(threshold=1.4).transform(self._data)
         self._dataBin = DataFrame(self._arrayBin, columns=self._data.columns, index=self._data.index)
+        self._dataSimpleReturns = self._data.pct_change(1)
+        self._dataSimpleVolatility = self._dataSimpleReturns.std().to_frame()
+        self._dataSimpleDaily = self._dataSimpleReturns.mean().to_frame()
+        self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
+        self._dataSimpleReturnsCumulative = (self._dataSimpleReturns + 1).cumprod()
 
-    def _setReturns(self, length: int = 0, column: str = 'Adj Close', n_months: int = 0):
-        self._returns = (self._data / self._data.iloc[0]).fillna(method='backfill')
-        self._returns['PORTFOLIO'] = self._returns.iloc[:, 0:length].sum(axis=1) / length
-        #self._returns.columns = [x.replace(column, '') for x in self._returns.columns]
-        #plt.figure(figsize=(3 * math.log(n_months), 4.5))
-        #plt.tight_layout()
-        #plt.plot(self._returns)
-        #plt.title('~title~')
-        #plt.xlabel(y_stocks[0].TimeSpan.StartDateStr + ' - ' + y_stocks[0].TimeSpan.EndDateStr)
-        #plt.ylabel(y_stocks[0].SourceColumn + ' in USD')
-        #plt.legend(loc='upper left', labels=self._returns.columns)
-        #plt.show()
-        daily_pct_change = np.log(self._returns.pct_change() + 1)
+    def _setReturns(self):
+        self._dataReturns = (self._data / self._data.iloc[0]).fillna(method='backfill')
+        self._dataReturns['PORTFOLIO'] = self._dataReturns.iloc[:, 0:self._a_int].sum(axis=1) / self._a_int
+        daily_pct_change = np.log(self._dataReturns.pct_change() + 1)
         vols = daily_pct_change.std() * np.sqrt(252)
         print('vols', vols)
 
     def PlotAllData(self):
+        plt.style.use('seaborn')
         fig, ax = plt.subplots(4, 1, figsize=(self._a_float, self._a_float), sharex=True)
+        fig.suptitle(self._a_title)
         self._data.plot(ax=ax[0], label=self._data.columns)
+        ax[0].set(ylabel='Price $USD')
         ax[0].legend(loc=self._legend_place)
         self._dataNorm.plot(ax=ax[1], label=self._dataNorm.columns)
+        ax[1].set(ylabel='Norm L1 base t(0)')
         ax[1].legend(loc=self._legend_place)
         self._dataScaled.plot(ax=ax[2], label=self._dataScaled.columns)
+        ax[2].set(ylabel='Scaled values [0 - 1]')
         ax[2].legend(loc=self._legend_place)
         self._dataBin.plot(ax=ax[3], label=self._dataBin.columns)
+        ax[3].set(ylabel='Binary [-1,0,+1]')
         ax[3].legend(loc=self._legend_place)
-        plt.style.use('fivethirtyeight')
+        plt.tight_layout()
+        return plt
+
+    def PlotAll(self):
+        plt.style.use('seaborn')
+        fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float), sharex=True)
+        fig.suptitle(self._a_title)
+        self._dataReturns.plot(ax=ax[0], label=self._dataReturns.columns)
+        ax[0].set(ylabel='Returns')
+        ax[0].legend(loc=self._legend_place)
+        self._dataSimpleReturns.plot(ax=ax[1], label=self._dataSimpleReturns.columns)
+        ax[1].set(ylabel='Simple Return - Volatility')
+        ax[1].legend(loc=self._legend_place)
+        self._dataSimpleReturnsCumulative.plot(ax=ax[2], label=self._dataSimpleReturnsCumulative.columns)
+        ax[2].set(ylabel='Simple Return - Cumulative')
+        ax[2].legend(loc=self._legend_place)
         plt.tight_layout()
         return plt

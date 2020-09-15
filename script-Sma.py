@@ -5,7 +5,7 @@ from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
 # BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
 #ETFs# BRTXQ FZILX FSRNX VTSAX
 # TFII LSPD T FTS RY
-yahooStockOption: YahooStockOption = YahooStockOption('BRK-B')
+yahooStockOption: YahooStockOption = YahooStockOption('OTEX')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
 print(yahooStockIndicator.GetLabel())
