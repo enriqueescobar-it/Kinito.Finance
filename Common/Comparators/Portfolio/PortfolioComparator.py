@@ -14,7 +14,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _a_int: int = -1
     _a_title: str = 'Portfolio: '
     _stocks: list
-    _weights: list
+    _weights: ndarray
     _legend_place: str = 'upper left'
     _data: DataFrame = DataFrame()
     _dataNorm: DataFrame = DataFrame()
@@ -25,6 +25,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataSimpleVolatility: DataFrame = DataFrame()
     _dataSimpleDaily: DataFrame = DataFrame()
     _dataSimpleCorrelation: DataFrame = DataFrame()
+    _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
     _dataSimpleReturnsCumulative: DataFrame = DataFrame()
     _arrayNorm: ndarray
     _arrayScaled: ndarray
@@ -35,20 +36,12 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._a_int = len(y_stocks)
         iso_weight: float = 1.0 / len(y_stocks)
         self._stocks = y_stocks
-        self._weights = iso_weight * 4
+        self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._setAllData(y_stocks)
         print('DF:', self._data.head())
         print('DN:', self._dataNorm.head())
         print('DS:', self._dataScaled.head())
         print('DB:', self._dataBin.head())
-        #plt.figure(figsize=(3 * math.log(y_stocks[0].TimeSpan.MonthCount), 4.5))
-        #plt.tight_layout()
-        #plt.plot(self._data)
-        #plt.title('~title~')
-        #plt.xlabel(y_stocks[0].TimeSpan.StartDateStr + ' - ' + y_stocks[0].TimeSpan.EndDateStr)
-        #plt.ylabel(y_stocks[0].SourceColumn + ' in USD')
-        #plt.legend(loc='upper left', labels=self._data.columns)
-        #plt.show()
         self._setReturns()
         print('SR', self._dataReturns.head())
 
@@ -67,8 +60,14 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleVolatility = self._dataSimpleReturns.std().to_frame()
         self._dataSimpleDaily = self._dataSimpleReturns.mean().to_frame()
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
-        print(self._dataSimpleCorrelation)
+        self._dataSimpleCovarianceAnnual = self._dataSimpleReturns.cov() * 252
         self._dataSimpleReturnsCumulative = (self._dataSimpleReturns + 1).cumprod()
+        port_annual_var: float = np.dot(self._weights.T, np.dot(self._dataSimpleCovarianceAnnual, self._weights))
+        port_annual_volatility: float = np.sqrt(port_annual_var)
+        port_annual_simple_ret: float = np.sum(self._dataSimpleReturns.mean() * self._weights) * 252
+        print('Port Ann Ret', str(round(port_annual_var, 5)*100)+'%')
+        print('Port Ann Volatility/ Risk', str(round(port_annual_volatility, 5)*100)+'%')
+        print('Port Ann Variance', str(round(port_annual_simple_ret, 5)*100)+'%')
 
     def _setReturns(self):
         self._dataReturns = (self._data / self._data.iloc[0]).fillna(method='backfill')
@@ -127,7 +126,11 @@ class PortfolioComparator(AbstractPortfolioComparator):
             ax.annotate(txt, (vols[i], avg_return[i]))
         plt.tight_layout()
         plt.show()
+        sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
         #cm = sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
         #print('CM', cm) CM <seaborn.matrix.ClusterGrid object at 0x000001B927DDD520>
+        plt.tight_layout()
+        plt.show()
+        sns.clustermap(self._dataSimpleCovarianceAnnual, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
         plt.tight_layout()
         return plt
