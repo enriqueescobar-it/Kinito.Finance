@@ -56,7 +56,7 @@ class IndexComparator(AbstractIndexComparator):
 
     def __heatMap(self, df: pd.DataFrame):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
-        sns.clustermap(df, cmap="coolwarm", row_cluster=True, col_cluster=True)
+        sns.clustermap(df, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
         plt.show()
 
     def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):

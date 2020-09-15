@@ -4,7 +4,9 @@ from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPor
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from pandas import DataFrame, np
 from numpy import ndarray
+import seaborn as sns
 import matplotlib.pyplot as plt
+from heatmapcluster import heatmapcluster
 
 
 class PortfolioComparator(AbstractPortfolioComparator):
@@ -65,6 +67,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleVolatility = self._dataSimpleReturns.std().to_frame()
         self._dataSimpleDaily = self._dataSimpleReturns.mean().to_frame()
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
+        print(self._dataSimpleCorrelation)
         self._dataSimpleReturnsCumulative = (self._dataSimpleReturns + 1).cumprod()
 
     def _setReturns(self):
@@ -76,7 +79,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
 
     def PlotAllData(self):
         plt.style.use('seaborn')
-        fig, ax = plt.subplots(4, 1, figsize=(self._a_float, self._a_float), sharex=True)
+        fig, ax = plt.subplots(4, 1, figsize=(self._a_float, self._a_float/2.0), sharex=True)
         fig.suptitle(self._a_title)
         self._data.plot(ax=ax[0], label=self._data.columns)
         ax[0].set(ylabel='Price $USD')
@@ -93,9 +96,9 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.tight_layout()
         return plt
 
-    def PlotAll(self):
+    def PlotAllSimple(self):
         plt.style.use('seaborn')
-        fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float), sharex=True)
+        fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float/1.5), sharex=True)
         fig.suptitle(self._a_title)
         self._dataReturns.plot(ax=ax[0], label=self._dataReturns.columns)
         ax[0].set(ylabel='Returns')
@@ -106,5 +109,25 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleReturnsCumulative.plot(ax=ax[2], label=self._dataSimpleReturnsCumulative.columns)
         ax[2].set(ylabel='Simple Return - Cumulative')
         ax[2].legend(loc=self._legend_place)
+        plt.tight_layout()
+        return plt
+
+    def PlotAllHeatmaps(self):
+        prf_returns = (self._dataReturns.pct_change() + 1)[1:]
+        avg_return = (prf_returns-1).mean()
+        daily_pct_change = np.log(self._dataReturns.pct_change() + 1)
+        vols = daily_pct_change.std() * np.sqrt(252)
+        plt.style.use('seaborn')
+        fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
+        #print('AX', type(ax)) AX <class 'matplotlib.axes._subplots.AxesSubplot'>
+        fig.suptitle(self._a_title)
+        ax.set(ylabel='Simple Return Std', xlabel='Simple Return Mean')
+        ax.scatter(vols, avg_return)
+        for i, txt in enumerate(list(vols.index)):
+            ax.annotate(txt, (vols[i], avg_return[i]))
+        plt.tight_layout()
+        plt.show()
+        #cm = sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
+        #print('CM', cm) CM <seaborn.matrix.ClusterGrid object at 0x000001B927DDD520>
         plt.tight_layout()
         return plt

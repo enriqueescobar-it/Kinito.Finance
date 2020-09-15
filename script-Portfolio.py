@@ -9,4 +9,5 @@ for yahooTicker in yahooTickers:
 
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
 yahooPc.PlotAllData().show()
-yahooPc.PlotAll().show()
+yahooPc.PlotAllSimple().show()
+yahooPc.PlotAllHeatmaps().show()
