@@ -342,7 +342,7 @@ class HistoricalPlotter(AbstractPlotter):
         an_ax.plot(a_df, label=self.__Col)
         an_ax.legend(loc=self.__legendPlace)
         an_ax.set_title(a_title, fontsize=10)
-        an_ax.set(ylabel=self.__Col + ' 1$ Growth Invested', fontsize=10)
+        an_ax.set(ylabel=self.__Col + ' 1$ Growth Invested')
         return an_ax
 
     def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
