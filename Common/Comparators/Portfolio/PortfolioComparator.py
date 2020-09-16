@@ -69,7 +69,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataReturns = (self._data / self._data.iloc[0]).fillna(method='backfill')
         self._dataReturns.fillna(method='ffill', inplace=True)
         self._dataSimpleReturnsCumulative = (self._dataSimpleReturns + 1).cumprod()
-        self._dataSimpleCovarianceAnnual = self._dataSimpleReturns.cov() * 252
+        self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
 
     def _setBasicPortfolio(self):
         self._dataReturns['PORTFOLIO'] = self._dataReturns.iloc[:, 0:self._a_length].sum(axis=1) / self._a_length

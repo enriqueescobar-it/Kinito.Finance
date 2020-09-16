@@ -25,7 +25,7 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CP')
+yahooStockOption: YahooStockOption = YahooStockOption('WCN')
 #MWK YCBD GRWG FSZ AMZN WELL
 #KL WCN OTEX AQN TFII CP CNI LMT WMT RY BRK-B GNW OTEX BPY
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN

@@ -341,7 +341,8 @@ class HistoricalPlotter(AbstractPlotter):
         a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cumulative {period_str} Returns {self.__timeSpan.MonthCount} months'
         an_ax.plot(a_df, label=self.__Col)
         an_ax.legend(loc=self.__legendPlace)
-        an_ax.set(ylabel=self.__Col + ' 1$ Growth Invested', xlabel=a_title)
+        an_ax.set_title(a_title, fontsize=10)
+        an_ax.set(ylabel=self.__Col + ' 1$ Growth Invested', fontsize=10)
         return an_ax
 
     def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):

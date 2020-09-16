@@ -56,7 +56,7 @@ class IndexComparator(AbstractIndexComparator):
 
     def __heatMap(self, df: pd.DataFrame):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
-        sns.clustermap(df, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
+        sns.clustermap(df, cmap="coolwarm", annot=False, row_cluster=True, col_cluster=True)
         plt.show()
 
     def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
@@ -68,7 +68,7 @@ class IndexComparator(AbstractIndexComparator):
         #ax1.set_xlabel('Since ' + self.__stockOption.TimeSpan.StartDateStr)
         ax1.set_ylabel(y_title)
         ax1.set_title(self.__stockOption.SourceColumn + ' ' + a_title + 'Since ' + self.__stockOption.TimeSpan.StartDateStr)
-        ax1.legend(loc='upper left', fontsize=(len(self.__indexList)*0.4))
+        ax1.legend(loc='upper left', fontsize=(len(self.__indexList)*0.3))
         ax2 = fig2L1C.add_subplot(gs2L1C[1, 0])
         ax2 = sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
         ax2.set_title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
