@@ -170,3 +170,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         sns.clustermap(self._dataSimpleCovarianceAnnual, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True, fmt='.2%')
         plt.tight_layout()
         return plt
+
+    @property
+    def data(self):
+        return self._data

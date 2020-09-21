@@ -10,5 +10,8 @@ from Common.Predictors.Keras.KerasPredictor import KerasPredictor
 yahooStockOption: YahooStockOption = YahooStockOption('AAPL')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 predictor_list = []
-abstractPredictor: AbstractPredictor =\
-    KerasPredictor(60, 'Adj Close', yahooStockOption.HistoricalData, yahooStockOption.TimeSpan)
+#abstractPredictor: AbstractPredictor =\
+#    DecisionTreePredictor(60, 'Adj Close', yahooStockOption.HistoricalData, yahooStockOption.TimeSpan)
+# from sklearn.cross_validation import train_test_split -> from sklearn.model_selection import train_test_split
+# & GridSearchCV
+
