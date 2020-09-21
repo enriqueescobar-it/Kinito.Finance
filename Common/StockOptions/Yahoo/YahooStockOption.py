@@ -59,7 +59,7 @@ class YahooStockOption(AbstractStockOption):
     HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalScaled: np.ndarray
+    HistoricalScaled: pd.DataFrame
     HistoricalSimpleReturns: pd.DataFrame
     HistoricalSparse: np.ndarray
     HistoricalSVRLinearScore: float = -1.1
@@ -116,12 +116,12 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalNormalized = self._setNormalizer(self.HistoricalData)
         self.HistoricalL1Normalized = self._setNormalizerL1(self.HistoricalData)
         self.HistoricalBinary = self._setBinarizer(self.HistoricalData)
+        self.HistoricalSparse = self._setSparser(self.HistoricalData)
+        self.HistoricalScaled = self._setScaler(self.HistoricalData)
         self._setSimpleReturns()
         self._setLogReturns()
         self._setDataDaily()
         self._setDataMonthly()
-        self._setSparser()
-        self._setScaler()
         self._setDataPrediction()
         self._setFinViz()
         self._setYahooFinance()
@@ -155,11 +155,15 @@ class YahooStockOption(AbstractStockOption):
     def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
         return preprocessing.Binarizer(threshold=1.4).transform(a_df)
 
-    def _setSparser(self):
-        self.HistoricalSparse = preprocessing.scale(self.HistoricalData)
+    def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
+        return preprocessing.scale(a_df)
 
-    def _setScaler(self):
-        self.HistoricalScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self.HistoricalData)
+    def _setScaler(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        # scale to compare array from 0.0 to 100.0
+        minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
+        # scale to compare data frame
+        stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
+        return pd.DataFrame(stockArrayScaled, columns=a_df.columns)
 
     def _setSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()

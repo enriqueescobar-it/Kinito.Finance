@@ -17,10 +17,10 @@ class IndexComparator(AbstractIndexComparator):
         self.__indexList = indices
         self.Data = self._setData()
         self.DataNormalized = self._setNormalizer(self.Data)
+        self.DataScaled = self._setScaler()
         self.DataSimpleReturns = self._setSimpleReturns(self.Data)
         self.DataSimpleReturnsCorr = self.__setSimpleReturnsCorr(self.Data)
         self.DataLogReturns = self._setLogReturns(self.Data)
-        self.DataScaled = self._setScaler()
         self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
         self.__heatMap(self.DataSimpleReturnsCorr)
         self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
@@ -43,15 +43,15 @@ class IndexComparator(AbstractIndexComparator):
     def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
         return preprocessing.Binarizer(threshold=1.4).transform(a_df)
 
-    def _setSparser(self):
-        pass
+    def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
+        return preprocessing.scale(a_df)
 
-    def _setScaler(self):
+    def _setScaler(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         # scale to compare array from 0.0 to 100.0
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
-        stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(self.Data)
-        return pd.DataFrame(stockArrayScaled, columns=self.Data.columns)
+        stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
+        return pd.DataFrame(stockArrayScaled, columns=a_df.columns)
 
     def _setSimpleReturns(self, df: pd.DataFrame):
         return df.pct_change(1)
