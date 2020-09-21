@@ -119,7 +119,8 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalSparse = self._setSparser(self.HistoricalData)
         self.HistoricalScaled = self._setScaler(self.HistoricalData)
         self._setSimpleReturns()
-        self._setLogReturns()
+        self.HistoricalLogReturns = self._setLogReturns(self.HistoricalData)
+        self._setLogReturnsPlus()
         self._setDataDaily()
         self._setDataMonthly()
         self._setDataPrediction()
@@ -218,9 +219,14 @@ class YahooStockOption(AbstractStockOption):
         #ax.legend((line_1, line_2), ('mean', 'actual'))
         #plt.show()
 
-    def _setLogReturns(self):
-        a_var = np.log(self.HistoricalData[self.SourceColumn] / self.HistoricalData[self.SourceColumn].shift(1))
-        self.HistoricalLogReturns = a_var.to_frame()
+    def _setSimpleReturnsPlus(self):
+        pass
+
+    def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        a_var = np.log(a_df[self.SourceColumn] / a_df[self.SourceColumn].shift(1))
+        return a_var.to_frame()
+
+    def _setLogReturnsPlus(self):
         self.HistoricalLogReturns['MovingStd252'] =\
             self.HistoricalLogReturns[self.SourceColumn].rolling(window=252).std().to_frame()
         self.HistoricalLogReturns['MovingStd21'] =\

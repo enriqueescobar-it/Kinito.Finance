@@ -56,8 +56,9 @@ class IndexComparator(AbstractIndexComparator):
     def _setSimpleReturns(self, df: pd.DataFrame):
         return df.pct_change(1)
 
-    def _setLogReturns(self, df: pd.DataFrame):
-        return np.log(df/df.shift(1))
+    def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        a_var = np.log(a_df[self.SourceColumn] / a_df[self.SourceColumn].shift(1))
+        return a_var.to_frame()
 
     def __setSimpleReturnsCorr(self, df: pd.DataFrame):
         return self._setSimpleReturns(df).corr()
