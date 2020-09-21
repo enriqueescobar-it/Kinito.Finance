@@ -53,11 +53,12 @@ class IndexComparator(AbstractIndexComparator):
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
         return pd.DataFrame(stockArrayScaled, columns=a_df.columns)
 
-    def _setSimpleReturns(self, df: pd.DataFrame):
-        return df.pct_change(1)
+    def _setSimpleReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        #return a_df.pct_change().to_frame()
+        return a_df.pct_change(1)
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        a_var = np.log(a_df[self.SourceColumn] / a_df[self.SourceColumn].shift(1))
+        a_var = np.log(a_df / a_df.shift(1))
         return a_var.to_frame()
 
     def __setSimpleReturnsCorr(self, df: pd.DataFrame):

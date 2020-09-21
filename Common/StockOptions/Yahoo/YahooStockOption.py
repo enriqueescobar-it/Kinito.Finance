@@ -118,7 +118,8 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalBinary = self._setBinarizer(self.HistoricalData)
         self.HistoricalSparse = self._setSparser(self.HistoricalData)
         self.HistoricalScaled = self._setScaler(self.HistoricalData)
-        self._setSimpleReturns()
+        self.HistoricalSimpleReturns = self._setSimpleReturns(self.HistoricalData)
+        self._setSimpleReturnsPlus()
         self.HistoricalLogReturns = self._setLogReturns(self.HistoricalData)
         self._setLogReturnsPlus()
         self._setDataDaily()
@@ -166,8 +167,10 @@ class YahooStockOption(AbstractStockOption):
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
         return pd.DataFrame(stockArrayScaled, columns=a_df.columns)
 
-    def _setSimpleReturns(self):
-        self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
+    def _setSimpleReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        return a_df[self.SourceColumn].pct_change().to_frame()
+
+    def _setSimpleReturnsPlus(self):
         df_rolling = self.HistoricalSimpleReturns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
         self.HistoricalSimpleReturns = self.HistoricalSimpleReturns.join(df_rolling)
         self.HistoricalSimpleReturns = self._getOutliers(self.HistoricalSimpleReturns)
@@ -218,9 +221,6 @@ class YahooStockOption(AbstractStockOption):
         #ax.set_title(PLOT_TITLE, fontsize=16)
         #ax.legend((line_1, line_2), ('mean', 'actual'))
         #plt.show()
-
-    def _setSimpleReturnsPlus(self):
-        pass
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         a_var = np.log(a_df[self.SourceColumn] / a_df[self.SourceColumn].shift(1))
