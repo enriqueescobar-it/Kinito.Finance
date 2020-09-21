@@ -103,8 +103,8 @@ yahooStockOptionPlotter.PlotDaily().show()
 yahooStockOptionPlotter.PlotMonthly().show()
 # preprocessing
 ## Mean removal
-print('MEAN=', yahooStockOption.HistoricalStandardized.mean(axis=0))
-print('SD=', yahooStockOption.HistoricalStandardized.std(axis=0))
+print('MEAN=', yahooStockOption.HistoricalSparse.mean(axis=0))
+print('SD=', yahooStockOption.HistoricalSparse.std(axis=0))
 ## scaling
 print('MinMaxScaled=', yahooStockOption.HistoricalScaled)
 ## normalization

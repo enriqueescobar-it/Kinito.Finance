@@ -16,18 +16,18 @@ class IndexComparator(AbstractIndexComparator):
     def __init__(self, stock_option: YahooStockOption, indices: list()):
         self.__stockOption = stock_option
         self.__indexList = indices
-        self.Data = self.__setComparator(indices)
-        self.DataSimpleReturns = self.__setSimpleReturns(self.Data)
+        self.Data = self._setData(indices)
+        self.DataSimpleReturns = self._setSimpleReturns(self.Data)
         self.DataSimpleReturnsCorr = self.__setSimpleReturnsCorr(self.Data)
-        self.DataLogReturns = self.__setLogReturns(self.Data)
-        self.DataNormalized = self.__setNormalizer()
-        self.DataScaled = self.__setScaler()
+        self.DataLogReturns = self._setLogReturns(self.Data)
+        self.DataNormalized = self._setNormalizer()
+        self.DataScaled = self._setScaler()
         self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
         self.__heatMap(self.DataSimpleReturnsCorr)
         self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
         self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
 
-    def __setComparator(self, indices):
+    def _setData(self, indices):
         df: pd.DataFrame = self.__stockOption.HistoricalData[self.__stockOption.SourceColumn].to_frame()
         df.columns = self.__stockOption.Ticker + df.columns
         a_df: pd.DataFrame = indices[0].HistoricalData
@@ -35,24 +35,33 @@ class IndexComparator(AbstractIndexComparator):
             a_df = a_df.merge(a_index.HistoricalData, left_index=True, right_index=True)
         return df.merge(a_df, left_index=True, right_index=True)
 
-    def __setNormalizer(self):
+    def _setNormalizer(self):
         return self.Data / self.Data.iloc[0]
 
-    def __setScaler(self):
+    def _setNormalizerL1(self):
+        pass
+
+    def _setBinarizer(self):
+        pass
+
+    def _setSparser(self):
+        pass
+
+    def _setScaler(self):
         # scale to compare array from 0.0 to 100.0
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(self.Data)
         return pd.DataFrame(stockArrayScaled, columns=self.Data.columns)
 
-    def __setSimpleReturns(self, df: pd.DataFrame):
+    def _setSimpleReturns(self, df: pd.DataFrame):
         return df.pct_change(1)
 
-    def __setSimpleReturnsCorr(self, df: pd.DataFrame):
-        return self.__setSimpleReturns(df).corr()
-
-    def __setLogReturns(self, df: pd.DataFrame):
+    def _setLogReturns(self, df: pd.DataFrame):
         return np.log(df/df.shift(1))
+
+    def __setSimpleReturnsCorr(self, df: pd.DataFrame):
+        return self._setSimpleReturns(df).corr()
 
     def __heatMap(self, df: pd.DataFrame):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))

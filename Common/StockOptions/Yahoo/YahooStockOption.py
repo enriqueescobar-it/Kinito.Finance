@@ -52,6 +52,7 @@ class YahooStockOption(AbstractStockOption):
     HistoricalData: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
+    HistoricalNormalized: pd.DataFrame
     HistoricalL1Normalized: ndarray
     HistoricalLinRegScore: float = -1.1
     HistoricalLinRegPrediction: ndarray
@@ -61,7 +62,7 @@ class YahooStockOption(AbstractStockOption):
     HistoricalMonthlyCum: pd.core.series.Series
     HistoricalScaled: ndarray
     HistoricalSimpleReturns: pd.DataFrame
-    HistoricalStandardized: ndarray
+    HistoricalSparse: ndarray
     HistoricalSVRLinearScore: float = -1.1
     HistoricalSVRLinearPrediction: ndarray
     HistoricalSVRPolyScore: float = -1.1
@@ -113,14 +114,15 @@ class YahooStockOption(AbstractStockOption):
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self._setData()
-        self._setDataSimpleReturns()
-        self._setDataLogReturns()
+        self._setSimpleReturns()
+        self._setLogReturns()
         self._setDataDaily()
         self._setDataMonthly()
-        self._setDataStandard()
-        self._setDataScaled()
-        self._setDataNormL1()
-        self._setDataBinary()
+        self._setSparser()
+        self._setScaler()
+        self._setNormalizer()
+        self._setNormalizerL1()
+        self._setBinarizer()
         self._setDataPrediction()
         self._setFinViz()
         self._setYahooFinance()
@@ -144,7 +146,22 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalData.fillna(method='bfill', inplace=True)
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
 
-    def _setDataSimpleReturns(self):
+    def _setNormalizer(self):
+        self.HistoricalNormalized = self.HistoricalData / self.HistoricalData.iloc[0]
+
+    def _setNormalizerL1(self):
+        self.HistoricalL1Normalized = preprocessing.normalize(self.HistoricalData, norm='l1')
+
+    def _setBinarizer(self):
+        self.HistoricalBinary = preprocessing.Binarizer(threshold=1.4).transform(self.HistoricalData)
+
+    def _setSparser(self):
+        self.HistoricalSparse = preprocessing.scale(self.HistoricalData)
+
+    def _setScaler(self):
+        self.HistoricalScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self.HistoricalData)
+
+    def _setSimpleReturns(self):
         self.HistoricalSimpleReturns = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
         df_rolling = self.HistoricalSimpleReturns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
         self.HistoricalSimpleReturns = self.HistoricalSimpleReturns.join(df_rolling)
@@ -197,7 +214,7 @@ class YahooStockOption(AbstractStockOption):
         #ax.legend((line_1, line_2), ('mean', 'actual'))
         #plt.show()
 
-    def _setDataLogReturns(self):
+    def _setLogReturns(self):
         a_var = np.log(self.HistoricalData[self.SourceColumn] / self.HistoricalData[self.SourceColumn].shift(1))
         self.HistoricalLogReturns = a_var.to_frame()
         self.HistoricalLogReturns['MovingStd252'] =\
@@ -212,18 +229,6 @@ class YahooStockOption(AbstractStockOption):
     def _setDataMonthly(self):
         self.HistoricalMonthly = self.HistoricalData[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
         self.HistoricalMonthlyCum = (self.HistoricalMonthly + 1).cumprod()
-
-    def _setDataStandard(self):
-        self.HistoricalStandardized = preprocessing.scale(self.HistoricalData)
-
-    def _setDataScaled(self):
-        self.HistoricalScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self.HistoricalData)
-
-    def _setDataNormL1(self):
-        self.HistoricalL1Normalized = preprocessing.normalize(self.HistoricalData, norm='l1')
-
-    def _setDataBinary(self):
-        self.HistoricalBinary = preprocessing.Binarizer(threshold=1.4).transform(self.HistoricalData)
 
     def _setFinViz(self):
         self._fin_viz_engine = FinVizEngine(self.Ticker)
