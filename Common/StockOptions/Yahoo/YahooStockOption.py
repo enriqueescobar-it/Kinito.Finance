@@ -2,7 +2,6 @@ from typing import List
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from numpy.core._multiarray_umath import ndarray
 from pyarrow.lib import null
 import math
 from Common.Measures.Time.TimeSpan import TimeSpan
@@ -48,29 +47,29 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str
     FvVolume: int
     ForecastSpan: int = 30
-    HistoricalBinary: ndarray
+    HistoricalBinary: np.ndarray
     HistoricalData: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
     HistoricalNormalized: pd.DataFrame
-    HistoricalL1Normalized: ndarray
+    HistoricalL1Normalized: np.ndarray
     HistoricalLinRegScore: float = -1.1
-    HistoricalLinRegPrediction: ndarray
+    HistoricalLinRegPrediction: np.ndarray
     HistoricalLogReturns: pd.DataFrame
     HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalScaled: ndarray
+    HistoricalScaled: np.ndarray
     HistoricalSimpleReturns: pd.DataFrame
-    HistoricalSparse: ndarray
+    HistoricalSparse: np.ndarray
     HistoricalSVRLinearScore: float = -1.1
-    HistoricalSVRLinearPrediction: ndarray
+    HistoricalSVRLinearPrediction: np.ndarray
     HistoricalSVRPolyScore: float = -1.1
-    HistoricalSVRPolyPrediction: ndarray
+    HistoricalSVRPolyPrediction: np.ndarray
     HistoricalSVRRbfScore: float = -1.1
-    HistoricalSVRRbfPrediction: ndarray
+    HistoricalSVRRbfPrediction: np.ndarray
     HistoricalTreeRegScore: float = -1.1
-    HistoricalTreeRegPrediction: ndarray
+    HistoricalTreeRegPrediction: np.ndarray
     RMSE: float = -1.1
     Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
@@ -115,14 +114,14 @@ class YahooStockOption(AbstractStockOption):
         self.TimeSpan = TimeSpan()
         self.HistoricalData = self._setData()
         self.HistoricalNormalized = self._setNormalizer(self.HistoricalData)
+        self.HistoricalL1Normalized = self._setNormalizerL1(self.HistoricalData)
+        self.HistoricalBinary = self._setBinarizer(self.HistoricalData)
         self._setSimpleReturns()
         self._setLogReturns()
         self._setDataDaily()
         self._setDataMonthly()
         self._setSparser()
         self._setScaler()
-        self._setNormalizerL1()
-        self._setBinarizer()
         self._setDataPrediction()
         self._setFinViz()
         self._setYahooFinance()
@@ -147,14 +146,14 @@ class YahooStockOption(AbstractStockOption):
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
         return a_df
 
-    def _setNormalizer(self, a_df: pd.DataFrame) -> pd.DataFrame:
+    def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return a_df / a_df.iloc[0]
 
-    def _setNormalizerL1(self):
-        self.HistoricalL1Normalized = preprocessing.normalize(self.HistoricalData, norm='l1')
+    def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
+        return preprocessing.normalize(a_df, norm='l1')
 
-    def _setBinarizer(self):
-        self.HistoricalBinary = preprocessing.Binarizer(threshold=1.4).transform(self.HistoricalData)
+    def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
+        return preprocessing.Binarizer(threshold=1.4).transform(a_df)
 
     def _setSparser(self):
         self.HistoricalSparse = preprocessing.scale(self.HistoricalData)

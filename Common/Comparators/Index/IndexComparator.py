@@ -1,10 +1,9 @@
-import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-
 from Common.Comparators.Index.AbstractIndexComparator import AbstractIndexComparator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from sklearn import preprocessing
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import seaborn as sns
@@ -35,14 +34,14 @@ class IndexComparator(AbstractIndexComparator):
             a_df = a_df.merge(a_index.HistoricalData, left_index=True, right_index=True)
         return df.merge(a_df, left_index=True, right_index=True)
 
-    def _setNormalizer(self, a_df: pd.DataFrame) -> pd.DataFrame:
+    def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return a_df / a_df.iloc[0]
 
-    def _setNormalizerL1(self):
-        pass
+    def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
+        return preprocessing.normalize(a_df, norm='l1')
 
-    def _setBinarizer(self):
-        pass
+    def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
+        return preprocessing.Binarizer(threshold=1.4).transform(a_df)
 
     def _setSparser(self):
         pass
