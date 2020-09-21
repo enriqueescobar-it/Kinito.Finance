@@ -113,14 +113,14 @@ class YahooStockOption(AbstractStockOption):
         self.SourceColumn = 'Adj Close'
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
-        self._setData()
+        self.HistoricalData = self._setData()
+        self.HistoricalNormalized = self._setNormalizer(self.HistoricalData)
         self._setSimpleReturns()
         self._setLogReturns()
         self._setDataDaily()
         self._setDataMonthly()
         self._setSparser()
         self._setScaler()
-        self._setNormalizer()
         self._setNormalizerL1()
         self._setBinarizer()
         self._setDataPrediction()
@@ -140,14 +140,15 @@ class YahooStockOption(AbstractStockOption):
                 a_df['Outliers'][ind] = x
         return a_df
 
-    def _setData(self):
-        self.HistoricalData = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
-        self.HistoricalData.fillna(method='ffill', inplace=True)
-        self.HistoricalData.fillna(method='bfill', inplace=True)
+    def _setData(self) -> pd.DataFrame:
+        a_df: pd.DataFrame = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
+        a_df.fillna(method='ffill', inplace=True)
+        a_df.fillna(method='bfill', inplace=True)
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
+        return a_df
 
-    def _setNormalizer(self):
-        self.HistoricalNormalized = self.HistoricalData / self.HistoricalData.iloc[0]
+    def _setNormalizer(self, a_df: pd.DataFrame) -> pd.DataFrame:
+        return a_df / a_df.iloc[0]
 
     def _setNormalizerL1(self):
         self.HistoricalL1Normalized = preprocessing.normalize(self.HistoricalData, norm='l1')

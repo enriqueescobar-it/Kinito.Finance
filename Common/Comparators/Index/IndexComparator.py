@@ -16,27 +16,27 @@ class IndexComparator(AbstractIndexComparator):
     def __init__(self, stock_option: YahooStockOption, indices: list()):
         self.__stockOption = stock_option
         self.__indexList = indices
-        self.Data = self._setData(indices)
+        self.Data = self._setData()
+        self.DataNormalized = self._setNormalizer(self.Data)
         self.DataSimpleReturns = self._setSimpleReturns(self.Data)
         self.DataSimpleReturnsCorr = self.__setSimpleReturnsCorr(self.Data)
         self.DataLogReturns = self._setLogReturns(self.Data)
-        self.DataNormalized = self._setNormalizer()
         self.DataScaled = self._setScaler()
         self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
         self.__heatMap(self.DataSimpleReturnsCorr)
         self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
         self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
 
-    def _setData(self, indices):
+    def _setData(self) -> pd.DataFrame:
         df: pd.DataFrame = self.__stockOption.HistoricalData[self.__stockOption.SourceColumn].to_frame()
         df.columns = self.__stockOption.Ticker + df.columns
-        a_df: pd.DataFrame = indices[0].HistoricalData
-        for a_index in indices[1:]:
+        a_df: pd.DataFrame = self.__indexList[0].HistoricalData
+        for a_index in self.__indexList[1:]:
             a_df = a_df.merge(a_index.HistoricalData, left_index=True, right_index=True)
         return df.merge(a_df, left_index=True, right_index=True)
 
-    def _setNormalizer(self):
-        return self.Data / self.Data.iloc[0]
+    def _setNormalizer(self, a_df: pd.DataFrame) -> pd.DataFrame:
+        return a_df / a_df.iloc[0]
 
     def _setNormalizerL1(self):
         pass
