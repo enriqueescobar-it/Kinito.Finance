@@ -37,14 +37,14 @@ class IndexComparator(AbstractIndexComparator):
     def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return a_df / a_df.iloc[0]
 
-    def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
-        return preprocessing.normalize(a_df, norm='l1')
+    def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        return pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns)
 
-    def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
-        return preprocessing.Binarizer(threshold=1.4).transform(a_df)
+    def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        return pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns)
 
-    def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> np.ndarray:
-        return preprocessing.scale(a_df)
+    def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns)
 
     def _setScaler(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         # scale to compare array from 0.0 to 100.0
