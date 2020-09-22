@@ -13,28 +13,28 @@ import math
 class IndexComparator(AbstractIndexComparator):
 
     def __init__(self, stock_option: YahooStockOption, indices: list()):
-        self.__stockOption = stock_option
-        self.__indexList = indices
+        self._stock_option = stock_option
+        self._index_list = indices
         self.Data = self._setData()
         self.DataNormalized = self._setNormalizer(self.Data)
         self.DataNormalizedL1 = self._setNormalizerL1(self.Data)
         self.DataSparsed = self._setSparser(self.Data)
         self.DataScaled = self._setScaler(self.Data)
         self.DataSimpleReturns = self._setSimpleReturns(self.Data)
-        self.DataSimpleReturnsCorr = self.__setSimpleReturnsCorr(self.Data)
+        self.DataSimpleReturnsCorr = self._setSimpleReturnsCorr(self.Data)
         self.DataLogReturns = self._setLogReturns(self.Data)
-        self.__heatMap(self.DataSimpleReturnsCorr)
-        self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
-        self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        self.__plot2L1C(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        self.__plot2L1C(self.DataSparsed, 'Sparsed', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
+        self._plotHeatMap(self.DataSimpleReturnsCorr)
+        self._plotCompared(self.Data, 'Flat', 'Price in USD')
+        self._plotCompared(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        self._plotCompared(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        self._plotCompared(self.DataSparsed, 'Sparsed', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        self._plotCompared(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
 
     def _setData(self) -> pd.DataFrame:
-        df: pd.DataFrame = self.__stockOption.HistoricalData[self.__stockOption.SourceColumn].to_frame()
-        df.columns = self.__stockOption.Ticker + df.columns
-        a_df: pd.DataFrame = self.__indexList[0].HistoricalData
-        for a_index in self.__indexList[1:]:
+        df: pd.DataFrame = self._stock_option.HistoricalData[self._stock_option.SourceColumn].to_frame()
+        df.columns = self._stock_option.Ticker + df.columns
+        a_df: pd.DataFrame = self._index_list[0].HistoricalData
+        for a_index in self._index_list[1:]:
             a_df = a_df.merge(a_index.HistoricalData, left_index=True, right_index=True)
         return df.merge(a_df, left_index=True, right_index=True)
 
@@ -65,27 +65,27 @@ class IndexComparator(AbstractIndexComparator):
         a_var = np.log(a_df / a_df.shift(1))
         return a_var#.to_frame()
 
-    def __setSimpleReturnsCorr(self, df: pd.DataFrame):
+    def _setSimpleReturnsCorr(self, df: pd.DataFrame):
         return self._setSimpleReturns(df).corr()
 
-    def __heatMap(self, df: pd.DataFrame):
+    def _plotHeatMap(self, df: pd.DataFrame):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
         sns.clustermap(df, cmap="coolwarm", col_cluster=False)# annot=False, row_cluster=True,
         plt.show()
 
-    def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        fig2L1C = plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 7))
-        gs2L1C = gridspec.GridSpec(2, 1)
-        ax1 = fig2L1C.add_subplot(gs2L1C[0, 0])
+    def _plotCompared(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+        fig_plot = plt.figure(figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 7))
+        grid_spec = gridspec.GridSpec(2, 1)
+        ax1 = fig_plot.add_subplot(grid_spec[0, 0])
         for c in df.columns.values:
             plt.plot(df.index, df[c], lw=2, label=c)
         #ax1.set_xlabel('Since ' + self.__stockOption.TimeSpan.StartDateStr)
         ax1.set_ylabel(y_title)
-        ax1.set_title(self.__stockOption.SourceColumn + ' ' + a_title + ':Since ' + self.__stockOption.TimeSpan.StartDateStr)
-        ax1.legend(loc='upper left', fontsize=(len(self.__indexList)*0.3))
-        ax2 = fig2L1C.add_subplot(gs2L1C[1, 0])
+        ax1.set_title(self._stock_option.SourceColumn + ' ' + a_title + ':Since ' + self._stock_option.TimeSpan.StartDateStr)
+        ax1.legend(loc='upper left', fontsize=(len(self._index_list) * 0.26))
+        ax2 = fig_plot.add_subplot(grid_spec[1, 0])
         ax2 = sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
-        ax2.set_title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
+        ax2.set_title('Stock ' + self._stock_option.SourceColumn + ' ' + a_title)
         #ax2.set_xlabel('Stock tickers')
         ax2.set_xticklabels(ax2.get_xticklabels(), rotation=30)
         #plt.xticks(rotation=45)
@@ -99,17 +99,17 @@ class IndexComparator(AbstractIndexComparator):
         #self.__snsBoxPlot(df, a_title, y_title)
         #plt.show()
 
-    def __snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+    def _snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
-        plt.title('Stock ' + self.__stockOption.SourceColumn + ' ' + a_title)
+        plt.title('Stock ' + self._stock_option.SourceColumn + ' ' + a_title)
         plt.xlabel('Stock tickers')
         plt.xticks(rotation=45)
         plt.ylabel(y_title)
 
-    def __summaryPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
+    def _summaryPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         for c in df.columns.values:
             plt.plot(df.index, df[c], lw=2, label=c)
-        plt.title(self.__stockOption.SourceColumn + ' ' + a_title + ' ' + str(self.__stockOption.TimeSpan.MonthCount) + ' months')
-        plt.xlabel(self.__stockOption.TimeSpan.StartDateStr + ' - ' + self.__stockOption.TimeSpan.EndDateStr)
+        plt.title(self._stock_option.SourceColumn + ' ' + a_title + ' ' + str(self._stock_option.TimeSpan.MonthCount) + ' months')
+        plt.xlabel(self._stock_option.TimeSpan.StartDateStr + ' - ' + self._stock_option.TimeSpan.EndDateStr)
         plt.ylabel(y_title)
         plt.legend(loc='upper left', fontsize=10)

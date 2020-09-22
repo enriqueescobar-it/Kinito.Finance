@@ -6,8 +6,8 @@ import pandas as pd
 
 
 class AbstractIndexComparator(AbstractComparator):
-    __stockOption: YahooStockOption
-    __indexList: list
+    _stock_option: YahooStockOption
+    _index_list: list
     Data: pd.DataFrame
     DataNormalized: pd.DataFrame
     DataNormalizedL1: pd.DataFrame
