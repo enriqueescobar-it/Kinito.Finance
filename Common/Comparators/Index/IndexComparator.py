@@ -15,6 +15,7 @@ class IndexComparator(AbstractIndexComparator):
     def __init__(self, stock_option: YahooStockOption, indices: list()):
         self._stock_option = stock_option
         self._index_list = indices
+        self._legend_place = 'upper left'
         self.Data = self._setData()
         self.DataNormalized = self._setNormalizer(self.Data)
         self.DataNormalizedL1 = self._setNormalizerL1(self.Data)
@@ -24,6 +25,7 @@ class IndexComparator(AbstractIndexComparator):
         self.DataSimpleReturnsCorr = self._setSimpleReturnsCorr(self.Data)
         self.DataLogReturns = self._setLogReturns(self.Data)
         self._plotHeatMap(self.DataSimpleReturnsCorr)
+        self._plotComparison(2, 5)
         self._plotCompared(self.Data, 'Flat', 'Price in USD')
         self._plotCompared(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
         self._plotCompared(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
@@ -42,20 +44,20 @@ class IndexComparator(AbstractIndexComparator):
         return a_df / a_df.iloc[0]
 
     def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns)
+        return pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns, index=a_df.index)
 
     def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns)
+        return pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns, index=a_df.index)
 
     def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns)
+        return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns, index=a_df.index)
 
     def _setScaler(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         # scale to compare array from 0.0 to 100.0
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
-        return pd.DataFrame(stockArrayScaled, columns=a_df.columns)
+        return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)
 
     def _setSimpleReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         #return a_df.pct_change().to_frame()
@@ -71,6 +73,30 @@ class IndexComparator(AbstractIndexComparator):
     def _plotHeatMap(self, df: pd.DataFrame):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
         sns.clustermap(df, cmap="coolwarm", col_cluster=False)# annot=False, row_cluster=True,
+        plt.show()
+
+    def _plotComparison(self, nb_col=1, nb_row=1):
+        a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
+        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float/2.5), sharex=True)
+        plt.style.use('fivethirtyeight')
+        # ax00
+        self.Data.plot(ax=ax[0, 0], legend=None)
+        #ax[0, 0].legend(loc=self._legend_place)
+        # ax01
+        #
+        # ax10
+        self.DataNormalized.plot(ax=ax[1, 0], legend=None)
+        #ax[1, 0].legend(loc=self._legend_place)
+        # ax11
+        # ax20
+        self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
+        # ax21
+        # ax30
+        self.DataSparsed.plot(ax=ax[3, 0], legend=None)
+        # ax 31
+        # ax40
+        self.DataScaled.plot(ax=ax[4, 0], legend=None)
+        plt.tight_layout()
         plt.show()
 
     def _plotCompared(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
