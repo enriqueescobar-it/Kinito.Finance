@@ -17,14 +17,18 @@ class IndexComparator(AbstractIndexComparator):
         self.__indexList = indices
         self.Data = self._setData()
         self.DataNormalized = self._setNormalizer(self.Data)
-        self.DataScaled = self._setScaler()
+        self.DataNormalizedL1 = self._setNormalizerL1(self.Data)
+        self.DataSparsed = self._setSparser(self.Data)
+        self.DataScaled = self._setScaler(self.Data)
         self.DataSimpleReturns = self._setSimpleReturns(self.Data)
         self.DataSimpleReturnsCorr = self.__setSimpleReturnsCorr(self.Data)
         self.DataLogReturns = self._setLogReturns(self.Data)
-        self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
         self.__heatMap(self.DataSimpleReturnsCorr)
-        self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since ' + stock_option.TimeSpan.StartDateStr)
-        self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since ' + stock_option.TimeSpan.StartDateStr)
+        self.__plot2L1C(self.Data, 'Flat', 'Price in USD')
+        self.__plot2L1C(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        self.__plot2L1C(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        self.__plot2L1C(self.DataSparsed, 'Sparsed', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        self.__plot2L1C(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
 
     def _setData(self) -> pd.DataFrame:
         df: pd.DataFrame = self.__stockOption.HistoricalData[self.__stockOption.SourceColumn].to_frame()
@@ -59,14 +63,14 @@ class IndexComparator(AbstractIndexComparator):
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         a_var = np.log(a_df / a_df.shift(1))
-        return a_var.to_frame()
+        return a_var#.to_frame()
 
     def __setSimpleReturnsCorr(self, df: pd.DataFrame):
         return self._setSimpleReturns(df).corr()
 
     def __heatMap(self, df: pd.DataFrame):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
-        sns.clustermap(df, cmap="coolwarm", annot=False, row_cluster=True, col_cluster=True)
+        sns.clustermap(df, cmap="coolwarm", col_cluster=False)# annot=False, row_cluster=True,
         plt.show()
 
     def __plot2L1C(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
@@ -77,7 +81,7 @@ class IndexComparator(AbstractIndexComparator):
             plt.plot(df.index, df[c], lw=2, label=c)
         #ax1.set_xlabel('Since ' + self.__stockOption.TimeSpan.StartDateStr)
         ax1.set_ylabel(y_title)
-        ax1.set_title(self.__stockOption.SourceColumn + ' ' + a_title + 'Since ' + self.__stockOption.TimeSpan.StartDateStr)
+        ax1.set_title(self.__stockOption.SourceColumn + ' ' + a_title + ':Since ' + self.__stockOption.TimeSpan.StartDateStr)
         ax1.legend(loc='upper left', fontsize=(len(self.__indexList)*0.3))
         ax2 = fig2L1C.add_subplot(gs2L1C[1, 0])
         ax2 = sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
