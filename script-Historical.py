@@ -25,10 +25,11 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CP')
-#YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA
+yahooStockOption: YahooStockOption = YahooStockOption('NVDA')
+# CLX UNP PM JNJ HD AMGN PRU TROW TXN NVEI.TO IPO SNOW VMW CRM FROG U
+#YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY
-#BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN
+#BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
 #ETFs:ARKK TEC.TO, VFV and ACES XEI ARKF QQC-f ZQQ XIT HQU SOXL QQQ HZU JNUG FIE BRTXQ
 #CCA CGO RCI.B
 # FZROX FZILX FSRNX VTSAX
@@ -38,11 +39,11 @@ yahooStockOption: YahooStockOption = YahooStockOption('CP')
 # BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
 #ETFs# BRTXQ FZILX FSRNX VTSAX
 # TFII LSPD T FTS RY SHOP
-# ACES AMT AMZN AQN ARKF ARKK BCE BPY BRK-B BRKB BRTXQ CCA CGO CM CNI COST CP ENB FIE FSRNX FSZ FTS FZILX FZROX
+# ACES AMT AMZN AQN ARKF ARKK BCE BPY BRK-B BRKA BRKB BRTXQ CCA CGO CM CNI COST CP ENB FIE FSRNX FSZ FTS FZILX FZROX
 # GNW GRWG HQU HZU IT JNUG KEY KL KO LMT LSPD MA MWK NKE NPI OTEX PPL QQC-f QQQ RCI RCI.B RY SHOP SJR.B SOXL
 # T TD TEC.TO TFII VDC VFV VGT VNR VPU VTSAX VYM VZ WCN WELL WMT XEI XIT YCBD ZQQ ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
-#'''
+'''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
@@ -87,7 +88,7 @@ marketIndices.append(fvxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-#'''
+'''
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
@@ -106,11 +107,12 @@ yahooStockOptionPlotter.PlotMonthly().show()
 print('MEAN=', yahooStockOption.HistoricalSparse.mean(axis=0))
 print('SD=', yahooStockOption.HistoricalSparse.std(axis=0))
 ## scaling
-print('MinMaxScaled=', yahooStockOption.HistoricalScaled)
+print('MinMaxScaled=', yahooStockOption.Data.Scaled)
 ## normalization
-print('L1 NORM=', yahooStockOption.HistoricalL1Normalized)
+print('L1 NORM=', yahooStockOption.Data.NormL1)
 ## binarization
-print('BIN=', yahooStockOption.HistoricalBinary)
+print('BIN=', yahooStockOption.Data.Binary)
+print('SPARSE=', yahooStockOption.Data.Sparse)
 # classification by classes
 # viz
 ## uni variate

@@ -1,6 +1,7 @@
-from abc import ABC
+from abc import *
+from pandas import DataFrame
 
 
 class AbstractStockOption(ABC):
-    Source: str
-    pass
+    Source: str = ''
+    Data: DataFrame

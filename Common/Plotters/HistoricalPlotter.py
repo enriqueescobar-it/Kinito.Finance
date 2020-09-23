@@ -5,7 +5,7 @@ import numpy as np
 import scipy.stats as scs
 import seaborn as sns
 import statsmodels.api as sm
-from numpy.core._multiarray_umath import ndarray
+from numpy import ndarray
 from pandas import DataFrame
 from pandas import Series
 from arch import arch_model
@@ -195,8 +195,8 @@ class HistoricalPlotter(AbstractPlotter):
     def Plot(self):
         a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
         x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
+        plt.style.use('seaborn')
         fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
-        plt.style.use('fivethirtyeight')
         # ax0
         self.__dataFrame[self.__Col].plot(ax=ax[0])
         ax[0].set(ylabel='Stock price ($)', title=a_title)
@@ -287,7 +287,7 @@ class HistoricalPlotter(AbstractPlotter):
         fig = plt.figure(constrained_layout=True, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 7))
         fig.suptitle(a_title)
         gs = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig)
-        plt.style.use('fivethirtyeight')
+        plt.style.use('seaborn')
         ax1 = fig.add_subplot(gs[0, 0])
         ax1 = self.__plot(ax1)
         ax2 = fig.add_subplot(gs[0, 1])
@@ -301,7 +301,7 @@ class HistoricalPlotter(AbstractPlotter):
         a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
         fig, ax = plt.subplots(2, 2, figsize=(a_float, a_float), sharex=False)
         fig.suptitle(a_title)
-        plt.style.use('fivethirtyeight')
+        plt.style.use('seaborn')
         # ax0
         ax[0, 0] = self.__newPeriod(ax[0, 0], df_period, period_str)
         # ax1
