@@ -26,11 +26,11 @@ class IndexComparator(AbstractIndexComparator):
         self.DataLogReturns = self._setLogReturns(self.Data)
         self._plotHeatMap(self.DataSimpleReturnsCorr)
         self._plotComparison(2, 5)
-        self._plotCompared(self.Data, 'Flat', 'Price in USD')
-        self._plotCompared(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        self._plotCompared(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        self._plotCompared(self.DataSparsed, 'Sparsed', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        self._plotCompared(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
+        #self._plotCompared(self.Data, 'Flat', 'Price in USD')
+        #self._plotCompared(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        #self._plotCompared(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        #self._plotCompared(self.DataSparsed, 'Sparsed', 'Sparse variation since' + stock_option.TimeSpan.StartDateStr)
+        #self._plotCompared(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
 
     def _setData(self) -> pd.DataFrame:
         df: pd.DataFrame = self._stock_option.HistoricalData[self._stock_option.SourceColumn].to_frame()
@@ -77,25 +77,37 @@ class IndexComparator(AbstractIndexComparator):
 
     def _plotComparison(self, nb_col=1, nb_row=1):
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
-        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float/2.5), sharex=True)
+        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float/2.5), sharex=False, sharey=False)
         plt.style.use('fivethirtyeight')
         # ax00
         self.Data.plot(ax=ax[0, 0], legend=None)
-        #ax[0, 0].legend(loc=self._legend_place)
+        plt.setp(ax[0, 0].get_xticklabels(), visible=False)
+        ax[0, 0].set(ylabel='Stock price ($)', xlabel='')
         # ax01
-        #
+        sns.boxplot(data=self.Data, width=.5, ax=ax[0, 1]).set(xlabel='')
         # ax10
         self.DataNormalized.plot(ax=ax[1, 0], legend=None)
-        #ax[1, 0].legend(loc=self._legend_place)
+        plt.setp(ax[1, 0].get_xticklabels(), visible=False)
+        ax[1, 0].set(ylabel='Base 1 variation', xlabel='')
         # ax11
+        sns.boxplot(data=self.DataNormalized, width=.5, ax=ax[1, 1])
         # ax20
         self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
+        plt.setp(ax[2, 0].get_xticklabels(), visible=False)
+        ax[2, 0].set(ylabel='L1 variation', xlabel='')
         # ax21
+        sns.boxplot(data=self.DataNormalizedL1, width=.5, ax=ax[2, 1])
         # ax30
         self.DataSparsed.plot(ax=ax[3, 0], legend=None)
-        # ax 31
+        plt.setp(ax[3, 0].get_xticklabels(), visible=False)
+        ax[3, 0].set(ylabel='Sparse variation', xlabel='')
+        # ax31
+        sns.boxplot(data=self.DataSparsed, width=.5, ax=ax[3, 1])
         # ax40
         self.DataScaled.plot(ax=ax[4, 0], legend=None)
+        ax[4, 0].set(ylabel='[0-100] variation')
+        # ax41
+        sns.boxplot(data=self.DataScaled, width=.5, ax=ax[4, 1])
         plt.tight_layout()
         plt.show()
 
