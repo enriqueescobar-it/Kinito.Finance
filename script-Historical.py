@@ -93,7 +93,7 @@ yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
 #yahooStockOptionPlotter.PlotForecast().show()
-yahooStockOptionPlotter.GraphPlot().show()
+yahooStockOptionPlotter.GraphPlot().show();exit(-7)
 #yahooStockOptionPlotter.Daily().show()
 #yahooStockOptionPlotter.DailyCum().show()
 #yahooStockOptionPlotter.DailyHist().show()

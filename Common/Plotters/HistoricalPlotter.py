@@ -283,15 +283,13 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def GraphPlot(self):
+        a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
         a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
-        fig = plt.figure(constrained_layout=True, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 7))
+        fig, ax = plt.subplots(1, 2, figsize=(a_float, a_float), sharey=True)
         fig.suptitle(a_title)
-        gs = gridspec.GridSpec(ncols=2, nrows=1, width_ratios=[3, 2], figure=fig)
         plt.style.use('seaborn')
-        ax1 = fig.add_subplot(gs[0, 0])
-        ax1 = self.__plot(ax1)
-        ax2 = fig.add_subplot(gs[0, 1])
-        ax2 = self.__plotDistro(ax2)
+        self.__plot(ax[0])
+        self.__plotDistro(ax[1])
         plt.tight_layout()
         return plt
 
