@@ -93,7 +93,7 @@ yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
 #yahooStockOptionPlotter.PlotForecast().show()
-yahooStockOptionPlotter.GraphPlot().show();exit(-7)
+yahooStockOptionPlotter.GraphPlot().show()
 #yahooStockOptionPlotter.Daily().show()
 #yahooStockOptionPlotter.DailyCum().show()
 #yahooStockOptionPlotter.DailyHist().show()
@@ -104,15 +104,8 @@ yahooStockOptionPlotter.PlotDaily().show()
 yahooStockOptionPlotter.PlotMonthly().show()
 # preprocessing
 ## Mean removal
-print('MEAN=', yahooStockOption.HistoricalSparse.mean(axis=0))
-print('SD=', yahooStockOption.HistoricalSparse.std(axis=0))
-## scaling
-print('MinMaxScaled=', yahooStockOption.Data.Scaled)
-## normalization
-print('L1 NORM=', yahooStockOption.Data.NormL1)
-## binarization
-print('BIN=', yahooStockOption.Data.Binary)
-print('SPARSE=', yahooStockOption.Data.Sparse)
+print('MEAN=', yahooStockOption.Data.Sparse.mean(axis=0))
+print('SD=', yahooStockOption.Data.Sparse.std(axis=0))
 # classification by classes
 # viz
 ## uni variate
