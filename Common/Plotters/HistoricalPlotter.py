@@ -21,6 +21,8 @@ class HistoricalPlotter(AbstractPlotter):
     _dataWeeklyCum: Series
     _dataMonthly: DataFrame
     _dataMonthlyCum: Series
+    _dataQuarterly: DataFrame
+    _dataQuarterlyCum: Series
     _mean: ndarray
     _median: ndarray
     _std: ndarray
@@ -58,6 +60,8 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataWeeklyCum = stock_option.HistoricalWeeklyCum
         self._dataMonthly = stock_option.HistoricalMonthly
         self._dataMonthlyCum = stock_option.HistoricalMonthlyCum
+        self._dataQuarterly = stock_option.HistoricalQuarterly
+        self._dataQuarterlyCum = stock_option.HistoricalQuarterlyCum
         self._mean = np.mean(stock_option.HistoricalData[self.__Col])
         self._mean = np.round(self._mean, 2)
         self._median = np.median(stock_option.HistoricalData[self.__Col])
@@ -331,15 +335,15 @@ class HistoricalPlotter(AbstractPlotter):
         plt.legend(loc=self.__legendPlace)
         return plt
 
-    def __newPeriodCum(self, an_ax, a_df: DataFrame, period_str: str):
+    def __newPeriodCum(self, an_ax, a_df: DataFrame, a_period: str):
         modelDailyDrop = a_df[self.__Col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
         modelDailyFitted = modelDailyModel.fit(disp='off')
         # modelDailyFitted.plot(annualize='D')
         avg_return = 100 * modelDailyDrop.mean()
         avg_return_str: str = f'{avg_return:.2f}%'
-        print(f'Average return: {100 * modelDailyDrop.mean():.2f}%')
-        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cumulative {period_str} Returns {self.__timeSpan.MonthCount} months'
+        print(f'Average return {a_period}: {100 * modelDailyDrop.mean():.2f}%')
+        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cumulative {a_period} Returns {self.__timeSpan.MonthCount} months'
         an_ax.plot(a_df, label=self.__Col)
         an_ax.legend(loc=self.__legendPlace)
         an_ax.set_title(a_title, fontsize=10)
@@ -373,6 +377,9 @@ class HistoricalPlotter(AbstractPlotter):
     def Monthly(self):
         return self.__plotPeriod(self._dataMonthly, 'Monthly')
 
+    def Quarterly(self):
+        return self.__plotPeriod(self._dataQuarterly, 'Quarterly')
+
     def DailyCum(self):
         return self.__plotPeriodCum(self._dataDailyCum, 'Daily')
 
@@ -381,6 +388,9 @@ class HistoricalPlotter(AbstractPlotter):
 
     def MonthlyCum(self):
         return self.__plotPeriodCum(self._dataMonthlyCum, 'Monthly')
+
+    def QuarterlyCum(self):
+        return self.__plotPeriodCum(self._dataQuarterlyCum, 'Quarterly')
 
     def DailyHist(self):
         return self.__plotHist(self._dataDaily, 'Daily')
@@ -396,3 +406,6 @@ class HistoricalPlotter(AbstractPlotter):
 
     def PlotMonthly(self):
         return self.__newPlot(self._dataMonthly, self._dataMonthlyCum, 'Monthly')
+
+    def PlotQuarterly(self):
+        return self.__newPlot(self._dataQuarterly, self._dataQuarterlyCum, 'Quarterly')

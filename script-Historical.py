@@ -103,6 +103,7 @@ yahooStockOptionPlotter.PlotWeekly().show()
 #yahooStockOptionPlotter.MonthlyCum().show()
 #yahooStockOptionPlotter.MonthlyHist().show()
 yahooStockOptionPlotter.PlotMonthly().show()
+yahooStockOptionPlotter.PlotQuarterly().show()
 # preprocessing
 ## Mean removal
 print('MEAN=', yahooStockOption.Data.Sparse.mean(axis=0))
@@ -110,14 +111,3 @@ print('SD=', yahooStockOption.Data.Sparse.std(axis=0))
 # classification by classes
 # viz
 ## uni variate
-'''import matplotlib.pyplot as plt
-print(yahooStockOption.HistoricalData.head())
-yahooStockOption.HistoricalData.plot(kind='box', subplots=True, layout=(2, 3), sharex=False, sharey=False)
-plt.show()
-### box and whiskers
-yahooStockOption.HistoricalData.hist()
-plt.show()
-## multi variate
-from pandas.plotting import scatter_matrix
-scatter_matrix(yahooStockOption.HistoricalData)
-plt.show()'''
