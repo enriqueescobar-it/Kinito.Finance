@@ -41,18 +41,18 @@ class YahooStockOption(AbstractStockOption):
     FvVolume: int
     ForecastSpan: int = 30
     HistoricalData: pd.DataFrame
-    HistoricalSimpleReturns: pd.DataFrame
-    HistoricalLogReturns: pd.DataFrame
-    HistoricalAnnually: pd.DataFrame
+    DataSimpleReturns: pd.DataFrame
+    DataLogReturns: pd.DataFrame
+    SimpleAnnually: pd.DataFrame
     HistoricalAnnuallyCum: pd.core.series.Series
-    HistoricalDaily: pd.DataFrame
+    SimpleDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
     HistoricalMarketIndex: AbstractStockMarketIndex
-    HistoricalMonthly: pd.DataFrame
+    SimpleMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalQuarterly: pd.DataFrame
+    SimpleQuarterly: pd.DataFrame
     HistoricalQuarterlyCum: pd.core.series.Series
-    HistoricalWeekly: pd.DataFrame
+    SimpleWeekly: pd.DataFrame
     HistoricalWeeklyCum: pd.core.series.Series
     RMSE: float = -1.1
     Source: str = 'yahoo'
@@ -103,11 +103,11 @@ class YahooStockOption(AbstractStockOption):
         self.Data['Binary'] = self._setBinarizer(self.HistoricalData)
         self.Data['Sparse'] = self._setSparser(self.HistoricalData)
         self.Data['Scaled'] = self._setScaler(self.HistoricalData)
-        self.HistoricalSimpleReturns = self._setSimpleReturns(self.HistoricalData)
-        self.HistoricalSimpleReturns = self._setSimpleReturnsPlus(self.HistoricalSimpleReturns)
-        self.Data['IsOutlier'] = self.HistoricalSimpleReturns.IsOutlier.astype(bool)
-        self.HistoricalLogReturns = self._setLogReturns(self.HistoricalData)
-        self.HistoricalLogReturns = self._setLogReturnsPlus(self.HistoricalLogReturns)
+        self.DataSimpleReturns = self._setSimpleReturns(self.HistoricalData)
+        self.DataSimpleReturns = self._setSimpleReturnsPlus(self.DataSimpleReturns)
+        self.Data['IsOutlier'] = self.DataSimpleReturns.IsOutlier.astype(bool)
+        self.DataLogReturns = self._setLogReturns(self.HistoricalData)
+        self.DataLogReturns = self._setLogReturnsPlus(self.DataLogReturns)
         self._setDataDaily(self.HistoricalData)
         self._setDataWeekly(self.HistoricalData)
         self._setDataMonthly(self.HistoricalData)
@@ -223,24 +223,24 @@ class YahooStockOption(AbstractStockOption):
         return a_df
 
     def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.HistoricalDaily = a_df[self.SourceColumn].pct_change().to_frame()
-        self.HistoricalDailyCum = (self.HistoricalDaily + 1).cumprod()
+        self.SimpleDaily = a_df[self.SourceColumn].pct_change().to_frame()
+        self.HistoricalDailyCum = (self.SimpleDaily + 1).cumprod()
 
     def _setDataWeekly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.HistoricalWeekly = a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
-        self.HistoricalWeeklyCum = (self.HistoricalWeekly + 1).cumprod()
+        self.SimpleWeekly = a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
+        self.HistoricalWeeklyCum = (self.SimpleWeekly + 1).cumprod()
 
     def _setDataMonthly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.HistoricalMonthly = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
-        self.HistoricalMonthlyCum = (self.HistoricalMonthly + 1).cumprod()
+        self.SimpleMonthly = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
+        self.HistoricalMonthlyCum = (self.SimpleMonthly + 1).cumprod()
 
     def _setDataQuarterly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.HistoricalQuarterly = a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
-        self.HistoricalQuarterlyCum = (self.HistoricalQuarterly + 1).cumprod()
+        self.SimpleQuarterly = a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
+        self.HistoricalQuarterlyCum = (self.SimpleQuarterly + 1).cumprod()
 
     def _setDataAnnually(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.HistoricalAnnually = a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
-        self.HistoricalAnnuallyCum = (self.HistoricalAnnually + 1).cumprod()
+        self.SimpleAnnually = a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
+        self.HistoricalAnnuallyCum = (self.SimpleAnnually + 1).cumprod()
 
     def _setFinViz(self, a_ticker: str = 'TD'):
         self._fin_viz_engine = FinVizEngine(a_ticker)
