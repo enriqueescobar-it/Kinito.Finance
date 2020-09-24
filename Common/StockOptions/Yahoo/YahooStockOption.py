@@ -48,16 +48,15 @@ class YahooStockOption(AbstractStockOption):
     FvVolume: int
     ForecastSpan: int = 30
     HistoricalData: pd.DataFrame
-    HistoricalNorm: pd.DataFrame
+    HistoricalSimpleReturns: pd.DataFrame
+    HistoricalLogReturns: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
     HistoricalLinRegScore: float = -1.1
     HistoricalLinRegPrediction: np.ndarray
-    HistoricalLogReturns: pd.DataFrame
     HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalSimpleReturns: pd.DataFrame
     HistoricalSVRLinearScore: float = -1.1
     HistoricalSVRLinearPrediction: np.ndarray
     HistoricalSVRPolyScore: float = -1.1
@@ -110,17 +109,16 @@ class YahooStockOption(AbstractStockOption):
         self.TimeSpan = TimeSpan()
         self.HistoricalData = self._setData()
         self.Data = self.HistoricalData[self.SourceColumn].to_frame()
-        self.HistoricalNorm = self._setNormalizer(self.HistoricalData)
-        self.Data['Norm'] = self.HistoricalNorm[self.SourceColumn]
+        self.Data['Norm'] = self._setNormalizer(self.HistoricalData)
         self.Data['NormL1'] = self._setNormalizerL1(self.HistoricalData)
         self.Data['Binary'] = self._setBinarizer(self.HistoricalData)
         self.Data['Sparse'] = self._setSparser(self.HistoricalData)
         self.Data['Scaled'] = self._setScaler(self.HistoricalData)
-        #exit(-111)
         self.HistoricalSimpleReturns = self._setSimpleReturns(self.HistoricalData)
-        self._setSimpleReturnsPlus()
+        self.HistoricalSimpleReturns = self._setSimpleReturnsPlus(self.HistoricalSimpleReturns)
+        self.Data['IsOutlier'] = self.HistoricalSimpleReturns.IsOutlier.astype(bool)
         self.HistoricalLogReturns = self._setLogReturns(self.HistoricalData)
-        self._setLogReturnsPlus()
+        self.HistoricalLogReturns = self._setLogReturnsPlus(self.HistoricalLogReturns)
         self._setDataDaily()
         self._setDataMonthly()
         self._setDataPrediction()
@@ -148,7 +146,7 @@ class YahooStockOption(AbstractStockOption):
         return a_df
 
     def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return a_df / a_df.iloc[0]
+        return (a_df / a_df.iloc[0])[self.SourceColumn]
 
     def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return\
@@ -171,11 +169,11 @@ class YahooStockOption(AbstractStockOption):
     def _setSimpleReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return a_df[self.SourceColumn].pct_change().to_frame()
 
-    def _setSimpleReturnsPlus(self):
-        df_rolling = self.HistoricalSimpleReturns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
-        self.HistoricalSimpleReturns = self.HistoricalSimpleReturns.join(df_rolling)
-        self.HistoricalSimpleReturns = self._getOutliers(self.HistoricalSimpleReturns)
-        df = self.HistoricalSimpleReturns[self.SourceColumn].dropna()
+    def _setSimpleReturnsPlus(self, simple_returns: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        df_rolling = simple_returns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
+        simple_returns = simple_returns.join(df_rolling)
+        simple_returns = self._getOutliers(simple_returns)
+        df = simple_returns[self.SourceColumn].dropna()
         dfLength = len(df)
         dfLength80 = int(round(dfLength*0.8))
         dfLength20 = dfLength - dfLength80
@@ -222,16 +220,16 @@ class YahooStockOption(AbstractStockOption):
         #ax.set_title(PLOT_TITLE, fontsize=16)
         #ax.legend((line_1, line_2), ('mean', 'actual'))
         #plt.show()
+        return simple_returns
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         a_var = np.log(a_df[self.SourceColumn] / a_df[self.SourceColumn].shift(1))
         return a_var.to_frame()
 
-    def _setLogReturnsPlus(self):
-        self.HistoricalLogReturns['MovingStd252'] =\
-            self.HistoricalLogReturns[self.SourceColumn].rolling(window=252).std().to_frame()
-        self.HistoricalLogReturns['MovingStd21'] =\
-            self.HistoricalLogReturns[self.SourceColumn].rolling(window=21).std().to_frame()
+    def _setLogReturnsPlus(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        a_df['MovingStd252'] = a_df[self.SourceColumn].rolling(window=252).std().to_frame()
+        a_df['MovingStd21'] = a_df[self.SourceColumn].rolling(window=21).std().to_frame()
+        return a_df
 
     def _setDataDaily(self):
         self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
