@@ -44,16 +44,16 @@ class YahooStockOption(AbstractStockOption):
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
     SimpleAnnually: pd.DataFrame
-    HistoricalAnnuallyCum: pd.core.series.Series
+    SimpleAnnuallyCum: pd.core.series.Series
     SimpleDaily: pd.DataFrame
-    HistoricalDailyCum: pd.core.series.Series
+    SimplyDailyCum: pd.core.series.Series
     HistoricalMarketIndex: AbstractStockMarketIndex
     SimpleMonthly: pd.DataFrame
-    HistoricalMonthlyCum: pd.core.series.Series
+    SimpleMonthlyCum: pd.core.series.Series
     SimpleQuarterly: pd.DataFrame
-    HistoricalQuarterlyCum: pd.core.series.Series
+    SimpleQuarterlyCum: pd.core.series.Series
     SimpleWeekly: pd.DataFrame
-    HistoricalWeeklyCum: pd.core.series.Series
+    SimpleWeeklyCum: pd.core.series.Series
     RMSE: float = -1.1
     Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
@@ -224,23 +224,23 @@ class YahooStockOption(AbstractStockOption):
 
     def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.SimpleDaily = a_df[self.SourceColumn].pct_change().to_frame()
-        self.HistoricalDailyCum = (self.SimpleDaily + 1).cumprod()
+        self.SimplyDailyCum = (self.SimpleDaily + 1).cumprod()
 
     def _setDataWeekly(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.SimpleWeekly = a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
-        self.HistoricalWeeklyCum = (self.SimpleWeekly + 1).cumprod()
+        self.SimpleWeeklyCum = (self.SimpleWeekly + 1).cumprod()
 
     def _setDataMonthly(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.SimpleMonthly = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
-        self.HistoricalMonthlyCum = (self.SimpleMonthly + 1).cumprod()
+        self.SimpleMonthlyCum = (self.SimpleMonthly + 1).cumprod()
 
     def _setDataQuarterly(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.SimpleQuarterly = a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
-        self.HistoricalQuarterlyCum = (self.SimpleQuarterly + 1).cumprod()
+        self.SimpleQuarterlyCum = (self.SimpleQuarterly + 1).cumprod()
 
     def _setDataAnnually(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.SimpleAnnually = a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
-        self.HistoricalAnnuallyCum = (self.SimpleAnnually + 1).cumprod()
+        self.SimpleAnnuallyCum = (self.SimpleAnnually + 1).cumprod()
 
     def _setFinViz(self, a_ticker: str = 'TD'):
         self._fin_viz_engine = FinVizEngine(a_ticker)
