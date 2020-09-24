@@ -44,16 +44,16 @@ class YahooStockOption(AbstractStockOption):
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
     SimpleAnnually: pd.DataFrame
-    SimpleAnnuallyCum: pd.core.series.Series
+    SimpleAnnuallyCum: pd.Series
     SimpleDaily: pd.DataFrame
-    SimplyDailyCum: pd.core.series.Series
+    SimplyDailyCum: pd.Series
     HistoricalMarketIndex: AbstractStockMarketIndex
     SimpleMonthly: pd.DataFrame
-    SimpleMonthlyCum: pd.core.series.Series
+    SimpleMonthlyCum: pd.Series
     SimpleQuarterly: pd.DataFrame
-    SimpleQuarterlyCum: pd.core.series.Series
+    SimpleQuarterlyCum: pd.Series
     SimpleWeekly: pd.DataFrame
-    SimpleWeeklyCum: pd.core.series.Series
+    SimpleWeeklyCum: pd.Series
     RMSE: float = -1.1
     Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
@@ -108,11 +108,16 @@ class YahooStockOption(AbstractStockOption):
         self.Data['IsOutlier'] = self.DataSimpleReturns.IsOutlier.astype(bool)
         self.DataLogReturns = self._setLogReturns(self.HistoricalData)
         self.DataLogReturns = self._setLogReturnsPlus(self.DataLogReturns)
-        self._setDataDaily(self.HistoricalData)
-        self._setDataWeekly(self.HistoricalData)
-        self._setDataMonthly(self.HistoricalData)
-        self._setDataQuarterly(self.HistoricalData)
-        self._setDataAnnually(self.HistoricalData)
+        self.SimpleDaily = self._setSimpleReturns('', self.HistoricalData)
+        self.SimplyDailyCum = self._setDataDaily(self.SimpleDaily)
+        self.SimpleWeekly = self._setSimpleReturns('W', self.HistoricalData)
+        self._setDataWeekly(self.SimpleWeekly)
+        self.SimpleMonthly = self._setSimpleReturns('M', self.HistoricalData)
+        self._setDataMonthly(self.SimpleMonthly)
+        self.SimpleQuarterly = self._setSimpleReturns('Q', self.HistoricalData)
+        self._setDataQuarterly(self.SimpleQuarterly)
+        self.SimpleAnnually = self._setSimpleReturns('A', self.HistoricalData)
+        self._setDataAnnually(self.SimpleAnnually)
         self._setFinViz(a_ticker)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
@@ -231,25 +236,20 @@ class YahooStockOption(AbstractStockOption):
         a_df['MovingStd21'] = a_df[self.SourceColumn].rolling(window=21).std().to_frame()
         return a_df
 
-    def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleDaily = self._setSimpleReturns('', a_df)
-        self.SimplyDailyCum = (self.SimpleDaily + 1).cumprod()
+    def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.Series:
+        return (a_df + 1).cumprod()
 
     def _setDataWeekly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleWeekly = self._setSimpleReturns('W', a_df)
-        self.SimpleWeeklyCum = (self.SimpleWeekly + 1).cumprod()
+        self.SimpleWeeklyCum = (a_df + 1).cumprod()
 
     def _setDataMonthly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleMonthly = self._setSimpleReturns('M', a_df)
-        self.SimpleMonthlyCum = (self.SimpleMonthly + 1).cumprod()
+        self.SimpleMonthlyCum = (a_df + 1).cumprod()
 
     def _setDataQuarterly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleQuarterly = self._setSimpleReturns('Q', a_df)
-        self.SimpleQuarterlyCum = (self.SimpleQuarterly + 1).cumprod()
+        self.SimpleQuarterlyCum = (a_df + 1).cumprod()
 
     def _setDataAnnually(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleAnnually = self._setSimpleReturns('A', a_df)
-        self.SimpleAnnuallyCum = (self.SimpleAnnually + 1).cumprod()
+        self.SimpleAnnuallyCum = (a_df + 1).cumprod()
 
     def _setFinViz(self, a_ticker: str = 'TD'):
         self._fin_viz_engine = FinVizEngine(a_ticker)
