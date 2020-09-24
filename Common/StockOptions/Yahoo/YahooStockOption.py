@@ -49,9 +49,6 @@ class YahooStockOption(AbstractStockOption):
     ForecastSpan: int = 30
     HistoricalData: pd.DataFrame
     HistoricalNorm: pd.DataFrame
-    HistoricalNormL1: pd.DataFrame
-    HistoricalBinary: pd.DataFrame
-    HistoricalSparse: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
     HistoricalLinRegScore: float = -1.1
@@ -115,12 +112,9 @@ class YahooStockOption(AbstractStockOption):
         self.Data = self.HistoricalData[self.SourceColumn].to_frame()
         self.HistoricalNorm = self._setNormalizer(self.HistoricalData)
         self.Data['Norm'] = self.HistoricalNorm[self.SourceColumn]
-        self.HistoricalNormL1 = self._setNormalizerL1(self.HistoricalData)
-        self.Data['NormL1'] = self.HistoricalNormL1[self.SourceColumn]
-        self.HistoricalBinary = self._setBinarizer(self.HistoricalData)
-        self.Data['Binary'] = self.HistoricalBinary[self.SourceColumn]
-        self.HistoricalSparse = self._setSparser(self.HistoricalData)
-        self.Data['Sparse'] = self.HistoricalSparse[self.SourceColumn]
+        self.Data['NormL1'] = self._setNormalizerL1(self.HistoricalData)
+        self.Data['Binary'] = self._setBinarizer(self.HistoricalData)
+        self.Data['Sparse'] = self._setSparser(self.HistoricalData)
         self.Data['Scaled'] = self._setScaler(self.HistoricalData)
         #exit(-111)
         self.HistoricalSimpleReturns = self._setSimpleReturns(self.HistoricalData)
@@ -157,13 +151,15 @@ class YahooStockOption(AbstractStockOption):
         return a_df / a_df.iloc[0]
 
     def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns, index=a_df.index)
+        return\
+            pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns, index=a_df.index)[self.SourceColumn]
 
     def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns, index=a_df.index)
+        return\
+            pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns, index=a_df.index)[self.SourceColumn]
 
     def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns, index=a_df.index)
+        return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns, index=a_df.index)[self.SourceColumn]
 
     def _setScaler(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         # scale to compare array from 0.0 to 100.0
