@@ -25,7 +25,7 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('NVDA')
+yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 # CLX UNP PM JNJ HD AMGN PRU TROW TXN NVEI.TO IPO SNOW VMW CRM FROG U
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY

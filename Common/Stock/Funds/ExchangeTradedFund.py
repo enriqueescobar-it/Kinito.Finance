@@ -1,5 +1,5 @@
-from Common.AssetTypes.Funds.AbstractFund import AbstractFund
+from Common.Stock.Funds.AbstractStockFund import AbstractStockFund
 
 
-class ExchangeTradedFund(AbstractFund):
+class ExchangeTradedFund(AbstractStockFund):
     pass

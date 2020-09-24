@@ -1,4 +1,4 @@
-from Common.AssetTypes.Funds.ExchangeTradedFund import ExchangeTradedFund
+from Common.Stock.Funds.ExchangeTradedFund import ExchangeTradedFund
 
 
 class Nikkei(ExchangeTradedFund):
