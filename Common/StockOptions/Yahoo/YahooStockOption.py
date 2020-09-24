@@ -5,11 +5,6 @@ import matplotlib.pyplot as plt
 from pyarrow.lib import null
 import math
 from Common.Measures.Time.TimeSpan import TimeSpan
-from Common.Predictors.Linear.LinearPredictor import LinearPredictor
-from Common.Predictors.Svr.LinearSvrPredictor import LinearSvrPredictor
-from Common.Predictors.Svr.PolySvrPredictor import PolySvrPredictor
-from Common.Predictors.Svr.RbfSvrPredictor import RbfSvrPredictor
-from Common.Predictors.Tree.DecisionTreePredictor import DecisionTreePredictor
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
@@ -22,8 +17,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
-from keras.models import Sequential
-from keras.layers import Dense, LSTM
 
 
 class YahooStockOption(AbstractStockOption):
@@ -52,19 +45,9 @@ class YahooStockOption(AbstractStockOption):
     HistoricalLogReturns: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
-    HistoricalLinRegScore: float = -1.1
-    HistoricalLinRegPrediction: np.ndarray
     HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
-    HistoricalSVRLinearScore: float = -1.1
-    HistoricalSVRLinearPrediction: np.ndarray
-    HistoricalSVRPolyScore: float = -1.1
-    HistoricalSVRPolyPrediction: np.ndarray
-    HistoricalSVRRbfScore: float = -1.1
-    HistoricalSVRRbfPrediction: np.ndarray
-    HistoricalTreeRegScore: float = -1.1
-    HistoricalTreeRegPrediction: np.ndarray
     RMSE: float = -1.1
     Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
@@ -119,12 +102,17 @@ class YahooStockOption(AbstractStockOption):
         self.Data['IsOutlier'] = self.HistoricalSimpleReturns.IsOutlier.astype(bool)
         self.HistoricalLogReturns = self._setLogReturns(self.HistoricalData)
         self.HistoricalLogReturns = self._setLogReturnsPlus(self.HistoricalLogReturns)
-        self._setDataDaily()
-        self._setDataMonthly()
-        self._setDataPrediction()
-        self._setFinViz()
-        self._setYahooFinance()
-        self._setYahooSummary()
+        self._setDataDaily(self.HistoricalData)
+        a_df = self.HistoricalData[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
+        print('W', a_df)
+        self._setDataMonthly(self.HistoricalData)
+        a_df = self.HistoricalData[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
+        print('Q', a_df)
+        a_df = self.HistoricalData[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
+        print('A', a_df)
+        self._setFinViz(a_ticker)
+        self._setYahooFinance(a_ticker)
+        self._setYahooSummary(a_ticker)
 
     def _getOutliers(self, a_df: pd.DataFrame, n_sigmas: int = 3):
         a_df['IsOutlier'] = pd.Series(dtype=int)
@@ -231,16 +219,16 @@ class YahooStockOption(AbstractStockOption):
         a_df['MovingStd21'] = a_df[self.SourceColumn].rolling(window=21).std().to_frame()
         return a_df
 
-    def _setDataDaily(self):
-        self.HistoricalDaily = self.HistoricalData[self.SourceColumn].pct_change().to_frame()
+    def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()):
+        self.HistoricalDaily = a_df[self.SourceColumn].pct_change().to_frame()
         self.HistoricalDailyCum = (self.HistoricalDaily + 1).cumprod()
 
-    def _setDataMonthly(self):
-        self.HistoricalMonthly = self.HistoricalData[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
+    def _setDataMonthly(self, a_df: pd.DataFrame = pd.DataFrame()):
+        self.HistoricalMonthly = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
         self.HistoricalMonthlyCum = (self.HistoricalMonthly + 1).cumprod()
 
-    def _setFinViz(self):
-        self._fin_viz_engine = FinVizEngine(self.Ticker)
+    def _setFinViz(self, a_ticker: str = 'TD'):
+        self._fin_viz_engine = FinVizEngine(a_ticker)
         self.FvCompanyName = self._fin_viz_engine.StockName
         self.FvCompanySector = self._fin_viz_engine.StockSector
         self.FvCompanyIndustry = self._fin_viz_engine.StockIndustry
@@ -262,8 +250,8 @@ class YahooStockOption(AbstractStockOption):
         self.FvDividend = self._fin_viz_engine.Dividend
         self.FvDividendPercent = self._fin_viz_engine.DividendPcnt
 
-    def _setYahooFinance(self):
-        self._y_finance_engine = YahooFinanceEngine(self.Ticker)
+    def _setYahooFinance(self, a_ticker: str = 'TD'):
+        self._y_finance_engine = YahooFinanceEngine(a_ticker)
         self.YeUrl = self._y_finance_engine.Url
         self.YeLogoUrl = self._y_finance_engine.LogoUrl
         self.YeAddress = self._y_finance_engine.Address
@@ -296,8 +284,8 @@ class YahooStockOption(AbstractStockOption):
         self.YePriceToBook = self._y_finance_engine.PriceToBook
         self.YeExDividendDate = self._y_finance_engine.ExDividendDate
 
-    def _setYahooSummary(self):
-        self._yahooSummaryScrapper = YahooSummaryScrapper(self.Ticker)
+    def _setYahooSummary(self, a_ticker: str = 'TD'):
+        self._yahooSummaryScrapper = YahooSummaryScrapper(a_ticker)
         self._yahooSummaryScrapper.ParseBody()
         self.YssPeRatio = self._yahooSummaryScrapper.PEratio
         self.YssMarketCap = self._yahooSummaryScrapper.MarketCap
@@ -315,71 +303,3 @@ class YahooStockOption(AbstractStockOption):
         S_t = s_0 * np.exp((mu - 0.5 * sigma ** 2) * time_steps + sigma * W)
         S_t = np.insert(S_t, 0, s_0, axis=1)
         return S_t
-
-    def _setDataPrediction(self):
-        #into the future
-        self.ForecastSpan = 30
-        #TREE
-        '''decisionTreePredictor: DecisionTreePredictor =\
-            DecisionTreePredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
-        self.HistoricalTreeRegScore = decisionTreePredictor.GetScore()
-        print('TREE confidence', self.HistoricalTreeRegScore)
-        #TREE predict n days
-        self.HistoricalTreeRegPrediction = decisionTreePredictor.GetPrediction()
-        print(self.HistoricalTreeRegPrediction.shape[0])
-        decisionTreePredictor.Plot().show()
-        #LIN
-        linearPredictor: LinearPredictor =\
-            LinearPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
-        self.HistoricalLinRegScore = linearPredictor.GetScore()
-        print('LINEAR confidence', self.HistoricalLinRegScore)
-        #LIN predict n days
-        self.HistoricalLinRegPrediction = linearPredictor.GetPrediction()
-        print(self.HistoricalLinRegPrediction.shape[0])
-        linearPredictor.Plot().show()
-        #SVR_LIN
-        linearSvrPredictor: LinearSvrPredictor =\
-            LinearSvrPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
-        self.HistoricalSVRLinearScore = linearSvrPredictor.GetScore()
-        print('SVR_LIN confidence', self.HistoricalSVRLinearScore)
-        #SVR_LIN predict n days
-        self.HistoricalSVRLinearPrediction = linearSvrPredictor.GetPrediction()
-        print(self.HistoricalSVRLinearPrediction.shape[0])
-        linearSvrPredictor.Plot().show()
-        #SVR_POLY
-        polySvrPredictor: PolySvrPredictor =\
-            PolySvrPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
-        self.HistoricalSVRPolyScore = polySvrPredictor.GetScore()
-        print('SVR_POLY confidence', self.HistoricalSVRPolyScore)
-        #SVR_POLY predict n days
-        self.HistoricalSVRPolyPrediction = polySvrPredictor.GetPrediction()
-        print(self.HistoricalSVRPolyPrediction.shape[0])
-        polySvrPredictor.Plot().show()
-        #SVR_RBF
-        rbfSvrPredictor: RbfSvrPredictor =\
-            RbfSvrPredictor(self.ForecastSpan, self.SourceColumn, self.HistoricalData)
-        self.HistoricalSVRRbfScore = rbfSvrPredictor.GetScore()
-        print('SVR_RBF confidence', self.HistoricalSVRRbfScore)
-        #SVR_RBF predict n days
-        self.HistoricalSVRRbfPrediction = rbfSvrPredictor.GetPrediction()
-        print(self.HistoricalSVRRbfPrediction.shape[0])
-        rbfSvrPredictor.Plot().show()
-        #
-        training_len: int = math.ceil(self.HistoricalScaled.shape[0] * 0.8)
-        print(training_len)
-        scaled_data = self.HistoricalScaled
-        train_data = scaled_data[0:training_len, :]
-        X_train = []
-        Y_train = []
-        for i in range(60, len(train_data)):
-            X_train.append(train_data[i-60:i, 0])
-            Y_train.append(train_data[i, 0])
-        X_train, Y_train = np.array(X_train), np.array(Y_train)
-        X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 1))
-        #LSTM model
-        model = Sequential()
-        model.add(LSTM(50, return_sequences=True, input_shape=(X_train.shape[1], 1)))
-        model.add(LSTM(50, return_sequences=False))
-        model.add(Dense(25))
-        model.add(Dense(1))
-        exit(-111)'''
