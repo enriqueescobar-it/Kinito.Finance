@@ -48,6 +48,8 @@ class YahooStockOption(AbstractStockOption):
     HistoricalMarketIndex: AbstractStockMarketIndex
     HistoricalMonthly: pd.DataFrame
     HistoricalMonthlyCum: pd.core.series.Series
+    HistoricalWeekly: pd.DataFrame
+    HistoricalWeeklyCum: pd.core.series.Series
     RMSE: float = -1.1
     Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
@@ -103,8 +105,7 @@ class YahooStockOption(AbstractStockOption):
         self.HistoricalLogReturns = self._setLogReturns(self.HistoricalData)
         self.HistoricalLogReturns = self._setLogReturnsPlus(self.HistoricalLogReturns)
         self._setDataDaily(self.HistoricalData)
-        a_df = self.HistoricalData[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
-        print('W', a_df)
+        self._setDataWeekly(self.HistoricalData)
         self._setDataMonthly(self.HistoricalData)
         a_df = self.HistoricalData[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
         print('Q', a_df)
@@ -222,6 +223,10 @@ class YahooStockOption(AbstractStockOption):
     def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.HistoricalDaily = a_df[self.SourceColumn].pct_change().to_frame()
         self.HistoricalDailyCum = (self.HistoricalDaily + 1).cumprod()
+
+    def _setDataWeekly(self, a_df: pd.DataFrame = pd.DataFrame()):
+        self.HistoricalWeekly = a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
+        self.HistoricalWeeklyCum = (self.HistoricalWeekly + 1).cumprod()
 
     def _setDataMonthly(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.HistoricalMonthly = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
