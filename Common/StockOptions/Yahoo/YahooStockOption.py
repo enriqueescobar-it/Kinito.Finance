@@ -52,7 +52,6 @@ class YahooStockOption(AbstractStockOption):
     HistoricalNormL1: pd.DataFrame
     HistoricalBinary: pd.DataFrame
     HistoricalSparse: pd.DataFrame
-    HistoricalScaled: pd.DataFrame
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
     HistoricalLinRegScore: float = -1.1
@@ -122,8 +121,7 @@ class YahooStockOption(AbstractStockOption):
         self.Data['Binary'] = self.HistoricalBinary[self.SourceColumn]
         self.HistoricalSparse = self._setSparser(self.HistoricalData)
         self.Data['Sparse'] = self.HistoricalSparse[self.SourceColumn]
-        self.HistoricalScaled = self._setScaler(self.HistoricalData)
-        self.Data['Scaled'] = self.HistoricalScaled[self.SourceColumn]
+        self.Data['Scaled'] = self._setScaler(self.HistoricalData)
         #exit(-111)
         self.HistoricalSimpleReturns = self._setSimpleReturns(self.HistoricalData)
         self._setSimpleReturnsPlus()
@@ -172,7 +170,7 @@ class YahooStockOption(AbstractStockOption):
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
-        return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)
+        return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)[self.SourceColumn]
 
     def _setSimpleReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return a_df[self.SourceColumn].pct_change().to_frame()
