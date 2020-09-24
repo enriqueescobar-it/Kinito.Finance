@@ -23,6 +23,8 @@ class HistoricalPlotter(AbstractPlotter):
     _dataMonthlyCum: Series
     _dataQuarterly: DataFrame
     _dataQuarterlyCum: Series
+    _dataAnnually: DataFrame
+    _dataAnnuallyCum: Series
     _mean: ndarray
     _median: ndarray
     _std: ndarray
@@ -62,6 +64,8 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataMonthlyCum = stock_option.HistoricalMonthlyCum
         self._dataQuarterly = stock_option.HistoricalQuarterly
         self._dataQuarterlyCum = stock_option.HistoricalQuarterlyCum
+        self._dataAnnually = stock_option.HistoricalAnnually
+        self._dataAnnuallyCum = stock_option.HistoricalAnnuallyCum
         self._mean = np.mean(stock_option.HistoricalData[self.__Col])
         self._mean = np.round(self._mean, 2)
         self._median = np.median(stock_option.HistoricalData[self.__Col])
@@ -380,6 +384,9 @@ class HistoricalPlotter(AbstractPlotter):
     def Quarterly(self):
         return self.__plotPeriod(self._dataQuarterly, 'Quarterly')
 
+    def Annually(self):
+        return self.__plotPeriod(self._dataAnnually, 'Annually')
+
     def DailyCum(self):
         return self.__plotPeriodCum(self._dataDailyCum, 'Daily')
 
@@ -391,6 +398,9 @@ class HistoricalPlotter(AbstractPlotter):
 
     def QuarterlyCum(self):
         return self.__plotPeriodCum(self._dataQuarterlyCum, 'Quarterly')
+
+    def AnnuallyCum(self):
+        return self.__plotPeriodCum(self._dataAnnuallyCum, 'Annually')
 
     def DailyHist(self):
         return self.__plotHist(self._dataDaily, 'Daily')
@@ -409,3 +419,6 @@ class HistoricalPlotter(AbstractPlotter):
 
     def PlotQuarterly(self):
         return self.__newPlot(self._dataQuarterly, self._dataQuarterlyCum, 'Quarterly')
+
+    def PlotAnnually(self):
+        return self.__newPlot(self._dataAnnually, self._dataAnnuallyCum, 'Annually')

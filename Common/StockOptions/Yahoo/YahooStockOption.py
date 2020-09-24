@@ -43,6 +43,8 @@ class YahooStockOption(AbstractStockOption):
     HistoricalData: pd.DataFrame
     HistoricalSimpleReturns: pd.DataFrame
     HistoricalLogReturns: pd.DataFrame
+    HistoricalAnnually: pd.DataFrame
+    HistoricalAnnuallyCum: pd.core.series.Series
     HistoricalDaily: pd.DataFrame
     HistoricalDailyCum: pd.core.series.Series
     HistoricalMarketIndex: AbstractStockMarketIndex
@@ -110,8 +112,7 @@ class YahooStockOption(AbstractStockOption):
         self._setDataWeekly(self.HistoricalData)
         self._setDataMonthly(self.HistoricalData)
         self._setDataQuarterly(self.HistoricalData)
-        a_df = self.HistoricalData[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
-        print('A', a_df)
+        self._setDataAnnually(self.HistoricalData)
         self._setFinViz(a_ticker)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
@@ -236,6 +237,10 @@ class YahooStockOption(AbstractStockOption):
     def _setDataQuarterly(self, a_df: pd.DataFrame = pd.DataFrame()):
         self.HistoricalQuarterly = a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
         self.HistoricalQuarterlyCum = (self.HistoricalQuarterly + 1).cumprod()
+
+    def _setDataAnnually(self, a_df: pd.DataFrame = pd.DataFrame()):
+        self.HistoricalAnnually = a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
+        self.HistoricalAnnuallyCum = (self.HistoricalAnnually + 1).cumprod()
 
     def _setFinViz(self, a_ticker: str = 'TD'):
         self._fin_viz_engine = FinVizEngine(a_ticker)

@@ -104,6 +104,7 @@ yahooStockOptionPlotter.PlotWeekly().show()
 #yahooStockOptionPlotter.MonthlyHist().show()
 yahooStockOptionPlotter.PlotMonthly().show()
 yahooStockOptionPlotter.PlotQuarterly().show()
+yahooStockOptionPlotter.PlotAnnually().show()
 # preprocessing
 ## Mean removal
 print('MEAN=', yahooStockOption.Data.Sparse.mean(axis=0))
