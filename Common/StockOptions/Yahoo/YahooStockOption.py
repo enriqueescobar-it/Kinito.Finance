@@ -109,15 +109,15 @@ class YahooStockOption(AbstractStockOption):
         self.DataLogReturns = self._setLogReturns(self.HistoricalData)
         self.DataLogReturns = self._setLogReturnsPlus(self.DataLogReturns)
         self.SimpleDaily = self._setSimpleReturns('', self.HistoricalData)
-        self.SimplyDailyCum = self._setDataDaily(self.SimpleDaily)
+        self.SimplyDailyCum = self._setSimpleCumulative(self.SimpleDaily)
         self.SimpleWeekly = self._setSimpleReturns('W', self.HistoricalData)
-        self._setDataWeekly(self.SimpleWeekly)
+        self.SimpleWeeklyCum = self._setSimpleCumulative(self.SimpleWeekly)
         self.SimpleMonthly = self._setSimpleReturns('M', self.HistoricalData)
-        self._setDataMonthly(self.SimpleMonthly)
+        self.SimpleMonthlyCum = self._setSimpleCumulative(self.SimpleMonthly)
         self.SimpleQuarterly = self._setSimpleReturns('Q', self.HistoricalData)
-        self._setDataQuarterly(self.SimpleQuarterly)
+        self.SimpleQuarterlyCum = self._setSimpleCumulative(self.SimpleQuarterly)
         self.SimpleAnnually = self._setSimpleReturns('A', self.HistoricalData)
-        self._setDataAnnually(self.SimpleAnnually)
+        self.SimpleAnnuallyCum = self._setSimpleCumulative(self.SimpleAnnually)
         self._setFinViz(a_ticker)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
@@ -236,20 +236,8 @@ class YahooStockOption(AbstractStockOption):
         a_df['MovingStd21'] = a_df[self.SourceColumn].rolling(window=21).std().to_frame()
         return a_df
 
-    def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.Series:
+    def _setSimpleCumulative(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.Series:
         return (a_df + 1).cumprod()
-
-    def _setDataWeekly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleWeeklyCum = (a_df + 1).cumprod()
-
-    def _setDataMonthly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleMonthlyCum = (a_df + 1).cumprod()
-
-    def _setDataQuarterly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleQuarterlyCum = (a_df + 1).cumprod()
-
-    def _setDataAnnually(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleAnnuallyCum = (a_df + 1).cumprod()
 
     def _setFinViz(self, a_ticker: str = 'TD'):
         self._fin_viz_engine = FinVizEngine(a_ticker)
