@@ -103,7 +103,7 @@ class YahooStockOption(AbstractStockOption):
         self.Data['Binary'] = self._setBinarizer(self.HistoricalData)
         self.Data['Sparse'] = self._setSparser(self.HistoricalData)
         self.Data['Scaled'] = self._setScaler(self.HistoricalData)
-        self.DataSimpleReturns = self._setSimpleReturns(self.HistoricalData)
+        self.DataSimpleReturns = self._setSimpleReturns('', self.HistoricalData)
         self.DataSimpleReturns = self._setSimpleReturnsPlus(self.DataSimpleReturns)
         self.Data['IsOutlier'] = self.DataSimpleReturns.IsOutlier.astype(bool)
         self.DataLogReturns = self._setLogReturns(self.HistoricalData)
@@ -157,8 +157,17 @@ class YahooStockOption(AbstractStockOption):
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
         return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)[self.SourceColumn]
 
-    def _setSimpleReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return a_df[self.SourceColumn].pct_change().to_frame()
+    def _setSimpleReturns(self, a_letter: str = '', a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        if a_letter == 'W':
+            return a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
+        elif a_letter == 'M':
+            return a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
+        elif a_letter == 'Q':
+            return a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
+        elif a_letter == 'A':
+            return a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
+        else:
+            return a_df[self.SourceColumn].pct_change().to_frame()
 
     def _setSimpleReturnsPlus(self, simple_returns: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         df_rolling = simple_returns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
@@ -223,23 +232,23 @@ class YahooStockOption(AbstractStockOption):
         return a_df
 
     def _setDataDaily(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleDaily = a_df[self.SourceColumn].pct_change().to_frame()
+        self.SimpleDaily = self._setSimpleReturns('', a_df)
         self.SimplyDailyCum = (self.SimpleDaily + 1).cumprod()
 
     def _setDataWeekly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleWeekly = a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
+        self.SimpleWeekly = self._setSimpleReturns('W', a_df)
         self.SimpleWeeklyCum = (self.SimpleWeekly + 1).cumprod()
 
     def _setDataMonthly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleMonthly = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
+        self.SimpleMonthly = self._setSimpleReturns('M', a_df)
         self.SimpleMonthlyCum = (self.SimpleMonthly + 1).cumprod()
 
     def _setDataQuarterly(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleQuarterly = a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
+        self.SimpleQuarterly = self._setSimpleReturns('Q', a_df)
         self.SimpleQuarterlyCum = (self.SimpleQuarterly + 1).cumprod()
 
     def _setDataAnnually(self, a_df: pd.DataFrame = pd.DataFrame()):
-        self.SimpleAnnually = a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
+        self.SimpleAnnually = self._setSimpleReturns('A', a_df)
         self.SimpleAnnuallyCum = (self.SimpleAnnually + 1).cumprod()
 
     def _setFinViz(self, a_ticker: str = 'TD'):
