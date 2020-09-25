@@ -1,9 +1,7 @@
 from typing import List
+from statistics import mean
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from pyarrow.lib import null
-import math
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
@@ -11,11 +9,8 @@ from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockMarketIndex import AbstractStockMarketIndex
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
-#For Prediction
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
-from sklearn import svm
-from sklearn.model_selection import train_test_split
 from sklearn.svm import SVR
 
 
@@ -54,6 +49,16 @@ class YahooStockOption(AbstractStockOption):
     SimpleQuarterlyCum: pd.Series
     SimpleWeekly: pd.DataFrame
     SimpleWeeklyCum: pd.Series
+    SimpleDailyReturnAvg: float = -1.1
+    SimpleWeeklyReturnAvg: float = -1.1
+    SimpleMonthlyReturnAvg: float = -1.1
+    SimpleQuarterlyReturnAvg: float = -1.1
+    SimpleAnnuallyReturnAvg: float = -1.1
+    IsDaily: bool = False
+    IsWeekly: bool = False
+    IsMonthly: bool = False
+    IsQuarterly: bool = False
+    IsAnnually: bool = False
     RMSE: float = -1.1
     Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
@@ -110,14 +115,28 @@ class YahooStockOption(AbstractStockOption):
         self.DataLogReturns = self._setLogReturnsPlus(self.DataLogReturns)
         self.SimpleDaily = self._setSimpleReturns('', self.HistoricalData)
         self.SimplyDailyCum = self._setSimpleCumulative(self.SimpleDaily)
+        self.SimpleDailyReturnAvg = self._setSimpleReturnAverage(self.SimplyDailyCum)
+        print('self.SimpleDailyReturnAvg', self.SimpleDailyReturnAvg)
         self.SimpleWeekly = self._setSimpleReturns('W', self.HistoricalData)
         self.SimpleWeeklyCum = self._setSimpleCumulative(self.SimpleWeekly)
+        self.SimpleWeeklyReturnAvg = self._setSimpleReturnAverage(self.SimpleWeeklyCum)
+        print('self.SimpleWeeklyReturnAvg', self.SimpleWeeklyReturnAvg)
         self.SimpleMonthly = self._setSimpleReturns('M', self.HistoricalData)
         self.SimpleMonthlyCum = self._setSimpleCumulative(self.SimpleMonthly)
+        self.SimpleMonthlyReturnAvg = self._setSimpleReturnAverage(self.SimpleMonthlyCum)
+        print('self.SimpleMonthlyReturnAvg', self.SimpleMonthlyReturnAvg)
         self.SimpleQuarterly = self._setSimpleReturns('Q', self.HistoricalData)
         self.SimpleQuarterlyCum = self._setSimpleCumulative(self.SimpleQuarterly)
+        self.SimpleQuarterlyReturnAvg = self._setSimpleReturnAverage(self.SimpleQuarterlyCum)
+        print('self.SimpleQuarterlyReturnAvg', self.SimpleQuarterlyReturnAvg)
         self.SimpleAnnually = self._setSimpleReturns('A', self.HistoricalData)
         self.SimpleAnnuallyCum = self._setSimpleCumulative(self.SimpleAnnually)
+        self.SimpleAnnuallyReturnAvg = self._setSimpleReturnAverage(self.SimpleAnnuallyCum)
+        print('self.SimpleAnnuallyReturnAvg', self.SimpleAnnuallyReturnAvg)
+        (self.IsDaily, self.IsWeekly, self.IsMonthly, self.IsQuarterly, self.IsAnnually) =\
+            self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
+                          self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg,
+                          self.SimpleAnnuallyReturnAvg)
         self._setFinViz(a_ticker)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
@@ -315,3 +334,13 @@ class YahooStockOption(AbstractStockOption):
         S_t = s_0 * np.exp((mu - 0.5 * sigma ** 2) * time_steps + sigma * W)
         S_t = np.insert(S_t, 0, s_0, axis=1)
         return S_t
+
+    def _setSimpleReturnAverage(self, a_series: pd.Series = pd.Series()) -> float:
+        a_series = a_series.dropna()
+        return round(100 * a_series.mean()[0], 2)
+
+    def _setIsTimely(self, day_avg: float, week_avg: float, month_avg: float, quarter_avg: float,
+                     annual_avg: float):
+        a_mean: float = round((day_avg + week_avg + month_avg + quarter_avg + annual_avg)/5, 2)
+        return (day_avg >= a_mean, week_avg >= a_mean, month_avg >= a_mean, quarter_avg >= a_mean,
+                annual_avg >= a_mean)
