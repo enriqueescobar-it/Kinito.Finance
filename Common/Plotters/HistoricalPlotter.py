@@ -67,13 +67,42 @@ class HistoricalPlotter(AbstractPlotter):
         self._time_span = stock_option.TimeSpan
         self._stockOption = stock_option
 
-    def __GetRankRange(self, a_df: DataFrame):
-        return np.linspace(min(a_df[self._col]), max(a_df[self._col]), num=1000)
+    def Plot(self):
+        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+        x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
+        plt.style.use('seaborn')
+        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
+        # ax0
+        self._data_frame[self._col].plot(ax=ax[0])
+        ax[0].set(ylabel='Stock price ($)', title=a_title)
+        # ax1
+        self._dataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
+        ax[1].scatter(self._dataSimpleReturns.index, self._dataSimpleReturns['Outliers'], color='red', label='Anomaly')
+        ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
+        ax[1].legend(loc=self._legend_place)
+        # ax2
+        self._dataLogReturns[self._col].plot(ax=ax[2])
+        ax[2].set(ylabel='Log returns (%)')
+        # ax3
+        self._dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
+        self._dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
+        ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
+        ax[3].legend(loc=self._legend_place)
+        plt.tight_layout()
+        return plt
 
-    def __GetProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
-        return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
+    def GraphPlot(self):
+        a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
+        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+        fig, ax = plt.subplots(1, 2, figsize=(a_float, a_float), sharey=True)
+        fig.suptitle(a_title)
+        plt.style.use('seaborn')
+        self._getDataPlot(ax[0])
+        self._getDataDistro(ax[1])
+        plt.tight_layout()
+        return plt
 
-    def __plot(self, ax: object):
+    def _getDataPlot(self, ax: object):
         '''
         fig, ax = plt.subplots()
         -ax.plot(x, y)
@@ -120,7 +149,7 @@ class HistoricalPlotter(AbstractPlotter):
         # ax.axis('tight')
         return ax
 
-    def __plotDistro(self, ax: object):
+    def _getDataDistro(self, ax: object):
         plus1sd = np.round(self._mean + self._std, 2)
         plus2sd = np.round(self._mean + 2 * self._std, 2)
         minus1sd = np.round(self._mean - self._std, 2)
@@ -152,28 +181,76 @@ class HistoricalPlotter(AbstractPlotter):
         # ax.axis('tight')
         return ax
 
-    def __newPeriodDist(self, an_ax, a_df: DataFrame, period_str: str):
-        r_range: ndarray = self.__GetRankRange(a_df)
-        mu: float = a_df[self._col].mean()
-        sigma: float = a_df[self._col].std()
-        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
-        sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=an_ax)
-        an_ax.set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
-        an_ax.plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
-        an_ax.legend(loc=self._legend_place)
-        plt.tight_layout()
-        return an_ax
+    def Daily(self):
+        return self.__plotPeriod(self._dataDaily, 'Daily')
 
-    def __newPeriodQqPlot(self, an_ax, a_df: DataFrame, period_str: str):
-        sm.qqplot(a_df[self._col].values, line='q', ax=an_ax)
-        an_ax.set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
-        return an_ax
+    def Weekly(self):
+        return self.__plotPeriod(self._dataWeekly, 'Weekly')
+
+    def Monthly(self):
+        return self.__plotPeriod(self._dataMonthly, 'Monthly')
+
+    def Quarterly(self):
+        return self.__plotPeriod(self._dataQuarterly, 'Quarterly')
+
+    def Annually(self):
+        return self.__plotPeriod(self._dataAnnually, 'Annually')
+
+    def __plotPeriod(self, a_df: DataFrame, period_str: str = 'Daily'):
+        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(self._time_span.MonthCount) + ' months'
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.plot(a_df, label=self._col)
+        plt.title(a_title)
+        plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
+        plt.ylabel(self._col + ' Percent Base=1')
+        plt.legend(loc=self._legend_place)
+        return plt
+
+    def DailyCum(self):
+        return self.__plotPeriodCum(self._dataDailyCum, 'Daily')
+
+    def WeeklyCum(self):
+        return self.__plotPeriodCum(self._dataWeeklyCum, 'Weekly')
+
+    def MonthlyCum(self):
+        return self.__plotPeriodCum(self._dataMonthlyCum, 'Monthly')
+
+    def QuarterlyCum(self):
+        return self.__plotPeriodCum(self._dataQuarterlyCum, 'Quarterly')
+
+    def AnnuallyCum(self):
+        return self.__plotPeriodCum(self._dataAnnuallyCum, 'Annually')
+
+    def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
+        modelDailyDrop = a_df[self._col].dropna()
+        modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
+        modelDailyFitted = modelDailyModel.fit(disp='off')
+        # modelDailyFitted.plot(annualize='D')
+        avg_return = 100 * modelDailyDrop.mean()
+        avg_return_str: str = f'{avg_return:.2f}%'
+        print(f'Average return {a_period}: {100 * modelDailyDrop.mean():.2f}%')
+        a_title: str = f'{self._ticker} {self._col} ({avg_return_str}) Cumulative {a_period} Returns {self._time_span.MonthCount} months'
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
+        plt.tight_layout()
+        plt.plot(a_df, label=self._col)
+        plt.title(a_title)
+        plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
+        plt.ylabel(self._col + ' 1$ Growth Invested')
+        plt.legend(loc=self._legend_place)
+        return plt
+
+    def DailyHist(self):
+        return self.__plotHist(self._dataDaily, 'Daily')
+
+    def MonthlyHist(self):
+        return self.__plotHist(self._dataMonthly, 'Monthly')
 
     def __plotHist(self, a_df: DataFrame, timely: str = 'Daily'):
-        r_range: ndarray = self.__GetRankRange(a_df)
+        r_range: ndarray = self._getRankRange(a_df)
         mu: float = a_df[self._col].mean()
         sigma: float = a_df[self._col].std()
-        norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
+        norm_pdf: ndarray = self._getProbabilityDensityFunction(r_range, mu, sigma)
         # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # plt.tight_layout()
         fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
@@ -192,106 +269,26 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
         return plt
 
-    def Plot(self):
-        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
-        x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
-        plt.style.use('seaborn')
-        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
-        # ax0
-        self._data_frame[self._col].plot(ax=ax[0])
-        ax[0].set(ylabel='Stock price ($)', title=a_title)
-        # ax1
-        self._dataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
-        ax[1].scatter(self._dataSimpleReturns.index, self._dataSimpleReturns['Outliers'], color='red', label='Anomaly')
-        ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
-        ax[1].legend(loc=self._legend_place)
-        # ax2
-        self._dataLogReturns[self._col].plot(ax=ax[2])
-        ax[2].set(ylabel='Log returns (%)')
-        # ax3
-        self._dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
-        self._dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
-        ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
-        ax[3].legend(loc=self._legend_place)
-        plt.tight_layout()
-        return plt
+    def _getRankRange(self, a_df: DataFrame):
+        return np.linspace(min(a_df[self._col]), max(a_df[self._col]), num=1000)
 
-    def PlotForecast(self):
-        forecast_df: DataFrame = self._data_frame[self.__dataXarray.shape[0]:]
-        title: str = ' Model '
-        x_label: str = 'Days'
-        label: str = 'Predictions'
-        #
-        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.title('Tree Regression Prediction' + title + 'Score=' + str(self.__dataTreeRegScore))
-        plt.xlabel(x_label)
-        plt.ylabel(self._col)
-        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
-        plt.plot(self._data_frame[self._col])
-        forecast_df[label] = self.__dataTreeRegPrediction
-        plt.plot(forecast_df[[self._col, label]])
-        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
-        plt.show()
-        #
-        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.title('Linear Regression Prediction' + title + 'Score=' + str(self.__dataLinearRegScore))
-        plt.xlabel(x_label)
-        plt.ylabel(self._col)
-        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
-        plt.plot(self._data_frame[self._col])
-        forecast_df[label] = self.__dataLinearRegPrediction
-        plt.plot(forecast_df[[self._col, label]])
-        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
-        plt.show()
-        #
-        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.title('SVR Linear Regression Prediction' + title + 'Score=' + str(self.__dataSVRLinearScore))
-        plt.xlabel(x_label)
-        plt.ylabel(self._col)
-        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
-        plt.plot(self._data_frame[self._col])
-        forecast_df[label] = self.__dataSVRLinearPrediction
-        plt.plot(forecast_df[[self._col, label]])
-        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
-        plt.show()
-        #
-        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.title('SVR Polynomial Regression Prediction' + title + 'Score=' + str(self.__dataSVRPolyScore))
-        plt.xlabel(x_label)
-        plt.ylabel(self._col)
-        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
-        plt.plot(self._data_frame[self._col])
-        forecast_df[label] = self.__dataSVRPolyPrediction
-        plt.plot(forecast_df[[self._col, label]])
-        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
-        plt.show()
-        #
-        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.title('SVR RBF Regression Prediction' + title + 'Score=' + str(self.__dataSVRrbfScore))
-        plt.xlabel(x_label)
-        plt.ylabel(self._col)
-        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
-        plt.plot(self._data_frame[self._col])
-        forecast_df[label] = self.__dataSVRrbfPrediction
-        plt.plot(forecast_df[[self._col, label]])
-        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
-        return plt
+    def _getProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
+        return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
 
-    def GraphPlot(self):
-        a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
-        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
-        fig, ax = plt.subplots(1, 2, figsize=(a_float, a_float), sharey=True)
-        fig.suptitle(a_title)
-        plt.style.use('seaborn')
-        self.__plot(ax[0])
-        self.__plotDistro(ax[1])
-        plt.tight_layout()
-        return plt
+    def PlotDaily(self):
+        return self.__newPlot(self._dataDaily, self._dataDailyCum, 'Daily')
+
+    def PlotWeekly(self):
+        return self.__newPlot(self._dataWeekly, self._dataWeeklyCum, 'Weekly')
+
+    def PlotMonthly(self):
+        return self.__newPlot(self._dataMonthly, self._dataMonthlyCum, 'Monthly')
+
+    def PlotQuarterly(self):
+        return self.__newPlot(self._dataQuarterly, self._dataQuarterlyCum, 'Quarterly')
+
+    def PlotAnnually(self):
+        return self.__newPlot(self._dataAnnually, self._dataAnnuallyCum, 'Annually')
 
     def __newPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(self._time_span.MonthCount) + ' months'
@@ -317,17 +314,6 @@ class HistoricalPlotter(AbstractPlotter):
         an_ax.set(ylabel=self._col + ' Percent Base=1')
         return an_ax
 
-    def __plotPeriod(self, a_df: DataFrame, period_str: str = 'Daily'):
-        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(self._time_span.MonthCount) + ' months'
-        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
-        plt.tight_layout()
-        plt.plot(a_df, label=self._col)
-        plt.title(a_title)
-        plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
-        plt.ylabel(self._col + ' Percent Base=1')
-        plt.legend(loc=self._legend_place)
-        return plt
-
     def __newPeriodCum(self, an_ax, a_df: DataFrame, a_period: str):
         modelDailyDrop = a_df[self._col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
@@ -343,71 +329,19 @@ class HistoricalPlotter(AbstractPlotter):
         an_ax.set(ylabel=self._col + ' 1$ Growth Invested')
         return an_ax
 
-    def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
-        modelDailyDrop = a_df[self._col].dropna()
-        modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
-        modelDailyFitted = modelDailyModel.fit(disp='off')
-        # modelDailyFitted.plot(annualize='D')
-        avg_return = 100 * modelDailyDrop.mean()
-        avg_return_str: str = f'{avg_return:.2f}%'
-        print(f'Average return {a_period}: {100 * modelDailyDrop.mean():.2f}%')
-        a_title: str = f'{self._ticker} {self._col} ({avg_return_str}) Cumulative {a_period} Returns {self._time_span.MonthCount} months'
-        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
+    def __newPeriodDist(self, an_ax, a_df: DataFrame, period_str: str):
+        r_range: ndarray = self._getRankRange(a_df)
+        mu: float = a_df[self._col].mean()
+        sigma: float = a_df[self._col].std()
+        norm_pdf: ndarray = self._getProbabilityDensityFunction(r_range, mu, sigma)
+        sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=an_ax)
+        an_ax.set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
+        an_ax.plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
+        an_ax.legend(loc=self._legend_place)
         plt.tight_layout()
-        plt.plot(a_df, label=self._col)
-        plt.title(a_title)
-        plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
-        plt.ylabel(self._col + ' 1$ Growth Invested')
-        plt.legend(loc=self._legend_place)
-        return plt
+        return an_ax
 
-    def Daily(self):
-        return self.__plotPeriod(self._dataDaily, 'Daily')
-
-    def Weekly(self):
-        return self.__plotPeriod(self._dataWeekly, 'Weekly')
-
-    def Monthly(self):
-        return self.__plotPeriod(self._dataMonthly, 'Monthly')
-
-    def Quarterly(self):
-        return self.__plotPeriod(self._dataQuarterly, 'Quarterly')
-
-    def Annually(self):
-        return self.__plotPeriod(self._dataAnnually, 'Annually')
-
-    def DailyCum(self):
-        return self.__plotPeriodCum(self._dataDailyCum, 'Daily')
-
-    def WeeklyCum(self):
-        return self.__plotPeriodCum(self._dataWeeklyCum, 'Weekly')
-
-    def MonthlyCum(self):
-        return self.__plotPeriodCum(self._dataMonthlyCum, 'Monthly')
-
-    def QuarterlyCum(self):
-        return self.__plotPeriodCum(self._dataQuarterlyCum, 'Quarterly')
-
-    def AnnuallyCum(self):
-        return self.__plotPeriodCum(self._dataAnnuallyCum, 'Annually')
-
-    def DailyHist(self):
-        return self.__plotHist(self._dataDaily, 'Daily')
-
-    def MonthlyHist(self):
-        return self.__plotHist(self._dataMonthly, 'Monthly')
-
-    def PlotDaily(self):
-        return self.__newPlot(self._dataDaily, self._dataDailyCum, 'Daily')
-
-    def PlotWeekly(self):
-        return self.__newPlot(self._dataWeekly, self._dataWeeklyCum, 'Weekly')
-
-    def PlotMonthly(self):
-        return self.__newPlot(self._dataMonthly, self._dataMonthlyCum, 'Monthly')
-
-    def PlotQuarterly(self):
-        return self.__newPlot(self._dataQuarterly, self._dataQuarterlyCum, 'Quarterly')
-
-    def PlotAnnually(self):
-        return self.__newPlot(self._dataAnnually, self._dataAnnuallyCum, 'Annually')
+    def __newPeriodQqPlot(self, an_ax, a_df: DataFrame, period_str: str):
+        sm.qqplot(a_df[self._col].values, line='q', ax=an_ax)
+        an_ax.set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
+        return an_ax

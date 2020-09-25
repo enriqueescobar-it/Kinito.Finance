@@ -25,10 +25,10 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('IPO')
+yahooStockOption: YahooStockOption = YahooStockOption('INTC')
 # CLX UNP PM JNJ HD AMGN PRU TROW TXN NVEI.TO
-# CAG BYND CHD NET NLOK JNPR INTC RUN REGI TRMB RBA CGNX ROK
-#YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA MSFT
+# CAG BYND CHD NET NLOK JNPR TRMB
+#YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
 #ETFs:ARKK TEC.TO, VFV and ACES XEI ARKF QQC-f ZQQ XIT HQU SOXL QQQ HZU JNUG FIE BRTXQ
@@ -40,10 +40,10 @@ yahooStockOption: YahooStockOption = YahooStockOption('IPO')
 # BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
 #ETFs# BRTXQ FZILX FSRNX VTSAX FPE HPI
 # TFII LSPD T FTS RY SHOP
-# AAPL ABBV ACES AMT AMZN AQN ARKF ARKK AVAV BCE BPY BRK-B BRKA BRKB BRTXQ CCA CGO CM CNI COST CP CRM
+# AAPL ABBV ACES AMT AMZN AQN ARKF ARKK AVAV BCE BPY BRK-B BRKA BRKB BRTXQ CCA CGNX CGO CM CNI COST CP CRM
 # ENB FIE FROG FSRNX FSZ FTS FZILX FZROX
-# GNW GRWG HQU HZU IT JNUG KEY K KDP KL KO KR LMT LSPD MA MO MWK NKE NPI OTEX PPL QQC-f QQQ RCI RCI.B RY
-# SHOP SJR.B SNOW SOXL
+# GNW GRWG HQU HZU IPO IT JNUG KEY K KDP KL KO KR LMT LSPD MA MO MSFT MWK NKE NPI OTEX PPL QQC-f QQQ
+# RBA RCI RCI.B REGI ROK RUN RY SHOP SJR.B SNOW SOXL
 # T TD TEC.TO TFII U VDC VFV VGT VMW VNR VPU VTSAX VYM VZ WCN WELL WMT XEI XIT YCBD ZM ZQQ ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
 '''
@@ -95,7 +95,6 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
-#yahooStockOptionPlotter.PlotForecast().show()
 yahooStockOptionPlotter.GraphPlot().show()
 #yahooStockOptionPlotter.Daily().show()
 #yahooStockOptionPlotter.DailyCum().show()
