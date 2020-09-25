@@ -116,23 +116,18 @@ class YahooStockOption(AbstractStockOption):
         self.SimpleDaily = self._setSimpleReturns('', self.HistoricalData)
         self.SimplyDailyCum = self._setSimpleCumulative(self.SimpleDaily)
         self.SimpleDailyReturnAvg = self._setSimpleReturnAverage(self.SimplyDailyCum)
-        print('self.SimpleDailyReturnAvg', self.SimpleDailyReturnAvg)
         self.SimpleWeekly = self._setSimpleReturns('W', self.HistoricalData)
         self.SimpleWeeklyCum = self._setSimpleCumulative(self.SimpleWeekly)
         self.SimpleWeeklyReturnAvg = self._setSimpleReturnAverage(self.SimpleWeeklyCum)
-        print('self.SimpleWeeklyReturnAvg', self.SimpleWeeklyReturnAvg)
         self.SimpleMonthly = self._setSimpleReturns('M', self.HistoricalData)
         self.SimpleMonthlyCum = self._setSimpleCumulative(self.SimpleMonthly)
         self.SimpleMonthlyReturnAvg = self._setSimpleReturnAverage(self.SimpleMonthlyCum)
-        print('self.SimpleMonthlyReturnAvg', self.SimpleMonthlyReturnAvg)
         self.SimpleQuarterly = self._setSimpleReturns('Q', self.HistoricalData)
         self.SimpleQuarterlyCum = self._setSimpleCumulative(self.SimpleQuarterly)
         self.SimpleQuarterlyReturnAvg = self._setSimpleReturnAverage(self.SimpleQuarterlyCum)
-        print('self.SimpleQuarterlyReturnAvg', self.SimpleQuarterlyReturnAvg)
         self.SimpleAnnually = self._setSimpleReturns('A', self.HistoricalData)
         self.SimpleAnnuallyCum = self._setSimpleCumulative(self.SimpleAnnually)
         self.SimpleAnnuallyReturnAvg = self._setSimpleReturnAverage(self.SimpleAnnuallyCum)
-        print('self.SimpleAnnuallyReturnAvg', self.SimpleAnnuallyReturnAvg)
         (self.IsDaily, self.IsWeekly, self.IsMonthly, self.IsQuarterly, self.IsAnnually) =\
             self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
                           self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg,

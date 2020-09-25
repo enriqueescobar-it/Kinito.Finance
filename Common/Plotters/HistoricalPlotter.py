@@ -41,8 +41,8 @@ class HistoricalPlotter(AbstractPlotter):
         self._yeAverage50 = np.round(stock_option.YeAverage50, 2)
         self._yeAverage200 = np.round(stock_option.YeAverage200, 2)
         if stock_option.Source == 'yahoo':
-            self.__Col = "Adj Close"
-        self.__dataFrame = stock_option.HistoricalData
+            self._col = "Adj Close"
+        self._data_frame = stock_option.HistoricalData
         self._dataSimpleReturns = stock_option.DataSimpleReturns
         self._dataLogReturns = stock_option.DataLogReturns
         self._dataDaily = stock_option.SimpleDaily
@@ -55,20 +55,20 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataQuarterlyCum = stock_option.SimpleQuarterlyCum
         self._dataAnnually = stock_option.SimpleAnnually
         self._dataAnnuallyCum = stock_option.SimpleAnnuallyCum
-        self._mean = np.mean(stock_option.HistoricalData[self.__Col])
+        self._mean = np.mean(stock_option.HistoricalData[self._col])
         self._mean = np.round(self._mean, 2)
-        self._median = np.median(stock_option.HistoricalData[self.__Col])
+        self._median = np.median(stock_option.HistoricalData[self._col])
         self._median = np.round(self._median, 2)
-        self._std = np.std(stock_option.HistoricalData[self.__Col])
+        self._std = np.std(stock_option.HistoricalData[self._col])
         self._std = np.round(self._std, 2)
-        self.__src = stock_option.Source
-        self.__legendPlace = 'upper left'
-        self.__ticker = stock_option.Ticker
-        self.__timeSpan = stock_option.TimeSpan
+        self._src = stock_option.Source
+        self._legend_place = 'upper left'
+        self._ticker = stock_option.Ticker
+        self._time_span = stock_option.TimeSpan
         self._stockOption = stock_option
 
     def __GetRankRange(self, a_df: DataFrame):
-        return np.linspace(min(a_df[self.__Col]), max(a_df[self.__Col]), num=1000)
+        return np.linspace(min(a_df[self._col]), max(a_df[self._col]), num=1000)
 
     def __GetProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
         return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
@@ -92,18 +92,18 @@ class HistoricalPlotter(AbstractPlotter):
         plus2sd = np.round(self._mean + 2 * self._std, 2)
         minus1sd = np.round(self._mean - self._std, 2)
         minus2sd = np.round(self._mean - 2 * self._std, 2)
-        price_label: str = self.__Col + '_Price=' + str(self._price)
-        median_label: str = self.__Col + '_Median=' + str(self._median)
-        mean_label: str = self.__Col + '_Mean=' + str(self._mean)
+        price_label: str = self._col + '_Price=' + str(self._price)
+        median_label: str = self._col + '_Median=' + str(self._median)
+        mean_label: str = self._col + '_Mean=' + str(self._mean)
         high52_label: str = 'High52=' + str(self._yeHigh52)
         low52_label: str = 'Low52=' + str(self._yeLow52)
         mean200_label: str = 'Average200=' + str(self._yeAverage200)
         mean50_label: str = 'Average50=' + str(self._yeAverage50)
-        plus1_label: str = self.__Col + '_+1Std=' + str(plus1sd)
-        plus2_label: str = self.__Col + '_+2Std=' + str(plus2sd)
-        minus1_label: str = self.__Col + '_-1Std=' + str(minus1sd)
-        minus2_label: str = self.__Col + '_-2Std=' + str(minus2sd)
-        ax.plot(self.__dataFrame[self.__Col], label=self.__Col)
+        plus1_label: str = self._col + '_+1Std=' + str(plus1sd)
+        plus2_label: str = self._col + '_+2Std=' + str(plus2sd)
+        minus1_label: str = self._col + '_-1Std=' + str(minus1sd)
+        minus2_label: str = self._col + '_-2Std=' + str(minus2sd)
+        ax.plot(self._data_frame[self._col], label=self._col)
         ax.axhline(self._price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
         ax.axhline(self._median, linestyle='--', label=median_label, color='blue', alpha=0.50)
         ax.axhline(self._mean, linestyle='--', label=mean_label, color='orange')
@@ -116,7 +116,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax.axhline(self._yeAverage200, linestyle='-.', label=mean200_label, color='yellow', alpha=0.50)
         ax.axhline(self._yeAverage50, linestyle='-.', label=mean50_label, color='orange', alpha=0.50)
         ax.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
-        ax.legend(loc=self.__legendPlace, fontsize=8)
+        ax.legend(loc=self._legend_place, fontsize=8)
         # ax.axis('tight')
         return ax
 
@@ -125,18 +125,18 @@ class HistoricalPlotter(AbstractPlotter):
         plus2sd = np.round(self._mean + 2 * self._std, 2)
         minus1sd = np.round(self._mean - self._std, 2)
         minus2sd = np.round(self._mean - 2 * self._std, 2)
-        price_label: str = self.__Col + '_Price=' + str(self._price)
-        median_label: str = self.__Col + '_Median=' + str(self._median)
-        mean_label: str = self.__Col + '_Mean=' + str(self._mean)
+        price_label: str = self._col + '_Price=' + str(self._price)
+        median_label: str = self._col + '_Median=' + str(self._median)
+        mean_label: str = self._col + '_Mean=' + str(self._mean)
         high52_label: str = 'High52=' + str(self._yeHigh52)
         low52_label: str = 'Low52=' + str(self._yeLow52)
         mean200_label: str = 'Average200=' + str(self._yeAverage200)
         mean50_label: str = 'Average50=' + str(self._yeAverage50)
-        plus1_label: str = self.__Col + '_+1Std=' + str(plus1sd)
-        plus2_label: str = self.__Col + '_+2Std=' + str(plus2sd)
-        minus1_label: str = self.__Col + '_-1Std=' + str(minus1sd)
-        minus2_label: str = self.__Col + '_-2Std=' + str(minus2sd)
-        ax = sns.distplot(self.__dataFrame[self.__Col], vertical=True, rug=True)
+        plus1_label: str = self._col + '_+1Std=' + str(plus1sd)
+        plus2_label: str = self._col + '_+2Std=' + str(plus2sd)
+        minus1_label: str = self._col + '_-1Std=' + str(minus1sd)
+        minus2_label: str = self._col + '_-2Std=' + str(minus2sd)
+        ax = sns.distplot(self._data_frame[self._col], vertical=True, rug=True)
         ax.axhline(self._price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
         ax.axhline(self._median, linestyle='--', label=median_label, color='blue', alpha=0.50)
         ax.axhline(self._mean, linestyle='--', label=mean_label, color='orange')
@@ -148,35 +148,35 @@ class HistoricalPlotter(AbstractPlotter):
         ax.axhline(self._yeLow52, linestyle='--', label=low52_label, color='green', alpha=0.50)
         ax.axhline(self._yeAverage200, linestyle='-.', label=mean200_label, color='yellow', alpha=0.50)
         ax.axhline(self._yeAverage50, linestyle='-.', label=mean50_label, color='orange', alpha=0.50)
-        ax.legend(loc=self.__legendPlace, fontsize=8)
+        ax.legend(loc=self._legend_place, fontsize=8)
         # ax.axis('tight')
         return ax
 
     def __newPeriodDist(self, an_ax, a_df: DataFrame, period_str: str):
         r_range: ndarray = self.__GetRankRange(a_df)
-        mu: float = a_df[self.__Col].mean()
-        sigma: float = a_df[self.__Col].std()
+        mu: float = a_df[self._col].mean()
+        sigma: float = a_df[self._col].std()
         norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=an_ax)
-        an_ax.set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns', fontsize=12)
+        an_ax.set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
         an_ax.plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
-        an_ax.legend(loc=self.__legendPlace)
+        an_ax.legend(loc=self._legend_place)
         plt.tight_layout()
         return an_ax
 
     def __newPeriodQqPlot(self, an_ax, a_df: DataFrame, period_str: str):
-        sm.qqplot(a_df[self.__Col].values, line='q', ax=an_ax)
-        an_ax.set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns', fontsize=12)
+        sm.qqplot(a_df[self._col].values, line='q', ax=an_ax)
+        an_ax.set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
         return an_ax
 
     def __plotHist(self, a_df: DataFrame, timely: str = 'Daily'):
         r_range: ndarray = self.__GetRankRange(a_df)
-        mu: float = a_df[self.__Col].mean()
-        sigma: float = a_df[self.__Col].std()
+        mu: float = a_df[self._col].mean()
+        sigma: float = a_df[self._col].std()
         norm_pdf: ndarray = self.__GetProbabilityDensityFunction(r_range, mu, sigma)
         # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # plt.tight_layout()
-        fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         # histogram
         # sns.distplot(self.__dataMonthly, vertical=False, rug=True)
         # plt.title(self.__ticker + ' ' + self.__Col + ' Monthly Returns ' + str(self.__timeSpan.MonthCount) + ' mts')
@@ -184,107 +184,107 @@ class HistoricalPlotter(AbstractPlotter):
         # plt.xlabel(self.__Col + ' Percent Base=1')
         # plt.legend(loc=self.__legendPlace)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=ax[0])
-        ax[0].set_title('Distribution of ' + self.__ticker + ' ' + self.__Col + ' ' + timely + ' Returns', fontsize=16)
+        ax[0].set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
         ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
-        ax[0].legend(loc=self.__legendPlace)
+        ax[0].legend(loc=self._legend_place)
         # Q-Q plot
-        qq = sm.qqplot(a_df[self.__Col].values, line='q', ax=ax[1])
-        ax[1].set_title('Q-Q plot of ' + self.__ticker + ' ' + self.__Col + ' ' + timely + ' Returns', fontsize=16)
+        qq = sm.qqplot(a_df[self._col].values, line='q', ax=ax[1])
+        ax[1].set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
         return plt
 
     def Plot(self):
-        a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
-        x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
+        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+        x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
         fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
         # ax0
-        self.__dataFrame[self.__Col].plot(ax=ax[0])
+        self._data_frame[self._col].plot(ax=ax[0])
         ax[0].set(ylabel='Stock price ($)', title=a_title)
         # ax1
-        self._dataSimpleReturns[self.__Col].plot(ax=ax[1], label='Normal')
+        self._dataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
         ax[1].scatter(self._dataSimpleReturns.index, self._dataSimpleReturns['Outliers'], color='red', label='Anomaly')
         ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
-        ax[1].legend(loc=self.__legendPlace)
+        ax[1].legend(loc=self._legend_place)
         # ax2
-        self._dataLogReturns[self.__Col].plot(ax=ax[2])
+        self._dataLogReturns[self._col].plot(ax=ax[2])
         ax[2].set(ylabel='Log returns (%)')
         # ax3
         self._dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
         self._dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
         ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
-        ax[3].legend(loc=self.__legendPlace)
+        ax[3].legend(loc=self._legend_place)
         plt.tight_layout()
         return plt
 
     def PlotForecast(self):
-        forecast_df: DataFrame = self.__dataFrame[self.__dataXarray.shape[0]:]
+        forecast_df: DataFrame = self._data_frame[self.__dataXarray.shape[0]:]
         title: str = ' Model '
         x_label: str = 'Days'
         label: str = 'Predictions'
         #
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
         plt.title('Tree Regression Prediction' + title + 'Score=' + str(self.__dataTreeRegScore))
         plt.xlabel(x_label)
-        plt.ylabel(self.__Col)
-        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
-        plt.plot(self.__dataFrame[self.__Col])
+        plt.ylabel(self._col)
+        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
+        plt.plot(self._data_frame[self._col])
         forecast_df[label] = self.__dataTreeRegPrediction
-        plt.plot(forecast_df[[self.__Col, label]])
-        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.plot(forecast_df[[self._col, label]])
+        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
         plt.show()
         #
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
         plt.title('Linear Regression Prediction' + title + 'Score=' + str(self.__dataLinearRegScore))
         plt.xlabel(x_label)
-        plt.ylabel(self.__Col)
-        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
-        plt.plot(self.__dataFrame[self.__Col])
+        plt.ylabel(self._col)
+        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
+        plt.plot(self._data_frame[self._col])
         forecast_df[label] = self.__dataLinearRegPrediction
-        plt.plot(forecast_df[[self.__Col, label]])
-        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.plot(forecast_df[[self._col, label]])
+        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
         plt.show()
         #
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
         plt.title('SVR Linear Regression Prediction' + title + 'Score=' + str(self.__dataSVRLinearScore))
         plt.xlabel(x_label)
-        plt.ylabel(self.__Col)
-        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
-        plt.plot(self.__dataFrame[self.__Col])
+        plt.ylabel(self._col)
+        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
+        plt.plot(self._data_frame[self._col])
         forecast_df[label] = self.__dataSVRLinearPrediction
-        plt.plot(forecast_df[[self.__Col, label]])
-        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.plot(forecast_df[[self._col, label]])
+        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
         plt.show()
         #
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
         plt.title('SVR Polynomial Regression Prediction' + title + 'Score=' + str(self.__dataSVRPolyScore))
         plt.xlabel(x_label)
-        plt.ylabel(self.__Col)
-        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
-        plt.plot(self.__dataFrame[self.__Col])
+        plt.ylabel(self._col)
+        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
+        plt.plot(self._data_frame[self._col])
         forecast_df[label] = self.__dataSVRPolyPrediction
-        plt.plot(forecast_df[[self.__Col, label]])
-        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.plot(forecast_df[[self._col, label]])
+        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
         plt.show()
         #
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
         plt.title('SVR RBF Regression Prediction' + title + 'Score=' + str(self.__dataSVRrbfScore))
         plt.xlabel(x_label)
-        plt.ylabel(self.__Col)
-        plt.scatter(self.__dataFrame.index, self.__dataFrame[self.__Col], color='black')
-        plt.plot(self.__dataFrame[self.__Col])
+        plt.ylabel(self._col)
+        plt.scatter(self._data_frame.index, self._data_frame[self._col], color='black')
+        plt.plot(self._data_frame[self._col])
         forecast_df[label] = self.__dataSVRrbfPrediction
-        plt.plot(forecast_df[[self.__Col, label]])
-        plt.legend([self.__Col, self.__Col + 'Training', self.__Col + 'Predicted'])
+        plt.plot(forecast_df[[self._col, label]])
+        plt.legend([self._col, self._col + 'Training', self._col + 'Predicted'])
         return plt
 
     def GraphPlot(self):
         a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
-        a_title: str = self.__ticker + ' ' + self.__Col + ' Flat ' + str(self.__timeSpan.MonthCount) + ' months'
+        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         fig, ax = plt.subplots(1, 2, figsize=(a_float, a_float), sharey=True)
         fig.suptitle(a_title)
         plt.style.use('seaborn')
@@ -294,8 +294,8 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def __newPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
-        a_title: str = self.__ticker + ' ' + self.__Col + ' ' + period_str + ' ' + str(self.__timeSpan.MonthCount) + ' months'
-        x_label: str = self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr
+        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(self._time_span.MonthCount) + ' months'
+        x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
         fig, ax = plt.subplots(2, 2, figsize=(a_float, a_float), sharex=False)
         fig.suptitle(a_title)
@@ -312,53 +312,53 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def __newPeriod(self, an_ax, a_df: DataFrame, period_str: str):
-        an_ax.plot(a_df, label=self.__Col)
-        an_ax.legend(loc=self.__legendPlace)
-        an_ax.set(ylabel=self.__Col + ' Percent Base=1')
+        an_ax.plot(a_df, label=self._col)
+        an_ax.legend(loc=self._legend_place)
+        an_ax.set(ylabel=self._col + ' Percent Base=1')
         return an_ax
 
     def __plotPeriod(self, a_df: DataFrame, period_str: str = 'Daily'):
-        a_title: str = self.__ticker + ' ' + self.__Col + ' ' + period_str + ' Returns ' + str(self.__timeSpan.MonthCount) + ' months'
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(self._time_span.MonthCount) + ' months'
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
-        plt.plot(a_df, label=self.__Col)
+        plt.plot(a_df, label=self._col)
         plt.title(a_title)
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' Percent Base=1')
-        plt.legend(loc=self.__legendPlace)
+        plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
+        plt.ylabel(self._col + ' Percent Base=1')
+        plt.legend(loc=self._legend_place)
         return plt
 
     def __newPeriodCum(self, an_ax, a_df: DataFrame, a_period: str):
-        modelDailyDrop = a_df[self.__Col].dropna()
+        modelDailyDrop = a_df[self._col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
         modelDailyFitted = modelDailyModel.fit(disp='off')
         # modelDailyFitted.plot(annualize='D')
         avg_return = 100 * modelDailyDrop.mean()
         avg_return_str: str = f'{avg_return:.2f}%'
         print(f'Average return {a_period}: {100 * modelDailyDrop.mean():.2f}%')
-        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cumulative {a_period} Returns {self.__timeSpan.MonthCount} months'
-        an_ax.plot(a_df, label=self.__Col)
-        an_ax.legend(loc=self.__legendPlace)
+        a_title: str = f'{self._ticker} {self._col} ({avg_return_str}) Cumulative {a_period} Returns {self._time_span.MonthCount} months'
+        an_ax.plot(a_df, label=self._col)
+        an_ax.legend(loc=self._legend_place)
         an_ax.set_title(a_title, fontsize=10)
-        an_ax.set(ylabel=self.__Col + ' 1$ Growth Invested')
+        an_ax.set(ylabel=self._col + ' 1$ Growth Invested')
         return an_ax
 
     def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
-        modelDailyDrop = a_df[self.__Col].dropna()
+        modelDailyDrop = a_df[self._col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
         modelDailyFitted = modelDailyModel.fit(disp='off')
         # modelDailyFitted.plot(annualize='D')
         avg_return = 100 * modelDailyDrop.mean()
         avg_return_str: str = f'{avg_return:.2f}%'
         print(f'Average return {a_period}: {100 * modelDailyDrop.mean():.2f}%')
-        a_title: str = f'{self.__ticker} {self.__Col} ({avg_return_str}) Cumulative {a_period} Returns {self.__timeSpan.MonthCount} months'
-        plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
+        a_title: str = f'{self._ticker} {self._col} ({avg_return_str}) Cumulative {a_period} Returns {self._time_span.MonthCount} months'
+        plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
-        plt.plot(a_df, label=self.__Col)
+        plt.plot(a_df, label=self._col)
         plt.title(a_title)
-        plt.xlabel(self.__timeSpan.StartDateStr + ' - ' + self.__timeSpan.EndDateStr)
-        plt.ylabel(self.__Col + ' 1$ Growth Invested')
-        plt.legend(loc=self.__legendPlace)
+        plt.xlabel(self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr)
+        plt.ylabel(self._col + ' 1$ Growth Invested')
+        plt.legend(loc=self._legend_place)
         return plt
 
     def Daily(self):
