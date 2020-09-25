@@ -182,21 +182,21 @@ class HistoricalPlotter(AbstractPlotter):
         return ax
 
     def Daily(self):
-        return self.__plotPeriod(self._dataDaily, 'Daily')
+        return self._getPeriodPlot(self._dataDaily, 'Daily')
 
     def Weekly(self):
-        return self.__plotPeriod(self._dataWeekly, 'Weekly')
+        return self._getPeriodPlot(self._dataWeekly, 'Weekly')
 
     def Monthly(self):
-        return self.__plotPeriod(self._dataMonthly, 'Monthly')
+        return self._getPeriodPlot(self._dataMonthly, 'Monthly')
 
     def Quarterly(self):
-        return self.__plotPeriod(self._dataQuarterly, 'Quarterly')
+        return self._getPeriodPlot(self._dataQuarterly, 'Quarterly')
 
     def Annually(self):
-        return self.__plotPeriod(self._dataAnnually, 'Annually')
+        return self._getPeriodPlot(self._dataAnnually, 'Annually')
 
-    def __plotPeriod(self, a_df: DataFrame, period_str: str = 'Daily'):
+    def _getPeriodPlot(self, a_df: DataFrame, period_str: str = 'Daily'):
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(self._time_span.MonthCount) + ' months'
         plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
@@ -208,21 +208,21 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyCum(self):
-        return self.__plotPeriodCum(self._dataDailyCum, 'Daily')
+        return self._getPeriodCumPlot(self._dataDailyCum, 'Daily')
 
     def WeeklyCum(self):
-        return self.__plotPeriodCum(self._dataWeeklyCum, 'Weekly')
+        return self._getPeriodCumPlot(self._dataWeeklyCum, 'Weekly')
 
     def MonthlyCum(self):
-        return self.__plotPeriodCum(self._dataMonthlyCum, 'Monthly')
+        return self._getPeriodCumPlot(self._dataMonthlyCum, 'Monthly')
 
     def QuarterlyCum(self):
-        return self.__plotPeriodCum(self._dataQuarterlyCum, 'Quarterly')
+        return self._getPeriodCumPlot(self._dataQuarterlyCum, 'Quarterly')
 
     def AnnuallyCum(self):
-        return self.__plotPeriodCum(self._dataAnnuallyCum, 'Annually')
+        return self._getPeriodCumPlot(self._dataAnnuallyCum, 'Annually')
 
-    def __plotPeriodCum(self, a_df: DataFrame, a_period: str = 'Daily'):
+    def _getPeriodCumPlot(self, a_df: DataFrame, a_period: str = 'Daily'):
         modelDailyDrop = a_df[self._col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
         modelDailyFitted = modelDailyModel.fit(disp='off')
@@ -241,16 +241,16 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyHist(self):
-        return self.__plotHist(self._dataDaily, 'Daily')
+        return self._getPeriodHist(self._dataDaily, 'Daily')
 
     def MonthlyHist(self):
-        return self.__plotHist(self._dataMonthly, 'Monthly')
+        return self._getPeriodHist(self._dataMonthly, 'Monthly')
 
-    def __plotHist(self, a_df: DataFrame, timely: str = 'Daily'):
-        r_range: ndarray = self._getRankRange(a_df)
+    def _getPeriodHist(self, a_df: DataFrame, timely: str = 'Daily'):
+        r_range: ndarray = self.__getRankRange(a_df)
         mu: float = a_df[self._col].mean()
         sigma: float = a_df[self._col].std()
-        norm_pdf: ndarray = self._getProbabilityDensityFunction(r_range, mu, sigma)
+        norm_pdf: ndarray = self.__getProbabilityDensityFunction(r_range, mu, sigma)
         # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # plt.tight_layout()
         fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
@@ -269,28 +269,28 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
         return plt
 
-    def _getRankRange(self, a_df: DataFrame):
+    def __getRankRange(self, a_df: DataFrame):
         return np.linspace(min(a_df[self._col]), max(a_df[self._col]), num=1000)
 
-    def _getProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
+    def __getProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
         return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
 
     def PlotDaily(self):
-        return self.__newPlot(self._dataDaily, self._dataDailyCum, 'Daily')
+        return self._getTimelyPlot(self._dataDaily, self._dataDailyCum, 'Daily')
 
     def PlotWeekly(self):
-        return self.__newPlot(self._dataWeekly, self._dataWeeklyCum, 'Weekly')
+        return self._getTimelyPlot(self._dataWeekly, self._dataWeeklyCum, 'Weekly')
 
     def PlotMonthly(self):
-        return self.__newPlot(self._dataMonthly, self._dataMonthlyCum, 'Monthly')
+        return self._getTimelyPlot(self._dataMonthly, self._dataMonthlyCum, 'Monthly')
 
     def PlotQuarterly(self):
-        return self.__newPlot(self._dataQuarterly, self._dataQuarterlyCum, 'Quarterly')
+        return self._getTimelyPlot(self._dataQuarterly, self._dataQuarterlyCum, 'Quarterly')
 
     def PlotAnnually(self):
-        return self.__newPlot(self._dataAnnually, self._dataAnnuallyCum, 'Annually')
+        return self._getTimelyPlot(self._dataAnnually, self._dataAnnuallyCum, 'Annually')
 
-    def __newPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
+    def _getTimelyPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
@@ -298,23 +298,23 @@ class HistoricalPlotter(AbstractPlotter):
         fig.suptitle(a_title)
         plt.style.use('seaborn')
         # ax0
-        ax[0, 0] = self.__newPeriod(ax[0, 0], df_period, period_str)
+        ax[0, 0] = self.__getTimelyPeriod(ax[0, 0], df_period, period_str)
         # ax1
-        ax[0, 1] = self.__newPeriodCum(ax[0, 1], df_periodCum, period_str)
+        ax[0, 1] = self.__getTimelyPeriodCum(ax[0, 1], df_periodCum, period_str)
         # ax2
-        ax[1, 0] = self.__newPeriodDist(ax[1, 0], df_period, period_str)
+        ax[1, 0] = self.__getTimelyPeriodDist(ax[1, 0], df_period, period_str)
         # ax3
-        ax[1, 1] = self.__newPeriodQqPlot(ax[1, 1], df_period, period_str)
+        ax[1, 1] = self.__getTimelyPeriodQqPlot(ax[1, 1], df_period, period_str)
         plt.tight_layout()
         return plt
 
-    def __newPeriod(self, an_ax, a_df: DataFrame, period_str: str):
+    def __getTimelyPeriod(self, an_ax, a_df: DataFrame, period_str: str):
         an_ax.plot(a_df, label=self._col)
         an_ax.legend(loc=self._legend_place)
         an_ax.set(ylabel=self._col + ' Percent Base=1')
         return an_ax
 
-    def __newPeriodCum(self, an_ax, a_df: DataFrame, a_period: str):
+    def __getTimelyPeriodCum(self, an_ax, a_df: DataFrame, a_period: str):
         modelDailyDrop = a_df[self._col].dropna()
         modelDailyModel = arch_model(modelDailyDrop, mean='Zero', vol='ARCH', p=1, o=0, q=0)
         modelDailyFitted = modelDailyModel.fit(disp='off')
@@ -329,11 +329,11 @@ class HistoricalPlotter(AbstractPlotter):
         an_ax.set(ylabel=self._col + ' 1$ Growth Invested')
         return an_ax
 
-    def __newPeriodDist(self, an_ax, a_df: DataFrame, period_str: str):
-        r_range: ndarray = self._getRankRange(a_df)
+    def __getTimelyPeriodDist(self, an_ax, a_df: DataFrame, period_str: str):
+        r_range: ndarray = self.__getRankRange(a_df)
         mu: float = a_df[self._col].mean()
         sigma: float = a_df[self._col].std()
-        norm_pdf: ndarray = self._getProbabilityDensityFunction(r_range, mu, sigma)
+        norm_pdf: ndarray = self.__getProbabilityDensityFunction(r_range, mu, sigma)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=an_ax)
         an_ax.set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
         an_ax.plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
@@ -341,7 +341,7 @@ class HistoricalPlotter(AbstractPlotter):
         plt.tight_layout()
         return an_ax
 
-    def __newPeriodQqPlot(self, an_ax, a_df: DataFrame, period_str: str):
+    def __getTimelyPeriodQqPlot(self, an_ax, a_df: DataFrame, period_str: str):
         sm.qqplot(a_df[self._col].values, line='q', ax=an_ax)
         an_ax.set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
         return an_ax
