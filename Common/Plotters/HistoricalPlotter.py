@@ -43,17 +43,6 @@ class HistoricalPlotter(AbstractPlotter):
         if stock_option.Source == 'yahoo':
             self.__Col = "Adj Close"
         self.__dataFrame = stock_option.HistoricalData
-        '''self.__dataTreeRegPrediction = y_stockOption.HistoricalTreeRegPrediction
-        self.__dataTreeRegScore = round(y_stockOption.HistoricalTreeRegScore, 5)
-        self.__dataLinearRegPrediction = y_stockOption.HistoricalLinRegPrediction
-        self.__dataLinearRegScore = round(y_stockOption.HistoricalLinRegScore, 5)
-        self.__dataSVRLinearPrediction = y_stockOption.HistoricalSVRLinearPrediction
-        self.__dataSVRLinearScore = round(y_stockOption.HistoricalSVRLinearScore, 5)
-        self.__dataSVRPolyPrediction = y_stockOption.HistoricalSVRPolyPrediction
-        self.__dataSVRPolyScore = round(y_stockOption.HistoricalSVRPolyScore, 5)
-        self.__dataSVRrbfPrediction = y_stockOption.HistoricalSVRRbfPrediction
-        self.__dataSVRrbfScore = round(y_stockOption.HistoricalSVRRbfScore, 5)
-        self.__dataXarray = y_stockOption.Xarray'''
         self._dataSimpleReturns = stock_option.DataSimpleReturns
         self._dataLogReturns = stock_option.DataLogReturns
         self._dataDaily = stock_option.SimpleDaily
