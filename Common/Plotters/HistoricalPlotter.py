@@ -163,7 +163,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodPlot(self._dataWeekly, 'Weekly')
 
     def Monthly(self):
-        return self._getPeriodPlot(self._dataMonthly, 'Monthly')
+        return self._getPeriodPlot(self._stock_option.SimpleMonthly, 'Monthly')
 
     def Quarterly(self):
         return self._getPeriodPlot(self._stock_option.SimpleQuarterly, 'Quarterly')
@@ -219,7 +219,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodHist(self._dataDaily, 'Daily')
 
     def MonthlyHist(self):
-        return self._getPeriodHist(self._dataMonthly, 'Monthly')
+        return self._getPeriodHist(self._stock_option.SimpleMonthly, 'Monthly')
 
     def _getPeriodHist(self, a_df: DataFrame, timely: str = 'Daily'):
         # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
@@ -247,7 +247,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getTimelyPlot(self._dataWeekly, self._stock_option.SimpleWeeklyCum, 'Weekly')
 
     def PlotMonthly(self):
-        return self._getTimelyPlot(self._dataMonthly, self._stock_option.SimpleMonthlyCum, 'Monthly')
+        return self._getTimelyPlot(self._stock_option.SimpleMonthly, self._stock_option.SimpleMonthlyCum, 'Monthly')
 
     def PlotQuarterly(self):
         return self._getTimelyPlot(self._stock_option.SimpleQuarterly, self._stock_option.SimpleQuarterlyCum, 'Quarterly')
