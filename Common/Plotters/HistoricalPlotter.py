@@ -13,7 +13,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 class HistoricalPlotter(AbstractPlotter):
     _stock_option: YahooStockOption
-    _dataSimpleReturns: DataFrame
     _dataLogReturns: DataFrame
     _dataDaily: DataFrame
     _dataWeekly: DataFrame
@@ -35,7 +34,6 @@ class HistoricalPlotter(AbstractPlotter):
         if stock_option.Source == 'yahoo':
             self._col = "Adj Close"
         self._data_frame = stock_option.HistoricalData
-        self._dataSimpleReturns = stock_option.DataSimpleReturns
         self._dataLogReturns = stock_option.DataLogReturns
         self._dataDaily = stock_option.SimpleDaily
         self._dataWeekly = stock_option.SimpleWeekly
@@ -58,8 +56,9 @@ class HistoricalPlotter(AbstractPlotter):
         self._data_frame[self._col].plot(ax=ax[0])
         ax[0].set(ylabel='Stock price ($)', title=a_title)
         # ax1
-        self._dataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
-        ax[1].scatter(self._dataSimpleReturns.index, self._dataSimpleReturns['Outliers'], color='red', label='Anomaly')
+        self._stock_option.DataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
+        ax[1].scatter(self._stock_option.DataSimpleReturns.index,
+                      self._stock_option.DataSimpleReturns['Outliers'], color='red', label='Anomaly')
         ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
         ax[1].legend(loc=self._legend_place)
         # ax2
