@@ -14,7 +14,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 class HistoricalPlotter(AbstractPlotter):
     _stock_option: YahooStockOption
     _dataDaily: DataFrame
-    _dataWeekly: DataFrame
     _price: float
     _yeAverage200: float
     _yeAverage50: float
@@ -31,7 +30,6 @@ class HistoricalPlotter(AbstractPlotter):
             self._col = "Adj Close"
         self._data_frame = stock_option.HistoricalData
         self._dataDaily = stock_option.SimpleDaily
-        self._dataWeekly = stock_option.SimpleWeekly
         print(stock_option.Median)
         #exit(555)
         self._legend_place = 'upper left'
@@ -158,7 +156,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodPlot(self._dataDaily, 'Daily')
 
     def Weekly(self):
-        return self._getPeriodPlot(self._dataWeekly, 'Weekly')
+        return self._getPeriodPlot(self._stock_option.SimpleWeekly, 'Weekly')
 
     def Monthly(self):
         return self._getPeriodPlot(self._stock_option.SimpleMonthly, 'Monthly')
@@ -242,7 +240,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getTimelyPlot(self._dataDaily, self._stock_option.SimplyDailyCum, 'Daily')
 
     def PlotWeekly(self):
-        return self._getTimelyPlot(self._dataWeekly, self._stock_option.SimpleWeeklyCum, 'Weekly')
+        return self._getTimelyPlot(self._stock_option.SimpleWeekly, self._stock_option.SimpleWeeklyCum, 'Weekly')
 
     def PlotMonthly(self):
         return self._getTimelyPlot(self._stock_option.SimpleMonthly, self._stock_option.SimpleMonthlyCum, 'Monthly')
