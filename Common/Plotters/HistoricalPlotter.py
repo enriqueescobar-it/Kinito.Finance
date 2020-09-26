@@ -17,7 +17,6 @@ class HistoricalPlotter(AbstractPlotter):
     _dataWeekly: DataFrame
     _dataMonthly: DataFrame
     _dataQuarterly: DataFrame
-    _dataAnnually: DataFrame
     _price: float
     _yeAverage200: float
     _yeAverage50: float
@@ -37,7 +36,6 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataWeekly = stock_option.SimpleWeekly
         self._dataMonthly = stock_option.SimpleMonthly
         self._dataQuarterly = stock_option.SimpleQuarterly
-        self._dataAnnually = stock_option.SimpleAnnually
         print(stock_option.Median)
         exit(555)
         self._legend_place = 'upper left'
@@ -173,7 +171,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodPlot(self._dataQuarterly, 'Quarterly')
 
     def Annually(self):
-        return self._getPeriodPlot(self._dataAnnually, 'Annually')
+        return self._getPeriodPlot(self._stock_option.SimpleAnnually, 'Annually')
 
     def _getPeriodPlot(self, a_df: DataFrame, period_str: str = 'Daily'):
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(self._time_span.MonthCount) + ' months'
@@ -257,7 +255,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getTimelyPlot(self._dataQuarterly, self._stock_option.SimpleQuarterlyCum, 'Quarterly')
 
     def PlotAnnually(self):
-        return self._getTimelyPlot(self._dataAnnually, self._stock_option.SimpleAnnuallyCum, 'Annually')
+        return self._getTimelyPlot(self._stock_option.SimpleAnnually, self._stock_option.SimpleAnnuallyCum, 'Annually')
 
     def _getTimelyPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(self._time_span.MonthCount) + ' months'
