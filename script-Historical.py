@@ -25,8 +25,8 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CP')
-# UNP PM PRU TROW TXN TRMB
+yahooStockOption: YahooStockOption = YahooStockOption('UNP')
+# PM PRU TROW TXN TRMB
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -96,6 +96,7 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
+exit(111)
 yahooStockOptionPlotter.GraphPlot().show()
 #yahooStockOptionPlotter.Daily().show()
 #yahooStockOptionPlotter.DailyCum().show()

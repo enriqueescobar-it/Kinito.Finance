@@ -29,29 +29,29 @@ class TimeSpan(object):
         self.StartDate = self.EndDate - timedelta(days=5 * 365.25)
         # self.StartDate = self.EndDate - relativedelta(years=5)
         self.StartDateStr = self.StartDate.strftime('%Y-%m-%d')
-        self.__setYearCount()
-        self.__setMonthCount()
-        self.__setWeekCount()
-        self.__setDayCount()
-        self.__setHourCount()
+        self._setYearCount()
+        self._setMonthCount()
+        self._setWeekCount()
+        self._setDayCount()
+        self._setHourCount()
 
-    def __setYearCount(self):
+    def _setYearCount(self):
         self.YearCount = relativedelta(self.EndDate, self.StartDate).years
         self.QuarterCount = relativedelta(self.EndDate, self.StartDate).months % 3
-        self.__setMonthCount()
+        self._setMonthCount()
 
-    def __setMonthCount(self):
+    def _setMonthCount(self):
         self.MonthCount = self.YearCount * 12
         self.MonthCount += relativedelta(self.EndDate, self.StartDate).months
 
-    def __setWeekCount(self):
+    def _setWeekCount(self):
         self.WeekCount = self.YearCount * 52
         self.WeekCount += relativedelta(self.EndDate, self.StartDate).weeks
 
-    def __setDayCount(self):
+    def _setDayCount(self):
         self.DayCount = int(round(self.YearCount * 365.25))
         self.DayCount += int(round(relativedelta(self.EndDate, self.StartDate).months * 30.4375))
         self.DayCount += self.EndDate.day
 
-    def __setHourCount(self):
+    def _setHourCount(self):
         self.HourCount = relativedelta(self.EndDate, self.StartDate).hours

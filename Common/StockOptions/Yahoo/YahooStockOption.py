@@ -2,8 +2,7 @@ from typing import List
 import scipy.stats as scs
 import pandas as pd
 import numpy as np
-from numpy.core._multiarray_umath import ndarray
-
+from numpy import ndarray
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
