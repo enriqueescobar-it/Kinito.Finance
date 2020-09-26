@@ -1,7 +1,9 @@
 from typing import List
-from statistics import mean
+import scipy.stats as scs
 import pandas as pd
 import numpy as np
+from numpy.core._multiarray_umath import ndarray
+
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
@@ -15,6 +17,10 @@ from sklearn.svm import SVR
 
 
 class YahooStockOption(AbstractStockOption):
+    _norm_pdf: ndarray
+    _sigma: float
+    _mu: float = -1.1
+    _data_range: ndarray
     FvBeta: float
     FvChangePercent: str
     FvCompanyCountry: str
@@ -96,6 +102,22 @@ class YahooStockOption(AbstractStockOption):
     _y_finance_engine: YahooFinanceEngine
     _yahooSummaryScrapper: YahooSummaryScrapper
 
+    @property
+    def DataRange(self):
+        return self._data_range
+
+    @property
+    def Mu(self):
+        return self._mu
+
+    @property
+    def Sigma(self):
+        return self._sigma
+
+    @property
+    def NormProbDensityFn(self):
+        return self._norm_pdf
+
     def __init__(self, a_ticker: str = 'CNI'):
         self.Source = 'yahoo'
         self.SourceColumn = 'Adj Close'
@@ -103,6 +125,10 @@ class YahooStockOption(AbstractStockOption):
         self.TimeSpan = TimeSpan()
         self.HistoricalData = self._setData()
         self.Data = self.HistoricalData[self.SourceColumn].to_frame()
+        self._data_range = self._getDataRange(1000, self.Data[self.SourceColumn])
+        self._mu = round(self.HistoricalData[self.SourceColumn].mean(), 2)
+        self._sigma: float = round(self.HistoricalData[self.SourceColumn].std(), 2)
+        self._norm_pdf = self._getProbabilityDensityFunction(self.DataRange, self._mu, self._sigma)
         self.Data['Norm'] = self._setNormalizer(self.HistoricalData)
         self.Data['NormL1'] = self._setNormalizerL1(self.HistoricalData)
         self.Data['Binary'] = self._setBinarizer(self.HistoricalData)
@@ -339,3 +365,9 @@ class YahooStockOption(AbstractStockOption):
         a_mean: float = round((day_avg + week_avg + month_avg + quarter_avg + annual_avg)/5, 2)
         return (day_avg >= a_mean, week_avg >= a_mean, month_avg >= a_mean, quarter_avg >= a_mean,
                 annual_avg >= a_mean)
+
+    def _getDataRange(self, spread_span: int = 1000, pd_series: pd.Series = pd.Series()) -> np.ndarray:
+        return np.linspace(min(pd_series), max(pd_series), num=spread_span)
+
+    def _getProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
+        return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)

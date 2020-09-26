@@ -13,6 +13,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class HistoricalPlotter(AbstractPlotter):
+    _stock_option: YahooStockOption
     _dataSimpleReturns: DataFrame
     _dataLogReturns: DataFrame
     _dataDaily: DataFrame
@@ -65,13 +66,13 @@ class HistoricalPlotter(AbstractPlotter):
         self._legend_place = 'upper left'
         self._ticker = stock_option.Ticker
         self._time_span = stock_option.TimeSpan
-        self._stockOption = stock_option
+        self._stock_option = stock_option
 
     def Plot(self):
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
-        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stockOption.TimeSpan.MonthCount), 5.5), sharex=True)
+        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
         # ax0
         self._data_frame[self._col].plot(ax=ax[0])
         ax[0].set(ylabel='Stock price ($)', title=a_title)
@@ -92,7 +93,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def GraphPlot(self):
-        a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
+        a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         fig, ax = plt.subplots(1, 2, figsize=(a_float, a_float), sharey=True)
         fig.suptitle(a_title)
@@ -247,10 +248,6 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodHist(self._dataMonthly, 'Monthly')
 
     def _getPeriodHist(self, a_df: DataFrame, timely: str = 'Daily'):
-        r_range: ndarray = self.__getRankRange(a_df)
-        mu: float = a_df[self._col].mean()
-        sigma: float = a_df[self._col].std()
-        norm_pdf: ndarray = self.__getProbabilityDensityFunction(r_range, mu, sigma)
         # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # plt.tight_layout()
         fig, ax = plt.subplots(1, 2, figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
@@ -262,18 +259,12 @@ class HistoricalPlotter(AbstractPlotter):
         # plt.legend(loc=self.__legendPlace)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=ax[0])
         ax[0].set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
-        ax[0].plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
+        ax[0].plot(self._stock_option.DataRange, self._stock_option.NormProbDensityFn, 'g', lw=2, label=f'N({self._stock_option.Mu:.2f}, {self._stock_option.Sigma ** 2:.4f})')
         ax[0].legend(loc=self._legend_place)
         # Q-Q plot
         qq = sm.qqplot(a_df[self._col].values, line='q', ax=ax[1])
         ax[1].set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
         return plt
-
-    def __getRankRange(self, a_df: DataFrame):
-        return np.linspace(min(a_df[self._col]), max(a_df[self._col]), num=1000)
-
-    def __getProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
-        return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
 
     def PlotDaily(self):
         return self._getTimelyPlot(self._dataDaily, self._dataDailyCum, 'Daily')
@@ -293,7 +284,7 @@ class HistoricalPlotter(AbstractPlotter):
     def _getTimelyPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
-        a_float: float = 3 * math.log(self._stockOption.TimeSpan.MonthCount)
+        a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         fig, ax = plt.subplots(2, 2, figsize=(a_float, a_float), sharex=False)
         fig.suptitle(a_title)
         plt.style.use('seaborn')
@@ -330,10 +321,10 @@ class HistoricalPlotter(AbstractPlotter):
         return an_ax
 
     def __getTimelyPeriodDist(self, an_ax, a_df: DataFrame, period_str: str):
-        r_range: ndarray = self.__getRankRange(a_df)
+        r_range: ndarray = np.linspace(min(a_df[self._col]), max(a_df[self._col]), num=1000)
         mu: float = a_df[self._col].mean()
         sigma: float = a_df[self._col].std()
-        norm_pdf: ndarray = self.__getProbabilityDensityFunction(r_range, mu, sigma)
+        norm_pdf: ndarray = scs.norm.pdf(r_range, loc=mu, scale=sigma)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=an_ax)
         an_ax.set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
         an_ax.plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
