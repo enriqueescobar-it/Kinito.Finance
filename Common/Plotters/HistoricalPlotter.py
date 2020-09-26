@@ -13,7 +13,6 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 class HistoricalPlotter(AbstractPlotter):
     _stock_option: YahooStockOption
-    _dataLogReturns: DataFrame
     _dataDaily: DataFrame
     _dataWeekly: DataFrame
     _dataMonthly: DataFrame
@@ -34,7 +33,6 @@ class HistoricalPlotter(AbstractPlotter):
         if stock_option.Source == 'yahoo':
             self._col = "Adj Close"
         self._data_frame = stock_option.HistoricalData
-        self._dataLogReturns = stock_option.DataLogReturns
         self._dataDaily = stock_option.SimpleDaily
         self._dataWeekly = stock_option.SimpleWeekly
         self._dataMonthly = stock_option.SimpleMonthly
@@ -62,11 +60,11 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
         ax[1].legend(loc=self._legend_place)
         # ax2
-        self._dataLogReturns[self._col].plot(ax=ax[2])
+        self._stock_option.DataLogReturns[self._col].plot(ax=ax[2])
         ax[2].set(ylabel='Log returns (%)')
         # ax3
-        self._dataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
-        self._dataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
+        self._stock_option.DataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
+        self._stock_option.DataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
         ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[3].legend(loc=self._legend_place)
         plt.tight_layout()
