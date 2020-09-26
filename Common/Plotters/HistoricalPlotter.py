@@ -6,7 +6,6 @@ import seaborn as sns
 import statsmodels.api as sm
 from numpy import ndarray
 from pandas import DataFrame
-from pandas import Series
 from arch import arch_model
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
@@ -17,7 +16,6 @@ class HistoricalPlotter(AbstractPlotter):
     _dataSimpleReturns: DataFrame
     _dataLogReturns: DataFrame
     _dataDaily: DataFrame
-    _dataDailyCum: Series
     _dataWeekly: DataFrame
     _dataMonthly: DataFrame
     _dataQuarterly: DataFrame
@@ -40,7 +38,6 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataSimpleReturns = stock_option.DataSimpleReturns
         self._dataLogReturns = stock_option.DataLogReturns
         self._dataDaily = stock_option.SimpleDaily
-        self._dataDailyCum = stock_option.SimplyDailyCum
         self._dataWeekly = stock_option.SimpleWeekly
         self._dataMonthly = stock_option.SimpleMonthly
         self._dataQuarterly = stock_option.SimpleQuarterly
@@ -193,7 +190,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def DailyCum(self):
-        return self._getPeriodCumPlot(self._dataDailyCum, 'Daily')
+        return self._getPeriodCumPlot(self._stock_option.SimplyDailyCum, 'Daily')
 
     def WeeklyCum(self):
         return self._getPeriodCumPlot(self._stock_option.SimpleWeeklyCum, 'Weekly')
@@ -251,7 +248,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def PlotDaily(self):
-        return self._getTimelyPlot(self._dataDaily, self._dataDailyCum, 'Daily')
+        return self._getTimelyPlot(self._dataDaily, self._stock_option.SimplyDailyCum, 'Daily')
 
     def PlotWeekly(self):
         return self._getTimelyPlot(self._dataWeekly, self._stock_option.SimpleWeeklyCum, 'Weekly')
