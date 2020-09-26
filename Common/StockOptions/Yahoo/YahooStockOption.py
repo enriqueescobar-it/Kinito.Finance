@@ -126,7 +126,7 @@ class YahooStockOption(AbstractStockOption):
         self.Data = self.HistoricalData[self.SourceColumn].to_frame()
         self._data_range = self._getDataRange(1000, self.Data[self.SourceColumn])
         self._mu = round(self.HistoricalData[self.SourceColumn].mean(), 2)
-        self._sigma: float = round(self.HistoricalData[self.SourceColumn].std(), 2)
+        self._sigma = round(self.HistoricalData[self.SourceColumn].std(), 2)
         self._norm_pdf = self._getProbabilityDensityFunction(self.DataRange, self._mu, self._sigma)
         self.Data['Norm'] = self._setNormalizer(self.HistoricalData)
         self.Data['NormL1'] = self._setNormalizerL1(self.HistoricalData)

@@ -26,9 +26,7 @@ class HistoricalPlotter(AbstractPlotter):
     _dataQuarterlyCum: Series
     _dataAnnually: DataFrame
     _dataAnnuallyCum: Series
-    _mean: ndarray
     _median: ndarray
-    _std: ndarray
     _price: float
     _yeAverage200: float
     _yeAverage50: float
@@ -56,12 +54,10 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataQuarterlyCum = stock_option.SimpleQuarterlyCum
         self._dataAnnually = stock_option.SimpleAnnually
         self._dataAnnuallyCum = stock_option.SimpleAnnuallyCum
-        self._mean = np.mean(stock_option.HistoricalData[self._col])
-        self._mean = np.round(self._mean, 2)
         self._median = np.median(stock_option.HistoricalData[self._col])
         self._median = np.round(self._median, 2)
-        self._std = np.std(stock_option.HistoricalData[self._col])
-        self._std = np.round(self._std, 2)
+        print(stock_option.Sigma)
+        exit(555)
         self._src = stock_option.Source
         self._legend_place = 'upper left'
         self._ticker = stock_option.Ticker
@@ -118,13 +114,13 @@ class HistoricalPlotter(AbstractPlotter):
         # plt.figure(figsize=(3 * math.log(self.__timeSpan.MonthCount), 4.5))
         # plt.tight_layout()
         # Plot the grid lines
-        plus1sd = np.round(self._mean + self._std, 2)
-        plus2sd = np.round(self._mean + 2 * self._std, 2)
-        minus1sd = np.round(self._mean - self._std, 2)
-        minus2sd = np.round(self._mean - 2 * self._std, 2)
+        plus1sd = np.round(self._stock_option.Mu + self._stock_option.Sigma, 2)
+        plus2sd = np.round(self._stock_option.Mu + 2 * self._stock_option.Sigma, 2)
+        minus1sd = np.round(self._stock_option.Mu - self._stock_option.Sigma, 2)
+        minus2sd = np.round(self._stock_option.Mu - 2 * self._stock_option.Sigma, 2)
         price_label: str = self._col + '_Price=' + str(self._price)
         median_label: str = self._col + '_Median=' + str(self._median)
-        mean_label: str = self._col + '_Mean=' + str(self._mean)
+        mean_label: str = self._col + '_Mean=' + str(self._stock_option.Mu)
         high52_label: str = 'High52=' + str(self._yeHigh52)
         low52_label: str = 'Low52=' + str(self._yeLow52)
         mean200_label: str = 'Average200=' + str(self._yeAverage200)
@@ -136,7 +132,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax.plot(self._data_frame[self._col], label=self._col)
         ax.axhline(self._price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
         ax.axhline(self._median, linestyle='--', label=median_label, color='blue', alpha=0.50)
-        ax.axhline(self._mean, linestyle='--', label=mean_label, color='orange')
+        ax.axhline(self._stock_option.Mu, linestyle='--', label=mean_label, color='orange')
         ax.axhline(plus1sd, linestyle='--', label=plus1_label, color='grey', alpha=0.50)
         ax.axhline(plus2sd, linestyle='--', label=plus2_label, color='grey', alpha=0.35)
         ax.axhline(minus1sd, linestyle='--', label=minus1_label, color='grey', alpha=0.50)
@@ -151,13 +147,13 @@ class HistoricalPlotter(AbstractPlotter):
         return ax
 
     def _getDataDistro(self, ax: object):
-        plus1sd = np.round(self._mean + self._std, 2)
-        plus2sd = np.round(self._mean + 2 * self._std, 2)
-        minus1sd = np.round(self._mean - self._std, 2)
-        minus2sd = np.round(self._mean - 2 * self._std, 2)
+        plus1sd = np.round(self._stock_option.Mu + self._stock_option.Sigma, 2)
+        plus2sd = np.round(self._stock_option.Mu + 2 * self._stock_option.Sigma, 2)
+        minus1sd = np.round(self._stock_option.Mu - self._stock_option.Sigma, 2)
+        minus2sd = np.round(self._stock_option.Mu - 2 * self._stock_option.Sigma, 2)
         price_label: str = self._col + '_Price=' + str(self._price)
         median_label: str = self._col + '_Median=' + str(self._median)
-        mean_label: str = self._col + '_Mean=' + str(self._mean)
+        mean_label: str = self._col + '_Mean=' + str(self._stock_option.Mu)
         high52_label: str = 'High52=' + str(self._yeHigh52)
         low52_label: str = 'Low52=' + str(self._yeLow52)
         mean200_label: str = 'Average200=' + str(self._yeAverage200)
@@ -169,7 +165,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax = sns.distplot(self._data_frame[self._col], vertical=True, rug=True)
         ax.axhline(self._price, linestyle='--', label=price_label, color='cyan', alpha=0.50)
         ax.axhline(self._median, linestyle='--', label=median_label, color='blue', alpha=0.50)
-        ax.axhline(self._mean, linestyle='--', label=mean_label, color='orange')
+        ax.axhline(self._stock_option.Mu, linestyle='--', label=mean_label, color='orange')
         ax.axhline(plus1sd, linestyle='--', label=plus1_label, color='grey', alpha=0.50)
         ax.axhline(plus2sd, linestyle='--', label=plus2_label, color='grey', alpha=0.35)
         ax.axhline(minus1sd, linestyle='--', label=minus1_label, color='grey', alpha=0.50)
