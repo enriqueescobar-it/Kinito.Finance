@@ -17,8 +17,9 @@ from sklearn.svm import SVR
 
 class YahooStockOption(AbstractStockOption):
     _norm_pdf: ndarray
-    _sigma: float
+    _sigma: float = -1.1
     _mu: float = -1.1
+    _median: float = -1.1
     _data_range: ndarray
     FvBeta: float
     FvChangePercent: str
@@ -110,6 +111,10 @@ class YahooStockOption(AbstractStockOption):
         return self._mu
 
     @property
+    def Median(self):
+        return self._median
+
+    @property
     def Sigma(self):
         return self._sigma
 
@@ -127,6 +132,7 @@ class YahooStockOption(AbstractStockOption):
         self._data_range = self._getDataRange(1000, self.Data[self.SourceColumn])
         self._mu = round(self.HistoricalData[self.SourceColumn].mean(), 2)
         self._sigma = round(self.HistoricalData[self.SourceColumn].std(), 2)
+        self._median = round(self.HistoricalData[self.SourceColumn].median(), 2)
         self._norm_pdf = self._getProbabilityDensityFunction(self.DataRange, self._mu, self._sigma)
         self.Data['Norm'] = self._setNormalizer(self.HistoricalData)
         self.Data['NormL1'] = self._setNormalizerL1(self.HistoricalData)
