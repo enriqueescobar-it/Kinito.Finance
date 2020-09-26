@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

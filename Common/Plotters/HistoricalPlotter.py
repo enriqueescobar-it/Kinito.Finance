@@ -23,7 +23,6 @@ class HistoricalPlotter(AbstractPlotter):
     _dataMonthly: DataFrame
     _dataMonthlyCum: Series
     _dataQuarterly: DataFrame
-    _dataQuarterlyCum: Series
     _dataAnnually: DataFrame
     _price: float
     _yeAverage200: float
@@ -49,7 +48,6 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataMonthly = stock_option.SimpleMonthly
         self._dataMonthlyCum = stock_option.SimpleMonthlyCum
         self._dataQuarterly = stock_option.SimpleQuarterly
-        self._dataQuarterlyCum = stock_option.SimpleQuarterlyCum
         self._dataAnnually = stock_option.SimpleAnnually
         print(stock_option.Median)
         exit(555)
@@ -208,7 +206,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodCumPlot(self._dataMonthlyCum, 'Monthly')
 
     def QuarterlyCum(self):
-        return self._getPeriodCumPlot(self._dataQuarterlyCum, 'Quarterly')
+        return self._getPeriodCumPlot(self._stock_option.SimpleQuarterlyCum, 'Quarterly')
 
     def AnnuallyCum(self):
         return self._getPeriodCumPlot(self._stock_option.SimpleAnnuallyCum, 'Annually')
@@ -266,7 +264,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getTimelyPlot(self._dataMonthly, self._dataMonthlyCum, 'Monthly')
 
     def PlotQuarterly(self):
-        return self._getTimelyPlot(self._dataQuarterly, self._dataQuarterlyCum, 'Quarterly')
+        return self._getTimelyPlot(self._dataQuarterly, self._stock_option.SimpleQuarterlyCum, 'Quarterly')
 
     def PlotAnnually(self):
         return self._getTimelyPlot(self._dataAnnually, self._stock_option.SimpleAnnuallyCum, 'Annually')
