@@ -15,7 +15,6 @@ class HistoricalPlotter(AbstractPlotter):
     _stock_option: YahooStockOption
     _dataDaily: DataFrame
     _dataWeekly: DataFrame
-    _dataMonthly: DataFrame
     _price: float
     _yeAverage200: float
     _yeAverage50: float
@@ -33,7 +32,6 @@ class HistoricalPlotter(AbstractPlotter):
         self._data_frame = stock_option.HistoricalData
         self._dataDaily = stock_option.SimpleDaily
         self._dataWeekly = stock_option.SimpleWeekly
-        self._dataMonthly = stock_option.SimpleMonthly
         print(stock_option.Median)
         #exit(555)
         self._legend_place = 'upper left'
