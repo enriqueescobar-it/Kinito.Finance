@@ -19,7 +19,6 @@ class HistoricalPlotter(AbstractPlotter):
     _dataDaily: DataFrame
     _dataDailyCum: Series
     _dataWeekly: DataFrame
-    _dataWeeklyCum: Series
     _dataMonthly: DataFrame
     _dataQuarterly: DataFrame
     _dataAnnually: DataFrame
@@ -43,7 +42,6 @@ class HistoricalPlotter(AbstractPlotter):
         self._dataDaily = stock_option.SimpleDaily
         self._dataDailyCum = stock_option.SimplyDailyCum
         self._dataWeekly = stock_option.SimpleWeekly
-        self._dataWeeklyCum = stock_option.SimpleWeeklyCum
         self._dataMonthly = stock_option.SimpleMonthly
         self._dataQuarterly = stock_option.SimpleQuarterly
         self._dataAnnually = stock_option.SimpleAnnually
@@ -198,7 +196,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodCumPlot(self._dataDailyCum, 'Daily')
 
     def WeeklyCum(self):
-        return self._getPeriodCumPlot(self._dataWeeklyCum, 'Weekly')
+        return self._getPeriodCumPlot(self._stock_option.SimpleWeeklyCum, 'Weekly')
 
     def MonthlyCum(self):
         return self._getPeriodCumPlot(self._stock_option.SimpleMonthlyCum, 'Monthly')
@@ -256,7 +254,7 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getTimelyPlot(self._dataDaily, self._dataDailyCum, 'Daily')
 
     def PlotWeekly(self):
-        return self._getTimelyPlot(self._dataWeekly, self._dataWeeklyCum, 'Weekly')
+        return self._getTimelyPlot(self._dataWeekly, self._stock_option.SimpleWeeklyCum, 'Weekly')
 
     def PlotMonthly(self):
         return self._getTimelyPlot(self._dataMonthly, self._stock_option.SimpleMonthlyCum, 'Monthly')
