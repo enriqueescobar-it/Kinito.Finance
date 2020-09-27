@@ -1,4 +1,5 @@
 import math
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as scs
@@ -28,8 +29,6 @@ class HistoricalPlotter(AbstractPlotter):
         if stock_option.Source == 'yahoo':
             self._col = "Adj Close"
         self._data_frame = stock_option.HistoricalData
-        print(stock_option.Median)
-        #exit(555)
         self._legend_place = 'upper left'
         self._ticker = stock_option.Ticker
         self._time_span = stock_option.TimeSpan
@@ -39,6 +38,7 @@ class HistoricalPlotter(AbstractPlotter):
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
         fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
         # ax0
         self._data_frame[self._col].plot(ax=ax[0])
@@ -167,6 +167,7 @@ class HistoricalPlotter(AbstractPlotter):
 
     def _getPeriodPlot(self, a_df: DataFrame, period_str: str = 'Daily'):
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(self._time_span.MonthCount) + ' months'
+        plt.rcParams['date.epoch'] = '0000-12-31'
         plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
         plt.plot(a_df, label=self._col)

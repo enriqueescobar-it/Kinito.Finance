@@ -25,8 +25,7 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('PM')
-# PRU TROW TXN TRMB
+yahooStockOption: YahooStockOption = YahooStockOption('AMZN')
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -43,9 +42,10 @@ yahooStockOption: YahooStockOption = YahooStockOption('PM')
 # CAG CCA CGNX CGO CHD CLX CM CNI COST CP CRM
 # ENB FIE FROG FSRNX FSZ FTS FZILX FZROX
 # GNW GRWG HD HQU HZU INTC IPO IT JNJ JNUG JNPR KEY K KDP KL KO KR LMT LMND LSPD MA MO MSFT MWK
-# NET NKE NLOK NPI NVEI.TO OTEX PPL QQC-f QQQ
+# NET NKE NLOK NPI NVEI.TO OTEX PM PPL PRU QQC-f QQQ
 # RBA RCI RCI.B REGI ROK RUN RY SHOP SJR.B SNOW SOXL
-# T TD TEC.TO TFII U UNP VDC VFV VGT VMW VNR VPU VTSAX VYM VZ WCN WELL WMT WORK XEI XIT YCBD ZG ZM ZQQ ZWB
+# T TD TEC.TO TFII TRMB TROW TXN U UNP VDC VFV VGT VMW VNR VPU VTSAX VYM VZ
+# WCN WELL WMT WORK XEI XIT YCBD ZG ZM ZQQ ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
 '''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
@@ -96,7 +96,6 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
-exit(111)
 yahooStockOptionPlotter.GraphPlot().show()
 #yahooStockOptionPlotter.Daily().show()
 #yahooStockOptionPlotter.DailyCum().show()
