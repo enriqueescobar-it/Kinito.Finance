@@ -14,6 +14,7 @@ for yahooTicker in yahooTickers:
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
 yahooPc.PlotAllData().show()
 yahooPc.PlotAllSimple().show()
+exit(333)
 yahooPc.PlotAllHeatmaps().show()
 # Explo Data Analysis
 # on returns sns.pairplot(returns w/o NaN => returns[1:])
