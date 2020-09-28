@@ -111,6 +111,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
 
     def PlotAllData(self):
         plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(5, 1, figsize=(self._a_float, self._a_float/2.0), sharex=True)
         fig.suptitle(self._a_title)
         self._data.plot(ax=ax[0], label=self._data.columns)
@@ -133,16 +134,17 @@ class PortfolioComparator(AbstractPortfolioComparator):
 
     def PlotAllSimple(self):
         plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float/1.5), sharex=True)
         fig.suptitle(self._a_title)
-        self._dataReturns.plot(ax=ax[0], label=self._dataReturns.columns)
-        ax[0].set(ylabel='Returns')
+        self._dataSimpleReturnsCumulative.plot(ax=ax[0], label=self._dataSimpleReturnsCumulative.columns)
+        ax[0].set(ylabel='Simple Return - Cumulative')
         ax[0].legend(loc=self._legend_place)
         self._dataSimpleReturns.plot(ax=ax[1], label=self._dataSimpleReturns.columns)
         ax[1].set(ylabel='Simple Return - Volatility')
         ax[1].legend(loc=self._legend_place)
-        self._dataSimpleReturnsCumulative.plot(ax=ax[2], label=self._dataSimpleReturnsCumulative.columns)
-        ax[2].set(ylabel='Simple Return - Cumulative')
+        self._dataReturns.plot(ax=ax[2], label=self._dataReturns.columns)
+        ax[2].set(ylabel='Returns')
         ax[2].legend(loc=self._legend_place)
         plt.tight_layout()
         return plt
@@ -153,6 +155,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         daily_pct_change = np.log(self._dataReturns.pct_change() + 1)
         vols = daily_pct_change.std() * np.sqrt(252)
         plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
         #print('AX', type(ax)) AX <class 'matplotlib.axes._subplots.AxesSubplot'>
         fig.suptitle(self._a_title)
