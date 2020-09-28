@@ -25,7 +25,7 @@ from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('AMZN')
+yahooStockOption: YahooStockOption = YahooStockOption('CNI')
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -34,20 +34,22 @@ yahooStockOption: YahooStockOption = YahooStockOption('AMZN')
 # FZROX FZILX FSRNX VTSAX
 # 60% StockMarketFund (FZROX~SWTSX~VTSAX) 20% InternationalFund (FZILX~SWISX~VTIAX) 20% REITFund (FSRNX)
 # Sector ETFs: VGT VPU VDC VYM
+# Sector Int'l: T (55*30.21$) IBM (14*126.66$) ABBV (21*82.79$) GM (46*35.24$) F (186*8.78$)
+# IRM (52*33.48$) MPW (93*17.34$) AGNC (93*17.17$) PSEC (245*6.67$) MAIN (41*37.95$) VYMI (5*59.21$)
 # MWK YCBD GRWG FSZ AMZN CGO RCI PPL SJR.B AQN CP CNI TD KL WCN BPY OTEX
 # BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
 #ETFs# BRTXQ FZILX FSRNX VTSAX FPE HPI
 # TFII LSPD T FTS RY SHOP
-# AAPL ABBV ACES AMGN AMT AMZN AQN ARKF ARKK AVAV BCE BPY BRK-B BRKA BRKB BRTXQ BYND
+# AAPL ABBV ACES AGNC AMGN AMD AMT AMZN AQN ARKF ARKK AVAV AZN BCE BPY BBBY BRK-B BRKA BRKB BRTXQ BYND
 # CAG CCA CGNX CGO CHD CLX CM CNI COST CP CRM
-# ENB FIE FROG FSRNX FSZ FTS FZILX FZROX
-# GNW GRWG HD HQU HZU INTC IPO IT JNJ JNUG JNPR KEY K KDP KL KO KR LMT LMND LSPD MA MO MSFT MWK
-# NET NKE NLOK NPI NVEI.TO OTEX PM PPL PRU QQC-f QQQ
+# ENB F FIE FROG FSRNX FSZ FTS FZILX FZROX
+# GM GMF GNW GRWG HD HLT HQU HZU IBM INTC IPO IRM IT JNJ JPM JNUG JNPR KEY K KDP KL KO KR LMT LMND LSPD
+# MA MAIN MO MU MPW MSFT MWK NET NKE NLOK NPI NVEI.TO OTEX PM PEP PPL PRU PAWZ PSEC QQC-f QQQ
 # RBA RCI RCI.B REGI ROK RUN RY SHOP SJR.B SNOW SOXL
-# T TD TEC.TO TFII TRMB TROW TXN U UNP VDC VFV VGT VMW VNR VPU VTSAX VYM VZ
+# T TD TEC.TO TFII TRMB TROW TXN U UNP VDC VFV VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ
 # WCN WELL WMT WORK XEI XIT YCBD ZG ZM ZQQ ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
-'''
+#'''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
@@ -92,7 +94,7 @@ marketIndices.append(fvxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-'''
+#'''
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()

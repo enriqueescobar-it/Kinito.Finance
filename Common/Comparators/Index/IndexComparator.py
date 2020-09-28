@@ -73,11 +73,13 @@ class IndexComparator(AbstractIndexComparator):
     def _plotHeatMap(self, df: pd.DataFrame):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
         sns.clustermap(df, cmap="coolwarm", col_cluster=False)# annot=False, row_cluster=True,
+        plt.rcParams['date.epoch'] = '0000-12-31'
         plt.show()
 
     def _plotComparison(self, nb_col=1, nb_row=1):
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float/2.5), sharex=False, sharey=False)
+        plt.rcParams['date.epoch'] = '0000-12-31'
         plt.style.use('fivethirtyeight')
         # ax00
         self.Data.plot(ax=ax[0, 0], legend=None)
