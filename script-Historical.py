@@ -24,6 +24,7 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.NseIndex import NseIndex
 from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockMarketIndex.Yahoo.TreasuryBill13Index import TreasuryBill13Index
+from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
@@ -60,6 +61,7 @@ dowJonesIndex: AbstractStockMarketIndex = DowJonesIndex('yahoo', "^DJI", yahooSt
 goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOption.TimeSpan)
 silverIndex: AbstractStockMarketIndex = SilverIndex('yahoo', "SI=F", yahooStockOption.TimeSpan)
 crudeOilIndex: AbstractStockMarketIndex = CrudeOilIndex('yahoo', "CL=F", yahooStockOption.TimeSpan)
+vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 daxIndex: AbstractStockMarketIndex = DaxIndex('yahoo', "^GDAXI", yahooStockOption.TimeSpan)
 euroNext100Index: AbstractStockMarketIndex = EuroNext100Index('yahoo', "^N100", yahooStockOption.TimeSpan)
 estx50Index: AbstractStockMarketIndex = Estx50Index('yahoo', "^N100", yahooStockOption.TimeSpan)
@@ -84,6 +86,7 @@ marketIndices.append(dowJonesIndex)
 marketIndices.append(goldIndex)
 marketIndices.append(silverIndex)
 marketIndices.append(crudeOilIndex)
+marketIndices.append(vixIndex)
 marketIndices.append(daxIndex)
 marketIndices.append(euroNext100Index)
 marketIndices.append(estx50Index)
