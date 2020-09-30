@@ -22,10 +22,11 @@ from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.NseIndex import NseIndex
 from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
+from Common.StockMarketIndex.Yahoo.TreasuryBill13Index import TreasuryBill13Index
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('SMAR')
+yahooStockOption: YahooStockOption = YahooStockOption('CP')
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -44,12 +45,12 @@ yahooStockOption: YahooStockOption = YahooStockOption('SMAR')
 # CAG CCA CGNX CGO CHD CL- CLX CM CNI COST CP CRM
 # EMR+ ENB ESTC F FIE FROG FSRNX FSZ FTS FZILX FZROX GM GLD GMF GNW GRWG
 # HD HLT HQU HZU IBM INTC IPO IRM IT JNJ+ JPM JNUG JNPR KEY K KDP KL KO- KR LMT LMND LOW+ LSPD LVGO
-# MA MAIN MELI MO MU MCD- MPW MSFT MWK NET NKE NFLX NLOK NPI NVEI.TO O+ OTEX PM PANW PEP PLAN PPL PRU PTON PAWZ PSEC PYPL
-# QQC-f QQQ RBA RCI RCI.B REGI ROK RUN RY SHOP SJR.B SLV SNOW SPOT SOXL
+# M MA MAIN MELI MO MU MCD- MPW MSFT MWK NET NKE NFLX NLY NLOK NPI NVEI.TO O+ OTEX PM PANW PEP PLAN PPL PRU PTON PAWZ PSEC PYPL
+# QCOM QQC-f QQQ RBA RCI RCI.B REGI ROK RUN RY SHOP SJR.B SLV SNOW SPOT SOXL
 # T+ TD TDOC TEC.TO TEAM TFII TGT- TRMB TTD TROW TWLO TXN U UNP UPWK VDC VFV VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ
 # WCN WELL WMT- WORK XEI XIT YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
-'''
+#'''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
@@ -69,6 +70,7 @@ ipcMexicoIndex: AbstractStockMarketIndex = IpcMexicoIndex('yahoo', "^MXX", yahoo
 nifty50Index: AbstractStockMarketIndex = NseIndex('yahoo', "^NSEI", yahooStockOption.TimeSpan)
 ipsaIndex: AbstractStockMarketIndex = IpsaIndex('yahoo', "^IPSA", yahooStockOption.TimeSpan)
 fvxIndex: AbstractStockMarketIndex = FvxIndex('yahoo', "^FVX", yahooStockOption.TimeSpan)
+irxIndex: AbstractStockMarketIndex = TreasuryBill13Index('yahoo', "^IRX", yahooStockOption.TimeSpan)
 jkseIndex: AbstractStockMarketIndex = JkseIndex('yahoo', "^JKSE", yahooStockOption.TimeSpan)
 kospIndex: AbstractStockMarketIndex = KospIndex('yahoo', "^KS11", yahooStockOption.TimeSpan)
 marketIndices = list()
@@ -91,12 +93,14 @@ marketIndices.append(ipcMexicoIndex)
 marketIndices.append(nifty50Index)
 marketIndices.append(ipsaIndex)
 marketIndices.append(fvxIndex)
+marketIndices.append(irxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-'''
+#'''
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
+exit(777)
 yahooStockOptionPlotter.Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
 #yahooStockOptionPlotter.Daily().show()
