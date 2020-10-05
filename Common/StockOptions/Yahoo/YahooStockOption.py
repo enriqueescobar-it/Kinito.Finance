@@ -1,8 +1,12 @@
+import statistics
 from typing import List
 import scipy.stats as scs
 import pandas as pd
 import numpy as np
 from numpy import ndarray
+from sklearn import preprocessing
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.svm import SVR
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
@@ -10,9 +14,6 @@ from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockMarketIndex import AbstractStockMarketIndex
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
-from sklearn import preprocessing
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.svm import SVR
 
 
 class YahooStockOption(AbstractStockOption):
@@ -163,6 +164,11 @@ class YahooStockOption(AbstractStockOption):
             self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
                           self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg,
                           self.SimpleAnnuallyReturnAvg)
+        print('D', self.IsDaily)
+        print('W', self.IsWeekly)
+        print('M', self.IsMonthly)
+        print('Q', self.IsQuarterly)
+        print('A', self.IsAnnually)
         self._setFinViz(a_ticker)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
@@ -365,11 +371,9 @@ class YahooStockOption(AbstractStockOption):
         a_series = a_series.dropna()
         return round(100 * a_series.mean()[0], 2)
 
-    def _setIsTimely(self, day_avg: float, week_avg: float, month_avg: float, quarter_avg: float,
-                     annual_avg: float):
-        a_mean: float = round((day_avg + week_avg + month_avg + quarter_avg + annual_avg)/5, 2)
-        return (day_avg >= a_mean, week_avg >= a_mean, month_avg >= a_mean, quarter_avg >= a_mean,
-                annual_avg >= a_mean)
+    def _setIsTimely(self, day_avg: float, week_avg: float, month_avg: float, quarter_avg: float, annual_avg: float):
+        a_median: float = statistics.median([day_avg, week_avg, month_avg, quarter_avg, annual_avg])
+        return (day_avg >= a_median, week_avg >= a_median, month_avg >= a_median, quarter_avg >= a_median, annual_avg >= a_median)
 
     def _getDataRange(self, spread_span: int = 1000, pd_series: pd.Series = pd.Series()) -> np.ndarray:
         return np.linspace(min(pd_series), max(pd_series), num=spread_span)

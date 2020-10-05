@@ -233,24 +233,36 @@ class HistoricalPlotter(AbstractPlotter):
         # Q-Q plot
         qq = sm.qqplot(a_df[self._col].values, line='q', ax=ax[1])
         ax[1].set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
-        return plt
+        return plt  
+    
+    def PlotTimely(self):
+        if self._stock_option.IsDaily:
+            self._plotDaily().show()
+        if self._stock_option.IsWeekly:
+            self._plotWeekly().show()
+        if self._stock_option.IsMonthly:
+            self._plotMonthly().show()
+        if self._stock_option.IsQuarterly:
+            self._plotQuarterly().show()
+        if self._stock_option.IsAnnually:
+            self._plotAnnually().show()
 
-    def PlotDaily(self):
+    def _plotDaily(self):
         return self._getTimelyPlot(self._stock_option.SimpleDaily, self._stock_option.SimplyDailyCum, 'Daily')
 
-    def PlotWeekly(self):
+    def _plotWeekly(self):
         return self._getTimelyPlot(self._stock_option.SimpleWeekly, self._stock_option.SimpleWeeklyCum, 'Weekly')
 
-    def PlotMonthly(self):
+    def _plotMonthly(self):
         return self._getTimelyPlot(self._stock_option.SimpleMonthly, self._stock_option.SimpleMonthlyCum, 'Monthly')
 
-    def PlotQuarterly(self):
+    def _plotQuarterly(self):
         return self._getTimelyPlot(self._stock_option.SimpleQuarterly, self._stock_option.SimpleQuarterlyCum, 'Quarterly')
 
-    def PlotAnnually(self):
+    def _plotAnnually(self):
         return self._getTimelyPlot(self._stock_option.SimpleAnnually, self._stock_option.SimpleAnnuallyCum, 'Annually')
 
-    def _getTimelyPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily'):
+    def _getTimelyPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily') -> plt:
         a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
