@@ -31,6 +31,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataSimpleCorrelation: DataFrame = DataFrame()
     _dataSimpleCovariance: DataFrame = DataFrame()
     _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
+    _portfolio_weighted_returns: Series = Series()
     _portfolio_weighted_returns_cum: Series = Series()
     _portfolio_weighted_returns_geom: float = -1.1
     _portfolio_weighted_annual_std: float = -1.1
@@ -44,10 +45,58 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._setBasicData(y_stocks)
-        self._setSimpleData()
-        self._setWeightedData()
+        self._dataReturns = self._getDataReturns(self._data)
+        print('!', self._dataReturns.head())
+        self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
+        print('?', self._dataSimpleReturns.head())
+        self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
+        #print(self._dataSimpleCorrelation)
+        self._dataSimpleCovariance = self._dataSimpleReturns.cov()
+        #print(self._dataSimpleCovariance)
+        self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
+        #print(self._dataSimpleCovarianceAnnual)
+        self._dataSimpleReturnsCumulative = self._getDataSimpleReturnsCumulative(self._dataSimpleReturns)
+        print('~', self._dataSimpleReturnsCumulative.head())
+        self._dataSimple = self._getDataSimple(self._dataSimpleReturns)
+        self._dataWeightedReturns = self._getDataWeighted(self._dataSimpleReturns)
+        print('#', self._dataWeightedReturns.head())
+        # axis =1 tells pandas we want to add the rows
+        self._portfolio_weighted_returns = round(self._dataWeightedReturns.sum(axis=1), 5)
+        #self._dataWeightedReturns['PORTFOLIOWeighted'] = portfolio_weighted_returns
+        portfolio_weighted_returns_mean = round(self._portfolio_weighted_returns.mean(), 5)
+        print('port_ret mean', portfolio_weighted_returns_mean)
+        portfolio_weighted_returns_std = round(self._portfolio_weighted_returns.std(), 5)
+        print('port_ret std', portfolio_weighted_returns_std)
+        self._portfolio_weighted_returns_cum: Series = round((self._portfolio_weighted_returns + 1).cumprod(), 5)
+        #self._dataWeightedReturns['PORTFOLIOCumulative'] = self._portfolio_weighted_returns_cum
+        print('$', self._dataWeightedReturns.head())
+        self._portfolio_weighted_returns_geom = round(np.prod(self._portfolio_weighted_returns + 1) ** (252 / self._portfolio_weighted_returns.shape[0]) - 1, 5)
+        print('geometric_port_return', self._portfolio_weighted_returns_geom)
+        self._portfolio_weighted_annual_std = round(np.std(self._portfolio_weighted_returns) * np.sqrt(252), 5)
+        print('port_ret annual', self._portfolio_weighted_annual_std)
+        self._portfolio_weighted_sharpe_ratio = round(self._portfolio_weighted_returns_geom / self._portfolio_weighted_annual_std, 5)
+        print('port_sharpe_ratio', self._portfolio_weighted_sharpe_ratio)
+        print('%', self._dataReturns.head())
+        dataReturns_avg: Series = self._getDataReturnsAverage(self._dataReturns)
+        print('^', dataReturns_avg.head())
+        daily_log_pct_changes: DataFrame = np.log(self._dataReturns.pct_change() + 1) #avant portfolio
+        daily_log_pct_changes.columns = daily_log_pct_changes.columns + 'LogReturn'
+        print('&', daily_log_pct_changes.head())
+        daily_log_volatilities: DataFrame = (daily_log_pct_changes.std() * np.sqrt(252)).to_frame()
+        daily_log_volatilities.columns = ['Volatility']
+        print('*', daily_log_volatilities)
+        port_daily_simple_ret: float = round(np.sum(self._dataSimpleReturns.mean()*self._weights), 5)
+        port_weekly_simple_ret: float = round(4.856 * port_daily_simple_ret, 5)
+        port_monthly_simple_ret: float = round(21 * port_daily_simple_ret, 5)
+        port_quarterly_simple_ret: float = round(63 * port_daily_simple_ret, 5)
+        port_yearly_simple_ret: float = round(252 * port_daily_simple_ret, 5)
+        print('port_daily_simple_ret', str(100*port_daily_simple_ret) + '%')
+        print('port_weekly_simple_ret', str(100*port_weekly_simple_ret) + '%')
+        print('port_monthly_simple_ret', str(100*port_monthly_simple_ret) + '%')
+        print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
+        print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        print('SR', self._dataReturns.head())
+        exit(111)
 
     def _setBasicData(self, y_stocks):
         for y_stock in y_stocks:
@@ -64,68 +113,48 @@ class PortfolioComparator(AbstractPortfolioComparator):
         arrayScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self._data)
         self._dataScaled = DataFrame(arrayScaled, columns=self._data.columns, index=self._data.index)
         self._dataSparsed = DataFrame(preprocessing.scale(self._data), columns=self._data.columns, index=self._data.index)
-        self._dataReturns = (self._data / self._data.iloc[0]).fillna(method='backfill')
-        self._dataReturns.fillna(method='ffill', inplace=True)
 
-    def _setSimpleData(self):
+    def _getDataReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = (a_df / a_df.iloc[0]).fillna(method='backfill')
+        new_df.fillna(method='ffill', inplace=True)
+        new_df.columns = new_df.columns.str.replace(self._a_suffix, '')
+        return new_df
+
+    def _getDataSimpleReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         # == (self._data / self._data.shift(1))-1
-        self._dataSimpleReturns = self._data.pct_change(1)
-        print(self._dataSimpleReturns.head())
-        self._dataSimpleReturnsCumulative = (self._dataSimpleReturns + 1).cumprod()
-        print(self._dataSimpleReturnsCumulative.head())
-        self._dataSimple['Volatility'] = self._dataSimpleReturns.std()
-        self._dataSimple['Daily'] = self._dataSimpleReturns.mean()
-        self._dataSimple['Variance'] = self._dataSimpleReturns.var()
-        print(self._dataSimple)
-        self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
-        print(self._dataSimpleCorrelation)
-        self._dataSimpleCovariance = self._dataSimpleReturns.cov()
-        print(self._dataSimpleCovariance)
-        self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
-        print(self._dataSimpleCovarianceAnnual)
+        new_df: DataFrame = a_df.pct_change(1)
+        new_df.columns = new_df.columns.str.replace(self._a_suffix, 'SimpleReturns')
+        return new_df
 
-    def _setWeightedData(self):
-        for ind, column in enumerate(self._dataSimpleReturns.columns):
-            print('weight', ind)
-            a_col: str = column.replace(self._a_suffix, '')
-            self._dataWeightedReturns[a_col] = round(self._weights[ind] * self._dataSimpleReturns[column], 5)
-        self._dataWeightedReturns.fillna(method='ffill', inplace=True)
-        self._dataWeightedReturns.fillna(method='bfill', inplace=True)
-        # axis =1 tells pandas we want to add the rows
-        portfolio_weighted_returns: Series = round(self._dataWeightedReturns.sum(axis=1), 5)
-        self._dataWeightedReturns['PORTFOLIO'] = portfolio_weighted_returns
-        portfolio_weighted_returns_mean = round(portfolio_weighted_returns.mean(), 5)
-        print('port_ret mean', portfolio_weighted_returns_mean)
-        portfolio_weighted_returns_std = round(portfolio_weighted_returns.std(), 5)
-        print('port_ret std', portfolio_weighted_returns_std)
-        self._portfolio_weighted_returns_cum: Series = round((portfolio_weighted_returns + 1).cumprod(), 5)
-        self._dataWeightedReturns['PORTFOLIOCumulative'] = self._portfolio_weighted_returns_cum
-        print(self._dataWeightedReturns.head())
-        self._portfolio_weighted_returns_geom = round(np.prod(portfolio_weighted_returns + 1) ** (252 / portfolio_weighted_returns.shape[0]) - 1, 5)
-        print('geometric_port_return', self._portfolio_weighted_returns_geom)
-        self._portfolio_weighted_annual_std = round(np.std(portfolio_weighted_returns) * np.sqrt(252), 5)
-        print('port_ret annual', self._portfolio_weighted_annual_std)
-        self._portfolio_weighted_sharpe_ratio = round(self._portfolio_weighted_returns_geom / self._portfolio_weighted_annual_std, 5)
-        print('port_sharpe_ratio', self._portfolio_weighted_sharpe_ratio)
+    def _getDataSimpleReturnsCumulative(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = (a_df + 1).cumprod()
+        new_df.columns = new_df.columns.str.replace('Returns', 'Cumulative')
+        return new_df
+
+    def _getDataSimple(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = DataFrame()
+        new_df['Volatility'] = a_df.std()
+        new_df['Daily'] = a_df.mean()
+        new_df['Variance'] = a_df.var()
+        return new_df
+
+    def _getDataWeighted(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = DataFrame()
+        for ind, column in enumerate(a_df.columns):
+            print('ind|col', str(ind) + '|' + column)
+            a_col: str = column.replace('Simple', 'Weighted')
+            new_df[a_col] = round(self._weights[ind] * a_df[column], 5)
+        new_df.fillna(method='ffill', inplace=True)
+        new_df.fillna(method='bfill', inplace=True)
+        return new_df
+
+    def _getDataReturnsAverage(self, a_df: DataFrame = DataFrame()) -> Series:
+        return a_df.iloc[:, 0:self._a_length].sum(axis=1) / self._a_length
 
     def _setPortfolioInfo(self):
-        print('_dataReturns', self._dataReturns)
-        self._dataReturns['PORTFOLIO'] = self._dataReturns.iloc[:, 0:self._a_length].sum(axis=1) / self._a_length
-        print('_dataReturns', self._dataReturns)
-        exit(999)
-        daily_pct_change = np.log(self._dataReturns.pct_change() + 1)
-        vols = daily_pct_change.std() * np.sqrt(252)
-        print('vols', vols)
-        port_daily_simple_ret: float = np.sum(self._dataSimpleReturns.mean()*self._weights)
-        port_daily_simple_ret = round(port_daily_simple_ret, 5)
-        port_monthly_simple_ret: float = round(21 * port_daily_simple_ret, 5)
-        port_yearly_simple_ret: float = round(252 * port_daily_simple_ret, 5)
-        print('port_daily_simple_ret', str(100*port_daily_simple_ret) + '%')
-        print('port_monthly_simple_ret', str(100*port_monthly_simple_ret) + '%')
-        print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
-        port_annual_var: float = np.dot(self._weights.T, np.dot(self._dataSimpleCovarianceAnnual, self._weights))
-        port_annual_volatility: float = np.sqrt(port_annual_var)
-        port_annual_simple_ret: float = np.sum(self._dataSimpleReturns.mean() * self._weights) * 252
+        port_annual_var: float = round(np.dot(self._weights.T, np.dot(self._dataSimpleCovarianceAnnual, self._weights)), 5)
+        port_annual_volatility: float = round(np.sqrt(port_annual_var), 5)
+        port_annual_simple_ret: float = round(np.sum(self._dataSimpleReturns.mean() * self._weights) * 252, 5)
         print('Port Ann Ret', str(round(port_annual_var, 5)*100)+'%')
         print('Port Ann Volatility/ Risk', str(round(port_annual_volatility, 5)*100)+'%')
         print('Port Ann Variance', str(round(port_annual_simple_ret, 5)*100)+'%')
