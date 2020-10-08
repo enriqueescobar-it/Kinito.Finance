@@ -1,15 +1,22 @@
 import math
-from sklearn import preprocessing
-from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
-from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
-from pandas import DataFrame, np, Series
-from numpy import ndarray
-import seaborn as sns
+
 import matplotlib.pyplot as plt
-from heatmapcluster import heatmapcluster
+import seaborn as sns
+from numpy import ndarray
+from pandas import DataFrame, np, Series
+from scipy import stats
+from sklearn import preprocessing
+
+from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
+from Common.Measures.Time.TimeSpan import TimeSpan
+from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
+from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 
 
 class PortfolioComparator(AbstractPortfolioComparator):
+    _a_ts: TimeSpan
+    _alpha: float = -1.1
+    _beta: float = -1.1
     _a_float: float = -1.1
     _a_suffix: str = ''
     _a_length: int = -1
@@ -36,10 +43,12 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _portfolio_weighted_returns_geom: float = -1.1
     _portfolio_weighted_annual_std: float = -1.1
     _portfolio_weighted_sharpe_ratio: float = -1.1
+    _stock_market_index: AbstractStockMarketIndex
 
     def __init__(self, y_stocks: list):
         self._a_float = 3 * math.log(y_stocks[0].TimeSpan.MonthCount)
         self._a_suffix = y_stocks[0].SourceColumn
+        self._a_ts = y_stocks[0].TimeSpan
         self._a_length = len(y_stocks)
         iso_weight: float = round(1.0 / len(y_stocks), 3)
         self._stocks = y_stocks
@@ -96,7 +105,20 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        exit(111)
+        self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
+        stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
+        stock_market_returns[np.isnan(stock_market_returns)] = 1
+        sns.regplot(stock_market_returns.values, dataReturns_avg.values)
+        plt.xlabel('Benchmark Returns')
+        plt.ylabel('Portfolio Returns')
+        plt.title('Portfolio Returns vs Benchmark Returns')
+        plt.show()
+        (self._beta, self._alpha) = stats.linregress(stock_market_returns.values, dataReturns_avg.values)[0:2]
+        self._beta = round(self._beta, 5)
+        self._alpha = round(self._alpha, 5)
+        print(f'The portfolio beta is {self._beta}, for each 1% of index portfolio will move {self._beta}%')
+        print('The portfolio alpha is ', self._alpha)
+        exit(1000)
 
     def _setBasicData(self, y_stocks):
         for y_stock in y_stocks:
@@ -163,7 +185,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         portfolio_volatility = np.sqrt(np.dot(portfolio_weights.T, np.dot(cov_mat_annual, portfolio_weights)))
         print(portfolio_volatility)
         # Calculate the weighted stock returns
-        - norm base[0] * weights -> WeigtedData -> sum by row then *.sum(axis=1 to port value)
+        - norm base[0] * weights -> WeightedData -> sum by row then *.sum(axis=1 to port value)
         WeightedReturns = StockReturns.mul(portfolio_weights, axis=1)
         port_values = port_values[1:]
         - cum ret
