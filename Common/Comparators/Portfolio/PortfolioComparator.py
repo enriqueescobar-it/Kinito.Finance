@@ -38,6 +38,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataSimpleCorrelation: DataFrame = DataFrame()
     _dataSimpleCovariance: DataFrame = DataFrame()
     _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
+    _dataLogReturns: DataFrame = DataFrame()
     _portfolio_weighted_returns: Series = Series()
     _portfolio_weighted_returns_cum: Series = Series()
     _portfolio_weighted_returns_geom: float = -1.1
@@ -118,6 +119,10 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._alpha = round(self._alpha, 5)
         print(f'The portfolio beta is {self._beta}, for each 1% of index portfolio will move {self._beta}%')
         print('The portfolio alpha is ', self._alpha)
+        self._dataLogReturns = self._getLogReturns(self._data)
+        print('_', self._dataLogReturns.head())
+        cov_mat_annual = self._dataLogReturns.cov() * 252
+        print('-', cov_mat_annual)
         exit(1000)
 
     def _setBasicData(self, y_stocks):
@@ -199,6 +204,11 @@ class PortfolioComparator(AbstractPortfolioComparator):
         CumulativeReturns.plot()
         plt.show()
         '''
+
+    def _getLogReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = np.log(a_df/a_df.shift(1))
+        new_df.columns = new_df.columns.str.replace(self._a_suffix, 'LogReturn')
+        return new_df
 
     def PlotAllData(self):
         plt.style.use('seaborn')
