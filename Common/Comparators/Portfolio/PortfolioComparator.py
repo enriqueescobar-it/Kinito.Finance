@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from numpy import ndarray
 from pandas import DataFrame, np, Series
-from scipy import stats
 from sklearn import preprocessing
 
 from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
+from Common.Measures.Portfolio.PortfolioBeta import PortfolioBeta
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
@@ -56,7 +56,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._setBasicData(y_stocks)
         self._dataReturns = self._getDataReturns(self._data)
-        print('!', self._dataReturns.head())
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
         print('?', self._dataSimpleReturns.head())
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
@@ -114,11 +113,9 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.ylabel('Portfolio Returns')
         plt.title('Portfolio Returns vs Benchmark Returns')
         plt.show()
-        (self._beta, self._alpha) = stats.linregress(stock_market_returns.values, dataReturns_avg.values)[0:2]
-        self._beta = round(self._beta, 5)
-        self._alpha = round(self._alpha, 5)
-        print(f'The portfolio beta is {self._beta}, for each 1% of index portfolio will move {self._beta}%')
-        print('The portfolio alpha is ', self._alpha)
+        p_beta: PortfolioBeta = PortfolioBeta(self._stock_market_index, self._dataReturns)
+        print(f'The portfolio beta is {p_beta.beta}, for each 1% of index portfolio will move {p_beta.beta}%')
+        print('The portfolio alpha is ', p_beta.alpha)
         self._dataLogReturns = self._getLogReturns(self._data)
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252

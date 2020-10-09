@@ -26,7 +26,7 @@ yahooPc.PlotAllHeatmaps().show()
 # sns.heatmap on corr
 # sns.clustermap on corr
 # df.iplot(kind='candle')
-# df[colname].ix[deltatime].ta_plot(study='sma',periods[12,21,55]) 'boll' => sma14, lowe14, upper14
+# df[colname].ix[deltatime].ta_plot(study='sma',periods[12,21,55]) 'boll' => sma14, lower14, upper14
 # EVal Perfo CALSSIFICATION ERROR METRICS
 # ...
 # Eval Perfo REGRESSION ERROR METRICS
