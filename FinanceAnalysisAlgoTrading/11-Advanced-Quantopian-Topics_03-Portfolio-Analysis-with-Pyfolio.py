@@ -24,7 +24,7 @@ bt_positions = bt.pyfolio_positions
 bt_transactions = bt.pyfolio_transactions
 bt_returns.plot()
 # In[46]:
-empyrical.beta(bt_returns,bm_returns)
+empyrical._beta(bt_returns, bm_returns)
 # # PyFolio Plots
 benchmark_rets = bm_returns
 # Cumulative Returns

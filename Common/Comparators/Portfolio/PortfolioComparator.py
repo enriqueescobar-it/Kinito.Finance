@@ -114,8 +114,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.title('Portfolio Returns vs Benchmark Returns')
         plt.show()
         p_beta: PortfolioBeta = PortfolioBeta(self._stock_market_index, self._dataReturns)
-        print(f'The portfolio beta is {p_beta.beta}, for each 1% of index portfolio will move {p_beta.beta}%')
-        print('The portfolio alpha is ', p_beta.alpha)
+        print(f'The portfolio beta is {p_beta.Beta}, for each 1% of index portfolio will move {p_beta.Beta}%')
+        print('The portfolio alpha is ', p_beta.Alpha)
         self._dataLogReturns = self._getLogReturns(self._data)
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
