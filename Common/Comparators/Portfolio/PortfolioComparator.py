@@ -56,6 +56,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._setBasicData(y_stocks)
         self._dataReturns = self._getDataReturns(self._data)
+        print('>', self._data.head())
+        exit(1000)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
         print('?', self._dataSimpleReturns.head())
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
