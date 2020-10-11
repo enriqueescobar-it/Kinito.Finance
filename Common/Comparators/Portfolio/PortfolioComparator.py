@@ -106,7 +106,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        p_stats: PortfolioStats = PortfolioStats(self._data)
+        p_stats: PortfolioStats = PortfolioStats(self._weights, self._data)
         exit(1000)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
         stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
