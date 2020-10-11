@@ -8,6 +8,7 @@ from sklearn import preprocessing
 
 from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
 from Common.Measures.Portfolio.PortfolioBeta import PortfolioBeta
+from Common.Measures.Portfolio.PortfolioStats import PortfolioStats
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
@@ -56,8 +57,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._setBasicData(y_stocks)
         self._dataReturns = self._getDataReturns(self._data)
-        print('>', self._data.head())
-        exit(1000)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
         print('?', self._dataSimpleReturns.head())
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
@@ -107,6 +106,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
+        p_stats: PortfolioStats = PortfolioStats(self._data)
+        exit(1000)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
         stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
         stock_market_returns[np.isnan(stock_market_returns)] = 1
