@@ -8,13 +8,19 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _annual_ret_std: float = -1.1
     _geom_avg_annual_ret: float = -1.1
     _simple_daily_returns: DataFrame = DataFrame()
+    _log_daily_returns: DataFrame = DataFrame()
+    _log_annual_cov_matrix: DataFrame = DataFrame()
     _simple_weighted_returns: DataFrame = DataFrame()
     _simple_cum_weighted_returns: DataFrame = DataFrame()
 
     def __init__(self, portfolio_weights: ndarray, portfolio_data: DataFrame = DataFrame()):
         print(portfolio_data.head(3))
-        self._simple_daily_returns: DataFrame = self._getSimpleDailyReturns(portfolio_data)
+        self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
         print(self._simple_daily_returns.head(3))
+        self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
+        print(self._log_daily_returns.head(3))
+        self._log_annual_cov_matrix = self._log_daily_returns.cov() * 252
+        print(self._log_annual_cov_matrix)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
         self._simple_weighted_returns['SimpleWeightedReturns'] = portfolio_weighted_returns
         print(self._simple_weighted_returns.head(3))
@@ -31,9 +37,15 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._annual_sharpe_ratio = round(self._annual_sharpe_ratio, 5)
 
     def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        a_df.columns = a_df.columns.str.replace('Adj Close', 'SimpleDailyRet')
+        new_df: DataFrame() = a_df.pct_change()[1:]
+        new_df.columns = new_df.columns.str.replace('Adj Close', 'SimpleDailyRet')
         # can do all lines but line 0 should be = 0
-        return a_df.pct_change()[1:]
+        return new_df
+
+    def _getLogDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame() = np.log(a_df/a_df.shift(1))
+        new_df.columns = new_df.columns.str.replace('Adj Close', 'LogDailyRet')
+        return new_df
 
     # volatility
     @property
@@ -51,6 +63,14 @@ class PortfolioStats(AbstractPortfolioMeasure):
     @property
     def SimpleDailyReturns(self):
         return self._simple_daily_returns
+
+    @property
+    def LogDailyReturns(self):
+        return self._log_daily_returns
+
+    @property
+    def LogAnnualCovarianceMatrix(self):
+        return self._log_annual_cov_matrix
 
     @property
     def SimpleWeightedReturns(self):
