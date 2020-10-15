@@ -22,26 +22,19 @@ class PortfolioOptim(AbstractPortfolioMeasure):
         # Creating an empty array to store portfolio sharpe ratio
         self._sharpe_ratio_matrix = np.zeros(self._threshold)
         self._setMatrices(portfolio_data, log_ret, cov_mat)
+        print('sharpe_ratio.max', self._sharpe_ratio_matrix.max())
+        print('portfolio_risk.min', self._risk_matrix.min())
         #col_names = portfolio_data.columns.str.replace('Adj Close', '')
         #print('col_names', col_names)
         min_risk_arr: np.ndarray = self._weight_matrix[self._risk_matrix.argmin()]
         print('min_risk_arr', min_risk_arr)
         self._min_risk_series = self._getMinimalRisk(min_risk_arr, portfolio_data.columns)
-        print('0', self._min_risk_series)
+        print(self._min_risk_series)
+        self._plotMinimalRisk()
         max_sharpe_ratio_arr: np.ndarray = self._weight_matrix[self._sharpe_ratio_matrix.argmax()]
         print('max_sharpe_ratio_arr', max_sharpe_ratio_arr)
-        print('sharpe_ratio.max', self._sharpe_ratio_matrix.max())
-        print('portfolio_risk.min', self._risk_matrix.min())
-        fig = plt.figure()
-        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-        ax1.set_xlabel('Asset')
-        ax1.set_ylabel('Weights')
-        ax1.set_title('Minimum Variance Portfolio weights')
-        self._min_risk_series.plot(kind='bar')
-        plt.setp(ax1.get_xticklabels(), rotation=45)
-        plt.show()
         max_sharpe_ratio_series = Series(max_sharpe_ratio_arr, index=portfolio_data.columns)
-        print('0', max_sharpe_ratio_series)
+        print(max_sharpe_ratio_series)
         #max_sr = max_sr.sort_values()
         #print('1', max_sr)
         fig = plt.figure()
@@ -81,6 +74,16 @@ class PortfolioOptim(AbstractPortfolioMeasure):
     def _getMinimalRisk(self, risk_arr: np.ndarray, col_names) -> Series:
         a_col_names = col_names.str.replace('Adj Close', 'risk')
         return Series(risk_arr, index=a_col_names)
+
+    def _plotMinimalRisk(self):
+        fig = plt.figure()
+        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        ax1.set_xlabel('Asset')
+        ax1.set_ylabel('Weights')
+        ax1.set_title('Minimum Variance Portfolio weights')
+        self._min_risk_series.plot(kind='bar')
+        plt.setp(ax1.get_xticklabels(), rotation=45)
+        plt.show()
 
     @property
     def MinimalRiskSeries(self):
