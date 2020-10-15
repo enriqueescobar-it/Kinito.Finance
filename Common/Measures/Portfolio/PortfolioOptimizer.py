@@ -27,8 +27,8 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         # Creating an empty array to store portfolio sharpe ratio
         self._sharpe_ratio_matrix = np.zeros(self._threshold)
         self._setMatrices(portfolio_data, log_ret, cov_mat)
-        print('sharpe_ratio.max', self._sharpe_ratio_matrix.max())
         print('portfolio_risk.min', self._risk_matrix.min())
+        print('sharpe_ratio.max', self._sharpe_ratio_matrix.max())
         self._min_risk_series = \
             self._getMinimalRisk(self._weight_matrix[self._risk_matrix.argmin()], portfolio_data.columns)
         print(self._min_risk_series)
@@ -52,7 +52,6 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         allocation, leftover = da.lp_portfolio()
         print("Discrete allocation:", allocation)
         print("Funds remaining: ${:.2f}".format(leftover))
-        exit(111)
 
     def _setMatrices(self, portfolio_data: DataFrame, log_ret: DataFrame, cov_mat: DataFrame):
         for i in range(self._threshold):
