@@ -1,6 +1,8 @@
 from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolioMeasure
 from pandas import DataFrame, np, Series
 import matplotlib.pyplot as plt
+import scipy.optimize as sco
+from scipy import stats
 
 
 class PortfolioOptim(AbstractPortfolioMeasure):
@@ -25,16 +27,12 @@ class PortfolioOptim(AbstractPortfolioMeasure):
         self._setMatrices(portfolio_data, log_ret, cov_mat)
         print('sharpe_ratio.max', self._sharpe_ratio_matrix.max())
         print('portfolio_risk.min', self._risk_matrix.min())
-        #col_names = portfolio_data.columns.str.replace('Adj Close', '')
-        #print('col_names', col_names)
-        min_risk_arr: np.ndarray = self._weight_matrix[self._risk_matrix.argmin()]
-        print('min_risk_arr', min_risk_arr)
-        self._min_risk_series = self._getMinimalRisk(min_risk_arr, portfolio_data.columns)
+        self._min_risk_series = \
+            self._getMinimalRisk(self._weight_matrix[self._risk_matrix.argmin()], portfolio_data.columns)
         print(self._min_risk_series)
         self._plotMinimalRisk()
-        max_sharpe_ratio_arr: np.ndarray = self._weight_matrix[self._sharpe_ratio_matrix.argmax()]
-        print('max_sharpe_ratio_arr', max_sharpe_ratio_arr)
-        self._max_sharpe_ratio_series = self._getMaximalSharpeRatio(max_sharpe_ratio_arr, portfolio_data.columns)
+        self._max_sharpe_ratio_series = \
+            self._getMaximalSharpeRatio(self._weight_matrix[self._sharpe_ratio_matrix.argmax()], portfolio_data.columns)
         print(self._max_sharpe_ratio_series)
         self._plotMaximalSharpeRatio()
         self._plotRiskReturns()
@@ -91,7 +89,8 @@ class PortfolioOptim(AbstractPortfolioMeasure):
         ax1.set_xlabel('Risk')
         ax1.set_ylabel('Returns')
         ax1.set_title('Portfolio optimization and Efficient Frontier')
-        plt.scatter(self._risk_matrix, self._annual_weighted_log_return_matrix)
+        plt.scatter(self._risk_matrix, self._annual_weighted_log_return_matrix, cmap='coolwarm')
+        plt.colorbar(label='Sharpe Ratio')
         plt.show()
 
     @property
