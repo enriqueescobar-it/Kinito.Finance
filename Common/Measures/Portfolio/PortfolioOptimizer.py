@@ -1,8 +1,10 @@
 from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolioMeasure
 from pandas import DataFrame, np, Series
 import matplotlib.pyplot as plt
-import scipy.optimize as sco
-from scipy import stats
+from pypfopt.efficient_frontier import EfficientFrontier
+from pypfopt import risk_models
+from pypfopt import expected_returns
+from pypfopt.discrete_allocation import DiscreteAllocation, get_latest_prices
 
 
 class PortfolioOptimizer(AbstractPortfolioMeasure):
@@ -36,6 +38,21 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         print(self._max_sharpe_ratio_series)
         self._plotMaximalSharpeRatio()
         self._plotRiskReturns()
+        mu = expected_returns.mean_historical_return(portfolio_data)  # returns.mean() * 252
+        S = risk_models.sample_cov(portfolio_data)  # Get the sample covariance matrix
+        ef = EfficientFrontier(mu, S)
+        weights = ef.max_sharpe()  # Maximize the Sharpe ratio, and get the raw weights
+        cleaned_weights = ef.clean_weights()
+        print(
+            cleaned_weights)  # Note the weights may have some rounding error, meaning they may not add up exactly to 1 but should be close
+        ef.portfolio_performance(verbose=True)
+        latest_prices = get_latest_prices(portfolio_data)
+        weights = cleaned_weights
+        da = DiscreteAllocation(weights, latest_prices, total_portfolio_value=10000)
+        allocation, leftover = da.lp_portfolio()
+        print("Discrete allocation:", allocation)
+        print("Funds remaining: ${:.2f}".format(leftover))
+        exit(111)
 
     def _setMatrices(self, portfolio_data: DataFrame, log_ret: DataFrame, cov_mat: DataFrame):
         for i in range(self._threshold):
@@ -60,6 +77,7 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         return Series(risk_arr, index=a_col_names)
 
     def _plotMinimalRisk(self):
+        plt.style.use('seaborn')
         fig = plt.figure()
         ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
         ax1.set_xlabel('Asset')
@@ -74,6 +92,7 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         return Series(sharpe_ratio_arr, index=a_col_names)
 
     def _plotMaximalSharpeRatio(self):
+        plt.style.use('seaborn')
         fig = plt.figure()
         ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
         ax1.set_xlabel('Asset')
@@ -84,13 +103,21 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         plt.show()
 
     def _plotRiskReturns(self):
+        plt.style.use('seaborn')
         fig = plt.figure()
         ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
         ax1.set_xlabel('Risk')
         ax1.set_ylabel('Returns')
         ax1.set_title('Portfolio optimization and Efficient Frontier')
-        plt.scatter(self._risk_matrix, self._annual_weighted_log_return_matrix, cmap='coolwarm')
+        plt.scatter(self._risk_matrix, self._annual_weighted_log_return_matrix,
+                    c=self._sharpe_ratio_matrix, cmap='coolwarm', marker='o', s=10, alpha=0.7)
         plt.colorbar(label='Sharpe Ratio')
+        plt.scatter(self._risk_matrix[self._sharpe_ratio_matrix.argmax()],
+                    self._annual_weighted_log_return_matrix[self._sharpe_ratio_matrix.argmax()],
+                    marker='*', color='red', s=500, edgecolors='black', label='Maximum Sharpe ratio')
+        plt.scatter(self._risk_matrix[self._risk_matrix.argmin()],
+                    self._annual_weighted_log_return_matrix[self._risk_matrix.argmin()],
+                    marker='*', color='blue', s=500, label='Minimum volatility')
         plt.show()
 
     @property
