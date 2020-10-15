@@ -5,7 +5,7 @@ import scipy.optimize as sco
 from scipy import stats
 
 
-class PortfolioOptim(AbstractPortfolioMeasure):
+class PortfolioOptimizer(AbstractPortfolioMeasure):
     _threshold: int = 5000
     _weight_matrix: np.ndarray
     _annual_weighted_log_return_matrix: np.ndarray

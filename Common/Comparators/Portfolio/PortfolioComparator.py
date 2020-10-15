@@ -8,7 +8,7 @@ from sklearn import preprocessing
 
 from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
 from Common.Measures.Portfolio.PortfolioBeta import PortfolioBeta
-from Common.Measures.Portfolio.PortfolioOptim import PortfolioOptim
+from Common.Measures.Portfolio.PortfolioOptimizer import PortfolioOptimizer
 from Common.Measures.Portfolio.PortfolioStats import PortfolioStats
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
@@ -108,8 +108,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
         p_stats: PortfolioStats = PortfolioStats(self._weights, self._data)
-        p_optim: PortfolioOptim = PortfolioOptim(self._data, p_stats.LogDailyReturns, p_stats.LogAnnualCovarianceMatrix)
-        exit(1000)
+        p_optim: PortfolioOptimizer = PortfolioOptimizer(self._data, p_stats.LogDailyReturns, p_stats.LogAnnualCovarianceMatrix)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
         stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
         stock_market_returns[np.isnan(stock_market_returns)] = 1
@@ -125,7 +124,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
         print('-', cov_mat_annual)
-        exit(1000)
 
     def _setBasicData(self, y_stocks):
         for y_stock in y_stocks:
