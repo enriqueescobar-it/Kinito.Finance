@@ -10,6 +10,7 @@ class PortfolioOptim(AbstractPortfolioMeasure):
     _risk_matrix: np.ndarray
     _sharpe_ratio_matrix: np.ndarray
     _min_risk_series: Series = Series()
+    _max_sharpe_ratio_series: Series = Series()
 
     def __init__(self, portfolio_data: DataFrame = DataFrame(), log_ret: DataFrame = DataFrame(),
                  cov_mat: DataFrame = DataFrame()):
@@ -33,25 +34,10 @@ class PortfolioOptim(AbstractPortfolioMeasure):
         self._plotMinimalRisk()
         max_sharpe_ratio_arr: np.ndarray = self._weight_matrix[self._sharpe_ratio_matrix.argmax()]
         print('max_sharpe_ratio_arr', max_sharpe_ratio_arr)
-        max_sharpe_ratio_series = Series(max_sharpe_ratio_arr, index=portfolio_data.columns)
-        print(max_sharpe_ratio_series)
-        #max_sr = max_sr.sort_values()
-        #print('1', max_sr)
-        fig = plt.figure()
-        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-        ax1.set_xlabel('Asset')
-        ax1.set_ylabel('Weights')
-        ax1.set_title('Tangency Portfolio weights')
-        max_sharpe_ratio_series.plot(kind='bar')
-        plt.setp(ax1.get_xticklabels(), rotation=45)
-        plt.show()
-        fig = plt.figure()
-        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-        ax1.set_xlabel('Risk')
-        ax1.set_ylabel('Returns')
-        ax1.set_title('Portfolio optimization and Efficient Frontier')
-        plt.scatter(self._risk_matrix, self._annual_weighted_log_return_matrix)
-        plt.show()
+        self._max_sharpe_ratio_series = self._getMaximalSharpeRatio(max_sharpe_ratio_arr, portfolio_data.columns)
+        print(self._max_sharpe_ratio_series)
+        self._plotMaximalSharpeRatio()
+        self._plotRiskReturns()
 
     def _setMatrices(self, portfolio_data: DataFrame, log_ret: DataFrame, cov_mat: DataFrame):
         for i in range(self._threshold):
@@ -85,6 +71,33 @@ class PortfolioOptim(AbstractPortfolioMeasure):
         plt.setp(ax1.get_xticklabels(), rotation=45)
         plt.show()
 
+    def _getMaximalSharpeRatio(self, sharpe_ratio_arr: np.ndarray, col_names) -> Series:
+        a_col_names = col_names.str.replace('Adj Close', 'ShareRatio')
+        return Series(sharpe_ratio_arr, index=a_col_names)
+
+    def _plotMaximalSharpeRatio(self):
+        fig = plt.figure()
+        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        ax1.set_xlabel('Asset')
+        ax1.set_ylabel('Weights')
+        ax1.set_title('Maximal Sharpe Ratio Portfolio weights')
+        self._max_sharpe_ratio_series.plot(kind='bar')
+        plt.setp(ax1.get_xticklabels(), rotation=45)
+        plt.show()
+
+    def _plotRiskReturns(self):
+        fig = plt.figure()
+        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        ax1.set_xlabel('Risk')
+        ax1.set_ylabel('Returns')
+        ax1.set_title('Portfolio optimization and Efficient Frontier')
+        plt.scatter(self._risk_matrix, self._annual_weighted_log_return_matrix)
+        plt.show()
+
     @property
     def MinimalRiskSeries(self):
         return self._min_risk_series
+
+    @property
+    def MaximalSharpeRatio(self):
+        return self._max_sharpe_ratio_series
