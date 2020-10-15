@@ -87,7 +87,7 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         plt.show()
 
     def _getMaximalSharpeRatio(self, sharpe_ratio_arr: np.ndarray, col_names) -> Series:
-        a_col_names = col_names.str.replace('Adj Close', 'ShareRatio')
+        a_col_names = col_names.str.replace('Adj Close', 'SharpeRatio')
         return Series(sharpe_ratio_arr, index=a_col_names)
 
     def _plotMaximalSharpeRatio(self):
