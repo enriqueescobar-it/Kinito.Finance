@@ -37,7 +37,7 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
             self._getMaximalSharpeRatio(self._weight_matrix[self._sharpe_ratio_matrix.argmax()], portfolio_data.columns)
         print(self._max_sharpe_ratio_series)
         self._plotMaximalSharpeRatio()
-        self._plotRiskReturns()
+        self._plotRiskReturns(portfolio_data)
         mu = expected_returns.mean_historical_return(portfolio_data)  # returns.mean() * 252
         S = risk_models.sample_cov(portfolio_data)  # Get the sample covariance matrix
         ef = EfficientFrontier(mu, S)
@@ -101,13 +101,18 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         plt.setp(ax1.get_xticklabels(), rotation=45)
         plt.show()
 
-    def _plotRiskReturns(self):
+    def _plotRiskReturns(self, portfolio_data: DataFrame):
         plt.style.use('seaborn')
         fig = plt.figure()
         ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
         ax1.set_xlabel('Risk')
         ax1.set_ylabel('Returns')
         ax1.set_title('Portfolio optimization and Efficient Frontier')
+        for i, txt in enumerate(portfolio_data.columns):
+            ax1.annotate(txt,
+                         (self._risk_matrix[i], self._annual_weighted_log_return_matrix[i]),
+                         xytext=(10, 0),
+                         arrowprops=dict(facecolor='black', shrink=0.05), textcoords='offset points')
         plt.scatter(self._risk_matrix, self._annual_weighted_log_return_matrix,
                     c=self._sharpe_ratio_matrix, cmap='coolwarm', marker='o', s=10, alpha=0.7)
         plt.colorbar(label='Sharpe Ratio')
