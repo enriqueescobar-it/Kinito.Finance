@@ -29,7 +29,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _data: DataFrame = DataFrame()
     _dataWeightedReturns: DataFrame = DataFrame()
     _dataNorm: DataFrame = DataFrame()
-    _dataNormL1: DataFrame = DataFrame()
     _dataBin: DataFrame = DataFrame()
     _dataReturns: DataFrame = DataFrame()
     _dataSimple: DataFrame = DataFrame()
@@ -63,7 +62,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._data = self._basics.Data
         self._dataBin = self._basics.DataBin
         self._dataNorm = self._basics.DataNorm
-        self._dataNormL1 = self._basics.DataNormL1
         self._stats: PortfolioStats = PortfolioStats(self._weights, self._data)
         self._dataReturns = self._getDataReturns(self._data)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
@@ -212,7 +210,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataNorm.plot(ax=ax[1], label=self._dataNorm.columns)
         ax[1].set(ylabel='Norm base t(0)')
         ax[1].legend(loc=self._legend_place, fontsize=8)
-        self._dataNormL1.plot(ax=ax[2], label=self._dataNormL1.columns)
+        self._basics.DataNormL1.plot(ax=ax[2], label=self._basics.DataNormL1.columns)
         ax[2].set(ylabel='Norm L1 base t(0)')
         ax[2].legend(loc=self._legend_place, fontsize=8)
         self._basics.DataScaled.plot(ax=ax[3], label=self._basics.DataScaled.columns)
