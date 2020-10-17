@@ -26,7 +26,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _weights: ndarray
     _legend_place: str = 'upper left'
     _dataWeightedReturns: DataFrame = DataFrame()
-    _dataReturns: DataFrame = DataFrame()
     _dataSimple: DataFrame = DataFrame()
     _dataSimpleReturns: DataFrame = DataFrame()
     _dataSimpleReturnsCumulative: DataFrame = DataFrame()
@@ -55,8 +54,10 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks)
         self._stats = PortfolioStats(self._weights, self._a_suffix, self._basics.Data)
-        self._dataReturns = self._getDataReturns(self._basics.Data)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._basics.Data)
+        print('-', self._stats.SimpleDailyReturns.head(3))
+        print('-', self._dataSimpleReturns.head(3))
+        exit(-7)
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
         #print(self._dataSimpleCorrelation)
         self._dataSimpleCovariance = self._dataSimpleReturns.cov()
@@ -84,10 +85,10 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_ret annual', self._portfolio_weighted_annual_std)
         self._portfolio_weighted_sharpe_ratio = round(self._portfolio_weighted_returns_geom / self._portfolio_weighted_annual_std, 5)
         print('port_sharpe_ratio', self._portfolio_weighted_sharpe_ratio)
-        print('%', self._dataReturns.head())
-        dataReturns_avg: Series = self._getDataReturnsAverage(self._dataReturns)
+        print('%', self._stats.Returns.head())
+        dataReturns_avg: Series = self._getDataReturnsAverage(self._stats.Returns)
         print('^', dataReturns_avg.head())
-        daily_log_pct_changes: DataFrame = np.log(self._dataReturns.pct_change() + 1) #avant portfolio
+        daily_log_pct_changes: DataFrame = np.log(self._stats.Returns.pct_change() + 1) #avant portfolio
         daily_log_pct_changes.columns = daily_log_pct_changes.columns + 'LogReturn'
         print('&', daily_log_pct_changes.head())
         daily_log_volatilities: DataFrame = (daily_log_pct_changes.std() * np.sqrt(252)).to_frame()
@@ -113,19 +114,14 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.ylabel('Portfolio Returns')
         plt.title('Portfolio Returns vs Benchmark Returns')
         plt.show()
-        self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._dataReturns)
+        exit(-111)
+        self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._stats.Returns)
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)
         self._dataLogReturns = self._getLogReturns(self._basics.Data)
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
         print('-', cov_mat_annual)
-
-    def _getDataReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        new_df: DataFrame = (a_df / a_df.iloc[0]).fillna(method='backfill')
-        new_df.fillna(method='ffill', inplace=True)
-        new_df.columns = new_df.columns.str.replace(self._a_suffix, '')
-        return new_df
 
     def _getDataSimpleReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         # == (self._data / self._data.shift(1))-1
@@ -224,16 +220,16 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleReturns.plot(ax=ax[1], label=self._dataSimpleReturns.columns)
         ax[1].set(ylabel='Simple Return - Volatility')
         ax[1].legend(loc=self._legend_place)
-        self._dataReturns.plot(ax=ax[2], label=self._dataReturns.columns)
+        self._stats.Returns.plot(ax=ax[2], label=self._stats.Returns.columns)
         ax[2].set(ylabel='Returns')
         ax[2].legend(loc=self._legend_place)
         plt.tight_layout()
         return plt
 
     def PlotAllHeatmaps(self):
-        prf_returns = (self._dataReturns.pct_change() + 1)[1:]
+        prf_returns = (self._stats.Returns.pct_change() + 1)[1:]
         avg_return = (prf_returns-1).mean()
-        daily_pct_change = np.log(self._dataReturns.pct_change() + 1)
+        daily_pct_change = np.log(self._stats.Returns.pct_change() + 1)
         vols = daily_pct_change.std() * np.sqrt(252)
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31'

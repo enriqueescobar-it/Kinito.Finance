@@ -13,6 +13,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _annual_ret_std: float = -1.1
     _geom_avg_annual_ret: float = -1.1
     _column: str = 'Adj Close'
+    _returns: DataFrame = DataFrame()
     _simple_daily_returns: DataFrame = DataFrame()
     _log_daily_returns: DataFrame = DataFrame()
     _simple_weighted_returns: DataFrame = DataFrame()
@@ -21,6 +22,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
     def __init__(self, portfolio_weights: ndarray, a_str: str = 'Adj Close', portfolio_data: DataFrame = DataFrame()):
         print(portfolio_data.head(3))
         self._column = a_str
+        self._returns = self._getReturns(portfolio_data)
         self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
         self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
@@ -30,6 +32,15 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._geom_avg_annual_ret = self._getGeomAvgAnnualRet(portfolio_weighted_returns)
         self._annual_ret_std = self._getAnnualReturnStd(portfolio_weighted_returns)
         self._annual_sharpe_ratio = self._getAnnualSharpeRatio()
+
+    def __roundFloat(self, a_float: float) -> float:
+        return round(a_float, 5)
+
+    def _getReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = (a_df / a_df.iloc[0]).fillna(method='backfill')
+        new_df.fillna(method='ffill', inplace=True)
+        new_df.columns = new_df.columns.str.replace(self._column, '')
+        return new_df
 
     def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame() = a_df.pct_change()[1:]
@@ -51,9 +62,6 @@ class PortfolioStats(AbstractPortfolioMeasure):
     def _getAnnualSharpeRatio(self) -> float:
         return self.__roundFloat(self._geom_avg_annual_ret / self._annual_ret_std)
 
-    def __roundFloat(self, a_float: float) -> float:
-        return round(a_float, 5)
-
     # volatility
     @property
     def AnnualStdDeviation(self):
@@ -66,6 +74,10 @@ class PortfolioStats(AbstractPortfolioMeasure):
     @property
     def AnnualSharpeRatio(self):
         return self._annual_sharpe_ratio
+
+    @property
+    def Returns(self):
+        return self._returns
 
     @property
     def SimpleDailyReturns(self):
