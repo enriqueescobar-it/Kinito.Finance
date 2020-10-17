@@ -57,7 +57,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._stats = PortfolioStats(self._weights, self._a_suffix, self._basics.Data)
         self._dataReturns = self._getDataReturns(self._basics.Data)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._basics.Data)
-        print('?', self._dataSimpleReturns.head())
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
         #print(self._dataSimpleCorrelation)
         self._dataSimpleCovariance = self._dataSimpleReturns.cov()

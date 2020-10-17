@@ -12,46 +12,47 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _annual_sharpe_ratio: float = -1.1
     _annual_ret_std: float = -1.1
     _geom_avg_annual_ret: float = -1.1
+    _column: str = 'Adj Close'
     _simple_daily_returns: DataFrame = DataFrame()
     _log_daily_returns: DataFrame = DataFrame()
-    _log_annual_cov_matrix: DataFrame = DataFrame()
     _simple_weighted_returns: DataFrame = DataFrame()
     _simple_cum_weighted_returns: DataFrame = DataFrame()
 
     def __init__(self, portfolio_weights: ndarray, a_str: str = 'Adj Close', portfolio_data: DataFrame = DataFrame()):
         print(portfolio_data.head(3))
-        self._simple_daily_returns = self._getSimpleDailyReturns(a_str, portfolio_data)
-        print(self._simple_daily_returns.head(3))
-        self._log_daily_returns = self._getLogDailyReturns(a_str, portfolio_data)
-        print(self._log_daily_returns.head(3))
-        self._log_annual_cov_matrix = self._log_daily_returns.cov() * 252
-        print(self._log_annual_cov_matrix)
+        self._column = a_str
+        self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
+        self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
         self._simple_weighted_returns['SimpleWeightedReturns'] = portfolio_weighted_returns
-        print(self._simple_weighted_returns.head(3))
         portfolio_cum_weighted_returns: Series = (portfolio_weighted_returns + 1).cumprod()
         self._simple_cum_weighted_returns['SimpleCumWeightedReturns'] = portfolio_cum_weighted_returns
-        print(self._simple_cum_weighted_returns.head(3))
-        self._geom_avg_annual_ret: float =\
-            np.prod(portfolio_weighted_returns + 1) ** (252 / portfolio_weighted_returns.shape[0]) - 1
-        self._geom_avg_annual_ret = round(self._geom_avg_annual_ret, 5)
-        # print(self._geom_avg_annual_ret)
-        self._annual_ret_std: float = np.std(portfolio_weighted_returns) * np.sqrt(252)
-        self._annual_ret_std = round(self._annual_ret_std, 5)
-        # print(self._annual_ret_std)
-        self._annual_sharpe_ratio: float = self._geom_avg_annual_ret / self._annual_ret_std
-        self._annual_sharpe_ratio = round(self._annual_sharpe_ratio, 5)
+        self._geom_avg_annual_ret = self._getGeomAvgAnnualRet(portfolio_weighted_returns)
+        self._annual_ret_std = self._getAnnualReturnStd(portfolio_weighted_returns)
+        self._annual_sharpe_ratio = self._getAnnualSharpeRatio()
 
-    def _getSimpleDailyReturns(self, a_str: str, a_df: DataFrame = DataFrame()) -> DataFrame:
+    def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame() = a_df.pct_change()[1:]
-        new_df.columns = new_df.columns.str.replace(a_str, 'SimpleDailyRet')
+        new_df.columns = new_df.columns.str.replace(self._column, 'SimpleDailyRet')
         # can do all lines but line 0 should be = 0
         return new_df
 
-    def _getLogDailyReturns(self, a_str: str, a_df: DataFrame = DataFrame()) -> DataFrame:
+    def _getLogDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame() = np.log(a_df / a_df.shift(1))
-        new_df.columns = new_df.columns.str.replace(a_str, 'LogDailyRet')
+        new_df.columns = new_df.columns.str.replace(self._column, 'LogDailyRet')
         return new_df
+
+    def _getGeomAvgAnnualRet(self, a_series: Series = Series()) -> float:
+        return self.__roundFloat(np.prod(a_series + 1) ** (252 / a_series.shape[0]) - 1)
+
+    def _getAnnualReturnStd(self, a_series: Series = Series()) -> float:
+        return self.__roundFloat(np.std(a_series) * np.sqrt(252))
+
+    def _getAnnualSharpeRatio(self) -> float:
+        return self.__roundFloat(self._geom_avg_annual_ret / self._annual_ret_std)
+
+    def __roundFloat(self, a_float: float) -> float:
+        return round(a_float, 5)
 
     # volatility
     @property
@@ -75,8 +76,24 @@ class PortfolioStats(AbstractPortfolioMeasure):
         return self._log_daily_returns
 
     @property
+    def LogDailyCovarianceMatrix(self):
+        return self._log_daily_returns.cov()
+
+    @property
+    def LogWeeklyCovarianceMatrix(self):
+        return self._log_daily_returns.cov() * 5
+
+    @property
+    def LogMonthlyCovarianceMatrix(self):
+        return self._log_daily_returns.cov() * 21
+
+    @property
+    def LogQuarterlyCovarianceMatrix(self):
+        return self._log_daily_returns.cov() * 63
+
+    @property
     def LogAnnualCovarianceMatrix(self):
-        return self._log_annual_cov_matrix
+        return self._log_daily_returns.cov() * 252
 
     @property
     def SimpleWeightedReturns(self):
