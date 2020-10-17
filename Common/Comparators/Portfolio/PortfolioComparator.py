@@ -7,7 +7,7 @@ from pandas import DataFrame, np, Series
 from sklearn import preprocessing
 
 from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
-from Common.Measures.Portfolio.PortfolioBeta import PortfolioBeta
+from Common.Measures.Portfolio.PortfolioLinearReg import PortfolioLinearReg
 from Common.Measures.Portfolio.PortfolioOptimizer import PortfolioOptimizer
 from Common.Measures.Portfolio.PortfolioStats import PortfolioStats
 from Common.Measures.Time.TimeSpan import TimeSpan
@@ -47,6 +47,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _portfolio_weighted_annual_std: float = -1.1
     _portfolio_weighted_sharpe_ratio: float = -1.1
     _stock_market_index: AbstractStockMarketIndex
+    _linear_reg: PortfolioLinearReg
+    _stats: PortfolioStats
 
     def __init__(self, y_stocks: list):
         self._a_float = 3 * math.log(y_stocks[0].TimeSpan.MonthCount)
@@ -57,6 +59,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._setBasicData(y_stocks)
+        self._stats: PortfolioStats = PortfolioStats(self._weights, self._data)
         self._dataReturns = self._getDataReturns(self._data)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
         print('?', self._dataSimpleReturns.head())
@@ -107,8 +110,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        p_stats: PortfolioStats = PortfolioStats(self._weights, self._data)
-        p_optim: PortfolioOptimizer = PortfolioOptimizer(p_stats, self._data)
+        p_optim: PortfolioOptimizer = PortfolioOptimizer(self._stats, self._data)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
         stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
         stock_market_returns[np.isnan(stock_market_returns)] = 1
@@ -117,9 +119,9 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.ylabel('Portfolio Returns')
         plt.title('Portfolio Returns vs Benchmark Returns')
         plt.show()
-        p_beta: PortfolioBeta = PortfolioBeta(self._stock_market_index, self._dataReturns)
-        print(f'The portfolio beta is {p_beta.Beta}, for each 1% of index portfolio will move {p_beta.Beta}%')
-        print('The portfolio alpha is ', p_beta.Alpha)
+        self._linear_reg: PortfolioLinearReg = PortfolioLinearReg(self._stock_market_index, self._dataReturns)
+        print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
+        print('The portfolio alpha is ', self._linear_reg.Alpha)
         self._dataLogReturns = self._getLogReturns(self._data)
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252

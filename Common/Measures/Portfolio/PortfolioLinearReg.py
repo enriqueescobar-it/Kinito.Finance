@@ -6,7 +6,7 @@ from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolio
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
 
 
-class PortfolioBeta(AbstractPortfolioMeasure):
+class PortfolioLinearReg(AbstractPortfolioMeasure):
     _index: AbstractStockMarketIndex
     _alpha: float = -1.1
     _beta: float = -1.1
