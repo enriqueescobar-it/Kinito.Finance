@@ -266,12 +266,24 @@ class PortfolioComparator(AbstractPortfolioComparator):
             ax.annotate(txt, (vols[i], avg_return[i]))
         plt.tight_layout()
         plt.show()
-        sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=False, col_cluster=True, fmt='.2%')
-        #cm = sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
-        #print('CM', cm) CM <seaborn.matrix.ClusterGrid object at 0x000001B927DDD520>
+        fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
+        fig.suptitle('Main Heat Map')
+        plt.title('Heat Map', fontsize=18)
+        ax.title.set_position([0.5, 1.05])
+        ax.set_xticks([])
+        sns.heatmap(self._dataSimpleCorrelation, cmap='coolwarm', annot=True, fmt='.2%', ax=ax)
+        #sns.clustermap(self._dataSimpleCorrelation, cmap='coolwarm', annot=True, row_cluster=False, col_cluster=True, fmt='.2%')
+        ##cm = sns.clustermap(self._dataSimpleCorrelation, cmap="coolwarm", annot=True, row_cluster=True, col_cluster=True)
+        ##print('CM', cm) CM <seaborn.matrix.ClusterGrid object at 0x000001B927DDD520>
         plt.tight_layout()
         plt.show()
-        sns.clustermap(self._dataSimpleCovarianceAnnual, cmap="coolwarm", annot=True, row_cluster=False, col_cluster=True, fmt='.2%')
+        fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
+        fig.suptitle('Main Heat Map')
+        plt.title('Heat Map', fontsize=18)
+        ax.title.set_position([0.5, 1.05])
+        ax.set_xticks([])
+        sns.heatmap(self._dataSimpleCovarianceAnnual, cmap="coolwarm", annot=True, fmt='.2%', ax=ax)
+        #sns.clustermap(self._dataSimpleCovarianceAnnual, cmap="coolwarm", annot=True, row_cluster=False, col_cluster=True, fmt='.2%')
         plt.tight_layout()
         return plt
 
