@@ -20,20 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/PortfolioBasics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/66_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/66_time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/73_fx_macd_renk.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/73_fx_macd_renk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/76_sma_crossover_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/AlgorithmicTradingAndQuantitativeAnalysis/Examples/76_sma_crossover_v2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/AutoUpdatingDataVizWithMatplotlibAWS/script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Comparators/Portfolio/PortfolioComparator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Comparators/Portfolio/PortfolioComparator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Measures/Portfolio/PortfolioBeta.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/PortfolioLinearReg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YahooTickerDownloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/YahooTickerDownloader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script" beforeDir="false" afterPath="$PROJECT_DIR$/script_.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Extract-FinViz.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Extract-FinViz.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yahoo-ticker-downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/yahoo-ticker-downloader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

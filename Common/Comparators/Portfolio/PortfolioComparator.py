@@ -49,6 +49,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _stock_market_index: AbstractStockMarketIndex
     _linear_reg: PortfolioLinearReg
     _stats: PortfolioStats
+    _optimizer: PortfolioOptimizer
 
     def __init__(self, y_stocks: list):
         self._a_float = 3 * math.log(y_stocks[0].TimeSpan.MonthCount)
@@ -110,7 +111,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        p_optim: PortfolioOptimizer = PortfolioOptimizer(self._stats, self._data)
+        self._optimizer = PortfolioOptimizer(self._stats, self._data)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
         stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
         stock_market_returns[np.isnan(stock_market_returns)] = 1
@@ -119,7 +120,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.ylabel('Portfolio Returns')
         plt.title('Portfolio Returns vs Benchmark Returns')
         plt.show()
-        self._linear_reg: PortfolioLinearReg = PortfolioLinearReg(self._stock_market_index, self._dataReturns)
+        self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._dataReturns)
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)
         self._dataLogReturns = self._getLogReturns(self._data)
@@ -290,5 +291,5 @@ class PortfolioComparator(AbstractPortfolioComparator):
         return plt
 
     @property
-    def data(self):
+    def Data(self):
         return self._data

@@ -35,13 +35,13 @@ exit(333)
 # Mean Absolute Error MAE
 # Mean Squared Error MSE
 # Root Mean Squared Error RMSE
-sns.pairplot(yahooPc.data)
+sns.pairplot(yahooPc.Data)
 plt.show()
-print('data', yahooPc.data.shape)
-len80: int = ceil(round(len(yahooPc.data)*0.8, 0))
+print('data', yahooPc.Data.shape)
+len80: int = ceil(round(len(yahooPc.Data) * 0.8, 0))
 print(len80)
-X = yahooPc.data.iloc[:, 0][0:len80]
-y = yahooPc.data.iloc[:, 0][len80:]
+X = yahooPc.Data.iloc[:, 0][0:len80]
+y = yahooPc.Data.iloc[:, 0][len80:]
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.8, random_state=101)
 from sklearn.linear_model import LinearRegression
