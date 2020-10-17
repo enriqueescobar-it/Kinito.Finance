@@ -1,6 +1,11 @@
 from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolioMeasure
 from pandas import DataFrame, np, Series
 from numpy import ndarray
+from math import sqrt
+from scipy.cluster.vq import kmeans, vq
+from sklearn.cluster import KMeans
+from pylab import plot, show
+from numpy import vstack, array
 
 
 class PortfolioStats(AbstractPortfolioMeasure):
@@ -27,12 +32,13 @@ class PortfolioStats(AbstractPortfolioMeasure):
         portfolio_cum_weighted_returns: Series = (portfolio_weighted_returns + 1).cumprod()
         self._simple_cum_weighted_returns['SimpleCumWeightedReturns'] = portfolio_cum_weighted_returns
         print(self._simple_cum_weighted_returns.head(3))
-        self._geom_avg_annual_ret: float = np.prod(portfolio_weighted_returns + 1) ** (252 / portfolio_weighted_returns.shape[0]) - 1
+        self._geom_avg_annual_ret: float =\
+            np.prod(portfolio_weighted_returns + 1) ** (252 / portfolio_weighted_returns.shape[0]) - 1
         self._geom_avg_annual_ret = round(self._geom_avg_annual_ret, 5)
-        #print(self._geom_avg_annual_ret)
+        # print(self._geom_avg_annual_ret)
         self._annual_ret_std: float = np.std(portfolio_weighted_returns) * np.sqrt(252)
         self._annual_ret_std = round(self._annual_ret_std, 5)
-        #print(self._annual_ret_std)
+        # print(self._annual_ret_std)
         self._annual_sharpe_ratio: float = self._geom_avg_annual_ret / self._annual_ret_std
         self._annual_sharpe_ratio = round(self._annual_sharpe_ratio, 5)
 
@@ -43,7 +49,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
         return new_df
 
     def _getLogDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        new_df: DataFrame() = np.log(a_df/a_df.shift(1))
+        new_df: DataFrame() = np.log(a_df / a_df.shift(1))
         new_df.columns = new_df.columns.str.replace('Adj Close', 'LogDailyRet')
         return new_df
 
