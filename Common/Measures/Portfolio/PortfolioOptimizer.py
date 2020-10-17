@@ -6,6 +6,8 @@ from pypfopt import risk_models
 from pypfopt import expected_returns
 from pypfopt.discrete_allocation import DiscreteAllocation, get_latest_prices
 
+from Common.Measures.Portfolio.PortfolioStats import PortfolioStats
+
 
 class PortfolioOptimizer(AbstractPortfolioMeasure):
     _threshold: int = 5000
@@ -16,8 +18,7 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
     _min_risk_series: Series = Series()
     _max_sharpe_ratio_series: Series = Series()
 
-    def __init__(self, portfolio_data: DataFrame = DataFrame(), log_ret: DataFrame = DataFrame(),
-                 cov_mat: DataFrame = DataFrame()):
+    def __init__(self, p_stats: PortfolioStats, portfolio_data: DataFrame = DataFrame()):
         # Creating an empty array to store portfolio weights
         self._weight_matrix = np.zeros((self._threshold, len(portfolio_data.columns)))
         # Creating an empty array to store portfolio returns
@@ -26,7 +27,7 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         self._risk_matrix = np.zeros(self._threshold)
         # Creating an empty array to store portfolio sharpe ratio
         self._sharpe_ratio_matrix = np.zeros(self._threshold)
-        self._setMatrices(portfolio_data, log_ret, cov_mat)
+        self._setMatrices(portfolio_data, p_stats.LogDailyReturns, p_stats.LogAnnualCovarianceMatrix)
         print('portfolio_risk.min', self._risk_matrix.min())
         print('sharpe_ratio.max', self._sharpe_ratio_matrix.max())
         self._min_risk_series = \
