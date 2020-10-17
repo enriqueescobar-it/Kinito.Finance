@@ -28,7 +28,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _legend_place: str = 'upper left'
     _data: DataFrame = DataFrame()
     _dataWeightedReturns: DataFrame = DataFrame()
-    _dataNorm: DataFrame = DataFrame()
     _dataBin: DataFrame = DataFrame()
     _dataReturns: DataFrame = DataFrame()
     _dataSimple: DataFrame = DataFrame()
@@ -61,7 +60,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._a_title = self._basics.Title
         self._data = self._basics.Data
         self._dataBin = self._basics.DataBin
-        self._dataNorm = self._basics.DataNorm
         self._stats: PortfolioStats = PortfolioStats(self._weights, self._data)
         self._dataReturns = self._getDataReturns(self._data)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
@@ -207,7 +205,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._data.plot(ax=ax[0], label=self._data.columns)
         ax[0].set(ylabel='Price $USD')
         ax[0].legend(loc=self._legend_place, fontsize=8)
-        self._dataNorm.plot(ax=ax[1], label=self._dataNorm.columns)
+        self._basics.DataNorm.plot(ax=ax[1], label=self._basics.DataNorm.columns)
         ax[1].set(ylabel='Norm base t(0)')
         ax[1].legend(loc=self._legend_place, fontsize=8)
         self._basics.DataNormL1.plot(ax=ax[2], label=self._basics.DataNormL1.columns)
