@@ -18,11 +18,11 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _simple_weighted_returns: DataFrame = DataFrame()
     _simple_cum_weighted_returns: DataFrame = DataFrame()
 
-    def __init__(self, portfolio_weights: ndarray, portfolio_data: DataFrame = DataFrame()):
+    def __init__(self, portfolio_weights: ndarray, a_str: str = 'Adj Close', portfolio_data: DataFrame = DataFrame()):
         print(portfolio_data.head(3))
-        self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
+        self._simple_daily_returns = self._getSimpleDailyReturns(a_str, portfolio_data)
         print(self._simple_daily_returns.head(3))
-        self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
+        self._log_daily_returns = self._getLogDailyReturns(a_str, portfolio_data)
         print(self._log_daily_returns.head(3))
         self._log_annual_cov_matrix = self._log_daily_returns.cov() * 252
         print(self._log_annual_cov_matrix)
@@ -42,15 +42,15 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._annual_sharpe_ratio: float = self._geom_avg_annual_ret / self._annual_ret_std
         self._annual_sharpe_ratio = round(self._annual_sharpe_ratio, 5)
 
-    def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+    def _getSimpleDailyReturns(self, a_str: str, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame() = a_df.pct_change()[1:]
-        new_df.columns = new_df.columns.str.replace('Adj Close', 'SimpleDailyRet')
+        new_df.columns = new_df.columns.str.replace(a_str, 'SimpleDailyRet')
         # can do all lines but line 0 should be = 0
         return new_df
 
-    def _getLogDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+    def _getLogDailyReturns(self, a_str: str, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame() = np.log(a_df / a_df.shift(1))
-        new_df.columns = new_df.columns.str.replace('Adj Close', 'LogDailyRet')
+        new_df.columns = new_df.columns.str.replace(a_str, 'LogDailyRet')
         return new_df
 
     # volatility
