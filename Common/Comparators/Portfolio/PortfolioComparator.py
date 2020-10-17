@@ -25,7 +25,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _stocks: list
     _weights: ndarray
     _legend_place: str = 'upper left'
-    _data: DataFrame = DataFrame()
     _dataWeightedReturns: DataFrame = DataFrame()
     _dataReturns: DataFrame = DataFrame()
     _dataSimple: DataFrame = DataFrame()
@@ -55,10 +54,9 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks)
-        self._data = self._basics.Data
-        self._stats: PortfolioStats = PortfolioStats(self._weights, self._data)
-        self._dataReturns = self._getDataReturns(self._data)
-        self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
+        self._stats: PortfolioStats = PortfolioStats(self._weights, self._basics.Data)
+        self._dataReturns = self._getDataReturns(self._basics.Data)
+        self._dataSimpleReturns = self._getDataSimpleReturns(self._basics.Data)
         print('?', self._dataSimpleReturns.head())
         self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
         #print(self._dataSimpleCorrelation)
@@ -107,7 +105,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        self._optimizer = PortfolioOptimizer(self._stats, self._data)
+        self._optimizer = PortfolioOptimizer(self._stats, self._basics.Data)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
         stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
         stock_market_returns[np.isnan(stock_market_returns)] = 1
@@ -119,7 +117,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._dataReturns)
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)
-        self._dataLogReturns = self._getLogReturns(self._data)
+        self._dataLogReturns = self._getLogReturns(self._basics.Data)
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
         print('-', cov_mat_annual)
@@ -198,7 +196,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(5, 1, figsize=(self._a_float, self._a_float/2.0), sharex=True)
         fig.suptitle(self._basics.Title)
-        self._data.plot(ax=ax[0], label=self._data.columns)
+        self._basics.Data.plot(ax=ax[0], label=self._basics.Data.columns)
         ax[0].set(ylabel='Price $USD')
         ax[0].legend(loc=self._legend_place, fontsize=8)
         self._basics.DataNorm.plot(ax=ax[1], label=self._basics.DataNorm.columns)
@@ -272,4 +270,4 @@ class PortfolioComparator(AbstractPortfolioComparator):
 
     @property
     def Data(self):
-        return self._data
+        return self._basics.Data
