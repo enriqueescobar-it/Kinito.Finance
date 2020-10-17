@@ -14,6 +14,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _geom_avg_annual_ret: float = -1.1
     _column: str = 'Adj Close'
     _returns: DataFrame = DataFrame()
+    _simple_returns: DataFrame = DataFrame()
     _simple_daily_returns: DataFrame = DataFrame()
     _log_daily_returns: DataFrame = DataFrame()
     _simple_weighted_returns: DataFrame = DataFrame()
@@ -23,6 +24,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
         print(portfolio_data.head(3))
         self._column = a_str
         self._returns = self._getReturns(portfolio_data)
+        self._simple_returns = self._getSimpleReturnsNan(portfolio_data)
         self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
         self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
@@ -40,6 +42,12 @@ class PortfolioStats(AbstractPortfolioMeasure):
         new_df: DataFrame = (a_df / a_df.iloc[0]).fillna(method='backfill')
         new_df.fillna(method='ffill', inplace=True)
         new_df.columns = new_df.columns.str.replace(self._column, '')
+        return new_df
+
+    def _getSimpleReturnsNan(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        # == (self._data / self._data.shift(1))-1
+        new_df: DataFrame = a_df.pct_change(1)
+        new_df.columns = new_df.columns.str.replace(self._column, 'SimpleReturns')
         return new_df
 
     def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
@@ -78,6 +86,10 @@ class PortfolioStats(AbstractPortfolioMeasure):
     @property
     def Returns(self):
         return self._returns
+
+    @property
+    def SimpleReturnsNan(self):
+        return self._simple_returns
 
     @property
     def SimpleDailyReturns(self):

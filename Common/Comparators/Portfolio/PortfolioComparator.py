@@ -27,7 +27,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _legend_place: str = 'upper left'
     _dataWeightedReturns: DataFrame = DataFrame()
     _dataSimple: DataFrame = DataFrame()
-    _dataSimpleReturns: DataFrame = DataFrame()
     _dataSimpleReturnsCumulative: DataFrame = DataFrame()
     _dataSimpleCorrelation: DataFrame = DataFrame()
     _dataSimpleCovariance: DataFrame = DataFrame()
@@ -54,20 +53,18 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks)
         self._stats = PortfolioStats(self._weights, self._a_suffix, self._basics.Data)
-        self._dataSimpleReturns = self._getDataSimpleReturns(self._basics.Data)
-        print('-', self._stats.SimpleDailyReturns.head(3))
-        print('-', self._dataSimpleReturns.head(3))
-        exit(-7)
-        self._dataSimpleCorrelation = self._dataSimpleReturns.corr()
+        print('-', self._stats.SimpleReturnsNan.head(3))
+        self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         #print(self._dataSimpleCorrelation)
-        self._dataSimpleCovariance = self._dataSimpleReturns.cov()
+        self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         #print(self._dataSimpleCovariance)
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
         #print(self._dataSimpleCovarianceAnnual)
-        self._dataSimpleReturnsCumulative = self._getDataSimpleReturnsCumulative(self._dataSimpleReturns)
+        self._dataSimpleReturnsCumulative = self._getDataSimpleReturnsCumulative(self._stats.SimpleReturnsNan)
         print('~', self._dataSimpleReturnsCumulative.head())
-        self._dataSimple = self._getDataSimple(self._dataSimpleReturns)
-        self._dataWeightedReturns = self._getDataWeighted(self._dataSimpleReturns)
+        #exit(-7)
+        self._dataSimple = self._getDataSimple(self._stats.SimpleReturnsNan)
+        self._dataWeightedReturns = self._getDataWeighted(self._stats.SimpleReturnsNan)
         print('#', self._dataWeightedReturns.head())
         # axis =1 tells pandas we want to add the rows
         self._portfolio_weighted_returns = round(self._dataWeightedReturns.sum(axis=1), 5)
@@ -94,7 +91,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         daily_log_volatilities: DataFrame = (daily_log_pct_changes.std() * np.sqrt(252)).to_frame()
         daily_log_volatilities.columns = ['Volatility']
         print('*', daily_log_volatilities)
-        port_daily_simple_ret: float = round(np.sum(self._dataSimpleReturns.mean()*self._weights), 5)
+        port_daily_simple_ret: float = round(np.sum(self._stats.SimpleReturnsNan.mean()*self._weights), 5)
         port_weekly_simple_ret: float = round(4.856 * port_daily_simple_ret, 5)
         port_monthly_simple_ret: float = round(21 * port_daily_simple_ret, 5)
         port_quarterly_simple_ret: float = round(63 * port_daily_simple_ret, 5)
@@ -114,7 +111,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.ylabel('Portfolio Returns')
         plt.title('Portfolio Returns vs Benchmark Returns')
         plt.show()
-        exit(-111)
+        #exit(-111)
         self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._stats.Returns)
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)
@@ -122,12 +119,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
         print('-', cov_mat_annual)
-
-    def _getDataSimpleReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        # == (self._data / self._data.shift(1))-1
-        new_df: DataFrame = a_df.pct_change(1)
-        new_df.columns = new_df.columns.str.replace(self._a_suffix, 'SimpleReturns')
-        return new_df
 
     def _getDataSimpleReturnsCumulative(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame = (a_df + 1).cumprod()
@@ -157,7 +148,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     def _setPortfolioInfo(self):
         port_annual_var: float = round(np.dot(self._weights.T, np.dot(self._dataSimpleCovarianceAnnual, self._weights)), 5)
         port_annual_volatility: float = round(np.sqrt(port_annual_var), 5)
-        port_annual_simple_ret: float = round(np.sum(self._dataSimpleReturns.mean() * self._weights) * 252, 5)
+        port_annual_simple_ret: float = round(np.sum(self._stats.SimpleReturnsNan.mean() * self._weights) * 252, 5)
         print('Port Ann Ret', str(round(port_annual_var, 5)*100)+'%')
         print('Port Ann Volatility/ Risk', str(round(port_annual_volatility, 5)*100)+'%')
         print('Port Ann Variance', str(round(port_annual_simple_ret, 5)*100)+'%')
@@ -217,7 +208,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleReturnsCumulative.plot(ax=ax[0], label=self._dataSimpleReturnsCumulative.columns)
         ax[0].set(ylabel='Simple Return - Cumulative')
         ax[0].legend(loc=self._legend_place)
-        self._dataSimpleReturns.plot(ax=ax[1], label=self._dataSimpleReturns.columns)
+        self._stats.SimpleReturnsNan.plot(ax=ax[1], label=self._stats.SimpleReturnsNan.columns)
         ax[1].set(ylabel='Simple Return - Volatility')
         ax[1].legend(loc=self._legend_place)
         self._stats.Returns.plot(ax=ax[2], label=self._stats.Returns.columns)
