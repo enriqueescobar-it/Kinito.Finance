@@ -27,7 +27,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _legend_place: str = 'upper left'
     _dataWeightedReturns: DataFrame = DataFrame()
     _dataSimple: DataFrame = DataFrame()
-    _dataSimpleReturnsCumulative: DataFrame = DataFrame()
     _dataSimpleCorrelation: DataFrame = DataFrame()
     _dataSimpleCovariance: DataFrame = DataFrame()
     _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
@@ -53,17 +52,11 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks)
         self._stats = PortfolioStats(self._weights, self._a_suffix, self._basics.Data)
-        print('-', self._stats.SimpleReturnsNan.head(3))
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
-        #print(self._dataSimpleCorrelation)
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
-        #print(self._dataSimpleCovariance)
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
-        #print(self._dataSimpleCovarianceAnnual)
-        self._dataSimpleReturnsCumulative = self._getDataSimpleReturnsCumulative(self._stats.SimpleReturnsNan)
-        print('~', self._dataSimpleReturnsCumulative.head())
-        #exit(-7)
         self._dataSimple = self._getDataSimple(self._stats.SimpleReturnsNan)
+        #exit(-7)
         self._dataWeightedReturns = self._getDataWeighted(self._stats.SimpleReturnsNan)
         print('#', self._dataWeightedReturns.head())
         # axis =1 tells pandas we want to add the rows
@@ -119,11 +112,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
         print('-', cov_mat_annual)
-
-    def _getDataSimpleReturnsCumulative(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        new_df: DataFrame = (a_df + 1).cumprod()
-        new_df.columns = new_df.columns.str.replace('Returns', 'Cumulative')
-        return new_df
 
     def _getDataSimple(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame = DataFrame()
@@ -205,7 +193,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float/1.5), sharex=True)
         fig.suptitle(self._basics.Title)
-        self._dataSimpleReturnsCumulative.plot(ax=ax[0], label=self._dataSimpleReturnsCumulative.columns)
+        self._stats.SimpleReturnsNanCumulative.plot(ax=ax[0], label=self._stats.SimpleReturnsNanCumulative.columns)
         ax[0].set(ylabel='Simple Return - Cumulative')
         ax[0].legend(loc=self._legend_place)
         self._stats.SimpleReturnsNan.plot(ax=ax[1], label=self._stats.SimpleReturnsNan.columns)

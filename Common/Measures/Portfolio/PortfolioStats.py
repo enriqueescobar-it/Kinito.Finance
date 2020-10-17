@@ -15,6 +15,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _column: str = 'Adj Close'
     _returns: DataFrame = DataFrame()
     _simple_returns: DataFrame = DataFrame()
+    _simple_returns_cumulative: DataFrame = DataFrame()
     _simple_daily_returns: DataFrame = DataFrame()
     _log_daily_returns: DataFrame = DataFrame()
     _simple_weighted_returns: DataFrame = DataFrame()
@@ -25,6 +26,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._column = a_str
         self._returns = self._getReturns(portfolio_data)
         self._simple_returns = self._getSimpleReturnsNan(portfolio_data)
+        self._simple_returns_cumulative = self._getSimpleReturnsNanCumulative(self._simple_returns)
         self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
         self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
@@ -48,6 +50,11 @@ class PortfolioStats(AbstractPortfolioMeasure):
         # == (self._data / self._data.shift(1))-1
         new_df: DataFrame = a_df.pct_change(1)
         new_df.columns = new_df.columns.str.replace(self._column, 'SimpleReturns')
+        return new_df
+
+    def _getSimpleReturnsNanCumulative(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = (a_df + 1).cumprod()
+        new_df.columns = new_df.columns.str.replace('Returns', 'Cumulative')
         return new_df
 
     def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
@@ -92,8 +99,20 @@ class PortfolioStats(AbstractPortfolioMeasure):
         return self._simple_returns
 
     @property
+    def SimpleReturnsNanCumulative(self):
+        return self._simple_returns_cumulative
+
+    @property
     def SimpleDailyReturns(self):
         return self._simple_daily_returns
+
+    @property
+    def SimpleWeightedReturns(self):
+        return self._simple_weighted_returns
+
+    @property
+    def SimpleCumWeightedReturns(self):
+        return self._simple_cum_weighted_returns
 
     @property
     def LogDailyReturns(self):
@@ -118,11 +137,3 @@ class PortfolioStats(AbstractPortfolioMeasure):
     @property
     def LogAnnualCovarianceMatrix(self):
         return self._log_daily_returns.cov() * 252
-
-    @property
-    def SimpleWeightedReturns(self):
-        return self._simple_weighted_returns
-
-    @property
-    def SimpleCumWeightedReturns(self):
-        return self._simple_cum_weighted_returns
