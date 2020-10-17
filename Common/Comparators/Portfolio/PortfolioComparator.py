@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from numpy import ndarray
 from pandas import DataFrame, np, Series
-from sklearn import preprocessing
 
 from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
+from Common.Measures.Portfolio.PortfolioBasics import PortfolioBasics
 from Common.Measures.Portfolio.PortfolioLinearReg import PortfolioLinearReg
 from Common.Measures.Portfolio.PortfolioOptimizer import PortfolioOptimizer
 from Common.Measures.Portfolio.PortfolioStats import PortfolioStats
@@ -30,7 +30,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataWeightedReturns: DataFrame = DataFrame()
     _dataNorm: DataFrame = DataFrame()
     _dataNormL1: DataFrame = DataFrame()
-    _dataScaled: DataFrame = DataFrame()
     _dataSparsed: DataFrame = DataFrame()
     _dataBin: DataFrame = DataFrame()
     _dataReturns: DataFrame = DataFrame()
@@ -47,6 +46,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _portfolio_weighted_annual_std: float = -1.1
     _portfolio_weighted_sharpe_ratio: float = -1.1
     _stock_market_index: AbstractStockMarketIndex
+    _basics: PortfolioBasics
     _linear_reg: PortfolioLinearReg
     _stats: PortfolioStats
     _optimizer: PortfolioOptimizer
@@ -59,7 +59,13 @@ class PortfolioComparator(AbstractPortfolioComparator):
         iso_weight: float = round(1.0 / len(y_stocks), 3)
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
-        self._setBasicData(y_stocks)
+        self._basics = PortfolioBasics(y_stocks)
+        self._a_title = self._basics.Title
+        self._data = self._basics.Data
+        self._dataBin = self._basics.DataBin
+        self._dataNorm = self._basics.DataNorm
+        self._dataNormL1 = self._basics.DataNormL1
+        self._dataSparsed = self._basics.DataSparse
         self._stats: PortfolioStats = PortfolioStats(self._weights, self._data)
         self._dataReturns = self._getDataReturns(self._data)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
@@ -127,22 +133,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
         print('-', cov_mat_annual)
-
-    def _setBasicData(self, y_stocks):
-        for y_stock in y_stocks:
-            print('stock EPS:', y_stock.Ticker + str(y_stock.FvEPS))
-            self._a_title += y_stock.Ticker + ' '
-            self._data[y_stock.Ticker + y_stock.SourceColumn] = y_stock.Data[y_stock.SourceColumn]
-            self._dataBin[y_stock.Ticker + 'Binary'] = y_stock.Data['Binary']
-            self._dataNorm[y_stock.Ticker + 'Norm'] = y_stock.Data['Norm']
-            #self._dataNormL1[y_stock.Ticker + 'NormL1'] = y_stock.Data['NormL1']
-            self._dataSparsed[y_stock.Ticker + 'Sparse'] = y_stock.Data['Sparse']
-            #self._dataScaled[y_stock.Ticker + 'Scaled'] = y_stock.Data['Scaled']
-        arrayNormL1 = preprocessing.normalize(self._data, norm='l1')
-        self._dataNormL1 = DataFrame(arrayNormL1, columns=self._data.columns, index=self._data.index)
-        arrayScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self._data)
-        self._dataScaled = DataFrame(arrayScaled, columns=self._data.columns, index=self._data.index)
-        self._dataSparsed = DataFrame(preprocessing.scale(self._data), columns=self._data.columns, index=self._data.index)
 
     def _getDataReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame = (a_df / a_df.iloc[0]).fillna(method='backfill')
@@ -227,7 +217,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataNormL1.plot(ax=ax[2], label=self._dataNormL1.columns)
         ax[2].set(ylabel='Norm L1 base t(0)')
         ax[2].legend(loc=self._legend_place, fontsize=8)
-        self._dataScaled.plot(ax=ax[3], label=self._dataScaled.columns)
+        self._basics.DataScaled.plot(ax=ax[3], label=self._basics.DataScaled.columns)
         ax[3].set(ylabel='Scaled values [0 - 1]')
         ax[3].legend(loc=self._legend_place, fontsize=8)
         self._dataSparsed.plot(ax=ax[4], label=self._dataSparsed.columns)
