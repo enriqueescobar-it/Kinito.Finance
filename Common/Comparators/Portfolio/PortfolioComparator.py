@@ -22,13 +22,11 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _a_float: float = -1.1
     _a_suffix: str = ''
     _a_length: int = -1
-    _a_title: str = 'Portfolio: '
     _stocks: list
     _weights: ndarray
     _legend_place: str = 'upper left'
     _data: DataFrame = DataFrame()
     _dataWeightedReturns: DataFrame = DataFrame()
-    _dataBin: DataFrame = DataFrame()
     _dataReturns: DataFrame = DataFrame()
     _dataSimple: DataFrame = DataFrame()
     _dataSimpleReturns: DataFrame = DataFrame()
@@ -57,9 +55,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks)
-        self._a_title = self._basics.Title
         self._data = self._basics.Data
-        self._dataBin = self._basics.DataBin
         self._stats: PortfolioStats = PortfolioStats(self._weights, self._data)
         self._dataReturns = self._getDataReturns(self._data)
         self._dataSimpleReturns = self._getDataSimpleReturns(self._data)
@@ -201,7 +197,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(5, 1, figsize=(self._a_float, self._a_float/2.0), sharex=True)
-        fig.suptitle(self._a_title)
+        fig.suptitle(self._basics.Title)
         self._data.plot(ax=ax[0], label=self._data.columns)
         ax[0].set(ylabel='Price $USD')
         ax[0].legend(loc=self._legend_place, fontsize=8)
@@ -224,7 +220,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float/1.5), sharex=True)
-        fig.suptitle(self._a_title)
+        fig.suptitle(self._basics.Title)
         self._dataSimpleReturnsCumulative.plot(ax=ax[0], label=self._dataSimpleReturnsCumulative.columns)
         ax[0].set(ylabel='Simple Return - Cumulative')
         ax[0].legend(loc=self._legend_place)
@@ -246,7 +242,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
         #print('AX', type(ax)) AX <class 'matplotlib.axes._subplots.AxesSubplot'>
-        fig.suptitle(self._a_title)
+        fig.suptitle(self._basics.Title)
         ax.set(ylabel='Simple Return Std', xlabel='Simple Return Mean')
         ax.scatter(vols, avg_return)
         for i, txt in enumerate(list(vols.index)):
