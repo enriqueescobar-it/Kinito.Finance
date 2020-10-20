@@ -26,7 +26,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _weights: ndarray
     _legend_place: str = 'upper left'
     _dataWeightedReturns: DataFrame = DataFrame()
-    _dataSimple: DataFrame = DataFrame()
+    _dataSimpleSummary: DataFrame = DataFrame()
     _dataSimpleCorrelation: DataFrame = DataFrame()
     _dataSimpleCovariance: DataFrame = DataFrame()
     _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
@@ -55,10 +55,11 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
-        self._dataSimple = self._getDataSimple(self._stats.SimpleReturnsNan)
-        #exit(-7)
+        self._dataSimpleSummary = self._stats.SimpleReturnsNanSummary
         self._dataWeightedReturns = self._getDataWeighted(self._stats.SimpleReturnsNan)
         print('#', self._dataWeightedReturns.head())
+        print(self._stats.SimpleWeightedReturns.head())
+        exit(-7)
         # axis =1 tells pandas we want to add the rows
         self._portfolio_weighted_returns = round(self._dataWeightedReturns.sum(axis=1), 5)
         #self._dataWeightedReturns['PORTFOLIOWeighted'] = portfolio_weighted_returns

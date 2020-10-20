@@ -16,6 +16,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _returns: DataFrame = DataFrame()
     _simple_returns: DataFrame = DataFrame()
     _simple_returns_cumulative: DataFrame = DataFrame()
+    _simple_returns_summary: DataFrame = DataFrame()
     _simple_daily_returns: DataFrame = DataFrame()
     _log_daily_returns: DataFrame = DataFrame()
     _simple_weighted_returns: DataFrame = DataFrame()
@@ -27,6 +28,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._returns = self._getReturns(portfolio_data)
         self._simple_returns = self._getSimpleReturnsNan(portfolio_data)
         self._simple_returns_cumulative = self._getSimpleReturnsNanCumulative(self._simple_returns)
+        self._simple_returns_summary = self._getSimpleReturnsNanSummary(self._simple_returns)
         self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
         self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
@@ -55,6 +57,13 @@ class PortfolioStats(AbstractPortfolioMeasure):
     def _getSimpleReturnsNanCumulative(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame = (a_df + 1).cumprod()
         new_df.columns = new_df.columns.str.replace('Returns', 'Cumulative')
+        return new_df
+
+    def _getSimpleReturnsNanSummary(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = DataFrame()
+        new_df['Volatility'] = a_df.std()
+        new_df['Daily'] = a_df.mean()
+        new_df['Variance'] = a_df.var()
         return new_df
 
     def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
@@ -97,6 +106,10 @@ class PortfolioStats(AbstractPortfolioMeasure):
     @property
     def SimpleReturnsNan(self):
         return self._simple_returns
+
+    @property
+    def SimpleReturnsNanSummary(self):
+        return self._simple_returns_summary
 
     @property
     def SimpleReturnsNanCumulative(self):
