@@ -51,7 +51,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks, self._a_float, self._legend_place)
-        self._stats = PortfolioStats(self._weights, self._a_suffix, self._basics.Data)
+        self._stats =\
+            PortfolioStats(self._weights, self._a_suffix, self._basics.Data, self._basics.Title, self._a_float, self._legend_place)
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
@@ -59,7 +60,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataWeightedReturns = self._getDataWeighted(self._stats.SimpleReturnsNan)
         print('#', self._dataWeightedReturns.head())
         print(self._stats.SimpleWeightedReturns.head())
-        #exit(-7)
+        exit(-7)
         # axis =1 tells pandas we want to add the rows
         self._portfolio_weighted_returns = round(self._dataWeightedReturns.sum(axis=1), 5)
         #self._dataWeightedReturns['PORTFOLIOWeighted'] = portfolio_weighted_returns
@@ -166,25 +167,11 @@ class PortfolioComparator(AbstractPortfolioComparator):
         new_df.columns = new_df.columns.str.replace(self._a_suffix, 'LogReturn')
         return new_df
 
-    def PlotBasics(self):
+    def PlotBasics(self) -> plt:
         return self._basics.Plot()
 
-    def PlotAllSimple(self):
-        plt.style.use('seaborn')
-        plt.rcParams['date.epoch'] = '0000-12-31'
-        fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float/1.5), sharex=True)
-        fig.suptitle(self._basics.Title)
-        self._stats.SimpleReturnsNanCumulative.plot(ax=ax[0], label=self._stats.SimpleReturnsNanCumulative.columns)
-        ax[0].set(ylabel='Simple Return - Cumulative')
-        ax[0].legend(loc=self._legend_place)
-        self._stats.SimpleReturnsNan.plot(ax=ax[1], label=self._stats.SimpleReturnsNan.columns)
-        ax[1].set(ylabel='Simple Return - Volatility')
-        ax[1].legend(loc=self._legend_place)
-        self._stats.Returns.plot(ax=ax[2], label=self._stats.Returns.columns)
-        ax[2].set(ylabel='Returns')
-        ax[2].legend(loc=self._legend_place)
-        plt.tight_layout()
-        return plt
+    def PlotStats(self) -> plt:
+        return self._stats.Plot()
 
     def PlotAllHeatmaps(self):
         prf_returns = (self._stats.Returns.pct_change() + 1)[1:]

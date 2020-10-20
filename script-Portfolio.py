@@ -16,7 +16,7 @@ for yahooTicker in yahooTickers:
 
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
 yahooPc.PlotBasics().show()
-yahooPc.PlotAllSimple().show()
+yahooPc.PlotStats().show()
 yahooPc.PlotAllHeatmaps().show()
 exit(333)
 # Explo Data Analysis

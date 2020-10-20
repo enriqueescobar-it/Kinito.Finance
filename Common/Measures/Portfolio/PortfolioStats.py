@@ -1,6 +1,7 @@
 from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolioMeasure
 from pandas import DataFrame, np, Series
 from numpy import ndarray
+import matplotlib.pyplot as plt
 from math import sqrt
 from scipy.cluster.vq import kmeans, vq
 from sklearn.cluster import KMeans
@@ -9,6 +10,9 @@ from numpy import vstack, array
 
 
 class PortfolioStats(AbstractPortfolioMeasure):
+    _a_title: str = ''
+    _a_float: float = -1.1
+    _legend_place: str = ''
     _annual_sharpe_ratio: float = -1.1
     _annual_ret_std: float = -1.1
     _geom_avg_annual_ret: float = -1.1
@@ -22,7 +26,11 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _simple_weighted_returns: DataFrame = DataFrame()
     _simple_cum_weighted_returns: DataFrame = DataFrame()
 
-    def __init__(self, portfolio_weights: ndarray, a_str: str = 'Adj Close', portfolio_data: DataFrame = DataFrame()):
+    def __init__(self, portfolio_weights: ndarray, a_str: str = 'Adj Close', portfolio_data: DataFrame = DataFrame(),
+                 a_title: str = '', a_float: float = -1.1, legend_place: str = ''):
+        self._a_float = a_float
+        self._a_title = a_title
+        self._legend_place = legend_place
         print(portfolio_data.head(3))
         self._column = a_str
         self._returns = self._getReturns(portfolio_data)
@@ -85,6 +93,23 @@ class PortfolioStats(AbstractPortfolioMeasure):
 
     def _getAnnualSharpeRatio(self) -> float:
         return self.__roundFloat(self._geom_avg_annual_ret / self._annual_ret_std)
+
+    def Plot(self) -> plt:
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
+        fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float/1.5), sharex=True)
+        fig.suptitle(self._a_title)
+        self._simple_returns_cumulative.plot(ax=ax[0], label=self._simple_returns_cumulative.columns)
+        ax[0].set(ylabel='Simple Return - Cumulative')
+        ax[0].legend(loc=self._legend_place)
+        self._simple_returns.plot(ax=ax[1], label=self._simple_returns.columns)
+        ax[1].set(ylabel='Simple Return - Volatility')
+        ax[1].legend(loc=self._legend_place)
+        self._returns.plot(ax=ax[2], label=self._returns.columns)
+        ax[2].set(ylabel='Returns')
+        ax[2].legend(loc=self._legend_place)
+        plt.tight_layout()
+        return plt
 
     # volatility
     @property
