@@ -50,7 +50,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         iso_weight: float = round(1.0 / len(y_stocks), 3)
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
-        self._basics = PortfolioBasics(y_stocks)
+        self._basics = PortfolioBasics(y_stocks, self._a_float, self._legend_place)
         self._stats = PortfolioStats(self._weights, self._a_suffix, self._basics.Data)
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
@@ -59,7 +59,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataWeightedReturns = self._getDataWeighted(self._stats.SimpleReturnsNan)
         print('#', self._dataWeightedReturns.head())
         print(self._stats.SimpleWeightedReturns.head())
-        exit(-7)
+        #exit(-7)
         # axis =1 tells pandas we want to add the rows
         self._portfolio_weighted_returns = round(self._dataWeightedReturns.sum(axis=1), 5)
         #self._dataWeightedReturns['PORTFOLIOWeighted'] = portfolio_weighted_returns
@@ -167,7 +167,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         return new_df
 
     def PlotAllData(self):
-        plt.style.use('seaborn')
+        return self._basics.Plot()
+        '''plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31'
         fig, ax = plt.subplots(5, 1, figsize=(self._a_float, self._a_float/2.0), sharex=True)
         fig.suptitle(self._basics.Title)
@@ -187,7 +188,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         ax[4].set(ylabel='Sparsed values')
         ax[4].legend(loc=self._legend_place, fontsize=8)
         plt.tight_layout()
-        return plt
+        return plt'''
 
     def PlotAllSimple(self):
         plt.style.use('seaborn')
