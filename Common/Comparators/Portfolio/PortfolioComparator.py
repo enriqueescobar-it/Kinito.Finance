@@ -57,9 +57,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
         self._dataSimpleSummary = self._stats.SimpleReturnsNanSummary
-        self._dataWeightedReturns = self._getDataWeighted(self._stats.SimpleReturnsNan)
-        print('#', self._dataWeightedReturns.head())
-        print(self._stats.SimpleWeightedReturns.head())
+        self._dataWeightedReturns = self._stats.SimpleWeightedReturns
         exit(-7)
         # axis =1 tells pandas we want to add the rows
         self._portfolio_weighted_returns = round(self._dataWeightedReturns.sum(axis=1), 5)
@@ -114,23 +112,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('_', self._dataLogReturns.head())
         cov_mat_annual = self._dataLogReturns.cov() * 252
         print('-', cov_mat_annual)
-
-    def _getDataSimple(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        new_df: DataFrame = DataFrame()
-        new_df['Volatility'] = a_df.std()
-        new_df['Daily'] = a_df.mean()
-        new_df['Variance'] = a_df.var()
-        return new_df
-
-    def _getDataWeighted(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        new_df: DataFrame = DataFrame()
-        for ind, column in enumerate(a_df.columns):
-            print('ind|col', str(ind) + '|' + column)
-            a_col: str = column.replace('Simple', 'Weighted')
-            new_df[a_col] = round(self._weights[ind] * a_df[column], 5)
-        new_df.fillna(method='ffill', inplace=True)
-        new_df.fillna(method='bfill', inplace=True)
-        return new_df
 
     def _getDataReturnsAverage(self, a_df: DataFrame = DataFrame()) -> Series:
         return a_df.iloc[:, 0:self._a_length].sum(axis=1) / self._a_length

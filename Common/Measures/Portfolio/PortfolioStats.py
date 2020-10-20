@@ -13,6 +13,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _a_title: str = ''
     _a_float: float = -1.1
     _legend_place: str = ''
+    _weights: ndarray
     _annual_sharpe_ratio: float = -1.1
     _annual_ret_std: float = -1.1
     _geom_avg_annual_ret: float = -1.1
@@ -24,7 +25,8 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _simple_daily_returns: DataFrame = DataFrame()
     _log_daily_returns: DataFrame = DataFrame()
     _simple_weighted_returns: DataFrame = DataFrame()
-    _simple_cum_weighted_returns: DataFrame = DataFrame()
+    _simple_weighted_returns_sum: DataFrame = DataFrame()
+    _simple_cum_weighted_returns_sum: DataFrame = DataFrame()
 
     def __init__(self, portfolio_weights: ndarray, a_str: str = 'Adj Close', portfolio_data: DataFrame = DataFrame(),
                  a_title: str = '', a_float: float = -1.1, legend_place: str = ''):
@@ -32,6 +34,7 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._a_title = a_title
         self._legend_place = legend_place
         print(portfolio_data.head(3))
+        self._weights = portfolio_weights
         self._column = a_str
         self._returns = self._getReturns(portfolio_data)
         self._simple_returns = self._getSimpleReturnsNan(portfolio_data)
@@ -39,10 +42,11 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._simple_returns_summary = self._getSimpleReturnsNanSummary(self._simple_returns)
         self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
         self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
+        self._simple_weighted_returns = self._getSimpleWeightedReturns(self._simple_returns)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
-        self._simple_weighted_returns['SimpleWeightedReturns'] = portfolio_weighted_returns
+        self._simple_weighted_returns_sum['SimpleWeightedReturns'] = portfolio_weighted_returns
         portfolio_cum_weighted_returns: Series = (portfolio_weighted_returns + 1).cumprod()
-        self._simple_cum_weighted_returns['SimpleCumWeightedReturns'] = portfolio_cum_weighted_returns
+        self._simple_cum_weighted_returns_sum['SimpleCumWeightedReturns'] = portfolio_cum_weighted_returns
         self._geom_avg_annual_ret = self._getGeomAvgAnnualRet(portfolio_weighted_returns)
         self._annual_ret_std = self._getAnnualReturnStd(portfolio_weighted_returns)
         self._annual_sharpe_ratio = self._getAnnualSharpeRatio()
@@ -93,6 +97,15 @@ class PortfolioStats(AbstractPortfolioMeasure):
 
     def _getAnnualSharpeRatio(self) -> float:
         return self.__roundFloat(self._geom_avg_annual_ret / self._annual_ret_std)
+
+    def _getSimpleWeightedReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = DataFrame()
+        for ind, column in enumerate(a_df.columns):
+            a_col: str = column.replace('Simple', 'SimpleWeighted')
+            new_df[a_col] = round(self._weights[ind] * a_df[column], 5)
+        new_df.fillna(method='ffill', inplace=True)
+        new_df.fillna(method='bfill', inplace=True)
+        return new_df
 
     def Plot(self) -> plt:
         plt.style.use('seaborn')
@@ -149,8 +162,12 @@ class PortfolioStats(AbstractPortfolioMeasure):
         return self._simple_weighted_returns
 
     @property
-    def SimpleCumWeightedReturns(self):
-        return self._simple_cum_weighted_returns
+    def SimpleWeightedReturnsSum(self):
+        return self._simple_weighted_returns_sum
+
+    @property
+    def SimpleCumWeightedReturnsSum(self):
+        return self._simple_cum_weighted_returns_sum
 
     @property
     def LogDailyReturns(self):
