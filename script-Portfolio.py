@@ -15,7 +15,7 @@ for yahooTicker in yahooTickers:
     print(yahooTicker)
 
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
-yahooPc.PlotAllData().show()
+yahooPc.PlotBasics().show()
 yahooPc.PlotAllSimple().show()
 yahooPc.PlotAllHeatmaps().show()
 exit(333)

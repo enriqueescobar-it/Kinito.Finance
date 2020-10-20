@@ -166,29 +166,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         new_df.columns = new_df.columns.str.replace(self._a_suffix, 'LogReturn')
         return new_df
 
-    def PlotAllData(self):
+    def PlotBasics(self):
         return self._basics.Plot()
-        '''plt.style.use('seaborn')
-        plt.rcParams['date.epoch'] = '0000-12-31'
-        fig, ax = plt.subplots(5, 1, figsize=(self._a_float, self._a_float/2.0), sharex=True)
-        fig.suptitle(self._basics.Title)
-        self._basics.Data.plot(ax=ax[0], label=self._basics.Data.columns)
-        ax[0].set(ylabel='Price $USD')
-        ax[0].legend(loc=self._legend_place, fontsize=8)
-        self._basics.DataNorm.plot(ax=ax[1], label=self._basics.DataNorm.columns)
-        ax[1].set(ylabel='Norm base t(0)')
-        ax[1].legend(loc=self._legend_place, fontsize=8)
-        self._basics.DataNormL1.plot(ax=ax[2], label=self._basics.DataNormL1.columns)
-        ax[2].set(ylabel='Norm L1 base t(0)')
-        ax[2].legend(loc=self._legend_place, fontsize=8)
-        self._basics.DataScaled.plot(ax=ax[3], label=self._basics.DataScaled.columns)
-        ax[3].set(ylabel='Scaled values [0 - 1]')
-        ax[3].legend(loc=self._legend_place, fontsize=8)
-        self._basics.DataSparse.plot(ax=ax[4], label=self._basics.DataSparse.columns)
-        ax[4].set(ylabel='Sparsed values')
-        ax[4].legend(loc=self._legend_place, fontsize=8)
-        plt.tight_layout()
-        return plt'''
 
     def PlotAllSimple(self):
         plt.style.use('seaborn')
