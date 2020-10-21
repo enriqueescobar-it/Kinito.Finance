@@ -1,4 +1,5 @@
 from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolioMeasure
+from Common.Measures.Portfolio.PortfolioBasics import PortfolioBasics
 from pandas import DataFrame, np, Series
 from numpy import ndarray
 import matplotlib.pyplot as plt
@@ -28,20 +29,20 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _simple_weighted_returns_sum: DataFrame = DataFrame()
     _simple_cum_weighted_returns_sum: DataFrame = DataFrame()
 
-    def __init__(self, portfolio_weights: ndarray, a_str: str = 'Adj Close', portfolio_data: DataFrame = DataFrame(),
-                 a_title: str = '', a_float: float = -1.1, legend_place: str = ''):
+    def __init__(self, portfolio_weights: ndarray, portfolio_basics: PortfolioBasics,
+                 a_str: str = 'Adj Close', a_float: float = -1.1, legend_place: str = ''):
         self._a_float = a_float
-        self._a_title = a_title
+        self._a_title = portfolio_basics.Title
         self._legend_place = legend_place
-        print(portfolio_data.head(3))
+        print(portfolio_basics.Data.head(3))
         self._weights = portfolio_weights
         self._column = a_str
-        self._returns = self._getReturns(portfolio_data)
-        self._simple_returns = self._getSimpleReturnsNan(portfolio_data)
+        self._returns = self._getReturns(portfolio_basics.Data)
+        self._simple_returns = self._getSimpleReturnsNan(portfolio_basics.Data)
         self._simple_returns_cumulative = self._getSimpleReturnsNanCumulative(self._simple_returns)
         self._simple_returns_summary = self._getSimpleReturnsNanSummary(self._simple_returns)
-        self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_data)
-        self._log_daily_returns = self._getLogDailyReturns(portfolio_data)
+        self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_basics.Data)
+        self._log_daily_returns = self._getLogDailyReturns(portfolio_basics.Data)
         self._simple_weighted_returns = self._getSimpleWeightedReturns(self._simple_returns)
         portfolio_weighted_returns: Series = (self._simple_daily_returns * portfolio_weights).sum(axis=1)
         self._simple_weighted_returns_sum['SimpleWeightedReturns'] = portfolio_weighted_returns
