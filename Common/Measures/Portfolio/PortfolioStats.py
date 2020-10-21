@@ -29,14 +29,13 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _simple_weighted_returns_sum: DataFrame = DataFrame()
     _simple_cum_weighted_returns_sum: DataFrame = DataFrame()
 
-    def __init__(self, portfolio_weights: ndarray, portfolio_basics: PortfolioBasics,
-                 a_str: str = 'Adj Close', a_float: float = -1.1, legend_place: str = ''):
+    def __init__(self, portfolio_weights: ndarray, portfolio_basics: PortfolioBasics, a_float: float = -1.1, legend_place: str = ''):
         self._a_float = a_float
         self._a_title = portfolio_basics.Title
         self._legend_place = legend_place
         print(portfolio_basics.Data.head(3))
         self._weights = portfolio_weights
-        self._column = a_str
+        self._column = portfolio_basics.Column
         self._returns = self._getReturns(portfolio_basics.Data)
         self._simple_returns = self._getSimpleReturnsNan(portfolio_basics.Data)
         self._simple_returns_cumulative = self._getSimpleReturnsNanCumulative(self._simple_returns)
