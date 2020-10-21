@@ -11,14 +11,10 @@ from numpy import vstack, array
 
 
 class PortfolioStats(AbstractPortfolioMeasure):
-    _a_title: str = ''
-    _a_float: float = -1.1
-    _legend_place: str = ''
     _weights: ndarray
     _annual_sharpe_ratio: float = -1.1
     _annual_ret_std: float = -1.1
     _geom_avg_annual_ret: float = -1.1
-    _column: str = 'Adj Close'
     _returns: DataFrame = DataFrame()
     _simple_returns: DataFrame = DataFrame()
     _simple_returns_cumulative: DataFrame = DataFrame()
@@ -28,14 +24,12 @@ class PortfolioStats(AbstractPortfolioMeasure):
     _simple_weighted_returns: DataFrame = DataFrame()
     _simple_weighted_returns_sum: DataFrame = DataFrame()
     _simple_cum_weighted_returns_sum: DataFrame = DataFrame()
+    _portfolio_basics: PortfolioBasics
 
-    def __init__(self, portfolio_weights: ndarray, portfolio_basics: PortfolioBasics, a_float: float = -1.1, legend_place: str = ''):
-        self._a_float = a_float
-        self._a_title = portfolio_basics.Title
-        self._legend_place = legend_place
+    def __init__(self, portfolio_weights: ndarray, portfolio_basics: PortfolioBasics):
+        self._portfolio_basics = portfolio_basics
         print(portfolio_basics.Data.head(3))
         self._weights = portfolio_weights
-        self._column = portfolio_basics.Column
         self._returns = self._getReturns(portfolio_basics.Data)
         self._simple_returns = self._getSimpleReturnsNan(portfolio_basics.Data)
         self._simple_returns_cumulative = self._getSimpleReturnsNanCumulative(self._simple_returns)
@@ -57,13 +51,13 @@ class PortfolioStats(AbstractPortfolioMeasure):
     def _getReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame = (a_df / a_df.iloc[0]).fillna(method='backfill')
         new_df.fillna(method='ffill', inplace=True)
-        new_df.columns = new_df.columns.str.replace(self._column, '')
+        new_df.columns = new_df.columns.str.replace(self._portfolio_basics.Column, '')
         return new_df
 
     def _getSimpleReturnsNan(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         # == (self._data / self._data.shift(1))-1
         new_df: DataFrame = a_df.pct_change(1)
-        new_df.columns = new_df.columns.str.replace(self._column, 'SimpleReturns')
+        new_df.columns = new_df.columns.str.replace(self._portfolio_basics.Column, 'SimpleReturns')
         return new_df
 
     def _getSimpleReturnsNanCumulative(self, a_df: DataFrame = DataFrame()) -> DataFrame:
@@ -80,13 +74,13 @@ class PortfolioStats(AbstractPortfolioMeasure):
 
     def _getSimpleDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame() = a_df.pct_change()[1:]
-        new_df.columns = new_df.columns.str.replace(self._column, 'SimpleDailyRet')
+        new_df.columns = new_df.columns.str.replace(self._portfolio_basics.Column, 'SimpleDailyRet')
         # can do all lines but line 0 should be = 0
         return new_df
 
     def _getLogDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame() = np.log(a_df / a_df.shift(1))
-        new_df.columns = new_df.columns.str.replace(self._column, 'LogDailyRet')
+        new_df.columns = new_df.columns.str.replace(self._portfolio_basics.Column, 'LogDailyRet')
         return new_df
 
     def _getGeomAvgAnnualRet(self, a_series: Series = Series()) -> float:
@@ -110,17 +104,17 @@ class PortfolioStats(AbstractPortfolioMeasure):
     def Plot(self) -> plt:
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31'
-        fig, ax = plt.subplots(3, 1, figsize=(self._a_float, self._a_float/1.5), sharex=True)
-        fig.suptitle(self._a_title)
+        fig, ax = plt.subplots(3, 1, figsize=(self._portfolio_basics.Size, self._portfolio_basics.Size/1.5), sharex=True)
+        fig.suptitle(self._portfolio_basics.Title)
         self._simple_returns_cumulative.plot(ax=ax[0], label=self._simple_returns_cumulative.columns)
         ax[0].set(ylabel='Simple Return - Cumulative')
-        ax[0].legend(loc=self._legend_place)
+        ax[0].legend(loc=self._portfolio_basics.LegendPlace)
         self._simple_returns.plot(ax=ax[1], label=self._simple_returns.columns)
         ax[1].set(ylabel='Simple Return - Volatility')
-        ax[1].legend(loc=self._legend_place)
+        ax[1].legend(loc=self._portfolio_basics.LegendPlace)
         self._returns.plot(ax=ax[2], label=self._returns.columns)
         ax[2].set(ylabel='Returns')
-        ax[2].legend(loc=self._legend_place)
+        ax[2].legend(loc=self._portfolio_basics.LegendPlace)
         plt.tight_layout()
         return plt
 

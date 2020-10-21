@@ -50,8 +50,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._stocks = y_stocks
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks, self._a_float, self._legend_place)
-        self._stats =\
-            PortfolioStats(self._weights, self._basics, self._a_float, self._legend_place)
+        self._stats = PortfolioStats(self._weights, self._basics)
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
