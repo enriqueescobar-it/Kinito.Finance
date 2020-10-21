@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 
 class PortfolioBasics(AbstractPortfolioMeasure):
     _a_title: str = ''
-    _a_float: float = -1.1
-    _a_suffix: str = ''
+    _size: float = -1.1
+    _column: str = ''
     _legend_place: str = ''
     _data: DataFrame = DataFrame()
     _dataBin: DataFrame = DataFrame()
@@ -18,9 +18,9 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     _dataLogReturns: DataFrame = DataFrame()
 
     def __init__(self, y_stocks: list, a_float: float, legend_place: str):
-        self._a_float = a_float
+        self._size = a_float
         self._legend_place = legend_place
-        self._a_suffix = y_stocks[0].SourceColumn
+        self._column = y_stocks[0].SourceColumn
         for y_stock in y_stocks:
             self._a_title += y_stock.Ticker + ' '
             self._data[y_stock.Ticker + y_stock.SourceColumn] = y_stock.Data[y_stock.SourceColumn]
@@ -36,15 +36,14 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         arrayScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self._data)
         self._dataScaled = DataFrame(arrayScaled, columns=self._data.columns, index=self._data.index)
         self._dataScaled.columns = self._dataScaled.columns.str.replace(y_stocks[0].SourceColumn, 'Scaled')
-        self._dataSparse = DataFrame(preprocessing.scale(self._data), columns=self._data.columns,
-                                     index=self._data.index)
+        self._dataSparse = DataFrame(preprocessing.scale(self._data), columns=self._data.columns, index=self._data.index)
         self._dataSparse.columns = self._dataSparse.columns.str.replace(y_stocks[0].SourceColumn, 'Sparse')
         self._dataLogReturns = self._getLogReturns(self._data)
 
     def Plot(self) -> plt:
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31'
-        fig, ax = plt.subplots(5, 1, figsize=(self._a_float, self._a_float/2.0), sharex=True)
+        fig, ax = plt.subplots(5, 1, figsize=(self._size, self._size / 2.0), sharex=True)
         fig.suptitle(self._a_title)
         self._data.plot(ax=ax[0], label=self._data.columns)
         ax[0].set(ylabel='Price $USD')
@@ -66,12 +65,12 @@ class PortfolioBasics(AbstractPortfolioMeasure):
 
     def _getLogReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame = np.log(a_df/a_df.shift(1))
-        new_df.columns = new_df.columns.str.replace(self._a_suffix, 'LogReturn')
+        new_df.columns = new_df.columns.str.replace(self._column, 'LogReturn')
         return new_df
 
     @property
-    def Title(self):
-        return self._a_title
+    def Column(self):
+        return self._column
 
     @property
     def Data(self):
@@ -100,3 +99,15 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     @property
     def DataLogReturns(self):
         return self._dataLogReturns
+
+    @property
+    def Size(self):
+        return self._size
+
+    @property
+    def LegendPlace(self):
+        return self._legend_place
+
+    @property
+    def Title(self):
+        return self._a_title
