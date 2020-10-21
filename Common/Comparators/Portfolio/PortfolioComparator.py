@@ -30,8 +30,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataSimpleCorrelation: DataFrame = DataFrame()
     _dataSimpleCovariance: DataFrame = DataFrame()
     _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
-    _dataLogReturns: DataFrame = DataFrame()
-    _portfolio_weighted_returns: Series = Series()
+    #_portfolio_weighted_returns: Series = Series()
     _portfolio_weighted_returns_cum: Series = Series()
     _portfolio_weighted_returns_geom: float = -1.1
     _portfolio_weighted_annual_std: float = -1.1
@@ -58,12 +57,14 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
         self._dataSimpleSummary = self._stats.SimpleReturnsNanSummary
         self._dataWeightedReturns = self._stats.SimpleWeightedReturns
-        exit(-7)
         # axis =1 tells pandas we want to add the rows
         self._portfolio_weighted_returns = round(self._dataWeightedReturns.sum(axis=1), 5)
+        print('7', self._portfolio_weighted_returns.head())
+        print('7', self._stats.SimpleWeightedReturnsSum.head())
         #self._dataWeightedReturns['PORTFOLIOWeighted'] = portfolio_weighted_returns
         portfolio_weighted_returns_mean = round(self._portfolio_weighted_returns.mean(), 5)
         print('port_ret mean', portfolio_weighted_returns_mean)
+        print(round(self._stats.SimpleWeightedReturnsSum.mean(), 5))
         portfolio_weighted_returns_std = round(self._portfolio_weighted_returns.std(), 5)
         print('port_ret std', portfolio_weighted_returns_std)
         self._portfolio_weighted_returns_cum: Series = round((self._portfolio_weighted_returns + 1).cumprod(), 5)
@@ -108,9 +109,9 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._stats.Returns)
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)
-        self._dataLogReturns = self._getLogReturns(self._basics.Data)
-        print('_', self._dataLogReturns.head())
-        cov_mat_annual = self._dataLogReturns.cov() * 252
+        print('_', self._basics.DataLogReturns.head())
+        exit(-7)
+        cov_mat_annual = self._basics.DataLogReturns.cov() * 252
         print('-', cov_mat_annual)
 
     def _getDataReturnsAverage(self, a_df: DataFrame = DataFrame()) -> Series:
@@ -142,11 +143,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         CumulativeReturns.plot()
         plt.show()
         '''
-
-    def _getLogReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
-        new_df: DataFrame = np.log(a_df/a_df.shift(1))
-        new_df.columns = new_df.columns.str.replace(self._a_suffix, 'LogReturn')
-        return new_df
 
     def PlotBasics(self) -> plt:
         return self._basics.Plot()

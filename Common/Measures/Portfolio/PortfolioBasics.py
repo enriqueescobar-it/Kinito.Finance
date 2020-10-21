@@ -1,5 +1,5 @@
 from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolioMeasure
-from pandas import DataFrame
+from pandas import DataFrame, np
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
 
@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 class PortfolioBasics(AbstractPortfolioMeasure):
     _a_title: str = ''
     _a_float: float = -1.1
+    _a_suffix: str = ''
     _legend_place: str = ''
     _data: DataFrame = DataFrame()
     _dataBin: DataFrame = DataFrame()
@@ -14,10 +15,12 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     _dataSparse: DataFrame = DataFrame()
     _dataNormL1: DataFrame = DataFrame()
     _dataScaled: DataFrame = DataFrame()
+    _dataLogReturns: DataFrame = DataFrame()
 
     def __init__(self, y_stocks: list, a_float: float, legend_place: str):
         self._a_float = a_float
         self._legend_place = legend_place
+        self._a_suffix = y_stocks[0].SourceColumn
         for y_stock in y_stocks:
             self._a_title += y_stock.Ticker + ' '
             self._data[y_stock.Ticker + y_stock.SourceColumn] = y_stock.Data[y_stock.SourceColumn]
@@ -36,6 +39,7 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         self._dataSparse = DataFrame(preprocessing.scale(self._data), columns=self._data.columns,
                                      index=self._data.index)
         self._dataSparse.columns = self._dataSparse.columns.str.replace(y_stocks[0].SourceColumn, 'Sparse')
+        self._dataLogReturns = self._getLogReturns(self._data)
 
     def Plot(self) -> plt:
         plt.style.use('seaborn')
@@ -59,6 +63,11 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         ax[4].legend(loc=self._legend_place, fontsize=8)
         plt.tight_layout()
         return plt
+
+    def _getLogReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = np.log(a_df/a_df.shift(1))
+        new_df.columns = new_df.columns.str.replace(self._a_suffix, 'LogReturn')
+        return new_df
 
     @property
     def Title(self):
@@ -87,3 +96,7 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     @property
     def DataScaled(self):
         return self._dataScaled
+
+    @property
+    def DataLogReturns(self):
+        return self._dataLogReturns
