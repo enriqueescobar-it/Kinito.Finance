@@ -16,6 +16,7 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     _dataNormL1: DataFrame = DataFrame()
     _dataScaled: DataFrame = DataFrame()
     _dataLogReturns: DataFrame = DataFrame()
+    _dataDailyReturns: DataFrame = DataFrame()
 
     def __init__(self, y_stocks: list, a_float: float, legend_place: str):
         self._size = a_float
@@ -39,6 +40,7 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         self._dataSparse = DataFrame(preprocessing.scale(self._data), columns=self._data.columns, index=self._data.index)
         self._dataSparse.columns = self._dataSparse.columns.str.replace(y_stocks[0].SourceColumn, 'Sparse')
         self._dataLogReturns = self._getLogReturns(self._data)
+        self._dataDailyReturns = self._getDailyReturns(self._data)
 
     def Plot(self) -> plt:
         plt.style.use('seaborn')
@@ -68,6 +70,14 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         new_df.columns = new_df.columns.str.replace(self._column, 'LogReturn')
         return new_df
 
+    def _getDailyReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        # == (self._data / self._data.shift(1))-1
+        #new_df: DataFrame = a_df.pct_change(1)
+        new_df: DataFrame = a_df.pct_change()
+        new_df.iloc[0, :] = 0
+        new_df.columns = new_df.columns.str.replace(self._column, 'DailyReturns')
+        return new_df
+
     @property
     def Column(self):
         return self._column
@@ -95,6 +105,10 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     @property
     def DataScaled(self):
         return self._dataScaled
+
+    @property
+    def DataDailyReturns(self):
+        return self._dataDailyReturns
 
     @property
     def DataLogReturns(self):

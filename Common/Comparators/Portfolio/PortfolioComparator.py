@@ -109,7 +109,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)
         print('_', self._basics.DataLogReturns.head())
-        exit(-7)
         cov_mat_annual = self._basics.DataLogReturns.cov() * 252
         print('-', cov_mat_annual)
 
