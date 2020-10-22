@@ -21,10 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/Timely/AbstractPortfolioTimely.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/Timely/PortfolioDaily.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/Timely/PortfolioMonthly.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/Timely/PortfolioQuarterly.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/Timely/PortfolioWeekly.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Common/Measures/Portfolio/Timely/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/DL_AZ-ArtNeuNets/ML_AZCodesAndDatasets.7z" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/DL_AZ-ArtNeuNets/Part3-RecurrentNN.7z" afterDir="false" />
@@ -112,8 +108,6 @@
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/softmax.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/titanic.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/winequality-red.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
