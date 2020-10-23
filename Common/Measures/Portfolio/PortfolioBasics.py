@@ -15,6 +15,7 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     _dataSparse: DataFrame = DataFrame()
     _dataNormL1: DataFrame = DataFrame()
     _dataScaled: DataFrame = DataFrame()
+    _dataSimpleReturns: DataFrame = DataFrame()
     _dataLogReturns: DataFrame = DataFrame()
     _dataDailyReturns: DataFrame = DataFrame()
 
@@ -39,6 +40,7 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         self._dataScaled.columns = self._dataScaled.columns.str.replace(y_stocks[0].SourceColumn, 'Scaled')
         self._dataSparse = DataFrame(preprocessing.scale(self._data), columns=self._data.columns, index=self._data.index)
         self._dataSparse.columns = self._dataSparse.columns.str.replace(y_stocks[0].SourceColumn, 'Sparse')
+        self._dataSimpleReturns = self._getSimpleReturns(self._data)
         self._dataLogReturns = self._getLogReturns(self._data)
         self._dataDailyReturns = self._getDailyReturns(self._data)
 
@@ -64,6 +66,12 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         ax[4].legend(loc=self._legend_place, fontsize=8)
         plt.tight_layout()
         return plt
+
+    def _getSimpleReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        new_df: DataFrame = (a_df / a_df.iloc[0]).fillna(method='backfill')
+        new_df.fillna(method='ffill', inplace=True)
+        new_df.columns = new_df.columns.str.replace(self._column, 'SimpleReturn')
+        return new_df
 
     def _getLogReturns(self, a_df: DataFrame = DataFrame()) -> DataFrame:
         new_df: DataFrame = np.log(a_df/a_df.shift(1))
@@ -109,6 +117,10 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     @property
     def DataDailyReturns(self):
         return self._dataDailyReturns
+
+    @property
+    def DataSimpleReturns(self):
+        return self._dataSimpleReturns
 
     @property
     def DataLogReturns(self):

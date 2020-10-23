@@ -30,7 +30,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('VOO')
+yahooStockOption: YahooStockOption = YahooStockOption('VIOO')
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -63,7 +63,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('VOO')
 # QCOM QQC-f QQQ RBA RCI RCI.B REAL.TO REGI ROK RUN RY RCI.B.TO RIOT
 # SU SU.TO SNA SBUX SHOP SPLK SPYD SJR.B SJR-B.TO SLV SNAP SNOW SPOT SOXL SRU.UN.TO.
 # T+ TD TDOC TEC.TO TEAM TFII TFII.TO+ TGT- TRMB TSLA TRP&TRP.TO TTD TOU.TO TROW TWLO TXN U UNM UNP UPWK
-# VDC VFC VFF VFV VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ V VOO+
+# VDC VFC VFF VFV VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ V VOO+ VOOG+ VNQ+ VIOO
 # WCN WCN.TO+ WELL WFG WMT- WORK XEI XIT XBC.TO XOM YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
 '''

@@ -30,11 +30,12 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._portfolio_basics = portfolio_basics
         #print(portfolio_basics.Data.head(3))
         self._weights = portfolio_weights
-        self._returns = self._getReturns(portfolio_basics.Data)
-        print(self._returns.head())
+        self._returns = portfolio_basics.DataSimpleReturns
+        print(self._returns.head(3))
         self._simple_returns = self._getSimpleReturnsNan(portfolio_basics.Data)
+        print(self._simple_returns.head(3))
         self._simple_returns_cumulative = self._getSimpleReturnsNanCumulative(self._simple_returns)
-        print(self._simple_returns_cumulative.head())
+        print(self._simple_returns_cumulative.head(3))
         exit(911)
         self._simple_returns_summary = self._getSimpleReturnsNanSummary(self._simple_returns)
         self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_basics.Data)
