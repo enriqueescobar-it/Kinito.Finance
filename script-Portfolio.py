@@ -5,10 +5,11 @@ import numpy as np
 from Common.Comparators.Portfolio.PortfolioComparator import PortfolioComparator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from typing import List
-yahooTickers: list = ['CNI', 'CP', 'TD', 'OTEX', 'AQN', 'WCN']
+yahooTickers: list = ['CNI', 'CP', 'TD', 'RY', 'OTEX', 'AQN', 'WCN', 'FTS', 'SU', 'VOO']#, 'PIODX', 'AIVSX']
     #['T', 'IBM', 'ABBV', 'GM', 'IRM', 'MPW', 'AGNC', 'PSEC', 'MAIN']
     #['VGT', 'VPU', 'VDC', 'VYM'], 'F', 'VYMI'
     #['CNI', 'CP', 'TD', 'OTEX', 'AQN', 'WCN']
+    #['MSFT', 'JNJ', 'T', 'PEP', 'ROIT']
 yahooStocks: list = list()
 for yahooTicker in yahooTickers:
     yahooStocks.append(YahooStockOption(yahooTicker))
