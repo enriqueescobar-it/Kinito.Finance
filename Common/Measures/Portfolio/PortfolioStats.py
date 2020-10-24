@@ -35,7 +35,6 @@ class PortfolioStats(AbstractPortfolioMeasure):
         self._simple_returns = portfolio_basics.DataDailyReturns
         self._simple_returns_cumulative = self._getSimpleReturnsNanCumulative(self._simple_returns)
         print(self._simple_returns_cumulative.head(3))
-        exit(911)
         self._simple_returns_summary = self._getSimpleReturnsNanSummary(self._simple_returns)
         self._simple_daily_returns = self._getSimpleDailyReturns(portfolio_basics.Data)
         self._log_daily_returns = self._getLogDailyReturns(portfolio_basics.Data)

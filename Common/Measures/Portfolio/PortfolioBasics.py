@@ -1,5 +1,5 @@
 from Common.Measures.Portfolio.AbstractPortfolioMeasure import AbstractPortfolioMeasure
-from pandas import DataFrame, np
+from pandas import DataFrame, Series, np
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
 
@@ -85,6 +85,36 @@ class PortfolioBasics(AbstractPortfolioMeasure):
         new_df.iloc[0, :] = 0
         new_df.columns = new_df.columns.str.replace(self._column, 'DailyReturns')
         return new_df
+
+    def _getSimpleReturnsDay(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        return self._setSimpleReturnsTimely('', a_df)
+
+    def _getSimpleReturnsWeek(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        return self._setSimpleReturnsTimely('W', a_df)
+
+    def _getSimpleReturnsMonth(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        return self._setSimpleReturnsTimely('M', a_df)
+
+    def _getSimpleReturnsQuarter(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        return self._setSimpleReturnsTimely('Q', a_df)
+
+    def _getSimpleReturnsAnnual(self, a_df: DataFrame = DataFrame()) -> DataFrame:
+        return self._setSimpleReturnsTimely('A', a_df)
+
+    def _setSimpleReturnsTimely(self, a_letter: str = '', a_df: DataFrame = DataFrame()) -> DataFrame:
+        if a_letter == 'W':
+            return a_df.resample('W').ffill().pct_change()#.to_frame()
+        elif a_letter == 'M':
+            return a_df.resample('M').ffill().pct_change()#.to_frame()
+        elif a_letter == 'Q':
+            return a_df.resample('Q').ffill().pct_change()#.to_frame()
+        elif a_letter == 'A':
+            return a_df.resample('A').ffill().pct_change()#.to_frame()
+        else:
+            return a_df.pct_change()#.to_frame()
+
+    def _setSimpleCumulative(self, a_df: DataFrame = DataFrame()):# -> Series:
+        return (a_df + 1).cumprod()
 
     @property
     def Column(self):
