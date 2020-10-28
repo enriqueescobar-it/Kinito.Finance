@@ -5,7 +5,14 @@ import numpy as np
 from Common.Comparators.Portfolio.PortfolioComparator import PortfolioComparator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from typing import List
-yahooTickers: list = ['MO', 'KO', 'JNJ', 'PG', 'CL']
+yahooTickers: list = ['T', 'IBM', 'ABBV', 'GM', 'F', 'IRM', 'MPW', 'AGNC', 'PSEC', 'MAIN']
+    #['T', 'MO', 'KO', 'PG', 'JNJ']
+    #['VOO', 'VOOG', 'CNI', 'CP', 'TD', 'RY', 'WCN', 'WM']
+    #['VOO', 'VOOG', 'ABBV', 'AAPL', 'MMM', 'BNS', 'CNI', 'CAT', 'CVX', 'KO', 'XOM', 'JNJ', 'LMT', 'MCD', 'PEP', 'O', 'RY', 'SO', 'SBUX', 'UNP', 'WM']
+    #['BNS', 'AAPL', 'ABBV', 'MMM', 'BRK.B', 'CNI', 'CAT', 'CVX', 'KO', 'XOM', 'JNJ', 'LMT', 'MCD', 'PEP', 'O', 'RY', 'SO', 'SBUX', 'UNP', 'WM']
+    #['VOO', 'VOOG'],
+    #['AMT', 'DLR', 'NNN', 'UHT', 'O']
+    #['MO', 'KO', 'JNJ', 'PG', 'CL']
     #['CNI', 'CP', 'TD', 'RY', 'OTEX', 'AQN', 'WCN', 'FTS', 'SU', 'VOO']#, 'PIODX', 'AIVSX']
     #['T', 'IBM', 'ABBV', 'GM', 'IRM', 'MPW', 'AGNC', 'PSEC', 'MAIN']
     #['VGT', 'VPU', 'VDC', 'VYM'], 'F', 'VYMI'
