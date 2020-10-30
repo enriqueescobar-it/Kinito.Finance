@@ -214,16 +214,19 @@ class YahooStockOption(AbstractStockOption):
         return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)[self.SourceColumn]
 
     def _setSimpleReturns(self, a_letter: str = '', a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
+        new_df: pd.DataFrame() = pd.DataFrame()
         if a_letter == 'W':
-            return a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
+            new_df = a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
         elif a_letter == 'M':
-            return a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
+            new_df = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
         elif a_letter == 'Q':
-            return a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
+            new_df = a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
         elif a_letter == 'A':
-            return a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
+            new_df = a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
         else:
-            return a_df[self.SourceColumn].pct_change().to_frame()
+            new_df = a_df[self.SourceColumn].pct_change().to_frame()
+        new_df.iloc[0, :] = 0
+        return new_df
 
     def _setSimpleReturnsPlus(self, simple_returns: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         df_rolling = simple_returns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
@@ -280,7 +283,9 @@ class YahooStockOption(AbstractStockOption):
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         a_var = np.log(a_df[self.SourceColumn] / a_df[self.SourceColumn].shift(1))
-        return a_var.to_frame()
+        new_df: pd.DataFrame = a_var.to_frame()
+        new_df.iloc[0, :] = 0
+        return new_df
 
     def _setLogReturnsPlus(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         a_df['MovingStd252'] = a_df[self.SourceColumn].rolling(window=252).std().to_frame()
