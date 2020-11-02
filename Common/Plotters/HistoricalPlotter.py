@@ -10,6 +10,7 @@ from arch import arch_model
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
+from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 
 
 class HistoricalPlotter(AbstractPlotter):
@@ -34,7 +35,7 @@ class HistoricalPlotter(AbstractPlotter):
         self._time_span = stock_option.TimeSpan
         self._stock_option = stock_option
 
-    def Plot(self, vixIndex: VixIndex):
+    def Plot(self, vixIndex: VixIndex, sAnP500: SnP500Index):
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
@@ -42,7 +43,7 @@ class HistoricalPlotter(AbstractPlotter):
         fig, ax = plt.subplots(5, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
         # ax2 -> ax0
         self._stock_option.DataLogReturns[self._col].plot(ax=ax[0])
-        ax[0].set(ylabel='Log returns (%)')
+        ax[0].set(ylabel='Log returns (%)', title=a_title)
         # ax1 -> ax1
         self._stock_option.DataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
         ax[1].scatter(self._stock_option.DataSimpleReturns.index,
@@ -56,13 +57,13 @@ class HistoricalPlotter(AbstractPlotter):
         ax[2].legend(loc=self._legend_place)
         # ax0 -> ax3
         self._data_frame[self._col].plot(ax=ax[3])
-        ax[3].set(ylabel='Stock price ($)', title=a_title)
+        ax[3].set(ylabel='Stock price ($)')
         # new -> ax4
-        self._stock_option.Data['Norm'].plot(ax=ax[4], label=self._stock_option.Ticker + 'Norm')
-        #vixIndex.
-        #vixIndex.Data['Norm'].plot(ax=ax[4])
-        ax[4].set(ylabel='Norm base t(0)')
-        ax[4].legend(loc=self._legend_place)#, fontsize=8)
+        self._stock_option.Data['Scaled'].plot(ax=ax[4], label=self._stock_option.Ticker + 'Scaled')
+        vixIndex.DataScaled.plot(ax=ax[4])
+        sAnP500.DataScaled.plot(ax=ax[4])
+        ax[4].set(ylabel='Scaled on 100')
+        ax[4].legend(loc=self._legend_place)  # , fontsize=8)
         plt.tight_layout()
         return plt
 
@@ -172,7 +173,8 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getPeriodPlot(self._stock_option.SimpleAnnually, 'Annually')
 
     def _getPeriodPlot(self, a_df: DataFrame, period_str: str = 'Daily'):
-        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(self._time_span.MonthCount) + ' months'
+        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' Returns ' + str(
+            self._time_span.MonthCount) + ' months'
         plt.rcParams['date.epoch'] = '0000-12-31'
         plt.figure(figsize=(3 * math.log(self._time_span.MonthCount), 4.5))
         plt.tight_layout()
@@ -234,13 +236,14 @@ class HistoricalPlotter(AbstractPlotter):
         # plt.legend(loc=self.__legendPlace)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=ax[0])
         ax[0].set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
-        ax[0].plot(self._stock_option.DataRange, self._stock_option.NormProbDensityFn, 'g', lw=2, label=f'N({self._stock_option.Mu:.2f}, {self._stock_option.Sigma ** 2:.4f})')
+        ax[0].plot(self._stock_option.DataRange, self._stock_option.NormProbDensityFn, 'g', lw=2,
+                   label=f'N({self._stock_option.Mu:.2f}, {self._stock_option.Sigma ** 2:.4f})')
         ax[0].legend(loc=self._legend_place)
         # Q-Q plot
         qq = sm.qqplot(a_df[self._col].values, line='q', ax=ax[1])
         ax[1].set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + timely + ' Returns', fontsize=16)
-        return plt  
-    
+        return plt
+
     def PlotTimely(self):
         if self._stock_option.IsDaily:
             self._plotDaily().show()
@@ -263,13 +266,15 @@ class HistoricalPlotter(AbstractPlotter):
         return self._getTimelyPlot(self._stock_option.SimpleMonthly, self._stock_option.SimpleMonthlyCum, 'Monthly')
 
     def _plotQuarterly(self):
-        return self._getTimelyPlot(self._stock_option.SimpleQuarterly, self._stock_option.SimpleQuarterlyCum, 'Quarterly')
+        return self._getTimelyPlot(self._stock_option.SimpleQuarterly, self._stock_option.SimpleQuarterlyCum,
+                                   'Quarterly')
 
     def _plotAnnually(self):
         return self._getTimelyPlot(self._stock_option.SimpleAnnually, self._stock_option.SimpleAnnuallyCum, 'Annually')
 
     def _getTimelyPlot(self, df_period: DataFrame, df_periodCum: DataFrame, period_str: str = 'Daily') -> plt:
-        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(self._time_span.MonthCount) + ' months'
+        a_title: str = self._ticker + ' ' + self._col + ' ' + period_str + ' ' + str(
+            self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         fig, ax = plt.subplots(2, 2, figsize=(a_float, a_float), sharex=False)
@@ -313,7 +318,8 @@ class HistoricalPlotter(AbstractPlotter):
         sigma: float = a_df[self._col].std()
         norm_pdf: ndarray = scs.norm.pdf(r_range, loc=mu, scale=sigma)
         sns.distplot(a_df, vertical=False, rug=True, kde=True, norm_hist=True, ax=an_ax)
-        an_ax.set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
+        an_ax.set_title('Distribution of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns',
+                        fontsize=12)
         an_ax.plot(r_range, norm_pdf, 'g', lw=2, label=f'N({mu:.2f}, {sigma ** 2:.4f})')
         an_ax.legend(loc=self._legend_place)
         plt.tight_layout()
