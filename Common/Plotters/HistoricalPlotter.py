@@ -44,6 +44,7 @@ class HistoricalPlotter(AbstractPlotter):
         # ax2 -> ax0
         self._stock_option.DataLogReturns[self._col].plot(ax=ax[0])
         ax[0].set(ylabel='Log returns (%)', title=a_title)
+        ax[0].legend(loc=self._legend_place)
         # ax1 -> ax1
         self._stock_option.DataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
         ax[1].scatter(self._stock_option.DataSimpleReturns.index,
@@ -56,8 +57,9 @@ class HistoricalPlotter(AbstractPlotter):
         ax[2].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[2].legend(loc=self._legend_place)
         # ax0 -> ax3
-        self._data_frame[self._col].plot(ax=ax[3])
+        self._data_frame[self._col].plot(ax=ax[3], label= self._ticker + self._col)
         ax[3].set(ylabel='Stock price ($)')
+        ax[3].legend(loc=self._legend_place)
         # new -> ax4
         self._stock_option.Data['Scaled'].plot(ax=ax[4], label=self._stock_option.Ticker + 'Scaled')
         vixIndex.DataScaled.plot(ax=ax[4])
