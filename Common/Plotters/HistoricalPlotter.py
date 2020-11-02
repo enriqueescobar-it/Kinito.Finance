@@ -1,5 +1,4 @@
 import math
-import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as scs
@@ -10,6 +9,7 @@ from pandas import DataFrame
 from arch import arch_model
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
+from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 
 
 class HistoricalPlotter(AbstractPlotter):
@@ -34,12 +34,12 @@ class HistoricalPlotter(AbstractPlotter):
         self._time_span = stock_option.TimeSpan
         self._stock_option = stock_option
 
-    def Plot(self):
+    def Plot(self, vixIndex: VixIndex):
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
-        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
+        fig, ax = plt.subplots(5, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
         # ax2 -> ax0
         self._stock_option.DataLogReturns[self._col].plot(ax=ax[0])
         ax[0].set(ylabel='Log returns (%)')
@@ -57,6 +57,12 @@ class HistoricalPlotter(AbstractPlotter):
         # ax0 -> ax3
         self._data_frame[self._col].plot(ax=ax[3])
         ax[3].set(ylabel='Stock price ($)', title=a_title)
+        # new -> ax4
+        self._stock_option.Data['Norm'].plot(ax=ax[4], label=self._stock_option.Ticker + 'Norm')
+        #vixIndex.
+        #vixIndex.Data['Norm'].plot(ax=ax[4])
+        ax[4].set(ylabel='Norm base t(0)')
+        ax[4].legend(loc=self._legend_place)#, fontsize=8)
         plt.tight_layout()
         return plt
 
