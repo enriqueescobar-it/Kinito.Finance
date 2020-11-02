@@ -30,14 +30,14 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('WMT')
+yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
 #ETFs:ARKK TEC.TO, VFV and ACES XEI ARKF QQC-f ZQQ XIT HQU SOXL HZU JNUG FIE BRTXQ
 #CCA CGO RCI.B
 # Canadian Dividend Aristocrat List from SnP Global
-# Canadian Dividen All-Star List
+# Canadian Dividend All-Star List
 # David Fish's CCC List
 # growth portfolio= ETFs & blue chips
 # income portfolio= Tx34 IBMx8 ABBVx12 GMx30 Fx126 IRMx30 MPWx60 AGNCx57 PSECx149 MAINx27
@@ -72,6 +72,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('WMT')
 # VDC VFC VFF VFV VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ V VOO+ VOOG+ VNQ+ VIOO VHT
 # WCN WCN.TO+ WELL WFG WMT- WORK XEI XIT XBC.TO XOM YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
+vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 '''
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
@@ -81,7 +82,6 @@ dowJonesIndex: AbstractStockMarketIndex = DowJonesIndex('yahoo', "^DJI", yahooSt
 goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOption.TimeSpan)
 silverIndex: AbstractStockMarketIndex = SilverIndex('yahoo', "SI=F", yahooStockOption.TimeSpan)
 crudeOilIndex: AbstractStockMarketIndex = CrudeOilIndex('yahoo', "CL=F", yahooStockOption.TimeSpan)
-vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 soxIndex: AbstractStockMarketIndex = SoxIndex('yahoo', "^SOX", yahooStockOption.TimeSpan)
 #vix3mIndex: AbstractStockMarketIndex = Vix3mIndex('yahoo', "^VIX3M", yahooStockOption.TimeSpan)
 daxIndex: AbstractStockMarketIndex = DaxIndex('yahoo', "^GDAXI", yahooStockOption.TimeSpan)
@@ -131,6 +131,7 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = \
     HistoricalPlotter(yahooStockOption)
 yahooStockOptionPlotter.Plot().show()
+exit(31415)
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.PlotTimely()
 #yahooStockOptionPlotter.Daily().show()

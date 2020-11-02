@@ -40,23 +40,23 @@ class HistoricalPlotter(AbstractPlotter):
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
         fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
-        # ax0
-        self._data_frame[self._col].plot(ax=ax[0])
-        ax[0].set(ylabel='Stock price ($)', title=a_title)
-        # ax1
+        # ax2 -> ax0
+        self._stock_option.DataLogReturns[self._col].plot(ax=ax[0])
+        ax[0].set(ylabel='Log returns (%)')
+        # ax1 -> ax1
         self._stock_option.DataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
         ax[1].scatter(self._stock_option.DataSimpleReturns.index,
                       self._stock_option.DataSimpleReturns['Outliers'], color='red', label='Anomaly')
         ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
         ax[1].legend(loc=self._legend_place)
-        # ax2
-        self._stock_option.DataLogReturns[self._col].plot(ax=ax[2])
-        ax[2].set(ylabel='Log returns (%)')
-        # ax3
-        self._stock_option.DataLogReturns['MovingStd252'].plot(ax=ax[3], color='r', label='Moving Volatility 252 Day')
-        self._stock_option.DataLogReturns['MovingStd21'].plot(ax=ax[3], color='g', label='Moving Volatility 21 Day')
-        ax[3].set(ylabel='Moving Volatility', xlabel=x_label)
-        ax[3].legend(loc=self._legend_place)
+        # ax3 -> ax2
+        self._stock_option.DataLogReturns['MovingStd252'].plot(ax=ax[2], color='r', label='Moving Volatility 252 Day')
+        self._stock_option.DataLogReturns['MovingStd21'].plot(ax=ax[2], color='g', label='Moving Volatility 21 Day')
+        ax[2].set(ylabel='Moving Volatility', xlabel=x_label)
+        ax[2].legend(loc=self._legend_place)
+        # ax0 -> ax3
+        self._data_frame[self._col].plot(ax=ax[3])
+        ax[3].set(ylabel='Stock price ($)', title=a_title)
         plt.tight_layout()
         return plt
 

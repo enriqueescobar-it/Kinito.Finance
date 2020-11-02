@@ -5,7 +5,7 @@ import numpy as np
 from Common.Comparators.Portfolio.PortfolioComparator import PortfolioComparator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from typing import List
-yahooTickers: list = ['VOO', 'VOOG', 'WCN']
+yahooTickers: list = ['BCE', 'HD', 'MCD']
     #['VOO', 'VOOG', 'QQQ', 'CQQQ']#, 'TD', 'RY', 'AQN', 'WCN', 'WM', 'CNI', 'CP']#
     #['VOO', 'VOOG', 'AAPL', 'AMZN', 'MSFT']
     #['FB', 'AAPL', 'NFLX', 'MSFT', 'AMZN', 'GOOGL', 'XOM', 'CVX']
@@ -14,7 +14,7 @@ yahooTickers: list = ['VOO', 'VOOG', 'WCN']
     #['VOO', 'VOOG', 'CNI', 'CP', 'TD', 'RY', 'WCN', 'WM']
     #['VOO', 'VOOG', 'ABBV', 'AAPL', 'MMM', 'BNS', 'CNI', 'CAT', 'CVX', 'KO', 'XOM', 'JNJ', 'LMT', 'MCD', 'PEP', 'O', 'RY', 'SO', 'SBUX', 'UNP', 'WM']
     #['BNS', 'AAPL', 'ABBV', 'MMM', 'BRK.B', 'CNI', 'CAT', 'CVX', 'KO', 'XOM', 'JNJ', 'LMT', 'MCD', 'PEP', 'O', 'RY', 'SO', 'SBUX', 'UNP', 'WM']
-    #['VOO', 'VOOG'],
+    #['VOO', 'VOOG'], 'AAPL', 'AMZN', 'MSFT',
     #['AMT', 'DLR', 'NNN', 'UHT', 'O']
     #['MO', 'KO', 'JNJ', 'PG', 'CL']
     #['CNI', 'CP', 'TD', 'RY', 'OTEX', 'AQN', 'WCN', 'FTS', 'SU', 'VOO']#, 'PIODX', 'AIVSX']
