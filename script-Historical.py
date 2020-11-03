@@ -30,7 +30,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')
+yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')XWEB
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -66,11 +66,11 @@ yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')
 # M MA MAIN MELI MFI.TO MO MU MCD- MGM MPW MRK MARA MRNA MRVL MSFT MWK MDY MRU.TO
 # NEE+ NEM+ NET NKE NSP NEAR NFLX NLY NLOK NNDM NPI NVEI.TO O+ OTEX
 # PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+
-# QCOM QQC-f QQQ QRVO RBA RCI RCI.B REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO RIOT
+# QCOM QQC-f QQQ QRVO RBA RCI RCI.B REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO RIOT RHS
 # SU SU.TO SNA SBUX SHOP SPLK SPYD SJR.B SJR-B.TO SLV SNAP SNOW SPOT SOXL SRU.UN.TO. SPG SAP SPNS
 # T+ TD TDOC TEC.TO TEAM TFII TFII.TO+ TGT- TRMB TSLA TRP&TRP.TO TTD TOU.TO TROW TWLO TXN U UNM UNP UPWK
 # VDC VFC VFF VFV VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ V VOO+ VOOG+ VNQ+ VIOO VHT
-# WCN WCN.TO+ WELL WFG WMT- WORK XEI XIT XBC.TO XOM YCBD ZG ZM ZQQ ZS ZWB
+# WCN WCN.TO+ WELL WFG WMT- WORK XEI XIT XBC.TO XOM XWEB YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
@@ -128,10 +128,9 @@ marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
 '''
-yahooStockOptionPlotter: HistoricalPlotter = \
-    HistoricalPlotter(yahooStockOption)
-yahooStockOptionPlotter.Plot(vixIndex, sAnP500).show()
-exit(31415)
+yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
+yahooStockOptionPlotter.Plot().show()
+#exit(31415)
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.PlotTimely()
 #yahooStockOptionPlotter.Daily().show()

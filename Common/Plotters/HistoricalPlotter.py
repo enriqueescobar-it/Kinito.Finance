@@ -15,13 +15,15 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 
 class HistoricalPlotter(AbstractPlotter):
     _stock_option: YahooStockOption
+    _vix_index: VixIndex
+    _sNp_500: SnP500Index
     _price: float
     _yeAverage200: float
     _yeAverage50: float
     _yeHigh52: float
     _yeLow52: float
 
-    def __init__(self, stock_option: YahooStockOption):
+    def __init__(self, stock_option: YahooStockOption, vixIndex: VixIndex, sAnP500: SnP500Index):
         self._price = np.round(stock_option.FvPrice, 2)
         self._yeHigh52 = np.round(stock_option.YeHigh52, 2)
         self._yeLow52 = np.round(stock_option.YeLow52, 2)
@@ -34,8 +36,10 @@ class HistoricalPlotter(AbstractPlotter):
         self._ticker = stock_option.Ticker
         self._time_span = stock_option.TimeSpan
         self._stock_option = stock_option
+        self._vix_index = vixIndex
+        self._sNp_500 = sAnP500
 
-    def Plot(self, vixIndex: VixIndex, sAnP500: SnP500Index):
+    def Plot(self):
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
@@ -57,14 +61,17 @@ class HistoricalPlotter(AbstractPlotter):
         ax[2].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[2].legend(loc=self._legend_place)
         # ax0 -> ax3
-        self._data_frame[self._col].plot(ax=ax[3], label= self._ticker + self._col)
-        ax[3].set(ylabel='Stock price ($)')
+        #self._data_frame[self._col].plot(ax=ax[3], label= self._ticker + self._col)
+        self._stock_option.Data['Norm'].plot(ax=ax[3], label=self._ticker + 'Norm')
+        self._sNp_500.DataNorm.plot(ax=ax[3], label=self._sNp_500.DataNorm.columns)
+        self._vix_index.DataNorm.plot(ax=ax[3], label=self._vix_index.DataNorm.columns)
+        ax[3].set(ylabel='Norm to fold')
         ax[3].legend(loc=self._legend_place)
         # new -> ax4
         self._stock_option.Data['Scaled'].plot(ax=ax[4], label=self._stock_option.Ticker + 'Scaled')
-        vixIndex.DataScaled.plot(ax=ax[4])
-        sAnP500.DataScaled.plot(ax=ax[4])
-        ax[4].set(ylabel='Scaled on 100')
+        self._sNp_500.DataScaled.plot(ax=ax[4])
+        self._vix_index.DataScaled.plot(ax=ax[4])
+        ax[4].set(ylabel='Scaled to 100')
         ax[4].legend(loc=self._legend_place)  # , fontsize=8)
         plt.tight_layout()
         return plt

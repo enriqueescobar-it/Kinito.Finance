@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import *
 from pandas import DataFrame
 from numpy import ndarray
 from pyarrow.lib import null
@@ -16,6 +16,7 @@ class AbstractStockMarketIndex(ABC):
     _time_sp: TimeSpan
     _toUsd: float = -1.1
     HistoricalData: DataFrame = DataFrame()
+    DataNorm: DataFrame = DataFrame()
     DataScaled: DataFrame = DataFrame()
 
     def __init__(self, source: str = 'yahoo', name: str = 'CboeVolat', column: str = 'Adj Close', ticker: str = "^VIX",
@@ -30,16 +31,22 @@ class AbstractStockMarketIndex(ABC):
         self.HistoricalData.fillna(method='ffill', inplace=True)
         self.HistoricalData.fillna(method='bfill', inplace=True)
         self.HistoricalData = self.HistoricalData[self._column].to_frame()
-        self.HistoricalData.columns = [x.replace(self._column, self._name + self._column) for x in
-                                       self.HistoricalData.columns]
-        self._setDataScaled()
+        self.HistoricalData.columns =\
+            [x.replace(self._column, self._name + self._column) for x in self.HistoricalData.columns]
+        self.DataScaled = self._getDataScaled()
+        self.DataNorm = self._getDataNorm()
 
-    def _setDataScaled(self):
+    def _getDataScaled(self) -> DataFrame:
         # scale to compare array from 0.0 to 100.0
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
         stockArrayScaled: ndarray = minMaxScaler.fit_transform(self.HistoricalData)
-        self.DataScaled = DataFrame(stockArrayScaled, columns=self.HistoricalData.columns,
-                                    index=self.HistoricalData.index)
-        # self.DataNorm = self.HistoricalData / self.HistoricalData.iloc[0]
-        self.DataScaled.columns = [x.replace(self._column, 'Scaled') for x in self.DataScaled.columns]
+        a_df: DataFrame =\
+            DataFrame(stockArrayScaled, columns=self.HistoricalData.columns, index=self.HistoricalData.index)
+        a_df.columns = [x.replace(self._column, 'Scaled') for x in a_df.columns]
+        return a_df
+
+    def _getDataNorm(self) -> DataFrame:
+        a_df: DataFrame = self.HistoricalData / self.HistoricalData.iloc[0]
+        a_df.columns = [x.replace(self._column, 'Norm') for x in a_df.columns]
+        return a_df
