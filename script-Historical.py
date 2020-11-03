@@ -7,6 +7,7 @@ from Common.StockMarketIndex.Yahoo.DowJonesIndex import DowJonesIndex
 from Common.StockMarketIndex.Yahoo.Estx50Index import Estx50Index
 from Common.StockMarketIndex.Yahoo.EuroNext100Index import EuroNext100Index
 from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
+from Common.StockMarketIndex.Yahoo.OvxIndex import OvxIndex
 from Common.StockMarketIndex.Yahoo.SilverIndex import SilverIndex
 from Common.StockMarketIndex.Yahoo.HangSengIndex import HangSengIndex
 from Common.StockMarketIndex.Yahoo.BovespaIndex import BovespaIndex
@@ -30,7 +31,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')XWEB
+yahooStockOption: YahooStockOption = YahooStockOption('AAPL')#'ESTC')XWEB
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -53,7 +54,8 @@ yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')XWEB
 # BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
 # ETFs: BRTXQ FZILX FSRNX VTSAX FPE HPI
 # TFII LSPD T FTS RY SHOP
-# AAPL ABBV ABR+ ABT ABX.TO&GOLD ACES ADP AGNC AKAM AMGN AMD AMP AMT AMZN ANTM AQN AQN.TO APHA ASAN ARKF ARKK AVAV AVGO AVB AYX AZN AIVSX+
+# AAPL ABBV AAOI ABR+ ABT ABX.TO&GOLD ACES ADP AGNC AKAM AMGN AMD AMP AMT AMZN ANTM AQN AQN.TO
+# APHA ASAN ARKF ARKK AVAV AVGO AVB AYX AZN AIVSX+
 # BA BCE BNS BPY BABA BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO
 # CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST CP CRM CSCO CDNS CNQ.TO CSIQ
 # DCBO.TO DND.TO CU.TO DLHC
@@ -72,9 +74,10 @@ yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')XWEB
 # VDC VFC VFF VFV VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ V VOO+ VOOG+ VNQ+ VIOO VHT
 # WCN WCN.TO+ WELL WFG WMT- WORK XEI XIT XBC.TO XOM XWEB YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
-vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
+vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 '''
+ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
 nyseIndex: AbstractStockMarketIndex = NyseIndex('yahoo', "^NYA", yahooStockOption.TimeSpan)
@@ -100,6 +103,7 @@ irxIndex: AbstractStockMarketIndex = TreasuryBill13Index('yahoo', "^IRX", yahooS
 jkseIndex: AbstractStockMarketIndex = JkseIndex('yahoo', "^JKSE", yahooStockOption.TimeSpan)
 kospIndex: AbstractStockMarketIndex = KospIndex('yahoo', "^KS11", yahooStockOption.TimeSpan)
 marketIndices = list()
+marketIndices.append(ovxIndex)
 marketIndices.append(vixIndex)
 marketIndices.append(sAnP500)
 marketIndices.append(sAndPTsx)

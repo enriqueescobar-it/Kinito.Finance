@@ -9,8 +9,8 @@ from pandas import DataFrame
 from arch import arch_model
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
-from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
+from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 
 
 class HistoricalPlotter(AbstractPlotter):

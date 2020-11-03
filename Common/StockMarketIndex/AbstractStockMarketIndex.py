@@ -30,7 +30,7 @@ class AbstractStockMarketIndex(ABC):
         self.HistoricalData = PandaEngine(source, tm_spn, ticker).DataFrame
         self.HistoricalData.fillna(method='ffill', inplace=True)
         self.HistoricalData.fillna(method='bfill', inplace=True)
-        self.HistoricalData = self.HistoricalData[self._column].to_frame()
+        self.HistoricalData = self.HistoricalData[self._column].to_frame() / self._toUsd
         self.HistoricalData.columns =\
             [x.replace(self._column, self._name + self._column) for x in self.HistoricalData.columns]
         self.DataScaled = self._getDataScaled()

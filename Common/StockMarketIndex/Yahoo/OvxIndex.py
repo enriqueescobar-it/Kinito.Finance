@@ -3,11 +3,11 @@ from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarket
 from pyarrow.lib import null
 
 
-class DaxIndex(AbstractStockMarketIndex):
+class OvxIndex(AbstractStockMarketIndex):
 
-    def __init__(self, source: str = 'yahoo', ticker: str = "^GDAXI", tm_spn: TimeSpan = null):
-        a_ticker: str = "^GDAXI" if source == 'yahoo' else ticker
+    def __init__(self, source: str = 'yahoo', ticker: str = "^OVX", tm_spn: TimeSpan = null):
+        a_ticker: str = "^OVX" if source == 'yahoo' else ticker
         a_column: str = 'Adj Close' if source == 'yahoo' else ticker
-        a_name: str = 'DeutscherAktien' if source == 'yahoo' else ticker
-        a_to_usd: float = 1.15
+        a_name: str = 'OilVolat' if source == 'yahoo' else ticker
+        a_to_usd: float = 1.0
         super().__init__(source, a_name, a_column, a_ticker, tm_spn, a_to_usd)

@@ -9,5 +9,5 @@ class SnP500Index(AbstractStockMarketIndex):
         a_ticker: str = "^GSPC" if source == 'yahoo' else ticker
         a_column: str = 'Adj Close' if source == 'yahoo' else ticker
         a_name: str = 'S&P500' if source == 'yahoo' else ticker
-        a_to_usd: float = 1.0
+        a_to_usd: float = 1.00
         super().__init__(source, a_name, a_column, a_ticker, tm_spn, a_to_usd)

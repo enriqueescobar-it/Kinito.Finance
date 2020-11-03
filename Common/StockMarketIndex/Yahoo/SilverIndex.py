@@ -1,19 +1,13 @@
 from Common.Measures.Time.TimeSpan import TimeSpan
-from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
 from pyarrow.lib import null
 
 
 class SilverIndex(AbstractStockMarketIndex):
 
-    def __init__(self, source: str = 'yahoo', ticker: str = "SI=F", tm_spn: TimeSpan = null):
-        self.__column = 'Adj Close'
-        self.__name = 'Silver'
-        self.__source = source
-        self.__ticker = "SI=F" if source == 'yahoo' else ticker
-        self.__time_sp = tm_spn
-        self.HistoricalData = PandaEngine(source, tm_spn, ticker).DataFrame
-        self.HistoricalData.fillna(method='ffill', inplace=True)
-        self.HistoricalData.fillna(method='bfill', inplace=True)
-        self.HistoricalData = self.HistoricalData[self.__column].to_frame()
-        self.HistoricalData.columns = [x.replace(self.__column, self.__name + self.__column) for x in self.HistoricalData.columns]
+    def __init__(self, source: str = 'yahoo', ticker: str = "", tm_spn: TimeSpan = null):
+        a_ticker: str = "SI=F" if source == 'yahoo' else ticker
+        a_column: str = 'Adj Close' if source == 'yahoo' else ticker
+        a_name: str = 'Silver' if source == 'yahoo' else ticker
+        a_to_usd: float = 1.00
+        super().__init__(source, a_name, a_column, a_ticker, tm_spn, a_to_usd)
