@@ -16,8 +16,8 @@ class AbstractStockMarketIndex(ABC):
     _time_sp: TimeSpan
     _toUsd: float = -1.1
     HistoricalData: DataFrame = DataFrame()
-    DataNorm: DataFrame = DataFrame()
-    DataScaled: DataFrame = DataFrame()
+    _data_norm: DataFrame = DataFrame()
+    _data_scaled: DataFrame = DataFrame()
 
     def __init__(self, source: str = 'yahoo', name: str = 'CboeVolat', column: str = 'Adj Close', ticker: str = "^VIX",
                  tm_spn: TimeSpan = null, to_usd: float = 1.0):
@@ -33,8 +33,8 @@ class AbstractStockMarketIndex(ABC):
         self.HistoricalData = self.HistoricalData[self._column].to_frame() / self._toUsd
         self.HistoricalData.columns =\
             [x.replace(self._column, self._name + self._column) for x in self.HistoricalData.columns]
-        self.DataScaled = self._getDataScaled()
-        self.DataNorm = self._getDataNorm()
+        self._data_scaled = self._getDataScaled()
+        self._data_norm = self._getDataNorm()
 
     def _getDataScaled(self) -> DataFrame:
         # scale to compare array from 0.0 to 100.0
@@ -50,3 +50,15 @@ class AbstractStockMarketIndex(ABC):
         a_df: DataFrame = self.HistoricalData / self.HistoricalData.iloc[0]
         a_df.columns = [x.replace(self._column, 'Norm') for x in a_df.columns]
         return a_df
+
+    @property
+    def Data(self):
+        return self.HistoricalData
+
+    @property
+    def DataNorm(self):
+        return self._data_norm
+
+    @property
+    def DataScaled(self):
+        return self._data_scaled

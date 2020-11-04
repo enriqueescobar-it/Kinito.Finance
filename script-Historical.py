@@ -31,7 +31,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('AAPL')#'ESTC')XWEB
+yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')XWEB
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -42,7 +42,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('AAPL')#'ESTC')XWEB
 # David Fish's CCC List
 # growth portfolio= ETFs & blue chips
 # income portfolio= Tx34 IBMx8 ABBVx12 GMx30 Fx126 IRMx30 MPWx60 AGNCx57 PSECx149 MAINx27
-# ETSY
+# ETSY ESTC VYM - VGT - VTI - VPU
 # VYM VTSAX/ SWTSX/ FZROX index vs. VTI/ SCHB ETF, VFIAX/ SWPPX/ VXAIX index vs. VOO/ SCHX
 # FZROX FZILX FSRNX
 # VTSAX
@@ -76,7 +76,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('AAPL')#'ESTC')XWEB
 print(yahooStockOption.HistoricalData.describe(include='all'))
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
-'''
+#'''
 ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
@@ -131,7 +131,7 @@ marketIndices.append(irxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-'''
+#'''
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 yahooStockOptionPlotter.Plot().show()
 #exit(31415)
