@@ -31,7 +31,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')XWEB
+yahooStockOption: YahooStockOption = YahooStockOption('CAT')#'ESTC')XWEB
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -76,7 +76,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('AMZN')#'ESTC')XWEB
 print(yahooStockOption.HistoricalData.describe(include='all'))
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
-#'''
+'''
 ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
@@ -131,11 +131,11 @@ marketIndices.append(irxIndex)
 marketIndices.append(jkseIndex)
 marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-#'''
+'''
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
+yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()
 #exit(31415)
-yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.PlotTimely()
 #yahooStockOptionPlotter.Daily().show()
 #yahooStockOptionPlotter.DailyCum().show()

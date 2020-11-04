@@ -44,44 +44,46 @@ class HistoricalPlotter(AbstractPlotter):
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
-        fig, ax = plt.subplots(5, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
-        # ax2 -> ax0
+        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
+        # ax2 -> ax0 -> null
+        '''
         self._stock_option.DataLogReturns[self._col].plot(ax=ax[0])
         ax[0].set(ylabel='Log returns (%)', title=a_title)
         ax[0].legend(loc=self._legend_place)
-        # ax1 -> ax1
-        self._stock_option.DataSimpleReturns[self._col].plot(ax=ax[1], label='Normal')
-        ax[1].scatter(self._stock_option.DataSimpleReturns.index,
+        '''
+        # ax1 -> ax1 -> ax0
+        self._stock_option.DataSimpleReturns[self._col].plot(ax=ax[0], label='Normal')
+        ax[0].scatter(self._stock_option.DataSimpleReturns.index,
                       self._stock_option.DataSimpleReturns['Outliers'], color='red', label='Anomaly')
-        ax[1].set(ylabel='Simple returns (%)\n&\nOutliers')
+        ax[0].set(ylabel='Simple returns (%)\n&\nOutliers', title=a_title)
+        ax[0].legend(loc=self._legend_place)
+        # ax3 -> ax2 -> ax1
+        self._stock_option.DataLogReturns['MovingStd252'].plot(ax=ax[1], color='r', label='Moving Volatility 252 Day')
+        self._stock_option.DataLogReturns['MovingStd21'].plot(ax=ax[1], color='g', label='Moving Volatility 21 Day')
+        ax[1].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[1].legend(loc=self._legend_place)
-        # ax3 -> ax2
-        self._stock_option.DataLogReturns['MovingStd252'].plot(ax=ax[2], color='r', label='Moving Volatility 252 Day')
-        self._stock_option.DataLogReturns['MovingStd21'].plot(ax=ax[2], color='g', label='Moving Volatility 21 Day')
-        ax[2].set(ylabel='Moving Volatility', xlabel=x_label)
-        ax[2].legend(loc=self._legend_place)
-        # ax0 -> ax3
+        # ax0 -> ax3 -> ax2
         #self._data_frame[self._col].plot(ax=ax[3], label= self._ticker + self._col)
-        self._stock_option.Data['Norm'].plot(ax=ax[3], label=self._ticker + 'Norm')
-        self._sNp_500.DataNorm.plot(ax=ax[3], label=self._sNp_500._data_norm.columns)
-        self._vix_index.DataNorm.plot(ax=ax[3], label=self._vix_index._data_norm.columns)
-        ax[3].set(ylabel='Norm to fold')
-        ax[3].legend(loc=self._legend_place)
-        # new -> ax4
-        self._stock_option.Data['Scaled'].plot(ax=ax[4], label=self._stock_option.Ticker + 'Scaled')
-        self._sNp_500.DataScaled.plot(ax=ax[4])
-        self._vix_index.DataScaled.plot(ax=ax[4])
-        ax[4].set(ylabel='Scaled to 100')
-        ax[4].legend(loc=self._legend_place)  # , fontsize=8)
+        self._stock_option.Data['Norm'].plot(ax=ax[2], label=self._ticker + 'Norm')
+        self._sNp_500.DataNorm.plot(ax=ax[2], label=self._sNp_500._data_norm.columns)
+        self._vix_index.DataNorm.plot(ax=ax[2], label=self._vix_index._data_norm.columns)
+        ax[2].set(ylabel='Norm to fold')
+        ax[2].legend(loc=self._legend_place)
+        # new -> ax4 -> ax3
+        self._stock_option.Data['Scaled'].plot(ax=ax[3], label=self._stock_option.Ticker + 'Scaled')
+        self._sNp_500.DataScaled.plot(ax=ax[3])
+        self._vix_index.DataScaled.plot(ax=ax[3])
+        ax[3].set(ylabel='Scaled to 100')
+        ax[3].legend(loc=self._legend_place)  # , fontsize=8)
         plt.tight_layout()
         return plt
 
     def GraphPlot(self):
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+        plt.style.use('seaborn')
         fig, ax = plt.subplots(1, 2, figsize=(a_float, a_float), sharey=True)
         fig.suptitle(a_title)
-        plt.style.use('seaborn')
         self._getDataPlot(ax[0])
         self._getDataDistro(ax[1])
         plt.tight_layout()
