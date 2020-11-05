@@ -95,16 +95,16 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        self._optimizer = PortfolioOptimizer(self._stats, self._basics.Data)
+        self._optimizer = PortfolioOptimizer(self._a_float, self._stats, self._basics.Data)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
         stock_market_returns: Series = self._stock_market_index.Data.iloc[:, 0].pct_change()+1#[1:]
         stock_market_returns[np.isnan(stock_market_returns)] = 1
+        print(stock_market_returns.head())
         sns.regplot(stock_market_returns.values, dataReturns_avg.values)
         plt.xlabel('Benchmark Returns')
         plt.ylabel('Portfolio Returns')
         plt.title('Portfolio Returns vs Benchmark Returns')
         plt.show()
-        #exit(-111)
         self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._stats.Returns)
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)

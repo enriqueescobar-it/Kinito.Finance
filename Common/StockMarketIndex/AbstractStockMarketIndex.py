@@ -51,6 +51,22 @@ class AbstractStockMarketIndex(ABC):
         a_df.columns = [x.replace(self._column, 'Norm') for x in a_df.columns]
         return a_df
 
+    def _getSimpleReturns(self, a_letter: str = '') -> DataFrame:
+        new_df: DataFrame() = DataFrame()
+        if a_letter == 'W':
+            new_df = self._data[self._data.columns].resample('W').ffill().pct_change()
+        elif a_letter == 'M':
+            new_df = self._data[self._data.columns].resample('M').ffill().pct_change()
+        elif a_letter == 'Q':
+            new_df = self._data[self._data.columns].resample('Q').ffill().pct_change()
+        elif a_letter == 'A':
+            new_df = self._data[self._data.columns].resample('A').ffill().pct_change()
+        else:
+            new_df = self._data[self._data.columns].pct_change()
+        new_df.columns = [x.replace(self._data.columns, a_letter.lower()) for x in self._data.columns]
+        new_df.iloc[0, :] = 0
+        return new_df
+
     @property
     def Data(self):
         return self._data

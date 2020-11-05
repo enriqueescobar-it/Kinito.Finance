@@ -11,6 +11,7 @@ from Common.Measures.Portfolio.PortfolioStats import PortfolioStats
 
 class PortfolioOptimizer(AbstractPortfolioMeasure):
     _threshold: int = 5000
+    _a_float: float = -1.1
     _weight_matrix: np.ndarray
     _annual_weighted_log_return_matrix: np.ndarray
     _risk_matrix: np.ndarray
@@ -19,7 +20,8 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
     _max_sharpe_ratio_series: Series = Series()
     _portfolio_data: DataFrame = DataFrame()
 
-    def __init__(self, p_stats: PortfolioStats, portfolio_data: DataFrame = DataFrame()):
+    def __init__(self, a_float: float, p_stats: PortfolioStats, portfolio_data: DataFrame = DataFrame()):
+        self._a_float = a_float
         self._portfolio_data = portfolio_data
         # Creating an empty array to store portfolio weights
         self._weight_matrix = np.zeros((self._threshold, len(portfolio_data.columns)))
@@ -57,8 +59,32 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         print("Funds remaining: ${:.2f}".format(leftover))
 
     def Plot(self):
-        self._plotMinimalRisk().show()
-        self._plotMaximalSharpeRatio().show()
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
+        fig, ax = plt.subplots(1, 2, figsize=(self._a_float, self._a_float/2.0))
+        plt.tight_layout()
+        plt.show()
+        #self._plotMinimalRisk().show()
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
+        fig = plt.figure()
+        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        ax1.set_xlabel('Asset')
+        ax1.set_ylabel('Weights')
+        ax1.set_title('Minimum Risk Portfolio weights')
+        self._min_risk_series.plot(kind='bar')
+        plt.setp(ax1.get_xticklabels(), rotation=45)
+        plt.show()
+        #self._plotMaximalSharpeRatio().show()
+        plt.style.use('seaborn')
+        fig = plt.figure()
+        ax1 = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        ax1.set_xlabel('Asset')
+        ax1.set_ylabel('Weights')
+        ax1.set_title('Maximal Sharpe Ratio Portfolio weights')
+        self._max_sharpe_ratio_series.plot(kind='bar')
+        plt.setp(ax1.get_xticklabels(), rotation=45)
+        plt.show()
         self._plotRiskReturns(self._portfolio_data).show()
 
     def _setMatrices(self, portfolio_data: DataFrame, log_ret: DataFrame, cov_mat: DataFrame):

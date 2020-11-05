@@ -29,11 +29,13 @@ for yahooTicker in yahooTickers:
 
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
 yahooPc.PlotOptimal()
+exit(111)
 yahooPc.PlotBasics().show()
+exit(222)
 yahooPc.PlotStats().show()
 exit(333)
 yahooPc.PlotAllHeatmaps().show()
-exit(333)
+exit(444)
 # Explo Data Analysis
 # on returns sns.pairplot(returns w/o NaN => returns[1:])
 # return[col].min() -> value .argmin() -> index == .idxmin()
