@@ -28,8 +28,10 @@ for yahooTicker in yahooTickers:
     print(yahooTicker)
 
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
+yahooPc.PlotOptimal()
 yahooPc.PlotBasics().show()
 yahooPc.PlotStats().show()
+exit(333)
 yahooPc.PlotAllHeatmaps().show()
 exit(333)
 # Explo Data Analysis

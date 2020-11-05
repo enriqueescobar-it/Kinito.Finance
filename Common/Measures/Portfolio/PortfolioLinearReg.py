@@ -16,7 +16,7 @@ class PortfolioLinearReg(AbstractPortfolioMeasure):
 
     def __init__(self, an_index: AbstractStockMarketIndex, portfolio_df_returns: DataFrame = DataFrame()):
         self._index = an_index
-        index_returns: Series = an_index.HistoricalData.iloc[:, 0].pct_change() + 1
+        index_returns: Series = an_index.Data.iloc[:, 0].pct_change() + 1
         index_returns[np.isnan(index_returns)] = 1
         nb_col: int = len(portfolio_df_returns.columns)
         portfolio_returns: Series = portfolio_df_returns.iloc[:, 0:nb_col].sum(axis=1) / nb_col

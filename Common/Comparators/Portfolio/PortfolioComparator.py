@@ -97,7 +97,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._setPortfolioInfo()
         self._optimizer = PortfolioOptimizer(self._stats, self._basics.Data)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
-        stock_market_returns: Series = self._stock_market_index.HistoricalData.iloc[:, 0].pct_change()+1#[1:]
+        stock_market_returns: Series = self._stock_market_index.Data.iloc[:, 0].pct_change()+1#[1:]
         stock_market_returns[np.isnan(stock_market_returns)] = 1
         sns.regplot(stock_market_returns.values, dataReturns_avg.values)
         plt.xlabel('Benchmark Returns')
@@ -141,6 +141,9 @@ class PortfolioComparator(AbstractPortfolioComparator):
         CumulativeReturns.plot()
         plt.show()
         '''
+
+    def PlotOptimal(self):
+        self._optimizer.Plot()
 
     def PlotBasics(self) -> plt:
         return self._basics.Plot()

@@ -31,7 +31,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from Common.Measures.Time.TimeSpan import TimeSpan
 
-yahooStockOption: YahooStockOption = YahooStockOption('CAT')#'ESTC')XWEB
+yahooStockOption: YahooStockOption = YahooStockOption('LAC')#'ESTC')XWEB
 #YCBD GRWG FSZ AMZN WELL WCN WMT MWK CP COST KO AMT MA AMD BAC NVDA
 #KL WCN OTEX AQN TFII CP CNI LMT RY BRK-B GNW OTEX BPY LMT STOR GME SNE HD
 #BCE, ZWB, CM, KEY, VNR, ENB, PPL, SJR.B, NPI, AQN FTS NPI
@@ -46,6 +46,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('CAT')#'ESTC')XWEB
 # VYM VTSAX/ SWTSX/ FZROX index vs. VTI/ SCHB ETF, VFIAX/ SWPPX/ VXAIX index vs. VOO/ SCHX
 # FZROX FZILX FSRNX
 # VTSAX
+# [NFLX, NKE, AMZN] [MRNA, MSFT, CAT] [T, XOM, MO]
 # 60% StockMarketFund (FZROX~SWTSX~VTSAX) 20% InternationalFund (FZILX~SWISX~VTIAX) 20% REITFund (FSRNX)
 # Sector ETFs: VGT VPU VDC VYM
 # Sector Int'l: T (55*30.21$) IBM (14*126.66$) ABBV (21*82.79$) GM (46*35.24$) F (186*8.78$)
