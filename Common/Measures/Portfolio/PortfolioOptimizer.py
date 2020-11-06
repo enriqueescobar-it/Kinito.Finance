@@ -167,9 +167,15 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         plt.scatter(self._risk_matrix[self._sharpe_ratio_matrix.argmax()],
                     self._annual_weighted_log_return_matrix[self._sharpe_ratio_matrix.argmax()],
                     marker='*', color='red', s=500, edgecolors='black', label='Maximum Sharpe ratio')
+        plt.scatter(self._risk_matrix[self._sharpe_ratio_matrix.argmin()],
+                    self._annual_weighted_log_return_matrix[self._sharpe_ratio_matrix.argmin()],
+                    marker='x', color='red', s=400, edgecolors='black', label='Minimum Sharpe ratio')
         plt.scatter(self._risk_matrix[self._risk_matrix.argmin()],
                     self._annual_weighted_log_return_matrix[self._risk_matrix.argmin()],
                     marker='*', color='blue', s=500, label='Minimum volatility')
+        plt.scatter(self._risk_matrix[self._risk_matrix.argmax()],
+                    self._annual_weighted_log_return_matrix[self._risk_matrix.argmax()],
+                    marker='x', color='blue', s=400, label='Maximum volatility')
         #plt.show()
         return plt
 
