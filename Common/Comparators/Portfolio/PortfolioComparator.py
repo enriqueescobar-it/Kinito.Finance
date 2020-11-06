@@ -135,6 +135,24 @@ class PortfolioComparator(AbstractPortfolioComparator):
         plt.show()
         '''
 
+    def PlotMatrix(self) -> plt:
+        prf_returns = (self._stats.Returns.pct_change() + 1)[1:]
+        avg_return = (prf_returns-1).mean()
+        daily_pct_change = np.log(self._stats.Returns.pct_change() + 1)
+        vols = daily_pct_change.std() * np.sqrt(252)
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
+        fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
+        #print('AX', type(ax)) AX <class 'matplotlib.axes._subplots.AxesSubplot'>
+        fig.suptitle(self._basics.Title)
+        ax.set(ylabel='Simple Return Std', xlabel='Simple Return Mean')
+        ax.scatter(vols, avg_return)
+        for i, txt in enumerate(list(vols.index)):
+            ax.annotate(txt, (vols[i], avg_return[i]))
+        plt.tight_layout()
+        #plt.show()
+        return plt
+
     def PlotMarket(self) -> plt:
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31'
@@ -158,21 +176,6 @@ class PortfolioComparator(AbstractPortfolioComparator):
         return self._stats.Plot()
 
     def PlotAllHeatmaps(self):
-        prf_returns = (self._stats.Returns.pct_change() + 1)[1:]
-        avg_return = (prf_returns-1).mean()
-        daily_pct_change = np.log(self._stats.Returns.pct_change() + 1)
-        vols = daily_pct_change.std() * np.sqrt(252)
-        plt.style.use('seaborn')
-        plt.rcParams['date.epoch'] = '0000-12-31'
-        fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
-        #print('AX', type(ax)) AX <class 'matplotlib.axes._subplots.AxesSubplot'>
-        fig.suptitle(self._basics.Title)
-        ax.set(ylabel='Simple Return Std', xlabel='Simple Return Mean')
-        ax.scatter(vols, avg_return)
-        for i, txt in enumerate(list(vols.index)):
-            ax.annotate(txt, (vols[i], avg_return[i]))
-        plt.tight_layout()
-        plt.show()
         fig, ax = plt.subplots(1, 1, figsize=(self._a_float, self._a_float/2.0))
         fig.suptitle('Main Heat Map')
         plt.title('Heat Map', fontsize=18)
