@@ -5,7 +5,7 @@ import numpy as np
 from Common.Comparators.Portfolio.PortfolioComparator import PortfolioComparator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 #from typing import List
-yahooTickers: list = ['VGT', 'VYM', 'VTI', 'VPU']
+yahooTickers: list = ['WMT', 'WCN'] #['VGT', 'VYM', 'VTI', 'VPU']
     #['VOO', 'VOOG', 'QQQ', 'CQQQ']#, 'TD', 'RY', 'AQN', 'WCN', 'WM', 'CNI', 'CP']#
     #['VOO', 'VOOG', 'AAPL', 'AMZN', 'MSFT']
     #['FB', 'AAPL', 'NFLX', 'MSFT', 'AMZN', 'GOOGL', 'XOM', 'CVX']
@@ -28,12 +28,10 @@ for yahooTicker in yahooTickers:
     print(yahooTicker)
 
 yahooPc: PortfolioComparator = PortfolioComparator(yahooStocks)
-yahooPc.PlotOptimal()
-exit(111)
 yahooPc.PlotBasics().show()
-exit(222)
 yahooPc.PlotStats().show()
-exit(333)
+yahooPc.PlotOptimal()
+yahooPc.PlotMarket().show()
 yahooPc.PlotAllHeatmaps().show()
 exit(444)
 # Explo Data Analysis

@@ -30,6 +30,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _dataSimpleCorrelation: DataFrame = DataFrame()
     _dataSimpleCovariance: DataFrame = DataFrame()
     _dataSimpleCovarianceAnnual: DataFrame = DataFrame()
+    _data_returns_avg: Series = Series()
     #_portfolio_weighted_returns: Series = Series()
     _portfolio_weighted_returns_cum: Series = Series()
     _portfolio_weighted_returns_geom: float = -1.1
@@ -76,8 +77,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._portfolio_weighted_sharpe_ratio = round(self._portfolio_weighted_returns_geom / self._portfolio_weighted_annual_std, 5)
         print('port_sharpe_ratio', self._portfolio_weighted_sharpe_ratio)
         print('%', self._stats.Returns.head())
-        dataReturns_avg: Series = self._getDataReturnsAverage(self._stats.Returns)
-        print('^', dataReturns_avg.head())
+        self._data_returns_avg = self._getDataReturnsAverage(self._stats.Returns)
+        print('^', self._data_returns_avg.head())
         daily_log_pct_changes: DataFrame = np.log(self._stats.Returns.pct_change() + 1) #avant portfolio
         daily_log_pct_changes.columns = daily_log_pct_changes.columns + 'LogReturn'
         print('&', daily_log_pct_changes.head())
@@ -95,16 +96,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('port_quarterly_simple_ret', str(100*port_quarterly_simple_ret) + '%')
         print('port_yearly_simple_ret', str(100*port_yearly_simple_ret) + '%')
         self._setPortfolioInfo()
-        self._optimizer = PortfolioOptimizer(self._a_float, self._stats, self._basics.Data)
+        self._optimizer = PortfolioOptimizer(self._legend_place, self._a_float, self._stats, self._basics.Data)
         self._stock_market_index = SnP500Index('yahoo', "^GSPC", self._a_ts)
-        stock_market_returns: Series = self._stock_market_index.Data.iloc[:, 0].pct_change()+1#[1:]
-        stock_market_returns[np.isnan(stock_market_returns)] = 1
-        print(stock_market_returns.head())
-        sns.regplot(stock_market_returns.values, dataReturns_avg.values)
-        plt.xlabel('Benchmark Returns')
-        plt.ylabel('Portfolio Returns')
-        plt.title('Portfolio Returns vs Benchmark Returns')
-        plt.show()
         self._linear_reg = PortfolioLinearReg(self._stock_market_index, self._stats.Returns)
         print(f'The portfolio beta is {self._linear_reg.Beta}, for each 1% of index portfolio will move {self._linear_reg.Beta}%')
         print('The portfolio alpha is ', self._linear_reg.Alpha)
@@ -141,6 +134,19 @@ class PortfolioComparator(AbstractPortfolioComparator):
         CumulativeReturns.plot()
         plt.show()
         '''
+
+    def PlotMarket(self) -> plt:
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
+        stock_market_returns: Series = self._stock_market_index.Data.iloc[:, 0].pct_change()+1#[1:]
+        stock_market_returns[np.isnan(stock_market_returns)] = 1
+        print(stock_market_returns.head())
+        sns.regplot(stock_market_returns.values, self._data_returns_avg.values)
+        plt.xlabel('Benchmark Returns')
+        plt.ylabel('Portfolio Returns')
+        plt.title('Portfolio Returns vs Benchmark Returns')
+        #plt.show()
+        return plt
 
     def PlotOptimal(self):
         self._optimizer.Plot()
