@@ -7,6 +7,7 @@ from pandas import DataFrame, np, Series
 
 from Common.Comparators.Portfolio.AbstractPortfolioComparator import AbstractPortfolioComparator
 from Common.Measures.Portfolio.PortfolioBasics import PortfolioBasics
+from Common.Measures.Portfolio.PortfolioFinal import PortfolioFinal
 from Common.Measures.Portfolio.PortfolioLinearReg import PortfolioLinearReg
 from Common.Measures.Portfolio.PortfolioOptimizer import PortfolioOptimizer
 from Common.Measures.Portfolio.PortfolioStats import PortfolioStats
@@ -41,6 +42,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
     _linear_reg: PortfolioLinearReg
     _stats: PortfolioStats
     _optimizer: PortfolioOptimizer
+    _final: PortfolioFinal
 
     def __init__(self, y_stocks: list):
         self._a_float = 3 * math.log(y_stocks[0].TimeSpan.MonthCount)
@@ -52,6 +54,8 @@ class PortfolioComparator(AbstractPortfolioComparator):
         self._weights = np.array(len(y_stocks) * [iso_weight], dtype=float)
         self._basics = PortfolioBasics(y_stocks, self._a_float, self._legend_place)
         self._stats = PortfolioStats(self._weights, self._basics)
+        self._final = PortfolioFinal(y_stocks)
+        exit(1234)
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
