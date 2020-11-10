@@ -20,6 +20,8 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
     _min_risk_series: Series = Series()
     _max_sharpe_ratio_series: Series = Series()
     _portfolio_data: DataFrame = DataFrame()
+    _efficient_frontier: EfficientFrontier
+    _discrete_allocation: DiscreteAllocation
 
     def __init__(self, legend_place: str, a_float: float, p_stats: PortfolioStats, portfolio_data: DataFrame = DataFrame()):
         self._legend_place = legend_place
@@ -45,18 +47,19 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         print(self._max_sharpe_ratio_series)
         #self._plotMaximalSharpeRatio()
         #self._plotRiskReturns(portfolio_data)
-        mu = expected_returns.mean_historical_return(portfolio_data)  # returns.mean() * 252
-        S = risk_models.sample_cov(portfolio_data)  # Get the sample covariance matrix
-        ef = EfficientFrontier(mu, S)
-        weights = ef.max_sharpe()  # Maximize the Sharpe ratio, and get the raw weights
-        cleaned_weights = ef.clean_weights()
+        #mu: Series = expected_returns.mean_historical_return(portfolio_data)  # returns.mean() * 252
+        #S: DataFrame = risk_models.sample_cov(portfolio_data)  # Get the sample covariance matrix
+        #ef: EfficientFrontier = EfficientFrontier(mu, S)
+        self._efficient_frontier = self._getEfficientFrontier(portfolio_data)
+        # Maximize the Sharpe ratio, and get the raw weights
+        max_weights = self._efficient_frontier.max_sharpe()
         # Note the weights may have some rounding error, meaning they may not add up exactly to 1 but should be close
-        print(cleaned_weights)
-        ef.portfolio_performance(verbose=True)
-        latest_prices = get_latest_prices(portfolio_data)
-        weights = cleaned_weights
-        da = DiscreteAllocation(weights, latest_prices, total_portfolio_value=10000)
-        allocation, leftover = da.lp_portfolio()
+        cleaned_weights = self._efficient_frontier.clean_weights()
+        self._efficient_frontier.portfolio_performance(verbose=True)
+        latest_prices_series: Series = get_latest_prices(portfolio_data)
+        max_weights = cleaned_weights
+        self._discrete_allocation = DiscreteAllocation(max_weights, latest_prices_series, total_portfolio_value=10000)
+        allocation, leftover = self._discrete_allocation.lp_portfolio()
         print("Discrete allocation:", allocation)
         print("Funds remaining: ${:.2f}".format(leftover))
 
@@ -96,6 +99,11 @@ class PortfolioOptimizer(AbstractPortfolioMeasure):
         plt.setp(ax1.get_xticklabels(), rotation=45)
         plt.show()'''
         self._plotRiskReturns(self._portfolio_data).show()
+
+    def _getEfficientFrontier(self, portfolio_data) -> EfficientFrontier:
+        mu: Series = expected_returns.mean_historical_return(portfolio_data)  # returns.mean() * 252
+        S: DataFrame = risk_models.sample_cov(portfolio_data)  # Get the sample covariance matrix
+        return EfficientFrontier(mu, S)
 
     def _setMatrices(self, portfolio_data: DataFrame, log_ret: DataFrame, cov_mat: DataFrame):
         for i in range(self._threshold):
