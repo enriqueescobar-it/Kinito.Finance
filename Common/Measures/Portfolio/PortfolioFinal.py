@@ -58,3 +58,25 @@ class PortfolioFinal(AbstractPortfolioMeasure):
         plt.show()
         # building a portfolio by providing stock data
         # pf = build_portfolio(data=df_data)
+        # # Portfolio optimisation
+        # ## Efficient Frontier
+        # Based on the **Efficient Frontier**, the portfolio can be optimised for
+        #  - minimum volatility
+        #  - maximum Sharpe ratio
+        #  - minimum volatility for a given target return
+        #  - maximum Sharpe ratio for a given target volatility
+        # See below for an example for each optimisation.
+        # if needed, change risk free rate and frequency/time window of the portfolio
+        print("pf.risk_free_rate = {}".format(pf.risk_free_rate))
+        print("pf.freq = {}".format(pf.freq))
+        print('ef_minimum_volatility')
+        pf.ef_minimum_volatility(verbose=True)
+        # optimisation for maximum Sharpe ratio
+        print('ef_maximum_sharpe_ratio')
+        pf.ef_maximum_sharpe_ratio(verbose=True)
+        # minimum volatility for a given target return of 0.26
+        print('ef_efficient_return: target return 0.26')
+        pf.ef_efficient_return(0.26, verbose=True)
+        # maximum Sharpe ratio for a given target volatility of 0.22
+        print('ef_efficient_volatility: target volatility 0.22')
+        pf.ef_efficient_volatility(0.22, verbose=True)
