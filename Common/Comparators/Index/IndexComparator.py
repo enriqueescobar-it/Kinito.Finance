@@ -35,9 +35,9 @@ class IndexComparator(AbstractIndexComparator):
     def _setData(self) -> pd.DataFrame:
         df: pd.DataFrame = self._stock_option.HistoricalData[self._stock_option.SourceColumn].to_frame()
         df.columns = self._stock_option.Ticker + df.columns
-        a_df: pd.DataFrame = self._index_list[0]._data
+        a_df: pd.DataFrame = self._index_list[0].Data
         for a_index in self._index_list[1:]:
-            a_df = a_df.merge(a_index.HistoricalData, left_index=True, right_index=True)
+            a_df = a_df.merge(a_index.Data, left_index=True, right_index=True)
         return df.merge(a_df, left_index=True, right_index=True)
 
     def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
