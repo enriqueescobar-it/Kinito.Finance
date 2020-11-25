@@ -4,8 +4,11 @@ from finquant.portfolio import build_portfolio
 from pandas import DataFrame, Series
 import matplotlib.pyplot as plt
 
+
 class PortfolioFinal(AbstractPortfolioMeasure):
     _data: DataFrame = DataFrame()
+    _freq: int = -1
+    _risk_free_rate: float = -1.1
     _annualised_expected_return: float = -1.1
     _volatility: float = -1.1
     _sharpe_risk_free005: float = -1.1
@@ -67,8 +70,8 @@ class PortfolioFinal(AbstractPortfolioMeasure):
         #  - maximum Sharpe ratio for a given target volatility
         # See below for an example for each optimisation.
         # if needed, change risk free rate and frequency/time window of the portfolio
-        print("pf.risk_free_rate = {}".format(pf.risk_free_rate))
-        print("pf.freq = {}".format(pf.freq))
+        self._freq = pf.freq
+        self._risk_free_rate = pf.risk_free_rate
         print('ef_minimum_volatility')
         pf.ef_minimum_volatility(verbose=True)
         # optimisation for maximum Sharpe ratio
@@ -80,3 +83,35 @@ class PortfolioFinal(AbstractPortfolioMeasure):
         # maximum Sharpe ratio for a given target volatility of 0.22
         print('ef_efficient_volatility: target volatility 0.22')
         pf.ef_efficient_volatility(0.22, verbose=True)
+
+    @property
+    def Frequency(self):
+        return self._freq
+
+    @property
+    def Volatility(self):
+        return round(self._volatility, 5)
+
+    @property
+    def RiskFreeRate(self):
+        return round(self._risk_free_rate, 5)
+
+    @property
+    def Free005SharpeRatio(self):
+        return round(self._sharpe_risk_free005, 5)
+
+    @property
+    def AnnualExpectedReturn(self):
+        return round(self._annualised_expected_return, 5)
+
+    @property
+    def AnnualMeanReturnSeries(self):
+        return self._annualised_mean_return_series
+
+    @property
+    def SkewnessSeries(self):
+        return self._skewness_series
+
+    @property
+    def KurtosisSeries(self):
+        return self._kurtosis_series
