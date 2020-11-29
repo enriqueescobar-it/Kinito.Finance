@@ -6,23 +6,29 @@ import matplotlib.pyplot as plt
 
 
 class PortfolioFinal(AbstractPortfolioMeasure):
-    _data: DataFrame = DataFrame()
     _freq: int = -1
+    _size: float = -1.1
     _risk_free_rate: float = -1.1
     _annualised_expected_return: float = -1.1
     _volatility: float = -1.1
     _sharpe_risk_free005: float = -1.1
+    _a_title: str = ''
+    _legend_place: str = ''
     _annualised_mean_return_series: Series = Series()
     _skewness_series: Series = Series()
     _kurtosis_series: Series = Series()
+    _data: DataFrame = DataFrame()
     _portfolio_df: DataFrame = DataFrame()
     _cumulative_return_df: DataFrame = DataFrame()
     _cumulative_log_return_df: DataFrame = DataFrame()
     _pct_chng_return_df: DataFrame = DataFrame()
     _pct_chng_log_return_df: DataFrame = DataFrame()
 
-    def __init__(self, y_stocks: list):
+    def __init__(self, y_stocks: list,  a_float: float, legend_place: str):
         yahoo_list: list = list()
+        self._size = a_float
+        self._a_title = 'a title'
+        self._legend_place = legend_place
         t_s: TimeSpan = y_stocks[0].TimeSpan
         for y_stock in y_stocks:
             yahoo_list.append(y_stock.Ticker)
@@ -45,20 +51,10 @@ class PortfolioFinal(AbstractPortfolioMeasure):
         self._kurtosis_series = pf.kurtosis
         # daily returns (percentage change) price_{t} - price_{t=0}) / price_{t=0}
         self._cumulative_return_df = pf.comp_cumulative_returns()
-        self._cumulative_return_df.plot().axhline(y=0, color="darkgrey", lw=3)
-        plt.show()
         self._cumulative_log_return_df = pf.comp_daily_log_returns().cumsum()
-        self._cumulative_log_return_df.plot().axhline(y=0, color="darkgrey", lw=3)
-        plt.show()
         # daily percentage changes of returns
         self._pct_chng_return_df = pf.comp_daily_returns()
-        # plotting daily percentage changes of returns
-        self._pct_chng_return_df.plot().axhline(y=0, color="darkgrey")
-        plt.show()
         self._pct_chng_log_return_df = pf.comp_daily_log_returns()
-        # plotting daily log returns
-        self._pct_chng_log_return_df.plot().axhline(y=0, color="darkgrey")
-        plt.show()
         # building a portfolio by providing stock data
         # pf = build_portfolio(data=df_data)
         # # Portfolio optimisation
@@ -83,6 +79,21 @@ class PortfolioFinal(AbstractPortfolioMeasure):
         # maximum Sharpe ratio for a given target volatility of 0.22
         print('ef_efficient_volatility: target volatility 0.22')
         pf.ef_efficient_volatility(0.22, verbose=True)
+
+    def Plot(self): #-> plt:
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31'
+        fig, ax = plt.subplots(2, 2, figsize=(self._size / 2.0, self._size / 2.0), sharex=True)
+        fig.suptitle(self._a_title)
+        #plt.title('another title', fontsize=18)
+        self._cumulative_return_df.plot(ax=ax[0, 0]).axhline(y=0, color="darkgrey", lw=3)
+        self._cumulative_log_return_df.plot(ax=ax[0, 1]).axhline(y=0, color="darkgrey", lw=3)
+        # plotting daily percentage changes of returns
+        self._pct_chng_return_df.plot(ax=ax[1, 0]).axhline(y=0, color="darkgrey")
+        # plotting daily log returns
+        self._pct_chng_log_return_df.plot(ax=ax[1, 1]).axhline(y=0, color="darkgrey")
+        plt.tight_layout()
+        return plt
 
     @property
     def Frequency(self):
@@ -115,3 +126,19 @@ class PortfolioFinal(AbstractPortfolioMeasure):
     @property
     def KurtosisSeries(self):
         return self._kurtosis_series
+
+    @property
+    def CumulativeSimpleReturns(self):
+        return self._cumulative_return_df
+
+    @property
+    def CumulativeLogReturns(self):
+        return self._cumulative_log_return_df
+
+    @property
+    def DailyPcntChangesSimpleReturns(self):
+        return self._pct_chng_return_df
+
+    @property
+    def DailyPcntChangesLogReturns(self):
+        return self._pct_chng_log_return_df
