@@ -35,6 +35,15 @@ class TimeSpan(object):
         self._setDayCount()
         self._setHourCount()
 
+    def setStartDateStr(self, a_str: str = ''):
+        self.StartDateStr = a_str
+        self.StartDate = dt.date(*(int(s) for s in self.StartDateStr.split('-')))
+        self._setYearCount()
+        self._setMonthCount()
+        self._setWeekCount()
+        self._setDayCount()
+        self._setHourCount()
+
     def _setYearCount(self):
         self.YearCount = relativedelta(self.EndDate, self.StartDate).years
         self.QuarterCount = relativedelta(self.EndDate, self.StartDate).months % 3

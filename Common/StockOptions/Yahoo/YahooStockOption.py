@@ -129,6 +129,7 @@ class YahooStockOption(AbstractStockOption):
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self.HistoricalData = self._setData()
+        self.TimeSpan = self._updateTimeSpan(self.TimeSpan, self.HistoricalData)
         self.Data = self.HistoricalData[self.SourceColumn].to_frame()
         self._data_range = self._getDataRange(1000, self.Data[self.SourceColumn])
         self._mu = round(self.HistoricalData[self.SourceColumn].mean(), 2)
@@ -385,3 +386,7 @@ class YahooStockOption(AbstractStockOption):
 
     def _getProbabilityDensityFunction(self, nd_array: ndarray, mu_float: float, sigma_float: float):
         return scs.norm.pdf(nd_array, loc=mu_float, scale=sigma_float)
+
+    def _updateTimeSpan(self, t_s: TimeSpan, a_df: pd.DataFrame = pd.DataFrame()) -> TimeSpan:
+        t_s.setStartDateStr(a_df.index.to_pydatetime()[0].strftime('%Y-%m-%d'))
+        return t_s
