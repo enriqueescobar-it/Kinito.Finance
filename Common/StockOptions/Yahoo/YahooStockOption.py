@@ -22,25 +22,25 @@ class YahooStockOption(AbstractStockOption):
     _mu: float = -1.1
     _median: float = -1.1
     _data_range: ndarray
-    FvBeta: float
-    FvChangePercent: str
-    FvCompanyCountry: str
-    FvCompanyIndustry: str
-    FvCompanyName: str
-    FvCompanySector: str
-    FvDividend: str
-    FvDividendPercent: str
-    FvEPS: float
-    FvEarnings: str
+    FvBeta: float = -1.1
+    FvChangePercent: str = ''
+    FvCompanyCountry: str = ''
+    FvCompanyIndustry: str = ''
+    FvCompanyName: str = ''
+    FvCompanySector: str = ''
+    FvDividend: str = ''
+    FvDividendPercent: str = ''
+    FvEPS: float = -1.1
+    FvEarnings: str = ''
     FvMarketCap: int
-    FvPayout: str
-    FvPeRatio: float
-    FvLow52: str
-    FvHigh52: str
-    FvPrice: float
+    FvPayout: str = ''
+    FvPeRatio: float = -1.1
+    FvLow52: str = ''
+    FvHigh52: str = ''
+    FvPrice: float = -1.1
     FvRange52: List[float]
-    FvRsi14: str
-    FvVolume: int
+    FvRsi14: str = ''
+    FvVolume: int = -1
     ForecastSpan: int = 30
     HistoricalData: pd.DataFrame
     DataSimpleReturns: pd.DataFrame
@@ -94,11 +94,11 @@ class YahooStockOption(AbstractStockOption):
     YeShortRatio: float = -1.1
     YeBookValue: float = -1.1
     YePriceToBook: float = -1.1
-    YssBeta: str
-    YssEarningsDate: str
-    YssLink: str
-    YssMarketCap: str
-    YssPeRatio: str
+    YssBeta: str = ''
+    YssEarningsDate: str = ''
+    YssLink: str = ''
+    YssMarketCap: str = ''
+    YssPeRatio: str = ''
     _fin_viz_engine: FinVizEngine
     _y_finance_engine: YahooFinanceEngine
     _yahooSummaryScrapper: YahooSummaryScrapper
