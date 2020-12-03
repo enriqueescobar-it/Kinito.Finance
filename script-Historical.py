@@ -24,14 +24,16 @@ from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.NseIndex import NseIndex
 from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
 from Common.StockMarketIndex.Yahoo.SoxIndex import SoxIndex
+from Common.StockMarketIndex.Yahoo.TnxIndex import TnxIndex
 from Common.StockMarketIndex.Yahoo.TreasuryBill13Index import TreasuryBill13Index
 #from Common.StockMarketIndex.Yahoo.Vix3mIndex import Vix3mIndex
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
+from Common.StockMarketIndex.Yahoo.TyxIndex import TyxIndex
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
-yahooStockOption: YahooStockOption = YahooStockOption('NOW')#'ESTC')XWEB DDOG BEKE GBTC
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -69,20 +71,20 @@ yahooStockOption: YahooStockOption = YahooStockOption('NOW')#'ESTC')XWEB DDOG BE
 # AAPL ABBV+ AAOI ADBE+ ABR+ ABT ABX.TO&GOLD ACES ADC+ ADP AGNC AKAM AMGN AMD AMP AMT AMZN ANTM AQN AQN.TO ARKK ARKG ARKQ ARKW
 # APHA+ ASAN ARKF ARKK AVAV AVGO AVB AYX AZN AIVSX+ AEM+ AEM.TO+ AWK+ ANET+ AT.TO
 # BA BCE BCE.TO+ BNS BPY BABA BIDU- BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO BIP+ BZUN+ BILI+ BEP+ BYND+
-# CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST CP CRM CSCO CDNS CNQ.TO CSIQ
+# CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST CP CRM CSCO CDNS CNQ.TO CSIQ CELH+
 # DCBO.TO DND.TO CU.TO DLHC DDOG DKNG+ DDOG+
 # EMR+ ENB ENB.TO ESS ESTC+ ESPO EMA.TO ET ETSY+ ENGH.TO+ ENPH+ EEM EQB.TO
 # F FD.TO FF.TO FFMG FENY FIE FIVG FROG FSLR FSLY+ FSRNX FSZ FTS+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE-
 # GM GIS GLD GLW GMF GNW GRWG GILD GBTC GAMR GSY.TO+ GOOD GXC+ GOOG+
 # HD+ HLT HQU HZU HEO.V HII IBM IBUY IWFH INTC IPO IIVI IVAC IGV+ IBM IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
 # KEY K KXS.TO KDP KL KL.TO KO- KR KMI K.TO KXS.TO+
-# LB.TO LMT LMND LOW+ LSPD LVGO
-# M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST
+# LB.TO LMT LMND LOW+ LSPD+ LVGO LOGI+
+# M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST
 # NEE+ NEM+ NET NKE NSP NEAR NFLX NLY NLOK NNDM NPI NOBL+ NVEI.TO NVDA+ NOW+ O+ OTEX OHI O-
 # PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS PHO
 # QCOM QQC-f QQQ QRVO RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO RIOT RHS QRS.TO REAL.TO ROKU+
 # SU SU.TO SIS.TO+ SNA SBUX SHOP+ SHOP.TO+ SPLK SPYD SJR.B SJR-B.TO SLV SNAP SNOW SPOT SOXL SRU.UN.TO. SPG SAP SPNS STOR+ STAG SEDG+ SJR-B.TO
-# T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+ TRP TRP.TO TTD TOU.TO TROW TWLO TXN U UNM UNP UPWK
+# T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+ TRP TRP.TO TTD TOU.TO TROW TWLO TXN TWST+ U UNM UNP UPWK
 # VDC VFC VFF VFV.TO VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ+ V VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
 # WCN WCN.TO+ WELL.TO WFG WMT- WORK WPC- XEI XIT XBC.TO XOM XWEB+ XLK+ YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
@@ -98,6 +100,8 @@ goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOptio
 silverIndex: AbstractStockMarketIndex = SilverIndex('yahoo', "SI=F", yahooStockOption.TimeSpan)
 crudeOilIndex: AbstractStockMarketIndex = CrudeOilIndex('yahoo', "CL=F", yahooStockOption.TimeSpan)
 soxIndex: AbstractStockMarketIndex = SoxIndex('yahoo', "^SOX", yahooStockOption.TimeSpan)
+tnxIndex: AbstractStockMarketIndex = TnxIndex('yahoo', "^TNX", yahooStockOption.TimeSpan)
+tyxIndex: AbstractStockMarketIndex = TyxIndex('yahoo', "^TYX", yahooStockOption.TimeSpan)
 #vix3mIndex: AbstractStockMarketIndex = Vix3mIndex('yahoo', "^VIX3M", yahooStockOption.TimeSpan)
 daxIndex: AbstractStockMarketIndex = DaxIndex('yahoo', "^GDAXI", yahooStockOption.TimeSpan)
 euroNext100Index: AbstractStockMarketIndex = EuroNext100Index('yahoo', "^N100", yahooStockOption.TimeSpan)
@@ -126,6 +130,8 @@ marketIndices.append(goldIndex)
 marketIndices.append(silverIndex)
 marketIndices.append(crudeOilIndex)
 marketIndices.append(soxIndex)
+marketIndices.append(tnxIndex)
+marketIndices.append(tyxIndex)
 #marketIndices.append(vix3mIndex)
 marketIndices.append(daxIndex)
 marketIndices.append(euroNext100Index)
