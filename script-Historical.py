@@ -33,7 +33,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
-yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC
+yahooStockOption: YahooStockOption = YahooStockOption('CTC-A.TO')#'ESTC')XWEB DDOG BEKE GBTC
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]

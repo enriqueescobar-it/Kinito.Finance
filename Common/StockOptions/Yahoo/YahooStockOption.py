@@ -99,9 +99,29 @@ class YahooStockOption(AbstractStockOption):
     YssLink: str = ''
     YssMarketCap: str = ''
     YssPeRatio: str = ''
+    _high52: float = -1.1
+    _low52: float = -1.1
+    _range52: List[float]
+    _price: float = -1.1
     _fin_viz_engine: FinVizEngine
     _y_finance_engine: YahooFinanceEngine
     _yahooSummaryScrapper: YahooSummaryScrapper
+
+    @property
+    def High52(self):
+        return self._high52
+
+    @property
+    def Low52(self):
+        return self._low52
+
+    @property
+    def Range52(self):
+        return self._range52
+
+    @property
+    def Price(self):
+        return self._price
 
     @property
     def DataRange(self):
@@ -170,7 +190,7 @@ class YahooStockOption(AbstractStockOption):
         print('M', self.IsMonthly)
         print('Q', self.IsQuarterly)
         print('A', self.IsAnnually)
-        self._setFinViz(a_ticker)
+        #self._setFinViz(a_ticker)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
 
@@ -191,7 +211,23 @@ class YahooStockOption(AbstractStockOption):
         a_df.fillna(method='ffill', inplace=True)
         a_df.fillna(method='bfill', inplace=True)
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
+        self._high52 = self.__setHigh52(a_df)
+        self._low52 = self.__setLow52(a_df)
+        self._range52 = [self._low52, self._high52]
+        self._price = self.__setPrice(a_df)
         return a_df
+
+    def __setHigh52(self, a_df) -> float:
+        i = a_df['High'].head(252).max()
+        return round(i, 6)
+
+    def __setLow52(self, a_df) -> float:
+        i = a_df['Low'].head(252).min()
+        return round(i, 6)
+
+    def __setPrice(self, a_df) -> float:
+        i = a_df['Adj Close'].iloc[0]
+        return round(i, 6)
 
     def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return (a_df / a_df.iloc[0])[self.SourceColumn]
@@ -307,9 +343,6 @@ class YahooStockOption(AbstractStockOption):
         self.FvEPS = self._fin_viz_engine.EpsTtm
         self.FvBeta = self._fin_viz_engine.Beta
         self.FvEarnings = self._fin_viz_engine.EarningDate
-        self.FvLow52 = self._fin_viz_engine.Low52
-        self.FvHigh52 = self._fin_viz_engine.High52
-        self.FvRange52 = self._fin_viz_engine.Range52
         self.FvRsi14 = self._fin_viz_engine.Rsi14
         self.FvVolatility = self._fin_viz_engine.Volatility
         self.FvPayout = self._fin_viz_engine.PayoutPcnt
@@ -318,6 +351,9 @@ class YahooStockOption(AbstractStockOption):
         self.FvPrice = self._fin_viz_engine.Price
         self.FvDividend = self._fin_viz_engine.Dividend
         self.FvDividendPercent = self._fin_viz_engine.DividendPcnt
+        self.FvLow52 = self._fin_viz_engine.Low52
+        self.FvHigh52 = self._fin_viz_engine.High52
+        self.FvRange52 = self._fin_viz_engine.Range52
 
     def _setYahooFinance(self, a_ticker: str = 'TD'):
         self._y_finance_engine = YahooFinanceEngine(a_ticker)

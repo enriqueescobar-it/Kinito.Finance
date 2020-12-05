@@ -24,7 +24,7 @@ class HistoricalPlotter(AbstractPlotter):
     _yeLow52: float
 
     def __init__(self, stock_option: YahooStockOption, vixIndex: VixIndex, sAnP500: SnP500Index):
-        self._price = np.round(stock_option.FvPrice, 2)
+        self._price = np.round(stock_option.Price, 2)
         self._yeHigh52 = np.round(stock_option.YeHigh52, 2)
         self._yeLow52 = np.round(stock_option.YeLow52, 2)
         self._yeAverage50 = np.round(stock_option.YeAverage50, 2)

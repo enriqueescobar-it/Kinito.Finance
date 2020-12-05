@@ -5,35 +5,35 @@ from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 class FinVizEngine(AbstractEngine):
     """description of class"""
-    AvgVolume: int
-    Beta: float
-    ChangePcnt: str
-    Dividend: str
-    DividendPcnt: str
-    EarningDate: str
-    EpsTtm: float
-    EpsQqPcnt: str
-    High52: str
-    Low52: str
-    MarketCap: int
-    PayoutPcnt: str
-    PeRatio: float
-    Price: float
+    AvgVolume: int = -1
+    Beta: float = -1.1
+    ChangePcnt: str = ''
+    Dividend: str = ''
+    DividendPcnt: str = ''
+    EarningDate: str = ''
+    EpsTtm: float = -1.1
+    EpsQqPcnt: str = ''
+    High52: str = ''
+    Low52: str = ''
+    MarketCap: int = -1
+    PayoutPcnt: str = ''
+    PeRatio: float = -1.1
+    Price: float = -1.1
     Range52: List[float]
-    RelVolume: float
-    Rsi14: str
-    StockName: str
-    StockSector: str
-    StockIndustry: str
-    StockCountry: str
-    SalesQqPcnt: str
-    ShsOutstand: int
-    Sma20: str
-    Sma50: str
-    Sma200: str
-    Volume: int
-    Volatility: str
-    _ticker: str
+    RelVolume: float = -1.1
+    Rsi14: str = ''
+    StockName: str = ''
+    StockSector: str = ''
+    StockIndustry: str = ''
+    StockCountry: str = ''
+    SalesQqPcnt: str = ''
+    ShsOutstand: int = -1
+    Sma20: str = ''
+    Sma50: str = ''
+    Sma200: str = ''
+    Volume: int = -1
+    Volatility: str = ''
+    _ticker: str = ''
     _fin_viz: FinViz
 
     def __init__(self, a_ticker: str = 'CNI'):
