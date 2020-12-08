@@ -1,3 +1,4 @@
+from typing import Tuple
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,19 +7,21 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 
 
 class SmaStrategy(AbstractTechIndicatorStrategy):
-    __sma_indicator: SmaIndicator
+    _sma_indicator: SmaIndicator
 
     def __init__(self, sma_indicator: SmaIndicator):
-        self.__sma_indicator = sma_indicator
-        a_df: pd.DataFrame = self.__sma_indicator.GetData()
-        self._col = self.__sma_indicator.GetCol()
-        self._lower_label = a_df.columns[self.__sma_indicator.GetLowHigh()[0]]
-        self._upper_label = a_df.columns[self.__sma_indicator.GetLowHigh()[1]]
-        self._data = a_df[self.__sma_indicator.GetCol()].to_frame()
+        self._sma_indicator = sma_indicator
+        a_df: pd.DataFrame = self._sma_indicator.GetData()
+        self._col = self._sma_indicator.GetCol()
+        self._lower_label = a_df.columns[self._sma_indicator.GetLowHigh()[0]]
+        #
+        self._upper_label = a_df.columns[self._sma_indicator.GetLowHigh()[1]]
+        self._data = a_df[self._sma_indicator.GetCol()].to_frame()
         self._data[self._lower_label] = a_df[self._lower_label]
+        #
         self._data[self._upper_label] = a_df[self._upper_label]
-        self._buy_label = self.__sma_indicator.GetLabel() + self._buy_label
-        self._sell_label = self.__sma_indicator.GetLabel() + self._sell_label
+        self._buy_label = self._sma_indicator.GetLabel() + self._buy_label
+        self._sell_label = self._sma_indicator.GetLabel() + self._sell_label
         buyNsellTuple = self._buyNsell()
         self._data[self._buy_label] = buyNsellTuple[0]
         self._data[self._sell_label] = buyNsellTuple[1]
@@ -53,21 +56,44 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         return buySignal, sellSignal
 
     def Plot(self):
-        self.__sma_indicator.PlotData().show()
-        plt.figure(figsize=self.__sma_indicator.GetFigSize())
-        plt.style.use(self.__sma_indicator.GetPlotStyle())
+        self._sma_indicator.PlotData().show()
+        plt.figure(figsize=self._sma_indicator.GetFigSize())
+        plt.style.use(self._sma_indicator.GetPlotStyle())
         for a_ind, col in enumerate(self._data.columns[0:3]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3
             self._data[col].plot(alpha=an_alpha)
             print('i', an_alpha)
-        plt.scatter(self.__sma_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^', color='green')
-        plt.scatter(self.__sma_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label, marker='v', color='red')
-        plt.title(self.__sma_indicator.GetMainLabel())
-        plt.xlabel(self.__sma_indicator.GetXLabel())
-        plt.xticks(rotation=self.__sma_indicator.GetXticksAngle())
-        plt.ylabel(self.__sma_indicator.GetYLabel())
-        plt.legend(loc=self.__sma_indicator.GetLegendPlace())
+        plt.scatter(self._sma_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^', color='green')
+        plt.scatter(self._sma_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label, marker='v', color='red')
+        plt.title(self._sma_indicator.GetMainLabel())
+        plt.xlabel(self._sma_indicator.GetXLabel())
+        plt.xticks(rotation=self._sma_indicator.GetXticksAngle())
+        plt.ylabel(self._sma_indicator.GetYLabel())
+        plt.legend(loc=self._sma_indicator.GetLegendPlace())
         return plt
 
     def PlotAll(self) -> plt:
-        return self.Plot()
+        n_col: int = 1
+        n_row: int = 2
+        a_title: str = self._sma_indicator.GetMainLabel()
+        x_title: str = self._sma_indicator.GetXLabel()
+        y_title: str = self._sma_indicator.GetYLabel()
+        f_size: Tuple[float, float] = (self._sma_indicator.GetFigSize()[0], self._sma_indicator.GetFigSize()[0])
+        fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
+        plt.style.use(self._sma_indicator.GetPlotStyle())
+        #ax0 strategy
+        for a_ind, col in enumerate(self._data.columns[0:1]):
+            an_alpha: float = 1.0 if a_ind == 0 else 0.3
+            ax[0].plot(self._data[col], alpha=an_alpha, label=col)
+        ax[0].scatter(self._sma_indicator.GetData().index, self._data[self._buy_label], marker='^', color='green', label=self._buy_label)
+        ax[0].scatter(self._sma_indicator.GetData().index, self._data[self._sell_label], marker='v', color='red', label=self._sell_label)
+        ax[0].set(ylabel=y_title, title=a_title)
+        ax[0].legend(loc=self._sma_indicator.GetLegendPlace())
+        #ax1 strategy
+        for a_ind, col in enumerate(self._sma_indicator.GetData().columns[-2:self._sma_indicator.GetData().columns.size]):
+            an_alpha: float = 0.5 if a_ind != 0 else 1.0
+            ax[1].plot(self._sma_indicator.GetData()[col], alpha=an_alpha, label=col)
+        ax[1].xaxis.set_tick_params(rotation=self._sma_indicator.GetXticksAngle())
+        ax[1].set(ylabel='Index', xlabel=x_title)
+        ax[1].legend(loc=self._sma_indicator.GetLegendPlace())
+        return plt

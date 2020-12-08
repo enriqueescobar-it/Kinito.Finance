@@ -31,9 +31,16 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.TyxIndex import TyxIndex
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
+from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
+from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
+from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
+from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
+from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
+from Common.TechIndicators.EmaIndicator import EmaIndicator
+from Common.TechIndicators.MacdIndicator import MacdIndicator
+from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-
-yahooStockOption: YahooStockOption = YahooStockOption('CTC-A.TO')#'ESTC')XWEB DDOG BEKE GBTC
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -69,24 +76,25 @@ yahooStockOption: YahooStockOption = YahooStockOption('CTC-A.TO')#'ESTC')XWEB DD
 # ETFs: BRTXQ FZILX FSRNX VTSAX FPE HPI
 # TFII LSPD T FTS RY SHOP
 # AAPL ABBV+ AAOI ADBE+ ABR+ ABT ABX.TO&GOLD ACES ADC+ ADP AGNC AKAM AMGN AMD AMP AMT AMZN ANTM AQN AQN.TO ARKK ARKG ARKQ ARKW
-# APHA+ ASAN ARKF ARKK AVAV AVGO AVB AYX AZN AIVSX+ AEM+ AEM.TO+ AWK+ ANET+ AT.TO
-# BA BCE BCE.TO+ BNS BPY BABA BIDU- BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO BIP+ BZUN+ BILI+ BEP+ BYND+
+# APHA+ ASAN ARKF ARKK AVAV AVGO AVB AYX AZN AIVSX+ AEM+ AEM.TO+ AWK+ ANET+ AT.TO ATZ.TO. ACO-X.TO+
+# BA BCE BCE.TO. BNS BPY BABA BIDU- BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO. BIP+ BZUN+ BILI++ BEP+ BYND+ BAM-A.TO+ BMO.TO.
 # CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST CP CRM CSCO CDNS CNQ.TO CSIQ CELH+
-# DCBO.TO DND.TO CU.TO DLHC DDOG DKNG+ DDOG+
-# EMR+ ENB ENB.TO ESS ESTC+ ESPO EMA.TO ET ETSY+ ENGH.TO+ ENPH+ EEM EQB.TO
-# F FD.TO FF.TO FFMG FENY FIE FIVG FROG FSLR FSLY+ FSRNX FSZ FTS+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE-
+# CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++
+# DCBO.TO DND.TO CU.TO DLHC DDOG DKNG+ DDOG+ DOL.TO+
+# EMR+ ENB ENB.TO ESS ESTC+ ESPO EMA.TO ET ETSY+ ENGH.TO+ ENPH+ EEM EQB.TO+ ELY+
+# F FD.TO FF.TO FFMG FENY FIE FIVG FROG FSLR FSLY+ FSRNX FSZ FTS+ FTS.TO+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE-
 # GM GIS GLD GLW GMF GNW GRWG GILD GBTC GAMR GSY.TO+ GOOD GXC+ GOOG+
-# HD+ HLT HQU HZU HEO.V HII IBM IBUY IWFH INTC IPO IIVI IVAC IGV+ IBM IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
+# HD+ HLT HQU HZU HEO.V HII HLF.TO. IBM IBUY IWFH INTC IPO IIVI IVAC IGV+ IBM IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
 # KEY K KXS.TO KDP KL KL.TO KO- KR KMI K.TO KXS.TO+
 # LB.TO LMT LMND LOW+ LSPD+ LVGO LOGI+
-# M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST
-# NEE+ NEM+ NET NKE NSP NEAR NFLX NLY NLOK NNDM NPI NOBL+ NVEI.TO NVDA+ NOW+ O+ OTEX OHI O-
-# PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS PHO
-# QCOM QQC-f QQQ QRVO RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO RIOT RHS QRS.TO REAL.TO ROKU+
-# SU SU.TO SIS.TO+ SNA SBUX SHOP+ SHOP.TO+ SPLK SPYD SJR.B SJR-B.TO SLV SNAP SNOW SPOT SOXL SRU.UN.TO. SPG SAP SPNS STOR+ STAG SEDG+ SJR-B.TO
+# M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST MFC.TO.
+# NEE+ NEM+ NET NKE NSP NEAR NFLX NLY NLOK NNDM NPI NOBL+ NVEI.TO NVDA+ NOW+ O+ OTEX OHI O- NWC.TO.
+# PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS PHO POW.TO.
+# QCOM QQC-f QQQ QRVO QSR.TO+ RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO. RIOT RHS QRS.TO REAL.TO ROKU+
+# SU SU.TO. SIS.TO+ SNA SBUX SHOP+ SHOP.TO+ SPLK SPYD SJR.B SJR-B.TO SLV SNAP SNOW SPOT SOXL SRU.UN.TO. SPG SAP SPNS STOR+ STAG SEDG+ SJR-B.TO SOY.TO.
 # T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+ TRP TRP.TO TTD TOU.TO TROW TWLO TXN TWST+ U UNM UNP UPWK
 # VDC VFC VFF VFV.TO VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ+ V VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
-# WCN WCN.TO+ WELL.TO WFG WMT- WORK WPC- XEI XIT XBC.TO XOM XWEB+ XLK+ YCBD ZG ZM ZQQ ZS ZWB
+# WCN WCN.TO+ WELL.TO WFG WMT- WORK WPC- XEI XIT XBC.TO XOM. XWEB+ XLK+ YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
@@ -166,6 +174,21 @@ yahooStockOptionPlotter.PlotTimely()
 #yahooStockOptionPlotter._plotMonthly().show()
 #yahooStockOptionPlotter._plotQuarterly().show()
 #yahooStockOptionPlotter._plotAnnually().show()
+yahooMacdIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
+print(yahooMacdIndicator.GetLabel())
+yahooMacdStrategy: MacdStrategy = MacdStrategy(yahooMacdIndicator)
+#yahooStockOptionStrategy.Plot().show()
+yahooMacdStrategy.PlotAll().show()
+yahooSmaIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
+print(yahooSmaIndicator.GetLabel())
+yahooSmaStrategy: SmaStrategy = SmaStrategy(yahooSmaIndicator)
+yahooSmaStrategy.Plot().show()
+yahooSmaStrategy.PlotAll().show()
+yahooEmaIndicator: EmaIndicator = EmaIndicator(yahooStockOption)
+print(yahooEmaIndicator.GetLabel())
+yahooEmaStrategy: EmaStrategy = EmaStrategy(yahooEmaIndicator)
+yahooEmaStrategy.Plot().show()
+yahooEmaStrategy.PlotAll().show()
 # preprocessing
 ## Mean removal
 print('MEAN=', yahooStockOption.Data.Sparse.mean(axis=0))

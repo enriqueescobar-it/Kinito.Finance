@@ -107,10 +107,14 @@
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/titanic.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/winequality-red.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Readers/Engine/FinVizEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/Engine/FinVizEngine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockOptions/Yahoo/YahooStockOption.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Ema.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Ema.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Macd.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Macd.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Sma.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Sma.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +168,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.script-Historical">
-    <configuration name="PortfolioComparator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="script-Ema" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -172,53 +176,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/Comparators/Portfolio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/Comparators/Portfolio/PortfolioComparator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="PortfolioOptimizer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/Measures/Portfolio" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="F:\Disk_X\Kinito.Finance\Common\Measures\Portfolio\PortfolioOptimizer.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="PortfolioStats" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Kinito.Finance" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Common/Measures/Portfolio" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common/Measures/Portfolio/PortfolioStats.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Ema.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -248,6 +210,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="script-Macd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Macd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="script-Portfolio" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -269,13 +252,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="script-Sma" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Kinito.Finance" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Sma.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.script-Historical" />
+        <item itemvalue="Python.script-Ema" />
+        <item itemvalue="Python.script-Sma" />
+        <item itemvalue="Python.script-Macd" />
         <item itemvalue="Python.script-Portfolio" />
-        <item itemvalue="Python.PortfolioStats" />
-        <item itemvalue="Python.PortfolioOptimizer" />
-        <item itemvalue="Python.PortfolioComparator" />
       </list>
     </recent_temporary>
   </component>
@@ -322,7 +326,7 @@
     </state>
     <state x="498" y="170" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1600975232725" />
     <state x="2467" y="-267" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599578410124" />
-    <state width="1799" height="232" key="GridCell.Tab.0.bottom" timestamp="1607146762672">
+    <state width="1799" height="232" key="GridCell.Tab.0.bottom" timestamp="1607401829281">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.bottom/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990555" />
@@ -336,8 +340,8 @@
     <state width="1431" height="282" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1602998488972" />
-    <state width="1799" height="232" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1607146762672" />
-    <state width="1799" height="232" key="GridCell.Tab.0.center" timestamp="1607146762672">
+    <state width="1799" height="232" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1607401829281" />
+    <state width="1799" height="232" key="GridCell.Tab.0.center" timestamp="1607401829281">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.center/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -351,8 +355,8 @@
     <state width="1431" height="282" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1602998488971" />
-    <state width="1799" height="232" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1607146762672" />
-    <state width="1799" height="232" key="GridCell.Tab.0.left" timestamp="1607146762672">
+    <state width="1799" height="232" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1607401829281" />
+    <state width="1799" height="232" key="GridCell.Tab.0.left" timestamp="1607401829281">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.left/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -366,8 +370,8 @@
     <state width="1431" height="282" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1602998488971" />
-    <state width="1799" height="232" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1607146762672" />
-    <state width="1799" height="232" key="GridCell.Tab.0.right" timestamp="1607146762672">
+    <state width="1799" height="232" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1607401829281" />
+    <state width="1799" height="232" key="GridCell.Tab.0.right" timestamp="1607401829281">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.right/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -381,7 +385,7 @@
     <state width="1431" height="282" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1602998488972" />
-    <state width="1799" height="232" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1607146762672" />
+    <state width="1799" height="232" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1607401829281" />
     <state x="2190" y="-384" key="SettingsEditor" timestamp="1599588699316">
       <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
@@ -400,12 +404,21 @@
       <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state x="2352" y="-235" key="run.anything.popup/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1598752421800" />
-    <state x="394" y="197" key="run.anything.popup/0.0.1474.864@0.0.1474.864" timestamp="1598655461248" />
     <state x="2246" y="-123" width="800" height="823" key="search.everywhere.popup" timestamp="1604276568309">
       <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
     <state x="2246" y="-123" width="800" height="823" key="search.everywhere.popup/0.0.1458.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1604276568309" />
     <state x="2246" y="-123" width="800" height="823" key="search.everywhere.popup/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1603252013807" />
     <state x="297" y="289" width="728" height="677" key="search.everywhere.popup/0.0.1474.864@0.0.1474.864" timestamp="1600038406363" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py</url>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
