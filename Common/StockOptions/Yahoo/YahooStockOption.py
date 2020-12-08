@@ -226,7 +226,7 @@ class YahooStockOption(AbstractStockOption):
         return round(i, 6)
 
     def __setPrice(self, a_df) -> float:
-        i = a_df['High'].iloc[0]
+        i = a_df['Adj Close'].iloc[-1]
         return round(i, 6)
 
     def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
