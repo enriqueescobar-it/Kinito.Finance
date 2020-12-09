@@ -25,7 +25,7 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         buyNsellTuple = self._buyNsell()
         self._data[self._buy_label] = buyNsellTuple[0]
         self._data[self._sell_label] = buyNsellTuple[1]
-        print('DATA', self._data.describe())
+        print('DATA', self._data.columns)
 
     def _buyNsell(self):
         buySignal = []
@@ -54,7 +54,6 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         return buySignal, sellSignal
 
     def Plot(self) -> plt:
-        self._macd_indicator.PlotData().show()
         plt.figure(figsize=self._macd_indicator.FigSizeTuple)
         plt.style.use(self._macd_indicator.FigStyle)
         for a_ind, col in enumerate(self._data.columns[0:1]):

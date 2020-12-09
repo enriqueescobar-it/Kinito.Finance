@@ -1,4 +1,5 @@
 import math
+import matplotlib.pyplot as plt
 from abc import *
 from typing import Tuple
 from pandas import DataFrame
@@ -36,6 +37,10 @@ class AbstractTechIndicator(ABC):
 
     @abstractmethod
     def _setData(self, y_stock_option: YahooStockOption):
+        pass
+
+    @abstractmethod
+    def PlotData(self) -> plt:
         pass
 
     @property
