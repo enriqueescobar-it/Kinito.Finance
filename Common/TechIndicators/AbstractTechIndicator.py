@@ -36,7 +36,7 @@ class AbstractTechIndicator(ABC):
         self._y_label = self._col + ' in USD'
 
     @abstractmethod
-    def _setData(self, y_stock_option: YahooStockOption):
+    def _setData(self, a_df: DataFrame):
         pass
 
     @abstractmethod

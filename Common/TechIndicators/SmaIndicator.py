@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-
+from pandas import DataFrame
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
@@ -12,22 +12,24 @@ class SmaIndicator(AbstractTechIndicator):
         self._name = 'SMA'
         self._label += self._name
         self._main_label += ' ' + self._label
-        self._setData(y_stock_option)
+        self._setData(y_stock_option.DataFrame)
 
-    def __getSma(self, y_stock_option: YahooStockOption, a_int: int = 12):
+    def __getSma(self, a_df: DataFrame, a_int: int = 12):
+        d_f: DataFrame = a_df.copy()
         # return last column as .iloc[:,-1] spaning rollng mean
-        return y_stock_option.DataFrame[self._col].rolling(window=a_int, min_periods=0).mean()
+        return a_df[self._col].rolling(window=a_int, min_periods=0).mean()
 
-    def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.DataFrame[self._col]
-        self._data[self._name + '005'] = self.__getSma(y_stock_option, 5)
-        self._data[self._name + '009'] = self.__getSma(y_stock_option, 9)
-        self._data[self._name + '010'] = self.__getSma(y_stock_option, 10)
-        self._data[self._name + '020'] = self.__getSma(y_stock_option, 20)
-        self._data[self._name + '030'] = self.__getSma(y_stock_option, 30)
-        self._data[self._name + '050'] = self.__getSma(y_stock_option, 50)
-        self._data[self._name + '100'] = self.__getSma(y_stock_option, 100)
-        self._data[self._name + '200'] = self.__getSma(y_stock_option, 200)
+    def _setData(self, a_df: DataFrame):
+        d_f: DataFrame = a_df.copy()
+        self._data[self._col] = d_f[self._col]
+        self._data[self._name + '005'] = self.__getSma(d_f, 5)
+        self._data[self._name + '009'] = self.__getSma(d_f, 9)
+        self._data[self._name + '010'] = self.__getSma(d_f, 10)
+        self._data[self._name + '020'] = self.__getSma(d_f, 20)
+        self._data[self._name + '030'] = self.__getSma(d_f, 30)
+        self._data[self._name + '050'] = self.__getSma(d_f, 50)
+        self._data[self._name + '100'] = self.__getSma(d_f, 100)
+        self._data[self._name + '200'] = self.__getSma(d_f, 200)
         self._low_high = (5, 7)
 
     def PlotData(self) -> plt:

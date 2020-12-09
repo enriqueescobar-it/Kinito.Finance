@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-
+from pandas import DataFrame
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
@@ -12,16 +12,18 @@ class MacdIndicator(AbstractTechIndicator):
         self._name = 'MACD'
         self._label += self._name
         self._main_label += ' ' + self._label
-        self._setData(y_stock_option)
+        self._setData(y_stock_option.DataFrame)
 
-    def __getEMA(self, y_stock_option: YahooStockOption, a_int: int = 12):
-        return y_stock_option.DataFrame[self._col].ewm(span=a_int, adjust=False).mean()
+    def __getEMA(self, a_df: DataFrame, a_int: int = 12):
+        d_f: DataFrame = a_df.copy()
+        return d_f[self._col].ewm(span=a_int, adjust=False).mean()
 
-    def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.DataFrame[self._col]
-        shortEma = self.__getEMA(y_stock_option, 12)
+    def _setData(self, a_df: DataFrame):
+        d_f: DataFrame = a_df.copy()
+        self._data[self._col] = d_f[self._col]
+        shortEma = self.__getEMA(d_f, 12)
         self._data['EMA12'] = shortEma
-        longEma = self.__getEMA(y_stock_option, 26)
+        longEma = self.__getEMA(d_f, 26)
         self._data['EMA26'] = longEma
         macd = shortEma - longEma
         self._data[self._name] = macd

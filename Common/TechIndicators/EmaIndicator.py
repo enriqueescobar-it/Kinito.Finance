@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-
+from pandas import DataFrame
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
@@ -12,22 +12,24 @@ class EmaIndicator(AbstractTechIndicator):
         self._name = 'EMA'
         self._label += self._name
         self._main_label += ' ' + self._label
-        self._setData(y_stock_option)
+        self._setData(y_stock_option.DataFrame)
 
-    def __getEma(self, y_stock_option: YahooStockOption, a_int: int = 21):
+    def __getEma(self, a_df: DataFrame, a_int: int = 21):
+        d_f: DataFrame = a_df.copy()
         # return last column as .iloc[:,-1] spaning ewm mean
-        return y_stock_option.DataFrame[self._col].ewm(span=a_int, adjust=False).mean()
+        return a_df[self._col].ewm(span=a_int, adjust=False).mean()
 
-    def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.DataFrame[self._col]
-        self._data[self._name + '005'] = self.__getEma(y_stock_option, 5)
-        self._data[self._name + '010'] = self.__getEma(y_stock_option, 10)
-        self._data[self._name + '020'] = self.__getEma(y_stock_option, 20)
-        self._data[self._name + '021'] = self.__getEma(y_stock_option, 21)
-        self._data[self._name + '050'] = self.__getEma(y_stock_option, 50)
-        self._data[self._name + '063'] = self.__getEma(y_stock_option, 63)
-        self._data[self._name + '100'] = self.__getEma(y_stock_option, 100)
-        self._data[self._name + '200'] = self.__getEma(y_stock_option, 200)
+    def _setData(self, a_df: DataFrame):
+        d_f: DataFrame = a_df.copy()
+        self._data[self._col] = d_f[self._col]
+        self._data[self._name + '005'] = self.__getEma(d_f, 5)
+        self._data[self._name + '010'] = self.__getEma(d_f, 10)
+        self._data[self._name + '020'] = self.__getEma(d_f, 20)
+        self._data[self._name + '021'] = self.__getEma(d_f, 21)
+        self._data[self._name + '050'] = self.__getEma(d_f, 50)
+        self._data[self._name + '063'] = self.__getEma(d_f, 63)
+        self._data[self._name + '100'] = self.__getEma(d_f, 100)
+        self._data[self._name + '200'] = self.__getEma(d_f, 200)
         self._low_high = (1, 4, 6)
         print(self._data.tail())
 
