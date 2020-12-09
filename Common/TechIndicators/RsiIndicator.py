@@ -34,8 +34,8 @@ class RsiIndicator(AbstractTechIndicator):
         self._rsi = 100.0 - (100.0 / (1.0 + self.__rs))
 
     def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.HistoricalData[self._col]
-        delta: pd.core.series.Series = y_stock_option.HistoricalData[self._col].diff(1)
+        self._data[self._col] = y_stock_option.DataFrame[self._col]
+        delta: pd.core.series.Series = y_stock_option.DataFrame[self._col].diff(1)
         self._data['Delta'] = delta
         avgGain: pd.core.series.Series = self.__getAverageGain(delta)
         self._data['AverageGain'] = avgGain

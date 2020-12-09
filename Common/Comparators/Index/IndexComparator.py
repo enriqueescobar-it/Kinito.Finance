@@ -33,7 +33,7 @@ class IndexComparator(AbstractIndexComparator):
         #self._plotCompared(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
 
     def _setData(self) -> pd.DataFrame:
-        df: pd.DataFrame = self._stock_option.HistoricalData[self._stock_option.SourceColumn].to_frame()
+        df: pd.DataFrame = self._stock_option.DataFrame[self._stock_option.SourceColumn].to_frame()
         df.columns = self._stock_option.Ticker + df.columns
         a_df: pd.DataFrame = self._index_list[0].Data
         for a_index in self._index_list[1:]:

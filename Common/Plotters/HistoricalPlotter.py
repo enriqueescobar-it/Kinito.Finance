@@ -31,7 +31,7 @@ class HistoricalPlotter(AbstractPlotter):
         self._yeAverage200 = np.round(stock_option.YeAverage200, 2)
         if stock_option.Source == 'yahoo':
             self._col = "Adj Close"
-        self._data_frame = stock_option.HistoricalData
+        self._data_frame = stock_option.DataFrame
         self._legend_place = 'upper left'
         self._ticker = stock_option.Ticker
         self._time_span = stock_option.TimeSpan

@@ -3,7 +3,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
 
 yahooStockOption: YahooStockOption = YahooStockOption('ESTC')
-print(yahooStockOption.HistoricalData.describe(include='all'))
+print(yahooStockOption.DataFrame.describe(include='all'))
 yahooStockIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
 print('Column=', yahooStockIndicator.Column)
 print('Data=', yahooStockIndicator.DataFrame.columns)

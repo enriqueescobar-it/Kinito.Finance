@@ -42,7 +42,7 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str = ''
     FvVolume: int = -1
     ForecastSpan: int = 30
-    HistoricalData: pd.DataFrame
+    _historical: pd.DataFrame
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
     SimpleAnnually: pd.DataFrame
@@ -124,6 +124,10 @@ class YahooStockOption(AbstractStockOption):
         return self._price
 
     @property
+    def DataFrame(self):
+        return self._historical
+
+    @property
     def DataRange(self):
         return self._data_range
 
@@ -148,37 +152,37 @@ class YahooStockOption(AbstractStockOption):
         self.SourceColumn = 'Adj Close'
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
-        self.HistoricalData = self._setData()
-        self.TimeSpan = self._updateTimeSpan(self.TimeSpan, self.HistoricalData)
-        self.Data = self.HistoricalData[self.SourceColumn].to_frame()
+        self._historical = self._setData()
+        self.TimeSpan = self._updateTimeSpan(self.TimeSpan, self._historical)
+        self.Data = self._historical[self.SourceColumn].to_frame()
         self._data_range = self._getDataRange(1000, self.Data[self.SourceColumn])
-        self._mu = round(self.HistoricalData[self.SourceColumn].mean(), 2)
-        self._sigma = round(self.HistoricalData[self.SourceColumn].std(), 2)
-        self._median = round(self.HistoricalData[self.SourceColumn].median(), 2)
+        self._mu = round(self._historical[self.SourceColumn].mean(), 2)
+        self._sigma = round(self._historical[self.SourceColumn].std(), 2)
+        self._median = round(self._historical[self.SourceColumn].median(), 2)
         self._norm_pdf = self._getProbabilityDensityFunction(self.DataRange, self._mu, self._sigma)
-        self.Data['Norm'] = self._setNormalizer(self.HistoricalData)
-        self.Data['NormL1'] = self._setNormalizerL1(self.HistoricalData)
-        self.Data['Binary'] = self._setBinarizer(self.HistoricalData)
-        self.Data['Sparse'] = self._setSparser(self.HistoricalData)
-        self.Data['Scaled'] = self._setScaler(self.HistoricalData)
-        self.DataSimpleReturns = self._setSimpleReturns('', self.HistoricalData)
+        self.Data['Norm'] = self._setNormalizer(self._historical)
+        self.Data['NormL1'] = self._setNormalizerL1(self._historical)
+        self.Data['Binary'] = self._setBinarizer(self._historical)
+        self.Data['Sparse'] = self._setSparser(self._historical)
+        self.Data['Scaled'] = self._setScaler(self._historical)
+        self.DataSimpleReturns = self._setSimpleReturns('', self._historical)
         self.DataSimpleReturns = self._setSimpleReturnsPlus(self.DataSimpleReturns)
         self.Data['IsOutlier'] = self.DataSimpleReturns.IsOutlier.astype(bool)
-        self.DataLogReturns = self._setLogReturns(self.HistoricalData)
+        self.DataLogReturns = self._setLogReturns(self._historical)
         self.DataLogReturns = self._setLogReturnsPlus(self.DataLogReturns)
-        self.SimpleDaily = self._setSimpleReturns('', self.HistoricalData)
+        self.SimpleDaily = self._setSimpleReturns('', self._historical)
         self.SimplyDailyCum = self._setSimpleCumulative(self.SimpleDaily)
         self.SimpleDailyReturnAvg = self._setSimpleReturnAverage(self.SimplyDailyCum)
-        self.SimpleWeekly = self._setSimpleReturns('W', self.HistoricalData)
+        self.SimpleWeekly = self._setSimpleReturns('W', self._historical)
         self.SimpleWeeklyCum = self._setSimpleCumulative(self.SimpleWeekly)
         self.SimpleWeeklyReturnAvg = self._setSimpleReturnAverage(self.SimpleWeeklyCum)
-        self.SimpleMonthly = self._setSimpleReturns('M', self.HistoricalData)
+        self.SimpleMonthly = self._setSimpleReturns('M', self._historical)
         self.SimpleMonthlyCum = self._setSimpleCumulative(self.SimpleMonthly)
         self.SimpleMonthlyReturnAvg = self._setSimpleReturnAverage(self.SimpleMonthlyCum)
-        self.SimpleQuarterly = self._setSimpleReturns('Q', self.HistoricalData)
+        self.SimpleQuarterly = self._setSimpleReturns('Q', self._historical)
         self.SimpleQuarterlyCum = self._setSimpleCumulative(self.SimpleQuarterly)
         self.SimpleQuarterlyReturnAvg = self._setSimpleReturnAverage(self.SimpleQuarterlyCum)
-        self.SimpleAnnually = self._setSimpleReturns('A', self.HistoricalData)
+        self.SimpleAnnually = self._setSimpleReturns('A', self._historical)
         self.SimpleAnnuallyCum = self._setSimpleCumulative(self.SimpleAnnually)
         self.SimpleAnnuallyReturnAvg = self._setSimpleReturnAverage(self.SimpleAnnuallyCum)
         (self.IsDaily, self.IsWeekly, self.IsMonthly, self.IsQuarterly, self.IsAnnually) =\

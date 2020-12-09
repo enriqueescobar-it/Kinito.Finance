@@ -3,7 +3,7 @@ from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
 
 yahooStockOption: YahooStockOption = YahooStockOption('ESTC')
-print(yahooStockOption.HistoricalData.describe(include='all'))
+print(yahooStockOption.DataFrame.describe(include='all'))
 yahooStockIndicator: EmaIndicator = EmaIndicator(yahooStockOption)
 print('Column=', yahooStockIndicator.Column)
 print('Data=', yahooStockIndicator.DataFrame.columns)

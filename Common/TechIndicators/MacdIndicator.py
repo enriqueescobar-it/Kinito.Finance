@@ -15,10 +15,10 @@ class MacdIndicator(AbstractTechIndicator):
         self._setData(y_stock_option)
 
     def __getEMA(self, y_stock_option: YahooStockOption, a_int: int = 12):
-        return y_stock_option.HistoricalData[self._col].ewm(span=a_int, adjust=False).mean()
+        return y_stock_option.DataFrame[self._col].ewm(span=a_int, adjust=False).mean()
 
     def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.HistoricalData[self._col]
+        self._data[self._col] = y_stock_option.DataFrame[self._col]
         shortEma = self.__getEMA(y_stock_option, 12)
         self._data['EMA12'] = shortEma
         longEma = self.__getEMA(y_stock_option, 26)

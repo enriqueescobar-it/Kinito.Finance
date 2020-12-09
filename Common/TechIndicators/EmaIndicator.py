@@ -16,10 +16,10 @@ class EmaIndicator(AbstractTechIndicator):
 
     def __getEma(self, y_stock_option: YahooStockOption, a_int: int = 21):
         # return last column as .iloc[:,-1] spaning ewm mean
-        return y_stock_option.HistoricalData[self._col].ewm(span=a_int, adjust=False).mean()
+        return y_stock_option.DataFrame[self._col].ewm(span=a_int, adjust=False).mean()
 
     def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.HistoricalData[self._col]
+        self._data[self._col] = y_stock_option.DataFrame[self._col]
         self._data[self._name + '005'] = self.__getEma(y_stock_option, 5)
         self._data[self._name + '010'] = self.__getEma(y_stock_option, 10)
         self._data[self._name + '020'] = self.__getEma(y_stock_option, 20)

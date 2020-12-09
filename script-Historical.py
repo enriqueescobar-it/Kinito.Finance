@@ -40,7 +40,7 @@ from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('ARKG')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -86,7 +86,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('ARKG')#'ESTC')XWEB DDOG B
 # GM GIS GLD GLW GMF GNW GRWG GILD GBTC GAMR GSY.TO+ GOOD GXC+ GOOG+
 # HD+ HLT HQU HZU HEO.V HII HLF.TO. IBM IBUY IWFH INTC IPO IIVI IVAC IGV+ IBM IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
 # KEY K KXS.TO KDP KL KL.TO KO- KR KMI K.TO KXS.TO+
-# LB.TO LMT LMND LOW+ LSPD+ LVGO LOGI+
+# LB.TO LMT LMND LOW+ LSPD++ LSPD.TO++ LVGO LOGI+
 # M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST MFC.TO.
 # NEE+ NEM+ NET NKE NSP NEAR NFLX NLY NLOK NNDM NPI NOBL+ NVEI.TO NVDA+ NOW+ O+ OTEX OHI O- NWC.TO.
 # PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS PHO POW.TO.
@@ -95,8 +95,8 @@ yahooStockOption: YahooStockOption = YahooStockOption('ARKG')#'ESTC')XWEB DDOG B
 # T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+ TRP TRP.TO TTD TOU.TO TROW TWLO TXN TWST+ TVE.TO.
 # U UNM UNP UPWK
 # VDC VFC VFF VFV.TO VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ+ V VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
-# WCN WCN.TO+ WELL.TO WFG WMT- WORK WPC- XEI XIT XBC.TO XOM. XWEB+ XLK+ YCBD ZG ZM ZQQ ZS ZWB
-print(yahooStockOption.HistoricalData.describe(include='all'))
+# WCN WCN.TO+ WELL.TO WEED.TO++ WFG WMT- WORK WPC- XEI XIT XBC.TO XOM. XWEB+ XLK+ XBC.V+++ YCBD ZG ZM ZQQ ZS ZWB
+print(yahooStockOption.DataFrame.describe(include='all'))
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 '''
@@ -162,15 +162,14 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()
-exit(31415)
+#exit(31415)
 #yahooStockOptionPlotter.PlotTimely()
+#exit(31415)
 yahooMacdIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
-print(yahooMacdIndicator.GetLabel())
-print(yahooMacdIndicator.GetData().columns)
-exit(31415)
+yahooMacdIndicator.PlotData().show()
+#exit(31415)
 yahooSmaIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
-print(yahooSmaIndicator.GetLabel())
-print(yahooSmaIndicator.GetData().columns)
+yahooSmaIndicator.PlotData().show()
 exit(31415)
 yahooMacdStrategy: MacdStrategy = MacdStrategy(yahooMacdIndicator)
 #yahooStockOptionStrategy.Plot().show()

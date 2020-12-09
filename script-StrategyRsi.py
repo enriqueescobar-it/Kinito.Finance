@@ -4,7 +4,7 @@ from Common.TechIndicators.RsiIndicator import RsiIndicator
 #from Common.Plotters.Strategies.RsiStrategyPlotter import RsiStrategyPlotter
 
 yahooStockOption: YahooStockOption = YahooStockOption('ESTC')
-print(yahooStockOption.HistoricalData.describe(include='all'))
+print(yahooStockOption.DataFrame.describe(include='all'))
 yahooStockIndicator: RsiIndicator = RsiIndicator(yahooStockOption)
 print('Column=', yahooStockIndicator.Column)
 print('Data=', yahooStockIndicator.DataFrame.columns)

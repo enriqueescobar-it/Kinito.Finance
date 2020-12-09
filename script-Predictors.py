@@ -8,7 +8,7 @@ from Common.Predictors.Svr.RbfSvrPredictor import RbfSvrPredictor
 from Common.Predictors.Keras.KerasPredictor import KerasPredictor
 
 yahooStockOption: YahooStockOption = YahooStockOption('AAPL')
-print(yahooStockOption.HistoricalData.describe(include='all'))
+print(yahooStockOption.DataFrame.describe(include='all'))
 predictor_list = []
 #abstractPredictor: AbstractPredictor =\
 #    DecisionTreePredictor(60, 'Adj Close', yahooStockOption.HistoricalData, yahooStockOption.TimeSpan)
