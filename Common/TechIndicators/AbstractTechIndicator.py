@@ -79,12 +79,13 @@ class AbstractTechIndicator(ABC):
         return self._legend_place
 
     @property
+    def LowMedHighTuple(self):
+        return self._low_high
+
+    @property
     def Name(self):
         return self._name
 
     @property
     def Source(self):
         return self._src
-
-    def GetLowHigh(self) -> Tuple[int, int]:
-        return self._low_high

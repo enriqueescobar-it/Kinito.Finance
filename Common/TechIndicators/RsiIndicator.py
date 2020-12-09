@@ -44,7 +44,7 @@ class RsiIndicator(AbstractTechIndicator):
         rs = avgGain / avgLoss
         self._data['RelativeStrength'] = rs
         self._data[self._name] = 100.0 - (100.0 / (1.0 + rs))
-        print(self._data.tail())
+        self._low_high = (2, 3)
 
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)

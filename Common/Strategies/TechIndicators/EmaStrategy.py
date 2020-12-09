@@ -13,9 +13,9 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         self._ema_indicator = ema_indicator
         a_df: pd.DataFrame = self._ema_indicator.DataFrame
         self._col = self._ema_indicator.Column
-        self._lower_label = a_df.columns[self._ema_indicator.GetLowHigh()[0]]
-        self._middle_label = a_df.columns[self._ema_indicator.GetLowHigh()[1]]
-        self._upper_label = a_df.columns[self._ema_indicator.GetLowHigh()[2]]
+        self._lower_label = a_df.columns[self._ema_indicator.LowMedHighTuple[0]]
+        self._middle_label = a_df.columns[self._ema_indicator.LowMedHighTuple[1]]
+        self._upper_label = a_df.columns[self._ema_indicator.LowMedHighTuple[2]]
         self._data = a_df[self._ema_indicator.Column].to_frame()
         self._data[self._lower_label] = a_df[self._lower_label]
         self._data[self._middle_label] = a_df[self._middle_label]
@@ -58,7 +58,7 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
 
     def Plot(self):
         self._ema_indicator.PlotData().show()
-        plt.figure(figsize=self._ema_indicator.GetFigSize())
+        plt.figure(figsize=self._ema_indicator.FigSizeTuple)
         plt.style.use(self._ema_indicator.FigStyle)
         for a_ind, col in enumerate(self._data.columns[0:4]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3

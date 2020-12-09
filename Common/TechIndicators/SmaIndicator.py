@@ -29,7 +29,6 @@ class SmaIndicator(AbstractTechIndicator):
         self._data[self._name + '100'] = self.__getSma(y_stock_option, 100)
         self._data[self._name + '200'] = self.__getSma(y_stock_option, 200)
         self._low_high = (5, 7)
-        print(self._data.tail())
 
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)

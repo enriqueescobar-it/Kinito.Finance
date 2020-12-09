@@ -13,9 +13,9 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         self._sma_indicator = sma_indicator
         a_df: pd.DataFrame = self._sma_indicator.DataFrame
         self._col = self._sma_indicator.Column
-        self._lower_label = a_df.columns[self._sma_indicator.GetLowHigh()[0]]
+        self._lower_label = a_df.columns[self._sma_indicator.LowMedHighTuple[0]]
         #
-        self._upper_label = a_df.columns[self._sma_indicator.GetLowHigh()[1]]
+        self._upper_label = a_df.columns[self._sma_indicator.LowMedHighTuple[1]]
         self._data = a_df[self._sma_indicator.Column].to_frame()
         self._data[self._lower_label] = a_df[self._lower_label]
         #
@@ -57,7 +57,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
 
     def Plot(self):
         self._sma_indicator.PlotData().show()
-        plt.figure(figsize=self._sma_indicator.GetFigSize())
+        plt.figure(figsize=self._sma_indicator.FigSizeTuple)
         plt.style.use(self._sma_indicator.FigStyle)
         for a_ind, col in enumerate(self._data.columns[0:3]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3

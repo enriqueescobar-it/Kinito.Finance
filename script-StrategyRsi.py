@@ -3,7 +3,7 @@ from Common.TechIndicators.RsiIndicator import RsiIndicator
 #from Common.Strategies.TechIndicators.RsiStrategy import RsiStrategy
 #from Common.Plotters.Strategies.RsiStrategyPlotter import RsiStrategyPlotter
 
-yahooStockOption: YahooStockOption = YahooStockOption('CNI')
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')
 print(yahooStockOption.HistoricalData.describe(include='all'))
 yahooStockIndicator: RsiIndicator = RsiIndicator(yahooStockOption)
 print('Column=', yahooStockIndicator.Column)
@@ -16,6 +16,7 @@ print('LabelXangle=', yahooStockIndicator.LabelXangle)
 print('LabelY=', yahooStockIndicator.LabelY)
 print('LabelMain=', yahooStockIndicator.LabelMain)
 print('LegendPlace=', yahooStockIndicator.LegendPlace)
+print('LowHigh=', yahooStockIndicator.LowMedHighTuple)
 print('Name=', yahooStockIndicator.Name)
 print('Source=', yahooStockIndicator.Source)
 yahooStockIndicator.PlotData().show()

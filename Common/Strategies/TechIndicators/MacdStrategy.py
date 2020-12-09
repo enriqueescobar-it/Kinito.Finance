@@ -13,9 +13,9 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         self._macd_indicator = macd_indicator
         a_df: pd.DataFrame = self._macd_indicator.DataFrame
         self._col = self._macd_indicator.Column
-        self._lower_label = a_df.columns[self._macd_indicator.GetLowHigh()[0]]
+        self._lower_label = a_df.columns[self._macd_indicator.LowMedHighTuple[0]]
         #
-        self._upper_label = a_df.columns[self._macd_indicator.GetLowHigh()[1]]
+        self._upper_label = a_df.columns[self._macd_indicator.LowMedHighTuple[1]]
         self._data = a_df[self._macd_indicator.Column].to_frame()
         self._data[self._lower_label] = a_df[self._lower_label]
         #
@@ -55,7 +55,7 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
 
     def Plot(self) -> plt:
         self._macd_indicator.PlotData().show()
-        plt.figure(figsize=self._macd_indicator.GetFigSize())
+        plt.figure(figsize=self._macd_indicator.FigSizeTuple)
         plt.style.use(self._macd_indicator.FigStyle)
         for a_ind, col in enumerate(self._data.columns[0:1]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3
