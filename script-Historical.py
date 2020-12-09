@@ -40,7 +40,7 @@ from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('MO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
+yahooStockOption: YahooStockOption = YahooStockOption('ARKG')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -76,7 +76,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('MO')#'ESTC')XWEB DDOG BEK
 # ETFs: BRTXQ FZILX FSRNX VTSAX FPE HPI
 # TFII LSPD T FTS RY SHOP
 # AAPL ABBV+ AAOI ADBE+ ABR+ ABT ABX.TO&GOLD ACES ADC+ ADP AGNC AKAM AMGN AMD AMP AMT AMZN ANTM AQN AQN.TO ARKK ARKG ARKQ ARKW
-# APHA+ ASAN ARKF ARKK AVAV AVGO AVB AYX AZN AIVSX+ AEM+ AEM.TO+ AWK+ ANET+ AT.TO ATZ.TO. ACO-X.TO+
+# APHA+ ASAN ARKF ARKK AVAV AVGO AVB AYX AZN AIVSX+ AEM+ AEM.TO+ AWK+ ANET+ AT.TO ATZ.TO. ACO-X.TO+ ARKG+
 # BA BCE BCE.TO. BNS BPY BABA BIDU- BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO. BIP+ BZUN+ BILI++ BEP+ BYND+ BAM-A.TO+ BMO.TO.
 # CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST CP CRM CSCO CDNS CNQ.TO CSIQ CELH+
 # CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++
@@ -162,7 +162,7 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()
-#exit(31415)
+exit(31415)
 #yahooStockOptionPlotter.PlotTimely()
 yahooMacdIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
 print(yahooMacdIndicator.GetLabel())

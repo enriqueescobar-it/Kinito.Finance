@@ -79,7 +79,7 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         a_title: str = self._ema_indicator.LabelMain
         x_title: str = self._ema_indicator.LabelX
         y_title: str = self._ema_indicator.LabelY
-        f_size: Tuple[float, float] = (self._ema_indicator.GetFigSize()[0], self._ema_indicator.GetFigSize()[0])
+        f_size: Tuple[float, float] = (self._ema_indicator.FigSizeTuple[0], self._ema_indicator.FigSizeTuple[0])
         fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
         plt.style.use(self._ema_indicator.FigStyle)
         #ax0 strategy

@@ -76,7 +76,7 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         a_title: str = self._macd_indicator.LabelMain
         x_title: str = self._macd_indicator.LabelX
         y_title: str = self._macd_indicator.LabelY
-        f_size: Tuple[float, float] = (self._macd_indicator.GetFigSize()[0], self._macd_indicator.GetFigSize()[0])
+        f_size: Tuple[float, float] = (self._macd_indicator.FigSizeTuple[0], self._macd_indicator.FigSizeTuple[0])
         fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
         plt.style.use(self._macd_indicator.FigStyle)
         #ax0 strategy

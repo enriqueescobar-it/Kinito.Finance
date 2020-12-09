@@ -47,6 +47,10 @@ class AbstractTechIndicator(ABC):
         return self._data
 
     @property
+    def FigSizeTuple(self):
+        return self._fig_size
+
+    @property
     def FigStyle(self):
         return self._plot_style
 
@@ -81,9 +85,6 @@ class AbstractTechIndicator(ABC):
     @property
     def Source(self):
         return self._src
-
-    def GetFigSize(self) -> Tuple[float, float]:
-        return self._fig_size
 
     def GetLowHigh(self) -> Tuple[int, int]:
         return self._low_high
