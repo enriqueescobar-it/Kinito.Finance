@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="folder">
+      <change afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/RsiStrategy.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/DL_AZ-ArtNeuNets/ML_AZCodesAndDatasets.7z" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/DL_AZ-ArtNeuNets/Part3-RecurrentNN.7z" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/DL_AZ-ArtNeuNets/Section40-ConvolutionalNN.7z" afterDir="false" />
@@ -108,12 +109,7 @@
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/winequality-red.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/EmaStrategy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/AbstractTechIndicator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Ema.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Ema.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Macd.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Macd.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-Sma.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Sma.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +162,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\Predictors\Svr" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-StrategyRsi">
+  <component name="RunManager" selected="Python.script-Ema">
     <configuration name="script-Ema" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -274,10 +270,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.script-StrategyRsi" />
         <item itemvalue="Python.script-Ema" />
-        <item itemvalue="Python.script-Sma" />
         <item itemvalue="Python.script-Macd" />
+        <item itemvalue="Python.script-Sma" />
+        <item itemvalue="Python.script-StrategyRsi" />
         <item itemvalue="Python.script-Historical" />
       </list>
     </recent_temporary>
@@ -325,7 +321,7 @@
     </state>
     <state x="498" y="170" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@0.0.1474.864" timestamp="1600975232725" />
     <state x="2467" y="-267" key="FileChooserDialogImpl/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1599578410124" />
-    <state width="1799" height="232" key="GridCell.Tab.0.bottom" timestamp="1607482166521">
+    <state width="1799" height="232" key="GridCell.Tab.0.bottom" timestamp="1607489988100">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.bottom/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990555" />
@@ -339,8 +335,8 @@
     <state width="1431" height="282" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.bottom/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1602998488972" />
-    <state width="1799" height="232" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1607482166521" />
-    <state width="1799" height="232" key="GridCell.Tab.0.center" timestamp="1607482166520">
+    <state width="1799" height="232" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1607489988100" />
+    <state width="1799" height="232" key="GridCell.Tab.0.center" timestamp="1607489988099">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.center/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -354,8 +350,8 @@
     <state width="1431" height="282" key="GridCell.Tab.0.center/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.center/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1602998488971" />
-    <state width="1799" height="232" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1607482166520" />
-    <state width="1799" height="232" key="GridCell.Tab.0.left" timestamp="1607482166520">
+    <state width="1799" height="232" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1607489988099" />
+    <state width="1799" height="232" key="GridCell.Tab.0.left" timestamp="1607489988099">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.left/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -369,8 +365,8 @@
     <state width="1431" height="282" key="GridCell.Tab.0.left/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.left/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1602998488971" />
-    <state width="1799" height="232" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1607482166520" />
-    <state width="1799" height="232" key="GridCell.Tab.0.right" timestamp="1607482166520">
+    <state width="1799" height="232" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1607489988099" />
+    <state width="1799" height="232" key="GridCell.Tab.0.right" timestamp="1607489988100">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.right/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -384,7 +380,7 @@
     <state width="1431" height="282" key="GridCell.Tab.0.right/0.0.1474.864/1920.0.1858.1080@0.0.1474.864" timestamp="1599347418131" />
     <state width="1431" height="221" key="GridCell.Tab.0.right/0.0.1474.864/380.-900.1440.860@0.0.1474.864" timestamp="1601095223685" />
     <state width="1431" height="185" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1602998488972" />
-    <state width="1799" height="232" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1607482166520" />
+    <state width="1799" height="232" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1607489988100" />
     <state x="2190" y="-384" key="SettingsEditor" timestamp="1599588699316">
       <screen x="1920" y="-474" width="1618" height="1050" />
     </state>
@@ -405,15 +401,5 @@
     <state x="2246" y="-123" width="800" height="823" key="search.everywhere.popup/0.0.1458.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1604276568309" />
     <state x="2246" y="-123" width="800" height="823" key="search.everywhere.popup/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1603252013807" />
     <state x="297" y="289" width="728" height="677" key="search.everywhere.popup/0.0.1474.864@0.0.1474.864" timestamp="1600038406363" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Common/TechIndicators/SmaIndicator.py</url>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -82,15 +82,15 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
         plt.style.use(self._ema_indicator.FigStyle)
         #ax0 strategy
-        for a_ind, col in enumerate(self._data.columns[0:1]):
+        for a_ind, col in enumerate(self._data.columns[0:4]): #[0:1]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3
             ax[0].plot(self._data[col], alpha=an_alpha, label=col)
         ax[0].scatter(self._ema_indicator.DataFrame.index, self._data[self._buy_label], marker='^', color='green', label=self._buy_label)
         ax[0].scatter(self._ema_indicator.DataFrame.index, self._data[self._sell_label], marker='v', color='red', label=self._sell_label)
         ax[0].set(ylabel=y_title, title=a_title)
         ax[0].legend(loc=self._ema_indicator.LegendPlace)
-        #ax1 strategy
-        for a_ind, col in enumerate(self._ema_indicator.DataFrame.columns[-2:self._ema_indicator.DataFrame.columns.size]):
+        #ax1 strategy self._ema_indicator.DataFrame.columns[-2:self._ema_indicator.DataFrame.columns.size]
+        for a_ind, col in enumerate(self._ema_indicator.DataFrame[[self._lower_label, self._middle_label, self._upper_label]].columns):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             ax[1].plot(self._ema_indicator.DataFrame[col], alpha=an_alpha, label=col)
         ax[1].xaxis.set_tick_params(rotation=self._ema_indicator.LabelXangle)
