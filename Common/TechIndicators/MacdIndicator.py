@@ -27,7 +27,6 @@ class MacdIndicator(AbstractTechIndicator):
         self._data[self._name] = macd
         self._data['SignalLine'] = macd.ewm(span=9, adjust=False).mean()
         self._low_high = (3, 4)
-        print(self._data.tail())
 
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)

@@ -40,7 +40,7 @@ from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC
+yahooStockOption: YahooStockOption = YahooStockOption('MO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -80,7 +80,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG B
 # BA BCE BCE.TO. BNS BPY BABA BIDU- BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO. BIP+ BZUN+ BILI++ BEP+ BYND+ BAM-A.TO+ BMO.TO.
 # CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST CP CRM CSCO CDNS CNQ.TO CSIQ CELH+
 # CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++
-# DCBO.TO DND.TO CU.TO DLHC DDOG DKNG+ DDOG+ DOL.TO+
+# DCBO.TO DND.TO CU.TO DLHC DDOG DKNG+ DDOG+ DOL.TO+ DND.TO+
 # EMR+ ENB ENB.TO ESS ESTC+ ESPO EMA.TO ET ETSY+ ENGH.TO+ ENPH+ EEM EQB.TO+ ELY+
 # F FD.TO FF.TO FFMG FENY FIE FIVG FROG FSLR FSLY+ FSRNX FSZ FTS+ FTS.TO+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE-
 # GM GIS GLD GLW GMF GNW GRWG GILD GBTC GAMR GSY.TO+ GOOD GXC+ GOOG+
@@ -92,7 +92,8 @@ yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG B
 # PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS PHO POW.TO.
 # QCOM QQC-f QQQ QRVO QSR.TO+ RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO. RIOT RHS QRS.TO REAL.TO ROKU+
 # SU SU.TO. SIS.TO+ SNA SBUX SHOP+ SHOP.TO+ SPLK SPYD SJR.B SJR-B.TO SLV SNAP SNOW SPOT SOXL SRU.UN.TO. SPG SAP SPNS STOR+ STAG SEDG+ SJR-B.TO SOY.TO.
-# T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+ TRP TRP.TO TTD TOU.TO TROW TWLO TXN TWST+ U UNM UNP UPWK
+# T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+ TRP TRP.TO TTD TOU.TO TROW TWLO TXN TWST+ TVE.TO.
+# U UNM UNP UPWK
 # VDC VFC VFF VFV.TO VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ+ V VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
 # WCN WCN.TO+ WELL.TO WFG WMT- WORK WPC- XEI XIT XBC.TO XOM. XWEB+ XLK+ YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.HistoricalData.describe(include='all'))
@@ -162,25 +163,18 @@ yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption,
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()
 #exit(31415)
-yahooStockOptionPlotter.PlotTimely()
-#yahooStockOptionPlotter.Daily().show()
-#yahooStockOptionPlotter.DailyCum().show()
-#yahooStockOptionPlotter.DailyHist().show()
-#yahooStockOptionPlotter._plotDaily().show()
-#yahooStockOptionPlotter._plotWeekly().show()
-#yahooStockOptionPlotter.Monthly().show()
-#yahooStockOptionPlotter.MonthlyCum().show()
-#yahooStockOptionPlotter.MonthlyHist().show()
-#yahooStockOptionPlotter._plotMonthly().show()
-#yahooStockOptionPlotter._plotQuarterly().show()
-#yahooStockOptionPlotter._plotAnnually().show()
+#yahooStockOptionPlotter.PlotTimely()
 yahooMacdIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
 print(yahooMacdIndicator.GetLabel())
+print(yahooMacdIndicator.GetData().columns)
+exit(31415)
+yahooSmaIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
+print(yahooSmaIndicator.GetLabel())
+print(yahooSmaIndicator.GetData().columns)
+exit(31415)
 yahooMacdStrategy: MacdStrategy = MacdStrategy(yahooMacdIndicator)
 #yahooStockOptionStrategy.Plot().show()
 yahooMacdStrategy.PlotAll().show()
-yahooSmaIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
-print(yahooSmaIndicator.GetLabel())
 yahooSmaStrategy: SmaStrategy = SmaStrategy(yahooSmaIndicator)
 yahooSmaStrategy.Plot().show()
 yahooSmaStrategy.PlotAll().show()

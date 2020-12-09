@@ -38,41 +38,52 @@ class AbstractTechIndicator(ABC):
     def _setData(self, y_stock_option: YahooStockOption):
         pass
 
-    def GetData(self) -> DataFrame:
+    @property
+    def Column(self):
+        return self._col
+
+    @property
+    def DataFrame(self):
         return self._data
 
-    def GetCol(self) -> str:
-        return self._col
+    @property
+    def FigStyle(self):
+        return self._plot_style
+
+    @property
+    def Label(self):
+        return self._label
+
+    @property
+    def LabelMain(self):
+        return self._main_label
+
+    @property
+    def LabelX(self):
+        return self._x_label
+
+    @property
+    def LabelXangle(self):
+        return self._x_ticks_angle
+
+    @property
+    def LabelY(self):
+        return self._y_label
+
+    @property
+    def LegendPlace(self):
+        return self._legend_place
+
+    @property
+    def Name(self):
+        return self._name
+
+    @property
+    def Source(self):
+        return self._src
 
     def GetFigSize(self) -> Tuple[float, float]:
         return self._fig_size
 
-    def GetLabel(self) -> str:
-        return self._label
-
-    def GetLegendPlace(self) -> str:
-        return self._legend_place
-
     def GetLowHigh(self) -> Tuple[int, int]:
         return self._low_high
-
-    def GetMainLabel(self) -> str:
-        return self._main_label
-
-    def GetName(self) -> str:
-        return self._name
-
-    def GetPlotStyle(self) -> str:
-        return self._plot_style
-
-    def GetSource(self) -> str:
-        return self._src
-
-    def GetXLabel(self) -> str:
-        return self._x_label
-
-    def GetXticksAngle(self) -> int:
-        return self._x_ticks_angle
-
-    def GetYLabel(self) -> str:
-        return self._y_label
