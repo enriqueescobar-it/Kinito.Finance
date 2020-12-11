@@ -29,7 +29,7 @@ class HistoricalPlotter(AbstractPlotter):
         self._yeLow52 = np.round(stock_option.YeLow52, 2)
         self._yeAverage50 = np.round(stock_option.YeAverage50, 2)
         self._yeAverage200 = np.round(stock_option.YeAverage200, 2)
-        if stock_option.Source == 'yahoo':
+        if stock_option._source == 'yahoo':
             self._col = "Adj Close"
         self._data_frame = stock_option.DataFrame
         self._legend_place = 'upper left'

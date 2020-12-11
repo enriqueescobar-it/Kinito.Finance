@@ -67,7 +67,6 @@ class YahooStockOption(AbstractStockOption):
     IsQuarterly: bool = False
     IsAnnually: bool = False
     RMSE: float = -1.1
-    Source: str = 'yahoo'
     SourceColumn: str = 'Adj Close'
     Ticker: str = 'TD'
     TimeSpan: TimeSpan
@@ -147,9 +146,9 @@ class YahooStockOption(AbstractStockOption):
     def NormProbDensityFn(self):
         return self._norm_pdf
 
-    def __init__(self, a_ticker: str = 'CNI'):
-        self.Source = 'yahoo'
-        self.SourceColumn = 'Adj Close'
+    def __init__(self, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
+        self._source = a_src
+        self.SourceColumn = a_col
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self._historical = self._setData()

@@ -29,9 +29,9 @@ class AbstractTechIndicator(ABC):
         self._col = 'Adj Close' if self._src == 'yahoo' else 'Close'
         self._fig_size = (3 * math.log(y_stock_option.TimeSpan.MonthCount), 4.5)
         self._main_label = "{1} ({0}) {2} History {3} months".format(y_stock_option.Source,
-                                                                    y_stock_option.Ticker,
-                                                                    self._col,
-                                                                    str(y_stock_option.TimeSpan.MonthCount))
+                                                                     y_stock_option.Ticker,
+                                                                     self._col,
+                                                                     str(y_stock_option.TimeSpan.MonthCount))
         self._x_label = y_stock_option.TimeSpan.StartDateStr + ' - ' + y_stock_option.TimeSpan.EndDateStr
         self._y_label = self._col + ' in USD'
 
