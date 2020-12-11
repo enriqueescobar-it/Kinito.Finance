@@ -33,7 +33,7 @@ class IndexComparator(AbstractIndexComparator):
         #self._plotCompared(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
 
     def _setData(self) -> pd.DataFrame:
-        df: pd.DataFrame = self._stock_option.DataFrame[self._stock_option.SourceColumn].to_frame()
+        df: pd.DataFrame = self._stock_option.DataFrame[self._stock_option.Column].to_frame()
         df.columns = self._stock_option.Ticker + df.columns
         a_df: pd.DataFrame = self._index_list[0].Data
         for a_index in self._index_list[1:]:
@@ -121,11 +121,11 @@ class IndexComparator(AbstractIndexComparator):
             plt.plot(df.index, df[c], lw=2, label=c)
         #ax1.set_xlabel('Since ' + self.__stockOption.TimeSpan.StartDateStr)
         ax1.set_ylabel(y_title)
-        ax1.set_title(self._stock_option.SourceColumn + ' ' + a_title + ':Since ' + self._stock_option.TimeSpan.StartDateStr)
+        ax1.set_title(self._stock_option.Column + ' ' + a_title + ':Since ' + self._stock_option.TimeSpan.StartDateStr)
         ax1.legend(loc='upper left', fontsize=(len(self._index_list) * 0.26))
         ax2 = fig_plot.add_subplot(grid_spec[1, 0])
         ax2 = sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
-        ax2.set_title('Stock ' + self._stock_option.SourceColumn + ' ' + a_title)
+        ax2.set_title('Stock ' + self._stock_option.Column + ' ' + a_title)
         #ax2.set_xlabel('Stock tickers')
         ax2.set_xticklabels(ax2.get_xticklabels(), rotation=30)
         #plt.xticks(rotation=45)
@@ -141,7 +141,7 @@ class IndexComparator(AbstractIndexComparator):
 
     def _snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
-        plt.title('Stock ' + self._stock_option.SourceColumn + ' ' + a_title)
+        plt.title('Stock ' + self._stock_option.Column + ' ' + a_title)
         plt.xlabel('Stock tickers')
         plt.xticks(rotation=45)
         plt.ylabel(y_title)
@@ -149,7 +149,7 @@ class IndexComparator(AbstractIndexComparator):
     def _summaryPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         for c in df.columns.values:
             plt.plot(df.index, df[c], lw=2, label=c)
-        plt.title(self._stock_option.SourceColumn + ' ' + a_title + ' ' + str(self._stock_option.TimeSpan.MonthCount) + ' months')
+        plt.title(self._stock_option.Column + ' ' + a_title + ' ' + str(self._stock_option.TimeSpan.MonthCount) + ' months')
         plt.xlabel(self._stock_option.TimeSpan.StartDateStr + ' - ' + self._stock_option.TimeSpan.EndDateStr)
         plt.ylabel(y_title)
         plt.legend(loc='upper left', fontsize=10)

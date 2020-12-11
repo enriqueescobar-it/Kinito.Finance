@@ -67,7 +67,6 @@ class YahooStockOption(AbstractStockOption):
     IsQuarterly: bool = False
     IsAnnually: bool = False
     RMSE: float = -1.1
-    SourceColumn: str = 'Adj Close'
     Ticker: str = 'TD'
     TimeSpan: TimeSpan
     YeUrl: str = 'NA'
@@ -148,16 +147,16 @@ class YahooStockOption(AbstractStockOption):
 
     def __init__(self, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
         self._source = a_src
-        self.SourceColumn = a_col
+        self._column = a_col
         self.Ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self._historical = self._setData()
         self.TimeSpan = self._updateTimeSpan(self.TimeSpan, self._historical)
-        self._data = self._historical[self.SourceColumn].to_frame()
-        self._data_range = self._getDataRange(1000, self._data[self.SourceColumn])
-        self._mu = round(self._historical[self.SourceColumn].mean(), 2)
-        self._sigma = round(self._historical[self.SourceColumn].std(), 2)
-        self._median = round(self._historical[self.SourceColumn].median(), 2)
+        self._data = self._historical[self.Column].to_frame()
+        self._data_range = self._getDataRange(1000, self._data[self.Column])
+        self._mu = round(self._historical[self.Column].mean(), 2)
+        self._sigma = round(self._historical[self.Column].std(), 2)
+        self._median = round(self._historical[self.Column].median(), 2)
         self._norm_pdf = self._getProbabilityDensityFunction(self.DataRange, self._mu, self._sigma)
         self._data['Norm'] = self._setNormalizer(self._historical)
         self._data['NormL1'] = self._setNormalizerL1(self._historical)
@@ -201,7 +200,7 @@ class YahooStockOption(AbstractStockOption):
         a_df['IsOutlier'] = pd.Series(dtype=int)
         a_df['Outliers'] = pd.Series(dtype=float)
         for ind in a_df.index:
-            x = a_df[self.SourceColumn][ind]
+            x = a_df[self.Column][ind]
             mu = a_df['mean'][ind]
             sigma = a_df['std'][ind]
             a_df['IsOutlier'][ind] = 1 if (x > mu + n_sigmas * sigma) | (x < mu - n_sigmas * sigma) else 0
@@ -233,46 +232,46 @@ class YahooStockOption(AbstractStockOption):
         return round(i, 6)
 
     def _setNormalizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return (a_df / a_df.iloc[0])[self.SourceColumn]
+        return (a_df / a_df.iloc[0])[self.Column]
 
     def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return\
-            pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns, index=a_df.index)[self.SourceColumn]
+            pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns, index=a_df.index)[self.Column]
 
     def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return\
-            pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns, index=a_df.index)[self.SourceColumn]
+            pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns, index=a_df.index)[self.Column]
 
     def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns, index=a_df.index)[self.SourceColumn]
+        return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns, index=a_df.index)[self.Column]
 
     def _setScaler(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         # scale to compare array from 0.0 to 100.0
         minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0.0, 100.0))
         # scale to compare data frame
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
-        return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)[self.SourceColumn]
+        return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)[self.Column]
 
     def _setSimpleReturns(self, a_letter: str = '', a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         new_df: pd.DataFrame() = pd.DataFrame()
         if a_letter == 'W':
-            new_df = a_df[self.SourceColumn].resample('W').ffill().pct_change().to_frame()
+            new_df = a_df[self.Column].resample('W').ffill().pct_change().to_frame()
         elif a_letter == 'M':
-            new_df = a_df[self.SourceColumn].resample('M').ffill().pct_change().to_frame()
+            new_df = a_df[self.Column].resample('M').ffill().pct_change().to_frame()
         elif a_letter == 'Q':
-            new_df = a_df[self.SourceColumn].resample('Q').ffill().pct_change().to_frame()
+            new_df = a_df[self.Column].resample('Q').ffill().pct_change().to_frame()
         elif a_letter == 'A':
-            new_df = a_df[self.SourceColumn].resample('A').ffill().pct_change().to_frame()
+            new_df = a_df[self.Column].resample('A').ffill().pct_change().to_frame()
         else:
-            new_df = a_df[self.SourceColumn].pct_change().to_frame()
+            new_df = a_df[self.Column].pct_change().to_frame()
         new_df.iloc[0, :] = 0
         return new_df
 
     def _setSimpleReturnsPlus(self, simple_returns: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        df_rolling = simple_returns[self.SourceColumn].rolling(window=21).agg(['mean', 'std'])
+        df_rolling = simple_returns[self.Column].rolling(window=21).agg(['mean', 'std'])
         simple_returns = simple_returns.join(df_rolling)
         simple_returns = self._getOutliers(simple_returns)
-        df = simple_returns[self.SourceColumn].dropna()
+        df = simple_returns[self.Column].dropna()
         dfLength = len(df)
         dfLength80 = int(round(dfLength*0.8))
         dfLength20 = dfLength - dfLength80
@@ -285,10 +284,10 @@ class YahooStockOption(AbstractStockOption):
         print(dfLength20)
         preds = []
         for i in range(0, test.shape[0]):
-            a = train[self.SourceColumn][len(train)-dfLength20+i:].sum() + sum(preds)
+            a = train[self.Column][len(train)-dfLength20+i:].sum() + sum(preds)
             b = a/dfLength20
             preds.append(b)
-        self.RMSE = np.sqrt(np.mean(np.power((np.array(test[self.SourceColumn])-preds), 2)))
+        self.RMSE = np.sqrt(np.mean(np.power((np.array(test[self.Column])-preds), 2)))
         print('\n RMSE value on validation set:', self.RMSE)
         lin_svr = SVR(kernel='linear', C=1000.0)
         #lin_svr.fit(self.HistoricalSimpleReturns.index, self.HistoricalSimpleReturns[self.SourceColumn])
@@ -322,14 +321,14 @@ class YahooStockOption(AbstractStockOption):
         return simple_returns
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        a_var = np.log(a_df[self.SourceColumn] / a_df[self.SourceColumn].shift(1))
+        a_var = np.log(a_df[self.Column] / a_df[self.Column].shift(1))
         new_df: pd.DataFrame = a_var.to_frame()
         new_df.iloc[0, :] = 0
         return new_df
 
     def _setLogReturnsPlus(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        a_df['MovingStd252'] = a_df[self.SourceColumn].rolling(window=252).std().to_frame()
-        a_df['MovingStd21'] = a_df[self.SourceColumn].rolling(window=21).std().to_frame()
+        a_df['MovingStd252'] = a_df[self.Column].rolling(window=252).std().to_frame()
+        a_df['MovingStd21'] = a_df[self.Column].rolling(window=21).std().to_frame()
         return a_df
 
     def _setSimpleCumulative(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.Series:
