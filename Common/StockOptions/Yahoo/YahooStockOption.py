@@ -67,8 +67,6 @@ class YahooStockOption(AbstractStockOption):
     IsQuarterly: bool = False
     IsAnnually: bool = False
     RMSE: float = -1.1
-    Ticker: str = 'TD'
-    TimeSpan: TimeSpan
     YeUrl: str = 'NA'
     YeLogoUrl: str = 'NA'
     YeAddress: str = 'NA'
@@ -148,7 +146,7 @@ class YahooStockOption(AbstractStockOption):
     def __init__(self, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
         self._source = a_src
         self._column = a_col
-        self.Ticker = a_ticker
+        self._ticker = a_ticker
         self.TimeSpan = TimeSpan()
         self._historical = self._setData()
         self.TimeSpan = self._updateTimeSpan(self.TimeSpan, self._historical)
@@ -209,7 +207,7 @@ class YahooStockOption(AbstractStockOption):
         return a_df
 
     def _setData(self) -> pd.DataFrame:
-        a_df: pd.DataFrame = PandaEngine(self.Source, self.TimeSpan, self.Ticker).DataFrame
+        a_df: pd.DataFrame = PandaEngine(self.Source, self.TimeSpan, self._ticker).DataFrame
         a_df.fillna(method='ffill', inplace=True)
         a_df.fillna(method='bfill', inplace=True)
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns

@@ -29,8 +29,7 @@ class HistoricalPlotter(AbstractPlotter):
         self._yeLow52 = np.round(stock_option.YeLow52, 2)
         self._yeAverage50 = np.round(stock_option.YeAverage50, 2)
         self._yeAverage200 = np.round(stock_option.YeAverage200, 2)
-        if stock_option._source == 'yahoo':
-            self._col = "Adj Close"
+        self._col = stock_option.Column
         self._data_frame = stock_option.DataFrame
         self._legend_place = 'upper left'
         self._ticker = stock_option.Ticker
@@ -65,8 +64,8 @@ class HistoricalPlotter(AbstractPlotter):
         # ax0 -> ax3 -> ax2
         #self._data_frame[self._col].plot(ax=ax[3], label= self._ticker + self._col)
         self._stock_option.Data['Norm'].plot(ax=ax[2], label=self._ticker + 'Norm')
-        self._sNp_500.DataNorm.plot(ax=ax[2], label=self._sNp_500._data_norm.columns)
-        self._vix_index.DataNorm.plot(ax=ax[2], label=self._vix_index._data_norm.columns)
+        self._sNp_500.DataNorm.plot(ax=ax[2], label=self._sNp_500.DataNorm.columns)
+        self._vix_index.DataNorm.plot(ax=ax[2], label=self._vix_index.DataNorm.columns)
         ax[2].set(ylabel='Norm to fold')
         ax[2].legend(loc=self._legend_place)
         # new -> ax4 -> ax3
