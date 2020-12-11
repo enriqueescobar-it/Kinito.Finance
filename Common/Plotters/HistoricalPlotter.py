@@ -64,7 +64,7 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].legend(loc=self._legend_place)
         # ax0 -> ax3 -> ax2
         #self._data_frame[self._col].plot(ax=ax[3], label= self._ticker + self._col)
-        self._stock_option.getData()['Norm'].plot(ax=ax[2], label=self._ticker + 'Norm')
+        self._stock_option.Data['Norm'].plot(ax=ax[2], label=self._ticker + 'Norm')
         self._sNp_500.DataNorm.plot(ax=ax[2], label=self._sNp_500._data_norm.columns)
         self._vix_index.DataNorm.plot(ax=ax[2], label=self._vix_index._data_norm.columns)
         ax[2].set(ylabel='Norm to fold')
