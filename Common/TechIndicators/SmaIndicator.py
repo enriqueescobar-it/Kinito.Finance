@@ -6,6 +6,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class SmaIndicator(AbstractTechIndicator):
+    _data: DataFrame = DataFrame()
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
@@ -14,23 +15,8 @@ class SmaIndicator(AbstractTechIndicator):
         self._main_label += ' ' + self._label
         self._setData(y_stock_option.DataFrame)
 
-    def __getSma(self, a_df: DataFrame, a_int: int = 12):
-        d_f: DataFrame = a_df.copy()
-        # return last column as .iloc[:,-1] spaning rollng mean
-        return a_df[self._col].rolling(window=a_int, min_periods=0).mean()
-
-    def _setData(self, a_df: DataFrame):
-        d_f: DataFrame = a_df.copy()
-        self._data[self._col] = d_f[self._col]
-        self._data[self._name + '005'] = self.__getSma(d_f, 5)
-        self._data[self._name + '009'] = self.__getSma(d_f, 9)
-        self._data[self._name + '010'] = self.__getSma(d_f, 10)
-        self._data[self._name + '020'] = self.__getSma(d_f, 20)
-        self._data[self._name + '030'] = self.__getSma(d_f, 30)
-        self._data[self._name + '050'] = self.__getSma(d_f, 50)
-        self._data[self._name + '100'] = self.__getSma(d_f, 100)
-        self._data[self._name + '200'] = self.__getSma(d_f, 200)
-        self._low_high = (5, 7)
+    def GetData(self) -> DataFrame:
+        return self._data
 
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)
@@ -47,3 +33,25 @@ class SmaIndicator(AbstractTechIndicator):
         plt.legend(loc=self._legend_place)
         plt.grid(True)
         return plt
+
+    def _setData(self, a_df: DataFrame):
+        print('_', self._data.columns)
+        d_f: DataFrame = a_df.copy()
+        print('0', self._data.columns)
+        self._data[self._col] = d_f[self._col]
+        print('1', self._data.columns)
+        self._data[self._name + '005'] = self.__getSma(d_f, 5)
+        self._data[self._name + '009'] = self.__getSma(d_f, 9)
+        self._data[self._name + '010'] = self.__getSma(d_f, 10)
+        self._data[self._name + '020'] = self.__getSma(d_f, 20)
+        self._data[self._name + '030'] = self.__getSma(d_f, 30)
+        self._data[self._name + '050'] = self.__getSma(d_f, 50)
+        self._data[self._name + '100'] = self.__getSma(d_f, 100)
+        self._data[self._name + '200'] = self.__getSma(d_f, 200)
+        print('2', self._data.columns)
+        self._low_high = (5, 7)
+
+    def __getSma(self, a_df: DataFrame, a_int: int = 12):
+        d_f: DataFrame = a_df.copy()
+        # return last column as .iloc[:,-1] spaning rollng mean
+        return a_df[self._col].rolling(window=a_int, min_periods=0).mean()

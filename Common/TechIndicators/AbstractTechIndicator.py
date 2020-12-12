@@ -16,7 +16,6 @@ class AbstractTechIndicator(ABC):
     #['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark', 'seaborn-dark-palette', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid', 'tableau-colorblind10']
     _plot_style: str = 'seaborn'
     _x_ticks_angle: int = 45
-    _data: DataFrame = DataFrame()
     _strategy: AbstractTechIndicatorStrategy
     _fig_size: Tuple[float, float]
     _low_high: Tuple[int, int]
@@ -36,20 +35,20 @@ class AbstractTechIndicator(ABC):
         self._y_label = self._col + ' in USD'
 
     @abstractmethod
-    def _setData(self, a_df: DataFrame):
+    def GetData(self) -> DataFrame:
         pass
 
     @abstractmethod
     def PlotData(self) -> plt:
         pass
 
+    @abstractmethod
+    def _setData(self, a_df: DataFrame):
+        pass
+
     @property
     def Column(self):
         return self._col
-
-    @property
-    def DataFrame(self):
-        return self._data
 
     @property
     def FigSizeTuple(self):

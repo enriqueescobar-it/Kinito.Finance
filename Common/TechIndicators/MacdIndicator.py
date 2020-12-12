@@ -6,6 +6,7 @@ from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class MacdIndicator(AbstractTechIndicator):
+    _data: DataFrame = DataFrame()
 
     def __init__(self, y_stock_option: YahooStockOption):
         super().__init__(y_stock_option)
@@ -14,21 +15,8 @@ class MacdIndicator(AbstractTechIndicator):
         self._main_label += ' ' + self._label
         self._setData(y_stock_option.DataFrame)
 
-    def __getEMA(self, a_df: DataFrame, a_int: int = 12):
-        d_f: DataFrame = a_df.copy()
-        return d_f[self._col].ewm(span=a_int, adjust=False).mean()
-
-    def _setData(self, a_df: DataFrame):
-        d_f: DataFrame = a_df.copy()
-        self._data[self._col] = d_f[self._col]
-        shortEma = self.__getEMA(d_f, 12)
-        self._data['EMA12'] = shortEma
-        longEma = self.__getEMA(d_f, 26)
-        self._data['EMA26'] = longEma
-        macd = shortEma - longEma
-        self._data[self._name] = macd
-        self._data['SignalLine'] = macd.ewm(span=9, adjust=False).mean()
-        self._low_high = (3, 4)
+    def GetData(self) -> DataFrame:
+        return self._data
 
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)
@@ -45,3 +33,19 @@ class MacdIndicator(AbstractTechIndicator):
         plt.legend(loc=self._legend_place)
         plt.grid(True)
         return plt
+
+    def _setData(self, a_df: DataFrame):
+        d_f: DataFrame = a_df.copy()
+        self._data[self._col] = d_f[self._col]
+        shortEma = self.__getEMA(d_f, 12)
+        self._data['EMA12'] = shortEma
+        longEma = self.__getEMA(d_f, 26)
+        self._data['EMA26'] = longEma
+        macd = shortEma - longEma
+        self._data[self._name] = macd
+        self._data['SignalLine'] = macd.ewm(span=9, adjust=False).mean()
+        self._low_high = (3, 4)
+
+    def __getEMA(self, a_df: DataFrame, a_int: int = 12):
+        d_f: DataFrame = a_df.copy()
+        return d_f[self._col].ewm(span=a_int, adjust=False).mean()
