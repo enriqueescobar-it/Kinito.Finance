@@ -1,27 +1,23 @@
 import statistics
 from typing import List
-import scipy.stats as scs
-import pandas as pd
+
 import numpy as np
+import pandas as pd
+import scipy.stats as scs
 from numpy import ndarray
 from sklearn import preprocessing
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVR
+
 from Common.Measures.Time.TimeSpan import TimeSpan
 from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
-from Common.StockMarketIndex import AbstractStockMarketIndex
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
 
 
 class YahooStockOption(AbstractStockOption):
-    _norm_pdf: ndarray
-    _sigma: float = -1.1
-    _mu: float = -1.1
-    _median: float = -1.1
-    _data_range: ndarray
     FvBeta: float = -1.1
     FvChangePercent: str = ''
     FvCompanyCountry: str = ''
@@ -42,14 +38,12 @@ class YahooStockOption(AbstractStockOption):
     FvRsi14: str = ''
     FvVolume: int = -1
     ForecastSpan: int = 30
-    _historical: pd.DataFrame
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
     SimpleAnnually: pd.DataFrame
     SimpleAnnuallyCum: pd.Series
     SimpleDaily: pd.DataFrame
     SimplyDailyCum: pd.Series
-    HistoricalMarketIndex: AbstractStockMarketIndex
     SimpleMonthly: pd.DataFrame
     SimpleMonthlyCum: pd.Series
     SimpleQuarterly: pd.DataFrame
@@ -61,11 +55,6 @@ class YahooStockOption(AbstractStockOption):
     SimpleMonthlyReturnAvg: float = -1.1
     SimpleQuarterlyReturnAvg: float = -1.1
     SimpleAnnuallyReturnAvg: float = -1.1
-    IsDaily: bool = False
-    IsWeekly: bool = False
-    IsMonthly: bool = False
-    IsQuarterly: bool = False
-    IsAnnually: bool = False
     RMSE: float = -1.1
     YeUrl: str = 'NA'
     YeLogoUrl: str = 'NA'
@@ -95,61 +84,13 @@ class YahooStockOption(AbstractStockOption):
     YssLink: str = ''
     YssMarketCap: str = ''
     YssPeRatio: str = ''
-    _high52: float = -1.1
-    _low52: float = -1.1
-    _range52: List[float]
-    _price: float = -1.1
-    _fin_viz_engine: FinVizEngine
-    _y_finance_engine: YahooFinanceEngine
-    _yahooSummaryScrapper: YahooSummaryScrapper
-
-    @property
-    def High52(self):
-        return self._high52
-
-    @property
-    def Low52(self):
-        return self._low52
-
-    @property
-    def Range52(self):
-        return self._range52
-
-    @property
-    def Price(self):
-        return self._price
-
-    @property
-    def DataFrame(self):
-        return self._historical
-
-    @property
-    def DataRange(self):
-        return self._data_range
-
-    @property
-    def Mu(self):
-        return self._mu
-
-    @property
-    def Median(self):
-        return self._median
-
-    @property
-    def Sigma(self):
-        return self._sigma
-
-    @property
-    def NormProbDensityFn(self):
-        return self._norm_pdf
 
     def __init__(self, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
         self._source = a_src
         self._column = a_col
         self._ticker = a_ticker
-        self.TimeSpan = TimeSpan()
         self._historical = self._setData()
-        self.TimeSpan = self._updateTimeSpan(self.TimeSpan, self._historical)
+        self._t_s = self._updateTimeSpan(self._t_s, self._historical)
         self._data = self._historical[self.Column].to_frame()
         self._data_range = self._getDataRange(1000, self._data[self.Column])
         self._mu = round(self._historical[self.Column].mean(), 2)
@@ -207,7 +148,7 @@ class YahooStockOption(AbstractStockOption):
         return a_df
 
     def _setData(self) -> pd.DataFrame:
-        a_df: pd.DataFrame = PandaEngine(self.Source, self.TimeSpan, self._ticker).DataFrame
+        a_df: pd.DataFrame = PandaEngine(self.Source, self._t_s, self._ticker).DataFrame
         a_df.fillna(method='ffill', inplace=True)
         a_df.fillna(method='bfill', inplace=True)
         # self.HistoricalData.columns = self.Ticker + self.HistoricalData.columns
