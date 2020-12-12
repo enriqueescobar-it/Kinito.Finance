@@ -35,11 +35,8 @@ class SmaIndicator(AbstractTechIndicator):
         return plt
 
     def _setData(self, a_df: DataFrame):
-        print('_', self._data.columns)
         d_f: DataFrame = a_df.copy()
-        print('0', self._data.columns)
         self._data[self._col] = d_f[self._col]
-        print('1', self._data.columns)
         self._data[self._name + '005'] = self.__getSma(d_f, 5)
         self._data[self._name + '009'] = self.__getSma(d_f, 9)
         self._data[self._name + '010'] = self.__getSma(d_f, 10)
@@ -48,7 +45,6 @@ class SmaIndicator(AbstractTechIndicator):
         self._data[self._name + '050'] = self.__getSma(d_f, 50)
         self._data[self._name + '100'] = self.__getSma(d_f, 100)
         self._data[self._name + '200'] = self.__getSma(d_f, 200)
-        print('2', self._data.columns)
         self._low_high = (5, 7)
 
     def __getSma(self, a_df: DataFrame, a_int: int = 12):

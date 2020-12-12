@@ -46,7 +46,6 @@ class EmaIndicator(AbstractTechIndicator):
         self._data[self._name + '100'] = self.__getEma(d_f, 100)
         self._data[self._name + '200'] = self.__getEma(d_f, 200)
         self._low_high = (1, 4, 6)
-        print(self._data.tail())
 
     def __getEma(self, a_df: DataFrame, a_int: int = 21):
         d_f: DataFrame = a_df.copy()
