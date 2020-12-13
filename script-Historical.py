@@ -38,6 +38,7 @@ from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.TechIndicators.MacdIndicator import MacdIndicator
+from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
 yahooStockOption: YahooStockOption = YahooStockOption('NIO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
@@ -167,30 +168,25 @@ yahooStockOptionPlotter.Plot().show()
 #exit(31415)
 yahooMacdIndicator: MacdIndicator = MacdIndicator(yahooStockOption)
 print(yahooMacdIndicator.GetData().columns)
-print(yahooMacdIndicator.GetData().head(3))
 yahooMacdIndicator.PlotData().show()
-print(yahooStockOption.DataFrame.columns)
-#exit(31415)
+yahooMacdStrategy: MacdStrategy = MacdStrategy(yahooMacdIndicator)
+yahooMacdStrategy.Plot().show()
+yahooMacdStrategy.PlotAll().show()
 yahooSmaIndicator: SmaIndicator = SmaIndicator(yahooStockOption)
 print(yahooSmaIndicator.GetData().columns)
-print(yahooSmaIndicator.GetData().head(3))
 yahooSmaIndicator.PlotData().show()
-print(yahooStockOption.DataFrame.columns)
-yahooEmaIndicator: EmaIndicator = EmaIndicator(yahooStockOption)
-print(yahooEmaIndicator.GetData().columns)
-print(yahooEmaIndicator.GetData().head(3))
-yahooEmaIndicator.PlotData().show()
-print(yahooStockOption.DataFrame.columns)
-exit(31415)
-yahooMacdStrategy: MacdStrategy = MacdStrategy(yahooMacdIndicator)
-#yahooStockOptionStrategy.Plot().show()
-yahooMacdStrategy.PlotAll().show()
 yahooSmaStrategy: SmaStrategy = SmaStrategy(yahooSmaIndicator)
 yahooSmaStrategy.Plot().show()
 yahooSmaStrategy.PlotAll().show()
+yahooEmaIndicator: EmaIndicator = EmaIndicator(yahooStockOption)
+print(yahooEmaIndicator.GetData().columns)
+yahooEmaIndicator.PlotData().show()
 yahooEmaStrategy: EmaStrategy = EmaStrategy(yahooEmaIndicator)
 yahooEmaStrategy.Plot().show()
 yahooEmaStrategy.PlotAll().show()
+yahooRsiIndicator: RsiIndicator = RsiIndicator(yahooStockOption)
+print(yahooRsiIndicator.GetData().columns)
+yahooRsiIndicator.PlotData().show()
 # preprocessing
 ## Mean removal
 print('MEAN=', yahooStockOption.Data.Sparse.mean(axis=0))

@@ -1,12 +1,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-
+from pandas import DataFrame
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
 
 class RsiIndicator(AbstractTechIndicator):
+    _data: DataFrame = DataFrame()
     __period: int
 
     def __init__(self, y_stock_option: YahooStockOption):
@@ -17,34 +18,8 @@ class RsiIndicator(AbstractTechIndicator):
         self.__setPeriod(14)
         self._setData(y_stock_option)
 
-    def __setPeriod(self, a_int: int):
-        self.__period = a_int
-
-    def __getAverageGain(self, delta: pd.core.series.Series) -> pd.core.series.Series:
-        up = delta.copy()
-        up[up < 0] = 0
-        return up.rolling(window=self.__period).mean()
-
-    def __getAverageLoss(self, delta: pd.core.series.Series) -> pd.core.series.Series:
-        down = delta.copy()
-        down[down > 0] = 0
-        return abs(down.rolling(window=self.__period).mean())
-
-    def __setRsi(self):
-        self._rsi = 100.0 - (100.0 / (1.0 + self.__rs))
-
-    def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.DataFrame[self._col]
-        delta: pd.core.series.Series = y_stock_option.DataFrame[self._col].diff(1)
-        self._data['Delta'] = delta
-        avgGain: pd.core.series.Series = self.__getAverageGain(delta)
-        self._data['AverageGain'] = avgGain
-        avgLoss: pd.core.series.Series = self.__getAverageLoss(delta)
-        self._data['AverageLoss'] = avgLoss
-        rs = avgGain / avgLoss
-        self._data['RelativeStrength'] = rs
-        self._data[self._name] = 100.0 - (100.0 / (1.0 + rs))
-        self._low_high = (2, 3)
+    def GetData(self) -> DataFrame:
+        return self._data
 
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)
@@ -69,3 +44,32 @@ class RsiIndicator(AbstractTechIndicator):
         plt.legend(loc=self._legend_place)
         plt.grid(True)
         return plt
+
+    def _setData(self, y_stock_option: YahooStockOption):
+        self._data[self._col] = y_stock_option.DataFrame[self._col]
+        delta: pd.core.series.Series = y_stock_option.DataFrame[self._col].diff(1)
+        self._data['Delta'] = delta
+        avgGain: pd.core.series.Series = self.__getAverageGain(delta)
+        self._data['AverageGain'] = avgGain
+        avgLoss: pd.core.series.Series = self.__getAverageLoss(delta)
+        self._data['AverageLoss'] = avgLoss
+        rs = avgGain / avgLoss
+        self._data['RelativeStrength'] = rs
+        self._data[self._name] = 100.0 - (100.0 / (1.0 + rs))
+        self._low_high = (2, 3)
+
+    def __setPeriod(self, a_int: int):
+        self.__period = a_int
+
+    def __getAverageGain(self, delta: pd.core.series.Series) -> pd.core.series.Series:
+        up = delta.copy()
+        up[up < 0] = 0
+        return up.rolling(window=self.__period).mean()
+
+    def __getAverageLoss(self, delta: pd.core.series.Series) -> pd.core.series.Series:
+        down = delta.copy()
+        down[down > 0] = 0
+        return abs(down.rolling(window=self.__period).mean())
+
+    def __setRsi(self):
+        self._rsi = 100.0 - (100.0 / (1.0 + self.__rs))
