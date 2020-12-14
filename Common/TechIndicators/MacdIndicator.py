@@ -48,8 +48,8 @@ class MacdIndicator(AbstractTechIndicator):
         longEma = self.__getEMA(d_f, 26)
         self._data['EMA26'] = longEma
         macd = shortEma - longEma
-        self._data[self._name] = macd
-        self._data['SignalLine'] = macd.ewm(span=9, adjust=False).mean()
+        self._data[self._name + str(12) + '-' + str(26)] = macd
+        self._data['SignalLine9'] = macd.ewm(span=9, adjust=False).mean()
         self._low_high = (3, 4)
 
     def __getEMA(self, a_df: DataFrame, a_int: int = 12):
