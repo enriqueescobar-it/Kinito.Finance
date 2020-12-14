@@ -150,6 +150,9 @@ class HistoricalPlotter(AbstractPlotter):
         ax[0].legend(loc=self._legend_place)
         ax[0].set_title('ind_tile', fontsize=10)
         #ax1
+        ax[1] = self._sma_ind.PlotAx(ax[1])
+        ax[1].legend(loc=self._legend_place)
+        ax[1].set_title('ind_tile', fontsize=10)
         #ax2
         plt.tight_layout()
         return plt

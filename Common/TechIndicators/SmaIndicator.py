@@ -18,6 +18,12 @@ class SmaIndicator(AbstractTechIndicator):
     def GetData(self) -> DataFrame:
         return self._data
 
+    def PlotAx(self, ax: object) -> object:
+        for a_ind, col in enumerate(self._data.columns):
+            an_alpha: float = 1.0 if (a_ind == 0 or a_ind in self._low_high) else 0.3
+            self._data[col].plot(alpha=an_alpha, ax=ax)
+        return ax
+
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)
         plt.style.use(self._plot_style)

@@ -18,7 +18,7 @@ class MacdIndicator(AbstractTechIndicator):
     def GetData(self) -> DataFrame:
         return self._data
 
-    def PlotAx(self, ax: object):
+    def PlotAx(self, ax: object) -> object:
         for a_ind, col in enumerate(self._data.columns[-2:self._data.columns.size]):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             self._data[col].plot(alpha=an_alpha, ax=ax)

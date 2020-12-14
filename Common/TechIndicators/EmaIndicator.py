@@ -18,6 +18,9 @@ class EmaIndicator(AbstractTechIndicator):
     def GetData(self) -> DataFrame:
         return self._data
 
+    def PlotAx(self, ax: object) -> object:
+        pass
+
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)
         plt.style.use(self._plot_style)
