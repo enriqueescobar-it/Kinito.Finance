@@ -11,6 +11,9 @@ from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
+from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
+from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
+from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
 from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
@@ -22,8 +25,11 @@ class HistoricalPlotter(AbstractPlotter):
     _vix_index: VixIndex
     _sNp_500: SnP500Index
     _macd_ind: MacdIndicator
+    _macd_strat: MacdStrategy
     _sma_ind: SmaIndicator
+    _sma_strat: SmaStrategy
     _ema_ind: EmaIndicator
+    _ema_strat: EmaStrategy
     _rsi_ind: RsiIndicator
     _price: float
     _yeAverage200: float
@@ -36,12 +42,24 @@ class HistoricalPlotter(AbstractPlotter):
         return self._macd_ind
 
     @property
+    def MacdStrat(self):
+        return self._macd_strat
+
+    @property
     def SmaInd(self):
         return self._sma_ind
 
     @property
+    def SmaStrat(self):
+        return self._sma_strat
+
+    @property
     def EmaInd(self):
         return self._ema_ind
+
+    @property
+    def EmaStrat(self):
+        return self._ema_strat
 
     @property
     def RsiInd(self):
@@ -62,8 +80,11 @@ class HistoricalPlotter(AbstractPlotter):
         self._vix_index = vixIndex
         self._sNp_500 = sAnP500
         self._macd_ind = MacdIndicator(stock_option)
+        self._macd_strat = MacdStrategy(self._macd_ind)
         self._sma_ind = SmaIndicator(stock_option)
+        self._sma_strat = SmaStrategy(self._sma_ind)
         self._ema_ind = EmaIndicator(stock_option)
+        self._ema_strat = EmaStrategy(self._ema_ind)
         self._rsi_ind = RsiIndicator(stock_option)
 
     def Plot(self):
