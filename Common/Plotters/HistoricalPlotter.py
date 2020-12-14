@@ -87,7 +87,7 @@ class HistoricalPlotter(AbstractPlotter):
         self._ema_strat = EmaStrategy(self._ema_ind)
         self._rsi_ind = RsiIndicator(stock_option)
 
-    def Plot(self):
+    def Plot(self) -> plt:
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
@@ -126,7 +126,7 @@ class HistoricalPlotter(AbstractPlotter):
         plt.tight_layout()
         return plt
 
-    def GraphPlot(self):
+    def GraphPlot(self) -> plt:
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
         plt.style.use('seaborn')
@@ -134,6 +134,17 @@ class HistoricalPlotter(AbstractPlotter):
         fig.suptitle(a_title)
         self._getDataPlot(ax[0])
         self._getDataDistro(ax[1])
+        plt.tight_layout()
+        return plt
+
+    def StrategyPlot(self) -> plt:
+        nb_col: int = 1
+        nb_row: int = 3
+        a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
+        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+        plt.style.use('seaborn')
+        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float), sharey=True)
+        fig.suptitle(a_title)
         plt.tight_layout()
         return plt
 
