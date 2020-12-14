@@ -1,10 +1,10 @@
-from abc import ABC
-import pandas as pd
+from abc import *
+from pandas import DataFrame
 from Common.Measures.Time.TimeSpan import TimeSpan
 
 
 class AbstractPlotter(ABC):
-    _data_frame: pd.DataFrame
+    _data_frame: DataFrame
     _src: str
     _col: str
     _legend_place: str

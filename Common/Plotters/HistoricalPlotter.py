@@ -11,17 +11,41 @@ from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
+from Common.TechIndicators.EmaIndicator import EmaIndicator
+from Common.TechIndicators.MacdIndicator import MacdIndicator
+from Common.TechIndicators.RsiIndicator import RsiIndicator
+from Common.TechIndicators.SmaIndicator import SmaIndicator
 
 
 class HistoricalPlotter(AbstractPlotter):
     _stock_option: YahooStockOption
     _vix_index: VixIndex
     _sNp_500: SnP500Index
+    _macd_ind: MacdIndicator
+    _sma_ind: SmaIndicator
+    _ema_ind: EmaIndicator
+    _rsi_ind: RsiIndicator
     _price: float
     _yeAverage200: float
     _yeAverage50: float
     _yeHigh52: float
     _yeLow52: float
+
+    @property
+    def MacdInd(self):
+        return self._macd_ind
+
+    @property
+    def SmaInd(self):
+        return self._sma_ind
+
+    @property
+    def EmaInd(self):
+        return self._ema_ind
+
+    @property
+    def RsiInd(self):
+        return self._rsi_ind
 
     def __init__(self, stock_option: YahooStockOption, vixIndex: VixIndex, sAnP500: SnP500Index):
         self._price = np.round(stock_option.Price, 2)
@@ -37,6 +61,10 @@ class HistoricalPlotter(AbstractPlotter):
         self._stock_option = stock_option
         self._vix_index = vixIndex
         self._sNp_500 = sAnP500
+        self._macd_ind = MacdIndicator(stock_option)
+        self._sma_ind = SmaIndicator(stock_option)
+        self._ema_ind = EmaIndicator(stock_option)
+        self._rsi_ind = RsiIndicator(stock_option)
 
     def Plot(self):
         a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
