@@ -100,8 +100,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('NIO')#'ESTC')XWEB DDOG BE
 print(yahooStockOption.DataFrame.describe(include='all'))
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
-'''
-ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
+''' #ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
 nyseIndex: AbstractStockMarketIndex = NyseIndex('yahoo', "^NYA", yahooStockOption.TimeSpan)
@@ -131,7 +130,7 @@ kospIndex: AbstractStockMarketIndex = KospIndex('yahoo', "^KS11", yahooStockOpti
 marketIndices = list()
 marketIndices.append(sAnP500)
 marketIndices.append(vixIndex)
-marketIndices.append(ovxIndex)
+#marketIndices.append(ovxIndex)
 marketIndices.append(sAndPTsx)
 marketIndices.append(nasdaqIndex)
 marketIndices.append(nyseIndex)
