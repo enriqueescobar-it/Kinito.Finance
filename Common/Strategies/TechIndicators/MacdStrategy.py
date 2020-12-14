@@ -8,6 +8,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 
 class MacdStrategy(AbstractTechIndicatorStrategy):
     _macd_indicator: MacdIndicator
+    _summary: pd.DataFrame
 
     def __init__(self, macd_indicator: MacdIndicator):
         self._macd_indicator = macd_indicator
@@ -26,13 +27,20 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         self._data[self._buy_label] = buyNsellTuple[0]
         self._data[self._sell_label] = buyNsellTuple[1]
         print('DATA', self._data.columns)
+        self._setSummary()
+
+    @property
+    def Summary(self):
+        return self._summary
 
     def PlotAx(self, ax: object) -> object:
         for a_ind, col in enumerate(self._data.columns[0:1]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3
             self._data[col].plot(alpha=an_alpha, ax=ax)
-        ax.scatter(self._macd_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^', color='green')
-        ax.scatter(self._macd_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label, marker='v', color='red')
+        ax.scatter(self._macd_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^',
+                   color='green')
+        ax.scatter(self._macd_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label,
+                   marker='v', color='red')
         return ax
 
     def Plot(self) -> plt:
@@ -42,8 +50,10 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3
             self._data[col].plot(alpha=an_alpha)
             print('i', an_alpha)
-        plt.scatter(self._macd_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^', color='green')
-        plt.scatter(self._macd_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label, marker='v', color='red')
+        plt.scatter(self._macd_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label,
+                    marker='^', color='green')
+        plt.scatter(self._macd_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label,
+                    marker='v', color='red')
         plt.title(self._macd_indicator.LabelMain)
         plt.xlabel(self._macd_indicator.LabelX)
         plt.xticks(rotation=self._macd_indicator.LabelXangle)
@@ -60,16 +70,19 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         f_size: Tuple[float, float] = (self._macd_indicator.FigSizeTuple[0], self._macd_indicator.FigSizeTuple[0])
         fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
         plt.style.use(self._macd_indicator.FigStyle)
-        #ax0 strategy
+        # ax0 strategy
         for a_ind, col in enumerate(self._data.columns[0:1]):
             an_alpha: float = 1.0 if a_ind == 0 else 0.3
             ax[0].plot(self._data[col], alpha=an_alpha, label=col)
-        ax[0].scatter(self._macd_indicator.GetData().index, self._data[self._buy_label], marker='^', color='green', label=self._buy_label)
-        ax[0].scatter(self._macd_indicator.GetData().index, self._data[self._sell_label], marker='v', color='red', label=self._sell_label)
+        ax[0].scatter(self._macd_indicator.GetData().index, self._data[self._buy_label], marker='^', color='green',
+                      label=self._buy_label)
+        ax[0].scatter(self._macd_indicator.GetData().index, self._data[self._sell_label], marker='v', color='red',
+                      label=self._sell_label)
         ax[0].set(ylabel=y_title, title=a_title)
         ax[0].legend(loc=self._macd_indicator.LegendPlace)
-        #ax1 index
-        for a_ind, col in enumerate(self._macd_indicator.GetData().columns[-2:self._macd_indicator.GetData().columns.size]):
+        # ax1 index
+        for a_ind, col in enumerate(
+                self._macd_indicator.GetData().columns[-2:self._macd_indicator.GetData().columns.size]):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             ax[1].plot(self._macd_indicator.GetData()[col], alpha=an_alpha, label=col)
         ax[1].xaxis.set_tick_params(rotation=self._macd_indicator.LabelXangle)
@@ -102,3 +115,21 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
                 sellSignal.append(np.nan)
 
         return buySignal, sellSignal
+
+    def _setSummary(self):
+        self._summary = pd.DataFrame(index=self._data.index)
+        self._summary['Buy'] = self._data[self._buy_label].replace(np.nan, 0)
+        self._summary['Buy'][self._summary['Buy'] > 0] = 1
+        self._summary['Sell'] = self._data[self._sell_label].replace(np.nan, 0)
+        self._summary['Sell'][self._summary['Sell'] > 0] = 1
+        self._summary['BuyAndSell'] = 0
+        last_float: float = 0.0
+        for ind in self._summary.index:
+            if self._summary['Buy'][ind] > self._summary['Sell'][ind]:
+                self._summary['BuyAndSell'][ind] = 1.0
+                last_float = 1.0
+            elif self._summary['Buy'][ind] < self._summary['Sell'][ind]:
+                self._summary['BuyAndSell'][ind] = -1.0
+                last_float = -1.0
+            else: # row['Buy'] == row['Sell']
+                self._summary['BuyAndSell'][ind] = last_float
