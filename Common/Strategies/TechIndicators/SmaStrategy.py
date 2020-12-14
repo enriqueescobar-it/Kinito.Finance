@@ -28,6 +28,11 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         print('DATA', self._data.columns)
 
     def PlotAx(self, ax: object) -> object:
+        for a_ind, col in enumerate(self._data.columns[0:3]):
+            an_alpha: float = 1.0 if a_ind == 0 else 0.3
+            self._data[col].plot(alpha=an_alpha, ax=ax)
+        ax.scatter(self._sma_indicator.GetData().index, self._data[self._buy_label], label=self._buy_label, marker='^', color='green')
+        ax.scatter(self._sma_indicator.GetData().index, self._data[self._sell_label], label=self._sell_label, marker='v', color='red')
         return ax
 
     def Plot(self):

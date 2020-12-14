@@ -106,9 +106,8 @@
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/softmax.txt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/titanic.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/winequality-red.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/MacdStrategy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/MacdIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Strategies/TechIndicators/SmaStrategy.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
