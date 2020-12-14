@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-from pandas import DataFrame
+from pandas import DataFrame, Series
 from Common.TechIndicators.AbstractTechIndicator import AbstractTechIndicator
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
@@ -47,11 +47,11 @@ class RsiIndicator(AbstractTechIndicator):
 
     def _setData(self, y_stock_option: YahooStockOption):
         self._data[self._col] = y_stock_option.DataFrame[self._col]
-        delta: pd.core.series.Series = y_stock_option.DataFrame[self._col].diff(1)
+        delta: Series = y_stock_option.DataFrame[self._col].diff(1)
         self._data['Delta'] = delta
-        avgGain: pd.core.series.Series = self.__getAverageGain(delta)
+        avgGain: Series = self.__getAverageGain(delta)
         self._data['AverageGain'] = avgGain
-        avgLoss: pd.core.series.Series = self.__getAverageLoss(delta)
+        avgLoss: Series = self.__getAverageLoss(delta)
         self._data['AverageLoss'] = avgLoss
         rs = avgGain / avgLoss
         self._data['RelativeStrength'] = rs
@@ -61,12 +61,12 @@ class RsiIndicator(AbstractTechIndicator):
     def __setPeriod(self, a_int: int):
         self.__period = a_int
 
-    def __getAverageGain(self, delta: pd.core.series.Series) -> pd.core.series.Series:
+    def __getAverageGain(self, delta: Series) -> Series:
         up = delta.copy()
         up[up < 0] = 0
         return up.rolling(window=self.__period).mean()
 
-    def __getAverageLoss(self, delta: pd.core.series.Series) -> pd.core.series.Series:
+    def __getAverageLoss(self, delta: Series) -> Series:
         down = delta.copy()
         down[down > 0] = 0
         return abs(down.rolling(window=self.__period).mean())
