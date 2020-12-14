@@ -87,8 +87,8 @@ class HistoricalPlotter(AbstractPlotter):
         self._ema_strat = EmaStrategy(self._ema_ind)
         self._rsi_ind = RsiIndicator(stock_option)
 
-    def Plot(self) -> plt:
-        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+    def Plot(self, s: str = ' Plot ') -> plt:
+        a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
@@ -126,9 +126,9 @@ class HistoricalPlotter(AbstractPlotter):
         plt.tight_layout()
         return plt
 
-    def GraphPlot(self) -> plt:
+    def GraphPlot(self, s: str = ' Graph ') -> plt:
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
-        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+        a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
         plt.style.use('seaborn')
         fig, ax = plt.subplots(1, 2, figsize=(a_float, a_float), sharey=True)
         fig.suptitle(a_title)
@@ -137,14 +137,34 @@ class HistoricalPlotter(AbstractPlotter):
         plt.tight_layout()
         return plt
 
-    def StrategyPlot(self) -> plt:
+    def IndicatorPlot(self, s: str = ' Indicator ') -> plt:
         nb_col: int = 1
         nb_row: int = 3
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
-        a_title: str = self._ticker + ' ' + self._col + ' Flat ' + str(self._time_span.MonthCount) + ' months'
+        a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
         plt.style.use('seaborn')
-        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float), sharey=True)
+        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float), sharex=True)
         fig.suptitle(a_title)
+        #ax0
+        ax[0] = self._macd_ind.PlotAx(ax[0])
+        ax[0].legend(loc=self._legend_place)
+        ax[0].set_title('ind_tile', fontsize=10)
+        #ax1
+        #ax2
+        plt.tight_layout()
+        return plt
+
+    def StrategyPlot(self, s: str = ' Strategy ') -> plt:
+        nb_col: int = 1
+        nb_row: int = 3
+        a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
+        a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
+        plt.style.use('seaborn')
+        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float), sharex=True)
+        fig.suptitle(a_title)
+        #ax0
+        #ax1
+        #ax2
         plt.tight_layout()
         return plt
 
