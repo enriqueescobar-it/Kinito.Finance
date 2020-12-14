@@ -39,6 +39,10 @@ class AbstractTechIndicator(ABC):
         pass
 
     @abstractmethod
+    def PlotAx(self, ax: object) -> object:
+        pass
+
+    @abstractmethod
     def PlotData(self) -> plt:
         pass
 

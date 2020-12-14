@@ -148,12 +148,15 @@ class HistoricalPlotter(AbstractPlotter):
         #ax0
         ax[0] = self._macd_ind.PlotAx(ax[0])
         ax[0].legend(loc=self._legend_place)
-        ax[0].set_title('ind_tile', fontsize=10)
+        ax[0].set_title(self._macd_ind.Name, fontsize=10)
         #ax1
         ax[1] = self._sma_ind.PlotAx(ax[1])
         ax[1].legend(loc=self._legend_place)
-        ax[1].set_title('ind_tile', fontsize=10)
+        ax[1].set_title(self._sma_ind.Name, fontsize=10)
         #ax2
+        ax[2] = self._ema_ind.PlotAx(ax[2])
+        ax[2].legend(loc=self._legend_place)
+        ax[2].set_title(self._ema_ind.Name, fontsize=10)
         plt.tight_layout()
         return plt
 
