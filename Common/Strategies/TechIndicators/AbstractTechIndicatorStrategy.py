@@ -14,7 +14,7 @@ class AbstractTechIndicatorStrategy(AbstractStrategy):
     _data: DataFrame
 
     @abstractmethod
-    def _buyNsell(self):
+    def PlotAx(self, ax: object) -> object:
         pass
 
     @abstractmethod
@@ -23,4 +23,8 @@ class AbstractTechIndicatorStrategy(AbstractStrategy):
 
     @abstractmethod
     def PlotAll(self) -> plt:
+        pass
+
+    @abstractmethod
+    def _buyNsell(self):
         pass

@@ -27,34 +27,8 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         self._data[self._sell_label] = buyNsellTuple[1]
         print('DATA', self._data.columns)
 
-    def _buyNsell(self):
-        buySignal = []
-        sellSignal = []
-        flagLong = False
-        flagShort = False
-
-        for i in range(len(self._data)):
-            if self._data[self._middle_label][i] < self._data[self._upper_label][i] and self._data[self._lower_label][i] < self._data[self._middle_label][i] and flagLong == False:
-                buySignal.append(self._data[self._col][i])
-                sellSignal.append(np.nan)
-                flagShort = True
-            elif flagShort == True and self._data[self._lower_label][i] > self._data[self._middle_label][i]:
-                buySignal.append(np.nan)
-                sellSignal.append(self._data[self._col][i])
-                flagShort = False
-            elif self._data[self._middle_label][i] > self._data[self._upper_label][i] and self._data[self._lower_label][i] > self._data[self._middle_label][i] and flagLong == False:
-                buySignal.append(self._data[self._col][i])
-                sellSignal.append(np.nan)
-                flagLong = True
-            elif flagLong == True and self._data[self._lower_label][i] < self._data[self._middle_label][i]:
-                buySignal.append(np.nan)
-                sellSignal.append(self._data[self._col][i])
-                flagLong = False
-            else:
-                buySignal.append(np.nan)
-                sellSignal.append(np.nan)
-
-        return buySignal, sellSignal
+    def PlotAx(self, ax: object) -> object:
+        return ax
 
     def Plot(self):
         plt.figure(figsize=self._ema_indicator.FigSizeTuple)
@@ -97,3 +71,32 @@ class EmaStrategy(AbstractTechIndicatorStrategy):
         ax[1].set(ylabel='Index', xlabel=x_title)
         ax[1].legend(loc=self._ema_indicator.LegendPlace)
         return plt
+
+    def _buyNsell(self):
+        buySignal = []
+        sellSignal = []
+        flagLong = False
+        flagShort = False
+
+        for i in range(len(self._data)):
+            if self._data[self._middle_label][i] < self._data[self._upper_label][i] and self._data[self._lower_label][i] < self._data[self._middle_label][i] and flagLong == False:
+                buySignal.append(self._data[self._col][i])
+                sellSignal.append(np.nan)
+                flagShort = True
+            elif flagShort == True and self._data[self._lower_label][i] > self._data[self._middle_label][i]:
+                buySignal.append(np.nan)
+                sellSignal.append(self._data[self._col][i])
+                flagShort = False
+            elif self._data[self._middle_label][i] > self._data[self._upper_label][i] and self._data[self._lower_label][i] > self._data[self._middle_label][i] and flagLong == False:
+                buySignal.append(self._data[self._col][i])
+                sellSignal.append(np.nan)
+                flagLong = True
+            elif flagLong == True and self._data[self._lower_label][i] < self._data[self._middle_label][i]:
+                buySignal.append(np.nan)
+                sellSignal.append(self._data[self._col][i])
+                flagLong = False
+            else:
+                buySignal.append(np.nan)
+                sellSignal.append(np.nan)
+
+        return buySignal, sellSignal

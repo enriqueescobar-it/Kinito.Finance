@@ -27,33 +27,8 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         self._data[self._sell_label] = buyNsellTuple[1]
         print('DATA', self._data.columns)
 
-    def _buyNsell(self):
-        buySignal = []
-        sellSignal = []
-        flag = -1
-
-        for i in range(len(self._data)):
-            if self._data[self._lower_label][i] > self._data[self._upper_label][i]:#
-                if flag != 1:
-                    buySignal.append(self._data[self._col][i])
-                    sellSignal.append(np.nan)
-                    flag = 1
-                else:
-                    buySignal.append(np.nan)
-                    sellSignal.append(np.nan)
-            elif self._data[self._lower_label][i] < self._data[self._upper_label][i]:#
-                if flag != 0:
-                    buySignal.append(np.nan)
-                    sellSignal.append(self._data[self._col][i])
-                    flag = 0
-                else:
-                    buySignal.append(np.nan)
-                    sellSignal.append(np.nan)
-            else:
-                buySignal.append(np.nan)
-                sellSignal.append(np.nan)
-
-        return buySignal, sellSignal
+    def PlotAx(self, ax: object) -> object:
+        return ax
 
     def Plot(self):
         plt.figure(figsize=self._sma_indicator.FigSizeTuple)
@@ -96,3 +71,31 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         ax[1].set(ylabel='Index', xlabel=x_title)
         ax[1].legend(loc=self._sma_indicator.LegendPlace)
         return plt
+
+    def _buyNsell(self):
+        buySignal = []
+        sellSignal = []
+        flag = -1
+
+        for i in range(len(self._data)):
+            if self._data[self._lower_label][i] > self._data[self._upper_label][i]:#
+                if flag != 1:
+                    buySignal.append(self._data[self._col][i])
+                    sellSignal.append(np.nan)
+                    flag = 1
+                else:
+                    buySignal.append(np.nan)
+                    sellSignal.append(np.nan)
+            elif self._data[self._lower_label][i] < self._data[self._upper_label][i]:#
+                if flag != 0:
+                    buySignal.append(np.nan)
+                    sellSignal.append(self._data[self._col][i])
+                    flag = 0
+                else:
+                    buySignal.append(np.nan)
+                    sellSignal.append(np.nan)
+            else:
+                buySignal.append(np.nan)
+                sellSignal.append(np.nan)
+
+        return buySignal, sellSignal

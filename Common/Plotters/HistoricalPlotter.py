@@ -169,6 +169,8 @@ class HistoricalPlotter(AbstractPlotter):
         fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float), sharex=True)
         fig.suptitle(a_title)
         #ax0
+        ax[0] = self._macd_strat.PlotAx(ax[0])
+        ax[0].legend(loc=self._legend_place)
         #ax1
         #ax2
         plt.tight_layout()

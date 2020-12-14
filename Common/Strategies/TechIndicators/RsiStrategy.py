@@ -11,3 +11,9 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
 
     def __init__(self, rsi_indicator: RsiIndicator):
         pass
+
+    def PlotAx(self, ax: object) -> object:
+        return ax
+
+    def Plot(self) -> plt:
+        pass
