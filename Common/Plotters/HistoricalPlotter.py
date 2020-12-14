@@ -177,9 +177,9 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].legend(loc=self._legend_place)
         ax[1].set_title(self._sma_ind.Name, fontsize=10)
         #ax2
-        #ax[2] = self._ema_strat.PlotAx(ax[2])
-        #ax[2].legend(loc=self._legend_place)
-        #ax[2].set_title(self._ema_ind.Name, fontsize=10)
+        ax[2] = self._ema_strat.PlotAx(ax[2])
+        ax[2].legend(loc=self._legend_place)
+        ax[2].set_title(self._ema_ind.Name, fontsize=10)
         plt.tight_layout()
         return plt
 
