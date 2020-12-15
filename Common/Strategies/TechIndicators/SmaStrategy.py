@@ -58,7 +58,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
 
     def PlotAll(self) -> plt:
         n_col: int = 1
-        n_row: int = 2
+        n_row: int = 3
         a_title: str = self._sma_indicator.LabelMain
         x_title: str = self._sma_indicator.LabelX
         y_title: str = self._sma_indicator.LabelY
@@ -77,9 +77,14 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         for a_ind, col in enumerate(self._sma_indicator.GetData()[[self._lower_label, self._upper_label]].columns):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             ax[1].plot(self._sma_indicator.GetData()[col], alpha=an_alpha, label=col)
-        ax[1].xaxis.set_tick_params(rotation=self._sma_indicator.LabelXangle)
-        ax[1].set(ylabel='Index', xlabel=x_title)
+        #ax[1].xaxis.set_tick_params(rotation=self._sma_indicator.LabelXangle)
+        ax[1].set(ylabel='Index')
         ax[1].legend(loc=self._sma_indicator.LegendPlace)
+        # ax2
+        ax[2].plot(self._summary, alpha=an_alpha)
+        ax[2].legend(loc=self._sma_indicator.LegendPlace)
+        ax[2].xaxis.set_tick_params(rotation=self._sma_indicator.LabelXangle)
+        ax[2].set(ylabel='Buy & Sell', xlabel=x_title)
         return plt
 
     def _buyNsell(self):

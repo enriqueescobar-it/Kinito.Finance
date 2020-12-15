@@ -63,7 +63,7 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
 
     def PlotAll(self) -> plt:
         n_col: int = 1
-        n_row: int = 2
+        n_row: int = 3
         a_title: str = self._macd_indicator.LabelMain
         x_title: str = self._macd_indicator.LabelX
         y_title: str = self._macd_indicator.LabelY
@@ -81,13 +81,17 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         ax[0].set(ylabel=y_title, title=a_title)
         ax[0].legend(loc=self._macd_indicator.LegendPlace)
         # ax1 index
-        for a_ind, col in enumerate(
-                self._macd_indicator.GetData().columns[-2:self._macd_indicator.GetData().columns.size]):
+        for a_ind, col in enumerate(self._macd_indicator.GetData().columns[-2:self._macd_indicator.GetData().columns.size]):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             ax[1].plot(self._macd_indicator.GetData()[col], alpha=an_alpha, label=col)
-        ax[1].xaxis.set_tick_params(rotation=self._macd_indicator.LabelXangle)
-        ax[1].set(ylabel='Index', xlabel=x_title)
+        #ax[1].xaxis.set_tick_params(rotation=self._macd_indicator.LabelXangle)
+        ax[1].set(ylabel='Index')
         ax[1].legend(loc=self._macd_indicator.LegendPlace)
+        # ax2
+        ax[2].plot(self._summary, alpha=an_alpha)
+        ax[2].legend(loc=self._macd_indicator.LegendPlace)
+        ax[2].xaxis.set_tick_params(rotation=self._macd_indicator.LabelXangle)
+        ax[2].set(ylabel='Buy & Sell', xlabel=x_title)
         return plt
 
     def _buyNsell(self):
