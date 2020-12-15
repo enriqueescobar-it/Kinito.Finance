@@ -13,6 +13,7 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
 from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
+from Common.Strategies.TechIndicators.RsiStrategy import RsiStrategy
 from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
 from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.TechIndicators.MacdIndicator import MacdIndicator
@@ -31,6 +32,7 @@ class HistoricalPlotter(AbstractPlotter):
     _ema_ind: EmaIndicator
     _ema_strat: EmaStrategy
     _rsi_ind: RsiIndicator
+    _rsi_strat: RsiStrategy
     _price: float
     _yeAverage200: float
     _yeAverage50: float
@@ -65,6 +67,10 @@ class HistoricalPlotter(AbstractPlotter):
     def RsiInd(self):
         return self._rsi_ind
 
+    @property
+    def RsiStrat(self):
+        return self._rsi_strat
+
     def __init__(self, stock_option: YahooStockOption, vixIndex: VixIndex, sAnP500: SnP500Index):
         self._price = np.round(stock_option.Price, 2)
         self._yeHigh52 = np.round(stock_option.YeHigh52, 2)
@@ -86,6 +92,7 @@ class HistoricalPlotter(AbstractPlotter):
         self._ema_ind = EmaIndicator(stock_option)
         self._ema_strat = EmaStrategy(self._ema_ind)
         self._rsi_ind = RsiIndicator(stock_option)
+        self._rsi_strat = RsiStrategy(self._rsi_ind)
 
     def Plot(self, s: str = ' Plot ') -> plt:
         a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
@@ -139,7 +146,7 @@ class HistoricalPlotter(AbstractPlotter):
 
     def IndicatorPlot(self, s: str = ' Indicator ') -> plt:
         nb_col: int = 1
-        nb_row: int = 3
+        nb_row: int = 4
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
         plt.style.use('seaborn')
@@ -157,6 +164,10 @@ class HistoricalPlotter(AbstractPlotter):
         ax[2] = self._ema_ind.PlotAx(ax[2])
         ax[2].legend(loc=self._legend_place)
         ax[2].set_title(self._ema_ind.Name, fontsize=10)
+        #ax3
+        ax[3] = self._rsi_ind.PlotAx(ax[3])
+        ax[3].legend(loc=self._legend_place)
+        ax[3].set_title(self._rsi_ind.Name, fontsize=10)
         plt.tight_layout()
         return plt
 

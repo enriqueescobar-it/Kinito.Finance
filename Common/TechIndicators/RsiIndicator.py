@@ -25,15 +25,15 @@ class RsiIndicator(AbstractTechIndicator):
         for a_ind, col in enumerate(self._data.columns[-1:self._data.columns.size]):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             self._data[col].plot(alpha=an_alpha, ax=ax)
-        ax.hlines(10, linestyle='--', label='10%', alpha=0.50, color='gray')
-        ax.hlines(20, linestyle='--', label='20%', alpha=0.50, color='orange')
-        ax.hlines(30, linestyle='--', label='30%', alpha=0.50, color='green')
-        ax.hlines(40, linestyle='--', label='40%', alpha=0.50, color='red')
-        ax.hlines(50, linestyle='--', label='50%', alpha=1.00, color='violet')
-        ax.hlines(60, linestyle='--', label='60%', alpha=0.50, color='red')
-        ax.hlines(70, linestyle='--', label='70%', alpha=0.50, color='green')
-        ax.hlines(80, linestyle='--', label='80%', alpha=0.50, color='orange')
-        ax.hlines(90, linestyle='--', label='90%', alpha=0.50, color='gray')
+        ax.hlines(10, linestyle='--', label='10%', alpha=0.50, color='gray', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(20, linestyle='--', label='20%', alpha=0.50, color='orange', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(30, linestyle='--', label='30%', alpha=0.50, color='green', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(40, linestyle='--', label='40%', alpha=0.50, color='red', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(50, linestyle='--', label='50%', alpha=1.00, color='violet', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(60, linestyle='--', label='60%', alpha=0.50, color='red', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(70, linestyle='--', label='70%', alpha=0.50, color='green', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(80, linestyle='--', label='80%', alpha=0.50, color='orange', xmin=self._data.index.min(), xmax=self._data.index.max())
+        ax.hlines(90, linestyle='--', label='90%', alpha=0.50, color='gray', xmin=self._data.index.min(), xmax=self._data.index.max())
         return ax
 
     def PlotData(self) -> plt:
