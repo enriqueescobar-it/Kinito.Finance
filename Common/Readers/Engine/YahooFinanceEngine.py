@@ -8,18 +8,20 @@ from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 class YahooFinanceEngine(AbstractEngine):
     """description of class"""
-    Url: str = 'NA'
-    LogoUrl: str = 'NA'
-    Address: str = 'NA'
-    City: str = 'NA'
-    State: str = 'NA'
-    PostalCode: str = 'NA'
-    Country: str = 'NA'
+    _info_list: list = list()
+    _url: str = 'NA'
+    _url_logo: str = 'NA'
+    _address: str = 'NA'
+    _city: str = 'NA'
+    _state: str = 'NA'
+    _postal_code: str = 'NA'
+    _country: str = 'NA'
+    _market: str = 'NA'
+    _currency: str = 'NA'
+    _quote_type: str = 'NA'
+    _exchange: str = 'NA'
+    _market_cap: str = 'NA'
     Beta: float = -1.1
-    Market: str = 'NA'
-    Currency: str = 'NA'
-    QuoteType: str = 'NA'
-    Exchange: str = 'NA'
     High52: float = -1.1
     Low52: float = -1.1
     Average50: float = -1.1
@@ -84,44 +86,108 @@ class YahooFinanceEngine(AbstractEngine):
         self.SplitSeries = self.__yFinance.splits
         #self.SustainabilityDf = self.__yFinance.sustainability
 
+    @property
+    def InfoList(self):
+        return self._info_list
+
+    @property
+    def Address(self):
+        return self._address
+
+    @property
+    def City(self):
+        return self._city
+
+    @property
+    def Country(self):
+        return self._country
+
+    @property
+    def Currency(self):
+        return self._currency
+
+    @property
+    def Exchange(self):
+        return self._exchange
+
+    @property
+    def Market(self):
+        return self._market
+
+    @property
+    def MarketCap(self):
+        return self._market_cap
+
+    @property
+    def PostalCode(self):
+        return self._postal_code
+
+    @property
+    def QuoteType(self):
+        return self._quote_type
+
+    @property
+    def State(self):
+        return self._state
+
+    @property
+    def Url(self):
+        return self._url
+
+    @property
+    def UrlLogo(self):
+        return self._url_logo
+
     def __setInfo(self):
         self.InfoDic = self.__yFinance.info
         print('InfoDic\r\n', self.InfoDic)
-        self.Url = self.__getValue('website')
-        self.LogoUrl = self.__getValue('logo_url')
-        self.Address = self.__getValue('address1')
-        self.City = self.__getValue('city')
-        self.PostalCode = self.__getValue('zip')
-        self.State = self.__getValue('state')
-        self.Country = self.__getValue('country')
+        self._url = self.__getValueString('website')
+        self._info_list.append(self._url)
+        self._url_logo = self.__getValueString('logo_url')
+        self._info_list.append(self._url_logo)
+        self._address = self.__getValueString('address1')
+        self._info_list.append(self._address)
+        self._city = self.__getValueString('city')
+        self._info_list.append(self._city)
+        self._postal_code = self.__getValueString('zip')
+        self._info_list.append(self._postal_code)
+        self._state = self.__getValueString('state')
+        self._info_list.append(self._state)
+        self._country = self.__getValueString('country')
+        self._info_list.append(self._country)
+        self._market = self.__getValueString('market')
+        self._info_list.append(self._market)
+        self._currency = self.__getValueString('currency')
+        self._info_list.append(self._currency)
+        self._quote_type = self.__getValueString('quoteType')
+        self._info_list.append(self._quote_type)
+        self._exchange = self.__getValueString('exchange')
+        self._info_list.append(self._exchange)
+        self._market_cap = self.__getValueString('marketCap')
+        self._info_list.append(self._market_cap)
         self.Beta = self.__getFloat('beta')
-        self.Market = self.__getValue('market')
-        self.Currency = self.__getValue('currency')
-        self.QuoteType = self.__getValue('quoteType')
-        self.Exchange = self.__getValue('exchange')
-        self.Low52 = self.__getValue('fiftyTwoWeekLow')
-        self.High52 = self.__getValue('fiftyTwoWeekHigh')
-        self.Average50 = self.__getValue('fiftyDayAverage')
-        self.Average200 = self.__getValue('twoHundredDayAverage')
-        self.MarketCap = self.__getValue('marketCap')
-        self.PayoutRatio = self.__getValue('payoutRatio')
-        self.PegRatio = self.__getValue('pegRatio')
-        self.PEforward = self.__getValue('forwardPE')
-        self.PEtrailing = self.__getValue('trailingPE')
-        self.ShortRatio = self.__getValue('shortRatio')
-        self.BookValue = self.__getValue('bookValue')
-        self.PriceToBook = self.__getValue('priceToBook')
+        self.Low52 = self.__getValueString('fiftyTwoWeekLow')
+        self.High52 = self.__getValueString('fiftyTwoWeekHigh')
+        self.Average50 = self.__getValueString('fiftyDayAverage')
+        self.Average200 = self.__getValueString('twoHundredDayAverage')
+        self.PayoutRatio = self.__getValueString('payoutRatio')
+        self.PegRatio = self.__getValueString('pegRatio')
+        self.PEforward = self.__getValueString('forwardPE')
+        self.PEtrailing = self.__getValueString('trailingPE')
+        self.ShortRatio = self.__getValueString('shortRatio')
+        self.BookValue = self.__getValueString('bookValue')
+        self.PriceToBook = self.__getValueString('priceToBook')
         if type(self.InfoDic['exDividendDate']) == type(1.1):
             self.ExDividendDate = datetime.datetime.fromtimestamp(self.InfoDic['exDividendDate'] / 1e3)
 
-    def __getValue(self, a_key: str = 'NA'):
+    def __getValueString(self, a_key: str = 'NA') -> str:
         if a_key in self.InfoDic:
             return 'None' if self.InfoDic[a_key] is None else self.InfoDic[a_key]
         else:
             return 'NA'
 
-    def __getFloat(self, a_key: str = 'NA'):
-        a_str = self.__getValue(a_key)
+    def __getFloat(self, a_key: str = 'NA') -> float:
+        a_str = self.__getValueString(a_key)
         if a_str == 'NA' or a_str == '-' or a_str == 'None':
             return -1.0
         else:

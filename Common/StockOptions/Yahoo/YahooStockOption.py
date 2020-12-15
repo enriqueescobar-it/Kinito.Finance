@@ -1,5 +1,4 @@
 import statistics
-from typing import List
 
 import numpy as np
 import pandas as pd
@@ -10,33 +9,14 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVR
 
 from Common.Measures.Time.TimeSpan import TimeSpan
-from Common.Readers.Engine.FinVizEngine import FinVizEngine
 from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
+from prettytable import PrettyTable
 
 
 class YahooStockOption(AbstractStockOption):
-    FvBeta: float = -1.1
-    FvChangePercent: str = ''
-    FvCompanyCountry: str = ''
-    FvCompanyIndustry: str = ''
-    FvCompanyName: str = ''
-    FvCompanySector: str = ''
-    FvDividend: str = ''
-    FvDividendPercent: str = ''
-    FvEPS: float = -1.1
-    FvEarnings: str = ''
-    FvMarketCap: int
-    FvPayout: str = ''
-    FvPeRatio: float = -1.1
-    FvLow52: str = ''
-    FvHigh52: str = ''
-    FvPrice: float = -1.1
-    FvRange52: List[float]
-    FvRsi14: str = ''
-    FvVolume: int = -1
     ForecastSpan: int = 30
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
@@ -131,7 +111,6 @@ class YahooStockOption(AbstractStockOption):
         print('M', self.IsMonthly)
         print('Q', self.IsQuarterly)
         print('A', self.IsAnnually)
-        #self._setFinViz(a_ticker)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
 
@@ -273,33 +252,13 @@ class YahooStockOption(AbstractStockOption):
     def _setSimpleCumulative(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.Series:
         return (a_df + 1).cumprod()
 
-    def _setFinViz(self, a_ticker: str = 'TD'):
-        self._fin_viz_engine = FinVizEngine(a_ticker)
-        self.FvCompanyName = self._fin_viz_engine.StockName
-        self.FvCompanySector = self._fin_viz_engine.StockSector
-        self.FvCompanyIndustry = self._fin_viz_engine.StockIndustry
-        self.FvCompanyCountry = self._fin_viz_engine.StockCountry
-        self.FvPeRatio = self._fin_viz_engine.PeRatio
-        self.FvMarketCap = self._fin_viz_engine.MarketCap
-        self.FvEPS = self._fin_viz_engine.EpsTtm
-        self.FvBeta = self._fin_viz_engine.Beta
-        self.FvEarnings = self._fin_viz_engine.EarningDate
-        self.FvRsi14 = self._fin_viz_engine.Rsi14
-        self.FvVolatility = self._fin_viz_engine.Volatility
-        self.FvPayout = self._fin_viz_engine.PayoutPcnt
-        self.FvVolume = self._fin_viz_engine.Volume
-        self.FvChangePercent = self._fin_viz_engine.ChangePcnt
-        self.FvPrice = self._fin_viz_engine.Price
-        self.FvDividend = self._fin_viz_engine.Dividend
-        self.FvDividendPercent = self._fin_viz_engine.DividendPcnt
-        self.FvLow52 = self._fin_viz_engine.Low52
-        self.FvHigh52 = self._fin_viz_engine.High52
-        self.FvRange52 = self._fin_viz_engine.Range52
-
     def _setYahooFinance(self, a_ticker: str = 'TD'):
         self._y_finance_engine = YahooFinanceEngine(a_ticker)
+        t = PrettyTable()
+        t.add_column(a_ticker, self._y_finance_engine.InfoList)
+        print(t)
         self.YeUrl = self._y_finance_engine.Url
-        self.YeLogoUrl = self._y_finance_engine.LogoUrl
+        self.YeLogoUrl = self._y_finance_engine.UrlLogo
         self.YeAddress = self._y_finance_engine.Address
         self.YeCity = self._y_finance_engine.City
         self.YePostalCode = self._y_finance_engine.PostalCode
