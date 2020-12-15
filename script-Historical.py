@@ -41,7 +41,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('NIO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -81,19 +81,19 @@ yahooStockOption: YahooStockOption = YahooStockOption('NIO')#'ESTC')XWEB DDOG BE
 # BA BCE BCE.TO. BNS BPY BABA BIDU- BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO. BIP+ BZUN+ BILI++ BEP+ BYND+ BAM-A.TO+ BMO.TO.
 # CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST+ CP CRM CSCO CDNS CNQ.TO CSIQ CELH+
 # CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++
-# DCBO.TO DND.TO CU.TO DLHC DDOG DKNG+ DDOG+ DOL.TO+ DND.TO+
+# DCBO.TO DND.TO CU.TO DLHC DDOG DKNG+ DDOG+ DOL.TO+ DND.TO+ DIS-
 # EMR+ ENB ENB.TO ESS ESTC+ ESPO EMA.TO ET ETSY+ ENGH.TO+ ENPH+ EEM EQB.TO+ ELY+
 # F FD.TO FF.TO FFMG FENY FIE FIVG FROG FSLR FSLY+ FSRNX FSZ FTS+ FTS.TO+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE-
 # GM GIS GLD GLW GMF GNW GRWG GILD GBTC GAMR GSY.TO+ GOOD GXC+ GOOG+
-# HD+ HLT HQU HZU HEO.V HII HLF.TO. IBM IBUY IWFH INTC IPO IIVI IVAC IGV+ IBM IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
+# HD+ HLT HQU HZU HEO.V HII HLF.TO. IBM IBUY IWFH INTC IPO IIVI IVAC IGV+ IBM- IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
 # KEY K KXS.TO KDP KL KL.TO KO- KR KMI K.TO KXS.TO+
 # LB.TO LMT LMND LOW+ LSPD++ LSPD.TO++ LVGO LOGI+ LAND+ LMND+
 # M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST MFC.TO. MXIM+
 # NEE+ NEM+ NET NKE NSP NEAR NFLX NIO++ NLY NLOK NNDM NPI NOBL+ NVEI.TO NVDA+++++ NOW+ O+ OTEX OHI O- NWC.TO.
-# PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS PHO POW.TO. PAAS+++
+# PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS+ PHO POW.TO. PAAS+++
 # QCOM QQC-f QQQ QRVO QSR.TO+ RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO. RIOT RHS QRS.TO REAL.TO ROKU+
 # SU SU.TO. SIS.TO+ SNA SBUX SHOP+ SHOP.TO+ SPLK SPYD SJR.B SJR-B.TO SLV SNAP SNOW SPOT SOXL SRU.UN.TO. SPG SAP SPNS STOR+ STAG SEDG+ SJR-B.TO SOY.TO.
-# T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+++ TRP TRP.TO TTD TOU.TO TROW TWLO TXN TWST+ TVE.TO. TPB+++
+# T- T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+++ TRP TRP.TO TTD+++++ TOU.TO TROW TWLO++++ TXN TWST+ TVE.TO. TPB+++
 # U UNM UNP UPWK
 # VDC VFC VFF VFV.TO VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ+ V VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
 # WCN WCN.TO+ WELL.TO WEED.TO++ WFG WMT- WORK. WPC- XEI XIT XBC.TO XOM. XWEB+ XLK+ XBC.V+++ YCBD ZG ZM ZQQ ZS ZWB
@@ -169,20 +169,20 @@ yahooStockOptionPlotter.Plot().show()
 print(yahooStockOptionPlotter.MacdInd.GetData().columns)
 #yahooMacdIndicator.PlotData().show()
 #yahooMacdStrategy: MacdStrategy = yahooStockOptionPlotter.MacdStrat #MacdStrategy(yahooMacdIndicator)
-yahooStockOptionPlotter.MacdStrat.Plot().show()
+#yahooStockOptionPlotter.MacdStrat.Plot().show()
 yahooStockOptionPlotter.MacdStrat.PlotAll().show()
 print(yahooStockOptionPlotter.MacdStrat.Summary['BuyAndSell'])
 #yahooSmaIndicator: SmaIndicator = yahooStockOptionPlotter.SmaInd #SmaIndicator(yahooStockOption)
 print(yahooStockOptionPlotter.SmaInd.GetData().columns)
 #yahooSmaIndicator.PlotData().show()
 #yahooSmaStrategy: SmaStrategy = yahooStockOptionPlotter.SmaStrat #SmaStrategy(yahooSmaIndicator)
-yahooStockOptionPlotter.SmaStrat.Plot().show()
+#yahooStockOptionPlotter.SmaStrat.Plot().show()
 yahooStockOptionPlotter.SmaStrat.PlotAll().show()
 #yahooEmaIndicator: EmaIndicator = yahooStockOptionPlotter.EmaInd #EmaIndicator(yahooStockOption)
 print(yahooStockOptionPlotter.EmaInd.GetData().columns)
 #yahooEmaIndicator.PlotData().show()
 #yahooEmaStrategy: EmaStrategy = yahooStockOptionPlotter.EmaStrat #EmaStrategy(yahooEmaIndicator)
-yahooStockOptionPlotter.EmaStrat.Plot().show()
+#yahooStockOptionPlotter.EmaStrat.Plot().show()
 yahooStockOptionPlotter.EmaStrat.PlotAll().show()
 #
 yahooStockOptionPlotter.IndicatorPlot().show()

@@ -16,13 +16,25 @@ class RsiIndicator(AbstractTechIndicator):
         self._label += self._name
         self._main_label += ' ' + self._label
         self.__setPeriod(14)
-        self._setData(y_stock_option)
+        self._setData(y_stock_option.DataFrame)
 
     def GetData(self) -> DataFrame:
         return self._data
 
     def PlotAx(self, ax: object) -> object:
-        pass
+        for a_ind, col in enumerate(self._data.columns[-1:self._data.columns.size]):
+            an_alpha: float = 0.5 if a_ind != 0 else 1.0
+            self._data[col].plot(alpha=an_alpha, ax=ax)
+        ax.hlines(10, linestyle='--', label='10%', alpha=0.50, color='gray')
+        ax.hlines(20, linestyle='--', label='20%', alpha=0.50, color='orange')
+        ax.hlines(30, linestyle='--', label='30%', alpha=0.50, color='green')
+        ax.hlines(40, linestyle='--', label='40%', alpha=0.50, color='red')
+        ax.hlines(50, linestyle='--', label='50%', alpha=1.00, color='violet')
+        ax.hlines(60, linestyle='--', label='60%', alpha=0.50, color='red')
+        ax.hlines(70, linestyle='--', label='70%', alpha=0.50, color='green')
+        ax.hlines(80, linestyle='--', label='80%', alpha=0.50, color='orange')
+        ax.hlines(90, linestyle='--', label='90%', alpha=0.50, color='gray')
+        return ax
 
     def PlotData(self) -> plt:
         plt.figure(figsize=self._fig_size)
@@ -36,6 +48,7 @@ class RsiIndicator(AbstractTechIndicator):
         plt.axhline(20, linestyle='--', label='20%', alpha=0.50, color='orange')
         plt.axhline(30, linestyle='--', label='30%', alpha=0.50, color='green')
         plt.axhline(40, linestyle='--', label='40%', alpha=0.50, color='red')
+        plt.axhline(50, linestyle='--', label='50%', alpha=1.00, color='violet')
         plt.axhline(60, linestyle='--', label='60%', alpha=0.50, color='red')
         plt.axhline(70, linestyle='--', label='70%', alpha=0.50, color='green')
         plt.axhline(80, linestyle='--', label='80%', alpha=0.50, color='orange')
@@ -48,9 +61,10 @@ class RsiIndicator(AbstractTechIndicator):
         plt.grid(True)
         return plt
 
-    def _setData(self, y_stock_option: YahooStockOption):
-        self._data[self._col] = y_stock_option.DataFrame[self._col]
-        delta: Series = y_stock_option.DataFrame[self._col].diff(1)
+    def _setData(self, a_df: DataFrame):
+        d_f: DataFrame = a_df.copy()
+        self._data[self._col] = d_f[self._col]
+        delta: Series = d_f[self._col].diff(1)
         self._data['Delta'] = delta
         avgGain: Series = self.__getAverageGain(delta)
         self._data['AverageGain'] = avgGain
