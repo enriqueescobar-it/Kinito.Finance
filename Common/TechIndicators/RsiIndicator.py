@@ -77,6 +77,7 @@ class RsiIndicator(AbstractTechIndicator):
 
     def __setPeriod(self, a_int: int):
         self.__period = a_int
+        self._name += str(a_int)
 
     def __getAverageGain(self, delta: Series) -> Series:
         up = delta.copy()

@@ -33,6 +33,7 @@ class HistoricalPlotter(AbstractPlotter):
     _ema_strat: EmaStrategy
     _rsi_ind: RsiIndicator
     _rsi_strat: RsiStrategy
+    _summary: DataFrame
     _price: float
     _yeAverage200: float
     _yeAverage50: float
@@ -93,6 +94,11 @@ class HistoricalPlotter(AbstractPlotter):
         self._ema_strat = EmaStrategy(self._ema_ind)
         self._rsi_ind = RsiIndicator(stock_option)
         self._rsi_strat = RsiStrategy(self._rsi_ind)
+        self._summary = DataFrame(index=self._macd_ind.GetData().index)
+        self._summary['MACD'] = self._macd_strat.Summary['BuyAndSell']
+        self._summary['SMA'] = self._sma_strat.Summary['BuyAndSell']
+        self._summary['EMA'] = self._ema_strat.Summary['BuyAndSell']
+        self._summary['BuyAndSell'] = self._summary.mean(axis=1)
 
     def Plot(self, s: str = ' Plot ') -> plt:
         a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
@@ -173,7 +179,7 @@ class HistoricalPlotter(AbstractPlotter):
 
     def StrategyPlot(self, s: str = ' Strategy ') -> plt:
         nb_col: int = 1
-        nb_row: int = 3
+        nb_row: int = 4
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
         plt.style.use('seaborn')
@@ -191,6 +197,9 @@ class HistoricalPlotter(AbstractPlotter):
         ax[2] = self._ema_strat.PlotAx(ax[2])
         ax[2].legend(loc=self._legend_place)
         ax[2].set_title(self._ema_ind.Name, fontsize=10)
+        #ax3
+        ax[3] = self._summary['BuyAndSell'].plot()
+        #ax[3].plot(self.)
         plt.tight_layout()
         return plt
 
