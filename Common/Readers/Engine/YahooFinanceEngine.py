@@ -38,15 +38,28 @@ class YahooFinanceEngine(AbstractEngine):
     _pe_trailing: float = -1.1
     _book_value: float = -1.1
     _book_price_to: float = -1.1
-    ExDividendDate: datetime = datetime.date.min
+    _ent_value: int = -1
+    _ent2revenue: float = -1.1
+    _ent2ebitda: float = -1.1
+    _div_rate: float = -1.1
+    _div_5y_avg_yield: float = -1.1
+    _div_yield: float = -1.1
+    _div_last_value: float = -1.1
+    _div_last_date: int = -1
+    _div_ex_date: int = -1
+    _div_last_date: int = -1
+    _split_date: int = -1
+    _fiscal_year_end_last: int = -1
+    _fiscal_year_end_next: int = -1
+    _last_quarter: int = -1
     __ticker: str = 'NA'
-    InfoDic: dict #= dict()
+    InfoDic: dict  # = dict()
     ActionsDf: pd.DataFrame = pd.DataFrame()
     Balance_SheetDf: pd.DataFrame = pd.DataFrame()
     BalanceSheetDf: pd.DataFrame = pd.DataFrame()
     CalendarDf: pd.DataFrame = pd.DataFrame()
     CashFlowDf: pd.DataFrame = pd.DataFrame()
-    EarningDf:pd.DataFrame = pd.DataFrame()
+    EarningDf: pd.DataFrame = pd.DataFrame()
     FinancialDf: pd.DataFrame = pd.DataFrame()
     IsIn: str = 'NA'
     Balance_SheetQDf: pd.DataFrame = pd.DataFrame()
@@ -63,20 +76,21 @@ class YahooFinanceEngine(AbstractEngine):
         self.__ticker = a_ticker
         self.__yFinance = yf.Ticker(a_ticker)
         if '_info' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_info'):
-            #if self.__yFinance.__dict__['_info'] is not None:
+            # if self.__yFinance.__dict__['_info'] is not None:
             self.__setInfo()
         self.ActionsDf = self.__yFinance.actions
         if '_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_balance_sheet'):
             self.Balance_SheetDf = self.__yFinance.balance_sheet
-        #self.BalanceSheetDf = self.__yFinance.balancesheet
-        #self.CalendarDf = self.__yFinance.calendar
-        #self.CashFlowDf = self.__yFinance.cashflow
-        #self.EarningDf = self.__yFinance.earnings
-        #self.FinancialDf = self.__yFinance.financials
-        #self.IsIn = "NA" if self.__yFinance.isin == "-" else self.__yFinance.isin
+        # self.BalanceSheetDf = self.__yFinance.balancesheet
+        # self.CalendarDf = self.__yFinance.calendar
+        # self.CashFlowDf = self.__yFinance.cashflow
+        # self.EarningDf = self.__yFinance.earnings
+        # self.FinancialDf = self.__yFinance.financials
+        # self.IsIn = "NA" if self.__yFinance.isin == "-" else self.__yFinance.isin
         if '_options' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_options'):
             self.OptionTuple = self.__yFinance.options
-        if '_quarterly_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_balance_sheet'):
+        if '_quarterly_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance,
+                                                                             '_quarterly_balance_sheet'):
             self.Balance_SheetQDf = self.__yFinance.quarterly_balance_sheet
         if '_quarterly_balancesheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_balancesheet'):
             self.BalanceSheetQDf = self.__yFinance.quarterly_balancesheet
@@ -86,9 +100,9 @@ class YahooFinanceEngine(AbstractEngine):
             self.EarningQDf = self.__yFinance.quarterly_earnings
         if '_quarterly_financials' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_financials'):
             self.FinancialQDf = self.__yFinance.quarterly_financials
-        #self.RecommendationDf = self.__yFinance.recommendations
+        # self.RecommendationDf = self.__yFinance.recommendations
         self.SplitSeries = self.__yFinance.splits
-        #self.SustainabilityDf = self.__yFinance.sustainability
+        # self.SustainabilityDf = self.__yFinance.sustainability
 
     @property
     def InfoList(self):
@@ -139,12 +153,64 @@ class YahooFinanceEngine(AbstractEngine):
         return self._currency
 
     @property
+    def DateExDividend(self):
+        return self._div_ex_date
+
+    @property
+    def DateLastQuarter(self):
+        return self._last_quarter
+
+    @property
+    def DateSplit(self):
+        return self._split_date
+
+    @property
+    def DividendRate(self):
+        return self._div_rate
+
+    @property
+    def DividendLastDate(self):
+        return self._div_last_date
+
+    @property
+    def DividendLastValue(self):
+        return self._div_last_value
+
+    @property
+    def DividendYield(self):
+        return self._div_yield
+
+    @property
+    def Dividend5yAvgYield(self):
+        return self._div_5y_avg_yield
+
+    @property
+    def EntValue(self):
+        return self._ent_value
+
+    @property
+    def EntToRevenue(self):
+        return self._ent2revenue
+
+    @property
+    def EntToEbitda(self):
+        return self._ent2ebitda
+
+    @property
     def Exchange(self):
         return self._exchange
 
     @property
     def Fax(self):
         return self._fax
+
+    @property
+    def FiscalYearEndLastDate(self):
+        return self._fiscal_year_end_last
+
+    @property
+    def FiscalYearEndNextDate(self):
+        return self._fiscal_year_end_next
 
     @property
     def High52(self):
@@ -249,6 +315,12 @@ class YahooFinanceEngine(AbstractEngine):
         self._info_list.append(self._exchange)
         self._market_cap = self.__getValueFromKey('marketCap')
         self._info_list.append(self._market_cap)
+        self._ent_value = self.__getValueFromKey('enterpriseValue')
+        self._info_list.append(self._ent_value)
+        self._ent2revenue = self.__getValueFromKey('enterpriseToRevenue')
+        self._info_list.append(self._ent2revenue)
+        self._ent2ebitda = self.__getValueFromKey('enterpriseToRevenue')
+        self._info_list.append(self._ent2ebitda)
         self._beta = self.__getFloatFromString('beta')
         self._info_list.append(self._beta)
         self._low52 = self.__getValueFromKey('fiftyTwoWeekLow')
@@ -277,8 +349,28 @@ class YahooFinanceEngine(AbstractEngine):
         self._info_list.append(self._book_value)
         self._book_price_to = self.__getValueFromKey('priceToBook')
         self._info_list.append(self._book_price_to)
-        if type(self.InfoDic['exDividendDate']) == type(1.1):
-            self.ExDividendDate = datetime.datetime.fromtimestamp(self.InfoDic['exDividendDate'] / 1e3)
+        self._div_ex_date = self.__getValueFromKey('exDividendDate')
+        self._info_list.append(self._div_ex_date)
+        self._split_date = self.__getValueFromKey('lastSplitDate')
+        self._info_list.append(self._split_date)
+        self._div_last_date = self.__getValueFromKey('lastDividendDate')
+        self._info_list.append(self._div_last_date)
+        self._div_rate = self.__getValueFromKey('dividendRate')
+        self._info_list.append(self._div_rate)
+        self._div_5y_avg_yield = self.__getValueFromKey('fiveYearAvgDividendYield')
+        self._info_list.append(self._div_5y_avg_yield)
+        self._div_yield = self.__getValueFromKey('dividendYield')
+        self._info_list.append(self._div_yield)
+        self._div_last_value = self.__getValueFromKey('lastDividendValue')
+        self._info_list.append(self._div_last_value)
+        self._div_last_date = self.__getValueFromKey('lastDividendDate')
+        self._info_list.append(self._div_last_date)
+        self._fiscal_year_end_last = self.__getValueFromKey('lastFiscalYearEnd')
+        self._info_list.append(self._fiscal_year_end_last)
+        self._fiscal_year_end_next = self.__getValueFromKey('nextFiscalYearEnd')
+        self._info_list.append(self._fiscal_year_end_next)
+        self._last_quarter = self.__getValueFromKey('mostRecentQuarter')
+        self._info_list.append(self._last_quarter)
 
     def __getValueFromKey(self, a_key: str = 'NA') -> str:
         if a_key in self.InfoDic:

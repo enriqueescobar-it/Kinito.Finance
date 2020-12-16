@@ -138,12 +138,10 @@ class YahooStockOption(AbstractStockOption):
         return a_df
 
     def __setHigh52(self, a_df) -> float:
-        i = a_df['High'].head(252).max()
-        return round(i, 6)
+        return round(self.YeHigh52, 6)
 
     def __setLow52(self, a_df) -> float:
-        i = a_df['Low'].head(252).min()
-        return round(i, 6)
+        return round(self.YeLow52, 6)
 
     def __setPrice(self, a_df) -> float:
         i = a_df['Adj Close'].iloc[-1]
@@ -275,19 +273,19 @@ class YahooStockOption(AbstractStockOption):
         self.YeCurrency = self._y_finance_engine.Currency
         self.YeQuoteType = self._y_finance_engine.QuoteType
         self.YeExchange = self._y_finance_engine.Exchange
-        self.YeHigh52 = self._y_finance_engine._high52
-        self.YeLow52 = self._y_finance_engine._low52
-        self.YeAverage50 = self._y_finance_engine._avg50
-        self.YeAverage200 = self._y_finance_engine._avg200
+        self.YeHigh52 = self._y_finance_engine.High52
+        self.YeLow52 = self._y_finance_engine.Low52
+        self.YeAverage50 = self._y_finance_engine.Average50
+        self.YeAverage200 = self._y_finance_engine.Average200
         self.YeMarketCap = self._y_finance_engine.MarketCap
-        self.YePayoutRatio = self._y_finance_engine._ratio_payout
-        self.YePeForward = self._y_finance_engine._pe_forward
-        self.YePeTrailing = self._y_finance_engine._pe_trailing
-        self.YePegRatio = self._y_finance_engine._ratio_peg
-        self.YeShortRatio = self._y_finance_engine._ratio_short
-        self.YeBookValue = self._y_finance_engine._book_value
-        self.YePriceToBook = self._y_finance_engine._book_price_to
-        self.YeExDividendDate = self._y_finance_engine.ExDividendDate
+        self.YePayoutRatio = self._y_finance_engine.RatioPayout
+        self.YePeForward = self._y_finance_engine.PeForward
+        self.YePeTrailing = self._y_finance_engine.PeTrailing
+        self.YePegRatio = self._y_finance_engine.RatioPeg
+        self.YeShortRatio = self._y_finance_engine.RatioShort
+        self.YeBookValue = self._y_finance_engine.BookValue
+        self.YePriceToBook = self._y_finance_engine.BookPriceTo
+        self.YeExDividendDate = self._y_finance_engine.DateExDividend
 
     def _setYahooSummary(self, a_ticker: str = 'TD'):
         self._yahooSummaryScrapper = YahooSummaryScrapper(a_ticker)

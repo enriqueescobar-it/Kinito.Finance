@@ -42,7 +42,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('NWC.TO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -99,7 +99,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('NWC.TO')#'ESTC')XWEB DDOG
 # VDC VFC VFF VFV.TO VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ+ V VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
 # WCN WCN.TO+ WELL.TO WEED.TO++ WFG WMT- WORK. WPC- XEI XIT XBC.TO XOM. XWEB+ XLK+ XBC.V+++ YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.DataFrame.describe(include='all'))
-exit(1000)
+#exit(1000)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 ''' #ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
