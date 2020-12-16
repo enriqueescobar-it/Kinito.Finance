@@ -259,7 +259,7 @@ class YahooStockOption(AbstractStockOption):
         print(t)
         self.YeUrl = self._y_finance_engine.Url
         self.YeLogoUrl = self._y_finance_engine.UrlLogo
-        self.YeAddress = self._y_finance_engine.Address
+        self.YeAddress = self._y_finance_engine.AddressFirst
         self.YeCity = self._y_finance_engine.City
         self.YePostalCode = self._y_finance_engine.PostalCode
         self.YeState = self._y_finance_engine.State
@@ -275,18 +275,18 @@ class YahooStockOption(AbstractStockOption):
         self.YeCurrency = self._y_finance_engine.Currency
         self.YeQuoteType = self._y_finance_engine.QuoteType
         self.YeExchange = self._y_finance_engine.Exchange
-        self.YeHigh52 = self._y_finance_engine.High52
-        self.YeLow52 = self._y_finance_engine.Low52
-        self.YeAverage50 = self._y_finance_engine.Average50
-        self.YeAverage200 = self._y_finance_engine.Average200
+        self.YeHigh52 = self._y_finance_engine._high52
+        self.YeLow52 = self._y_finance_engine._low52
+        self.YeAverage50 = self._y_finance_engine._avg50
+        self.YeAverage200 = self._y_finance_engine._avg200
         self.YeMarketCap = self._y_finance_engine.MarketCap
-        self.YePayoutRatio = self._y_finance_engine.PayoutRatio
-        self.YePeForward = self._y_finance_engine.PEforward
-        self.YePeTrailing = self._y_finance_engine.PEtrailing
-        self.YePegRatio = self._y_finance_engine.PegRatio
-        self.YeShortRatio = self._y_finance_engine.ShortRatio
-        self.YeBookValue = self._y_finance_engine.BookValue
-        self.YePriceToBook = self._y_finance_engine.PriceToBook
+        self.YePayoutRatio = self._y_finance_engine._ratio_payout
+        self.YePeForward = self._y_finance_engine._pe_forward
+        self.YePeTrailing = self._y_finance_engine._pe_trailing
+        self.YePegRatio = self._y_finance_engine._ratio_peg
+        self.YeShortRatio = self._y_finance_engine._ratio_short
+        self.YeBookValue = self._y_finance_engine._book_value
+        self.YePriceToBook = self._y_finance_engine._book_price_to
         self.YeExDividendDate = self._y_finance_engine.ExDividendDate
 
     def _setYahooSummary(self, a_ticker: str = 'TD'):

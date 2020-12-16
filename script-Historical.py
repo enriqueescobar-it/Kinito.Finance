@@ -42,7 +42,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
+yahooStockOption: YahooStockOption = YahooStockOption('NWC.TO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -89,7 +89,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG B
 # HD+ HLT HQU HZU HEO.V HII HLF.TO. IBM IBUY IWFH INTC IPO IIVI IVAC IGV+ IBM- IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
 # KEY K KXS.TO KDP KL KL.TO KO- KR KMI K.TO KXS.TO+
 # LB.TO LMT LMND LOW+ LSPD++ LSPD.TO++ LVGO LOGI+ LAND+ LMND+
-# M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST MFC.TO. MXIM+
+# M MA MAIN MELI+ MFI.TO MO MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO MSCI+ NXST MFC.TO. MXIM+ NWC.TO.
 # NEE+ NEM+ NET NKE NSP NEAR NFLX NIO++ NLY NLOK NNDM NPI NOBL+ NVEI.TO NVDA+++++ NOW+ O+ OTEX OHI O- NWC.TO.
 # PM PANW PFE PINS PGX PEP PLAN PLTR PPL PRU PVD PTON PAWZ PSEC PYPL PKI.TO PIODX+ PKI.TO+ PINS+ PHO POW.TO. PAAS+++
 # QCOM QQC-f QQQ QRVO QSR.TO+ RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO. RIOT RHS QRS.TO REAL.TO ROKU+
@@ -99,6 +99,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG B
 # VDC VFC VFF VFV.TO VGT VMW VNR VPL VPU VTSAX VYM VYMI VZ+ V VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
 # WCN WCN.TO+ WELL.TO WEED.TO++ WFG WMT- WORK. WPC- XEI XIT XBC.TO XOM. XWEB+ XLK+ XBC.V+++ YCBD ZG ZM ZQQ ZS ZWB
 print(yahooStockOption.DataFrame.describe(include='all'))
+exit(1000)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 ''' #ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
