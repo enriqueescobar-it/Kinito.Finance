@@ -27,6 +27,7 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         self._sell_label = self._rsi_indicator.Label + self._sell_label
         print(self._data.columns)
         self.__setData()
+        print(self._data.head(3))
         #self._setSummary()
 
     @property
@@ -42,6 +43,7 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
     def PlotAll(self) -> plt:
         n_col: int = 1
         n_row: int = 3
+        an_alpha: float = 1.0
         a_title: str = self._rsi_indicator.LabelMain
         x_title: str = self._rsi_indicator.LabelX
         y_title: str = self._rsi_indicator.LabelY
@@ -49,8 +51,15 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
         plt.style.use(self._rsi_indicator.FigStyle)
         # ax0 strategy
+        ax[0].plot(self._data[self._col], alpha=an_alpha, label=self._col)
+        ax[0].scatter(self._rsi_indicator.GetData().index, self._data['Buy'], marker='^', color='green', label=self._buy_label)
+        ax[0].scatter(self._rsi_indicator.GetData().index, self._data['Sell'], marker='v', color='red', label=self._sell_label)
+        ax[0].set(ylabel=y_title, title=a_title)
+        ax[0].legend(loc=self._rsi_indicator.LegendPlace)
         # ax1 index
         ax[1] = self._rsi_indicator.PlotAx(ax[1])
+        ax[1].scatter(self._rsi_indicator.GetData().index, self._data['BuyRSI'], marker='^', color='green', label=self._buy_label)
+        ax[1].scatter(self._rsi_indicator.GetData().index, self._data['SellRSI'], marker='v', color='red', label=self._sell_label)
         ax[1].set(ylabel='Index')
         ax[1].legend(loc=self._rsi_indicator.LegendPlace)
         # ax2
@@ -70,13 +79,14 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         self._data['RSI'] = np.nan
         self._data = self.__setAverages(self._data)
         self._data = self.__completeAverages(self._data)
-        print(self._data.UpAverage)
         self._data['LongTomorrow'] = np.nan
         self._data['Buy'] = np.nan
         self._data['Sell'] = np.nan
         self._data['BuyRSI'] = np.nan
         self._data['SellRSI'] = np.nan
         self._data['BuyAndSell'] = np.nan
+        self._data = self.__setBuyNsell(self._data)
+        print(self._data.BuyAndSell)
 
     def __setUpAndDown(self, a_df: pd.DataFrame) -> pd.DataFrame:
         for x in range(1, len(a_df)):
@@ -105,37 +115,33 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
             a_df['RSI'][x] = 100 - (100 / (1 + a_df['RS'][x]))
         return a_df
 
-    def _setSummary(self):
-        self._summary = pd.DataFrame(index=self.__data.index)
-        self._summary['LongTomorrow'] = np.nan
-        self._summary['Buy'] = np.nan
-        self._summary['Sell'] = np.nan
-        self._summary['BuyRSI'] = np.nan
-        self._summary['SellRSI'] = np.nan
-        self._summary['BuyAndSell'] = np.nan
-        for x in range(15, len(self.__data)):
+    def __setBuyNsell(self, a_df: pd.DataFrame) -> pd.DataFrame:
+        for x in range(15, len(a_df)):
             # long tomorrow
-            if (self.__data['RSI'][x] <= 40) & (self.__data['RSI'][x - 1] > 40):
-                self._summary['LongTomorrow'][x] = True
-            elif (self._summary['LongTomorrow'][x - 1] == True) & (self.__data['RSI'][x] <= 70):
-                self._summary['LongTomorrow'][x] = True
+            if (a_df['RSI'][x] <= 40) & (a_df['RSI'][x - 1] > 40):
+                a_df['LongTomorrow'][x] = True
+            elif (a_df['LongTomorrow'][x - 1] == True) & (a_df['RSI'][x] <= 70):
+                a_df['LongTomorrow'][x] = True
             else:
-                self._summary['LongTomorrow'][x] = False
+                a_df['LongTomorrow'][x] = False
             # buy
-            if (self._summary['LongTomorrow'][x] == True) & (self._summary['LongTomorrow'][x - 1] == False):
-                self._summary['Buy'][x] = self.__data[self._col][x]
-                self._summary['BuyRSI'][x] = self.__data['RSI'][x]
+            if (a_df['LongTomorrow'][x] == True) & (a_df['LongTomorrow'][x - 1] == False):
+                a_df['Buy'][x] = a_df[self._col][x]
+                a_df['BuyRSI'][x] = a_df['RSI'][x]
             # sell
-            if (self._summary['LongTomorrow'][x] == False) & (self._summary['LongTomorrow'][x - 1] == True):
-                self._summary['Sell'][x] = self.__data[self._col][x]
-                self._summary['SellRSI'][x] = self.__data['RSI'][x]
-        self._summary['BuyAndSell'][15] = self.__data[self._col][15]
-        for x in range(16, len(self.__data)):
-            if self._summary['LongTomorrow'][x - 1] == True:
-                self._summary['BuyAndSell'][x] = self._summary['BuyAndSell'][x - 1] * (
-                            self.__data[self._col][x] / self.__data[self._col][x - 1])
+            if (a_df['LongTomorrow'][x] == False) & (a_df['LongTomorrow'][x - 1] == True):
+                a_df['Sell'][x] = a_df[self._col][x]
+                a_df['SellRSI'][x] = a_df['RSI'][x]
+        a_df['BuyAndSell'][15] = a_df[self._col][15]
+        for x in range(16, len(a_df)):
+            if a_df['LongTomorrow'][x - 1] == True:
+                a_df['BuyAndSell'][x] = a_df['BuyAndSell'][x - 1] * (a_df[self._col][x] / a_df[self._col][x - 1])
             else:
-                self._summary['BuyAndSell'][x] = self._summary['BuyAndSell'][x - 1]
+                a_df['BuyAndSell'][x] = a_df['BuyAndSell'][x - 1]
+        return a_df
+
+    def _setSummary(self):
+        pass
         '''self._summary['Buy'] = self._data[self._buy_label].replace(np.nan, 0)
         self._summary['Buy'][self._summary['Buy'] > 0] = 1
         self._summary['Sell'] = self._data[self._sell_label].replace(np.nan, 0)
