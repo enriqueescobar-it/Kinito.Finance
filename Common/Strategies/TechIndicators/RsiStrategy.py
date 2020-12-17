@@ -8,17 +8,28 @@ from Common.TechIndicators.RsiIndicator import RsiIndicator
 
 class RsiStrategy(AbstractTechIndicatorStrategy):
     _rsi_indicator: RsiIndicator
-    _col: str = 'Adj Close'
     _summary: pd.DataFrame
     __data: pd.DataFrame
 
     def __init__(self, rsi_indicator: RsiIndicator):
+        self._rsi_indicator = rsi_indicator
+        a_df: pd.DataFrame = self._rsi_indicator.GetData()
+        self._col = self._rsi_indicator.Column
+        print(a_df.columns)
+        #
+        #
+        #
+        self._data = a_df[self._rsi_indicator.Column].to_frame()
+        #
+        #
+        #
+        print(self._data.columns)
+        self.__setData()
+        exit(88)
         self.__data = rsi_indicator.GetData()
-        self.__data['UpMove'] = np.nan
-        self.__data['DownMove'] = np.nan
         self.__setUpAndDown()
         self.__setAverages()
-        self.__completeUpAndDown()
+        self.__completeAverages()
         self._setSummary()
 
     @property
@@ -36,6 +47,51 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
 
     def _buyNsell(self):
         pass
+
+    def __setData(self):
+        self._data['UpMove'] = np.nan
+        self._data['DownMove'] = np.nan
+        self._data = self.__setUpAndDown(self._data)
+        self._data['AverageUp'] = np.nan
+        self._data['AverageDown'] = np.nan
+        self._data['RS'] = np.nan
+        self._data['RSI'] = np.nan
+        self._data = self.__setAverages(self._data)
+        self._data = self.__completeAverages(self._data)
+        print(self._data.AverageUp)
+        self._data['LongTomorrow'] = np.nan
+        self._data['Buy'] = np.nan
+        self._data['Sell'] = np.nan
+        self._data['BuyRSI'] = np.nan
+        self._data['SellRSI'] = np.nan
+        self._data['BuyAndSell'] = np.nan
+
+    def __setUpAndDown(self, a_df: pd.DataFrame) -> pd.DataFrame:
+        for x in range(1, len(a_df)):
+            a_df['UpMove'][x] = 0
+            a_df['DownMove'][x] = 0
+
+            if a_df[self._col][x] > a_df[self._col][x - 1]:
+                a_df['UpMove'][x] = a_df[self._col][x] - a_df[self._col][x - 1]
+
+            if a_df[self._col][x] < a_df[self._col][x - 1]:
+                a_df['DownMove'][x] = abs(a_df[self._col][x] - a_df[self._col][x - 1])
+        return a_df
+
+    def __setAverages(self, a_df: pd.DataFrame) -> pd.DataFrame:
+        a_df['AverageUp'][14] = a_df['UpMove'][1:15].mean()
+        a_df['AverageDown'][14] = a_df['DownMove'][1:15].mean()
+        a_df['RS'][14] = a_df['AverageUp'][14] / a_df['AverageDown'][14]
+        a_df['RSI'][14] = 100 - (100 / (1 + a_df['RS'][14]))
+        return a_df
+
+    def __completeAverages(self, a_df: pd.DataFrame) -> pd.DataFrame:
+        for x in range(15, len(a_df)):
+            a_df['AverageUp'][x] = (a_df['AverageUp'][x - 1] * 13 + a_df['UpMove'][x]) / 14
+            a_df['AverageDown'][x] = (a_df['AverageDown'][x - 1] * 13 + a_df['DownMove'][x]) / 14
+            a_df['RS'][x] = a_df['AverageUp'][x] / a_df['AverageDown'][x]
+            a_df['RSI'][x] = 100 - (100 / (1 + a_df['RS'][x]))
+        return a_df
 
     def _setSummary(self):
         self._summary = pd.DataFrame(index=self.__data.index)
@@ -83,31 +139,3 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
                 last_float = -1.0
             else: # row['Buy'] == row['Sell']
                 self._summary['BuyAndSell'][ind] = last_float'''
-
-    def __setUpAndDown(self):
-        for x in range(1, len(self.__data)):
-            self.__data['UpMove'][x] = 0
-            self.__data['DownMove'][x] = 0
-
-            if self.__data[self._col][x] > self.__data[self._col][x - 1]:
-                self.__data['UpMove'][x] = self.__data[self._col][x] - self.__data[self._col][x - 1]
-
-            if self.__data[self._col][x] < self.__data[self._col][x - 1]:
-                self.__data['DownMove'][x] = abs(self.__data[self._col][x] - self.__data[self._col][x - 1])
-
-    def __setAverages(self):
-        self.__data['AverageUp'] = np.nan
-        self.__data['AverageDown'] = np.nan
-        self.__data['AverageUp'][14] = self.__data['UpMove'][1:15].mean()
-        self.__data['AverageDown'][14] = self.__data['DownMove'][1:15].mean()
-        self.__data['RS'] = np.nan
-        self.__data['RSI'] = np.nan
-        self.__data['RS'][14] = self.__data['AverageUp'][14] / self.__data['AverageDown'][14]
-        self.__data['RSI'][14] = 100 - (100 / (1 + self.__data['RS'][14]))
-
-    def __completeUpAndDown(self):
-        for x in range(15, len(self.__data)):
-            self.__data['AverageUp'][x] = (self.__data['AverageUp'][x - 1] * 13 + self.__data['UpMove'][x]) / 14
-            self.__data['AverageDown'][x] = (self.__data['AverageDown'][x - 1] * 13 + self.__data['DownMove'][x]) / 14
-            self.__data['RS'][x] = self.__data['AverageUp'][x] / self.__data['AverageDown'][x]
-            self.__data['RSI'][x] = 100 - (100 / (1 + self.__data['RS'][x]))

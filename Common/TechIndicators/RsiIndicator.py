@@ -73,7 +73,7 @@ class RsiIndicator(AbstractTechIndicator):
         rs = avgGain / avgLoss
         self._data['RelativeStrength'] = rs
         self._data[self._name] = 100.0 - (100.0 / (1.0 + rs))
-        self._low_high = (2, 3)
+        self._low_high = (0, 5)
 
     def __setPeriod(self, a_int: int):
         self.__period = a_int
