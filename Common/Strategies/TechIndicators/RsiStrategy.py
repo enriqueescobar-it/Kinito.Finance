@@ -9,7 +9,6 @@ from Common.TechIndicators.RsiIndicator import RsiIndicator
 class RsiStrategy(AbstractTechIndicatorStrategy):
     _rsi_indicator: RsiIndicator
     _summary: pd.DataFrame
-    __data: pd.DataFrame
 
     def __init__(self, rsi_indicator: RsiIndicator):
         self._rsi_indicator = rsi_indicator
@@ -28,7 +27,7 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         print(self._data.columns)
         self.__setData()
         print(self._data.head(3))
-        #self._setSummary()
+        self._setSummary()
 
     @property
     def Summary(self):
@@ -63,6 +62,11 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         ax[1].set(ylabel='Index')
         ax[1].legend(loc=self._rsi_indicator.LegendPlace)
         # ax2
+        ax[2].plot(self._summary, alpha=an_alpha)
+        ax[2].legend(loc=self._rsi_indicator.LegendPlace)
+        ax[2].xaxis.set_tick_params(rotation=self._rsi_indicator.LabelXangle)
+        ax[2].set(ylabel='Buy & Sell', xlabel=x_title)
+        return plt
         plt.tight_layout()
         return plt
 
@@ -86,7 +90,9 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         self._data['SellRSI'] = np.nan
         self._data['BuyAndSell'] = np.nan
         self._data = self.__setBuyNsell(self._data)
+        self._setSummary()
         print(self._data.BuyAndSell)
+        print(self._summary.BuyAndSell)
 
     def __setUpAndDown(self, a_df: pd.DataFrame) -> pd.DataFrame:
         for x in range(1, len(a_df)):
@@ -141,10 +147,10 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         return a_df
 
     def _setSummary(self):
-        pass
-        '''self._summary['Buy'] = self._data[self._buy_label].replace(np.nan, 0)
+        self._summary = pd.DataFrame(index=self._data.index)
+        self._summary['Buy'] = self._data['Buy'].replace(np.nan, 0)
         self._summary['Buy'][self._summary['Buy'] > 0] = 1
-        self._summary['Sell'] = self._data[self._sell_label].replace(np.nan, 0)
+        self._summary['Sell'] = self._data['Sell'].replace(np.nan, 0)
         self._summary['Sell'][self._summary['Sell'] > 0] = 1
         self._summary['BuyAndSell'] = 0
         last_float: float = 0.0
@@ -156,4 +162,4 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
                 self._summary['BuyAndSell'][ind] = -1.0
                 last_float = -1.0
             else: # row['Buy'] == row['Sell']
-                self._summary['BuyAndSell'][ind] = last_float'''
+                self._summary['BuyAndSell'][ind] = last_float
