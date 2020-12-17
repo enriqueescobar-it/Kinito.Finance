@@ -22,7 +22,7 @@ class RsiIndicator(AbstractTechIndicator):
         return self._data
 
     def PlotAx(self, ax: object) -> object:
-        for a_ind, col in enumerate(self._data.columns[-7:self._data.columns.size-6]):
+        for a_ind, col in enumerate(self._data.columns[-1:self._data.columns.size]):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             self._data[col].plot(alpha=an_alpha, ax=ax)
         ax.hlines(10, linestyle='--', label='10%', alpha=0.50, color='gray', xmin=self._data.index.min(), xmax=self._data.index.max())
@@ -40,7 +40,7 @@ class RsiIndicator(AbstractTechIndicator):
         plt.figure(figsize=self._fig_size)
         plt.style.use(self._plot_style)
         colors = cm.coolwarm
-        for a_ind, col in enumerate(self._data.columns[-7:self._data.columns.size-6]):
+        for a_ind, col in enumerate(self._data.columns[-1:self._data.columns.size]):
             an_alpha: float = 0.5 if a_ind != 0 else 1.0
             self._data[col].plot(alpha=an_alpha)
             print('i', a_ind)
@@ -59,6 +59,7 @@ class RsiIndicator(AbstractTechIndicator):
         plt.ylabel(self._y_label)
         plt.legend(loc=self._legend_place)
         plt.grid(True)
+        plt.tight_layout()
         return plt
 
     def _setData(self, a_df: DataFrame):

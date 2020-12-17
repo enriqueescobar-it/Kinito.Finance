@@ -92,6 +92,7 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         ax[2].legend(loc=self._macd_indicator.LegendPlace)
         ax[2].xaxis.set_tick_params(rotation=self._macd_indicator.LabelXangle)
         ax[2].set(ylabel='Buy & Sell', xlabel=x_title)
+        plt.tight_layout()
         return plt
 
     def _buyNsell(self):

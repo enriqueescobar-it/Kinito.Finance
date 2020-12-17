@@ -27,12 +27,7 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         self._sell_label = self._rsi_indicator.Label + self._sell_label
         print(self._data.columns)
         self.__setData()
-        exit(88)
-        self.__data = rsi_indicator.GetData()
-        self.__setUpAndDown()
-        self.__setAverages()
-        self.__completeAverages()
-        self._setSummary()
+        #self._setSummary()
 
     @property
     def Summary(self):
@@ -45,7 +40,22 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         pass
 
     def PlotAll(self) -> plt:
-        pass
+        n_col: int = 1
+        n_row: int = 3
+        a_title: str = self._rsi_indicator.LabelMain
+        x_title: str = self._rsi_indicator.LabelX
+        y_title: str = self._rsi_indicator.LabelY
+        f_size: Tuple[float, float] = (self._rsi_indicator.FigSizeTuple[0], self._rsi_indicator.FigSizeTuple[0])
+        fig, ax = plt.subplots(n_row, n_col, figsize=f_size, sharex=True)
+        plt.style.use(self._rsi_indicator.FigStyle)
+        # ax0 strategy
+        # ax1 index
+        ax[1] = self._rsi_indicator.PlotAx(ax[1])
+        ax[1].set(ylabel='Index')
+        ax[1].legend(loc=self._rsi_indicator.LegendPlace)
+        # ax2
+        plt.tight_layout()
+        return plt
 
     def _buyNsell(self):
         pass

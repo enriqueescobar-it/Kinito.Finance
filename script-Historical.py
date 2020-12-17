@@ -189,8 +189,9 @@ yahooStockOptionPlotter.EmaStrat.PlotAll().show()
 print(yahooStockOptionPlotter.RsiInd.GetData().columns)
 yahooStockOptionPlotter.RsiInd.PlotData().show()
 yahooEmaStrategy: RsiStrategy = yahooStockOptionPlotter.RsiStrat #RsiStrategy(yahooEmaIndicator)
-#yahooStockOptionPlotter.RsiStrat.PlotAll().show()
+yahooStockOptionPlotter.RsiStrat.PlotAll().show()
 #***
+exit(111)
 yahooStockOptionPlotter.IndicatorPlot().show()
 yahooStockOptionPlotter.StrategyPlot().show()
 

@@ -38,6 +38,7 @@ class EmaIndicator(AbstractTechIndicator):
         plt.ylabel(self._y_label)
         plt.legend(loc=self._legend_place)
         plt.grid(True)
+        plt.tight_layout()
         return plt
 
     def _setData(self, a_df: DataFrame):
