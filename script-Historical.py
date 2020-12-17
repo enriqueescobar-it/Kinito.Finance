@@ -187,11 +187,10 @@ print(yahooStockOptionPlotter.EmaInd.GetData().columns)
 yahooStockOptionPlotter.EmaStrat.PlotAll().show()
 #yahooRsiIndicator: RsiIndicator = yahooStockOptionPlotter.RsiInd #RsiIndicator(yahooStockOption)
 print(yahooStockOptionPlotter.RsiInd.GetData().columns)
-yahooStockOptionPlotter.RsiInd.PlotData().show()
-yahooEmaStrategy: RsiStrategy = yahooStockOptionPlotter.RsiStrat #RsiStrategy(yahooEmaIndicator)
+#yahooStockOptionPlotter.RsiInd.PlotData().show()
+#yahooEmaStrategy: RsiStrategy = yahooStockOptionPlotter.RsiStrat #RsiStrategy(yahooEmaIndicator)
 yahooStockOptionPlotter.RsiStrat.PlotAll().show()
 #***
-exit(111)
 yahooStockOptionPlotter.IndicatorPlot().show()
 yahooStockOptionPlotter.StrategyPlot().show()
 

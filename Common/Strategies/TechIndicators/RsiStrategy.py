@@ -34,6 +34,10 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         return self._summary
 
     def PlotAx(self, ax: object) -> object:
+        an_alpha: float = 1.0
+        ax.plot(self._data[self._col], alpha=an_alpha, label=self._col)
+        ax.scatter(self._rsi_indicator.GetData().index, self._data['Buy'], marker='^', color='green', label=self._buy_label)
+        ax.scatter(self._rsi_indicator.GetData().index, self._data['Sell'], marker='v', color='red', label=self._sell_label)
         return ax
 
     def Plot(self) -> plt:
@@ -66,7 +70,6 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         ax[2].legend(loc=self._rsi_indicator.LegendPlace)
         ax[2].xaxis.set_tick_params(rotation=self._rsi_indicator.LabelXangle)
         ax[2].set(ylabel='Buy & Sell', xlabel=x_title)
-        return plt
         plt.tight_layout()
         return plt
 

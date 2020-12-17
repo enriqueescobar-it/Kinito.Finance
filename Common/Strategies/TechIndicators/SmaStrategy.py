@@ -54,6 +54,7 @@ class SmaStrategy(AbstractTechIndicatorStrategy):
         plt.xticks(rotation=self._sma_indicator.LabelXangle)
         plt.ylabel(self._sma_indicator.LabelY)
         plt.legend(loc=self._sma_indicator.LegendPlace)
+        plt.tight_layout()
         return plt
 
     def PlotAll(self) -> plt:
