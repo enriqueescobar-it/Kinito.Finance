@@ -23,6 +23,8 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         #
         #
         #
+        self._buy_label = self._rsi_indicator.Label + self._buy_label
+        self._sell_label = self._rsi_indicator.Label + self._sell_label
         print(self._data.columns)
         self.__setData()
         exit(88)
@@ -52,13 +54,13 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         self._data['UpMove'] = np.nan
         self._data['DownMove'] = np.nan
         self._data = self.__setUpAndDown(self._data)
-        self._data['AverageUp'] = np.nan
-        self._data['AverageDown'] = np.nan
+        self._data['UpAverage'] = np.nan
+        self._data['DownAverage'] = np.nan
         self._data['RS'] = np.nan
         self._data['RSI'] = np.nan
         self._data = self.__setAverages(self._data)
         self._data = self.__completeAverages(self._data)
-        print(self._data.AverageUp)
+        print(self._data.UpAverage)
         self._data['LongTomorrow'] = np.nan
         self._data['Buy'] = np.nan
         self._data['Sell'] = np.nan
@@ -79,17 +81,17 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         return a_df
 
     def __setAverages(self, a_df: pd.DataFrame) -> pd.DataFrame:
-        a_df['AverageUp'][14] = a_df['UpMove'][1:15].mean()
-        a_df['AverageDown'][14] = a_df['DownMove'][1:15].mean()
-        a_df['RS'][14] = a_df['AverageUp'][14] / a_df['AverageDown'][14]
+        a_df['UpAverage'][14] = a_df['UpMove'][1:15].mean()
+        a_df['DownAverage'][14] = a_df['DownMove'][1:15].mean()
+        a_df['RS'][14] = a_df['UpAverage'][14] / a_df['DownAverage'][14]
         a_df['RSI'][14] = 100 - (100 / (1 + a_df['RS'][14]))
         return a_df
 
     def __completeAverages(self, a_df: pd.DataFrame) -> pd.DataFrame:
         for x in range(15, len(a_df)):
-            a_df['AverageUp'][x] = (a_df['AverageUp'][x - 1] * 13 + a_df['UpMove'][x]) / 14
-            a_df['AverageDown'][x] = (a_df['AverageDown'][x - 1] * 13 + a_df['DownMove'][x]) / 14
-            a_df['RS'][x] = a_df['AverageUp'][x] / a_df['AverageDown'][x]
+            a_df['UpAverage'][x] = (a_df['UpAverage'][x - 1] * 13 + a_df['UpMove'][x]) / 14
+            a_df['DownAverage'][x] = (a_df['DownAverage'][x - 1] * 13 + a_df['DownMove'][x]) / 14
+            a_df['RS'][x] = a_df['UpAverage'][x] / a_df['DownAverage'][x]
             a_df['RSI'][x] = 100 - (100 / (1 + a_df['RS'][x]))
         return a_df
 
