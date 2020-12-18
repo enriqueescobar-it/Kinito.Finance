@@ -41,7 +41,8 @@ class RsiStrategy(AbstractTechIndicatorStrategy):
         return ax
 
     def Plot(self) -> plt:
-        pass
+        plt.tight_layout()
+        return plt
 
     def PlotAll(self) -> plt:
         n_col: int = 1

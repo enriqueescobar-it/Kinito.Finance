@@ -59,6 +59,7 @@ class MacdStrategy(AbstractTechIndicatorStrategy):
         plt.xticks(rotation=self._macd_indicator.LabelXangle)
         plt.ylabel(self._macd_indicator.LabelY)
         plt.legend(loc=self._macd_indicator.LegendPlace)
+        plt.tight_layout()
         return plt
 
     def PlotAll(self) -> plt:
