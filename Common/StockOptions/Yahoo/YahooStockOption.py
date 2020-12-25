@@ -18,6 +18,9 @@ from prettytable import PrettyTable
 
 class YahooStockOption(AbstractStockOption):
     ForecastSpan: int = 30
+    _train_size: int = -1
+    _test_size: int = -1
+    _length: int = -1
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
     SimpleAnnually: pd.DataFrame
@@ -30,6 +33,9 @@ class YahooStockOption(AbstractStockOption):
     SimpleQuarterlyCum: pd.Series
     SimpleWeekly: pd.DataFrame
     SimpleWeeklyCum: pd.Series
+    _x_scaled_array: np.ndarray
+    _x_train_array: np.ndarray
+    _x_test_array: np.ndarray
     SimpleDailyReturnAvg: float = -1.1
     SimpleWeeklyReturnAvg: float = -1.1
     SimpleMonthlyReturnAvg: float = -1.1
@@ -82,6 +88,7 @@ class YahooStockOption(AbstractStockOption):
         self._data['Binary'] = self._setBinarizer(self._historical)
         self._data['Sparse'] = self._setSparser(self._historical)
         self._data['Scaled'] = self._setScaler(self._historical)
+        #self._setPreProcessing(self._historical)
         self.DataSimpleReturns = self._setSimpleReturns('', self._historical)
         self.DataSimpleReturns = self._setSimpleReturnsPlus(self.DataSimpleReturns)
         self._data['IsOutlier'] = self.DataSimpleReturns.IsOutlier.astype(bool)
@@ -102,10 +109,9 @@ class YahooStockOption(AbstractStockOption):
         self.SimpleAnnually = self._setSimpleReturns('A', self._historical)
         self.SimpleAnnuallyCum = self._setSimpleCumulative(self.SimpleAnnually)
         self.SimpleAnnuallyReturnAvg = self._setSimpleReturnAverage(self.SimpleAnnuallyCum)
-        (self.IsDaily, self.IsWeekly, self.IsMonthly, self.IsQuarterly, self.IsAnnually) =\
+        (self.IsDaily, self.IsWeekly, self.IsMonthly, self.IsQuarterly, self.IsAnnually) = \
             self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
-                          self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg,
-                          self.SimpleAnnuallyReturnAvg)
+                              self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg, self.SimpleAnnuallyReturnAvg)
         print('D', self.IsDaily)
         print('W', self.IsWeekly)
         print('M', self.IsMonthly)
@@ -113,6 +119,26 @@ class YahooStockOption(AbstractStockOption):
         print('A', self.IsAnnually)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
+
+    @property
+    def ArrayScaledX(self):
+        return self._x_scaled_array
+
+    @property
+    def ArrayTestX(self):
+        return self._x_test_array
+
+    @property
+    def ArrayTrainX(self):
+        return self._x_train_array
+
+    @property
+    def TrainSize(self):
+        return self._train_size
+
+    @property
+    def Length(self):
+        return self._length
 
     def _getOutliers(self, a_df: pd.DataFrame, n_sigmas: int = 3):
         a_df['IsOutlier'] = pd.Series(dtype=int)
@@ -151,12 +177,13 @@ class YahooStockOption(AbstractStockOption):
         return (a_df / a_df.iloc[0])[self.Column]
 
     def _setNormalizerL1(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return\
+        return \
             pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns, index=a_df.index)[self.Column]
 
     def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return\
-            pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns, index=a_df.index)[self.Column]
+        return \
+            pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns,
+                         index=a_df.index)[self.Column]
 
     def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns, index=a_df.index)[self.Column]
@@ -167,6 +194,92 @@ class YahooStockOption(AbstractStockOption):
         # scale to compare data frame
         stockArrayScaled: np.ndarray = minMaxScaler.fit_transform(a_df)
         return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)[self.Column]
+
+    def _setPreProcessing(self, a_df: pd.DataFrame()):
+        self._length = len(a_df)
+        self._train_size = int(self._length * 0.8)
+        self._test_size = self._length - self._train_size
+        self._period_days = 60
+        minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+        df = a_df.copy()
+        data_training = df[:self._train_size].copy()
+        data_training = data_training.drop(self.Column, inplace=False, axis=1)
+        data_training = minMaxScaler.fit_transform(data_training)
+        print(data_training)
+        data_testing = df[self._train_size: self._length].copy()
+        print(data_testing.head())
+        print(len(data_training))
+        print(len(data_testing))
+        x_train = []
+        y_train = []
+        for i in range(60, data_training.shape[0]):
+            x_train.append(data_training[i - 60:i])
+            y_train.append(data_training[i, 0])
+        x_train, y_train = np.array(x_train), np.array(y_train)
+        print(x_train.shape)
+        # Build LSTM
+        from tensorflow.keras import Sequential
+        from tensorflow.keras.layers import Dense, LSTM, Dropout
+        import matplotlib as plt
+        regressor = Sequential()
+        regressor.add(LSTM(units=60, activation='relu', return_sequences=True, input_shape=(x_train.shape[1], 5)))
+        regressor.add(Dropout(0.2))
+        regressor.add(LSTM(units=60, activation='relu', return_sequences=True))
+        regressor.add(Dropout(0.2))
+        regressor.add(LSTM(units=80, activation='relu', return_sequences=True))
+        regressor.add(Dropout(0.2))
+        regressor.add(LSTM(units=120, activation='relu'))
+        regressor.add(Dropout(0.2))
+        regressor.add(Dense(units=1))
+        regressor.compile(optimizer='adam', loss='mean_squared_error')
+        regressor.fit(x_train, y_train, epochs=50, batch_size=32)
+        # prepare date set
+        print(data_testing.head())
+        past_60_days = data_training[-61:]#  .tail(60)
+        new_df = past_60_days.append(data_testing, ignore_index=True)
+        new_df = new_df.drop(['Date', 'Adj Close'], axis=1)
+        print(new_df.head())
+        inputs = minMaxScaler.transform(df)
+        print(inputs)
+        x_test = []
+        y_test = []
+
+        for i in range(60, inputs.shape[0]):
+            x_test.append(inputs[i-60:i])
+            y_test.append(inputs[i, 0])
+
+        X_test, y_test = np.array(x_test), np.array(y_test)
+        x_test.shape, y_test.shape
+        y_pred = regressor.predict(x_test)
+        print(minMaxScaler.scale_)
+        scale = 1/8.18605127e-04
+        print(scale)
+        y_pred = y_pred*scale
+        y_test = y_test*scale
+        # viz
+        # Visualising the results
+        plt.figure(figsize=(14,5))
+        plt.plot(y_test, color = 'red', label = 'Real Google Stock Price')
+        plt.plot(y_pred, color = 'blue', label = 'Predicted Google Stock Price')
+        plt.title('Google Stock Price Prediction')
+        plt.xlabel('Time')
+        plt.ylabel('Google Stock Price')
+        plt.legend()
+        plt.show()
+        exit(123)
+        df_train = df[:1]
+        df = np.reshape(df.values, (-1, 1))
+        self._x_scaled_array = minMaxScaler.fit_transform(df)
+        self._x_train_array = self._x_scaled_array[:self._train_size]
+        self._x_test_array = self._x_scaled_array[self._train_size: self._length]
+        self._x_train_array, self._x_test_array = self._x_scaled_array[0: self._train_size, :], self._x_scaled_array[
+                                                                                                self._train_size:self._length,
+                                                                                                :]
+        print(len(self._x_train_array))
+        print(len(self._x_test_array))
+        exit(123)
+        # self._x_test_array = self._x_scaled_array[self._split : self._length]
+        exit(123)
 
     def _setSimpleReturns(self, a_letter: str = '', a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         new_df: pd.DataFrame() = pd.DataFrame()
@@ -189,7 +302,7 @@ class YahooStockOption(AbstractStockOption):
         simple_returns = self._getOutliers(simple_returns)
         df = simple_returns[self.Column].dropna()
         dfLength = len(df)
-        dfLength80 = int(round(dfLength*0.8))
+        dfLength80 = int(round(dfLength * 0.8))
         dfLength20 = dfLength - dfLength80
         train = df[:dfLength80].to_frame()
         test = df[dfLength80:].to_frame()
@@ -200,40 +313,40 @@ class YahooStockOption(AbstractStockOption):
         print(dfLength20)
         preds = []
         for i in range(0, test.shape[0]):
-            a = train[self.Column][len(train)-dfLength20+i:].sum() + sum(preds)
-            b = a/dfLength20
+            a = train[self.Column][len(train) - dfLength20 + i:].sum() + sum(preds)
+            b = a / dfLength20
             preds.append(b)
-        self.RMSE = np.sqrt(np.mean(np.power((np.array(test[self.Column])-preds), 2)))
+        self.RMSE = np.sqrt(np.mean(np.power((np.array(test[self.Column]) - preds), 2)))
         print('\n RMSE value on validation set:', self.RMSE)
         lin_svr = SVR(kernel='linear', C=1000.0)
-        #lin_svr.fit(self.HistoricalSimpleReturns.index, self.HistoricalSimpleReturns[self.SourceColumn])
+        # lin_svr.fit(self.HistoricalSimpleReturns.index, self.HistoricalSimpleReturns[self.SourceColumn])
         ##
-        #T = len(test)
-        #N = len(test)
-        #S_0 = df[train.index[-1]]#.date()]
-        #N_SIM = 100
-        #mu = train.mean()
-        #sigma = train.std()
-        #gbm_simulations: ndarray = self.simulate_gbm(S_0, mu, sigma, N_SIM, T, N)
-        #gbm_simulationsT: ndarray = np.transpose(gbm_simulations)
-        #print('gbm_simulationsT', gbm_simulationsT.shape)
+        # T = len(test)
+        # N = len(test)
+        # S_0 = df[train.index[-1]]#.date()]
+        # N_SIM = 100
+        # mu = train.mean()
+        # sigma = train.std()
+        # gbm_simulations: ndarray = self.simulate_gbm(S_0, mu, sigma, N_SIM, T, N)
+        # gbm_simulationsT: ndarray = np.transpose(gbm_simulations)
+        # print('gbm_simulationsT', gbm_simulationsT.shape)
         # prepare objects for plotting
-        #LAST_TRAIN_DATE = train.index[-1].date()
-        #FIRST_TEST_DATE = test.index[0].date()
-        #LAST_TEST_DATE = test.index[-1].date()
-        #PLOT_TITLE = f'{self.Ticker} Simulation ({FIRST_TEST_DATE}:{LAST_TEST_DATE})'
-        #selected_indices = self.HistoricalData[self.SourceColumn][LAST_TRAIN_DATE:LAST_TEST_DATE].index
-        #a_index = [date.date() for date in selected_indices]
-        #print('a_index', len(a_index))
-        #gbm_simulationsDf = pd.DataFrame(data=gbm_simulationsT, index=a_index)
-        #print('gbm_simulationsDf', gbm_simulationsDf.shape)
+        # LAST_TRAIN_DATE = train.index[-1].date()
+        # FIRST_TEST_DATE = test.index[0].date()
+        # LAST_TEST_DATE = test.index[-1].date()
+        # PLOT_TITLE = f'{self.Ticker} Simulation ({FIRST_TEST_DATE}:{LAST_TEST_DATE})'
+        # selected_indices = self.HistoricalData[self.SourceColumn][LAST_TRAIN_DATE:LAST_TEST_DATE].index
+        # a_index = [date.date() for date in selected_indices]
+        # print('a_index', len(a_index))
+        # gbm_simulationsDf = pd.DataFrame(data=gbm_simulationsT, index=a_index)
+        # print('gbm_simulationsDf', gbm_simulationsDf.shape)
         # plotting
-        #ax = gbm_simulationsDf.plot(alpha=0.2, legend=False)
-        #line_1, = ax.plot(a_index, gbm_simulationsDf.mean(axis=1), color='red')
-        #line_2, = ax.plot(a_index, self.HistoricalData[self.SourceColumn][LAST_TRAIN_DATE:LAST_TEST_DATE], color='blue')
-        #ax.set_title(PLOT_TITLE, fontsize=16)
-        #ax.legend((line_1, line_2), ('mean', 'actual'))
-        #plt.show()
+        # ax = gbm_simulationsDf.plot(alpha=0.2, legend=False)
+        # line_1, = ax.plot(a_index, gbm_simulationsDf.mean(axis=1), color='red')
+        # line_2, = ax.plot(a_index, self.HistoricalData[self.SourceColumn][LAST_TRAIN_DATE:LAST_TEST_DATE], color='blue')
+        # ax.set_title(PLOT_TITLE, fontsize=16)
+        # ax.legend((line_1, line_2), ('mean', 'actual'))
+        # plt.show()
         return simple_returns
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
@@ -298,8 +411,8 @@ class YahooStockOption(AbstractStockOption):
         self.YssLink = self._yahooSummaryScrapper.Link
 
     def simulate_gbm(self, s_0, mu, sigma, n_sims, T, N):
-        dt = T/N
-        dW = np.random.normal(scale = np.sqrt(dt), size=(n_sims, N))
+        dt = T / N
+        dW = np.random.normal(scale=np.sqrt(dt), size=(n_sims, N))
         W = np.cumsum(dW, axis=1)
         time_step = np.linspace(dt, T, N)
         time_steps = np.broadcast_to(time_step, (n_sims, N))
@@ -313,7 +426,8 @@ class YahooStockOption(AbstractStockOption):
 
     def _setIsTimely(self, day_avg: float, week_avg: float, month_avg: float, quarter_avg: float, annual_avg: float):
         a_median: float = statistics.median([day_avg, week_avg, month_avg, quarter_avg, annual_avg])
-        return (day_avg >= a_median, week_avg >= a_median, month_avg >= a_median, quarter_avg >= a_median, annual_avg >= a_median)
+        return (day_avg >= a_median, week_avg >= a_median, month_avg >= a_median, quarter_avg >= a_median,
+                annual_avg >= a_median)
 
     def _getDataRange(self, spread_span: int = 1000, pd_series: pd.Series = pd.Series()) -> np.ndarray:
         return np.linspace(min(pd_series), max(pd_series), num=spread_span)
