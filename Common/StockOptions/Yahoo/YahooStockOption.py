@@ -148,6 +148,10 @@ class YahooStockOption(AbstractStockOption):
         return self._training_percent
 
     @property
+    def TestSize(self):
+        return self._test_size
+
+    @property
     def TrainSize(self):
         return self._train_size
 
