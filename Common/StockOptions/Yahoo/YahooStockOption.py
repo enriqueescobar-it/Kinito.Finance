@@ -146,6 +146,10 @@ class YahooStockOption(AbstractStockOption):
         return self._column_array
 
     @property
+    def ColumnTestArray(self):
+        return self._column_test_array
+
+    @property
     def ColumnTrainArray(self):
         return self._column_train_array
 
@@ -233,6 +237,7 @@ class YahooStockOption(AbstractStockOption):
         self._column_series = self._historical.reset_index()[self._column]
         self._column_array = self._min_max_scaler.fit_transform(np.array(self._column_series).reshape(-1, 1))
         self._column_train_array = self._column_array[0:self._train_size, :]
+        self._column_test_array = self._column_array[self._train_size:len(self._column_array), :1]
         '''df = a_df.copy()
         data_training = df[:self._train_size].copy()
         data_training = data_training.drop(self.Column, inplace=False, axis=1)

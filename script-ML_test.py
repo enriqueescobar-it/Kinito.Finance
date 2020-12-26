@@ -22,16 +22,15 @@ print(len(yahooStockOption.ColumnSeries))
 print(type(yahooStockOption.ColumnArray))
 print(yahooStockOption.ColumnArray.shape)
 print(len(yahooStockOption.ColumnArray))
+print('TrainSize', yahooStockOption.TrainSize)
 print(type(yahooStockOption.ColumnTrainArray))
 print(yahooStockOption.ColumnTrainArray.shape)
 print(len(yahooStockOption.ColumnTrainArray))
-print(len(yahooStockOption.ColumnArray[yahooStockOption.TrainSize:len(yahooStockOption.ColumnArray), :1]))
+print('TestSize', yahooStockOption.TestSize)
+print(type(yahooStockOption.ColumnTestArray))
+print(yahooStockOption.ColumnTestArray.shape)
+print(len(yahooStockOption.ColumnTestArray))
 exit(555)
-testing_df_array = yahooStockOption.ColumnArray[yahooStockOption.TrainSize:len(yahooStockOption.ColumnArray), :1]
-print(yahooStockOption.TrainSize)
-print(len(testing_df_array))
-print(yahooStockOption.TestSize)
-
 
 # convert an array of values into a data set matrix
 def create_data_set(data_set: np.array, time_step_count: int = 1) -> ndarray:
@@ -47,7 +46,7 @@ def create_data_set(data_set: np.array, time_step_count: int = 1) -> ndarray:
 # reshape into X=t,t+1,t+2,t+3 and Y=t+4
 time_step = 100
 x_training_df_array, y_training_df_array = create_data_set(yahooStockOption.ColumnTrainArray, time_step)
-x_testing_df_array, y_testing_df_array = create_data_set(testing_df_array, time_step)
+x_testing_df_array, y_testing_df_array = create_data_set(yahooStockOption.ColumnTestArray, time_step)
 print('x_training_df_array', x_training_df_array.shape)
 print('y_training_df_array', y_training_df_array.shape)
 print('y_training_df_array', y_training_df_array.size)
@@ -114,11 +113,11 @@ print('EQUAL', yahooStockOption.TestSize == len(x_testing_df_array))
 print('EQUAL', len(testing_predict_array) == len(x_testing_df_array))
 print(len(testing_predict_array))
 print(len(x_testing_df_array))
-print(len(testing_df_array))
+print(len(yahooStockOption.ColumnTestArray))
 print(yahooStockOption.TestSize)
-print(testing_df_array[yahooStockOption.TestSize-100:])
-print(testing_df_array[yahooStockOption.TestSize-100:].reshape(1, -1))
-x_input = testing_df_array[yahooStockOption.TestSize-100:].reshape(1, -1)
+print(yahooStockOption.ColumnTestArray[yahooStockOption.TestSize-100:])
+print(yahooStockOption.ColumnTestArray[yahooStockOption.TestSize-100:].reshape(1, -1))
+x_input = yahooStockOption.ColumnTestArray[yahooStockOption.TestSize-100:].reshape(1, -1)
 temp_input = list(x_input)
 temp_input = temp_input[0].tolist()
 # demonstrate prediction for next 10 days
