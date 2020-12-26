@@ -79,11 +79,11 @@ class YahooStockOption(AbstractStockOption):
         self._ticker = a_ticker
         self._historical = self._setData()
         self._t_s = self._updateTimeSpan(self._t_s, self._historical)
-        self._data = self._historical[self.Column].to_frame()
-        self._data_range = self._getDataRange(1000, self._data[self.Column])
-        self._mu = round(self._historical[self.Column].mean(), 2)
-        self._sigma = round(self._historical[self.Column].std(), 2)
-        self._median = round(self._historical[self.Column].median(), 2)
+        self._data = self._historical[self._column].to_frame()
+        self._data_range = self._getDataRange(1000, self._data[self._column])
+        self._mu = round(self._historical[self._column].mean(), 2)
+        self._sigma = round(self._historical[self._column].std(), 2)
+        self._median = round(self._historical[self._column].median(), 2)
         self._norm_pdf = self._getProbabilityDensityFunction(self.DataRange, self._mu, self._sigma)
         self._data['Norm'] = self._setNormalizer(self._historical)
         self._data['NormL1'] = self._setNormalizerL1(self._historical)
@@ -133,6 +133,10 @@ class YahooStockOption(AbstractStockOption):
     @property
     def ArrayTrainX(self):
         return self._x_train_array
+
+    @property
+    def ColumnSeries(self):
+        return self._column_series
 
     @property
     def TrainPercent(self):
@@ -211,6 +215,7 @@ class YahooStockOption(AbstractStockOption):
         self._test_size = self._length - self._train_size
         self._period_days = 60
         self._min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+        self._column_series = self._historical.reset_index()[self._column]
         '''df = a_df.copy()
         data_training = df[:self._train_size].copy()
         data_training = data_training.drop(self.Column, inplace=False, axis=1)

@@ -12,19 +12,13 @@ vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.
 
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 
-from pandas import Series
-
-df_serie: Series = yahooStockOption.DataFrame.reset_index()[yahooStockOption.Column]
-print(type(df_serie))
 ### LSTM are sensitive to the scale of the data. so we apply MinMax scaler
 import numpy as np
 from numpy import ndarray
-from sklearn.preprocessing import MinMaxScaler
 
-minMaxScaler: MinMaxScaler = yahooStockOption.MinMaxScale
-df_array: ndarray = minMaxScaler.fit_transform(np.array(df_serie).reshape(-1, 1))
+print(type(yahooStockOption.ColumnSeries))
+df_array: ndarray = yahooStockOption.MinMaxScale.fit_transform(np.array(yahooStockOption.ColumnSeries).reshape(-1, 1))
 print(type(df_array))
-
 ##splitting dataset into train and test split
 training_size = int(len(df_array) * yahooStockOption.TrainPercent)
 testing_size = len(df_array) - training_size
@@ -81,8 +75,8 @@ print(tf.__version__)
 training_predict_array: ndarray = model.predict(x_training_df_array)
 testing_predict_array: ndarray = model.predict(x_testing_df_array)
 ##Transformback to original form
-training_predict_array = minMaxScaler.inverse_transform(training_predict_array)
-testing_predict_array = minMaxScaler.inverse_transform(testing_predict_array)
+training_predict_array = yahooStockOption.MinMaxScale.inverse_transform(training_predict_array)
+testing_predict_array = yahooStockOption.MinMaxScale.inverse_transform(testing_predict_array)
 ### Calculate RMSE performance metrics
 import math
 #import matplotlib as plt
@@ -105,11 +99,12 @@ testPredictPlot[:, :] = np.nan
 testPredictPlot[len(training_predict_array) + (look_back * 2) + 1:len(df_array) - 1, :] = testing_predict_array
 print(trainPredictPlot.shape)
 # plot baseline and predictions
-df_array_plot = minMaxScaler.inverse_transform(df_array)
+df_array_plot = yahooStockOption.MinMaxScale.inverse_transform(df_array)
 plt.plot(df_array_plot)
 plt.plot(trainPredictPlot)
 plt.plot(testPredictPlot)
 plt.show()
+exit(2)
 print('EQUAL', training_size == len(x_training_df_array))
 print('EQUAL', len(training_predict_array) == len(x_training_df_array))
 print('EQUAL', testing_size == len(x_testing_df_array))
@@ -159,14 +154,14 @@ print(len(df_array[1158:]))
 day_new = np.arange(1, 101)
 day_pred = np.arange(101, 131)
 
-df_array_new_plot = minMaxScaler.inverse_transform(df_array[1158:])
+df_array_new_plot = yahooStockOption.MinMaxScale.inverse_transform(df_array[1158:])
 plt.plot(day_new, df_array_new_plot)
 exit(111)
-plt.plot(day_pred, minMaxScaler.inverse_transform(lst_output))
+plt.plot(day_pred, yahooStockOption.MinMaxScale.inverse_transform(lst_output))
 df3 = df_array.tolist()
 df3.extend(lst_output)
 plt.plot(df3[1200:])
-df3 = minMaxScaler.inverse_transform(df3).tolist()
+df3 = yahooStockOption.MinMaxScale.inverse_transform(df3).tolist()
 plt.plot(df3)
 
 exit(111)
