@@ -16,15 +16,18 @@ yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption,
 import numpy as np
 from numpy import ndarray
 
-print(type(yahooStockOption.ColumnSeries))
-print(type(yahooStockOption.ColumnArray))
 ##splitting dataset into train and test split
+print(type(yahooStockOption.ColumnSeries))
+print(len(yahooStockOption.ColumnSeries))
+print(type(yahooStockOption.ColumnArray))
 print(yahooStockOption.ColumnArray.shape)
-print(len(yahooStockOption.ColumnArray[0:yahooStockOption.TrainSize, :]))
-#exit(555)
-training_df_array = yahooStockOption.ColumnArray[0:yahooStockOption.TrainSize, :]
+print(len(yahooStockOption.ColumnArray))
+print(type(yahooStockOption.ColumnTrainArray))
+print(yahooStockOption.ColumnTrainArray.shape)
+print(len(yahooStockOption.ColumnTrainArray))
+print(len(yahooStockOption.ColumnArray[yahooStockOption.TrainSize:len(yahooStockOption.ColumnArray), :1]))
+exit(555)
 testing_df_array = yahooStockOption.ColumnArray[yahooStockOption.TrainSize:len(yahooStockOption.ColumnArray), :1]
-print(len(training_df_array))
 print(yahooStockOption.TrainSize)
 print(len(testing_df_array))
 print(yahooStockOption.TestSize)
@@ -43,7 +46,7 @@ def create_data_set(data_set: np.array, time_step_count: int = 1) -> ndarray:
 
 # reshape into X=t,t+1,t+2,t+3 and Y=t+4
 time_step = 100
-x_training_df_array, y_training_df_array = create_data_set(training_df_array, time_step)
+x_training_df_array, y_training_df_array = create_data_set(yahooStockOption.ColumnTrainArray, time_step)
 x_testing_df_array, y_testing_df_array = create_data_set(testing_df_array, time_step)
 print('x_training_df_array', x_training_df_array.shape)
 print('y_training_df_array', y_training_df_array.shape)
