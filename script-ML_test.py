@@ -17,13 +17,13 @@ import numpy as np
 from numpy import ndarray
 
 print(type(yahooStockOption.ColumnSeries))
-df_array: ndarray = yahooStockOption.MinMaxScale.fit_transform(np.array(yahooStockOption.ColumnSeries).reshape(-1, 1))
-print(type(df_array))
+df_array: ndarray = yahooStockOption.ColumnArray
+print(type(yahooStockOption.ColumnArray))
 ##splitting dataset into train and test split
-training_size = int(len(df_array) * yahooStockOption.TrainPercent)
-testing_size = len(df_array) - training_size
-training_df_array = df_array[0:training_size, :]
-testing_df_array = df_array[training_size:len(df_array), :1]
+training_size = int(len(yahooStockOption.ColumnArray) * yahooStockOption.TrainPercent)
+testing_size = len(yahooStockOption.ColumnArray) - training_size
+training_df_array = yahooStockOption.ColumnArray[0:training_size, :]
+testing_df_array = yahooStockOption.ColumnArray[training_size:len(yahooStockOption.ColumnArray), :1]
 print(len(training_df_array))
 print(training_size)
 print(len(testing_df_array))
@@ -90,16 +90,16 @@ math.sqrt(mean_squared_error(y_testing_df_array, testing_predict_array))
 ### Plotting
 # shift train predictions for plotting
 look_back = 100
-trainPredictPlot: ndarray = np.empty_like(df_array)
+trainPredictPlot: ndarray = np.empty_like(yahooStockOption.ColumnArray)
 trainPredictPlot[:, :] = np.nan
 trainPredictPlot[look_back:len(training_predict_array) + look_back, :] = training_predict_array
 # shift test predictions for plotting
-testPredictPlot: ndarray = np.empty_like(df_array)
+testPredictPlot: ndarray = np.empty_like(yahooStockOption.ColumnArray)
 testPredictPlot[:, :] = np.nan
-testPredictPlot[len(training_predict_array) + (look_back * 2) + 1:len(df_array) - 1, :] = testing_predict_array
+testPredictPlot[len(training_predict_array) + (look_back * 2) + 1:len(yahooStockOption.ColumnArray) - 1, :] = testing_predict_array
 print(trainPredictPlot.shape)
 # plot baseline and predictions
-df_array_plot = yahooStockOption.MinMaxScale.inverse_transform(df_array)
+df_array_plot = yahooStockOption.MinMaxScale.inverse_transform(yahooStockOption.ColumnArray)
 plt.plot(df_array_plot)
 plt.plot(trainPredictPlot)
 plt.plot(testPredictPlot)
@@ -148,17 +148,17 @@ while i < 30:
         lst_output.extend(yhat.tolist())
         i = i + 1
 print(len(lst_output))
-print(df_array.shape)
-print(len(df_array))
-print(len(df_array[1158:]))
+print(yahooStockOption.ColumnArray.shape)
+print(len(yahooStockOption.ColumnArray))
+print(len(yahooStockOption.ColumnArray[1158:]))
 day_new = np.arange(1, 101)
 day_pred = np.arange(101, 131)
 
-df_array_new_plot = yahooStockOption.MinMaxScale.inverse_transform(df_array[1158:])
+df_array_new_plot = yahooStockOption.MinMaxScale.inverse_transform(yahooStockOption.ColumnArray[1158:])
 plt.plot(day_new, df_array_new_plot)
 exit(111)
 plt.plot(day_pred, yahooStockOption.MinMaxScale.inverse_transform(lst_output))
-df3 = df_array.tolist()
+df3 = yahooStockOption.ColumnArray.tolist()
 df3.extend(lst_output)
 plt.plot(df3[1200:])
 df3 = yahooStockOption.MinMaxScale.inverse_transform(df3).tolist()

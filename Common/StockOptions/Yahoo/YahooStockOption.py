@@ -23,6 +23,7 @@ class YahooStockOption(AbstractStockOption):
     _length: int = -1
     _training_percent: int = 0.8
     _min_max_scaler: MinMaxScaler
+    _column_array: ndarray
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
     SimpleAnnually: pd.DataFrame
@@ -139,6 +140,10 @@ class YahooStockOption(AbstractStockOption):
         return self._column_series
 
     @property
+    def ColumnArray(self):
+        return self._column_array
+
+    @property
     def TrainPercent(self):
         return self._training_percent
 
@@ -216,6 +221,7 @@ class YahooStockOption(AbstractStockOption):
         self._period_days = 60
         self._min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
         self._column_series = self._historical.reset_index()[self._column]
+        self._column_array = self._min_max_scaler.fit_transform(np.array(self._column_series).reshape(-1, 1))
         '''df = a_df.copy()
         data_training = df[:self._train_size].copy()
         data_training = data_training.drop(self.Column, inplace=False, axis=1)
