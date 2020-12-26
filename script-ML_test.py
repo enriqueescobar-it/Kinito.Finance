@@ -24,35 +24,42 @@ from sklearn.preprocessing import MinMaxScaler
 minMaxScaler = MinMaxScaler(feature_range=(0, 1))
 df_array: ndarray = minMaxScaler.fit_transform(np.array(df_serie).reshape(-1, 1))
 print(type(df_array))
-exit(111)
+
 ##splitting dataset into train and test split
 training_size = int(len(df_array) * 0.80)
 testing_size = len(df_array) - training_size
-train_data = df_array[0:training_size, :]
-test_data = df_array[training_size:len(df_array), :1]
-print(train_data)
+training_data = df_array[0:training_size, :]
+testing_data = df_array[training_size:len(df_array), :1]
+print(len(training_data))
+print(training_size)
+print(len(testing_data))
+print(testing_size)
+
 import numpy
 
 
-# convert an array of values into a dataset matrix
-def create_dataset(dataset, time_step=1):
-    dataX, dataY = [], []
-    for i in range(len(dataset) - time_step - 1):
-        a = dataset[i:(i + time_step), 0]  ###i=0, 0,1,2,3-----99   100
+# convert an array of values into a data set matrix
+def create_data_set(data_set, time_step_count: int = 1) -> ndarray:
+    dataX = []
+    dataY = []
+    for i in range(len(data_set) - time_step_count - 1):
+        a = data_set[i:(i + time_step_count), 0]  ###i=0, 0,1,2,3-----99   100
         dataX.append(a)
-        dataY.append(dataset[i + time_step, 0])
+        dataY.append(data_set[i + time_step_count, 0])
     return numpy.array(dataX), numpy.array(dataY)
 
 
 # reshape into X=t,t+1,t+2,t+3 and Y=t+4
 time_step = 100
-X_train, y_train = create_dataset(train_data, time_step)
-X_test, ytest = create_dataset(test_data, time_step)
+X_train, y_train = create_data_set(training_data, time_step)
+X_test, ytest = create_data_set(testing_data, time_step)
 print('X_train', X_train.shape)
 print('y_train', y_train.shape)
 print('y_train', y_train.size)
 print('X_test', X_test.shape)
 print('ytest', ytest.shape)
+
+exit(111)
 
 # reshape input to be [samples, time steps, features] which is required for LSTM
 X_train = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
@@ -102,11 +109,11 @@ testPredictPlot[:, :] = numpy.nan
 testPredictPlot[len(train_predict) + (look_back * 2) + 1:len(df_array) - 1, :] = test_predict
 # plot baseline and predictions
 # plt.plot(minMaxScaler.inverse_transform(df1))
-#plt.plot(trainPredictPlot)
-#plt.plot(testPredictPlot)
+# plt.plot(trainPredictPlot)
+# plt.plot(testPredictPlot)
 plt.show()
-print(len(test_data))
-x_input = test_data[341:].reshape(1, -1)
+print(len(testing_data))
+x_input = testing_data[341:].reshape(1, -1)
 temp_input = list(x_input)
 temp_input = temp_input[0].tolist()
 # demonstrate prediction for next 10 days
