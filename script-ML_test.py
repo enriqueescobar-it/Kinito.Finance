@@ -118,7 +118,9 @@ print(len(testing_predict_array))
 print(len(x_testing_df_array))
 print(len(testing_df_array))
 print(testing_size)
-x_input = testing_df_array[341:].reshape(1, -1)
+print(testing_df_array[testing_size-100:])
+print(testing_df_array[testing_size-100:].reshape(1, -1))
+x_input = testing_df_array[testing_size-100:].reshape(1, -1)
 temp_input = list(x_input)
 temp_input = temp_input[0].tolist()
 # demonstrate prediction for next 10 days
@@ -126,15 +128,16 @@ lst_output = []
 n_steps: int = 100
 i: int = 0
 while i < 30:
+    print('i:', i)
     if len(temp_input) > 100:
         # print(temp_input)
         x_input = np.array(temp_input[1:])
-        print("{} day input {}".format(i, x_input))
+        print("{} day input {}".format(i, len(x_input)))
         x_input = x_input.reshape(1, -1)
         x_input = x_input.reshape((1, n_steps, 1))
         # print(x_input)
         yhat = model.predict(x_input, verbose=0)
-        print("{} day output {}".format(i, yhat))
+        print("{} day output {}".format(i, len(yhat)))
         temp_input.extend(yhat[0].tolist())
         temp_input = temp_input[1:]
         # print(temp_input)
@@ -142,20 +145,28 @@ while i < 30:
         i = i + 1
     else:
         x_input = x_input.reshape((1, n_steps, 1))
+        print('else x_input', len(x_input))
         yhat = model.predict(x_input, verbose=0)
-        print(yhat[0])
+        print('yhat', len(yhat[0]))
         temp_input.extend(yhat[0].tolist())
-        print(len(temp_input))
+        print('temp_input', len(temp_input))
         lst_output.extend(yhat.tolist())
         i = i + 1
-print(lst_output)
+print(len(lst_output))
+print(df_array.shape)
+print(len(df_array))
+print(len(df_array[1158:]))
 day_new = np.arange(1, 101)
 day_pred = np.arange(101, 131)
 
-plt.plot(day_new, minMaxScaler.inverse_transform(df_array[1158:]))
+df_array_new_plot = minMaxScaler.inverse_transform(df_array[1158:])
+plt.plot(day_new, df_array_new_plot)
+exit(111)
 plt.plot(day_pred, minMaxScaler.inverse_transform(lst_output))
 df3 = df_array.tolist()
 df3.extend(lst_output)
 plt.plot(df3[1200:])
 df3 = minMaxScaler.inverse_transform(df3).tolist()
 plt.plot(df3)
+
+exit(111)
