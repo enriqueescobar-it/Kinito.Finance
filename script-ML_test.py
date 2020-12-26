@@ -11,21 +11,25 @@ sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOpti
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
-yahooStockOptionPlotter.GraphPlot().show()
 
-df1 = yahooStockOption.DataFrame.reset_index()['Adj Close']
-print(df1)
+from pandas import Series
+
+df_serie: Series = yahooStockOption.DataFrame.reset_index()[yahooStockOption.Column]
+print(type(df_serie))
 ### LSTM are sensitive to the scale of the data. so we apply MinMax scaler
 import numpy as np
+from numpy import ndarray
 from sklearn.preprocessing import MinMaxScaler
 
 minMaxScaler = MinMaxScaler(feature_range=(0, 1))
-df1 = minMaxScaler.fit_transform(np.array(df1).reshape(-1, 1))
-print(df1)
+df_array: ndarray = minMaxScaler.fit_transform(np.array(df_serie).reshape(-1, 1))
+print(type(df_array))
+exit(111)
 ##splitting dataset into train and test split
-training_size = int(len(df1) * 0.80)
-test_size = len(df1) - training_size
-train_data, test_data = df1[0:training_size, :], df1[training_size:len(df1), :1]
+training_size = int(len(df_array) * 0.80)
+testing_size = len(df_array) - training_size
+train_data = df_array[0:training_size, :]
+test_data = df_array[training_size:len(df_array), :1]
 print(train_data)
 import numpy
 
@@ -89,13 +93,13 @@ math.sqrt(mean_squared_error(ytest, test_predict))
 ### Plotting
 # shift train predictions for plotting
 look_back = 100
-trainPredictPlot = numpy.empty_like(df1)
+trainPredictPlot = numpy.empty_like(df_array)
 trainPredictPlot[:, :] = np.nan
 trainPredictPlot[look_back:len(train_predict) + look_back, :] = train_predict
 # shift test predictions for plotting
-testPredictPlot = numpy.empty_like(df1)
+testPredictPlot = numpy.empty_like(df_array)
 testPredictPlot[:, :] = numpy.nan
-testPredictPlot[len(train_predict) + (look_back * 2) + 1:len(df1) - 1, :] = test_predict
+testPredictPlot[len(train_predict) + (look_back * 2) + 1:len(df_array) - 1, :] = test_predict
 # plot baseline and predictions
 # plt.plot(minMaxScaler.inverse_transform(df1))
 #plt.plot(trainPredictPlot)
@@ -139,9 +143,9 @@ day_new = np.arange(1, 101)
 day_pred = np.arange(101, 131)
 import matplotlib.pyplot as plt
 
-plt.plot(day_new, minMaxScaler.inverse_transform(df1[1158:]))
+plt.plot(day_new, minMaxScaler.inverse_transform(df_array[1158:]))
 plt.plot(day_pred, minMaxScaler.inverse_transform(lst_output))
-df3 = df1.tolist()
+df3 = df_array.tolist()
 df3.extend(lst_output)
 plt.plot(df3[1200:])
 df3 = minMaxScaler.inverse_transform(df3).tolist()
