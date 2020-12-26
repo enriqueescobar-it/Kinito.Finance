@@ -40,7 +40,6 @@ print(testing_size)
 def create_data_set(data_set: np.array, time_step_count: int = 1) -> ndarray:
     dataX = []
     dataY = []
-    print('data_set', type(data_set))
     for i in range(len(data_set) - time_step_count - 1):
         a = data_set[i:(i + time_step_count), 0]  ###i=0, 0,1,2,3-----99   100
         dataX.append(a)
@@ -61,15 +60,12 @@ print('y_testing_df_array', y_testing_df_array.size)
 
 # reshape input to be [samples, time steps, features] which is required for LSTM
 x_training_df_array = x_training_df_array.reshape(x_training_df_array.shape[0], x_training_df_array.shape[1], 1)
-print('x_training_df_array', x_training_df_array)
 x_testing_df_array = x_testing_df_array.reshape(x_testing_df_array.shape[0], x_testing_df_array.shape[1], 1)
 ### Create the Stacked LSTM model
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import LSTM
-
-exit(111)
 
 model = Sequential()
 model.add(LSTM(50, return_sequences=True, input_shape=(100, 1)))
@@ -80,34 +76,35 @@ model.compile(loss='mean_squared_error', optimizer='adam')
 model.summary()
 model.summary()
 model.fit(x_training_df_array, y_training_df_array, validation_data=(x_testing_df_array, y_testing_df_array), epochs=100, batch_size=64, verbose=1)
-
 print(tf.__version__)
 ### Lets Do the prediction and check performance metrics
-train_predict = model.predict(x_training_df_array)
-test_predict = model.predict(x_testing_df_array)
+training_predict_array: ndarray = model.predict(x_training_df_array)
+testing_predict_array: ndarray = model.predict(x_testing_df_array)
 ##Transformback to original form
-train_predict = minMaxScaler.inverse_transform(train_predict)
-test_predict = minMaxScaler.inverse_transform(test_predict)
+training_predict_array = minMaxScaler.inverse_transform(training_predict_array)
+testing_predict_array = minMaxScaler.inverse_transform(testing_predict_array)
+
+exit(111)
 
 ### Calculate RMSE performance metrics
 import math
 import matplotlib as plt
 from sklearn.metrics import mean_squared_error
 
-math.sqrt(mean_squared_error(y_training_df_array, train_predict))
+math.sqrt(mean_squared_error(y_training_df_array, training_predict_array))
 
 ### Test Data RMSE
-math.sqrt(mean_squared_error(y_testing_df_array, test_predict))
+math.sqrt(mean_squared_error(y_testing_df_array, testing_predict_array))
 ### Plotting
 # shift train predictions for plotting
 look_back = 100
-trainPredictPlot = numpy.empty_like(df_array)
+trainPredictPlot = np.empty_like(df_array)
 trainPredictPlot[:, :] = np.nan
-trainPredictPlot[look_back:len(train_predict) + look_back, :] = train_predict
+trainPredictPlot[look_back:len(training_predict_array) + look_back, :] = training_predict_array
 # shift test predictions for plotting
-testPredictPlot = numpy.empty_like(df_array)
-testPredictPlot[:, :] = numpy.nan
-testPredictPlot[len(train_predict) + (look_back * 2) + 1:len(df_array) - 1, :] = test_predict
+testPredictPlot = np.empty_like(df_array)
+testPredictPlot[:, :] = np.nan
+testPredictPlot[len(training_predict_array) + (look_back * 2) + 1:len(df_array) - 1, :] = testing_predict_array
 # plot baseline and predictions
 # plt.plot(minMaxScaler.inverse_transform(df1))
 # plt.plot(trainPredictPlot)
