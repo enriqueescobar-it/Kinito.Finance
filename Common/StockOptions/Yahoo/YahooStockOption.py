@@ -21,6 +21,8 @@ class YahooStockOption(AbstractStockOption):
     _train_size: int = -1
     _test_size: int = -1
     _length: int = -1
+    _training_percent: int = 0.8
+    _min_max_scaler: MinMaxScaler
     DataSimpleReturns: pd.DataFrame
     DataLogReturns: pd.DataFrame
     SimpleAnnually: pd.DataFrame
@@ -88,7 +90,7 @@ class YahooStockOption(AbstractStockOption):
         self._data['Binary'] = self._setBinarizer(self._historical)
         self._data['Sparse'] = self._setSparser(self._historical)
         self._data['Scaled'] = self._setScaler(self._historical)
-        #self._setPreProcessing(self._historical)
+        self._setPreProcessing(self._historical)
         self.DataSimpleReturns = self._setSimpleReturns('', self._historical)
         self.DataSimpleReturns = self._setSimpleReturnsPlus(self.DataSimpleReturns)
         self._data['IsOutlier'] = self.DataSimpleReturns.IsOutlier.astype(bool)
@@ -133,12 +135,20 @@ class YahooStockOption(AbstractStockOption):
         return self._x_train_array
 
     @property
+    def TrainPercent(self):
+        return self._training_percent
+
+    @property
     def TrainSize(self):
         return self._train_size
 
     @property
     def Length(self):
         return self._length
+
+    @property
+    def MinMaxScale(self):
+        return self._min_max_scaler
 
     def _getOutliers(self, a_df: pd.DataFrame, n_sigmas: int = 3):
         a_df['IsOutlier'] = pd.Series(dtype=int)
@@ -197,11 +207,11 @@ class YahooStockOption(AbstractStockOption):
 
     def _setPreProcessing(self, a_df: pd.DataFrame()):
         self._length = len(a_df)
-        self._train_size = int(self._length * 0.8)
+        self._train_size = int(self._length * self._training_percent)
         self._test_size = self._length - self._train_size
         self._period_days = 60
-        minMaxScaler: MinMaxScaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-        df = a_df.copy()
+        self._min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+        '''df = a_df.copy()
         data_training = df[:self._train_size].copy()
         data_training = data_training.drop(self.Column, inplace=False, axis=1)
         data_training = minMaxScaler.fit_transform(data_training)
@@ -279,7 +289,7 @@ class YahooStockOption(AbstractStockOption):
         print(len(self._x_test_array))
         exit(123)
         # self._x_test_array = self._x_scaled_array[self._split : self._length]
-        exit(123)
+        exit(123)'''
 
     def _setSimpleReturns(self, a_letter: str = '', a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         new_df: pd.DataFrame() = pd.DataFrame()

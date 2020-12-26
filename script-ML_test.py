@@ -21,12 +21,12 @@ import numpy as np
 from numpy import ndarray
 from sklearn.preprocessing import MinMaxScaler
 
-minMaxScaler = MinMaxScaler(feature_range=(0, 1))
+minMaxScaler: MinMaxScaler = yahooStockOption.MinMaxScale
 df_array: ndarray = minMaxScaler.fit_transform(np.array(df_serie).reshape(-1, 1))
 print(type(df_array))
 
 ##splitting dataset into train and test split
-training_size = int(len(df_array) * 0.80)
+training_size = int(len(df_array) * yahooStockOption.TrainPercent)
 testing_size = len(df_array) - training_size
 training_df_array = df_array[0:training_size, :]
 testing_df_array = df_array[training_size:len(df_array), :1]
