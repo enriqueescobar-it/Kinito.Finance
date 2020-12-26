@@ -50,23 +50,26 @@ def create_data_set(data_set: np.array, time_step_count: int = 1) -> ndarray:
 
 # reshape into X=t,t+1,t+2,t+3 and Y=t+4
 time_step = 100
-X_train, y_train = create_data_set(training_df_array, time_step)
-X_test, ytest = create_data_set(testing_df_array, time_step)
-print('X_train', X_train.shape)
-print('y_train', y_train.shape)
-print('y_train', y_train.size)
-print('X_test', X_test.shape)
-print('ytest', ytest.shape)
-
-exit(111)
+x_training_df_array, y_training_df_array = create_data_set(training_df_array, time_step)
+x_testing_df_array, y_testing_df_array = create_data_set(testing_df_array, time_step)
+print('x_training_df_array', x_training_df_array.shape)
+print('y_training_df_array', y_training_df_array.shape)
+print('y_training_df_array', y_training_df_array.size)
+print('x_testing_df_array', x_testing_df_array.shape)
+print('y_testing_df_array', y_testing_df_array.shape)
+print('y_testing_df_array', y_testing_df_array.size)
 
 # reshape input to be [samples, time steps, features] which is required for LSTM
-X_train = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
-X_test = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
+x_training_df_array = x_training_df_array.reshape(x_training_df_array.shape[0], x_training_df_array.shape[1], 1)
+print('x_training_df_array', x_training_df_array)
+x_testing_df_array = x_testing_df_array.reshape(x_testing_df_array.shape[0], x_testing_df_array.shape[1], 1)
 ### Create the Stacked LSTM model
+import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.layers import LSTM
+
+exit(111)
 
 model = Sequential()
 model.add(LSTM(50, return_sequences=True, input_shape=(100, 1)))
@@ -76,13 +79,12 @@ model.add(Dense(1))
 model.compile(loss='mean_squared_error', optimizer='adam')
 model.summary()
 model.summary()
-model.fit(X_train, y_train, validation_data=(X_test, ytest), epochs=100, batch_size=64, verbose=1)
-import tensorflow as tf
+model.fit(x_training_df_array, y_training_df_array, validation_data=(x_testing_df_array, y_testing_df_array), epochs=100, batch_size=64, verbose=1)
 
 print(tf.__version__)
 ### Lets Do the prediction and check performance metrics
-train_predict = model.predict(X_train)
-test_predict = model.predict(X_test)
+train_predict = model.predict(x_training_df_array)
+test_predict = model.predict(x_testing_df_array)
 ##Transformback to original form
 train_predict = minMaxScaler.inverse_transform(train_predict)
 test_predict = minMaxScaler.inverse_transform(test_predict)
@@ -92,10 +94,10 @@ import math
 import matplotlib as plt
 from sklearn.metrics import mean_squared_error
 
-math.sqrt(mean_squared_error(y_train, train_predict))
+math.sqrt(mean_squared_error(y_training_df_array, train_predict))
 
 ### Test Data RMSE
-math.sqrt(mean_squared_error(ytest, test_predict))
+math.sqrt(mean_squared_error(y_testing_df_array, test_predict))
 ### Plotting
 # shift train predictions for plotting
 look_back = 100
