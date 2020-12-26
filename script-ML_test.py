@@ -28,31 +28,30 @@ print(type(df_array))
 ##splitting dataset into train and test split
 training_size = int(len(df_array) * 0.80)
 testing_size = len(df_array) - training_size
-training_data = df_array[0:training_size, :]
-testing_data = df_array[training_size:len(df_array), :1]
-print(len(training_data))
+training_df_array = df_array[0:training_size, :]
+testing_df_array = df_array[training_size:len(df_array), :1]
+print(len(training_df_array))
 print(training_size)
-print(len(testing_data))
+print(len(testing_df_array))
 print(testing_size)
-
-import numpy
 
 
 # convert an array of values into a data set matrix
-def create_data_set(data_set, time_step_count: int = 1) -> ndarray:
+def create_data_set(data_set: np.array, time_step_count: int = 1) -> ndarray:
     dataX = []
     dataY = []
+    print('data_set', type(data_set))
     for i in range(len(data_set) - time_step_count - 1):
         a = data_set[i:(i + time_step_count), 0]  ###i=0, 0,1,2,3-----99   100
         dataX.append(a)
         dataY.append(data_set[i + time_step_count, 0])
-    return numpy.array(dataX), numpy.array(dataY)
+    return np.array(dataX), np.array(dataY)
 
 
 # reshape into X=t,t+1,t+2,t+3 and Y=t+4
 time_step = 100
-X_train, y_train = create_data_set(training_data, time_step)
-X_test, ytest = create_data_set(testing_data, time_step)
+X_train, y_train = create_data_set(training_df_array, time_step)
+X_test, ytest = create_data_set(testing_df_array, time_step)
 print('X_train', X_train.shape)
 print('y_train', y_train.shape)
 print('y_train', y_train.size)
@@ -112,8 +111,8 @@ testPredictPlot[len(train_predict) + (look_back * 2) + 1:len(df_array) - 1, :] =
 # plt.plot(trainPredictPlot)
 # plt.plot(testPredictPlot)
 plt.show()
-print(len(testing_data))
-x_input = testing_data[341:].reshape(1, -1)
+print(len(testing_df_array))
+x_input = testing_df_array[341:].reshape(1, -1)
 temp_input = list(x_input)
 temp_input = temp_input[0].tolist()
 # demonstrate prediction for next 10 days
