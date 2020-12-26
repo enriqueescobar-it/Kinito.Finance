@@ -4,7 +4,7 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
-yahooStockOption: YahooStockOption = YahooStockOption('ESTC')
+yahooStockOption: YahooStockOption = YahooStockOption('AAPL')
 print(yahooStockOption.DataFrame.describe(include='all'))
 
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
@@ -83,43 +83,48 @@ testing_predict_array: ndarray = model.predict(x_testing_df_array)
 ##Transformback to original form
 training_predict_array = minMaxScaler.inverse_transform(training_predict_array)
 testing_predict_array = minMaxScaler.inverse_transform(testing_predict_array)
-
-exit(111)
-
 ### Calculate RMSE performance metrics
 import math
-import matplotlib as plt
+#import matplotlib as plt
+from matplotlib import pyplot as plt
 from sklearn.metrics import mean_squared_error
 
-math.sqrt(mean_squared_error(y_training_df_array, training_predict_array))
+print(math.sqrt(mean_squared_error(y_training_df_array, training_predict_array)))
 
 ### Test Data RMSE
 math.sqrt(mean_squared_error(y_testing_df_array, testing_predict_array))
 ### Plotting
 # shift train predictions for plotting
 look_back = 100
-trainPredictPlot = np.empty_like(df_array)
+trainPredictPlot: ndarray = np.empty_like(df_array)
 trainPredictPlot[:, :] = np.nan
 trainPredictPlot[look_back:len(training_predict_array) + look_back, :] = training_predict_array
 # shift test predictions for plotting
-testPredictPlot = np.empty_like(df_array)
+testPredictPlot: ndarray = np.empty_like(df_array)
 testPredictPlot[:, :] = np.nan
 testPredictPlot[len(training_predict_array) + (look_back * 2) + 1:len(df_array) - 1, :] = testing_predict_array
+print(trainPredictPlot.shape)
 # plot baseline and predictions
-# plt.plot(minMaxScaler.inverse_transform(df1))
-# plt.plot(trainPredictPlot)
-# plt.plot(testPredictPlot)
+df_array_plot = minMaxScaler.inverse_transform(df_array)
+plt.plot(df_array_plot)
+plt.plot(trainPredictPlot)
+plt.plot(testPredictPlot)
 plt.show()
+print('EQUAL', training_size == len(x_training_df_array))
+print('EQUAL', len(training_predict_array) == len(x_training_df_array))
+print('EQUAL', testing_size == len(x_testing_df_array))
+print('EQUAL', len(testing_predict_array) == len(x_testing_df_array))
+print(len(testing_predict_array))
+print(len(x_testing_df_array))
 print(len(testing_df_array))
+print(testing_size)
 x_input = testing_df_array[341:].reshape(1, -1)
 temp_input = list(x_input)
 temp_input = temp_input[0].tolist()
 # demonstrate prediction for next 10 days
-from numpy import array
-
 lst_output = []
-n_steps = 100
-i = 0
+n_steps: int = 100
+i: int = 0
 while i < 30:
     if len(temp_input) > 100:
         # print(temp_input)
@@ -146,7 +151,6 @@ while i < 30:
 print(lst_output)
 day_new = np.arange(1, 101)
 day_pred = np.arange(101, 131)
-import matplotlib.pyplot as plt
 
 plt.plot(day_new, minMaxScaler.inverse_transform(df_array[1158:]))
 plt.plot(day_pred, minMaxScaler.inverse_transform(lst_output))
