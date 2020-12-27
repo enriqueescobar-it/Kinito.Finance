@@ -1,4 +1,3 @@
-from Common.Plotters.HistoricalPlotter import HistoricalPlotter
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
 from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
@@ -9,8 +8,7 @@ print(yahooStockOption.DataFrame.describe(include='all'))
 
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
-
-yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
+#yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 
 ### LSTM are sensitive to the scale of the data. so we apply MinMax scaler
 import numpy as np
@@ -30,7 +28,6 @@ print('TestSize', yahooStockOption.TestSize)
 print(type(yahooStockOption.ColumnTestArray))
 print(yahooStockOption.ColumnTestArray.shape)
 print(len(yahooStockOption.ColumnTestArray))
-exit(555)
 
 # convert an array of values into a data set matrix
 def create_data_set(data_set: np.array, time_step_count: int = 1) -> ndarray:
@@ -48,15 +45,26 @@ time_step = 100
 x_training_df_array, y_training_df_array = create_data_set(yahooStockOption.ColumnTrainArray, time_step)
 x_testing_df_array, y_testing_df_array = create_data_set(yahooStockOption.ColumnTestArray, time_step)
 print('x_training_df_array', x_training_df_array.shape)
+print('x_training_df_array', x_training_df_array.size)
 print('y_training_df_array', y_training_df_array.shape)
 print('y_training_df_array', y_training_df_array.size)
 print('x_testing_df_array', x_testing_df_array.shape)
+print('x_testing_df_array', x_testing_df_array.size)
 print('y_testing_df_array', y_testing_df_array.shape)
 print('y_testing_df_array', y_testing_df_array.size)
 
 # reshape input to be [samples, time steps, features] which is required for LSTM
 x_training_df_array = x_training_df_array.reshape(x_training_df_array.shape[0], x_training_df_array.shape[1], 1)
 x_testing_df_array = x_testing_df_array.reshape(x_testing_df_array.shape[0], x_testing_df_array.shape[1], 1)
+print('x_training_df_array', x_training_df_array.shape)
+print('x_training_df_array', x_training_df_array.size)
+print('y_training_df_array', y_training_df_array.shape)
+print('y_training_df_array', y_training_df_array.size)
+print('x_testing_df_array', x_testing_df_array.shape)
+print('x_testing_df_array', x_testing_df_array.size)
+print('y_testing_df_array', y_testing_df_array.shape)
+print('y_testing_df_array', y_testing_df_array.size)
+exit(555)
 ### Create the Stacked LSTM model
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
