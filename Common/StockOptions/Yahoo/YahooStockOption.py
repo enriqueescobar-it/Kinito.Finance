@@ -23,6 +23,9 @@ class YahooStockOption(AbstractStockOption):
     _length: int = -1
     _training_percent: int = 0.8
     _min_max_scaler: MinMaxScaler
+    _column_series_loc: pd.Series
+    _column_series: pd.Series
+    _date_series: pd.Series
     _column_array: ndarray
     _column_train_array: ndarray
     _column_test_array: ndarray
@@ -138,6 +141,10 @@ class YahooStockOption(AbstractStockOption):
         return self._x_train_array
 
     @property
+    def ColumnLocSeries(self):
+        return self._column_series_loc
+
+    @property
     def ColumnSeries(self):
         return self._column_series
 
@@ -152,6 +159,10 @@ class YahooStockOption(AbstractStockOption):
     @property
     def ColumnTrainArray(self):
         return self._column_train_array
+
+    @property
+    def DateSeries(self):
+        return self._date_series
 
     @property
     def TrainPercent(self):
@@ -234,7 +245,9 @@ class YahooStockOption(AbstractStockOption):
         self._test_size = self._length - self._train_size
         self._period_days = 60
         self._min_max_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+        self._column_series_loc = self._historical.loc[:, self._column]
         self._column_series = self._historical.reset_index()[self._column]
+        self._date_series = self._historical.reset_index()['Date']
         self._column_array = self._min_max_scaler.fit_transform(np.array(self._column_series).reshape(-1, 1))
         self._column_train_array = self._column_array[0:self._train_size, :]
         self._column_test_array = self._column_array[self._train_size:len(self._column_array), :1]
