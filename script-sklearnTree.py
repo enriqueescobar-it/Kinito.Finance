@@ -3,7 +3,7 @@ from Common.StockMarketIndex.Yahoo.SnP500Index import SnP500Index
 from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 
-yahooStockOption: YahooStockOption = YahooStockOption('KO')
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')
 print(yahooStockOption.DataFrame.describe(include='all'))
 
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
@@ -19,6 +19,7 @@ from sklearn.metrics import accuracy_score
 from sklearn import tree
 #from sklearn.externals import joblib
 import joblib
+import matplotlib.pyplot as plt
 # 20% of data for testing
 print(type(yahooStockOption.DataFrame.loc[:, 'Adj Close']))
 print(type(yahooStockOption.DataFrame[['Adj Close']]))
@@ -44,18 +45,40 @@ y = y[:-forecast_count]
 # 80% training 20% testing
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 X_forecast = np.array(df_1.drop(['Prediction'], 1))[-forecast_count:]
-svr_rbf: SVR = SVR(kernel='rbf', C=1e3, gamma=0.1)
+# LIN
+svr_lin: SVR = SVR(kernel='linear', C=1e3)
+svr_lin.fit(X_train, y_train)
+confidence_lin = svr_lin.score(X_test, y_test)
+print('svr_lin', confidence_lin)
+prediction_lin = svr_lin.predict(X_forecast)
+print(prediction_lin)
+# POLY
+svr_poly: SVR = SVR(kernel='poly', C=1e3, degree=2)
+svr_poly.fit(X_train, y_train)
+confidence_poly = svr_poly.score(X_test, y_test)
+print('svr_poly', confidence_poly)
+prediction_poly = svr_poly.predict(X_forecast)
+print(prediction_poly)
+# RBF
+svr_rbf: SVR = SVR(kernel='rbf', C=1e3, gamma=0.1)#0.85
 svr_rbf.fit(X_train, y_train)
 confidence_rbf = svr_rbf.score(X_test, y_test)
 print('svr_rbf', confidence_rbf)
 prediction_rbf = svr_rbf.predict(X_forecast)
 print(prediction_rbf)
+# LIN REG
 lin_reg = LinearRegression()
 lin_reg.fit(X_train, y_train)
 confidence_lreg = lin_reg.score(X_test, y_test)
 print('lin_reg', confidence_lreg)
 prediction_lreg = lin_reg.predict(X_forecast)
 print(prediction_lreg)
+# PLOT
+plt.figure(figsize=(8, 6))
+plt.scatter(df_0.index, df_0)
+plt.plot(df_0.index, lin_reg.predict(X_train), color='green', label='lin_reg')
+plt.legend()
+plt.show()
 exit(1980)
 #model = joblib('model.joblib')
 model = DecisionTreeClassifier()
