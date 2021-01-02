@@ -63,7 +63,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('Skewness\n', self._final.SkewnessSeries)
         print('Frequency\n', self._final.Frequency)
         self._final.Plot().show()
-        #exit(1234)
+        exit(1234)
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252

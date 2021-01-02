@@ -416,6 +416,7 @@ class YahooStockOption(AbstractStockOption):
     def _setYahooFinance(self, a_ticker: str = 'TD'):
         self._y_finance_engine = YahooFinanceEngine(a_ticker)
         t = PrettyTable()
+        t.add_column('_', self._y_finance_engine.InfoLabels)
         t.add_column(a_ticker, self._y_finance_engine.InfoList)
         print(t)
         self.YeUrl = self._y_finance_engine.Url
