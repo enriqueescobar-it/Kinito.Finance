@@ -55,7 +55,7 @@ exit(444)
 sns.pairplot(yahooPc.Data)
 plt.show()
 print('data', yahooPc.Data.shape)
-len80: int = ceil(round(len(yahooPc.Data) * 0.8, 0))
+len80: int = round(len(yahooPc.Data) * 0.8, 0)
 print(len80)
 X = yahooPc.Data.iloc[:, 0][0:len80]
 y = yahooPc.Data.iloc[:, 0][len80:]

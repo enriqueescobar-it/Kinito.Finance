@@ -22,10 +22,10 @@ class PortfolioBasics(AbstractPortfolioMeasure):
     def __init__(self, y_stocks: list, a_float: float, legend_place: str):
         self._size = a_float
         self._legend_place = legend_place
-        self._column = y_stocks[0].SourceColumn
+        self._column = y_stocks[0].Column
         for y_stock in y_stocks:
             self._a_title += y_stock.Ticker + ' '
-            self._data[y_stock.Ticker + y_stock.SourceColumn] = y_stock.Data[y_stock.SourceColumn]
+            self._data[y_stock.Ticker + y_stock.Column] = y_stock.Data[y_stock.Column]
             self._dataBin[y_stock.Ticker + 'Binary'] = y_stock.Data['Binary']
             self._dataNorm[y_stock.Ticker + 'Norm'] = y_stock.Data['Norm']
             # self._dataNormL1[y_stock.Ticker + 'NormL1'] = y_stock.Data['NormL1']
@@ -34,12 +34,12 @@ class PortfolioBasics(AbstractPortfolioMeasure):
 
         arrayNormL1 = preprocessing.normalize(self._data, norm='l1')
         self._dataNormL1 = DataFrame(arrayNormL1, columns=self._data.columns, index=self._data.index)
-        self._dataNormL1.columns = self._dataNormL1.columns.str.replace(y_stocks[0].SourceColumn, 'NormL1')
+        self._dataNormL1.columns = self._dataNormL1.columns.str.replace(y_stocks[0].Column, 'NormL1')
         arrayScaled = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(self._data)
         self._dataScaled = DataFrame(arrayScaled, columns=self._data.columns, index=self._data.index)
-        self._dataScaled.columns = self._dataScaled.columns.str.replace(y_stocks[0].SourceColumn, 'Scaled')
+        self._dataScaled.columns = self._dataScaled.columns.str.replace(y_stocks[0].Column, 'Scaled')
         self._dataSparse = DataFrame(preprocessing.scale(self._data), columns=self._data.columns, index=self._data.index)
-        self._dataSparse.columns = self._dataSparse.columns.str.replace(y_stocks[0].SourceColumn, 'Sparse')
+        self._dataSparse.columns = self._dataSparse.columns.str.replace(y_stocks[0].Column, 'Sparse')
         self._dataSimpleReturns = self._getSimpleReturns(self._data)
         self._dataLogReturns = self._getLogReturns(self._data)
         self._dataDailyReturns = self._getDailyReturns(self._data)

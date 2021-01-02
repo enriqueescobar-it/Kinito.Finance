@@ -46,7 +46,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
 
     def __init__(self, y_stocks: list):
         self._a_float = 3 * math.log(y_stocks[0].TimeSpan.MonthCount)
-        self._a_suffix = y_stocks[0].SourceColumn
+        self._a_suffix = y_stocks[0].Column
         self._a_ts = y_stocks[0].TimeSpan
         self._a_length = len(y_stocks)
         iso_weight: float = round(1.0 / len(y_stocks), 3)
@@ -63,7 +63,7 @@ class PortfolioComparator(AbstractPortfolioComparator):
         print('Skewness\n', self._final.SkewnessSeries)
         print('Frequency\n', self._final.Frequency)
         self._final.Plot().show()
-        exit(1234)
+        #exit(1234)
         self._dataSimpleCorrelation = self._stats.SimpleReturnsNan.corr()
         self._dataSimpleCovariance = self._stats.SimpleReturnsNan.cov()
         self._dataSimpleCovarianceAnnual = self._dataSimpleCovariance * 252
