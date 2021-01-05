@@ -71,7 +71,7 @@ class BuffettIndicator(AbstractTechIndicator):
 
     def __setIndexQuarterly(self) -> DataFrame:
         df: DataFrame = self._wilshire_index.Data.copy()
-        df.resample('3M').last()
+        #df.resample('3M').last()
         print('3M', df.columns)
         return df
 

@@ -142,8 +142,7 @@ class HistoricalPlotter(AbstractPlotter):
         return plt
 
     def SnP500Plot(self) -> plt:
-        axe = BuffettIndicator(self._stock_option)
-        axe.PlotData().show()
+        buffettIndicator = BuffettIndicator(self._stock_option)
         a_title: str = self._ticker + ' ' + self._col + ' SnP500 ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
         plt.style.use('seaborn')
@@ -151,12 +150,13 @@ class HistoricalPlotter(AbstractPlotter):
         fig, ax = plt.subplots(2, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
         #ax0
         self._sNp_500.Data.plot(ax=ax[0], label=self._sNp_500.DataNorm.columns)
-        ax[0].set(ylabel='Price USD')
+        ax[0].set(ylabel='Price USD', title=a_title)
         ax[0].legend(loc=self._legend_place)
         #ax1
-        axe.PlotAx(ax[1])
+        buffettIndicator.PlotAx(ax[1])
         ax[1].set(ylabel='Index')
         ax[1].legend(loc=self._legend_place)
+        plt.grid(True)
         plt.tight_layout()
         return plt
 
