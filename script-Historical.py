@@ -169,6 +169,7 @@ indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndic
 #'''
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 yahooStockOptionPlotter.SnP500Plot().show()
+exit(31415)
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()
 #yahooStockOptionPlotter.PlotTimely()

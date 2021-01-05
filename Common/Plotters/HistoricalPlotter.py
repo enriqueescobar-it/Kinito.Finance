@@ -15,6 +15,7 @@ from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
 from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
 from Common.Strategies.TechIndicators.RsiStrategy import RsiStrategy
 from Common.Strategies.TechIndicators.SmaStrategy import SmaStrategy
+from Common.TechIndicators.BuffettIndicator import BuffettIndicator
 from Common.TechIndicators.EmaIndicator import EmaIndicator
 from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
@@ -147,6 +148,8 @@ class HistoricalPlotter(AbstractPlotter):
         plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
         fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
         #ax0
+        axe = BuffettIndicator(self._stock_option)
+        #print('AXE', axe.columns)
         #self._sNp_500.Data.plot(ax[0])
         plt.tight_layout()
         return plt
