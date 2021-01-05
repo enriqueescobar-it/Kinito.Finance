@@ -32,7 +32,7 @@ from Common.StockMarketIndex.Yahoo.Nikkei225Index import Nikkei225Index
 from Common.StockMarketIndex.Yahoo.ShenzhenComponentIndex import ShenzhenComponentIndex
 from Common.StockMarketIndex.Yahoo.NseIndex import NseIndex
 #from Common.StockMarketIndex.Yahoo.Vix3mIndex import Vix3mIndex
-from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
+from Common.Strategies.TechIndicators.AbstractTechStrategy import AbstractTechStrategy
 from Common.Strategies.TechIndicators.EmaStrategy import EmaStrategy
 from Common.Strategies.TechIndicators.MacdStrategy import MacdStrategy
 from Common.Strategies.TechIndicators.RsiStrategy import RsiStrategy
@@ -43,7 +43,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('RNW.TO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
+yahooStockOption: YahooStockOption = YahooStockOption('SHOP.TO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%]
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -67,8 +67,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('RNW.TO')#'ESTC')XWEB DDOG
 # ETSY ESTC VYM - VGT - VTI - VPU / ARKK ARKG ARKQ ARKW
 # BND-- <= VXUS- <= BNDX-- <= VNQ- <= VBK <= VYM <= VPU <= VOT ~ VTI <= VIG <= MGK ~ VOO ~ VOOG
 # VYM VTSAX/ SWTSX/ FZROX index vs. VTI/ SCHB ETF, VFIAX/ SWPPX/ VXAIX index vs. VOO/ SCHX
-# FZROX FZILX FSRNX
-# VTSAX
+# FZROX/ VTSAX FZILX/ VTI FSRNX/ VNQ
 # [NFLX, NKE, AMZN] [MRNA, MSFT, CAT] [T, XOM, MO]
 # 60% StockMarketFund (FZROX~SWTSX~VTSAX) 20% InternationalFund (FZILX~SWISX~VTIAX) 20% REITFund (FSRNX)
 # Sector ETFs: VGT VPU VDC VYM
@@ -83,22 +82,22 @@ yahooStockOption: YahooStockOption = YahooStockOption('RNW.TO')#'ESTC')XWEB DDOG
 # APHA+ ASAN ARKF ARKK AVAV AVGO++ AVB AYX++ AZN AIVSX+ AEM+ AEM.TO+ AWK+ ANET+ AT.TO ATZ.TO. ACO-X.TO+ ARKG+ A++ ACO-X.TO.
 # BA BCE BCE.TO. BNS BPY BABA++ BIDU- BBBY BNTX BRK-B BRKA BRKB BRTXQ BYND BNS.TO. BIP+ BZUN+ BILI++ BEP+ BYND+ BAM-A.TO+ BMO.TO. BTI- BMY-
 # CAG CAT CCA CCA.TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL- CLX CM CNI CSU.TO CSX CVD CMCSA COST+ CP CRM CSCO+ CDNS CNQ.TO CSIQ CELH+ CM+
-# CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++ CARR++ CB- CU.TO. CRSP++++++ C. CLNE.
+# CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++ CARR++ CB- CU.TO. CRSP++++++ C. CLNE. CMCSA+
 # DCBO.TO DND.TO DLHC DDOG DKNG+ DDOG+ DOL.TO+ DND.TO+ DIS- DHR+++ DTE+ DE++ DOCU+3
 # EMR+ ENB- ENB.TO- ESS ESTC+ ESPO EMA.TO ET ETSY+10 ENGH.TO+ ENPH+ EEM EQB.TO+ ELY+ ESS- EPD+ EB. ENPH+25
 # F FD.TO FF.TO FFMG FENY FIE FIVG FROG FSLR FSLY++ FSRNX FSZ FTS+ FTS.TO+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE- FRT-
 # GE. GD. GM GFI++ GIS GLD GLW GMF GNW GRWG GILD GBTC GAMR GSY.TO+ GOOD GXC+ GOOG+
-# HD+ HLT HQU HZU HEO.V HII. HLF.TO. HUBS+++
+# HD+ HLT HQU HZU HEO.V HII. HLF.TO. HUBS+++ HRL.
 # IBM IBUY IWFH INTC IPO IIVI IIPR+++++  IVAC IGV+ IBM- IRM+ IT IPFF JKS JD+ JNJ+ JPM+ JNUG JNPR
 # KEY K KXS.TO KDP KL KL.TO KO+ KR KMI- K.TO KXS.TO+
 # LB.TO LMT LMND LOW+ LSPD++ LSPD.TO++ LVGO LOGI+ LAND+ LMND+ LMT+
-# M MA MAIN MELI+ MFI.TO MO- MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO+ MSCI+ NXST MFC.TO. MXIM+ NWC.TO. MDLZ. MDB+6
+# M MA+2 MAIN MELI+ MFI.TO MO- MU MCD- MGM MPW MRK+ MARA MRNA MRVL MSFT+ MWK MDY MRU.TO+ MSCI+ NXST MFC.TO. MXIM+ NWC.TO. MDLZ. MDB+6
 # NEE+ NEM+ NET++ NKE NSP NEAR NFLX+++ NIO++ NLY NLOK NNDM NPI NOBL+ NVEI.TO NVDA+++++ NOW+ NRZ-
 # O+ OTEX OHI O- NWC.TO. OKTA+++++ OKE++ MC-
 # PM- PANW PFE PINS PGX PEP PLAN PLTR PPL PRU- PVD PTON PAWZ PSEC PYPL PCTY+++ PKI.TO PIODX+ PKI.TO+ PINS+ PHO PHM++ POW.TO. PAAS+++ PAYC+6
 # QCOM QQC-f QQQ QRVO QSR.TO+
-# RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO. RIOT RHS QRS.TO REAL.TO ROKU+ RF+ RNW.TO++
-# SU SU.TO. SIS.TO+ SNA SBUX+ SHOP+ SHOP.TO+ SPLK SPYD SJR.B SJR-B.TO SLV+ SNAP SNOW+ SPOT SOXL SRU.UN.TO. SPG SAP SPNS STOR+
+# RBA RCI+ RCI.B.TO+ REAL.TO REGI ROK+ RUN RY+ RY.TO+ RCI.B.TO. RIOT RHS QRS.TO REAL.TO ROKU+ RF+ RNW.TO++ ROP+
+# SU SU.TO. SIS.TO+ SNA SBUX+ SHOP+20 SHOP.TO+20 SPLK SPYD SJR.B SJR-B.TO SLV+ SNAP SNOW+ SPOT SOXL SRU.UN.TO. SPG SAP SPNS STOR+
 # STAG SEDG+ SJR-B.TO SOY.TO. SYK++ STX+ SQ+8
 # T+ T.TO+ TD TDOC+ TEC.TO TAL+ TEAM TFII+ TFII.TO+ TGT- TRMB TSLA+++ TRP TRP.TO TTD+15 TOU.TO TROW TWLO+6 TXN TWST+ TVE.TO. TPB+++ TSN- TSM+
 # U UNM UNP UPWK UNM-
@@ -169,9 +168,9 @@ marketIndices.append(wilshire5kIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
 #'''
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
+yahooStockOptionPlotter.SnP500Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()
-#exit(31415)
 #yahooStockOptionPlotter.PlotTimely()
 #exit(31415)
 #yahooMacdIndicator: MacdIndicator = yahooStockOptionPlotter.MacdInd #MacdIndicator(yahooStockOption)

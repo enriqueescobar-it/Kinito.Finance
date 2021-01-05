@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
-## Monte Carlo - Forecasting Stock Prices - Part I
+## Monte Carlo - Forecasting StockType Prices - Part I
 # *Suggested Answers follow (usually there are multiple ways to solve a problem in Python).*
-# Download the data for Microsoft (‘MSFT’) from Yahoo Finance for the period ‘2000-1-1’ until today.
-# Download the data for Microsoft (‘MSFT’) from IEX for the period ‘2015-1-1’ until today.
-# Forecasting Future Stock Prices – continued:
+# Download the data for Microsoft (ï¿½MSFTï¿½) from Yahoo Finance for the period ï¿½2000-1-1ï¿½ until today.
+# Download the data for Microsoft (ï¿½MSFTï¿½) from IEX for the period ï¿½2015-1-1ï¿½ until today.
+# Forecasting Future StockType Prices ï¿½ continued:
 import numpy as np  
 import pandas as pd  
 from pandas_datareader import data as wb  
@@ -24,7 +24,7 @@ data.plot(figsize=(10, 6));
 log_returns = np.log(1 + data.pct_change())
 log_returns.tail()
 log_returns.plot(figsize = (10, 6))
-# Assign the mean value of the log returns to a variable, called “U”, and their variance to a variable, called “var”. 
+# Assign the mean value of the log returns to a variable, called ï¿½Uï¿½, and their variance to a variable, called ï¿½varï¿½. 
 u = log_returns.mean()
 u
 # In[7]:
@@ -36,11 +36,11 @@ var
 # $$
 drift = u - (0.5 * var)
 drift
-# Store the standard deviation of the log returns in a variable, called “stdev”.
+# Store the standard deviation of the log returns in a variable, called ï¿½stdevï¿½.
 stdev = log_returns.std()
 stdev
 # ******
-# Use “.values” to transform the *drift* and the *stdev* objects into arrays. 
+# Use ï¿½.valuesï¿½ to transform the *drift* and the *stdev* objects into arrays. 
 type(drift)
 drift.values
 # In[4]:
@@ -50,8 +50,8 @@ np.array(drift)
 drift.values
 # In[14]:
 stdev.values
-# Forecast future stock prices for every trading day a year ahead. So, assign 250 to “t_intervals”.
-# Let’s examine 10 possible outcomes. Bind “iterations” to the value of 10.
+# Forecast future stock prices for every trading day a year ahead. So, assign 250 to ï¿½t_intervalsï¿½.
+# Letï¿½s examine 10 possible outcomes. Bind ï¿½iterationsï¿½ to the value of 10.
 t_intervals = 250
 t_intervals = 1000
 iterations = 10
@@ -81,7 +81,7 @@ daily_returns
 # S_{t+999} = S_{t+998} \mathbin{\cdot} daily\_return_{t+999}
 # $$
 # ***
-# Create a variable S0 equal to the last adjusted closing price of Microsoft. Use the “iloc” method.
+# Create a variable S0 equal to the last adjusted closing price of Microsoft. Use the ï¿½ilocï¿½ method.
 S0 = data.iloc[-1]
 S0
 # Create a variable price_list with the same dimension as the daily_returns matrix. 
