@@ -1,4 +1,4 @@
-from Common.Stock.Funds.ExchangeTradedFund import ExchangeTradedFund
+from Common.StockType.Funds.ExchangeTradedFund import ExchangeTradedFund
 
 
 class Dax(ExchangeTradedFund):

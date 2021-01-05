@@ -1,5 +1,5 @@
 from abc import *
-from Common.Stock.AbstractStock import AbstractStock
+from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockEquity(AbstractStock):

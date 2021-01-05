@@ -1,4 +1,4 @@
-from Common.Stock.Funds.ExchangeTradedFund import ExchangeTradedFund
+from Common.StockType.Funds.ExchangeTradedFund import ExchangeTradedFund
 
 
 class Ftse(ExchangeTradedFund):
@@ -9,7 +9,7 @@ class Ftse(ExchangeTradedFund):
     Size: int
 
     def __init__(self):
-        self.LongName = 'Financial Times Stock Exchange 100 Index'
+        self.LongName = 'Financial Times StockType Exchange 100 Index'
         self.ShortName = 'FTSE'
         self.Ticker = '^FTSE'
         self.CapType = 'L'

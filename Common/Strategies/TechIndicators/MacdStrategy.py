@@ -2,11 +2,11 @@ from typing import Tuple
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
+from Common.Strategies.TechIndicators.AbstractTechStrategy import AbstractTechStrategy
 from Common.TechIndicators.MacdIndicator import MacdIndicator
 
 
-class MacdStrategy(AbstractTechIndicatorStrategy):
+class MacdStrategy(AbstractTechStrategy):
     _macd_indicator: MacdIndicator
     _summary: pd.DataFrame
 

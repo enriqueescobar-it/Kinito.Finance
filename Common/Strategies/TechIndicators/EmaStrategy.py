@@ -2,11 +2,11 @@ from typing import Tuple
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
+from Common.Strategies.TechIndicators.AbstractTechStrategy import AbstractTechStrategy
 from Common.TechIndicators.EmaIndicator import EmaIndicator
 
 
-class EmaStrategy(AbstractTechIndicatorStrategy):
+class EmaStrategy(AbstractTechStrategy):
     _ema_indicator: EmaIndicator
 
     def __init__(self, ema_indicator: EmaIndicator):

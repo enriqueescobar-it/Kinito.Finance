@@ -2,11 +2,11 @@ from typing import Tuple
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
+from Common.Strategies.TechIndicators.AbstractTechStrategy import AbstractTechStrategy
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 
 
-class RsiStrategy(AbstractTechIndicatorStrategy):
+class RsiStrategy(AbstractTechStrategy):
     _rsi_indicator: RsiIndicator
     _summary: pd.DataFrame
 

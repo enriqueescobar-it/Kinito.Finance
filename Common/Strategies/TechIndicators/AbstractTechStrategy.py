@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from Common.Strategies.AbstractStrategy import AbstractStrategy
 
 
-class AbstractTechIndicatorStrategy(AbstractStrategy):
+class AbstractTechStrategy(AbstractStrategy):
     _buy_label: str = 'Buy'
     _sell_label: str = 'Sell'
     _col: str
