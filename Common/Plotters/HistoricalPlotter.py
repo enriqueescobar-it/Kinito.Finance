@@ -140,6 +140,17 @@ class HistoricalPlotter(AbstractPlotter):
         plt.tight_layout()
         return plt
 
+    def SnP500Plot(self) -> plt:
+        a_title: str = self._ticker + ' ' + self._col + ' SnP500 ' + str(self._time_span.MonthCount) + ' months'
+        x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
+        fig, ax = plt.subplots(4, 1, figsize=(3 * math.log(self._stock_option.TimeSpan.MonthCount), 5.5), sharex=True)
+        #ax0
+        #self._sNp_500.Data.plot(ax[0])
+        plt.tight_layout()
+        return plt
+
     def GraphPlot(self, s: str = ' Graph ') -> plt:
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
