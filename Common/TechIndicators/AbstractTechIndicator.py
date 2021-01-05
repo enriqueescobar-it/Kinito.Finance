@@ -4,7 +4,7 @@ from abc import *
 from typing import Tuple
 from pandas import DataFrame
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
-from Common.Strategies.TechIndicators.AbstractTechIndicatorStrategy import AbstractTechIndicatorStrategy
+from Common.Strategies.TechIndicators.AbstractTechStrategy import AbstractTechStrategy
 
 
 class AbstractTechIndicator(ABC):
@@ -16,7 +16,7 @@ class AbstractTechIndicator(ABC):
     #['Solarize_Light2', '_classic_test_patch', 'bmh', 'classic', 'dark_background', 'fast', 'fivethirtyeight', 'ggplot', 'grayscale', 'seaborn', 'seaborn-bright', 'seaborn-colorblind', 'seaborn-dark', 'seaborn-dark-palette', 'seaborn-darkgrid', 'seaborn-deep', 'seaborn-muted', 'seaborn-notebook', 'seaborn-paper', 'seaborn-pastel', 'seaborn-poster', 'seaborn-talk', 'seaborn-ticks', 'seaborn-white', 'seaborn-whitegrid', 'tableau-colorblind10']
     _plot_style: str = 'seaborn'
     _x_ticks_angle: int = 45
-    _strategy: AbstractTechIndicatorStrategy
+    _strategy: AbstractTechStrategy
     _fig_size: Tuple[float, float]
     _low_high: Tuple[int, int]
     _main_label: str
