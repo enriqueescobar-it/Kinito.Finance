@@ -23,11 +23,31 @@
       <change afterPath="$PROJECT_DIR$/DL_AZ-ArtNeuNets/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/DSnDL-20CaseStudiesBusiness/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Python4TimeSeries/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Section-10_57-ImportingandOrganizingYourDatainPython-PartIII-Data_01.csv" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TF2KerasDLBootcamp/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/TF_DL-DataSciencePython/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Plotters/HistoricalPlotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/TechIndicators/BuffettIndicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/TechIndicators/BuffettIndicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EodData/Examples/script-find-tsx-yahoo-finance.py" beforeDir="false" afterPath="$PROJECT_DIR$/EodData/Examples/script-find-tsx-yahoo-finance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinViz/Example/StockFileDataFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinViz/Example/StockFileDataFrame.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasBuilt-inDataVisualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasBuilt-inDataVisualization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasDataVisualizationExercise.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/04-Visualization-Matplotlib-Pandas_02-PandasVisualization_PandasDataVisualizationExercise.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/07-Stock-Market-Analysis-Capstone-Project_StockMarketAnalysisProject.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/07-Stock-Market-Analysis-Capstone-Project_StockMarketAnalysisProject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_02-Portfolio-Optimization.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_02-Portfolio-Optimization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_03-CAPM-Capital-Asset-Pricing-Model.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/09-Python-Finance-Fundamentals_03-CAPM-Capital-Asset-Pricing-Model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_01-Quantopian-Research-Basics.py" beforeDir="false" afterPath="$PROJECT_DIR$/FinanceAnalysisAlgoTrading/10-Quantopian-Platform_01-Quantopian-Research-Basics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-17_103-MCPredictingStockPrices-PartI-Lecture_CSV.py" beforeDir="false" afterPath="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-17_103-MCPredictingStockPrices-PartI-Lecture_CSV.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Common.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Ema.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-FinViz.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-ForFinance.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-ForYFinance.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-HistoricalPlotter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Macd.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Sma.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-find-stock-in-yahoo-finance.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-find-stock-in-yahoo-finance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-simple-find-stock-in-yahoo-finance.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-simple-find-stock-in-yahoo-finance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script_.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +100,8 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\Predictors\Tree" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-Historical">
-    <configuration name="script-Historical" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Section-17_103-MCPredictingStockPrices-PartI-Lecture_CSV">
+    <configuration name="Section-17_103-MCPredictingStockPrices-PartI-Lecture_CSV" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -89,11 +109,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Historical.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/InvestmentFundamentalsAndDataAnalytics/Examples/Section-17_103-MCPredictingStockPrices-PartI-Lecture_CSV.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -102,7 +122,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script-ML_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="script-InvestmentFundamentalsAndDataAnalytics" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -114,7 +134,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-ML_test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-InvestmentFundamentalsAndDataAnalytics.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -123,7 +143,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script-MacLearn" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="script-find-stock-in-yahoo-finance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -135,7 +155,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-MacLearn.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-find-stock-in-yahoo-finance.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -144,7 +164,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script-Portfolio" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="script-simple-find-stock-in-yahoo-finance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -156,7 +176,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-Portfolio.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-simple-find-stock-in-yahoo-finance.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -165,7 +185,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="script-sklearnTree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="script_" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -177,7 +197,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script-sklearnTree.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/script_.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -188,11 +208,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.script-Historical" />
-        <item itemvalue="Python.script-Portfolio" />
-        <item itemvalue="Python.script-sklearnTree" />
-        <item itemvalue="Python.script-MacLearn" />
-        <item itemvalue="Python.script-ML_test" />
+        <item itemvalue="Python.Section-17_103-MCPredictingStockPrices-PartI-Lecture_CSV" />
+        <item itemvalue="Python.script-find-stock-in-yahoo-finance" />
+        <item itemvalue="Python.script-InvestmentFundamentalsAndDataAnalytics" />
+        <item itemvalue="Python.script_" />
+        <item itemvalue="Python.script-simple-find-stock-in-yahoo-finance" />
       </list>
     </recent_temporary>
   </component>
@@ -234,7 +254,7 @@
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="701" y="281" key="FileChooserDialogImpl/0.0.1842.1080@0.0.1842.1080" timestamp="1609806272028" />
-    <state width="1799" height="312" key="GridCell.Tab.0.bottom" timestamp="1609876001372">
+    <state width="1799" height="236" key="GridCell.Tab.0.bottom" timestamp="1610093657704">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.bottom/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990555" />
@@ -247,8 +267,8 @@
     <state width="1575" height="185" key="GridCell.Tab.0.bottom/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1603256330611" />
     <state width="1431" height="185" key="GridCell.Tab.0.bottom/0.0.1474.864@0.0.1474.864" timestamp="1602998488972" />
     <state width="1799" height="435" key="GridCell.Tab.0.bottom/0.0.1842.1080/-1920.-554.1920.1040@0.0.1842.1080" timestamp="1608852188057" />
-    <state width="1799" height="312" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1609876001372" />
-    <state width="1799" height="312" key="GridCell.Tab.0.center" timestamp="1609876001372">
+    <state width="1799" height="236" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1610093657704" />
+    <state width="1799" height="236" key="GridCell.Tab.0.center" timestamp="1610093657704">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.center/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -261,8 +281,8 @@
     <state width="1575" height="185" key="GridCell.Tab.0.center/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1603256330611" />
     <state width="1431" height="185" key="GridCell.Tab.0.center/0.0.1474.864@0.0.1474.864" timestamp="1602998488971" />
     <state width="1799" height="435" key="GridCell.Tab.0.center/0.0.1842.1080/-1920.-554.1920.1040@0.0.1842.1080" timestamp="1608852188056" />
-    <state width="1799" height="312" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1609876001372" />
-    <state width="1799" height="312" key="GridCell.Tab.0.left" timestamp="1609876001371">
+    <state width="1799" height="236" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1610093657704" />
+    <state width="1799" height="236" key="GridCell.Tab.0.left" timestamp="1610093657704">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.left/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -275,8 +295,8 @@
     <state width="1575" height="185" key="GridCell.Tab.0.left/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1603256330610" />
     <state width="1431" height="185" key="GridCell.Tab.0.left/0.0.1474.864@0.0.1474.864" timestamp="1602998488971" />
     <state width="1799" height="435" key="GridCell.Tab.0.left/0.0.1842.1080/-1920.-554.1920.1040@0.0.1842.1080" timestamp="1608852188056" />
-    <state width="1799" height="312" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1609876001371" />
-    <state width="1799" height="312" key="GridCell.Tab.0.right" timestamp="1609876001372">
+    <state width="1799" height="236" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1610093657704" />
+    <state width="1799" height="236" key="GridCell.Tab.0.right" timestamp="1610093657704">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1415" height="121" key="GridCell.Tab.0.right/0.0.1458.864/1920.-474.1618.1050@0.0.1458.864" timestamp="1604542990554" />
@@ -289,7 +309,7 @@
     <state width="1575" height="185" key="GridCell.Tab.0.right/0.0.1474.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1603256330611" />
     <state width="1431" height="185" key="GridCell.Tab.0.right/0.0.1474.864@0.0.1474.864" timestamp="1602998488972" />
     <state width="1799" height="435" key="GridCell.Tab.0.right/0.0.1842.1080/-1920.-554.1920.1040@0.0.1842.1080" timestamp="1608852188056" />
-    <state width="1799" height="312" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1609876001372" />
+    <state width="1799" height="236" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1610093657704" />
     <state x="2321" y="-217" key="Vcs.Push.Dialog.v2" timestamp="1603341702135">
       <screen x="1920" y="-474" width="1618" height="1050" />
     </state>

@@ -1,54 +1,68 @@
-import pandas_datareader as panDR
-import datetime as dateTime
-panDRAPPL = panDR.get_data_yahoo('AAPL', 
-                          start=dateTime.datetime(2019, 1, 1), 
-                          end=dateTime.datetime(2020, 1, 1))
+import pandas_datareader as pdr
+from pandas import DataFrame, Series
+import datetime as dt
+import quandl
 
-import quandl 
-quanAPPL = quandl.get("WIKI/AAPL",
-                      start_date="2019-01-01",
-                      end_date="2020-01-01")
 
-import yfinance as yahooFin
-yAAPL = yahooFin.Ticker("AAPL")
-yAAPL.get_info()
-# get stock info
-yAAPL.info
+quanKey: str = 'A_KEY'
+#quanAPPL: DataFrame = quandl.get("WIKI/AAPL", start_date="2015-01-01", end_date="2021-01-01")
+#print(quanAPPL.columns)
+
+stock_ticker: str = 'AAPL'#ESTC
+panDRAPPL: DataFrame = pdr.get_data_yahoo(stock_ticker, start=dt.datetime(2019, 1, 1), end=dt.datetime(2020, 1, 1))
+print(panDRAPPL.head(1))
+
+import yfinance as yf
+
+yahooTicker: yf.ticker.Ticker = yf.Ticker(stock_ticker)
+print(yahooTicker.isin)
+print(yahooTicker.get_info()) # get stock info print(yAAPL.info)
 # get historical market data
-hist = yAAPL.history(period="max")
+hist_df: DataFrame = yahooTicker.history(period="max")
+print(hist_df.columns)
 # show actions (dividends, splits)
-yAAPL.actions
+actions_df: DataFrame = yahooTicker.actions
+print('a', actions_df[['Stock Splits']].shape)
 # show dividends
-yAAPL.dividends
+dividend_series: Series = yahooTicker.dividends
+print('d', dividend_series.shape)
 # show splits
-yAAPL.splits
+split_series: Series = yahooTicker.splits
+print('s', split_series.shape)
 # show financials
-yAAPL.financials
-yAAPL.quarterly_financials
+financials_df = yahooTicker.financials
+print('f', financials_df.shape)
+financial_q_df: DataFrame = yahooTicker.quarterly_financials
+print('f', financial_q_df.shape)
 # show major holders
-#stock.major_holders
+# stock.major_holders
 # show institutional holders
-#stock.institutional_holders
+# stock.institutional_holders
 # show balance heet
-yAAPL.balance_sheet
-yAAPL.quarterly_balance_sheet
+bs_df: DataFrame = yahooTicker.balance_sheet
+print('bs', bs_df.shape)
+bs_q_df: DataFrame = yahooTicker.quarterly_balance_sheet
+print('bsq', bs_q_df.shape)
 # show cashflow
-yAAPL.cashflow
-yAAPL.quarterly_cashflow
+cf_df: DataFrame = yahooTicker.cashflow
+print('cf', cf_df)
+cf_q_df: DataFrame = yahooTicker.quarterly_cashflow
+print('cfq', cf_q_df)
 # show earnings
-yAAPL.earnings
-yAAPL.quarterly_earnings
+print(yahooTicker.earnings.shape)
+print(yahooTicker.quarterly_earnings.shape)
 # show sustainability
-yAAPL.sustainability
+yahooTicker.sustainability
 # show analysts recommendations
-yAAPL.recommendations
+yahooTicker.recommendations
 # show next event (earnings, etc)
-yAAPL.calendar
+cal_df: DataFrame = yahooTicker.calendar
+print('cal', cal_df.shape)
 # show ISIN code - *experimental*
 # ISIN = International Securities Identification Number
-yAAPL.isin
+yahooTicker.isin
 # show options expirations
-yAAPL.options
+# CNR.TO yAAPL.options
 # get option chain for specific expiration
-opt = yAAPL.option_chain('YYYY-MM-DD')
+# opt = yAAPL.option_chain('YYYY-MM-DD')
 # data available via: opt.calls, opt.puts

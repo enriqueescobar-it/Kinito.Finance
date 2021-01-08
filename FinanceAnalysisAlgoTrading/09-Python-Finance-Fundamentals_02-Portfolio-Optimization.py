@@ -41,7 +41,7 @@ stock_daily_ret.head()
 log_ret = np.log(stocks/stocks.shift(1))
 log_ret.head()
 # In[31]:
-log_ret.hist(bins=100,figsize=(12,6));
+log_ret.hist_df(bins=100, figsize=(12, 6));
 plt.tight_layout()
 # In[32]:
 log_ret.describe().transpose()

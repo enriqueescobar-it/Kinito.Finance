@@ -4,7 +4,7 @@ import numpy as np
 from pandas_datareader import data as wb
 import matplotlib.pyplot as plt
 
-PG = wb.DataReader('PG', data_source='yahoo', start='1995-1-1')
+PG = wb.DataReader('PG', data_source='yahoo', start='1990-1-1')
 PG.head()
 PG.tail()
 # ## Simple Rate of Return

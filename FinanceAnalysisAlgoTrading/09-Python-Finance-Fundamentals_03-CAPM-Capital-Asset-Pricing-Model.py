@@ -42,8 +42,8 @@ aapl['Daily Return'] = aapl['Close'].pct_change(1)
 spy_etf['Daily Return'] = spy_etf['Close'].pct_change(1)
 plt.scatter(aapl['Daily Return'],spy_etf['Daily Return'],alpha=0.3)
 # In[46]:
-aapl['Daily Return'].hist(bins=100)
-spy_etf['Daily Return'].hist(bins=100)
+aapl['Daily Return'].hist_df(bins=100)
+spy_etf['Daily Return'].hist_df(bins=100)
 beta,alpha,r_value,p_value,std_err = stats.linregress(aapl['Daily Return'].iloc[1:],spy_etf['Daily Return'].iloc[1:])
 beta
 # In[39]:

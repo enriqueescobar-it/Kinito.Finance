@@ -20,11 +20,14 @@ def set_directory(yahoo_directory):
         print("+ " + yahoo_directory + "\tcreating new directory")
         PanOS.makedirs(yahoo_directory)
 
+
 def set_file_header(stockCsvFile, stockHeaderList):
     if not PanOS.path.exists(stockCsvFile):
         with open(stockCsvFile, mode='w') as csv_yfile:
-            writer = csv.DictWriter(csv_yfile, fieldnames=stockHeaderList, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer = csv.DictWriter(csv_yfile, fieldnames=stockHeaderList, delimiter=';', quotechar='"',
+                                    quoting=csv.QUOTE_MINIMAL)
             writer.writeheader()
+
 
 def get_yfile(yahoo_file, yahoo_symbol):
     y_file = yahoo_file.replace('.', '_' + yahoo_symbol + '.')
@@ -75,7 +78,7 @@ def set_dict(yahoo_content):
 
 def get_panda_tgt(yahoo_symbol):
     tgt_website = r'https://ca.finance.yahoo.com/quote/' + \
-        yahoo_symbol + '/key-statistics?p=' + yahoo_symbol
+                  yahoo_symbol + '/key-statistics?p=' + yahoo_symbol
     # print(tgt_website)
     # html_read = Pan.read_html(tgt_website)
     # html_head = html_read[0]
@@ -428,8 +431,8 @@ def get_yfinance(yahoo_symbol, yahoo_desc, yahoo_file):
     # SERIES
     yahoo_content = YaFin.Ticker(yahoo_symbol).splits
     yahoo_header = yahoo_head + \
-        "Splits [" + str(type(yahoo_content)) + "]\n" + \
-        get_the_string(yahoo_content, yahoo_file) + "\n"
+                   "Splits [" + str(type(yahoo_content)) + "]\n" + \
+                   get_the_string(yahoo_content, yahoo_file) + "\n"
     f.write(yahoo_header)
     try:
         # DATA_FRAME
@@ -465,8 +468,8 @@ def get_yfinance(yahoo_symbol, yahoo_desc, yahoo_file):
         # DATA_FRAME
         yahoo_content = YaFin.Ticker(yahoo_symbol).cashflow
         yahoo_header = yahoo_head + \
-            "Cashflow [" + str(type(yahoo_content)) + "]\n" + \
-            get_the_string(yahoo_content, yahoo_file) + "\n"
+                       "Cashflow [" + str(type(yahoo_content)) + "]\n" + \
+                       get_the_string(yahoo_content, yahoo_file) + "\n"
         f.write(yahoo_header)
         # DATA_FRAME
         yahoo_content = YaFin.Ticker(yahoo_symbol).quarterly_cashflow
@@ -476,8 +479,8 @@ def get_yfinance(yahoo_symbol, yahoo_desc, yahoo_file):
         # DATA_FRAME
         yahoo_content = YaFin.Ticker(yahoo_symbol).earnings
         yahoo_header = yahoo_head + \
-            "Earnings [" + str(type(yahoo_content)) + "]\n" + \
-            get_the_string(yahoo_content, yahoo_file) + "\n"
+                       "Earnings [" + str(type(yahoo_content)) + "]\n" + \
+                       get_the_string(yahoo_content, yahoo_file) + "\n"
         f.write(yahoo_header)
         # DATA_FRAME
         yahoo_content = YaFin.Ticker(yahoo_symbol).quarterly_earnings
@@ -487,8 +490,8 @@ def get_yfinance(yahoo_symbol, yahoo_desc, yahoo_file):
         # DATA_FRAME
         yahoo_content = YaFin.Ticker(yahoo_symbol).calendar
         yahoo_header = yahoo_head + \
-            "Calendar [" + str(type(yahoo_content)) + "]\n" + \
-            get_the_string(yahoo_content, yahoo_file) + "\n"
+                       "Calendar [" + str(type(yahoo_content)) + "]\n" + \
+                       get_the_string(yahoo_content, yahoo_file) + "\n"
         f.write(yahoo_header)
         # CLOSE
         f.close()
@@ -506,7 +509,6 @@ def get_yfinance(yahoo_symbol, yahoo_desc, yahoo_file):
 
 
 tsx_file_ = 'NYSE/NYSE-y.txt'
-
 
 tsx_start = PanDateTime.datetime(2019, 1, 1)
 tsx_stop_ = PanDateTime.datetime.now()

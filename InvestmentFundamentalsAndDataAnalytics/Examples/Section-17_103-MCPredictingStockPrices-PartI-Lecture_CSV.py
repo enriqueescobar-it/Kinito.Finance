@@ -5,25 +5,26 @@
 # Download the data for Microsoft (�MSFT�) from Yahoo Finance for the period �2000-1-1� until today.
 # Download the data for Microsoft (�MSFT�) from IEX for the period �2015-1-1� until today.
 # Forecasting Future StockType Prices � continued:
-import numpy as np  
-import pandas as pd  
-from pandas_datareader import data as wb  
-import matplotlib.pyplot as plt  
+import numpy as np
+import pandas as pd
+from pandas_datareader import data as wb
+import matplotlib.pyplot as plt
 from scipy.stats import norm
-get_ipython().run_line_magic('matplotlib', 'inline')
+
+# get_ipython().run_line_magic('matplotlib', 'inline')
 # In[2]:
 # ticker = 'PG'
 # ticker = 'MSFT'
 # data = pd.DataFrame()
 # data[ticker] = wb.DataReader(ticker, data_source='yahoo', start='2007-1-1')['Adj Close']
 # data[ticker] = wb.DataReader(ticker, data_source='iex', start='2015-1-1')['close']
-data = pd.read_csv('Section-17_PG_2007_2017.csv', index_col = 'Date')
-data = pd.read_csv('Section-17_MSFT_20000.csv', index_col = 'Date')
+data = pd.read_csv('Section-17_PG_2007_2017.csv', index_col='Date')
+data = pd.read_csv('Section-17_MSFT_2000.csv', index_col='Date')
 data.plot(figsize=(10, 6));
 # Use the .pct_change() method to obtain the log returns of Microsoft for the designated period.
 log_returns = np.log(1 + data.pct_change())
 log_returns.tail()
-log_returns.plot(figsize = (10, 6))
+log_returns.plot(figsize=(10, 6))
 # Assign the mean value of the log returns to a variable, called �U�, and their variance to a variable, called �var�. 
 u = log_returns.mean()
 u
@@ -96,5 +97,5 @@ for t in range(1, t_intervals):
     price_list[t] = price_list[t - 1] * daily_returns[t]
 price_list
 # Finally, plot the obtained price list data.
-plt.figure(figsize=(10,6))
+plt.figure(figsize=(10, 6))
 plt.plot(price_list);

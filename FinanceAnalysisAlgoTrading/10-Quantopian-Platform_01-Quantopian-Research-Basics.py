@@ -37,7 +37,7 @@ mcdon = get_pricing('MCD',
                     frequency='daily')
 mcdon['close_price'].plot()
 # In[35]:
-mcdon['close_price'].pct_change(1).hist(bins=100,figsize=(6,4))
+mcdon['close_price'].pct_change(1).hist_df(bins=100, figsize=(6, 4))
 # ## symbols()
 # By default `symbols` returns the security object for a ticker symbol. Specify a ticker symbol, or list of symbols, as a string and get a list of security objects back. 
 # - Use `symbol_reference_date` to identify which date you want the symbol back for a particular ticker symbol. 

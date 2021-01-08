@@ -9,10 +9,10 @@ df3.head()
 # ** Recreate this scatter plot of b vs a. Note the color and size of the points. Also note the figure size. See if you can figure out how to stretch it in a similar fashion. Remeber back to your matplotlib lecture...**
 df3.plot.scatter(x='a',y='b',c='red',s=50,figsize=(12,3))
 # ** Create a histogram of the 'a' column.**
-df3['a'].plot.hist()
+df3['a'].plot.hist_df()
 # ** These plots are okay, but they don't look very polished. Use style sheets to set the style to 'ggplot' and redo the histogram from above. Also figure out how to add more bins to it.***
 plt.style.use('ggplot')
-df3['a'].plot.hist(alpha=0.5,bins=25)
+df3['a'].plot.hist_df(alpha=0.5, bins=25)
 # ** Create a boxplot comparing the a and b columns.**
 df3[['a','b']].plot.box()
 # ** Create a kde plot of the 'd' column **
