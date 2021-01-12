@@ -25,7 +25,7 @@ class IndexComparator(AbstractIndexComparator):
         self.DataSimpleReturnsCorr = self._setSimpleReturnsCorr(self.Data)
         self.DataLogReturns = self._setLogReturns(self.Data)
         self._plotHeatMap(self.DataSimpleReturnsCorr)
-        self._plotComparison(2, 5)
+        self._plotComparison(2, 3)
         #self._plotCompared(self.Data, 'Flat', 'Price in USD')
         #self._plotCompared(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
         #self._plotCompared(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
@@ -74,6 +74,7 @@ class IndexComparator(AbstractIndexComparator):
         #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
         sns.clustermap(df, cmap="coolwarm", col_cluster=False)# annot=False, row_cluster=True,
         plt.rcParams['date.epoch'] = '0000-12-31'
+        plt.style.use('fivethirtyeight')
         plt.show()
 
     def _plotComparison(self, nb_col=1, nb_row=1):
@@ -85,31 +86,34 @@ class IndexComparator(AbstractIndexComparator):
         self.Data.plot(ax=ax[0, 0], legend=None)
         plt.setp(ax[0, 0].get_xticklabels(), visible=False)
         ax[0, 0].set(ylabel='Stock price ($)', xlabel='')
+        ax[0, 0].legend(loc=self._legend_place, fontsize=7)
         # ax01
         sns.boxplot(data=self.Data, width=.5, ax=ax[0, 1]).set(xlabel='')
         # ax10
         self.DataNormalized.plot(ax=ax[1, 0], legend=None)
         plt.setp(ax[1, 0].get_xticklabels(), visible=False)
-        ax[1, 0].set(ylabel='Base 1 variation', xlabel='')
+        ax[1, 0].set(ylabel='Normalized', xlabel='')
+        ax[1, 0].legend(loc=self._legend_place, fontsize=7)
         # ax11
         sns.boxplot(data=self.DataNormalized, width=.5, ax=ax[1, 1])
-        # ax20
-        self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
-        plt.setp(ax[2, 0].get_xticklabels(), visible=False)
-        ax[2, 0].set(ylabel='L1 variation', xlabel='')
-        # ax21
-        sns.boxplot(data=self.DataNormalizedL1, width=.5, ax=ax[2, 1])
-        # ax30
-        self.DataSparsed.plot(ax=ax[3, 0], legend=None)
-        plt.setp(ax[3, 0].get_xticklabels(), visible=False)
-        ax[3, 0].set(ylabel='Sparse variation', xlabel='')
-        # ax31
-        sns.boxplot(data=self.DataSparsed, width=.5, ax=ax[3, 1])
-        # ax40
-        self.DataScaled.plot(ax=ax[4, 0], legend=None)
-        ax[4, 0].set(ylabel='[0-100] variation')
-        # ax41
-        sns.boxplot(data=self.DataScaled, width=.5, ax=ax[4, 1])
+        ## ax20 -> dev null
+        #self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
+        #plt.setp(ax[2, 0].get_xticklabels(), visible=False)
+        #ax[2, 0].set(ylabel='L1 variation', xlabel='')
+        ## ax21 -> dev null
+        #sns.boxplot(data=self.DataNormalizedL1, width=.5, ax=ax[2, 1])
+        ## ax30 -> dev null
+        #self.DataSparsed.plot(ax=ax[3, 0], legend=None)
+        #plt.setp(ax[3, 0].get_xticklabels(), visible=False)
+        #ax[3, 0].set(ylabel='Sparse variation', xlabel='')
+        ## ax31 -> dev null
+        #sns.boxplot(data=self.DataSparsed, width=.5, ax=ax[3, 1])
+        # ax40 -> 30 -> 20
+        self.DataScaled.plot(ax=ax[2, 0], legend=None)
+        ax[2, 0].set(ylabel='[0-100] variation')
+        ax[2, 0].legend(loc=self._legend_place, fontsize=7)
+        # ax41 -> 31 -> 21
+        sns.boxplot(data=self.DataScaled, width=.5, ax=ax[2, 1])
         plt.tight_layout()
         plt.show()
 
