@@ -8,7 +8,9 @@ from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Funds.ExchangeTradedFund import ExchangeTradedFund
 from Common.StockType.Funds.IndexFund import IndexFund
 from Common.StockType.Funds.MutualFund import MutualFund
-from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
+from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency
+from Common.StockType.Currencies.Regular.RegularCurrency import RegularCurrency
+from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
 
 
 class YahooFinanceEngine(AbstractEngine):
@@ -458,5 +460,9 @@ class YahooFinanceEngine(AbstractEngine):
             self._stock_type = IndexFund()
         if s == 'MUTUALFUND':
             self._stock_type = MutualFund()
+        if s == 'CRYPTOCURRENCY':
+            self._stock_type = CryptoCurrency()
         if s == 'CURRENCY':
-            self._stock_type = AbstractCurrency()
+            self._stock_type = RegularCurrency()
+        if s == 'FUTURE':
+            self._stock_type = AbstractStockFuture()
