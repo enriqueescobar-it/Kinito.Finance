@@ -3,4 +3,9 @@ from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockFund(AbstractStock):
-    __class: str = 'NA'
+
+    def __init__(self):
+        self.__class = 'Fund'
+
+    def __str__(self):
+        return self.__class

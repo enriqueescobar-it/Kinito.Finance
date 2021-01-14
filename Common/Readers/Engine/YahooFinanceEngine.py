@@ -5,6 +5,7 @@ from pandas import Series
 from prettytable import PrettyTable
 from Common.Readers.Engine.AbstractEngine import AbstractEngine
 from Common.StockType.AbstractStock import AbstractStock
+from Common.StockType.Equities.AbstractStockEquity import AbstractStockEquity
 from Common.StockType.Funds.ExchangeTradedFund import ExchangeTradedFund
 from Common.StockType.Funds.IndexFund import IndexFund
 from Common.StockType.Funds.MutualFund import MutualFund
@@ -466,3 +467,5 @@ class YahooFinanceEngine(AbstractEngine):
             self._stock_type = RegularCurrency()
         if s == 'FUTURE':
             self._stock_type = AbstractStockFuture()
+        if s == 'EQUITY':
+            self._stock_type = AbstractStockEquity()

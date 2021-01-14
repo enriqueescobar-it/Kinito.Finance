@@ -1,11 +1,10 @@
-from abc import *
 from Common.StockType.AbstractStock import AbstractStock
 
 
-class AbstractStockBond(AbstractStock):
+class AbstractStockFuture(AbstractStock):
 
     def __init__(self):
-        self.__class = 'Bond'
+        self.__class = 'Future'
 
     def __str__(self):
         return self.__class
