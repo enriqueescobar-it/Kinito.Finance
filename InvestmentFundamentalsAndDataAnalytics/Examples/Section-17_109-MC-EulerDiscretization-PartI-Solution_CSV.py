@@ -9,7 +9,7 @@ import pandas as pd
 from pandas_datareader import data as web  
 from scipy.stats import norm 
 import matplotlib.pyplot as plt  
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline')
 # In[2]:
 data = pd.read_csv('D:/Python/MSFT_2000.csv', index_col = 'Date')
 # Store the annual standard deviation of the log returns in a variable, called “stdev”.

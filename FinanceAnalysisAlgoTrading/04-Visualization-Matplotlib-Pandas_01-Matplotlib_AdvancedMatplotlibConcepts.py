@@ -7,6 +7,9 @@
 # It is also possible to set a logarithmic scale for one or both axes. This functionality is in fact only one application of a more general transformation system in Matplotlib. Each of the axes' scales are set seperately using `set_xscale` and `set_yscale` methods which accept one parameter (with the value "log" in this case):
 # ### Placement of ticks and custom tick labels
 # We can explicitly determine where we want the axis ticks with `set_xticks` and `set_yticks`, which both take a list of values for where on the axis the ticks are to be placed. We can also use the `set_xticklabels` and `set_yticklabels` methods to provide a list of custom text labels for each tick location:
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib
 fig, ax = plt.subplots(figsize=(10, 4))
 ax.plot(x, x**2, x, x**3, lw=2)
 ax.set_xticks([1, 2, 3, 4, 5])

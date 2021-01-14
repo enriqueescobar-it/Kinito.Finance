@@ -1,12 +1,12 @@
-from datetime import datetime
-import yfinance as yf
-import datetime
 import pandas as pd
+import yfinance as yf
 from pandas import Series
+from prettytable import PrettyTable
 from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 
 class YahooFinanceEngine(AbstractEngine):
+    __pretty_table: PrettyTable = PrettyTable()
     _info_labels: list = list()
     _info_list: list = list()
     _url: str = 'NA'
@@ -104,6 +104,11 @@ class YahooFinanceEngine(AbstractEngine):
         # self.RecommendationDf = self.__yFinance.recommendations
         self.SplitSeries = self.__yFinance.splits
         # self.SustainabilityDf = self.__yFinance.sustainability
+        self.__pretty_table.add_column('Labels', self.InfoLabels)
+        self.__pretty_table.add_column('Type', self.InfoList)
+
+    def __str__(self):
+        return self.__pretty_table.__str__()
 
     @property
     def InfoList(self):

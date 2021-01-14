@@ -7,7 +7,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline')
 import statsmodels.api as sm
 # You can safely ignore the warning:
 #  Please use the pandas.tseries module instead. from pandas.core import datetools

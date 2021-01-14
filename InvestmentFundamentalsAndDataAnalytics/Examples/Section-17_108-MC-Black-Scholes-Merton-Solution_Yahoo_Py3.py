@@ -18,6 +18,7 @@ def d1(S, K, r, stdev, T):
  
 def d2(S0, K, r, sigma, T):
     return (np.log(S / K) + (r - stdev ** 2 / 2) * T) / (stdev * np.sqrt(T))
+
 def BSM(S, K, r, stdev, T):
         return (S * norm.cdf(d1(S, K, r, stdev, T))) - (K * np.exp(-r * T) * norm.cdf(d2(S, K, r, stdev, T)))
 # Store the annual standard deviation of the log returns in a variable, called “stdev”.

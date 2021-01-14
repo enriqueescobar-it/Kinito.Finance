@@ -30,5 +30,5 @@ import datetime
 start = datetime.datetime(2010, 1, 1)
 end = datetime.datetime(2017, 1, 1)
 gdp = web.DataReader("GDP", "fred", start, end)
-gdp.head()
+print(gdp.head())
 

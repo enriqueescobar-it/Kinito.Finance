@@ -13,7 +13,6 @@ from Common.Readers.Engine.PandaEngine import PandaEngine
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 from Common.StockOptions.AbstractStockOption import AbstractStockOption
 from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
-from prettytable import PrettyTable
 
 
 class YahooStockOption(AbstractStockOption):
@@ -415,10 +414,7 @@ class YahooStockOption(AbstractStockOption):
 
     def _setYahooFinance(self, a_ticker: str = 'TD'):
         self._y_finance_engine = YahooFinanceEngine(a_ticker)
-        t = PrettyTable()
-        t.add_column('_', self._y_finance_engine.InfoLabels)
-        t.add_column(a_ticker, self._y_finance_engine.InfoList)
-        print(t)
+        print(self._y_finance_engine)
         self.YeUrl = self._y_finance_engine.Url
         self.YeLogoUrl = self._y_finance_engine.UrlLogo
         self.YeAddress = self._y_finance_engine.AddressFirst

@@ -82,6 +82,7 @@ class IndexComparator(AbstractIndexComparator):
         fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float/2.5), sharex=False, sharey=False)
         plt.rcParams['date.epoch'] = '0000-12-31'
         plt.style.use('fivethirtyeight')
+        plt.style.use('ggplot')
         # ax00
         self.Data.plot(ax=ax[0, 0], legend=None)
         plt.setp(ax[0, 0].get_xticklabels(), visible=False)

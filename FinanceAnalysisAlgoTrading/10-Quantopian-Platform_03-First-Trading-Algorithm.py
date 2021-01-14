@@ -13,29 +13,34 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import quandl
 import numpy as np
+
 # ## United Airlines and American Airlines
 start = '07-01-2015'
 end = '07-01-2017'
-united = quandl.get('WIKI/UAL',start_date=start,end_date=end)
-american = quandl.get('WIKI/AAL',start_date=start,end_date=end)
+united = quandl.get('WIKI/UAL', start_date=start, end_date=end)
+american = quandl.get('WIKI/AAL', start_date=start, end_date=end)
 united.head()
 # In[107]:
 american.head()
 # In[108]:
-american['Adj. Close'].plot(label='American Airlines',figsize=(12,8))
+american['Adj. Close'].plot(label='American Airlines', figsize=(12, 8))
 united['Adj. Close'].plot(label='United Airlines')
 plt.legend()
 # ## Spread and Correlation
-np.corrcoef(american['Adj. Close'],united['Adj. Close'])
+np.corrcoef(american['Adj. Close'], united['Adj. Close'])
 # In[117]:
 spread = american['Adj. Close'] - united['Adj. Close']
-spread.plot(label='Spread',figsize=(12,8))
-plt.axhline(spread.mean(),c='r')
+spread.plot(label='Spread', figsize=(12, 8))
+plt.axhline(spread.mean(), c='r')
 plt.legend()
+
+
 # ### Normalizing with a z-score
 def zscore(stocks):
     return (stocks - stocks.mean()) / np.std(stocks)
-zscore(spread).plot(figsize=(14,8))
+
+
+zscore(spread).plot(figsize=(14, 8))
 plt.axhline(zscore(spread).mean(), color='black')
 plt.axhline(1.0, c='r', ls='--')
 plt.axhline(-1.0, c='g', ls='--')
@@ -49,10 +54,12 @@ spread_mavg30 = spread.rolling(30).mean()
 # Take a rolling 30 day standard deviation
 std_30 = spread.rolling(30).std()
 # Compute the z score for each day
-zscore_30_1 = (spread_mavg1 - spread_mavg30)/std_30
-zscore_30_1.plot(figsize=(12,8),label='Rolling 30 day Z score')
+zscore_30_1 = (spread_mavg1 - spread_mavg30) / std_30
+zscore_30_1.plot(figsize=(12, 8), label='Rolling 30 day Z score')
 plt.axhline(0, color='black')
 plt.axhline(1.0, color='red', linestyle='--');
+
+
 # ## Implementation of Strategy
 # #### WARNING: YOU SHOULD NOT ACTUALLY TRADE WITH THIS!
 def initialize(context):
@@ -62,11 +69,13 @@ def initialize(context):
     # Every day we check the pair status
     schedule_function(check_pairs, date_rules.every_day(), time_rules.market_close(minutes=60))
     # Our Two Airlines
-    context.aa = sid(45971) #aal
-    context.ual = sid(28051) #ual   
+    context.aa = sid(45971)  # aal
+    context.ual = sid(28051)  # ual
     # Flags to tell us if we're currently in a trade
     context.long_on_spread = False
     context.shorting_spread = False
+
+
 def check_pairs(context, data):
     # For convenience
     aa = context.aa
@@ -83,18 +92,18 @@ def check_pairs(context, data):
     mavg_1 = np.mean(short_prices[aa] - short_prices[ual])
     # Compute z-score
     if std_30 > 0:
-        zscore = (mavg_1 - mavg_30)/std_30
+        zscore = (mavg_1 - mavg_30) / std_30
         # Our two entry cases
         if zscore > 0.5 and not context.shorting_spread:
             # spread = aa - ual
-            order_target_percent(aa, -0.5) # short top
-            order_target_percent(ual, 0.5) # long bottom
+            order_target_percent(aa, -0.5)  # short top
+            order_target_percent(ual, 0.5)  # long bottom
             context.shorting_spread = True
             context.long_on_spread = False
         elif zscore < -0.5 and not context.long_on_spread:
             # spread = aa - ual
-            order_target_percent(aa, 0.5) # long top
-            order_target_percent(ual, -0.5) # short bottom
+            order_target_percent(aa, 0.5)  # long top
+            order_target_percent(ual, -0.5)  # short bottom
             context.shorting_spread = False
             context.long_on_spread = True
         # Our exit case
