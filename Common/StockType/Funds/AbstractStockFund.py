@@ -3,4 +3,4 @@ from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockFund(AbstractStock):
-    pass
+    __class: str = 'NA'

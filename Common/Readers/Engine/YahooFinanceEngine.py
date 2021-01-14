@@ -1,12 +1,20 @@
 import pandas as pd
+import numpy as np
 import yfinance as yf
 from pandas import Series
 from prettytable import PrettyTable
 from Common.Readers.Engine.AbstractEngine import AbstractEngine
+from Common.StockType.AbstractStock import AbstractStock
+from Common.StockType.Funds.ExchangeTradedFund import ExchangeTradedFund
+from Common.StockType.Funds.IndexFund import IndexFund
+from Common.StockType.Funds.MutualFund import MutualFund
+from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 
 
 class YahooFinanceEngine(AbstractEngine):
     __pretty_table: PrettyTable = PrettyTable()
+    __ticker: str = 'NA'
+    _stock_type: AbstractStock
     _info_labels: list = list()
     _info_list: list = list()
     _url: str = 'NA'
@@ -53,7 +61,6 @@ class YahooFinanceEngine(AbstractEngine):
     _fiscal_year_end_last: int = -1
     _fiscal_year_end_next: int = -1
     _last_quarter: int = -1
-    __ticker: str = 'NA'
     InfoDic: dict  # = dict()
     ActionsDf: pd.DataFrame = pd.DataFrame()
     Balance_SheetDf: pd.DataFrame = pd.DataFrame()
@@ -283,6 +290,10 @@ class YahooFinanceEngine(AbstractEngine):
         return self._state
 
     @property
+    def StockType(self):
+        return self._stock_type
+
+    @property
     def Url(self):
         return self._url
 
@@ -333,6 +344,7 @@ class YahooFinanceEngine(AbstractEngine):
         self._info_labels.append('currency')
         self._info_list.append(self._currency)
         self._quote_type = self.__getValueFromKey('quoteType')
+        self.__setStockType(self._quote_type)
         self._info_labels.append('quoteType')
         self._info_list.append(self._quote_type)
         self._exchange = self.__getValueFromKey('exchange')
@@ -435,6 +447,16 @@ class YahooFinanceEngine(AbstractEngine):
     def __getFloatFromString(self, a_key: str = 'NA') -> float:
         a_str = self.__getValueFromKey(a_key)
         if a_str == 'NA' or a_str == '-' or a_str == 'None':
-            return -1.0
+            return np.nan
         else:
             return float(a_str)
+
+    def __setStockType(self, s: str = ''):
+        if s == 'ETF':
+            self._stock_type = ExchangeTradedFund()
+        if s == 'INDEX':
+            self._stock_type = IndexFund()
+        if s == 'MUTUALFUND':
+            self._stock_type = MutualFund()
+        if s == 'CURRENCY':
+            self._stock_type = AbstractCurrency()
