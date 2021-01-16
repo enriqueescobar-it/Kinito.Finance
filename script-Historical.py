@@ -43,7 +43,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('SAVA')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
+yahooStockOption: YahooStockOption = YahooStockOption('VOOG')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V
 # DividendYield [2%, 4%] 2.5 - 6
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
