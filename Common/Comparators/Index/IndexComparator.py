@@ -81,8 +81,9 @@ class IndexComparator(AbstractIndexComparator):
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float/2.5), sharex=False, sharey=False)
         plt.rcParams['date.epoch'] = '0000-12-31'
-        plt.style.use('fivethirtyeight')
+        #plt.style.use('fivethirtyeight')
         plt.style.use('ggplot')
+        #plt.style.use('classic')
         # ax00
         self.Data.plot(ax=ax[0, 0], legend=None)
         plt.setp(ax[0, 0].get_xticklabels(), visible=False)

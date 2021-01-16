@@ -16,10 +16,10 @@ from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
 
 class YahooFinanceEngine(AbstractEngine):
     __pretty_table: PrettyTable = PrettyTable()
-    __ticker: str = 'NA'
-    _stock_type: AbstractStock
     _info_labels: list = list()
     _info_list: list = list()
+    __ticker: str = 'NA'
+    _stock_type: AbstractStock
     _url: str = 'NA'
     _url_logo: str = 'NA'
     _address1: str = 'NA'
@@ -456,7 +456,7 @@ class YahooFinanceEngine(AbstractEngine):
 
     def __setStockType(self, s: str = ''):
         if s == 'ETF':
-            self._stock_type = ExchangeTradedFund()
+            self._stock_type = ExchangeTradedFund(self.CompanyName, self.__ticker)
         if s == 'INDEX':
             self._stock_type = IndexFund()
         if s == 'MUTUALFUND':
