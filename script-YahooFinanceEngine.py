@@ -9,7 +9,7 @@ cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']
 currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']
 mutual_funds = ['PRLAX', 'QASGX', 'HISFX']
 us_treasuries = ['^TNX', '^IRX', '^TYX']
-a_ticker: str = 'CL=F'
+a_ticker: str = 'BTC-USD'
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print(abstractEngine)
 print(abstractEngine.StockType)
