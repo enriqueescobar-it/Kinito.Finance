@@ -464,7 +464,7 @@ class YahooFinanceEngine(AbstractEngine):
         if s == 'CRYPTOCURRENCY':
             self._stock_type = CryptoCurrency(self.CompanyName)
         if s == 'CURRENCY':
-            self._stock_type = RegularCurrency()
+            self._stock_type = RegularCurrency(self.CompanyName)
         if s == 'FUTURE':
             self._stock_type = AbstractStockFuture(self.CompanyName)
         if s == 'EQUITY':

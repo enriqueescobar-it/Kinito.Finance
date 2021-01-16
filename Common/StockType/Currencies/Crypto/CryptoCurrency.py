@@ -1,9 +1,9 @@
-from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
-from pandas import DataFrame
-import matplotlib.pyplot as plt
 import numpy as np
-from yahooquery import Ticker
+from pandas import DataFrame
 from prettytable import PrettyTable
+from yahooquery import Ticker
+
+from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 
 
 class CryptoCurrency(AbstractCurrency):
