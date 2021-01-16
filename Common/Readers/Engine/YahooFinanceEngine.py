@@ -460,7 +460,7 @@ class YahooFinanceEngine(AbstractEngine):
         if s == 'INDEX':
             self._stock_type = IndexFund()
         if s == 'MUTUALFUND':
-            self._stock_type = MutualFund()
+            self._stock_type = MutualFund(self.CompanyName, self.__ticker)
         if s == 'CRYPTOCURRENCY':
             self._stock_type = CryptoCurrency()
         if s == 'CURRENCY':
