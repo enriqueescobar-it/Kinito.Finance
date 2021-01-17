@@ -8,7 +8,6 @@ class AbstractStockFuture(AbstractStock):
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
-    __ticker: str = 'NA'
 
     def __init__(self, c_name: str):
         self.__class = 'Future'
