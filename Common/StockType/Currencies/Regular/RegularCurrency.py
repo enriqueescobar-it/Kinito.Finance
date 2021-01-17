@@ -7,10 +7,8 @@ class RegularCurrency(AbstractCurrency):
     __pretty_table: PrettyTable = PrettyTable()
 
     def __init__(self, c_name: str):
+        super().__init__(c_name.replace(' ', '').replace('/', '|'))
         self.__class = 'Regular'
-        self._name = c_name.replace(' ', '')
-        self._info_labels.append('Name')
-        self._info_list.append(self._name)
         self.__pretty_table.add_column('Labels', self.InfoLabels)
         self.__pretty_table.add_column(self.__class, self.InfoList)
 
