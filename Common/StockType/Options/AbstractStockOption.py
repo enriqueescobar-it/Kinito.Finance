@@ -7,18 +7,18 @@ class AbstractStockOption(AbstractStock):
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
-    __pretty_table: PrettyTable = PrettyTable()
+    _pretty_table: PrettyTable = PrettyTable()
 
     def __init__(self, c_name: str):
         self.__class = 'Option'
         self._name = c_name
         self._info_labels.append('Name')
         self._info_list.append(self._name)
-        self.__pretty_table.add_column('Labels', self.InfoLabels)
-        self.__pretty_table.add_column(self.__class, self.InfoList)
+        self._pretty_table.add_column('Labels', self.InfoLabels)
+        self._pretty_table.add_column(self.__class, self.InfoList)
 
     def __str__(self):
-        return self.__pretty_table.__str__()
+        return self._pretty_table.__str__()
 
     @property
     def InfoList(self):
