@@ -1,7 +1,7 @@
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 
 
-tech_stocks = ['AAPL', 'MSFT', 'INTC']
+tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD-B.TO']
 bank_stocks = ['WFC', 'BAC', 'C']
 etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO']
 commodity_futures = ['GC=F', 'SI=F', 'CL=F']
