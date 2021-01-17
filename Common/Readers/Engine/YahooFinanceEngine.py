@@ -6,9 +6,9 @@ from prettytable import PrettyTable
 from Common.Readers.Engine.AbstractEngine import AbstractEngine
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Equities.AbstractStockEquity import AbstractStockEquity
-from Common.StockType.Funds.ExchangeTradedFund import ExchangeTradedFund
-from Common.StockType.Funds.IndexFund import IndexFund
-from Common.StockType.Funds.MutualFund import MutualFund
+from Common.StockType.Funds.ExchangeTraded.ExchangeTradedFund import ExchangeTradedFund
+from Common.StockType.Funds.Index.IndexFund import IndexFund
+from Common.StockType.Funds.Mutual.MutualFund import MutualFund
 from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency
 from Common.StockType.Currencies.Regular.RegularCurrency import RegularCurrency
 from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture

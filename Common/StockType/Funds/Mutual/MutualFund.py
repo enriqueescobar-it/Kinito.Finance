@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-class ExchangeTradedFund(AbstractStockFund):
+class MutualFund(AbstractStockFund):
     __pretty_table: PrettyTable = PrettyTable()
     __ticker: str = 'NA'
     __y_query: Ticker
@@ -20,8 +20,8 @@ class ExchangeTradedFund(AbstractStockFund):
     _price_to_cash: float = np.nan
 
     def __init__(self, c_name: str, t_name: str):
-        self.__class = 'Etf'
-        self._name = c_name.replace(' ', '')
+        super().__init__(c_name.replace(' ', ''))
+        self.__class = 'Mutual'
         self._info_labels.append('Name')
         self._info_list.append(self._name)
         self.__ticker = t_name
@@ -30,7 +30,7 @@ class ExchangeTradedFund(AbstractStockFund):
         self.__pretty_table.add_column('Labels', self.InfoLabels)
         self.__pretty_table.add_column(self.__class, self.InfoList)
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.__pretty_table.__str__()
 
     def _setInfo(self):
@@ -39,10 +39,6 @@ class ExchangeTradedFund(AbstractStockFund):
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
-        # print('1', self.__y_query.fund_bond_holdings)
-        # print('2', self.__y_query.fund_bond_ratings)
-        # print('4', self.__y_query.fund_equity_holdings)
-        # print('7', self.__y_query.fund_ownership)
         self.__plotSectorDf().show()
 
     def __setSectorDf(self):

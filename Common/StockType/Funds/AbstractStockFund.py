@@ -7,8 +7,9 @@ class AbstractStockFund(AbstractStock):
     _info_list: list = list()
     _name: str = 'NA'
 
-    def __init__(self):
+    def __init__(self, c_name: str):
         self.__class = 'Fund'
+        self._name = c_name
 
     def __str__(self):
         return self.__class
