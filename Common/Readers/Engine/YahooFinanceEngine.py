@@ -458,7 +458,7 @@ class YahooFinanceEngine(AbstractEngine):
         if s == 'ETF':
             self._stock_type = ExchangeTradedFund(self.CompanyName, self.__ticker)
         if s == 'INDEX':
-            self._stock_type = IndexFund()
+            self._stock_type = IndexFund(self.CompanyName)
         if s == 'MUTUALFUND':
             self._stock_type = MutualFund(self.CompanyName, self.__ticker)
         if s == 'CRYPTOCURRENCY':
