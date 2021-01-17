@@ -5,9 +5,6 @@ from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 
 class RegularCurrency(AbstractCurrency):
     __pretty_table: PrettyTable = PrettyTable()
-    _info_labels: list = list()
-    _info_list: list = list()
-    _name: str = 'NA'
 
     def __init__(self, c_name: str):
         self.__class = 'Regular'
@@ -19,15 +16,3 @@ class RegularCurrency(AbstractCurrency):
 
     def __str__(self):
         return self.__pretty_table.__str__()
-
-    @property
-    def InfoList(self):
-        return self._info_list
-
-    @property
-    def InfoLabels(self):
-        return self._info_labels
-
-    @property
-    def Name(self):
-        return self._name
