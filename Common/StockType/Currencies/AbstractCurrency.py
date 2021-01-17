@@ -1,4 +1,3 @@
-from abc import *
 from Common.StockType.AbstractStock import AbstractStock
 
 
@@ -9,7 +8,7 @@ class AbstractCurrency(AbstractStock):
 
     def __init__(self, c_name: str):
         self.__class = 'Currency'
-        self._name = c_name
+        self._name = c_name.replace(' ', '')
         self._info_labels.append('Name')
         self._info_list.append(self._name)
 

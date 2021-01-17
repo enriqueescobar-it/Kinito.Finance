@@ -1,4 +1,5 @@
-from abc import *
+from prettytable import PrettyTable
+
 from Common.StockType.AbstractStock import AbstractStock
 
 
@@ -6,10 +7,11 @@ class AbstractStockFund(AbstractStock):
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
+    __pretty_table: PrettyTable = PrettyTable()
 
     def __init__(self, c_name: str):
         self.__class = 'Fund'
-        self._name = c_name
+        self._name = c_name.replace(' ', '')
 
     def __str__(self):
         return self.__class

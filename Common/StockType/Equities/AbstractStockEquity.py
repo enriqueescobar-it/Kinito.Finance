@@ -4,10 +4,10 @@ from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockEquity(AbstractStock):
-    __pretty_table: PrettyTable = PrettyTable()
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
+    __pretty_table: PrettyTable = PrettyTable()
 
     def __init__(self, c_name: str):
         self.__class = 'Equity'
