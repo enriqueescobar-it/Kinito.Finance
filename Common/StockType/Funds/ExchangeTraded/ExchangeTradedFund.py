@@ -29,9 +29,6 @@ class ExchangeTradedFund(AbstractStockFund):
         self._pretty_table.add_column('Labels', self.InfoLabels)
         self._pretty_table.add_column(self.__class, self.InfoList)
 
-    def __str__(self) -> str:
-        return self._pretty_table.__str__()
-
     def _setInfo(self):
         self.__setSectorDf()
         self.__setHoldingDf()
