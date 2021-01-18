@@ -11,7 +11,7 @@ class AbstractStockBond(AbstractStock):
 
     def __init__(self, c_name: str):
         self.__class = 'Bond'
-        self._name = c_name
+        self._name = c_name.replace(' ', '')
         self._info_labels.append('Name')
         self._info_list.append(self._name)
         self._pretty_table.add_column('Labels', self.InfoLabels)
