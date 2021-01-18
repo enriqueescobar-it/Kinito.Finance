@@ -8,4 +8,4 @@ class IndexFund(AbstractStockFund):
         self.__class = 'Index'
 
     def __str__(self):
-        return self.__class
+        return self._pretty_table.__str__()

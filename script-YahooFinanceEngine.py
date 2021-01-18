@@ -9,7 +9,7 @@ commodity_futures = ['GC=F', 'SI=F', 'CL=F']
 etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']
 mutual_funds = ['PRLAX', 'QASGX', 'HISFX']
 us_treasuries = ['^TNX', '^IRX', '^TYX']
-a_ticker: str = '^TNX'
+a_ticker: str = 'PRLAX'
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print(abstractEngine)
 print(abstractEngine.StockType)

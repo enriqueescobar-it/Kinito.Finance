@@ -1,13 +1,12 @@
-from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
-from pandas import DataFrame
-from yahooquery import Ticker
-from prettytable import PrettyTable
 import matplotlib.pyplot as plt
 import numpy as np
+from pandas import DataFrame
+from yahooquery import Ticker
+
+from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
 
 class ExchangeTradedFund(AbstractStockFund):
-    __pretty_table: PrettyTable = PrettyTable()
     __ticker: str = 'NA'
     __y_query: Ticker
     _sector_df: DataFrame = DataFrame()
@@ -27,11 +26,11 @@ class ExchangeTradedFund(AbstractStockFund):
         self.__ticker = t_name
         self.__y_query = Ticker(t_name)
         self._setInfo()
-        self.__pretty_table.add_column('Labels', self.InfoLabels)
-        self.__pretty_table.add_column(self.__class, self.InfoList)
+        self._pretty_table.add_column('Labels', self.InfoLabels)
+        self._pretty_table.add_column(self.__class, self.InfoList)
 
     def __str__(self) -> str:
-        return self.__pretty_table.__str__()
+        return self._pretty_table.__str__()
 
     def _setInfo(self):
         self.__setSectorDf()
