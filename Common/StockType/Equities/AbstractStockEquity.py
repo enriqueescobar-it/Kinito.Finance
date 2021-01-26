@@ -1,6 +1,8 @@
 from prettytable import PrettyTable
 
 from Common.StockType.AbstractStock import AbstractStock
+import numpy as np
+from pandas import DataFrame
 
 
 class AbstractStockEquity(AbstractStock):
@@ -8,6 +10,15 @@ class AbstractStockEquity(AbstractStock):
     _info_list: list = list()
     _name: str = 'NA'
     _pretty_table: PrettyTable = PrettyTable()
+    __ticker: str = 'NA'
+    _sector_df: DataFrame = DataFrame()
+    _holding_df: DataFrame = DataFrame()
+    _stock_part_count: int = -1
+    _bond_part_count: int = -1
+    _price_to_earn: float = np.nan
+    _price_to_book: float = np.nan
+    _price_to_sale: float = np.nan
+    _price_to_cash: float = np.nan
 
     def __init__(self, c_name: str):
         self.__class = 'Equity'
