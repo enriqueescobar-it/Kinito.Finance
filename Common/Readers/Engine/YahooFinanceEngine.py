@@ -466,6 +466,6 @@ class YahooFinanceEngine(AbstractEngine):
         if s == 'CURRENCY':
             self._stock_type = RegularCurrency(self.CompanyName)
         if s == 'FUTURE':
-            self._stock_type = AbstractStockFuture(self.CompanyName)
+            self._stock_type = AbstractStockFuture(self.CompanyName, self.__ticker)
         if s == 'EQUITY':
             self._stock_type = AbstractStockEquity(self.CompanyName)

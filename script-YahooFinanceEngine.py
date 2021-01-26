@@ -61,18 +61,18 @@ bank_stocks = ['WFC', 'BAC', 'C']
 cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']
 currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']
 commodity_futures = ['GC=F', 'SI=F', 'CL=F']
+us_treasuries = ['^TNX', '^IRX', '^TYX']
 etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']
 mutual_funds = ['PRLAX', 'QASGX', 'HISFX']
-us_treasuries = ['^TNX', '^IRX', '^TYX']
-a_ticker: str = 'MSFT'
-# getpricetobook(a_ticker)
-# getPricetoEarnings(a_ticker)
-quote = si.get_quote_table(a_ticker)
-print(quote["PE Ratio (TTM)"])
-val = si.get_stats_valuation(a_ticker)
-val = val.iloc[:, :2]
-val.columns = ["Attribute", "Recent"]
-print(float(val[val.Attribute.str.contains("Trailing P/E")].iloc[0, 1]))
+a_ticker: str = '^TNX'#'VOOG'
+## getpricetobook(a_ticker)
+## getPricetoEarnings(a_ticker)
+# quote = si.get_quote_table(a_ticker)
+# print(quote["PE Ratio (TTM)"])
+# val = si.get_stats_valuation(a_ticker)
+# val = val.iloc[:, :2]
+# val.columns = ["Attribute", "Recent"]
+# print(float(val[val.Attribute.str.contains("Trailing P/E")].iloc[0, 1]))
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print(abstractEngine)
 print(abstractEngine.StockType)
