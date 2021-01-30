@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+
 from Common.StockType.AbstractStock import AbstractStock
 import numpy as np
 from pandas import DataFrame
