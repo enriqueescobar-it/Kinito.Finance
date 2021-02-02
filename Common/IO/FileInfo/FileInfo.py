@@ -2,4 +2,5 @@ from Common.IO.FileInfo import IFileInfo
 
 
 class FileInfo(IFileInfo):
-    pass
+    def __init__(self, file_name: str = ''):
+        pass

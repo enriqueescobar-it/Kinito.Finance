@@ -20,18 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="folder">
-      <change afterPath="$PROJECT_DIR$/Common/IO/DirInfo/BaseDirInfo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/DirInfo/DirInfo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/DirInfo/IDirInfo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/DirInfo/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/FileInfo/BaseFileInfo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/FileInfo/FileInfo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/FileInfo/IFileInfo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/FileInfo/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/IO/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Objects/Interfaceable.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Objects/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/IO/FileInfo/FileInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/IO/FileInfo/FileInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/IO/FileInfo/IFileInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/IO/FileInfo/IFileInfo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,12 +302,12 @@
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="577" y="250" key="run.anything.popup/0.0.1842.1080@0.0.1842.1080" timestamp="1607999007682" />
-    <state x="-1546" y="-193" width="919" height="847" key="search.everywhere.popup" timestamp="1612242917945">
-      <screen x="-1920" y="-554" width="1858" height="1080" />
+    <state x="371" y="361" width="911" height="847" key="search.everywhere.popup" timestamp="1612279280192">
+      <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state x="2246" y="-123" width="800" height="823" key="search.everywhere.popup/0.0.1458.864/1920.-474.1618.1050@1920.-474.1618.1050" timestamp="1604276568309" />
     <state x="-1546" y="-193" width="919" height="847" key="search.everywhere.popup/0.0.1842.1080/-1920.-554.1858.1080@-1920.-554.1858.1080" timestamp="1612242917945" />
-    <state x="371" y="361" width="911" height="847" key="search.everywhere.popup/0.0.1842.1080/-1920.-554.1858.1080@0.0.1842.1080" timestamp="1611611424632" />
+    <state x="371" y="361" width="911" height="847" key="search.everywhere.popup/0.0.1842.1080/-1920.-554.1858.1080@0.0.1842.1080" timestamp="1612279280192" />
     <state x="371" y="361" width="911" height="847" key="search.everywhere.popup/0.0.1842.1080@0.0.1842.1080" timestamp="1610172465445" />
     <state x="643" y="451" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1610941187036">
       <screen x="0" y="0" width="1842" height="1080" />
