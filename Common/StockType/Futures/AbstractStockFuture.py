@@ -19,11 +19,13 @@ class AbstractStockFuture(AbstractStock):
     _price_to_cash: float = np.nan
 
     def __init__(self, c_name: str, t_name: str):
-        self.__class = 'Future'
         self._name = c_name.replace(' ', '')
+        self.__ticker = t_name
+        self.__class = 'Future'
+        #
         self._info_labels.append('Name')
         self._info_list.append(self._name)
-        self.__ticker = t_name
+        #
         self._setInfo()
         self._pretty_table.add_column('Labels', self.InfoLabels)
         self._pretty_table.add_column(self.__class, self.InfoList)
