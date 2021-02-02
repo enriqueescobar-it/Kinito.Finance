@@ -11,7 +11,7 @@ class ExchangeTradedFund(AbstractStockFund):
     __y_query: Ticker
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
-    _stock_part_count: int = -1
+    b : int = -1
     _bond_part_count: int = -1
     _price_to_earn: float = np.nan
     _price_to_book: float = np.nan
@@ -20,10 +20,11 @@ class ExchangeTradedFund(AbstractStockFund):
 
     def __init__(self, c_name: str, t_name: str):
         super().__init__(c_name.replace(' ', ''))
+        self.__ticker = t_name
         self.__class = 'Etf'
+        #
         self._info_labels.append('Name')
         self._info_list.append(self._name)
-        self.__ticker = t_name
         self.__y_query = Ticker(t_name)
         self._setInfo()
         self._pretty_table.add_column('Labels', self.InfoLabels)
