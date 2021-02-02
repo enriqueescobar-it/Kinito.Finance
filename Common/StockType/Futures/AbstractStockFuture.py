@@ -33,8 +33,10 @@ class AbstractStockFuture(AbstractStock):
 
     def _setInfo(self):
         self._info_labels.append('StockPartCount')
+        self._stock_part_count = 0
         self._info_list.append(self._stock_part_count)
         self._info_labels.append('BondPartCount')
+        self._bond_part_count = 0
         self._info_list.append(self._bond_part_count)
         self._info_labels.append('PriceToEarnings')
         self._info_list.append(self._price_to_earn)
