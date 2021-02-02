@@ -77,11 +77,11 @@ currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']
 commodity_futures = ['GC=F', 'SI=F', 'CL=F']
 etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']
 mutual_funds = ['PRLAX', 'QASGX', 'HISFX']
-a_ticker: str = 'MSFT'
+a_ticker: str = 'AAPL'#
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print(abstractEngine)
 print(abstractEngine.StockType)
-
+exit(-7)
 
 market_cap: float = getMarketCap(a_ticker)
 price_earn: float = getPricetoEarnings(a_ticker, market_cap)

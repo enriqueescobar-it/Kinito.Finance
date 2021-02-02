@@ -1,5 +1,3 @@
-from prettytable import PrettyTable
-
 from Common.StockType.AbstractStock import AbstractStock
 
 
@@ -7,7 +5,6 @@ class AbstractStockOption(AbstractStock):
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
-    _pretty_table: PrettyTable = PrettyTable()
 
     def __init__(self, c_name: str):
         self.__class = 'Option'

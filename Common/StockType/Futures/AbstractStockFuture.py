@@ -1,15 +1,13 @@
-from prettytable import PrettyTable
-
-from Common.StockType.AbstractStock import AbstractStock
 import numpy as np
 from pandas import DataFrame
+
+from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockFuture(AbstractStock):
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
-    _pretty_table: PrettyTable = PrettyTable()
     __ticker: str = 'NA'
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
