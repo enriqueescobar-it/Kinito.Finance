@@ -94,6 +94,11 @@ class IFileInfo(Interfaceable):
 
     @property
     @abstractmethod
+    def IsAbsolute(self):
+        pass
+
+    @property
+    @abstractmethod
     def IsReadOnly(self):
         pass
 
