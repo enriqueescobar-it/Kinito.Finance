@@ -44,7 +44,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('IXN')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
+yahooStockOption: YahooStockOption = YahooStockOption('CDZ.TO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
 # DividendYield [2%, 4%] 2.5 - 6
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -92,7 +92,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('IXN')#'ESTC')XWEB DDOG BE
 # AEM&TO+ AES+1.5 AT.TO ATZ.TO. ACO-X.TO+ ARKG+ A++ ACO-X.TO! ACN++ AIVSX+ AMC. ATVI+1.5 AXP+ AON+
 # BA BCE BCE.TO. BNS BPY BABA++ BIDU- BBBY BNTX BRK-B+ BRTXQ BYND BNS.TO. BIP+ BEP+2.5 BIP-UN.TO+1.5 BZUN+ BILI++ BEP+ BYND+ BAM-A.TO+
 # BMO.TO. BTI- BMY- BGS. BAND+5
-# CAG CAT CCA&TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL. CLX+ CM CNI CSU.TO CSX CVD CMCSA COST+1.5 CP CSCO+ CDNS+3.5
+# CAG CAT CCA&TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL. CLX+ CM CNI CDZ.TO CSU.TO CSX CVD CMCSA COST+1.5 CP CSCO+ CDNS+3.5
 # CNQ.TO. CSIQ+1.5 CELH+ CM+ CMI+1.5 CPX.TO+1.5 CVA. CLH+ COLL. COUP+5 CRM+1.5 CHTR+2 CDW+2 CCI+ CMS+
 # CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++ CARR++ CB- CU.TO. CRSP++++++ C. CLNE. CMCSA+ CIBR+
 # DCBO.TO DND.TO DLHC DKNG+ DDOG+ DOL.TO+ DND.TO+ DIS+ DHR+++ DTE+ DE++ DOCU+3 DVN. DAL. DLR+ DTE+  DOC.V+2

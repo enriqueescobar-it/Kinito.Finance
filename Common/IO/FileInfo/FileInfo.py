@@ -1,5 +1,7 @@
 from Common.IO.FileInfo import IFileInfo
 from pathlib import Path
+import os
+import datetime
 
 
 class FileInfo(IFileInfo):
@@ -14,13 +16,15 @@ class FileInfo(IFileInfo):
 
     def __init__(self, file_name: str = ''):
         self._path_orig = file_name
-        self._path_abs = Path(self._path_orig).resolve()
-        self._is_abs = Path(self._path_orig).is_absolute()
         self._exists = Path(self._path_orig).exists()
-        self._dir_name = Path(self._path_orig).parent
-        self._dir_path = Path(self._path_orig).resolve().parent
-        self._extension = Path(self._path_orig).suffix
-        self._name = Path(self._path_orig).stem
+        if self._exists:
+            self._is_abs = Path(self._path_orig).is_absolute()
+            self._path_abs = Path(self._path_orig).resolve()
+            self._dir_name = Path(self._path_orig).parent
+            self._dir_path = Path(self._path_orig).resolve().parent
+            self._extension = Path(self._path_orig).suffix
+            self._name = Path(self._path_orig).stem
+            self._stats = os.stat(self._path_abs)
 
     @property
     def Dir(self):
@@ -52,19 +56,19 @@ class FileInfo(IFileInfo):
 
     @property
     def IsReadOnly(self):
-        pass
+        return os.access(self._path_abs, os.R_OK)
 
     @property
     def LastAccessTime(self):
-        pass
+        return datetime.datetime.fromtimestamp(self._stats.st_ctime)
 
     @property
     def LastWriteTime(self):
-        pass
+        return datetime.datetime.fromtimestamp(self._stats.st_mtime)
 
     @property
     def Length(self):
-        pass
+        return self._stats.st_size
 
     @property
     def Name(self):
