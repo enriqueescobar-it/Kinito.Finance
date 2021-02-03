@@ -1,0 +1,16 @@
+from Common.IO.FileInfo.FileInfo import FileInfo
+
+fi: FileInfo = FileInfo(file_name='README.md')
+print(fi.Dir)
+print(fi.DirName)
+print(fi.Exists)
+print(fi.FullPath)
+print(fi.IsAbsolute)
+print(fi.IsReadOnly)
+print(fi.LastAccessTime)
+print(fi.LastWriteTime)
+print(fi.Length)
+print(fi.Name)
+print(fi.Extension)
+print(fi.OriginalPath)
+print(fi.Create())
