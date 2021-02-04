@@ -5,7 +5,7 @@ import scipy.stats as scs
 import seaborn as sns
 import statsmodels.api as sm
 from numpy import ndarray
-from pandas import DataFrame
+from pandas import DataFrame, Series
 from arch import arch_model
 from Common.Plotters.AbstractPlotter import AbstractPlotter
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
@@ -126,10 +126,12 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[1].legend(loc=self._legend_place)
         # ax0 -> ax3 -> ax2
-        #self._data_frame[self._col].plot(ax=ax[3], label= self._ticker + self._col)
+        une_series: Series = self._stock_option.Data['Norm'].divide(self._sNp_500.DataNorm['S&P500Norm'].replace(0, 1))
+        print(une_series.describe())
         self._stock_option.Data['Norm'].plot(ax=ax[2], label=self._ticker + 'Norm')
         self._sNp_500.DataNorm.plot(ax=ax[2], label=self._sNp_500.DataNorm.columns)
         self._vix_index.DataNorm.plot(ax=ax[2], label=self._vix_index.DataNorm.columns)
+        une_series.plot(ax=ax[2], label='SnPratio')
         ax[2].set(ylabel='Norm to fold')
         ax[2].legend(loc=self._legend_place)
         # new -> ax4 -> ax3
