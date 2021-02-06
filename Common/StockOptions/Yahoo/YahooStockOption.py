@@ -129,6 +129,10 @@ class YahooStockOption(AbstractStockOption):
         self._setYahooSummary(a_ticker)
 
     @property
+    def SnpRatio(self):
+        return self.__snp_ratio
+
+    @property
     def ArrayScaledX(self):
         return self._x_scaled_array
 
@@ -184,9 +188,9 @@ class YahooStockOption(AbstractStockOption):
     def MinMaxScale(self):
         return self._min_max_scaler
 
-    def SetSnpRatio(self, a_float: float):
-        print('SnP ratio', a_float)
-        self.__snp_ratio = a_float
+    def SetSnpRatio(self, a_df: pd.DataFrame, a_col: str):
+        a_series = round(self.Data['Norm'].divide(a_df[a_col].replace(0, 1)), 3)
+        self.__snp_ratio = a_series[-1]
 
     def _getOutliers(self, a_df: pd.DataFrame, n_sigmas: int = 3):
         a_df['IsOutlier'] = pd.Series(dtype=int)

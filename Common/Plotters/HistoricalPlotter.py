@@ -93,7 +93,6 @@ class HistoricalPlotter(AbstractPlotter):
         self._sNp_500 = sAnP500
         self._vix_index = vixIndex
         self._snp_ratio_series = self.__getSnpRatio(self._stock_option.Data['Norm'], self._sNp_500.DataNorm['S&P500Norm'])
-        stock_option.SetSnpRatio(self._snp_ratio_series[-1])
         self._macd_ind = MacdIndicator(stock_option)
         self._macd_strat = MacdStrategy(self._macd_ind)
         self._sma_ind = SmaIndicator(stock_option)
