@@ -85,8 +85,8 @@ class HistoricalPlotter(AbstractPlotter):
         self._ticker = stock_option.Ticker
         self._time_span = stock_option.TimeSpan
         self._stock_option = stock_option
-        self._vix_index = vixIndex
         self._sNp_500 = sAnP500
+        self._vix_index = vixIndex
         self._macd_ind = MacdIndicator(stock_option)
         self._macd_strat = MacdStrategy(self._macd_ind)
         self._sma_ind = SmaIndicator(stock_option)

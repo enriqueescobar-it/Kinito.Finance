@@ -44,7 +44,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('FCX')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
+yahooStockOption: YahooStockOption = YahooStockOption('F')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
 # DividendYield [2%, 4%] 2.5 - 6
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -194,12 +194,12 @@ marketIndices.append(wilshire5kIndex)
 #marketIndices.append(jkseIndex)
 #marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-#exit(-1)
+exit(-1)
 #'''
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 #yahooStockOptionPlotter.SnP500Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
-yahooStockOptionPlotter.Plot().show()
+yahooStockOptionPlotter.Plot().show()#snp_ratio
 #yahooStockOptionPlotter.PlotTimely()
 #exit(31415)
 #yahooMacdIndicator: MacdIndicator = yahooStockOptionPlotter.MacdInd #MacdIndicator(yahooStockOption)
