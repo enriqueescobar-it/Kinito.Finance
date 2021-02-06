@@ -1,16 +1,21 @@
 from Common.IO.FileInfo.FileInfo import FileInfo
+from Common.IO.DirInfo.DirInfo import DirInfo
+
 
 fi: FileInfo = FileInfo(file_name='README.md')
-print(fi.Dir)
-print(fi.DirName)
+#fi: DirInfo = DirInfo(dir_name='Common')
+print('Dir', fi.DirPath)
+print('DirName', fi.DirName)
+print('Name', fi.Name)
 print(fi.Exists)
-print(fi.FullPath)
+print('FullPath', fi.FullPath)
+print('OriginalPath', fi.OriginalPath)
+print('Root', fi.Root)
 print(fi.IsAbsolute)
 print(fi.IsReadOnly)
 print(fi.LastAccessTime)
+print(fi.CreationTime)
 print(fi.LastWriteTime)
 print(fi.Length)
-print(fi.Name)
 print(fi.Extension)
-print(fi.OriginalPath)
-print(fi.Create())
+#print(fi.Create())

@@ -16,6 +16,7 @@ class FileInfo(ABC):
     __is_abs: bool = False
     __exists: bool = False
     __a_time: datetime = datetime.datetime.now()
+    __c_time: datetime = datetime.datetime.now()
     __m_time: datetime = datetime.datetime.now()
 
     def __init__(self, file_name: str):
@@ -24,12 +25,14 @@ class FileInfo(ABC):
         if self.__exists:
             self.__is_abs = Path(self.__path_orig).is_absolute()
             self.__path_abs = Path(self.__path_orig).resolve()
-            self.__dir_name = Path(self.__path_orig).parent
-            self.__dir_path = Path(self.__path_orig).resolve().parent
-            self.__extension = Path(self.__path_orig).suffix
-            self.__name = Path(self.__path_orig).stem
+            self.__dir_name = Path(self.__path_abs).parent
+            self.__dir_path = Path(self.__path_abs).resolve().parent
+            self.__dir_root = Path(self.__path_abs).anchor
+            self.__extension = Path(self.__path_abs).suffix
+            self.__name = Path(self.__path_abs).stem
             self.__stats = os.stat(self.__path_abs)
-            self.__a_time = datetime.datetime.fromtimestamp(self.__stats.st_ctime)
+            self.__a_time = datetime.datetime.fromtimestamp(self.__stats.st_atime)
+            self.__c_time = datetime.datetime.fromtimestamp(self.__stats.st_ctime)
             self.__m_time = datetime.datetime.fromtimestamp(self.__stats.st_mtime)
             self.__length = self.__stats.st_size
             print(self.__stats.st_mode)
@@ -50,7 +53,7 @@ class FileInfo(ABC):
         return False
 
     @property
-    def Dir(self):
+    def DirPath(self):
         return self.__dir_path
 
     @property
@@ -60,6 +63,10 @@ class FileInfo(ABC):
     @property
     def Exists(self):
         return self.__exists
+
+    @property
+    def Root(self):
+        return self.__dir_root
 
     @property
     def Extension(self):
@@ -80,6 +87,10 @@ class FileInfo(ABC):
     @property
     def LastAccessTime(self):
         return self.__a_time
+
+    @property
+    def CreationTime(self):
+        return self.__c_time
 
     @property
     def LastWriteTime(self):

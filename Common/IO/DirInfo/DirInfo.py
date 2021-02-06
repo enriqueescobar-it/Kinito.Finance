@@ -17,21 +17,23 @@ class DirInfo(ABC):
     __exists: bool = False
     __is_dir: bool = False
     __a_time: datetime = datetime.datetime.now()
+    __c_time: datetime = datetime.datetime.now()
     __m_time: datetime = datetime.datetime.now()
 
-    def __init__(self, file_name: str):
-        self.__path_orig = file_name
+    def __init__(self, dir_name: str):
+        self.__path_orig = dir_name
         self.__exists = Path(self.__path_orig).exists()
         self.__is_dir = Path(self.__path_orig).is_dir()
         if self.__exists and self.__is_dir:
             self.__is_abs = Path(self.__path_orig).is_absolute()
             self.__path_abs = Path(self.__path_orig).resolve()
-            self.__dir_name = Path(self.__path_orig).parent
-            self.__dir_path = Path(self.__path_orig).resolve().parent
-            self.__dir_root = Path(self.__path_orig).anchor
-            self.__name = Path(self.__path_orig).stem
+            self.__dir_name = Path(self.__path_abs).name
+            self.__dir_path = Path(self.__path_abs).resolve().parent
+            self.__dir_root = Path(self.__path_abs).anchor
+            self.__name = Path(self.__path_abs).stem
             self.__stats = os.stat(self.__path_abs)
-            self.__a_time = datetime.datetime.fromtimestamp(self.__stats.st_ctime)
+            self.__a_time = datetime.datetime.fromtimestamp(self.__stats.st_atime)
+            self.__c_time = datetime.datetime.fromtimestamp(self.__stats.st_ctime)
             self.__m_time = datetime.datetime.fromtimestamp(self.__stats.st_mtime)
             self.__length = self.__stats.st_size
             print(self.__stats.st_mode)
@@ -52,7 +54,7 @@ class DirInfo(ABC):
         return False
 
     @property
-    def Dir(self):
+    def DirPath(self):
         return self.__dir_path
 
     @property
@@ -82,6 +84,10 @@ class DirInfo(ABC):
     @property
     def LastAccessTime(self):
         return self.__a_time
+
+    @property
+    def CreationTime(self):
+        return self.__c_time
 
     @property
     def LastWriteTime(self):
