@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/IO/FileInfo/FileInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/IO/FileInfo/FileInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script-FileInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-FileInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script-Historical.py" beforeDir="false" afterPath="$PROJECT_DIR$/script-Historical.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +55,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/StockType/Funds/ExchangeTraded" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -75,7 +74,7 @@
       <recent name="F:\Disk_X\Kinito.Finance\Common\StockType\Currencies" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.script-FileInfo">
+  <component name="RunManager" selected="Python.script-Historical">
     <configuration name="ExchangeTradedFund" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Kinito.Finance" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -183,8 +182,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.script-FileInfo" />
         <item itemvalue="Python.script-Historical" />
+        <item itemvalue="Python.script-FileInfo" />
         <item itemvalue="Python.script-YahooFinanceEngine" />
         <item itemvalue="Python.MutualFund" />
         <item itemvalue="Python.ExchangeTradedFund" />
@@ -213,26 +212,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="folder" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1799" height="262" key="GridCell.Tab.0.bottom" timestamp="1612644227150">
+    <state width="1799" height="262" key="GridCell.Tab.0.bottom" timestamp="1612647851942">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1799" height="171" key="GridCell.Tab.0.bottom/0.0.1842.1080/-1920.-362.1858.1080@0.0.1842.1080" timestamp="1612413416865" />
-    <state width="1799" height="262" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1612644227150" />
-    <state width="1799" height="262" key="GridCell.Tab.0.center" timestamp="1612644227150">
+    <state width="1799" height="262" key="GridCell.Tab.0.bottom/0.0.1842.1080@0.0.1842.1080" timestamp="1612647851942" />
+    <state width="1799" height="262" key="GridCell.Tab.0.center" timestamp="1612647851942">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1799" height="171" key="GridCell.Tab.0.center/0.0.1842.1080/-1920.-362.1858.1080@0.0.1842.1080" timestamp="1612413416865" />
-    <state width="1799" height="262" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1612644227150" />
-    <state width="1799" height="262" key="GridCell.Tab.0.left" timestamp="1612644227150">
+    <state width="1799" height="262" key="GridCell.Tab.0.center/0.0.1842.1080@0.0.1842.1080" timestamp="1612647851942" />
+    <state width="1799" height="262" key="GridCell.Tab.0.left" timestamp="1612647851941">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1799" height="171" key="GridCell.Tab.0.left/0.0.1842.1080/-1920.-362.1858.1080@0.0.1842.1080" timestamp="1612413416865" />
-    <state width="1799" height="262" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1612644227150" />
-    <state width="1799" height="262" key="GridCell.Tab.0.right" timestamp="1612644227150">
+    <state width="1799" height="262" key="GridCell.Tab.0.left/0.0.1842.1080@0.0.1842.1080" timestamp="1612647851941" />
+    <state width="1799" height="262" key="GridCell.Tab.0.right" timestamp="1612647851942">
       <screen x="0" y="0" width="1842" height="1080" />
     </state>
     <state width="1799" height="171" key="GridCell.Tab.0.right/0.0.1842.1080/-1920.-362.1858.1080@0.0.1842.1080" timestamp="1612413416865" />
-    <state width="1799" height="262" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1612644227150" />
+    <state width="1799" height="262" key="GridCell.Tab.0.right/0.0.1842.1080@0.0.1842.1080" timestamp="1612647851942" />
+    <state x="422" y="184" key="SettingsEditor" timestamp="1612646091783">
+      <screen x="0" y="0" width="1842" height="1080" />
+    </state>
+    <state x="422" y="184" key="SettingsEditor/0.0.1842.1080@0.0.1842.1080" timestamp="1612646091783" />
     <state x="-1254" y="-549" width="1101" height="924" key="dock-window-1" timestamp="1612361136037">
       <screen x="-1920" y="-554" width="1858" height="1080" />
     </state>
