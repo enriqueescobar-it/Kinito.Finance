@@ -194,9 +194,9 @@ marketIndices.append(wilshire5kIndex)
 #marketIndices.append(jkseIndex)
 #marketIndices.append(kospIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
-exit(-1)
 #'''
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
+exit(-1)
 #yahooStockOptionPlotter.SnP500Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()#snp_ratio

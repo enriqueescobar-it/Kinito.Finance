@@ -87,6 +87,8 @@ class HistoricalPlotter(AbstractPlotter):
         self._stock_option = stock_option
         self._sNp_500 = sAnP500
         self._vix_index = vixIndex
+        a_series: Series = self.__getSnpRatio(self._stock_option.Data['Norm'], self._sNp_500.DataNorm['S&P500Norm'])
+        print('a_series', a_series.describe())
         self._macd_ind = MacdIndicator(stock_option)
         self._macd_strat = MacdStrategy(self._macd_ind)
         self._sma_ind = SmaIndicator(stock_option)
@@ -481,3 +483,6 @@ class HistoricalPlotter(AbstractPlotter):
         sm.qqplot(a_df[self._col].values, line='q', ax=an_ax)
         an_ax.set_title('Q-Q plot of ' + self._ticker + ' ' + self._col + ' ' + period_str + ' Returns', fontsize=12)
         return an_ax
+
+    def __getSnpRatio(self, stock_option_series: Series, snp_series: Series) -> Series:
+        return stock_option_series.divide(snp_series.replace(0, 1))
