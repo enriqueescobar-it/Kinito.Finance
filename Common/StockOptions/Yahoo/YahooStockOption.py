@@ -16,6 +16,7 @@ from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
 
 
 class YahooStockOption(AbstractStockOption):
+    __snp_ratio: float = 0.0
     ForecastSpan: int = 30
     _train_size: int = -1
     _test_size: int = -1
@@ -182,6 +183,10 @@ class YahooStockOption(AbstractStockOption):
     @property
     def MinMaxScale(self):
         return self._min_max_scaler
+
+    def SetSnpRatio(self, a_float: float):
+        print('SnP ratio', a_float)
+        self.__snp_ratio = a_float
 
     def _getOutliers(self, a_df: pd.DataFrame, n_sigmas: int = 3):
         a_df['IsOutlier'] = pd.Series(dtype=int)

@@ -44,7 +44,7 @@ from Common.TechIndicators.MacdIndicator import MacdIndicator
 from Common.TechIndicators.RsiIndicator import RsiIndicator
 from Common.TechIndicators.SmaIndicator import SmaIndicator
 
-yahooStockOption: YahooStockOption = YahooStockOption('F')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
+yahooStockOption: YahooStockOption = YahooStockOption('ABX.TO')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
 # DividendYield [2%, 4%] 2.5 - 6
 # DividendGrowthRate 6% +
 # PEratio [15, 20]
@@ -87,7 +87,7 @@ yahooStockOption: YahooStockOption = YahooStockOption('F')#'ESTC')XWEB DDOG BEKE
 # # easy portfolio
 # 10% -> VAB.TO VGV.TO
 # 90% -> 25% VFV XUS 20% HXQ XQQ 5-10% XEC 25% XRE XDV 20% ARKK ARKG
-# AAPL+3 ABBV+ AAOI ADBE+3 ABR+ ABT++ ABX.TO&GOLD ACES+3 ADC+ ADP+ AGNC AKAM AMGN AMD+20 AM. AMP+1.5 AMT+1.5 AMAT+3
+# AAPL+3 ABBV+ AAOI+0.4 ADBE+3 ABR+ ABT++ ABX.TO&GOLD+0.9 ACES+3 ADC+ ADP+ AGNC AKAM AMGN AMD+20 AM. AMP+1.5 AMT+1.5 AMAT+3
 # AMZN+3 ANTM+ AQN+ AQN.TO+ ARKK+++ ARKF++ ARKG+ ARKQ ARKW++++ APPS+++ APPN+5 AVGO++ AA. APHA+ ASAN ARKF ARKK AVAV
 # AVGO++ AVB AYX++ AZN AWK+ ANET+2.5 AEM&TO+ AES+1.5 AT.TO ATZ.TO. ACO-X.TO+ ARKG+ A++ ACO-X.TO! ACN++ AIVSX+ AMC.
 # ATVI+1.5 AXP+ AON+
@@ -196,7 +196,7 @@ marketIndices.append(wilshire5kIndex)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
 #'''
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
-exit(-1)
+#exit(-1)
 #yahooStockOptionPlotter.SnP500Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()#snp_ratio

@@ -35,11 +35,16 @@ class HistoricalPlotter(AbstractPlotter):
     _rsi_ind: RsiIndicator
     _rsi_strat: RsiStrategy
     _summary: DataFrame
+    _snp_ratio_series: Series
     _price: float
     _yeAverage200: float
     _yeAverage50: float
     _yeHigh52: float
     _yeLow52: float
+
+    @property
+    def SnPratio(self):
+        return self._snp_ratio_series[-1]
 
     @property
     def MacdInd(self):
@@ -87,8 +92,8 @@ class HistoricalPlotter(AbstractPlotter):
         self._stock_option = stock_option
         self._sNp_500 = sAnP500
         self._vix_index = vixIndex
-        a_series: Series = self.__getSnpRatio(self._stock_option.Data['Norm'], self._sNp_500.DataNorm['S&P500Norm'])
-        print('a_series', a_series.describe())
+        self._snp_ratio_series = self.__getSnpRatio(self._stock_option.Data['Norm'], self._sNp_500.DataNorm['S&P500Norm'])
+        stock_option.SetSnpRatio(self._snp_ratio_series[-1])
         self._macd_ind = MacdIndicator(stock_option)
         self._macd_strat = MacdStrategy(self._macd_ind)
         self._sma_ind = SmaIndicator(stock_option)
@@ -128,12 +133,10 @@ class HistoricalPlotter(AbstractPlotter):
         ax[1].set(ylabel='Moving Volatility', xlabel=x_label)
         ax[1].legend(loc=self._legend_place)
         # ax0 -> ax3 -> ax2
-        une_series: Series = self._stock_option.Data['Norm'].divide(self._sNp_500.DataNorm['S&P500Norm'].replace(0, 1))
-        print(une_series.describe())
         self._stock_option.Data['Norm'].plot(ax=ax[2], label=self._ticker + 'Norm')
         self._sNp_500.DataNorm.plot(ax=ax[2], label=self._sNp_500.DataNorm.columns)
         self._vix_index.DataNorm.plot(ax=ax[2], label=self._vix_index.DataNorm.columns)
-        une_series.plot(ax=ax[2], label='SnPratio')
+        self._snp_ratio_series.plot(ax=ax[2], label='SnPratio')
         ax[2].set(ylabel='Norm to fold')
         ax[2].legend(loc=self._legend_place)
         # new -> ax4 -> ax3
@@ -485,4 +488,4 @@ class HistoricalPlotter(AbstractPlotter):
         return an_ax
 
     def __getSnpRatio(self, stock_option_series: Series, snp_series: Series) -> Series:
-        return stock_option_series.divide(snp_series.replace(0, 1))
+        return round(stock_option_series.divide(snp_series.replace(0, 1)), 3)
