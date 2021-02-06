@@ -2,7 +2,7 @@ from Common.IO.FileInfo.FileInfo import FileInfo
 from Common.IO.DirInfo.DirInfo import DirInfo
 
 
-fi: FileInfo = FileInfo(file_name='README.md')
+fi: FileInfo = FileInfo(file_name='F:\Disk_X\Kinito.Finance\README.txt')
 #fi: DirInfo = DirInfo(dir_name='Common')
 print('Dir', fi.DirPath)
 print('DirName', fi.DirName)
@@ -18,4 +18,4 @@ print(fi.CreationTime)
 print(fi.LastWriteTime)
 print(fi.Length)
 print(fi.Extension)
-#print(fi.Create())
+print(fi.Create())

@@ -1,8 +1,8 @@
 #from Common.IO.FileInfo import IFileInfo
+import datetime
+import os
 from abc import *
 from pathlib import Path
-import os
-import datetime
 
 
 class FileInfo(ABC):
@@ -11,6 +11,7 @@ class FileInfo(ABC):
     __path_abs: str = ''
     __dir_name: str = ''
     __dir_path: str = ''
+    __dir_root: str = ''
     __extension: str = ''
     __name: str = ''
     __is_abs: bool = False
@@ -44,7 +45,10 @@ class FileInfo(ABC):
         return False
 
     def Create(self) -> bool:
-        return False
+        if self.__exists:
+            return False
+        else:
+            return True
 
     def Delete(self) -> bool:
         return False
