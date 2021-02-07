@@ -82,7 +82,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # # growth stocks
 # BCE.TO BIP-UN.TO BIP BEP
 # # passive TSX
-# BCE.TO MG.TO SIS.TO IFC.TO AP-UN.TO MFC.TO POW.TO
+# BCE.TO MG.TO SIS.TO IFC.TO AP-UN.TO MFC.TO POW.TO QSR.TO FSV.TO TIH.TO BAM-A.TO TRP.TO
 # # easy portfolio
 # 10% -> VAB.TO VGV.TO
 # 90% -> 25% VFV XUS 20% HXQ XQQ 5-10% XEC 25% XRE XDV 20% ARKK ARKG
@@ -91,7 +91,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # AMZN+3 ANTM+ AQN+ AQN.TO+ ARKK+++ ARKF++ ARKG+ ARKQ ARKW++++ APPS+++ APPN+5 AVGO++ APHA+ ASAN ARKF ARKK AVAV
 # AVGO++ AVB AYX++ AZN AWK+ ANET+2.5 AEM&TO+ AES+1.5 AT.TO ATZ.TO. ARKG+ ACO-X.TO! ACN++ AIVSX+ AMC. ATVI+1.5 AXP+ AON+
 # BA BCE BCE.TO. BNS BPY BABA++ BIDU- BBBY BNTX BRK-B+ BRTXQ BYND BNS.TO. BIP+ BEP+2.5 BIP-UN.TO+1.5 BZUN+ BILI++ BEP+
-# BYND+ BAM-A.TO+ BMO.TO. BTI- BMY- BGS. BAND+5
+# BYND+ BAM-A.TO+ BMO.TO. BTI- BMY- BGS. BAND+6.2 BP+0.5 BX+1.8
 # CAG CAT CCA&TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL. CLX+ CM CNI CDZ.TO CSU.TO CSX CVD CMCSA COST+1.5 CP CSCO+
 # CDNS+3.5 CNQ.TO. CSIQ+1.5 CELH+ CM+ CMI+1.5 CPX.TO+1.5 CVA. CLH+ COLL. COUP+5 CRM+1.5 CHTR+2 CDW+2 CCI+ CCIV+1.5 CMS+
 # CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++ CARR++ CB- CU.TO. CRSP++++++ C. CLNE. CMCSA+ CIBR+
@@ -106,9 +106,9 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # ICLN++ IVR. IEP+ IXN+2
 # JKS+2 JD+ JNJ+ JPM+ JNUG. JNPR. JBHT+
 # KEY K KXS.TO KDP KL&TO KO! KR KMI. K.TO++ KXS.TO+ KHC. KWEB+1.5
-# LB.TO LMT+ LNT+ LMND LOW++ LSPD&TO+2.5 LVGO LOGI+ LAND+ LMND+ LULU+3 LUV. LW+1.25
+# LB.TO+0.4 LMT+0.9 LNT+0.8 LOW+1.4 LSPD&TO+2 LOGI+3.9 LAND+1.3 LMND+1.7 LULU+2.7 LUV+0.7 LW+1.25 LLY+1.5
 # M+0.5 MA+2 MAIN+0.8 MET+0.8 MELI+10 MFI.TO MO. MU+3 MCD+ MGM MRVL MSFT+2.5 MWK+2 MDY+ MRU.TO+ MSCI+ MFC.TO+0.8 MXIM+
-# MDLZ. MDB+6 MAA. MTUM+ NWC.TO. MGNI+ MLPX+0.5 MPW+1.5 MRK+ MARA+0.5 MRNA+4
+# MDLZ. MDB+6 MAA. MTUM+ NWC.TO. MGNI+ MLPX+0.5 MPW+1.5 MRK+ MARA+0.5 MRNA+4 MFC.TO+0.8
 # NEE+ NEM+ NET+2 NKE+ NSP NEAR NFLX+++ NIO+4 NLY. NLOK NNDM NPI NOBL+ NVEI.TO NVDA+5 NOW+4 NRZ- NUSI+ NXST+1.5 NWC.TO.
 # O+ OTEX OHI O- OKTA+++++ OKE+ MC-
 # PANW+1.6 PAAS+1.9 PAWZ+1.4 PAYC+8.5 PBI+0.4 PBA+0.8 PBW+3.6 PBH+0.4 PCTY+3.7 PEP+0.8 PFE+0.7 PDD+5.4 PG+0.9 PGX+0.6 PHM+1.6
@@ -119,8 +119,8 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # RSG++ RTX.
 # SU. SU.TO. SIS.TO+ SNA SBUX+ SHOP&TO+25 SPLK SPYD SJR.B SJR-B.TO SLV+0.8 SNAP SNOW+ SPOT SOXL SRU.UN.TO. SPG SAP
 # SPNS+2 SNPS+3 STOR+ STAG SEDG+ SJR-B.TO SOY.TO. SYK++ STX+ SQ+8 SFTBY+2 SAVA. SMOG+2 SE+7.5 SCHA+
-# T&TO+ TD TTD+15 TDOC+10 TEC.TO TAL+ TEAM+5 TENB+ TFII+ TFII.TO+ TGT- TRMB TSLA+++ TRP TRP.TO TTD+15 TOU.TO TROW TWLO+6
-# TWST+ TVE.TO. TPB+++ TPR. TSN- TSM+ TCOM. TXN+2 TTCF+2 TMO+2 TRUL.CN+5
+# T&TO+0.5 TAL+5.1 TD+0.9 TCOM+0.4 TDOC+10.8 TEC.TO+1.3 TEAM+6.5 TENB+1.1 TFII&TO+2.7 TGT+1.5 TJX+1 TMO+2 TOU.TO+0.4 TPB+2.9 TPR+0.6
+# TRMB+1.8 TRP&TO0.7 TRUL.CN+4 TROW+1.3 TSLA+13.8 TSN+0.6 TSM+3.2 TTCF+1.9 TTD+15.8 TVE.TO+0.2 TWLO+7.6 TWST+7.9 TXN+1.8
 # U UNM UNP+1.5 UPWK UNM- UDN.
 # VDC VFC VFF VFV.TO VG+1.5 VGT+2 VMW VNR VPL VPU VITAX+2 VTSAX+1.2 VYM VYMI VZ+ V+1.5 VOO+ VOOG+ VNQ+ VIOO VHT VSP.TO
 # VEQT.TO+ VGRO.TO+ VEEV+6 VTV+
@@ -129,7 +129,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # YCBD.
 # ZG+3.5 ZM+3 ZQQ.TO+1.5 ZS+3 ZWB.TO. ZUO. ZTS+2
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
-yahooStockOption: YahooStockOption = YahooStockOption('PNR')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
+yahooStockOption: YahooStockOption = YahooStockOption('T')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 skewIndex: AbstractStockMarketIndex = SkewIndex('yahoo', "^SKEW", yahooStockOption.TimeSpan)
@@ -194,6 +194,7 @@ marketIndices.append(wilshire5kIndex)
 #marketIndices.append(jkseIndex)
 #marketIndices.append(kospIndex)
 yahooStockOption.SetSnpRatio(sAnP500.DataNorm, 'S&P500Norm')
+#exit(-11)
 print(yahooStockOption.SnpRatio)
 exit(-11)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
