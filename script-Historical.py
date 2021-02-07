@@ -111,8 +111,9 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # MDLZ. MDB+6 MAA. MTUM+ NWC.TO. MGNI+ MLPX+0.5 MPW+1.5 MRK+ MARA+0.5 MRNA+4
 # NEE+ NEM+ NET+2 NKE+ NSP NEAR NFLX+++ NIO+4 NLY. NLOK NNDM NPI NOBL+ NVEI.TO NVDA+5 NOW+4 NRZ- NUSI+ NXST+1.5 NWC.TO.
 # O+ OTEX OHI O- OKTA+++++ OKE+ MC-
-# PM- PANW PBI+0.3 PFE+ PINS PG+ PGX PEP+ PLAN PLTR+1.5 PPL.TO+ PBA+ PBW+3.5 PRU- PVD PTON PAWZ PSEC PYPL+3 PCTY+++
-# PKI.TO PHO+ PAAS+++ PAYC+6 PBH. PDD+3 PNC+ PTGX+ PIODX+ PKI.TO+ PINS+2 PNR+ PHM++ POW.TO+0.8
+# PANW+1.6 PAAS+1.9 PAWZ+1.4 PAYC+8.5 PBI+0.4 PBA+0.8 PBW+3.6 PBH+0.4 PCTY+3.7 PEP+0.8 PFE+0.7 PDD+5.4 PG+0.9 PGX+0.6 PHM+1.6
+# PHO+1.2 PINS+2.5 PIODX+0.6 PKI.TO+1 PLAN+2.4 PLTR+1.5 PM+0.6 PNC+1.1 PNR+0.9 POW.TO+0.8 PPL.TO+0.7 PRU+0.7 PSEC+1
+# PTON+4.4 PTGX+1.1 PYPL+3
 # QCOM+2 QQC-f QQQ+1.5 QQQJ++ QRVO+2.5 QSR.TO+ QTEC+2
 # RBA RCI+ RCI.B.TO+ REAL.TO RCL.S REGI+7.5 ROK+1.5 ROKU+10 ROP+1.5 RUN+5 RY+ RY.TO+ RYT+1.5 RIOT RHS RNG+9 RF+ RNW.TO++
 # RSG++ RTX.
@@ -128,7 +129,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # YCBD.
 # ZG+3.5 ZM+3 ZQQ.TO+1.5 ZS+3 ZWB.TO. ZUO. ZTS+2
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
-yahooStockOption: YahooStockOption = YahooStockOption('AA')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
+yahooStockOption: YahooStockOption = YahooStockOption('PNR')#'ESTC')XWEB DDOG BEKE GBTC GNDP.V IHI
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 skewIndex: AbstractStockMarketIndex = SkewIndex('yahoo', "^SKEW", yahooStockOption.TimeSpan)
