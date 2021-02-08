@@ -70,15 +70,19 @@ def getPriceToSales(stock, cap: float) -> float:
         pass
 
 
-us_treasuries = ['^TNX', '^IRX', '^TYX']#!
-tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD-B.TO']
-bank_stocks = ['WFC', 'BAC', 'C']
-cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']#!
-currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#!
-commodity_futures = ['GC=F', 'SI=F', 'CL=F']#!
+us_treasuries = ['^TNX', '^IRX', '^TYX']#! #~
+tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD-B.TO']#~
+bank_stocks = ['WFC', 'BAC', 'C']#~
+cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']#! #~
+currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#! #~
+commodity_futures = ['GC=F', 'SI=F', 'CL=F']#! #~
 etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']#!
 mutual_funds = ['PRLAX', 'QASGX', 'HISFX']#!
-a_ticker: str = 'JPY=X'#
+a_ticker: str = 'PRLAX'#
+abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
+print(abstractEngine)
+print(abstractEngine.StockType)
+exit(-7)
 yfsi: YahooFinStockInfo = YahooFinStockInfo(a_ticker)
 print(yfsi.PeRatio)
 print(yfsi.FpeRatio)
@@ -87,10 +91,6 @@ print(yfsi.PriceToBook)
 print(yfsi.PriceToEarnings)
 print(yfsi.PriceToSales)
 exit(-6)
-abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
-print(abstractEngine)
-print(abstractEngine.StockType)
-exit(-7)
 
 market_cap: float = getMarketCap(a_ticker)
 price_earn: float = getPricetoEarnings(a_ticker, market_cap)
