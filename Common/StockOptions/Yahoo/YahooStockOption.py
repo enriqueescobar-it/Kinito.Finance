@@ -121,7 +121,9 @@ class YahooStockOption(AbstractStockOption):
             self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
                               self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg, self.SimpleAnnuallyReturnAvg)
         self._setYahooFinance(a_ticker)
+        exit(-111)
         self._setYahooSummary(a_ticker)
+        exit(-111)
 
     @property
     def SnpRatio(self):
@@ -418,6 +420,7 @@ class YahooStockOption(AbstractStockOption):
 
     def _setYahooFinance(self, a_ticker: str = 'TD'):
         self._y_finance_engine = YahooFinanceEngine(a_ticker)
+        exit(-111)
         print(self._y_finance_engine)
         print(self._y_finance_engine.StockType)
         self.YeUrl = self._y_finance_engine.Url
