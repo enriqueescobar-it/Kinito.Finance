@@ -120,11 +120,6 @@ class YahooStockOption(AbstractStockOption):
         (self.IsDaily, self.IsWeekly, self.IsMonthly, self.IsQuarterly, self.IsAnnually) = \
             self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
                               self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg, self.SimpleAnnuallyReturnAvg)
-        print('D', self.IsDaily)
-        print('W', self.IsWeekly)
-        print('M', self.IsMonthly)
-        print('Q', self.IsQuarterly)
-        print('A', self.IsAnnually)
         self._setYahooFinance(a_ticker)
         self._setYahooSummary(a_ticker)
 
@@ -482,11 +477,6 @@ class YahooStockOption(AbstractStockOption):
         return round(100 * a_series.mean()[0], 2)
 
     def _setIsTimely(self, day_avg: float, week_avg: float, month_avg: float, quarter_avg: float, annual_avg: float):
-        print('day_avg', day_avg)
-        print('week_avg', week_avg)
-        print('month_avg', month_avg)
-        print('quarter_avg', quarter_avg)
-        print('annual_avg', annual_avg)
         a_median: float = statistics.median([day_avg, week_avg, month_avg, quarter_avg, annual_avg])
         return (day_avg >= a_median, week_avg >= a_median, month_avg >= a_median, quarter_avg >= a_median,
                 annual_avg >= a_median)
