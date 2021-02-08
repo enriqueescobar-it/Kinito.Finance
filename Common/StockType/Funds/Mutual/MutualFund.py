@@ -20,10 +20,11 @@ class MutualFund(AbstractStockFund):
 
     def __init__(self, c_name: str, t_name: str):
         super().__init__(c_name.replace(' ', ''))
+        self.__ticker = t_name
         self.__class = 'Mutual'
+        #
         self._info_labels.append('Name')
         self._info_list.append(self._name)
-        self.__ticker = t_name
         self.__y_query = Ticker(t_name)
         self._setInfo()
         self._pretty_table.add_column('Labels', self.InfoLabels)

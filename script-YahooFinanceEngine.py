@@ -78,7 +78,7 @@ currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#! #~
 commodity_futures = ['GC=F', 'SI=F', 'CL=F']#! #~
 etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']#!
 mutual_funds = ['PRLAX', 'QASGX', 'HISFX']#!
-a_ticker: str = 'PRLAX'#
+a_ticker: str = 'TSLA'#
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print(abstractEngine)
 print(abstractEngine.StockType)
