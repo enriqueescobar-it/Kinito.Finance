@@ -1,4 +1,5 @@
 import math
+from math import pi
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as scs
@@ -107,6 +108,33 @@ class HistoricalPlotter(AbstractPlotter):
         self._summary['EMA'] = self._ema_strat.Summary['BuyAndSell']
         self._summary['RSI'] = self._rsi_strat.Summary['BuyAndSell']
         self._summary['BuyAndSell'] = self._summary.mean(axis=1)
+
+    def RadarPlot(self) -> plt:
+        a_title: str = self._ticker + ' Radar Plot ' + str(self._time_span.MonthCount) + ' months'
+        x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
+        catego_array: [] = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Annually']
+        category_count: int = len(catego_array)
+        value_array: [] = [self._stock_option.SimpleDailyReturnAvg,
+                           self._stock_option.SimpleWeeklyReturnAvg,
+                           self._stock_option.SimpleMonthlyReturnAvg,
+                           self._stock_option.SimpleQuarterlyReturnAvg,
+                           self._stock_option.SimpleAnnuallyReturnAvg]
+        # connect the dots
+        value_array += value_array[:1]
+        # calculate angles
+        angle_array: [] = [n / float(category_count) * 2 * pi for n in range(category_count)]
+        # connect the dots
+        angle_array += angle_array[:1]
+        plt.style.use('seaborn')
+        plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
+        plt.polar(angle_array, value_array)
+        plt.fill(angle_array, value_array, alpha=0.3)
+        plt.xticks(angle_array[:-1], catego_array)
+        #ax.set_rlabel_position(0)
+        #plt.yticks([5, 10, 15], color='grey', size=10)
+        #plt.ylim(0,20)
+        plt.tight_layout()
+        return plt
 
     def Plot(self, s: str = ' Plot ') -> plt:
         a_title: str = self._ticker + ' ' + self._col + s + str(self._time_span.MonthCount) + ' months'
