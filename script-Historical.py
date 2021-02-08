@@ -131,7 +131,6 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # ZG+3.5 ZM+3 ZQQ.TO+1.5 ZS+3 ZWB.TO. ZUO. ZTS+2
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
 yahooStockOption: YahooStockOption = YahooStockOption('TSLA')#'ESTC')XWEB DDOG BEKE GBTC IHI
-yfsi: YahooFinStockInfo = YahooFinStockInfo(yahooStockOption.Ticker)
 exit(-11)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)

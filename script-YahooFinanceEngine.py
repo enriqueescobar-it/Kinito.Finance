@@ -1,6 +1,7 @@
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 import requests
 import yahoo_fin.stock_info as si
+from Common.Readers.Engine.YahooFinStockInfo import YahooFinStockInfo
 
 api_key = '41da2fad6cc1f1221dc6b74b0a926139'
 
@@ -69,15 +70,23 @@ def getPriceToSales(stock, cap: float) -> float:
         pass
 
 
-us_treasuries = ['^TNX', '^IRX', '^TYX']
+us_treasuries = ['^TNX', '^IRX', '^TYX']#!
 tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD-B.TO']
 bank_stocks = ['WFC', 'BAC', 'C']
-cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']
-currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']
-commodity_futures = ['GC=F', 'SI=F', 'CL=F']
-etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']
-mutual_funds = ['PRLAX', 'QASGX', 'HISFX']
-a_ticker: str = 'PRLAX'#
+cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']#!
+currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#!
+commodity_futures = ['GC=F', 'SI=F', 'CL=F']#!
+etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']#!
+mutual_funds = ['PRLAX', 'QASGX', 'HISFX']#!
+a_ticker: str = 'JPY=X'#
+yfsi: YahooFinStockInfo = YahooFinStockInfo(a_ticker)
+print(yfsi.PeRatio)
+print(yfsi.FpeRatio)
+print(yfsi.PegRatio)
+print(yfsi.PriceToBook)
+print(yfsi.PriceToEarnings)
+print(yfsi.PriceToSales)
+exit(-6)
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print(abstractEngine)
 print(abstractEngine.StockType)
