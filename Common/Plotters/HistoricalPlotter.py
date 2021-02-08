@@ -112,27 +112,33 @@ class HistoricalPlotter(AbstractPlotter):
     def RadarPlot(self) -> plt:
         a_title: str = self._ticker + ' Radar Plot ' + str(self._time_span.MonthCount) + ' months'
         x_label: str = self._time_span.StartDateStr + ' - ' + self._time_span.EndDateStr
+        a_float: float = 2 * math.log(self._stock_option.TimeSpan.MonthCount)
         catego_array: [] = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Annually']
-        category_count: int = len(catego_array)
+        catego_count: int = len(catego_array)
         value_array: [] = [self._stock_option.SimpleDailyReturnAvg,
                            self._stock_option.SimpleWeeklyReturnAvg,
                            self._stock_option.SimpleMonthlyReturnAvg,
                            self._stock_option.SimpleQuarterlyReturnAvg,
                            self._stock_option.SimpleAnnuallyReturnAvg]
+        value_max: int = int(round(max(value_array)))
         # connect the dots
         value_array += value_array[:1]
         # calculate angles
-        angle_array: [] = [n / float(category_count) * 2 * pi for n in range(category_count)]
+        angle_array: [] = [n / float(catego_count) * 2 * pi for n in range(catego_count)]
         # connect the dots
         angle_array += angle_array[:1]
         plt.style.use('seaborn')
         plt.rcParams['date.epoch'] = '0000-12-31 00:00:00'
-        plt.polar(angle_array, value_array)
+        fig = plt.figure(figsize=(a_float, a_float))
+        ax = plt.subplot(polar=True)
+        plt.polar(angle_array, value_array, marker='.')
         plt.fill(angle_array, value_array, alpha=0.3)
         plt.xticks(angle_array[:-1], catego_array)
-        #ax.set_rlabel_position(0)
+        ax.set_rlabel_position(0)
+        ax.set(xlabel=x_label)
         #plt.yticks([5, 10, 15], color='grey', size=10)
-        #plt.ylim(0,20)
+        plt.ylim(0, value_max)
+        plt.title(a_title)
         plt.tight_layout()
         return plt
 
