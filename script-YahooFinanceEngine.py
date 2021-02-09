@@ -78,19 +78,19 @@ currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#! #~
 commodity_futures = ['GC=F', 'SI=F', 'CL=F']#! #~
 etf_stocks = ['VOO', 'VOOG', 'GINN.TO', 'VGRO.TO', 'XIT.TO']#!
 mutual_funds = ['PRLAX', 'QASGX', 'HISFX']#!
-a_ticker: str = 'TSLA'#
+a_ticker: str = '^TNX'#
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print(abstractEngine)
 print(abstractEngine.StockType)
-exit(-7)
-yfsi: YahooFinStockInfo = YahooFinStockInfo(a_ticker)
+#exit(-7)
+yfsi: YahooFinStockInfo = YahooFinStockInfo(a_ticker) #PRLAX VOOG SI=F EURUSD=X BTC-USD
 print(yfsi.PeRatio)
 print(yfsi.FpeRatio)
 print(yfsi.PegRatio)
 print(yfsi.PriceToBook)
 print(yfsi.PriceToEarnings)
 print(yfsi.PriceToSales)
-exit(-6)
+exit(-77)
 
 market_cap: float = getMarketCap(a_ticker)
 price_earn: float = getPricetoEarnings(a_ticker, market_cap)

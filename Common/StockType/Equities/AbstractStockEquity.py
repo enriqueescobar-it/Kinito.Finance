@@ -3,6 +3,7 @@ from pandas import DataFrame
 from yahooquery import Ticker
 
 from Common.StockType.AbstractStock import AbstractStock
+from Common.Readers.Engine.YahooFinStockInfo import YahooFinStockInfo
 
 
 class AbstractStockEquity(AbstractStock):
@@ -11,14 +12,15 @@ class AbstractStockEquity(AbstractStock):
     _name: str = 'NA'
     __ticker: str = 'NA'
     __y_query: Ticker
+    __yfsi: YahooFinStockInfo
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
     _bond_part_count: int = -1
-    _price_to_earn: float = np.nan
     _price_to_book: float = np.nan
-    _price_to_sale: float = np.nan
     _price_to_cash: float = np.nan
+    _price_to_earn: float = np.nan
+    _price_to_sale: float = np.nan
 
     def __init__(self, c_name: str, t_name: str):
         self._name = c_name.replace(' ', '')
@@ -28,6 +30,7 @@ class AbstractStockEquity(AbstractStock):
         self._info_labels.append('Name')
         self._info_list.append(self._name)
         self.__y_query = Ticker(t_name)
+        self.__yfsi = YahooFinStockInfo(t_name)
         self._setInfo()
         self._pretty_table.add_column('Labels', self.InfoLabels)
         self._pretty_table.add_column(self.__class, self.InfoList)
@@ -53,7 +56,47 @@ class AbstractStockEquity(AbstractStock):
         self._info_list.append(self._price_to_cash)
 
     def __setInfo(self):
-        print(self.__y_query)
+        self._price_to_book = self.__yfsi.PriceToBook
+        self._price_to_earn = self.__yfsi.PriceToEarnings
+        self._price_to_sale = self.__yfsi.PriceToSales
+        '''
+        "maxAge": 1,
+        "priceHint": 2,
+        "enterpriseValue": 1672450801664,
+        "forwardPE": 25.70207,
+        "profitMargins": 0.21350001,
+        "floatShares": 4329740605,
+        "sharesOutstanding": 4334329856,
+        "sharesShort": 35234606,
+        "sharesShortPriorMonth": 34828293,
+        "sharesShortPreviousMonthDate": "2020-06-15 00:00:00",
+        "dateShortInterest": "2020-07-15 00:00:00",
+        "sharesPercentSharesOut": 0.0081,
+        "heldPercentInsiders": 0.00066,
+        "heldPercentInstitutions": 0.62115,
+        "shortRatio": 0.96,
+        "shortPercentOfFloat": 0.0081,
+        "beta": 1.182072,
+        "category": null,
+        "bookValue": 18.137,
+        "priceToBook": 21.214094,
+        "fundFamily": null,
+        "legalType": null,
+        "lastFiscalYearEnd": "2019-09-28 00:00:00",
+        "nextFiscalYearEnd": "2021-09-28 00:00:00",
+        "mostRecentQuarter": "2020-03-28 00:00:00",
+        "earningsQuarterlyGrowth": -0.027,
+        "netIncomeToCommon": 57215000576,
+        "trailingEps": 12.728,
+        "forwardEps": 14.97,
+        "pegRatio": 2.78,
+        "lastSplitFactor": "7:1",
+        "lastSplitDate": "2014-06-09 00:00:00",
+        "enterpriseToRevenue": 6.241,
+        "enterpriseToEbitda": 21.634,
+        "52WeekChange": 0.8239218,
+        "SandP52WeekChange": 0.103224516
+        '''
 
     @property
     def InfoList(self):
