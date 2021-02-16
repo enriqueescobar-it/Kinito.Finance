@@ -80,6 +80,10 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
 # ETFs: BRTXQ FZILX FSRNX VTSAX FPE HPI
 # TFII LSPD T FTS RY SHOP
+# # Top REIT ETFs
+# ZRE.TO XRE.TO RIT.TO
+# # High Yield Dividend ETFs Passive income
+# HAL.TO ZDV.TO CDZ.TO XEI.TO XDV.TO
 # # growth stocks
 # BCE.TO BIP-UN.TO BIP BEP
 # # passive TSX
@@ -90,7 +94,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # AAPL+3 ABBV+1.2 AAOI+0.4 ADBE+3.1 ABR+1.8 ABT+1.7 ABX.TO&GOLD+0.9 ACES+2.8 ADC+1.1 ADP+1.1 AGNC+0.8 AKAM+1.3 AMGN+0.9
 # AMD+21.7 AM+0.3 AMP+1.5 AMT+1.5 AMAT+3.2 A+1.8 AA+0.5
 # AMZN+3 ANTM+ AQN+ AQN.TO+ ARKK+++ ARKF++ ARKG+ ARKQ ARKW++++ APPS+++ APPN+5 AVGO++ APHA+ ASAN ARKF ARKK AVAV
-# AVGO++ AVB AYX++ AZN AWK+ ANET+2.5 AEM&TO+ AES+1.5 AT.TO ATZ.TO. ARKG+ ACO-X.TO! ACN++ AIVSX+ AMC. ATVI+1.5 AXP+ AON+
+# AVGO++ AVB AYX+4.6 AZN AWK+ ANET+2.5 AEM&TO+ AES+1.5 AT.TO ATZ.TO. ARKG+ ACO-X.TO! ACN++ AIVSX+ AMC. ATVI+1.5 AXP+ AON+
 # BA BCE BCE.TO. BNS BPY BABA++ BIDU- BBBY BNTX BRK-B+ BRTXQ BYND BNS.TO. BIP+ BEP+2.5 BIP-UN.TO+1.5 BZUN+ BILI++ BEP+
 # BYND+ BAM-A.TO+ BMO.TO. BTI- BMY- BGS. BAND+6.2 BP+0.5 BX+1.8
 # CAG CAT CCA&TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL. CLX+ CM CNI CDZ.TO CSU.TO CSX CVD CMCSA COST+1.5 CP CSCO+
@@ -99,9 +103,9 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # DCBO.TO DND.TO DLHC DKNG+ DDOG+ DOL.TO+ DND.TO+ DIS+ DHR+++ DTE+ DE++ DOCU+3 DVN. DAL. DLR+ DTE+  DOC.V+2
 # EMR+ ENB&TO. ESS ESTC+ ESPO EMA.TO EMQQ+2 EL+1.5 ETSY+10 ENGH.TO+ ENPH+ EEM EQB.TO+ ELY+ ESS- EPD+ EB. ENPH+25 ET.
 # EBAY+
-# F FD.TO FF.TO FDN+1.5 FFMG FENY FIE FIS+ FIVG+ FSR FSLR FSLY++ FSRNX FSZ FTS+ FTS.TO+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE.
+# F+0.6 FD.TO FF.TO FDN+1.5 FFMG FENY FIE FIS+ FIVG+ FSR FSLR FSLY++ FSRNX FSZ FTS+ FTS.TO+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE.
 # FTEC+2 FAST+1.5 FB+1.5 FRC+ FRO. FROG. FRT. FCEL. FCX+3
-# GE. GD. GM+1.0 GME!!! GMF+1.1 GFI++ GIS. GLD+ GLW GNW GRWG GILD GBTC GAMR GSY.TO+3 GOOD+ GXC+ GOOG+2 GOOGL+2 GGG++
+# GE. GD. GM+1.0 GME!!! GMF+1.1 GFI++ GIS. GLD+ GLW GNW GRWG GILD GBTC GAMR GSY.TO+3.6 GOOD+ GXC+ GOOG+2 GOOGL+2 GGG++
 # HD+ HLT HQU HZU HEO.V HII. HLF.TO. HUBS+3 HRL. HTA. HIW. HACK++ HRL.
 # IBUY+2.5 IWFH+1.25 INTC+ INTU+2 IPO+2 IIVI+2.5 IIPR+12 INVH+ IVAC+0.8 IGV+2 IBM+0.8 IRM+ IT+ IPFF. IYW+2 IWY+1.5
 # ICLN++ IVR. IEP+ IXN+2
@@ -109,12 +113,12 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # KEY K KXS.TO KDP KL&TO KO! KR KMI. K.TO++ KXS.TO+ KHC. KWEB+1.5
 # LB.TO+0.4 LMT+0.9 LNT+0.8 LOW+1.4 LSPD&TO+2 LOGI+3.9 LAND+1.3 LMND+1.7 LULU+2.7 LUV+0.7 LW+1.25 LLY+1.5
 # M+0.5 MA+2 MAIN+0.8 MET+0.8 MELI+10 MFI.TO MO. MU+3 MCD+ MGM MRVL MSFT+2.5 MWK+2 MDY+ MRU.TO+ MSCI+ MFC.TO+0.8 MXIM+
-# MDLZ. MDB+6 MAA. MTUM+ NWC.TO. MGNI+ MLPX+0.5 MPW+1.5 MRK+ MARA+0.5 MRNA+4 MFC.TO+0.8
+# MDLZ. MDB+6 MAA. MTUM+ NWC.TO. MGNI+ MLPX+0.5 MPW+1.5 MRK+ MARA+0.5 MRNA+4 MFC.TO+0.8 MG.TO+ MOGO+1.8 MSTR+3.3
 # NEE+ NEM+ NET+2 NKE+ NSP NEAR NFLX+++ NIO+4 NLY. NLOK NNDM NPI NOBL+ NVEI.TO NVDA+5 NOW+4 NRZ- NUSI+ NXST+1.5 NWC.TO.
 # O+ OTEX OHI O- OKTA+++++ OKE+ MC-
 # PANW+1.6 PAAS+1.9 PAWZ+1.4 PAYC+8.5 PBI+0.4 PBA+0.8 PBW+3.6 PBH+0.4 PCTY+3.7 PEP+0.8 PFE+0.7 PDD+5.4 PG+0.9 PGX+0.6 PHM+1.6
 # PHO+1.2 PINS+2.5 PIODX+0.6 PKI.TO+1 PLAN+2.4 PLTR+1.5 PM+0.6 PNC+1.1 PNR+0.9 POW.TO+0.8 PPL.TO+0.7 PRU+0.7 PSEC+1
-# PTON+4.4 PTGX+1.1 PYPL+3
+# PTON+4.4 PTGX+1.1 PYPL+4.1
 # QCOM+2 QQC-f QQQ+1.5 QQQJ++ QRVO+2.5 QSR.TO+ QTEC+2
 # RBA RCI+ RCI.B.TO+ REAL.TO RCL.S REGI+7.5 ROK+1.5 ROKU+10 ROP+1.5 RUN+5 RY+ RY.TO+ RYT+1.5 RIOT RHS RNG+9 RF+ RNW.TO++
 # RSG++ RTX.
@@ -130,8 +134,8 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # YCBD.
 # ZG+3.5 ZM+3 ZQQ.TO+1.5 ZS+3 ZWB.TO. ZUO. ZTS+2
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
-yahooStockOption: YahooStockOption = YahooStockOption('^TNX')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD
-exit(-11)
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD
+#exit(-11)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
 skewIndex: AbstractStockMarketIndex = SkewIndex('yahoo', "^SKEW", yahooStockOption.TimeSpan)
@@ -197,17 +201,18 @@ marketIndices.append(wilshire5kIndex)
 #marketIndices.append(kospIndex)
 yahooStockOption.SetSnpRatio(sAnP500.DataNorm, 'S&P500Norm')
 print(yahooStockOption.SnpRatio)
-exit(-11)
+#exit(-111)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
 #'''
+exit(-1111)
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 yahooStockOptionPlotter.RadarPlot().show()
-exit(-11)
+exit(-11111)
 #yahooStockOptionPlotter.SnP500Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()#snp_ratio
 #yahooStockOptionPlotter.PlotTimely()
-#exit(31415)
+exit(-111111)
 #yahooMacdIndicator: MacdIndicator = yahooStockOptionPlotter.MacdInd #MacdIndicator(yahooStockOption)
 print(yahooStockOptionPlotter.MacdInd.GetData().columns)
 #yahooMacdIndicator.PlotData().show()

@@ -11,6 +11,9 @@ import math
 
 
 class IndexComparator(AbstractIndexComparator):
+    __corr_series: pd.Series = pd.Series()
+    __corr_idx_df: pd.DataFrame = pd.DataFrame()
+    __corr_idx_list: list = list()
 
     def __init__(self, stock_option: YahooStockOption, indices: list()):
         self._stock_option = stock_option
@@ -23,14 +26,17 @@ class IndexComparator(AbstractIndexComparator):
         self.DataScaled = self._setScaler(self.Data)
         self.DataSimpleReturns = self._setSimpleReturns(self.Data)
         self.DataSimpleReturnsCorr = self._setSimpleReturnsCorr(self.Data)
+        self.__corr_series = self.__getBestCorrelations()
+        self.__corr_idx_df = self.__getBestMultiIndex()
+        self.__corr_idx_list = self.__getBestMultiList()
         self.DataLogReturns = self._setLogReturns(self.Data)
         self._plotHeatMap(self.DataSimpleReturnsCorr)
         self._plotComparison(2, 3)
-        #self._plotCompared(self.Data, 'Flat', 'Price in USD')
-        #self._plotCompared(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        #self._plotCompared(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
-        #self._plotCompared(self.DataSparsed, 'Sparsed', 'Sparse variation since' + stock_option.TimeSpan.StartDateStr)
-        #self._plotCompared(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
+        # self._plotCompared(self.Data, 'Flat', 'Price in USD')
+        # self._plotCompared(self.DataNormalized, 'Normalized', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        # self._plotCompared(self.DataNormalizedL1, 'NormalizedL1', 'Base 1 variation since' + stock_option.TimeSpan.StartDateStr)
+        # self._plotCompared(self.DataSparsed, 'Sparsed', 'Sparse variation since' + stock_option.TimeSpan.StartDateStr)
+        # self._plotCompared(self.DataScaled, 'Scaled', 'Range [0-100] scaled since' + stock_option.TimeSpan.StartDateStr)
 
     def _setData(self) -> pd.DataFrame:
         df: pd.DataFrame = self._stock_option.DataFrame[self._stock_option.Column].to_frame()
@@ -47,7 +53,8 @@ class IndexComparator(AbstractIndexComparator):
         return pd.DataFrame(preprocessing.normalize(a_df, norm='l1'), columns=a_df.columns, index=a_df.index)
 
     def _setBinarizer(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        return pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns, index=a_df.index)
+        return pd.DataFrame(preprocessing.Binarizer(threshold=1.4).transform(a_df), columns=a_df.columns,
+                            index=a_df.index)
 
     def _setSparser(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         return pd.DataFrame(preprocessing.scale(a_df), columns=a_df.columns, index=a_df.index)
@@ -60,30 +67,30 @@ class IndexComparator(AbstractIndexComparator):
         return pd.DataFrame(stockArrayScaled, columns=a_df.columns, index=a_df.index)
 
     def _setSimpleReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
-        #return a_df.pct_change().to_frame()
+        # return a_df.pct_change().to_frame()
         return a_df.pct_change(1)
 
     def _setLogReturns(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.DataFrame:
         a_var = np.log(a_df / a_df.shift(1))
-        return a_var#.to_frame()
+        return a_var  # .to_frame()
 
     def _setSimpleReturnsCorr(self, df: pd.DataFrame):
         return self._setSimpleReturns(df).corr()
 
     def _plotHeatMap(self, df: pd.DataFrame):
-        #plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
-        sns.clustermap(df, cmap="coolwarm", col_cluster=False)# annot=False, row_cluster=True,
+        # plt.figure(figsize=(1.75 * math.log(self.__stockOption.TimeSpan.MonthCount), 1.75 * math.log(self.__stockOption.TimeSpan.MonthCount)))
+        sns.clustermap(df, cmap="coolwarm", col_cluster=False)  # annot=False, row_cluster=True,
         plt.rcParams['date.epoch'] = '0000-12-31'
         plt.style.use('fivethirtyeight')
         plt.show()
 
     def _plotComparison(self, nb_col=1, nb_row=1):
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
-        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float/2.5), sharex=False, sharey=False)
+        fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float / 2.5), sharex=False, sharey=False)
         plt.rcParams['date.epoch'] = '0000-12-31'
-        #plt.style.use('fivethirtyeight')
+        # plt.style.use('fivethirtyeight')
         plt.style.use('ggplot')
-        #plt.style.use('classic')
+        # plt.style.use('classic')
         # ax00
         self.Data.plot(ax=ax[0, 0], legend=None)
         plt.setp(ax[0, 0].get_xticklabels(), visible=False)
@@ -99,17 +106,17 @@ class IndexComparator(AbstractIndexComparator):
         # ax11
         sns.boxplot(data=self.DataNormalized, width=.5, ax=ax[1, 1])
         ## ax20 -> dev null
-        #self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
-        #plt.setp(ax[2, 0].get_xticklabels(), visible=False)
-        #ax[2, 0].set(ylabel='L1 variation', xlabel='')
+        # self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
+        # plt.setp(ax[2, 0].get_xticklabels(), visible=False)
+        # ax[2, 0].set(ylabel='L1 variation', xlabel='')
         ## ax21 -> dev null
-        #sns.boxplot(data=self.DataNormalizedL1, width=.5, ax=ax[2, 1])
+        # sns.boxplot(data=self.DataNormalizedL1, width=.5, ax=ax[2, 1])
         ## ax30 -> dev null
-        #self.DataSparsed.plot(ax=ax[3, 0], legend=None)
-        #plt.setp(ax[3, 0].get_xticklabels(), visible=False)
-        #ax[3, 0].set(ylabel='Sparse variation', xlabel='')
+        # self.DataSparsed.plot(ax=ax[3, 0], legend=None)
+        # plt.setp(ax[3, 0].get_xticklabels(), visible=False)
+        # ax[3, 0].set(ylabel='Sparse variation', xlabel='')
         ## ax31 -> dev null
-        #sns.boxplot(data=self.DataSparsed, width=.5, ax=ax[3, 1])
+        # sns.boxplot(data=self.DataSparsed, width=.5, ax=ax[3, 1])
         # ax40 -> 30 -> 20
         self.DataScaled.plot(ax=ax[2, 0], legend=None)
         ax[2, 0].set(ylabel='[0-100] variation')
@@ -125,28 +132,28 @@ class IndexComparator(AbstractIndexComparator):
         ax1 = fig_plot.add_subplot(grid_spec[0, 0])
         for c in df.columns.values:
             plt.plot(df.index, df[c], lw=2, label=c)
-        #ax1.set_xlabel('Since ' + self.__stockOption.TimeSpan.StartDateStr)
+        # ax1.set_xlabel('Since ' + self.__stockOption.TimeSpan.StartDateStr)
         ax1.set_ylabel(y_title)
         ax1.set_title(self._stock_option.Column + ' ' + a_title + ':Since ' + self._stock_option.TimeSpan.StartDateStr)
         ax1.legend(loc='upper left', fontsize=(len(self._index_list) * 0.26))
         ax2 = fig_plot.add_subplot(grid_spec[1, 0])
-        ax2 = sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
+        ax2 = sns.boxplot(data=df, width=.5)  # fliersize=20, whis=.2, , linewidth=2.5
         ax2.set_title('Stock ' + self._stock_option.Column + ' ' + a_title)
-        #ax2.set_xlabel('Stock tickers')
+        # ax2.set_xlabel('Stock tickers')
         ax2.set_xticklabels(ax2.get_xticklabels(), rotation=30)
-        #plt.xticks(rotation=45)
+        # plt.xticks(rotation=45)
         ax2.set_ylabel(y_title)
         plt.tight_layout()
         plt.show()
-        #plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
-        #self.__summaryPlot(df, a_title, y_title)
-        #plt.show()
-        #plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
-        #self.__snsBoxPlot(df, a_title, y_title)
-        #plt.show()
+        # plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
+        # self.__summaryPlot(df, a_title, y_title)
+        # plt.show()
+        # plt.figure(figsize=(3 * math.log(self.__stockOption.TimeSpan.MonthCount), 3.5))
+        # self.__snsBoxPlot(df, a_title, y_title)
+        # plt.show()
 
     def _snsBoxPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
-        sns.boxplot(data=df, width=.5)#fliersize=20, whis=.2, , linewidth=2.5
+        sns.boxplot(data=df, width=.5)  # fliersize=20, whis=.2, , linewidth=2.5
         plt.title('Stock ' + self._stock_option.Column + ' ' + a_title)
         plt.xlabel('Stock tickers')
         plt.xticks(rotation=45)
@@ -155,7 +162,25 @@ class IndexComparator(AbstractIndexComparator):
     def _summaryPlot(self, df: pd.DataFrame, a_title: str = '', y_title: str = ''):
         for c in df.columns.values:
             plt.plot(df.index, df[c], lw=2, label=c)
-        plt.title(self._stock_option.Column + ' ' + a_title + ' ' + str(self._stock_option.TimeSpan.MonthCount) + ' months')
+        plt.title(
+            self._stock_option.Column + ' ' + a_title + ' ' + str(self._stock_option.TimeSpan.MonthCount) + ' months')
         plt.xlabel(self._stock_option.TimeSpan.StartDateStr + ' - ' + self._stock_option.TimeSpan.EndDateStr)
         plt.ylabel(y_title)
         plt.legend(loc='upper left', fontsize=10)
+
+    def __getBestCorrelations(self) -> pd.Series:
+        #self.DataSimpleReturnsCorr.abs().where
+        #self.DataSimpleReturnsCorr.abs().shape
+        return (self.DataSimpleReturnsCorr.where(
+                np.triu(np.ones(self.DataSimpleReturnsCorr.shape), k=1).astype(np.bool))
+               .stack()
+               .sort_values(ascending=False).drop_duplicates())
+
+    def __getBestMultiIndex(self) -> pd.DataFrame:
+        a_df: pd.DataFrame = self.__corr_series.index.to_frame().reset_index(drop=True, inplace=False)
+        return a_df[a_df[0].str.contains(self._stock_option.Ticker)].head(5)
+
+    def __getBestMultiList(self) -> list:
+        a_list: list = pd.DataFrame.drop_duplicates(self.__corr_idx_df[0].to_frame())[0].tolist()
+        a_list.extend(self.__corr_idx_df[1].tolist())
+        return a_list

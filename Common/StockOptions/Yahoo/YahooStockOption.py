@@ -420,7 +420,7 @@ class YahooStockOption(AbstractStockOption):
         self._y_finance_engine = YahooFinanceEngine(a_ticker)
         print(self._y_finance_engine)
         print(self._y_finance_engine.StockType)
-        exit(-222)
+        #exit(-222)
         self.YeUrl = self._y_finance_engine.Url
         self.YeLogoUrl = self._y_finance_engine.UrlLogo
         self.YeAddress = self._y_finance_engine.AddressFirst
