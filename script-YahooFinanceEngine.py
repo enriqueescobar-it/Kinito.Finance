@@ -70,6 +70,7 @@ def getPriceToSales(stock, cap: float) -> float:
         pass
 
 
+bond_funds = ['UDN', 'NEAR']
 us_treasuries = ['^TNX', '^IRX', '^TYX']#! #~
 tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD-B.TO']#~
 bank_stocks = ['WFC', 'BAC', 'C']#~
