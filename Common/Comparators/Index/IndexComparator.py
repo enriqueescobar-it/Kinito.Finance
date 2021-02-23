@@ -92,19 +92,19 @@ class IndexComparator(AbstractIndexComparator):
         plt.style.use('ggplot')
         # plt.style.use('classic')
         # ax00
-        self.Data.plot(ax=ax[0, 0], legend=None)
+        self.Data[self.__corr_idx_list].plot(ax=ax[0, 0], legend=None)
         plt.setp(ax[0, 0].get_xticklabels(), visible=False)
-        ax[0, 0].set(ylabel='Stock price ($)', xlabel='')
+        ax[0, 0].set(ylabel='Price ($)', xlabel='')
         ax[0, 0].legend(loc=self._legend_place, fontsize=7)
         # ax01
-        sns.boxplot(data=self.Data, width=.5, ax=ax[0, 1]).set(xlabel='')
+        sns.boxplot(data=self.Data[self.__corr_idx_list], width=.5, ax=ax[0, 1]).set(xlabel='')
         # ax10
-        self.DataNormalized.plot(ax=ax[1, 0], legend=None)
+        self.DataNormalized[self.__corr_idx_list].plot(ax=ax[1, 0], legend=None)
         plt.setp(ax[1, 0].get_xticklabels(), visible=False)
         ax[1, 0].set(ylabel='Normalized', xlabel='')
         ax[1, 0].legend(loc=self._legend_place, fontsize=7)
         # ax11
-        sns.boxplot(data=self.DataNormalized, width=.5, ax=ax[1, 1])
+        sns.boxplot(data=self.DataNormalized[self.__corr_idx_list], width=.5, ax=ax[1, 1])
         ## ax20 -> dev null
         # self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
         # plt.setp(ax[2, 0].get_xticklabels(), visible=False)
@@ -118,11 +118,12 @@ class IndexComparator(AbstractIndexComparator):
         ## ax31 -> dev null
         # sns.boxplot(data=self.DataSparsed, width=.5, ax=ax[3, 1])
         # ax40 -> 30 -> 20
-        self.DataScaled.plot(ax=ax[2, 0], legend=None)
-        ax[2, 0].set(ylabel='[0-100] variation')
+        self.DataScaled[self.__corr_idx_list].plot(ax=ax[2, 0], legend=None)
+        ax[2, 0].set(ylabel='100 Sparse') #ax[2, 0].set_xticklabels([]) #ax[2, 0].set_xlabel(None)
         ax[2, 0].legend(loc=self._legend_place, fontsize=7)
         # ax41 -> 31 -> 21
-        sns.boxplot(data=self.DataScaled, width=.5, ax=ax[2, 1])
+        sns.boxplot(data=self.DataScaled[self.__corr_idx_list], width=.5, ax=ax[2, 1])
+        plt.xticks(rotation=20)
         plt.tight_layout()
         plt.show()
 

@@ -78,7 +78,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # IRM (52*33.48$) MPW (93*17.34$) AGNC (93*17.17$) PSEC (245*6.67$) MAIN (41*37.95$) VYMI (5*59.21$)
 # MWK YCBD GRWG FSZ AMZN CGO RCI PPL SJR.B AQN CP CNI TD KL WCN BPY OTEX
 # BCE ZWB CM KEY VNR ENB TFII LMT WMT RY BRKB GNW IT
-# ETFs: BRTXQ FZILX FSRNX VTSAX FPE HPI
+# ETFs: BRTXQ FZILX FSRNX VTSAX FPE HPI DYNF SPGI RSP
 # ETFs volat: VCAR VPOP
 # TFII LSPD T FTS RY SHOP
 # # Top REIT ETFs
@@ -91,6 +91,8 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # PEP JNJ RY
 # # passive TSX
 # BCE.TO MG.TO SIS.TO IFC.TO AP-UN.TO MFC.TO POW.TO QSR.TO FSV.TO TIH.TO BAM-A.TO TRP.TO
+# # speculate
+# CSC.TO CPH.TO WME.TO
 # # easy portfolio
 # 10% -> VAB.TO VGV.TO
 # 90% -> 25% VFV XUS 20% HXQ XQQ 5-10% XEC 25% XRE XDV 20% ARKK ARKG
@@ -103,7 +105,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # CAG CAT CCA&TO. CAR.UN.TO CGNX CGO CGO.TO. CHD CHWY CL. CLX+ CM CNI CDZ.TO CSU.TO CSX CVD CMCSA COST+1.5 CP CSCO+
 # CDNS+3.5 CNQ.TO. CSIQ+1.5 CELH+ CM+ CMI+1.5 CPX.TO+1.5 CVA. CLH+ COLL. COUP+5 CRM+1.5 CHTR+2 CDW+2 CCI+ CCIV+1.5 CMS+
 # CNR.TO+ CU.TO. CSU.TO++ CTC-A.TO+ CLR.TO. CRWD++ CARR++ CB- CU.TO. CRSP++++++ C. CLNE. CMCSA+ CIBR+ CVX+0.7
-# DCBO.TO DND.TO DLHC DKNG+ DDOG+ DOL.TO+ DND.TO+ DIS+ DHR+++ DTE+ DE++ DOCU+3 DVN. DAL. DLR+ DTE+  DOC.V+2
+# DCBO.TO DND.TO DLHC DKNG+ DDOG+ DOL.TO+ DND.TO+ DIS+ DHR+++ DTE+ DE++ DOCU+3 DVN. DAL. DLR+ DTE+ DOC.V+2 DYNF+1.0
 # EMR+ ENB&TO. ESS ESTC+ ESPO EMA.TO EMQQ+2 EL+1.5 ETSY+10 ENGH.TO+ ENPH+ EEM EQB.TO+ ELY+ ESS- EPD+ EB. ENPH+25 ET.
 # EBAY+
 # F+0.6 FD.TO FF.TO FDN+1.5 FFMG FENY FIE FIS+ FIVG+ FSR FSLR FSLY++ FSRNX FSZ FTS+ FTS.TO+ FOOD.TO FZILX FZROX FVRR FXAIX FEYE.
@@ -124,8 +126,8 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # PTON+4.4 PTGX+1.1 PYPL+4.1
 # QCOM+2 QQC-f QQQ+1.5 QQQJ++ QRVO+2.5 QSR.TO+ QTEC+2
 # RBA RCI+ RCI.B.TO+ REAL.TO RCL.S REGI+7.5 ROK+1.5 ROKU+10 ROP+1.5 RUN+5 RY+ RY.TO+ RYT+1.5 RIOT RHS RNG+9 RF+ RNW.TO++
-# RSG++ RTX.
-# SU&TO. SIS.TO+ SNA SBUX+ SHOP&TO+25 SPLK SPYD SJR.B SJR-B.TO SLV+0.8 SNAP SNOW+ SPOT SOXL SRU.UN.TO. SPG SAP
+# RSG+1.0 RTX+0.7 RSP+1.0
+# SU&TO. SIS.TO+ SNA SBUX+ SHOP&TO+25 SPLK SPYD SJR.B SJR-B.TO SLV+0.8 SNAP SNOW+ SPOT SOXL SRU.UN.TO. SPG SAP SPGI+1.9
 # SPNS+1.6 SNPS+3.0 STOR+0.8 STAG+1.3 SEDG+6.7 SJR-B.TO+0.6 SOY.TO+1.3 SYK+1.3 STX+1.5 SQ+13.7 SFTBY+2.2 SAVA+2.1 SMOG+1.9 SE+7.5 SCHA+1.1 STN&TO+0.9 SPGI+2
 # T&TO+0.5 TAL+5.1 TD+0.9 TCOM+0.4 TDOC+10.8 TEC.TO+1.3 TEAM+6.5 TENB+1.1 TFII&TO+2.7 TGT+1.5 TJX+1 TMO+2 TOU.TO+0.4 TPB+2.9 TPR+0.6
 # TRMB+1.8 TRP&TO0.7 TRUL.CN+4 TROW+1.3 TSLA+13.8 TSN+0.6 TSM+3.2 TTCF+1.9 TTD+15.8 TVE.TO+0.2 TWLO+7.6 TWST+7.9 TXN+1.8 TCL-A.TO+0.7
@@ -134,10 +136,10 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # VNRT.L+0.9 VNQ+0.7 VOO+1.1 VOOG+1.3 VPL+0.9 VPU+0.8 VSP.TO+1.0 VTV+0.9 VTSAX+1.2 VYM+0.9 VYMI+0.8 VZ+0.7
 # W+3 WCN++ WCN.TO++ WELL.TO+200 WEED.TO++ WM++ WMT++ WORK. WPC. WPM+1.5 WBA.
 # XEI.TO. XIT XBC.TO XOM. XWEB+ XLC+ XLK+2 XBC.V+++ XTC.TO. ZS++ XBUY+1.5
-# YCBD.
-# ZG+3.5 ZM+3 ZQQ.TO+1.5 ZS+3 ZWB.TO. ZUO. ZTS+2
+# YCBD+0.5
+# ZG+3.5 ZM+4.7 ZQQ.TO+1.5 ZS+4.4 ZWB.TO+0.8 ZUO+0.6 ZTS+1.9
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
-yahooStockOption: YahooStockOption = YahooStockOption('VMW')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD
+yahooStockOption: YahooStockOption = YahooStockOption('ZS')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD BTCC-B.TO
 #exit(-11)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
@@ -207,15 +209,15 @@ print(yahooStockOption.SnpRatio)
 #exit(-111)
 indexComparator: IndexComparator = IndexComparator(yahooStockOption, marketIndices)
 #'''
-exit(-1111)
+exit(-1111)#
 yahooStockOptionPlotter: HistoricalPlotter = HistoricalPlotter(yahooStockOption, vixIndex, sAnP500)
 yahooStockOptionPlotter.RadarPlot().show()
-exit(-11111)
+#exit(-11111)#
 #yahooStockOptionPlotter.SnP500Plot().show()
 yahooStockOptionPlotter.GraphPlot().show()
 yahooStockOptionPlotter.Plot().show()#snp_ratio
 #yahooStockOptionPlotter.PlotTimely()
-exit(-111111)
+#exit(-111111)#
 #yahooMacdIndicator: MacdIndicator = yahooStockOptionPlotter.MacdInd #MacdIndicator(yahooStockOption)
 print(yahooStockOptionPlotter.MacdInd.GetData().columns)
 #yahooMacdIndicator.PlotData().show()
