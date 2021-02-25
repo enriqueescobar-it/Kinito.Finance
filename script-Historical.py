@@ -2,11 +2,13 @@ from Common.Comparators.Index.IndexComparator import IndexComparator
 from Common.Plotters.HistoricalPlotter import HistoricalPlotter
 from Common.Readers.Engine.YahooFinStockInfo import YahooFinStockInfo
 from Common.StockMarketIndex.AbstractStockMarketIndex import AbstractStockMarketIndex
+from Common.StockMarketIndex.Yahoo.BitcoinIndex import BitcoinIndex
 from Common.StockMarketIndex.Yahoo.CrudeOilIndex import CrudeOilIndex
 from Common.StockMarketIndex.Yahoo.DowJonesIndex import DowJonesIndex
 from Common.StockMarketIndex.Yahoo.GoldIndex import GoldIndex
 from Common.StockMarketIndex.Yahoo.SilverIndex import SilverIndex
 from Common.StockMarketIndex.Yahoo.NasdaqIndex import NasdaqIndex
+from Common.StockMarketIndex.Yahoo.Nasdaq100Index import Nasdaq100Index
 from Common.StockMarketIndex.Yahoo.NyseComposite import NyseIndex
 from Common.StockMarketIndex.Yahoo.SnPTSXComposite import SnPTSXComposite
 from Common.StockMarketIndex.Yahoo.FvxIndex import FvxIndex
@@ -139,7 +141,7 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # YCBD+0.5
 # ZG+3.5 ZM+4.7 ZQQ.TO+1.5 ZS+4.4 ZWB.TO+0.8 ZUO+0.6 ZTS+1.9
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
-yahooStockOption: YahooStockOption = YahooStockOption('ZS')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD BTCC-B.TO
+yahooStockOption: YahooStockOption = YahooStockOption('ESTC')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD BTCC-B.TO
 #exit(-11)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
@@ -147,11 +149,13 @@ skewIndex: AbstractStockMarketIndex = SkewIndex('yahoo', "^SKEW", yahooStockOpti
 #''' #ovxIndex: AbstractStockMarketIndex = OvxIndex('yahoo', "^OVX", yahooStockOption.TimeSpan)
 sAndPTsx: AbstractStockMarketIndex = SnPTSXComposite('yahoo', "^GSPTSE", yahooStockOption.TimeSpan)
 nasdaqIndex: AbstractStockMarketIndex = NasdaqIndex('yahoo', "^IXIC", yahooStockOption.TimeSpan)
+nasdaq100Index: AbstractStockMarketIndex = Nasdaq100Index('yahoo', "^NDX", yahooStockOption.TimeSpan)
 nyseIndex: AbstractStockMarketIndex = NyseIndex('yahoo', "^NYA", yahooStockOption.TimeSpan)
 dowJonesIndex: AbstractStockMarketIndex = DowJonesIndex('yahoo', "^DJI", yahooStockOption.TimeSpan)
 goldIndex: AbstractStockMarketIndex = GoldIndex('yahoo', "GC=F", yahooStockOption.TimeSpan)
 silverIndex: AbstractStockMarketIndex = SilverIndex('yahoo', "SI=F", yahooStockOption.TimeSpan)
 crudeOilIndex: AbstractStockMarketIndex = CrudeOilIndex('yahoo', "CL=F", yahooStockOption.TimeSpan)
+#bitcoinIndex: AbstractStockMarketIndex = BitcoinIndex('yahoo', "BTC-USD", yahooStockOption.TimeSpan)
 soxIndex: AbstractStockMarketIndex = SoxIndex('yahoo', "^SOX", yahooStockOption.TimeSpan)
 tnxIndex: AbstractStockMarketIndex = TnxIndex('yahoo', "^TNX", yahooStockOption.TimeSpan)
 tyxIndex: AbstractStockMarketIndex = TyxIndex('yahoo', "^TYX", yahooStockOption.TimeSpan)
@@ -179,11 +183,13 @@ marketIndices.append(skewIndex)
 #marketIndices.append(ovxIndex)
 marketIndices.append(sAndPTsx)
 marketIndices.append(nasdaqIndex)
+marketIndices.append(nasdaq100Index)
 marketIndices.append(nyseIndex)
 marketIndices.append(dowJonesIndex)
 marketIndices.append(goldIndex)
 marketIndices.append(silverIndex)
 marketIndices.append(crudeOilIndex)
+#marketIndices.append(bitcoinIndex)
 marketIndices.append(soxIndex)
 marketIndices.append(tnxIndex)
 marketIndices.append(tyxIndex)

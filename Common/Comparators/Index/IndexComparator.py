@@ -85,26 +85,29 @@ class IndexComparator(AbstractIndexComparator):
         plt.show()
 
     def _plotComparison(self, nb_col=1, nb_row=1):
+        a_int: int = len(self.__corr_idx_list)
         a_float: float = 3 * math.log(self._stock_option.TimeSpan.MonthCount)
         fig, ax = plt.subplots(nb_row, nb_col, figsize=(a_float, a_float / 2.5), sharex=False, sharey=False)
         plt.rcParams['date.epoch'] = '0000-12-31'
         # plt.style.use('fivethirtyeight')
-        plt.style.use('ggplot')
+        plt.style.use('seaborn')
         # plt.style.use('classic')
         # ax00
-        self.Data[self.__corr_idx_list].plot(ax=ax[0, 0], legend=None)
+        self.Data[self.__corr_idx_list].plot(ax=ax[0, 0], legend=None, color=sns.color_palette(n_colors=a_int))
         plt.setp(ax[0, 0].get_xticklabels(), visible=False)
         ax[0, 0].set(ylabel='Price ($)', xlabel='')
         ax[0, 0].legend(loc=self._legend_place, fontsize=7)
         # ax01
         sns.boxplot(data=self.Data[self.__corr_idx_list], width=.5, ax=ax[0, 1]).set(xlabel='')
+        ax[0, 1].set(xticklabels=[])
         # ax10
-        self.DataNormalized[self.__corr_idx_list].plot(ax=ax[1, 0], legend=None)
+        self.DataNormalized[self.__corr_idx_list].plot(ax=ax[1, 0], legend=None, color=sns.color_palette(n_colors=a_int))
         plt.setp(ax[1, 0].get_xticklabels(), visible=False)
         ax[1, 0].set(ylabel='Normalized', xlabel='')
         ax[1, 0].legend(loc=self._legend_place, fontsize=7)
         # ax11
         sns.boxplot(data=self.DataNormalized[self.__corr_idx_list], width=.5, ax=ax[1, 1])
+        ax[1, 1].set(xticklabels=[])
         ## ax20 -> dev null
         # self.DataNormalizedL1.plot(ax=ax[2, 0], legend=None)
         # plt.setp(ax[2, 0].get_xticklabels(), visible=False)
@@ -118,8 +121,8 @@ class IndexComparator(AbstractIndexComparator):
         ## ax31 -> dev null
         # sns.boxplot(data=self.DataSparsed, width=.5, ax=ax[3, 1])
         # ax40 -> 30 -> 20
-        self.DataScaled[self.__corr_idx_list].plot(ax=ax[2, 0], legend=None)
-        ax[2, 0].set(ylabel='100 Sparse') #ax[2, 0].set_xticklabels([]) #ax[2, 0].set_xlabel(None)
+        self.DataScaled[self.__corr_idx_list].plot(ax=ax[2, 0], legend=None, color=sns.color_palette(n_colors=a_int))
+        ax[2, 0].set(ylabel='100 Sparse', xlabel='') #ax[2, 0].set_xticklabels([]) #ax[2, 0].set_xlabel(None)
         ax[2, 0].legend(loc=self._legend_place, fontsize=7)
         # ax41 -> 31 -> 21
         sns.boxplot(data=self.DataScaled[self.__corr_idx_list], width=.5, ax=ax[2, 1])
@@ -179,7 +182,7 @@ class IndexComparator(AbstractIndexComparator):
 
     def __getBestMultiIndex(self) -> pd.DataFrame:
         a_df: pd.DataFrame = self.__corr_series.index.to_frame().reset_index(drop=True, inplace=False)
-        return a_df[a_df[0].str.contains(self._stock_option.Ticker)].head(5)
+        return a_df[a_df[0].str.contains(self._stock_option.Ticker)].head(6)
 
     def __getBestMultiList(self) -> list:
         a_list: list = pd.DataFrame.drop_duplicates(self.__corr_idx_df[0].to_frame())[0].tolist()
