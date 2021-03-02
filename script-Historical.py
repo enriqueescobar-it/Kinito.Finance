@@ -147,7 +147,9 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # YCBD+0.5
 # ZG+3.5 ZM+4.7 ZIM+1.7 ZQQ.TO+1.5 ZS+4.4 ZWB.TO+0.8 ZUO+0.6 ZTS+1.9
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
-yahooStockOption: YahooStockOption = YahooStockOption('GAMR')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD BTCC-B.TO
+# Yield on Cost MANULIFE ~ 25$ x 100000 = 2500000$ invest
+# 1.09$ per share/ year => 109000$/ year ROI
+yahooStockOption: YahooStockOption = YahooStockOption('T')#'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD BTCC-B.TO
 #exit(-11)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)
