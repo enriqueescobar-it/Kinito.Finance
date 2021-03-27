@@ -79,7 +79,7 @@ class YahooStockOption(AbstractStockOption):
     YssMarketCap: str = ''
     YssPeRatio: str = ''
 
-    def __init__(self, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
+    def __init__(self, y_fin_engine: YahooFinanceEngine, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
         self._source = a_src
         self._column = a_col
         self._ticker = a_ticker
@@ -120,7 +120,7 @@ class YahooStockOption(AbstractStockOption):
         (self.IsDaily, self.IsWeekly, self.IsMonthly, self.IsQuarterly, self.IsAnnually) = \
             self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
                               self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg, self.SimpleAnnuallyReturnAvg)
-        self._setYahooFinance(a_ticker)
+        self._setYahooFinance(y_fin_engine)
         self._setYahooSummary(a_ticker)
 
     @property
@@ -416,8 +416,8 @@ class YahooStockOption(AbstractStockOption):
     def _setSimpleCumulative(self, a_df: pd.DataFrame = pd.DataFrame()) -> pd.Series:
         return (a_df + 1).cumprod()
 
-    def _setYahooFinance(self, a_ticker: str = 'TD'):
-        self._y_finance_engine = YahooFinanceEngine(a_ticker)
+    def _setYahooFinance(self, y_fin_engine: YahooFinanceEngine):
+        self._y_finance_engine = y_fin_engine
         print(self._y_finance_engine)
         print(self._y_finance_engine.StockType)
         #exit(-222)
