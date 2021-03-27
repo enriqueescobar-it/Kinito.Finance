@@ -21,6 +21,7 @@ from Common.StockMarketIndex.Yahoo.VixIndex import VixIndex
 from Common.StockMarketIndex.Yahoo.SkewIndex import SkewIndex
 from Common.StockMarketIndex.Yahoo.Wilshire5kIndex import Wilshire5kIndex
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
+from Common.WebScrappers.Yahoo.YahooSummaryScrapper import YahooSummaryScrapper
 from Common.StockOptions.Yahoo.YahooStockOption import YahooStockOption
 from Common.StockMarketIndex.Yahoo.DaxIndex import DaxIndex
 from Common.StockMarketIndex.Yahoo.Estx50Index import Estx50Index
@@ -163,9 +164,10 @@ from Common.TechIndicators.SmaIndicator import SmaIndicator
 # AYX+4 PLAN+1.5 ASAN+ DDOG+1.5 DT+ FOUR++ FROG. MDLA+ NTNX. PEGA+3 PSTG+ SMAR++ WDAY++
 # Yield on Cost MANULIFE ~ 25$ x 100000 = 2500000$ invest
 # 1.09$ per share/ year => 109000$/ year ROI
-a_ticker = 'HUBS' #'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X JPY=X ^TNX BTC-USD BTCC-B.TO
+a_ticker = 'DDOG' #'ESTC')XWEB DDOG BEKE GBTC IHI GC=F JPY=X ^TNX BTC-USD BTCC-B.TO
 yahooFinanceEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
-yahooStockOption: YahooStockOption = YahooStockOption(yahooFinanceEngine, a_ticker)
+yahooSummaryScrapper: YahooSummaryScrapper = YahooSummaryScrapper(a_ticker)
+yahooStockOption: YahooStockOption = YahooStockOption(yahooFinanceEngine, yahooSummaryScrapper, a_ticker)
 #exit(-11)
 sAnP500: AbstractStockMarketIndex = SnP500Index('yahoo', "^GSPC", yahooStockOption.TimeSpan)
 vixIndex: AbstractStockMarketIndex = VixIndex('yahoo', "^VIX", yahooStockOption.TimeSpan)

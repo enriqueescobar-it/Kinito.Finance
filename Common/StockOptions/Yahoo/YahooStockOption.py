@@ -79,7 +79,7 @@ class YahooStockOption(AbstractStockOption):
     YssMarketCap: str = ''
     YssPeRatio: str = ''
 
-    def __init__(self, y_fin_engine: YahooFinanceEngine, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
+    def __init__(self, y_fin_engine: YahooFinanceEngine, y_sum_scapper: YahooSummaryScrapper, a_ticker: str = 'CNI', a_src: str = 'yahoo', a_col: str = 'Adj Close'):
         self._source = a_src
         self._column = a_col
         self._ticker = a_ticker
@@ -121,7 +121,7 @@ class YahooStockOption(AbstractStockOption):
             self._setIsTimely(self.SimpleDailyReturnAvg, self.SimpleWeeklyReturnAvg,
                               self.SimpleMonthlyReturnAvg, self.SimpleQuarterlyReturnAvg, self.SimpleAnnuallyReturnAvg)
         self._setYahooFinance(y_fin_engine)
-        self._setYahooSummary(a_ticker)
+        self._setYahooSummary(y_sum_scapper)
 
     @property
     def SnpRatio(self):
@@ -453,8 +453,8 @@ class YahooStockOption(AbstractStockOption):
         self.YePriceToBook = self._y_finance_engine.BookPriceTo
         self.YeExDividendDate = self._y_finance_engine.DateExDividend
 
-    def _setYahooSummary(self, a_ticker: str = 'TD'):
-        self._yahooSummaryScrapper = YahooSummaryScrapper(a_ticker)
+    def _setYahooSummary(self, y_sum_scapper: YahooSummaryScrapper):
+        self._yahooSummaryScrapper = y_sum_scapper
         self._yahooSummaryScrapper.ParseBody()
         self.YssPeRatio = self._yahooSummaryScrapper.PEratio
         self.YssMarketCap = self._yahooSummaryScrapper.MarketCap
