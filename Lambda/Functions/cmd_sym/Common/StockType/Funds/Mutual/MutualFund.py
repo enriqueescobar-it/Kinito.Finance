@@ -36,7 +36,9 @@ class MutualFund(AbstractStockFund):
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
-        self.__plotSectorDf().show()
+
+    def __plot__(self):
+        return self.__plotSectorDf()
 
     def __setSectorDf(self):
         self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
@@ -84,9 +86,9 @@ class MutualFund(AbstractStockFund):
         self._info_list.append(self._price_to_cash)
 
     def __setPerformance(self):
-        print('Performance', self.__y_query.fund_performance)
+        print('___Performance', self.__y_query.fund_performance)
         for key in self.__y_query.fund_performance.get(self.__ticker):
-            print(key)
+            print('_ ' + key)
 
     @property
     def SectorDataFrame(self):
