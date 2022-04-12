@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
+import pandas
 from yahooquery import Ticker
 
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
@@ -36,13 +37,20 @@ class MutualFund(AbstractStockFund):
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
-
-    def __plot__(self):
-        return self.__plotSectorDf()
+        self.__plotSectorDf().show()
 
     def __setSectorDf(self):
-        self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
-        self._sector_df.columns = ['Sector', 'Percent']
+        is_df : bool = isinstance(self.__y_query.fund_sector_weightings, pandas.DataFrame)
+
+        if is_df:
+            self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
+            self._sector_df.columns = ['Sector', 'Percent']
+        else:
+            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
+            self._sector_df['Sector'] = s
+            self._sector_df['Percent'] = 1.0
+            self._sector_df.loc[0] = [s, 1.0]
+        print(self._sector_df)
 
     def __plotSectorDf(self) -> plt:
         self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
@@ -51,14 +59,40 @@ class MutualFund(AbstractStockFund):
         return plt
 
     def __setHoldingDf(self):
-        self._holding_df = self.__y_query.fund_top_holdings
-        self._holding_df.set_index('symbol', inplace=True)
-        self._holding_df.reset_index(inplace=True)
+        is_df : bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
+
+        if is_df:
+            self._holding_df = self.__y_query.fund_top_holdings
+            self._holding_df.set_index('symbol', inplace=True)
+            self._holding_df.reset_index(inplace=True)
+        else:
+            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
+            self._holding_df['symbol'] = s
+            self._holding_df['holdingName'] = 'a name'
+            self._holding_df['holdingPercent'] = 1.0
+            self._holding_df.loc[0] = [self.__ticker, s, 1.0]
+        print(self._holding_df)
 
     def __setAllocation(self):
-        df: DataFrame = self.__y_query.fund_category_holdings.set_index('maxAge')
-        df.reset_index(inplace=True)
-        stock_int: int = int(df['stockPosition'][0]*100)
+        is_df : bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
+        df: DataFrame = DataFrame()
+
+        if is_df:
+            df = self.__y_query.fund_category_holdings.set_index('maxAge')
+            df.reset_index(inplace=True)
+        else:
+            df['maxAge'] = 1.0
+            df['cashPosition'] = np.nan
+            df['stockPosition'] = np.nan
+            df['bondPosition'] = np.nan
+            df['otherPosition'] = np.nan
+            df['preferredPosition'] = np.nan
+            df['convertiblePosition'] = np.nan
+            df.loc[0] = [1.0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+            df = df.set_index('maxAge')
+            df.reset_index(inplace=True)
+        stock_int: int = int(np.nan_to_num(df['stockPosition'][0]) *100) if np.isnan(df['stockPosition'][0]) else int(df['stockPosition'][0]*100)
+        #stock_int: int = int(df['stockPosition'][0]*100)
         self._info_labels.append('StockPartCount')
         self._info_list.append(stock_int)
         bond_int: int = 100 - stock_int
@@ -86,9 +120,13 @@ class MutualFund(AbstractStockFund):
         self._info_list.append(self._price_to_cash)
 
     def __setPerformance(self):
-        print('___Performance', self.__y_query.fund_performance)
-        for key in self.__y_query.fund_performance.get(self.__ticker):
-            print('_ ' + key)
+        print('Performance', self.__y_query.fund_performance)
+        is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
+        if is_null:
+            print(self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
+        else:
+            for key in self.__y_query.fund_performance.get(self.__ticker):
+                print(key)
 
     @property
     def SectorDataFrame(self):

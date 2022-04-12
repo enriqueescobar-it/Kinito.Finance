@@ -348,7 +348,7 @@ class YahooFinanceEngine(AbstractEngine):
         self._info_list.append(self._currency)
         self._quote_type = self.__getValueFromKey('quoteType')
         self.__setStockType(self._quote_type)
-        self._info_labels.append('quoteType')
+        '''self._info_labels.append('quoteType')
         self._info_list.append(self._quote_type)
         self._exchange = self.__getValueFromKey('exchange')
         self._info_labels.append('exchange')
@@ -439,7 +439,7 @@ class YahooFinanceEngine(AbstractEngine):
         self._info_list.append(self._fiscal_year_end_next)
         self._last_quarter = self.__getValueFromKey('mostRecentQuarter')
         self._info_labels.append('mostRecentQuarter')
-        self._info_list.append(self._last_quarter)
+        self._info_list.append(self._last_quarter)'''
 
     def __getValueFromKey(self, a_key: str = 'NA') -> str:
         if a_key in self.InfoDic:
