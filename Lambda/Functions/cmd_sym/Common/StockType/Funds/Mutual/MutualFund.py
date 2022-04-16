@@ -31,6 +31,15 @@ class MutualFund(AbstractStockFund):
         self._setInfo()
         self._pretty_table.add_column('Labels', self.InfoLabels)
         self._pretty_table.add_column(self.__class, self.InfoList)
+
+    def __iter__(self):
+        yield from {
+            "type": self.__class,
+            "name": self._name,
+            "ticker": self.__ticker,
+            "stock_percent": self._stock_part_count,
+            "bond_percent": self._bond_part_count
+        }.items()
     
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)

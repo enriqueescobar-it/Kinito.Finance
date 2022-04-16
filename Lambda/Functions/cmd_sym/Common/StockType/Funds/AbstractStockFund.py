@@ -16,6 +16,12 @@ class AbstractStockFund(AbstractStock):
     def __repr__(self):
         return self.__str__()
 
+    def __iter__(self):
+        yield from {
+            "type": self.__class,
+            "name": self._name
+        }.items()
+
     @property
     def InfoList(self):
         return self._info_list
