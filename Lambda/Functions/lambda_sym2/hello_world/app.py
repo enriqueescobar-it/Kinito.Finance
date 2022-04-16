@@ -1,6 +1,6 @@
 import json
-
 import requests
+from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 
 
 def lambda_handler(event, context):
@@ -32,11 +32,16 @@ def lambda_handler(event, context):
     #     print(e)
 
     #     raise e
+    #operation: str = event['key3']
+    #a_msg: str = "hello world " + operation
+    #abstractEngine: YahooFinanceEngine = YahooFinanceEngine(operation);
 
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": "hello world",
+            "message" : "ta ta ta chin"
+            #"message": a_msg,
+            #"type": abstractEngine.QuoteType
             # "location": ip.text.replace("\n", "")
         }),
     }

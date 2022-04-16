@@ -3,6 +3,7 @@ import numpy as np
 from pandas import DataFrame
 import pandas
 from yahooquery import Ticker
+import json
 
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
@@ -30,6 +31,10 @@ class MutualFund(AbstractStockFund):
         self._setInfo()
         self._pretty_table.add_column('Labels', self.InfoLabels)
         self._pretty_table.add_column(self.__class, self.InfoList)
+    
+    def to_json(self):
+        return json.dumps(dict(self), ensure_ascii=False)
+        #return super().to_json() self.__dict__ dict(self)
 
     def _setInfo(self):
         self.__setSectorDf()
@@ -37,7 +42,9 @@ class MutualFund(AbstractStockFund):
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
-        self.__plotSectorDf().show()
+        print("DICT")
+        print(self.__dict__)
+        self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):
         is_df : bool = isinstance(self.__y_query.fund_sector_weightings, pandas.DataFrame)
