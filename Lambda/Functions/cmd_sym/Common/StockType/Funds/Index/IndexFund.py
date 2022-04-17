@@ -1,3 +1,4 @@
+import json
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 import numpy as np
 from pandas import DataFrame
@@ -26,8 +27,22 @@ class IndexFund(AbstractStockFund):
         self._pretty_table.add_column('Labels', self.InfoLabels)
         self._pretty_table.add_column(self.__class, self.InfoList)
 
-    def __str__(self):
-        return self._pretty_table.__str__()
+    def __iter__(self):
+        yield from {
+            "type": self.__class,
+            "name": self._name,
+            "ticker": self.__ticker,
+            "stock_percent": self._stock_part_count,
+            "bond_percent": self._bond_part_count,
+            "price_to_earnings": self._price_to_earn,
+            "price_to_book": self._price_to_book,
+            "price_to_sales": self._price_to_sale,
+            "price_to_cashflow": self._price_to_cash
+        }.items()
+    
+    def to_json(self):
+        return json.dumps(dict(self), ensure_ascii=False)
+        #return super().to_json() self.__dict__ dict(self)
 
     def _setInfo(self):
         self._info_labels.append('PriceToEarnings')
@@ -38,3 +53,35 @@ class IndexFund(AbstractStockFund):
         self._info_list.append(self._price_to_sale)
         self._info_labels.append('PriceToCashflow')
         self._info_list.append(self._price_to_cash)
+
+    @property
+    def SectorDataFrame(self):
+        return self._sector_df
+
+    @property
+    def HoldingDataFrame(self):
+        return self._holding_df
+
+    @property
+    def StockPartCount(self):
+        return self._stock_part_count
+
+    @property
+    def BondPartCount(self):
+        return self._bond_part_count
+
+    @property
+    def PriceToEarnings(self):
+        return self._price_to_earn
+
+    @property
+    def PriceToSales(self):
+        return self._price_to_sale
+
+    @property
+    def PriceToBook(self):
+        return self._price_to_book
+
+    @property
+    def PriceToCashflow(self):
+        return self._price_to_cash
