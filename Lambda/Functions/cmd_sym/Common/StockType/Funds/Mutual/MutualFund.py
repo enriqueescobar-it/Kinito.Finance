@@ -1,9 +1,9 @@
+import json
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
 import pandas
 from yahooquery import Ticker
-import json
 
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 

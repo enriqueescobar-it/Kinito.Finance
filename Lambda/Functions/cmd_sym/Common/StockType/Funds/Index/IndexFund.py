@@ -1,11 +1,16 @@
 import json
-from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
+import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
+import pandas
+from yahooquery import Ticker
+
+from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
 
 class IndexFund(AbstractStockFund):
     __ticker: str = 'NA'
+    
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1

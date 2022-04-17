@@ -2,6 +2,7 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
+import pandas
 from yahooquery import Ticker
 
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
@@ -12,7 +13,7 @@ class ExchangeTradedFund(AbstractStockFund):
     __y_query: Ticker
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
-    _stock_part_count : int = -1
+    _stock_part_count: int = -1
     _bond_part_count: int = -1
     _price_to_earn: float = np.nan
     _price_to_book: float = np.nan
