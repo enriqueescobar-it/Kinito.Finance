@@ -1,3 +1,4 @@
+import json
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
@@ -11,7 +12,7 @@ class ExchangeTradedFund(AbstractStockFund):
     __y_query: Ticker
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
-    b : int = -1
+    _stock_part_count : int = -1
     _bond_part_count: int = -1
     _price_to_earn: float = np.nan
     _price_to_book: float = np.nan
@@ -30,17 +31,32 @@ class ExchangeTradedFund(AbstractStockFund):
         self._pretty_table.add_column('Labels', self.InfoLabels)
         self._pretty_table.add_column(self.__class, self.InfoList)
 
+    def __iter__(self):
+        yield from {
+            "type": self.__class,
+            "name": self._name,
+            "ticker": self.__ticker,
+            "stock_percent": self._stock_part_count,
+            "bond_percent": self._bond_part_count,
+            "price_to_earnings": self._price_to_earn,
+            "price_to_book": self._price_to_book,
+            "price_to_sales": self._price_to_sale,
+            "price_to_cashflow": self._price_to_cash
+        }.items()
+    
+    def to_json(self):
+        return json.dumps(dict(self), ensure_ascii=False)
+        #return super().to_json() self.__dict__ dict(self)
+
     def _setInfo(self):
         self.__setSectorDf()
         self.__setHoldingDf()
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
-        # print('1', self.__y_query.fund_bond_holdings)
-        # print('2', self.__y_query.fund_bond_ratings)
-        # print('4', self.__y_query.fund_equity_holdings)
-        # print('7', self.__y_query.fund_ownership)
-        self.__plotSectorDf().show()
+        print("DICT")
+        print(self.__dict__)
+        self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):
         self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
