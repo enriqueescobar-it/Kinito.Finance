@@ -38,7 +38,11 @@ class MutualFund(AbstractStockFund):
             "name": self._name,
             "ticker": self.__ticker,
             "stock_percent": self._stock_part_count,
-            "bond_percent": self._bond_part_count
+            "bond_percent": self._bond_part_count,
+            "price_to_earnings": self._price_to_earn,
+            "price_to_book": self._price_to_book,
+            "price_to_sales": self._price_to_sale,
+            "price_to_cashflow": self._price_to_cash
         }.items()
     
     def to_json(self):
@@ -117,9 +121,22 @@ class MutualFund(AbstractStockFund):
         return stock_int, bond_int
 
     def __setInfo(self):
-        for key in self.__y_query.fund_holding_info.get(self.__ticker):
-            if key == 'equityHoldings':
-                self.__setPriceTo(self.__y_query.fund_holding_info.get(self.__ticker)[key])
+        print("SET_INFO", self.__y_query.fund_holding_info)
+        is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
+        if is_null:
+            print(self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
+            self._info_labels.append('PriceToEarnings')
+            self._info_list.append(self._price_to_earn)
+            self._info_labels.append('PriceToBook')
+            self._info_list.append(self._price_to_book)
+            self._info_labels.append('PriceToSales')
+            self._info_list.append(self._price_to_sale)
+            self._info_labels.append('PriceToCashflow')
+            self._info_list.append(self._price_to_cash)
+        else:
+            for key in self.__y_query.fund_holding_info.get(self.__ticker):
+                if key == 'equityHoldings':
+                    self.__setPriceTo(self.__y_query.fund_holding_info.get(self.__ticker)[key])
 
     def __setPriceTo(self, a_dict: dict):
         self._price_to_earn = a_dict['priceToEarnings']
