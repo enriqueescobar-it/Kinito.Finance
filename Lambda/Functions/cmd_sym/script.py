@@ -11,15 +11,15 @@ args = vars(ap.parse_args())
 print("Hi there, you are looking for the <{}> symbol?".format(args["symbol"]))
 
 #
-# bond_funds = ['UDN', 'NEAR']
+# bonds: bond_funds = ['UDN', 'NEAR']
 # tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD-B.TO']#!
 # bank_stocks = ['WFC', 'BAC', 'C']#~extend EQUITY
 # cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']#! #~extend
 # currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#! #~extend
 # commodity_futures = ['GC=F', 'SI=F', 'CL=F']#! #~extend
-# index funds us_treasuries = ['^TNX', '^IRX', '^TYX']#! #~extend
-# etf_stocks = ['VOO', 'VOOG', 'GINN', 'VGRO.TO', 'XIT.TO']#! #~extend
-# mutual_funds = ['PRLAX', 'QASGX', 'HISFX']#! #~extend
+# funds: us_treasuries = ['^TNX', '^IRX', '^TYX']#! #~extend
+# funds: etf_stocks = ['VOO', 'VOOG', 'GINN', 'VGRO.TO', 'XIT.TO']#! #~extend
+# funds: mutual_funds = ['PRLAX', 'QASGX', 'HISFX']#! #~extend
 # a_ticker: str = '^TNX'#
 a_ticker: str = args["symbol"]
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
