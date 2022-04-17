@@ -10,7 +10,7 @@ from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
 class IndexFund(AbstractStockFund):
     __ticker: str = 'NA'
-    
+
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
