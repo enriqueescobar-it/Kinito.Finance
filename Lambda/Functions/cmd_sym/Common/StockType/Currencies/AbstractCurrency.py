@@ -6,6 +6,7 @@ class AbstractCurrency(AbstractStock):
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
+    __ticker: str = 'NA'
     _stock_part_count: int = -1
     _bond_part_count: int = -1
     _price_to_earn: float = np.nan
@@ -26,6 +27,15 @@ class AbstractCurrency(AbstractStock):
 
     def __str__(self):
         return self._pretty_table.__str__()
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __iter__(self):
+        yield from {
+            "type": self.__class,
+            "name": self._name,
+        }.items()
 
     def _setInfo(self):
         self._stock_part_count = 0
