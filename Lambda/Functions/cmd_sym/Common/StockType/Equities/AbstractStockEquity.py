@@ -38,6 +38,22 @@ class AbstractStockEquity(AbstractStock):
     def __str__(self):
         return self._pretty_table.__str__()
 
+    def __repr__(self):
+        return self.__str__()
+
+    def __iter__(self):
+        yield from {
+            "type": self.__class,
+            "name": self._name,
+            "ticker": self.__ticker,
+            "stock_percent": self._stock_part_count,
+            "bond_percent": self._bond_part_count,
+            "price_to_earnings": self._price_to_earn,
+            "price_to_book": self._price_to_book,
+            "price_to_sales": self._price_to_sale,
+            "price_to_cashflow": self._price_to_cash
+        }.items()
+
     def _setInfo(self):
         self._stock_part_count = 100
         self._info_labels.append('StockPartCount')
@@ -109,3 +125,35 @@ class AbstractStockEquity(AbstractStock):
     @property
     def Name(self):
         return self._name
+
+    @property
+    def SectorDataFrame(self):
+        return self._sector_df
+
+    @property
+    def HoldingDataFrame(self):
+        return self._holding_df
+
+    @property
+    def StockPartCount(self):
+        return self._stock_part_count
+
+    @property
+    def BondPartCount(self):
+        return self._bond_part_count
+
+    @property
+    def PriceToEarnings(self):
+        return self._price_to_earn
+
+    @property
+    def PriceToSales(self):
+        return self._price_to_sale
+
+    @property
+    def PriceToBook(self):
+        return self._price_to_book
+
+    @property
+    def PriceToCashflow(self):
+        return self._price_to_cash
