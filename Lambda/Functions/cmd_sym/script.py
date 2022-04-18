@@ -12,7 +12,7 @@ print("Hi there, you are looking for the <{}> symbol?".format(args["symbol"]))
 
 #
 # bonds: bond_funds = ['UDN', 'NEAR']
-# tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD-B.TO']#!
+# tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD.TO', 'ATD-B.TO']#!
 # bank_stocks = ['WFC', 'BAC', 'C']#~extend EQUITY
 # cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']#! #~extend
 # currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#! #~extend
