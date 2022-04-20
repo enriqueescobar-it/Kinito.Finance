@@ -5,10 +5,12 @@ class AbstractStockBond(AbstractStock):
     _info_labels: list = list()
     _info_list: list = list()
     _name: str = 'NA'
+    __ticker: str = 'NA'
 
-    def __init__(self, c_name: str):
-        self.__class = 'Bond'
+    def __init__(self, c_name: str, t_name: str):
         self._name = c_name.replace(' ', '')
+        self.__ticker = t_name
+        self.__class = 'Bond'
         self._info_labels.append('Name')
         self._info_list.append(self._name)
         self._pretty_table.add_column('Labels', self.InfoLabels)
