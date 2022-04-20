@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6146f2e-d186-4011-a5ed-e02567a0f772" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../.idea/aws.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/aws.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinanceEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinanceEngine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Funds/Mutual/MutualFund.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Funds/Mutual/MutualFund.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lambda_sym2/hello_world/Common/Readers/Engine/YahooFinanceEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../lambda_sym2/hello_world/Common/Readers/Engine/YahooFinanceEngine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lambda_sym2/hello_world/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/../lambda_sym2/hello_world/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/script.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +34,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Common/Readers/Engine" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -91,6 +87,7 @@
       <workItem from="1649372390877" duration="291000" />
       <workItem from="1649706626540" duration="95000" />
       <workItem from="1649706766718" duration="603000" />
+      <workItem from="1650420873292" duration="187000" />
     </task>
     <servers />
   </component>

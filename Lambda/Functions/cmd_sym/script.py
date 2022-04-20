@@ -1,6 +1,5 @@
 # import the necessary packages
 import argparse
-import json
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 
 # construct the argument parse and parse the arguments
