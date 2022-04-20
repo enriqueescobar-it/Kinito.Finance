@@ -2,19 +2,15 @@ from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockBond(AbstractStock):
-    _info_labels: list = list()
-    _info_list: list = list()
-    _name: str = 'NA'
     __ticker: str = 'NA'
+    _name: str = 'NA'
 
     def __init__(self, c_name: str, t_name: str):
         self._name = c_name.replace(' ', '')
         self.__ticker = t_name
         self.__class = 'Bond'
-        self._info_labels.append('Name')
-        self._info_list.append(self._name)
-        self._pretty_table.add_column('Labels', self.InfoLabels)
-        self._pretty_table.add_column(self.__class, self.InfoList)
+        self._pretty_table.add_row(['type', self.__class])
+        self._pretty_table.add_row(['name', self._name])
 
     def __str__(self):
         return self._pretty_table.__str__()
