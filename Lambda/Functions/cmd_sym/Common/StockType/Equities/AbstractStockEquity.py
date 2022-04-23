@@ -32,11 +32,11 @@ class AbstractStockEquity(AbstractStock):
         self.__y_query = Ticker(t_name)
         self.__yfsi = YahooFinStockInfo(t_name)
         self._setInfo()
-        self._pretty_table.add_column('Labels', self.InfoLabels)
-        self._pretty_table.add_column(self.__class, self.InfoList)
+        self.__pretty_table.add_column('Labels', self.InfoLabels)
+        self.__pretty_table.add_column(self.__class, self.InfoList)
 
     def __str__(self):
-        return self._pretty_table.__str__()
+        return self.__pretty_table.__str__()
 
     def __repr__(self):
         return self.__str__()

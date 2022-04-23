@@ -11,7 +11,7 @@ class AbstractStockFund(AbstractStock):
         self._name = c_name.replace(' ', '')
 
     def __str__(self):
-        return self._pretty_table.__str__()
+        return self.__pretty_table.__str__()
 
     def __repr__(self):
         return self.__str__()

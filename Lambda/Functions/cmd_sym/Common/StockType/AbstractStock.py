@@ -5,24 +5,24 @@ from prettytable import PrettyTable
 
 class AbstractStock(ABC):
     __class: str = 'NA'
-    _pretty_table: PrettyTable = PrettyTable()
+    _header: list = ['Info', 'TypeInfo']
     _info_labels: list = list()
     _info_list: list = list()
 
     def __init__(self):
-        self.__class = 'StockInfo'
-        self._pretty_table.add_column('Labels', self._info_labels)
-        self._pretty_table.add_column(self.__class, self._info_list)
+        self.__class = 'TypeInfo'
 
     def __str__(self):
-        return self._pretty_table.__str__()
+        pt: PrettyTable = PrettyTable()
+        pt.field_names = self._header
+        return pt.__str__()
 
     def __repr__(self):
         return self.__str__()
 
     def __iter__(self):
         yield from {
-            "type": self.__class
+            "Info": self.__class
         }.items()
 
     def to_json(self):
