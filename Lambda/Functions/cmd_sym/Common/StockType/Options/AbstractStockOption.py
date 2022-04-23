@@ -7,8 +7,8 @@ from Common.StockType.AbstractStock import AbstractStock
 class AbstractStockOption(AbstractStock):
     __ticker: str = 'NA'
     _name: str = 'NA'
-    _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
+    _sector_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
     _bond_part_count: int = -1
     _price_to_book: float = np.nan
@@ -53,13 +53,37 @@ class AbstractStockOption(AbstractStock):
         }.items()
 
     @property
-    def InfoList(self):
-        return self._info_list
-
-    @property
-    def InfoLabels(self):
-        return self._info_labels
-
-    @property
     def Name(self):
         return self._name
+
+    @property
+    def HoldingDataFrame(self):
+        return self._holding_df
+
+    @property
+    def SectorDataFrame(self):
+        return self._sector_df
+
+    @property
+    def StockPartCount(self):
+        return self._stock_part_count
+
+    @property
+    def BondPartCount(self):
+        return self._bond_part_count
+
+    @property
+    def PriceToEarnings(self):
+        return self._price_to_earn
+
+    @property
+    def PriceToSales(self):
+        return self._price_to_sale
+
+    @property
+    def PriceToBook(self):
+        return self._price_to_book
+
+    @property
+    def PriceToCashflow(self):
+        return self._price_to_cash
