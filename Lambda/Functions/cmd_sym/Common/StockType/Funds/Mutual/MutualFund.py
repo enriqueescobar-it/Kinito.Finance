@@ -29,8 +29,8 @@ class MutualFund(AbstractStockFund):
         self._info_list.append(self._name)
         self.__y_query = Ticker(t_name)
         self._setInfo()
-        self._pretty_table.add_column('Labels', self.InfoLabels)
-        self._pretty_table.add_column(self.__class, self.InfoList)
+        self.__pretty_table.add_column('Labels', self.InfoLabels)
+        self.__pretty_table.add_column(self.__class, self.InfoList)
 
     def __iter__(self):
         yield from {
