@@ -20,9 +20,10 @@ class RegularCurrency(AbstractCurrency):
 
     def __iter__(self):
         yield from {
+            "Info": "StockInfo",
+            "ticker": self.__ticker,
             "type": self.__class,
             "name": self._name,
-            "ticker": self.__ticker,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
             "price_to_earnings": self._price_to_earn,
