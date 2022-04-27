@@ -23,10 +23,6 @@ abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)
 print(abstractStock.to_json())
 '''
-abstractStockBond: AbstractStockBond = AbstractStockBond('a company', a_sym)
-print(abstractStockBond)
-print(abstractStockBond.to_json())
-
 aStockBond: AbstractStockOption = AbstractStockOption('a cy', a_sym)
 print(aStockBond)
 print(aStockBond.to_json())
