@@ -1,34 +1,35 @@
+from prettytable import PrettyTable
+
 from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockFund(AbstractStock):
-    _info_labels: list = list()
-    _info_list: list = list()
+    __ticker: str = 'NA'
     _name: str = 'NA'
 
     def __init__(self, c_name: str):
         self.__class = 'Fund'
+        #
         self._name = c_name.replace(' ', '')
 
     def __str__(self):
-        return self.__pretty_table.__str__()
+        pt: PrettyTable = PrettyTable()
+        pt.field_names = self._header
+        pt.add_row(['ticker', self.__ticker])
+        pt.add_row(['type', self.__class])
+        pt.add_row(['name', self._name])
+        return pt.__str__()
 
     def __repr__(self):
         return self.__str__()
 
     def __iter__(self):
         yield from {
+            "Info": "StockInfo",
+            "ticker": self.__ticker,
             "type": self.__class,
             "name": self._name
         }.items()
-
-    @property
-    def InfoList(self):
-        return self._info_list
-
-    @property
-    def InfoLabels(self):
-        return self._info_labels
 
     @property
     def Name(self):
