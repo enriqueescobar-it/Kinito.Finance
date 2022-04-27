@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
 import pandas
+from prettytable import PrettyTable
 from yahooquery import Ticker
 
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
@@ -25,18 +26,30 @@ class IndexFund(AbstractStockFund):
         self.__ticker = t_name
         self.__class = 'Index'
         #
-        self._info_labels.append('Name')
-        self._info_list.append(self._name)
         #
         self._setInfo()
-        self.__pretty_table.add_column('Labels', self.InfoLabels)
-        self.__pretty_table.add_column(self.__class, self.InfoList)
+
+    def __str__(self):
+        pt: PrettyTable = PrettyTable()
+        pt.field_names = self._header
+        pt.add_row(['Info', 'StockInfo'])
+        pt.add_row(['ticker', self.__ticker])
+        pt.add_row(['type', self.__class])
+        pt.add_row(['name', self._name])
+        pt.add_row(['stock_percent', self._stock_part_count])
+        pt.add_row(['bond_percent', self._bond_part_count])
+        pt.add_row(['price_to_earnings', self._price_to_earn])
+        pt.add_row(['price_to_book', self._price_to_book])
+        pt.add_row(['price_to_sales', self._price_to_sale])
+        pt.add_row(['price_to_cashflow', self._price_to_cash])
+        return pt.__str__()
 
     def __iter__(self):
         yield from {
+            "Info": "StockInfo",
+            "ticker": self.__ticker,
             "type": self.__class,
             "name": self._name,
-            "ticker": self.__ticker,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
             "price_to_earnings": self._price_to_earn,
@@ -50,14 +63,7 @@ class IndexFund(AbstractStockFund):
         #return super().to_json() self.__dict__ dict(self)
 
     def _setInfo(self):
-        self._info_labels.append('PriceToEarnings')
-        self._info_list.append(self._price_to_earn)
-        self._info_labels.append('PriceToBook')
-        self._info_list.append(self._price_to_book)
-        self._info_labels.append('PriceToSales')
-        self._info_list.append(self._price_to_sale)
-        self._info_labels.append('PriceToCashflow')
-        self._info_list.append(self._price_to_cash)
+        pass
 
     @property
     def SectorDataFrame(self):
