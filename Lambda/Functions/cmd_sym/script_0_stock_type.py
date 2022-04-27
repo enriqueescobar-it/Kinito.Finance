@@ -4,6 +4,7 @@ from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
 from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 from Common.StockType.Equities.AbstractStockEquity import AbstractStockEquity
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
+from Common.StockType.Funds.ExchangeTraded.ExchangeTradedFund import ExchangeTradedFund
 from Common.StockType.Funds.Mutual.MutualFund import MutualFund
 from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
 from Common.StockType.Options.AbstractStockOption import AbstractStockOption
@@ -44,7 +45,11 @@ print(aCurrency.to_json())
 abstractStockFund: AbstractStockFund = AbstractStockFund('una cia')#, a_sym)
 print(abstractStockFund)
 print(abstractStockFund.to_json())
-
+'''
 mutualFund: MutualFund = MutualFund('una cia', a_sym)
 print(mutualFund)
 print(mutualFund.to_json())
+'''
+etFund: ExchangeTradedFund = ExchangeTradedFund('una cia', a_sym)
+print(etFund)
+print(etFund.to_json())
