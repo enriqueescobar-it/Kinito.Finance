@@ -9,9 +9,9 @@ from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockFuture(AbstractStock):
+    __y_query: Ticker
     __ticker: str = 'NA'
     _name: str = 'NA'
-    __y_query: Ticker
     #
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
