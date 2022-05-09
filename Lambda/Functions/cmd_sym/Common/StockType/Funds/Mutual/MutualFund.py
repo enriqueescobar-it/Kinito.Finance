@@ -10,16 +10,7 @@ from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
 
 class MutualFund(AbstractStockFund):
-    __ticker: str = 'NA'
     __y_query: Ticker
-    _sector_df: DataFrame = DataFrame()
-    _holding_df: DataFrame = DataFrame()
-    _stock_part_count: int = -1
-    _bond_part_count: int = -1
-    _price_to_earn: float = np.nan
-    _price_to_book: float = np.nan
-    _price_to_sale: float = np.nan
-    _price_to_cash: float = np.nan
 
     def __init__(self, c_name: str, t_name: str):
         super().__init__(c_name.replace(' ', ''))
@@ -161,35 +152,3 @@ class MutualFund(AbstractStockFund):
         else:
             for key in self.__y_query.fund_performance.get(self.__ticker):
                 print(key)
-
-    @property
-    def SectorDataFrame(self):
-        return self._sector_df
-
-    @property
-    def HoldingDataFrame(self):
-        return self._holding_df
-
-    @property
-    def StockPartCount(self):
-        return self._stock_part_count
-
-    @property
-    def BondPartCount(self):
-        return self._bond_part_count
-
-    @property
-    def PriceToEarnings(self):
-        return self._price_to_earn
-
-    @property
-    def PriceToSales(self):
-        return self._price_to_sale
-
-    @property
-    def PriceToBook(self):
-        return self._price_to_book
-
-    @property
-    def PriceToCashflow(self):
-        return self._price_to_cash
