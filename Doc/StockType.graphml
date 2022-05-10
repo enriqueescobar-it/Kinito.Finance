@@ -109,17 +109,31 @@ __iter__()*<y:LabelModel>
     <node id="n3">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
-          <y:Geometry height="275.0" width="185.0" x="1063.8153766769863" y="757.0794179566565"/>
+          <y:Geometry height="405.94835913312704" width="185.0" x="1063.8153766769863" y="871.0909556243549"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="105.37890625" x="39.810546875" y="4.0">AbstractStockFund
 </y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="165.712890625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="89.3828125" x="2.0" y="30.701171875">_info_labels: list
-_info_list: list
-_name: str
-InfoLabels
-InfoList
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="371.529296875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="132.7421875" x="2.0" y="30.701171875000114">_name: str
+_sector_df: DataFrame
+_holding_df: DataFrame
+_stock_part_count: int
+_bond_part_count: int
+_price_to_earn: float
+_price_to_book: float
+_price_to_sale: float
+_price_to_cash: float
 Name
+SectorDataFrame
+HoldingDataFrame
+StockPartCount
+BondPartCount
+PriceToEarnings
+PriceToBook
+PriceToSales
+PriceToCashflow
+
+__ticker: str
 
 __init__()*
 __str__()*
@@ -140,31 +154,14 @@ __iter__()*<y:LabelModel>
     <node id="n4">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
-          <y:Geometry height="504.5333333333333" width="185.0" x="1063.8153766769863" y="1113.0794179566565"/>
+          <y:Geometry height="276.36573787409725" width="185.0" x="1063.8153766769863" y="1336.2145882352938"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="67.369140625" x="58.8154296875" y="4.0">MutualFund</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="459.736328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="132.7421875" x="2.0" y="30.701171875">__y_query: Ticker
-
-__ticker: str
-_sector_df: DataFrame
-_holding_df: DataFrame
-_stock_part_count: int
-_bond_part_count: int
-_price_to_earn: float
-_price_to_book: float
-_price_to_sale: float
-_price_to_cash: float
-SectorDataFrame
-HoldingDataFrame
-StockPartCount
-BondPartCount
-PriceToEarnings
-PriceToBook
-PriceToSales
-PriceToCashflow
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="209.81640625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="110.04296875" x="2.0" y="30.701171875">__y_query: Ticker
 
 __init__()*
+__str__()*
 __iter__()*
 _setInfo()
 to_json()
@@ -190,29 +187,11 @@ __setPerformance()<y:LabelModel>
     <node id="n5">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
-          <y:Geometry height="504.53333333333353" width="185.0" x="835.3153766769863" y="1113.0794179566565"/>
+          <y:Geometry height="276.36573787409725" width="185.0" x="835.3153766769863" y="1336.2145882352938"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="60.70703125" x="62.146484375" y="4.0">IndexFund</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="327.42578125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="132.7421875" x="2.0" y="30.701171875">__ticker: str
-_sector_df: DataFrame
-_holding_df: DataFrame
-_stock_part_count: int
-_bond_part_count: int
-_price_to_earn: float
-_price_to_book: float
-_price_to_sale: float
-_price_to_cash: float
-SectorDataFrame
-HoldingDataFrame
-StockPartCount
-BondPartCount
-PriceToEarnings
-PriceToBook
-PriceToSales
-PriceToCashflow
-
-__init__()**
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="62.8046875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="64.697265625" x="2.0" y="30.701171875">__init__()**
 __iter__()**
 _setInfo()
 to_json()<y:LabelModel>
@@ -231,31 +210,14 @@ to_json()<y:LabelModel>
     <node id="n6">
       <data key="d6">
         <y:GenericNode configuration="com.yworks.entityRelationship.big_entity">
-          <y:Geometry height="504.5333333333333" width="185.0" x="1292.3153766769863" y="1113.0794179566565"/>
+          <y:Geometry height="276.36573787409725" width="185.0" x="1292.3153766769863" y="1336.2145882352938"/>
           <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" backgroundColor="#B7C9E3" configuration="com.yworks.entityRelationship.label.name" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.701171875" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="t" textColor="#000000" verticalTextPosition="bottom" visible="true" width="122.74609375" x="31.126953125" y="4.0">ExchangeTradedFund</y:NodeLabel>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="459.736328125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="132.7421875" x="2.0" y="30.701171875">__y_query: Ticker
-
-__ticker: str
-_sector_df: DataFrame
-_holding_df: DataFrame
-_stock_part_count: int
-_bond_part_count: int
-_price_to_earn: float
-_price_to_book: float
-_price_to_sale: float
-_price_to_cash: float
-SectorDataFrame
-HoldingDataFrame
-StockPartCount
-BondPartCount
-PriceToEarnings
-PriceToBook
-PriceToSales
-PriceToCashflow
+          <y:NodeLabel alignment="left" autoSizePolicy="content" configuration="com.yworks.entityRelationship.label.attributes" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="209.81640625" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="top" visible="true" width="110.04296875" x="2.0" y="30.701171875">__y_query: Ticker
 
 __init__()*
+__str__()*
 __iter__()*
 _setInfo()
 to_json()
