@@ -6,8 +6,9 @@ from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
 ap = argparse.ArgumentParser()
 ap.add_argument("-s", "--symbol", required=True, help="symbol name case sensitive")
 args = vars(ap.parse_args())
+a_sym: str = args["symbol"]
 # display a friendly message to the user
-print("Hi there, you are looking for the <{}> symbol?".format(args["symbol"]))
+print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
 
 #
 # bonds: bond_funds = ['UDN', 'NEAR']

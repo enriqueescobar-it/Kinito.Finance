@@ -1,5 +1,5 @@
-from abc import ABC
+from Common.Readers.AbstractReader import AbstractReader
 
 
-class AbstractEngine(ABC):
+class AbstractEngine(AbstractReader):
     pass

@@ -24,9 +24,9 @@ class AbstractStockBond(AbstractStock):
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
-        pt.add_row(['ticker', self.__ticker])
-        pt.add_row(['type', self.__class])
-        pt.add_row(['name', self._name])
+        pt.add_row(['Ticker', self.__ticker])
+        pt.add_row(['Type', self.__class])
+        pt.add_row(['Name', self._name])
         pt.add_row(['StockPartCount', self._stock_part_count])
         pt.add_row(['BondPartCount', self._bond_part_count])
         pt.add_row(['PriceToEarnings', self._price_to_earn])
