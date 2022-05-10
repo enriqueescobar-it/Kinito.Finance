@@ -1,13 +1,29 @@
 from abc import *
+import json
 from prettytable import PrettyTable
 
 
 class AbstractStock(ABC):
     __class: str = 'NA'
-    _pretty_table: PrettyTable = PrettyTable()
+    _header: list = ['Info', 'TypeInfo']
+    _info_labels: list = list()
+    _info_list: list = list()
 
     def __init__(self):
-        self.__class = 'Stock'
+        self.__class = 'TypeInfo'
 
     def __str__(self):
-        return self.__class
+        pt: PrettyTable = PrettyTable()
+        pt.field_names = self._header
+        return pt.__str__()
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __iter__(self):
+        yield from {
+            "Info": self.__class
+        }.items()
+
+    def to_json(self):
+        return json.dumps(dict(self), ensure_ascii=False)
