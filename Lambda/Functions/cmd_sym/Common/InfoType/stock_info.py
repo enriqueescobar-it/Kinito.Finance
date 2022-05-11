@@ -22,7 +22,18 @@ class stock_info(abstract_info):
     __y_fin_dic: dict = {}
     __header: list = ['Info', 'StockInfo']
     _company_name: str = 'NA'
-    _quote_type: str = 'NA'
+    _url: str = 'NA'
+    _url_logo: str = "http://localhost"
+    _address1: str = 'NA'
+    _address2: str = 'NA'
+    _city: str = 'NA'
+    _postal_code: str = 'NA'
+    _state: str = 'NA'
+    _country: str = 'NA'
+    _phone: str = 'NA'
+    _fax: str = 'NA'
+    _market: str = 'NA'
+    _currency: str = 'NA'
     _actions_df: DataFrame = DataFrame()
     _balance_sheet_df: DataFrame = DataFrame()
     _q_cashflow_df: DataFrame = DataFrame()
@@ -65,6 +76,18 @@ class stock_info(abstract_info):
         pt.field_names = self.__header
         pt.add_row(['Ticker', self.__ticker])
         pt.add_row(['CompanyName', self._company_name])
+        pt.add_row(['URL', self._url])
+        pt.add_row(['LogoURL', self._url_logo])
+        pt.add_row(['Address1', self._address1])
+        pt.add_row(['Address2', self._address2])
+        pt.add_row(['City', self._city])
+        pt.add_row(['PostalCode', self._postal_code])
+        pt.add_row(['State', self._state])
+        pt.add_row(['Country', self._country])
+        pt.add_row(['Phone', self._phone])
+        pt.add_row(['Fax', self._fax])
+        pt.add_row(['Market', self._market])
+        pt.add_row(['Currency', self._currency])
         pt.add_row(['QuoteType', self._quote_type])
         return pt.__str__()
 
@@ -74,7 +97,20 @@ class stock_info(abstract_info):
     def __iter__(self):
         yield from {
             self.__header[0]: self.__header[1],
+            "ticker": self.__ticker,
             "company_name": self._company_name,
+            "url": self._url,
+            "logo_url": self._url_logo,
+            "address1": self._address1,
+            "address2": self._address2,
+            "city": self._city,
+            "postal_code": self._postal_code,
+            "state": self._state,
+            "country": self._country,
+            "phone": self._phone,
+            "fax": self._fax,
+            "market": self._market,
+            "currency": self._currency,
             "quote_type": self._quote_type
         }.items()
 
@@ -97,6 +133,18 @@ class stock_info(abstract_info):
             #print(self.__y_fin_dic)
             self.__y_fin_dic = self.__yFinance.info
             self._company_name = self.__get_str_from_key('shortName')
+            self._url = self.__get_str_from_key('website')
+            self._url_logo = self.__get_str_from_key('logo_url')
+            self._address1 = self.__get_str_from_key('address1')
+            self._address2 = self.__get_str_from_key('address2')
+            self._city = self.__get_str_from_key('city')
+            self._postal_code = self.__get_str_from_key('zip')
+            self._state = self.__get_str_from_key('state')
+            self._country = self.__get_str_from_key('country')
+            self._phone = self.__get_str_from_key('phone')
+            self._fax = self.__get_str_from_key('fax')
+            self._market = self.__get_str_from_key('market')
+            self._currency = self.__get_str_from_key('currency')
             self._quote_type = self.__get_str_from_key('quoteType')
             self.__get_stock_type(self._quote_type)
 
