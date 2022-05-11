@@ -11,7 +11,6 @@ args = vars(ap.parse_args())
 a_sym: str = args["symbol"]
 # display a friendly message to the user
 print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
-#
 # bonds: bond_funds = ['UDN', 'NEAR']
 # tech_stocks = ['AAPL', 'MSFT', 'INTC', 'ATD.TO', 'ATD-B.TO']#!
 # bank_stocks = ['WFC', 'BAC', 'C']#~extend EQUITY
@@ -30,6 +29,16 @@ print(a_stock_info.to_json())
 print(a_stock_info.CompanyName)
 print(a_stock_info.QuoteType)
 print(a_stock_info.StockType)
+a_stock_info.set_actions()
+print(a_stock_info.ActionDataFrame)
+a_stock_info.set_splits()
+print(a_stock_info.SplitSeries)
+print(a_stock_info.BalanceSheetDataFrame)
+print(a_stock_info.OptionTuple)
+print(a_stock_info.QuarterCashflowDataFrame)
+print(a_stock_info.QuarterEarningDataFrame)
+print(a_stock_info.QuarterFinancialDataFrame)
+print(a_stock_info.QuarterBalanceSheetDataFrame)
 exit(111)
 abstractEngine: YahooFinanceEngine = YahooFinanceEngine(a_ticker)
 print('QuoteType: ' + abstractEngine.QuoteType)
