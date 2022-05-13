@@ -1,3 +1,4 @@
+from Common.InfoType.stock_info import stock_info
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
 

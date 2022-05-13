@@ -58,8 +58,6 @@ class ExchangeTradedFund(AbstractStockFund):
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
-        print("DICT")
-        print(self.__dict__)
         self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):

@@ -7,6 +7,7 @@ from prettytable import PrettyTable
 
 from Common.InfoType.abstract_info import abstract_info
 from Common.StockType.AbstractStock import AbstractStock
+from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
 from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency
 from Common.StockType.Currencies.Regular.RegularCurrency import RegularCurrency
 from Common.StockType.Equities.AbstractStockEquity import AbstractStockEquity
@@ -185,9 +186,9 @@ class stock_info(abstract_info):
             self._stock_type = AbstractStockFuture(self._company_name, self.__ticker)
         if s == 'EQUITY':
             self._stock_type = AbstractStockEquity(self._company_name, self.__ticker)
-        #else:
-        #    self._stock_type = AbstractStockOption(self.CompanyName, self.__ticker)
-        #    self._stock_type = AbstractStockBond(self.CompanyName, self.__ticker)
+        else:
+        #    self._stock_type = AbstractStockOption(self._company_name, self.__ticker)
+            self._stock_type = AbstractStockBond(self._company_name, self.__ticker)
 
     @property
     def ActionDataFrame(self):
