@@ -6,14 +6,13 @@ abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)
 print(abstractStock.to_json())
 
-abstractCurrency: AbstractCurrency = AbstractCurrency('a cy')
+abstractCurrency: AbstractCurrency = AbstractCurrency('a cy', 'A_QUOTE')
 print(abstractCurrency)
 print(abstractCurrency.to_json())
-
-cryptoCurrency: CryptoCurrency = CryptoCurrency('an ethereum', 'ETH-USD')
+cryptoCurrency: CryptoCurrency = CryptoCurrency('an ethereum', 'ETH-USD', 'UNE_QUOTE')
 print(cryptoCurrency)
 print(cryptoCurrency.to_json())
 
-c_Currency: CryptoCurrency = CryptoCurrency('an xrp', 'XRP-USD')
+c_Currency: CryptoCurrency = CryptoCurrency('an xrp', 'XRP-USD', 'UN_QUOTE')
 print(c_Currency)
 print(c_Currency.to_json())
