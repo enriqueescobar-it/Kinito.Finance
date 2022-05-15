@@ -17,10 +17,11 @@ class AbstractCurrency(AbstractStock):
     _price_to_sale: float = np.nan
     _price_to_cash: float = np.nan
 
-    def __init__(self, c_name: str):
+    def __init__(self, c_name: str, q_type: str):
         self._name = c_name.replace(' ', '')
         #
         self.__class = 'Currency'
+        self._quote_type = q_type
         #
         self._setInfo()
         self._sector_df = DataFrame(columns=['S'])
@@ -29,9 +30,10 @@ class AbstractCurrency(AbstractStock):
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
-        pt.add_row(['ticker', self.__ticker])
-        pt.add_row(['type', self.__class])
-        pt.add_row(['name', self._name])
+        pt.add_row(['Ticker', self.__ticker])
+        pt.add_row(['Type', self.__class])
+        pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['Name', self._name])
         pt.add_row(['StockPartCount', self._stock_part_count])
         pt.add_row(['BondPartCount', self._bond_part_count])
         pt.add_row(['PriceToEarnings', self._price_to_earn])
@@ -48,6 +50,7 @@ class AbstractCurrency(AbstractStock):
             "Info": "StockInfo",
             "ticker": self.__ticker,
             "type": self.__class,
+            "quote_type": self._quote_type,
             "name": self._name
         }.items()
 
