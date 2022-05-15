@@ -6,10 +6,11 @@ from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
 class IndexFund(AbstractStockFund):
 
-    def __init__(self, c_name: str, t_name: str):
-        super().__init__(c_name.replace(' ', ''))
+    def __init__(self, c_name: str, t_name: str, q_type: str):
+        super().__init__(c_name.replace(' ', ''), q_type)
         self.__ticker = t_name
         self.__class = 'Index'
+        #self.__quote_type = q_type
         #
         #
         self._setInfo()
@@ -18,15 +19,16 @@ class IndexFund(AbstractStockFund):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
         pt.add_row(['Info', 'StockInfo'])
-        pt.add_row(['ticker', self.__ticker])
-        pt.add_row(['type', self.__class])
-        pt.add_row(['name', self._name])
-        pt.add_row(['stock_percent', self._stock_part_count])
-        pt.add_row(['bond_percent', self._bond_part_count])
-        pt.add_row(['price_to_earnings', self._price_to_earn])
-        pt.add_row(['price_to_book', self._price_to_book])
-        pt.add_row(['price_to_sales', self._price_to_sale])
-        pt.add_row(['price_to_cashflow', self._price_to_cash])
+        pt.add_row(['Ticker', self.__ticker])
+        pt.add_row(['Type', self.__class])
+        pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['Name', self._name])
+        pt.add_row(['StockPercent', self._stock_part_count])
+        pt.add_row(['BondPercent', self._bond_part_count])
+        pt.add_row(['PriceToEarnings', self._price_to_earn])
+        pt.add_row(['PriceToBook', self._price_to_book])
+        pt.add_row(['PriceToSales', self._price_to_sale])
+        pt.add_row(['PriceToCashflow', self._price_to_cash])
         return pt.__str__()
 
     def __iter__(self):
@@ -34,6 +36,7 @@ class IndexFund(AbstractStockFund):
             "Info": "StockInfo",
             "ticker": self.__ticker,
             "type": self.__class,
+            "quote_type": self._quote_type,
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,

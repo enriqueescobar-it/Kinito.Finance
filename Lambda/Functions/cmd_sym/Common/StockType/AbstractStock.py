@@ -5,9 +5,8 @@ from prettytable import PrettyTable
 
 class AbstractStock(ABC):
     __class: str = 'NA'
+    _quote_type: str = 'NA'
     _header: list = ['Info', 'TypeInfo']
-    _info_labels: list = list()
-    _info_list: list = list()
 
     def __init__(self):
         self.__class = 'TypeInfo'

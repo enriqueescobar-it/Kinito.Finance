@@ -14,10 +14,12 @@ from Common.StockType.Options.AbstractStockOption import AbstractStockOption
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-s", "--symbol", required=True, help="symbol name case sensitive")
+ap.add_argument("-q", "--quote", required=True, help="quote type name case sensitive")
 args = vars(ap.parse_args())
 a_sym: str = args["symbol"]
+a_quote: str = args["quote"]
 # display a friendly message to the user
-print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
+print("Hi there, you are looking for the <{}> symbol with <{}> quote?".format(a_sym, a_quote))
 
 abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)
@@ -39,7 +41,7 @@ aCurrency: AbstractCurrency = AbstractCurrency('una cia')#, a_sym)
 print(aCurrency)
 print(aCurrency.to_json())
 '''
-abstractStockFund: AbstractStockFund = AbstractStockFund('una cia')#, a_sym)
+abstractStockFund: AbstractStockFund = AbstractStockFund('una cia', a_quote)
 print(abstractStockFund)
 print(abstractStockFund.to_json())
 '''
@@ -51,6 +53,6 @@ etFund: ExchangeTradedFund = ExchangeTradedFund('una cia', a_sym)
 print(etFund)
 print(etFund.to_json())
 '''
-indexFund: IndexFund = IndexFund('una cia', a_sym)
+indexFund: IndexFund = IndexFund('una cia', a_sym, a_quote)
 print(indexFund)
 print(indexFund.to_json())
