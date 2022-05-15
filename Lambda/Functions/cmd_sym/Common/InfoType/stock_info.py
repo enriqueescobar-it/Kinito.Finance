@@ -173,22 +173,22 @@ class stock_info(abstract_info):
 
     def __get_stock_type(self, s: str = ''):
         if s == 'ETF':
-            self._stock_type = ExchangeTradedFund(self._company_name, self.__ticker)
+            self._stock_type = ExchangeTradedFund(self._company_name, self.__ticker, s)
         if s == 'INDEX':
-            self._stock_type = IndexFund(self._company_name, self.__ticker)
+            self._stock_type = IndexFund(self._company_name, self.__ticker, s)
         if s == 'MUTUALFUND':
-            self._stock_type = MutualFund(self._company_name, self.__ticker)
+            self._stock_type = MutualFund(self._company_name, self.__ticker, s)
         if s == 'CRYPTOCURRENCY':
-            self._stock_type = CryptoCurrency(self._company_name, self.__ticker)
+            self._stock_type = CryptoCurrency(self._company_name, self.__ticker, s)
         if s == 'CURRENCY':
-            self._stock_type = RegularCurrency(self._company_name, self.__ticker)
+            self._stock_type = RegularCurrency(self._company_name, self.__ticker, s)
         if s == 'FUTURE':
-            self._stock_type = AbstractStockFuture(self._company_name, self.__ticker)
+            self._stock_type = AbstractStockFuture(self._company_name, self.__ticker, s)
         if s == 'EQUITY':
-            self._stock_type = AbstractStockEquity(self._company_name, self.__ticker)
+            self._stock_type = AbstractStockEquity(self._company_name, self.__ticker, s)
         else:
         #    self._stock_type = AbstractStockOption(self._company_name, self.__ticker)
-            self._stock_type = AbstractStockBond(self._company_name, self.__ticker)
+            self._stock_type = AbstractStockBond(self._company_name, self.__ticker, s)
 
     @property
     def ActionDataFrame(self):
