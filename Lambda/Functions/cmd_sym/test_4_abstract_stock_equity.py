@@ -1,15 +1,45 @@
+from Common.InfoType.stock_info import stock_info
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Equities.AbstractStockEquity import AbstractStockEquity
 
+print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)
 print(abstractStock.to_json())
 
+print('\n============   ', 'equityStock', '   ============\n')
 equityStock: AbstractStockEquity = AbstractStockEquity('a cy', 'AAPL', 'A_QUOTE')
 print(equityStock)
 print(equityStock.to_json())
 
-
+print('\n============   ', 'equityStock', '   ============\n')
 eStock: AbstractStockEquity = AbstractStockEquity('a company', 'CNI', 'UN_QUOTE')
 print(eStock)
 print(eStock.to_json())
+
+print('\n============   ', 'stock_equity', '   ============\n')
+equity_stock_info: stock_info = stock_info('CNI')
+print(equity_stock_info)
+print(equity_stock_info.to_json())
+print(equity_stock_info.CompanyName)
+print(equity_stock_info.QuoteType)
+print(equity_stock_info.StockType)
+equity_stock_info.set_actions()
+print(equity_stock_info.ActionDataFrame.info())
+print(equity_stock_info.ActionDataFrame.describe())
+print(equity_stock_info.ActionDataFrame.columns)
+print(equity_stock_info.ActionDataFrame.dtypes)
+print(equity_stock_info.BalanceSheetDataFrame.info())
+print(equity_stock_info.BalanceSheetDataFrame.describe())
+print(equity_stock_info.BalanceSheetDataFrame.columns)
+print(equity_stock_info.BalanceSheetDataFrame.dtypes)
+print(equity_stock_info.QuarterCashflowDataFrame.info())
+print(equity_stock_info.QuarterCashflowDataFrame.describe())
+print(equity_stock_info.QuarterCashflowDataFrame.columns)
+print(equity_stock_info.QuarterCashflowDataFrame.dtypes)
+print(equity_stock_info.QuarterFinancialDataFrame.head())
+print(equity_stock_info.QuarterBalanceSheetDataFrame.head())
+print(equity_stock_info.OptionTuple)
+equity_stock_info.set_splits()
+print(equity_stock_info.SplitSeries)
+print(equity_stock_info.SplitSeries.dtypes)
