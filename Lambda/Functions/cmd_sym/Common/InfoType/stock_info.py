@@ -72,6 +72,9 @@ class stock_info(abstract_info):
             or '_quarterly_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_balance_sheet') or any(self.__yFinance.quarterly_balance_sheet):
             self.__set_quarterly_balance_sheet()
 
+        self.__set_actions()
+        self.__set_splits()
+
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self.__header
@@ -90,7 +93,15 @@ class stock_info(abstract_info):
         pt.add_row(['Market', self._market])
         pt.add_row(['Currency', self._currency])
         pt.add_row(['QuoteType', self._quote_type])
-        return pt.__str__()
+        s: str = pt.__str__() + "\n\nBALANCE SHEET\n\n" + self._balance_sheet_df.head().to_string(index=True)
+        s += "\n\nOPTION TUPLE\n" + str(self._option_tuple)
+        s += "\n\nQUARTER EARNINGS\n" + self._q_earning_df.head().to_string(index=True)
+        s += "\n\nQUARTER CASHFLOW\n" + self._q_cashflow_df.head().to_string(index=True)
+        s += "\n\nQUARTER FINANCIALS\n" + self._q_financial_df.head().to_string(index=True)
+        s += "\n\nQUARTER BALANCESHEET\n" + self._q_balance_sheet_df.head().to_string(index=True)
+        s += "\n\nACTION DATAFRAME\n" + self._actions_df.head().to_string(index=True)
+        s += "\n\nSPLIT SERIES\n" + self._split_series.head().to_string(index=True)
+        return s
 
     def __repr__(self):
         return self.__str__()
@@ -118,11 +129,11 @@ class stock_info(abstract_info):
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
 
-    def set_actions(self):
+    def __set_actions(self):
         if any(self.__yFinance.actions):
             self._actions_df = self.__yFinance.actions
 
-    def set_splits(self):
+    def __set_splits(self):
         if any(self.__yFinance.splits):
             self._split_series = self.__yFinance.splits
 
