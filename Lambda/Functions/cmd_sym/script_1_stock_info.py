@@ -17,9 +17,9 @@ print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
 # cryptocurrencies = ['BTC-USD', 'ETH-USD', 'XRP-USD']#! #~extend
 # currencies = ['EURUSD=X', 'JPY=X', 'GBPUSD=X']#! #~extend
 # commodity_futures = ['GC=F', 'SI=F', 'CL=F']#! #~extend
-# funds: us_treasuries = ['^TNX', '^IRX', '^TYX']#! #~extend
 # funds: etf_stocks = ['VOO', 'VOOG', 'GINN', 'VGRO.TO', 'XIT.TO']#! #~extend
 # funds: mutual_funds = ['PRLAX', 'QASGX', 'HISFX']#! #~extend
+# funds: us_treasuries = ['^TNX', '^IRX', '^TYX', '^VIX']#! #~extend
 # a_ticker: str = '^TNX'#
 a_ticker: str = args["symbol"]
 
@@ -29,7 +29,7 @@ print(a_stock_info.to_json())
 print(a_stock_info.CompanyName)
 print(a_stock_info.QuoteType)
 print(a_stock_info.StockType)
-a_stock_info.set_actions()
+# a_stock_info.__set_actions()
 #print(a_stock_info.ActionDataFrame.head())
 print(a_stock_info.ActionDataFrame.info())
 print(a_stock_info.ActionDataFrame.describe())
@@ -45,10 +45,12 @@ print(a_stock_info.QuarterCashflowDataFrame.info())
 print(a_stock_info.QuarterCashflowDataFrame.describe())
 print(a_stock_info.QuarterCashflowDataFrame.columns)
 print(a_stock_info.QuarterCashflowDataFrame.dtypes)
-#print(a_stock_info.QuarterEarningDataFrame.head())
-print(a_stock_info.QuarterFinancialDataFrame.head())
-print(a_stock_info.QuarterBalanceSheetDataFrame.head())
+#print(a_stock_info.QuarterBalanceSheetDataFrame.head())
+print(a_stock_info.QuarterBalanceSheetDataFrame.info())
+print(a_stock_info.QuarterBalanceSheetDataFrame.describe())
+print(a_stock_info.QuarterBalanceSheetDataFrame.columns)
+print(a_stock_info.QuarterBalanceSheetDataFrame.dtypes)
 print(a_stock_info.OptionTuple)
-a_stock_info.set_splits()
+# a_stock_info.__set_splits()
 print(a_stock_info.SplitSeries)
 print(a_stock_info.SplitSeries.dtypes)

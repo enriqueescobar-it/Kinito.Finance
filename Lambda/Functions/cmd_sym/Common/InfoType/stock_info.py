@@ -101,6 +101,7 @@ class stock_info(abstract_info):
         s += "\n\nQUARTER BALANCESHEET\n" + self._q_balance_sheet_df.head().to_string(index=True)
         s += "\n\nACTION DATAFRAME\n" + self._actions_df.head().to_string(index=True)
         s += "\n\nSPLIT SERIES\n" + self._split_series.head().to_string(index=True)
+        s += "\n\nSTOCK TYPE\n" + str(self._stock_type)
         return s
 
     def __repr__(self):
