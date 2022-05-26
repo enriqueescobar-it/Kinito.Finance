@@ -41,7 +41,9 @@ class AbstractStockFund(AbstractStock):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
-        return pt.__str__()
+        s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
+        s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.head().to_string(index=True)
+        return s
 
     def __repr__(self):
         return self.__str__()
