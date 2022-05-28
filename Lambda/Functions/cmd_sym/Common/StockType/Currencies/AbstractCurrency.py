@@ -24,8 +24,8 @@ class AbstractCurrency(AbstractStock):
         self._quote_type = q_type
         #
         self._setInfo()
-        self._sector_df = DataFrame(columns=['S'])
-        self._holding_df = DataFrame(columns=['H'])
+        #self._sector_df = DataFrame(columns=['S'])
+        #self._holding_df = DataFrame(columns=['H'])
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()

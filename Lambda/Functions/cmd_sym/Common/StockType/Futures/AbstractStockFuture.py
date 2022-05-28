@@ -86,7 +86,6 @@ class AbstractStockFuture(AbstractStock):
             self._sector_df['Sector'] = s
             self._sector_df['Percent'] = 1.0
             self._sector_df.loc[0] = [s, 1.0]
-        print(self._sector_df)
 
     def __plotSectorDf(self) -> plt:
         self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
@@ -107,7 +106,6 @@ class AbstractStockFuture(AbstractStock):
             self._holding_df['holdingName'] = 'a name'
             self._holding_df['holdingPercent'] = 1.0
             self._holding_df.loc[0] = [self.__ticker, s, 1.0]
-        print(self._holding_df)
 
     def __setAllocation(self):
         is_df : bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
@@ -133,7 +131,6 @@ class AbstractStockFuture(AbstractStock):
         return stock_int, bond_int
 
     def __setInfo(self):
-        print("SET_INFO", self.__y_query.fund_holding_info)
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
         if is_null:
             print(self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
@@ -149,7 +146,6 @@ class AbstractStockFuture(AbstractStock):
         self._price_to_cash = a_dict['priceToCashflow']
 
     def __setPerformance(self):
-        print('Performance', self.__y_query.fund_performance)
         is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
         if is_null:
             print(self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))

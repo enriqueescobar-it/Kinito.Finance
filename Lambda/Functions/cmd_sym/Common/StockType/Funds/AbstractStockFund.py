@@ -24,8 +24,8 @@ class AbstractStockFund(AbstractStock):
         self._name = c_name.replace(' ', '')
         self._stock_part_count = 0
         self._bond_part_count = 0
-        self._sector_df = DataFrame(columns=['S'])
-        self._holding_df = DataFrame(columns=['H'])
+        #self._sector_df = DataFrame(columns=['S'])
+        #self._holding_df = DataFrame(columns=['H'])
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
