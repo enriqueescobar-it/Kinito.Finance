@@ -8,6 +8,8 @@ from Common.StockType.AbstractStock import AbstractStock
 class AbstractCurrency(AbstractStock):
     __ticker: str = 'NA'
     _name: str = 'NA'
+    _has_sectors: bool = False
+    _has_holdings: bool = False
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
@@ -40,6 +42,8 @@ class AbstractCurrency(AbstractStock):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['HasSectors', self._has_sectors])
+        pt.add_row(['HasHoldings', self._has_holdings])
         s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
         s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.head().to_string(index=True)
         return s
@@ -95,3 +99,11 @@ class AbstractCurrency(AbstractStock):
     @property
     def PriceToCashflow(self):
         return self._price_to_cash
+
+    @property
+    def HasSectors(self):
+        return self._has_sectors
+
+    @property
+    def HasHoldings(self):
+        return self._has_holdings

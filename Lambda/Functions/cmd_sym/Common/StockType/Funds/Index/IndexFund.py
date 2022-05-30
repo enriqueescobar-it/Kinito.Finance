@@ -29,6 +29,8 @@ class IndexFund(AbstractStockFund):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['HasSectors', self._has_sectors])
+        pt.add_row(['HasHoldings', self._has_holdings])
         s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
         s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.head().to_string(index=True)
         return s
@@ -45,7 +47,9 @@ class IndexFund(AbstractStockFund):
             "price_to_earnings": self._price_to_earn,
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
-            "price_to_cashflow": self._price_to_cash
+            "price_to_cashflow": self._price_to_cash,
+            "has_sectors": self._has_sectors,
+            "has_holdings": self._has_holdings
         }.items()
     
     def to_json(self):

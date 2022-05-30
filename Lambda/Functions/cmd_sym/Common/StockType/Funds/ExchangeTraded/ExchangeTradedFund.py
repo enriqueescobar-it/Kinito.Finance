@@ -33,6 +33,8 @@ class ExchangeTradedFund(AbstractStockFund):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['HasSectors', self._has_sectors])
+        pt.add_row(['HasHoldings', self._has_holdings])
         s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
         s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.head().to_string(index=True)
         return s
@@ -49,7 +51,9 @@ class ExchangeTradedFund(AbstractStockFund):
             "price_to_earnings": self._price_to_earn,
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
-            "price_to_cashflow": self._price_to_cash
+            "price_to_cashflow": self._price_to_cash,
+            "has_sectors": self._has_sectors,
+            "has_holdings": self._has_holdings
         }.items()
     
     def to_json(self):
@@ -67,6 +71,7 @@ class ExchangeTradedFund(AbstractStockFund):
     def __setSectorDf(self):
         self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
         self._sector_df.columns = ['Sector', 'Percent']
+        self._has_sectors = True
 
     def __plotSectorDf(self) -> plt:
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
@@ -79,6 +84,7 @@ class ExchangeTradedFund(AbstractStockFund):
         self._holding_df = self.__y_query.fund_top_holdings
         self._holding_df.set_index('symbol', inplace=True)
         self._holding_df.reset_index(inplace=True)
+        self._has_holdings = True
 
     def __setAllocation(self):
         df: DataFrame = self.__y_query.fund_category_holdings.set_index('maxAge')

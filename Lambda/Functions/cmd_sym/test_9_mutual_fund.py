@@ -24,7 +24,7 @@ print(mf_1.to_json())
 print(mf_1)
 
 print('\n============   ', 'mutual_stock_info', '   ============\n')
-mutual_stock_info: stock_info = stock_info('QASGX')
+mutual_stock_info: stock_info = stock_info('HISFX')
 print(mutual_stock_info.to_json())
 print(mutual_stock_info)
 exit(111)
