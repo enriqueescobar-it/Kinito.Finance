@@ -133,14 +133,6 @@ class MutualFund(AbstractStockFund):
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
         if is_null:
             print(self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
-            self._info_labels.append('PriceToEarnings')
-            self._info_list.append(self._price_to_earn)
-            self._info_labels.append('PriceToBook')
-            self._info_list.append(self._price_to_book)
-            self._info_labels.append('PriceToSales')
-            self._info_list.append(self._price_to_sale)
-            self._info_labels.append('PriceToCashflow')
-            self._info_list.append(self._price_to_cash)
         else:
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
                 if key == 'equityHoldings':
@@ -153,7 +145,7 @@ class MutualFund(AbstractStockFund):
         self._price_to_cash = a_dict['priceToCashflow']
 
     def __setPerformance(self):
-        print('Performance', self.__y_query.fund_performance)
+        print("PERFORM_ANCE", self.__y_query.fund_performance, self.__y_query.fund_performance)
         is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
         if is_null:
             print(self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
