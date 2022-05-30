@@ -1,48 +1,16 @@
 from Common.InfoType.stock_info import stock_info
-from Common.StockType.AbstractStock import AbstractStock
-from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
-
-print('\n============   ', 'abstractStock', '   ============\n')
-abstractStock: AbstractStock = AbstractStock()
-print(abstractStock.to_json())
-print(abstractStock)
-
-print('\n============   ', 'futureStock', '   ============\n')
-futureStock: AbstractStockFuture = AbstractStockFuture('una cia', 'GC=F', 'A_QUOTE')
-print(futureStock.to_json())
-print(futureStock)
-
-print('\n============   ', 'fStock', '   ============\n')
-fStock: AbstractStockFuture = AbstractStockFuture('une cie', 'SI=F', 'UNA_QUOTE')
-print(fStock.to_json())
-print(fStock)
-
-print('\n============   ', 'f_Stock', '   ============\n')
-f_Stock: AbstractStockFuture = AbstractStockFuture('a cy', 'CL=F', 'UNE_QUOTE')
-print(f_Stock.to_json())
-print(f_Stock)
 
 print('\n============   ', 'future_stock_info', '   ============\n')
 future_stock_info: stock_info = stock_info('GC=F')
 print(future_stock_info.to_json())
 print(future_stock_info)
-exit(111)
-print(future_stock_info.CompanyName)
-print(future_stock_info.QuoteType)
-print(future_stock_info.ActionDataFrame.info())
-print(future_stock_info.ActionDataFrame.describe())
-print(future_stock_info.ActionDataFrame.columns)
-print(future_stock_info.ActionDataFrame.dtypes)
-print(future_stock_info.BalanceSheetDataFrame.info())
-print(future_stock_info.BalanceSheetDataFrame.describe())
-print(future_stock_info.BalanceSheetDataFrame.columns)
-print(future_stock_info.BalanceSheetDataFrame.dtypes)
-print(future_stock_info.QuarterCashflowDataFrame.info())
-print(future_stock_info.QuarterCashflowDataFrame.describe())
-print(future_stock_info.QuarterCashflowDataFrame.columns)
-print(future_stock_info.QuarterCashflowDataFrame.dtypes)
-print(future_stock_info.QuarterFinancialDataFrame.head())
-print(future_stock_info.QuarterBalanceSheetDataFrame.head())
-print(future_stock_info.OptionTuple)
-print(future_stock_info.SplitSeries)
-print(future_stock_info.SplitSeries.dtypes)
+
+print('\n============   ', 'f_stock_info', '   ============\n')
+f_stock_info: stock_info = stock_info('SI=F')
+print(f_stock_info.to_json())
+print(f_stock_info)
+
+print('\n============   ', 'fstock_info', '   ============\n')
+fstock_info: stock_info = stock_info('CL=F')
+print(fstock_info.to_json())
+print(fstock_info)
