@@ -1,7 +1,9 @@
 import json
 
 import matplotlib.pyplot as plt
+import numpy as np
 from pandas import DataFrame
+import pandas
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
@@ -15,6 +17,7 @@ class ExchangeTradedFund(AbstractStockFund):
         super().__init__(c_name.replace(' ', ''), q_type)
         self.__ticker = t_name
         self.__class = 'Etf'
+        #self.__quote_type = q_type
         #
         self.__y_query = Ticker(t_name)
         self._setInfo()
@@ -55,7 +58,7 @@ class ExchangeTradedFund(AbstractStockFund):
             "has_sectors": self._has_sectors,
             "has_holdings": self._has_holdings
         }.items()
-    
+
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
         #return super().to_json() self.__dict__ dict(self)
@@ -69,9 +72,18 @@ class ExchangeTradedFund(AbstractStockFund):
         self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):
-        self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
-        self._sector_df.columns = ['Sector', 'Percent']
-        self._has_sectors = True
+        is_df : bool = isinstance(self.__y_query.fund_sector_weightings, pandas.DataFrame)
+
+        if is_df:
+            self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
+            self._sector_df.columns = ['Sector', 'Percent']
+            self._has_sectors = True
+        else:
+            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
+            self._sector_df['Sector'] = s
+            self._sector_df['Percent'] = 1.0
+            self._sector_df.loc[0] = [s, 1.0]
+        print(self._sector_df)
 
     def __plotSectorDf(self) -> plt:
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
@@ -81,22 +93,53 @@ class ExchangeTradedFund(AbstractStockFund):
             return plt
 
     def __setHoldingDf(self):
-        self._holding_df = self.__y_query.fund_top_holdings
-        self._holding_df.set_index('symbol', inplace=True)
-        self._holding_df.reset_index(inplace=True)
-        self._has_holdings = True
+        is_df : bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
+
+        if is_df:
+            self._holding_df = self.__y_query.fund_top_holdings
+            self._holding_df.set_index('symbol', inplace=True)
+            self._holding_df.reset_index(inplace=True)
+            self._has_holdings = True
+        else:
+            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
+            self._holding_df['symbol'] = s
+            self._holding_df['holdingName'] = 'a name'
+            self._holding_df['holdingPercent'] = 1.0
+            self._holding_df.loc[0] = [self.__ticker, s, 1.0]
+        print(self._holding_df)
 
     def __setAllocation(self):
-        df: DataFrame = self.__y_query.fund_category_holdings.set_index('maxAge')
-        df.reset_index(inplace=True)
-        stock_int: int = int(df['stockPosition'][0]*100)
+        is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
+        df: DataFrame = DataFrame()
+
+        if is_df:
+            df = self.__y_query.fund_category_holdings.set_index('maxAge')
+            df.reset_index(inplace=True)
+        else:
+            df['maxAge'] = 1.0
+            df['cashPosition'] = np.nan
+            df['stockPosition'] = np.nan
+            df['bondPosition'] = np.nan
+            df['otherPosition'] = np.nan
+            df['preferredPosition'] = np.nan
+            df['convertiblePosition'] = np.nan
+            df.loc[0] = [1.0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+            df = df.set_index('maxAge')
+            df.reset_index(inplace=True)
+        stock_int: int = int(np.nan_to_num(df['stockPosition'][0]) *100) if np.isnan(df['stockPosition'][0]) else int(df['stockPosition'][0]*100)
+        #stock_int: int = int(df['stockPosition'][0]*100)
         bond_int: int = 100 - stock_int
         return stock_int, bond_int
 
     def __setInfo(self):
-        for key in self.__y_query.fund_holding_info.get(self.__ticker):
-            if key == 'equityHoldings':
-                self.__setPriceTo(self.__y_query.fund_holding_info.get(self.__ticker)[key])
+        print("SET_INFO", self.__y_query.fund_holding_info)
+        is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
+        if is_null:
+            print(self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
+        else:
+            for key in self.__y_query.fund_holding_info.get(self.__ticker):
+                if key == 'equityHoldings':
+                    self.__setPriceTo(self.__y_query.fund_holding_info.get(self.__ticker)[key])
 
     def __setPriceTo(self, a_dict: dict):
         self._price_to_earn = a_dict['priceToEarnings']
@@ -105,6 +148,10 @@ class ExchangeTradedFund(AbstractStockFund):
         self._price_to_cash = a_dict['priceToCashflow']
 
     def __setPerformance(self):
-        print('Performance', self.__y_query.fund_performance)
-        for key in self.__y_query.fund_performance.get(self.__ticker):
-            print(key)
+        print("PERFORM_ANCE", self.__y_query.fund_performance)
+        is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
+        if is_null:
+            print(self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
+        else:
+            for key in self.__y_query.fund_performance.get(self.__ticker):
+                print(key)

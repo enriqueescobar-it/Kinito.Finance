@@ -1,4 +1,5 @@
 import json
+
 import matplotlib.pyplot as plt
 import numpy as np
 from pandas import DataFrame
@@ -16,6 +17,7 @@ class MutualFund(AbstractStockFund):
         super().__init__(c_name.replace(' ', ''), q_type)
         self.__ticker = t_name
         self.__class = 'Mutual'
+        #self.__quote_type = q_type
         #
         self.__y_query = Ticker(t_name)
         self._setInfo()
@@ -56,7 +58,7 @@ class MutualFund(AbstractStockFund):
             "has_sectors": self._has_sectors,
             "has_holdings": self._has_holdings
         }.items()
-    
+
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
         #return super().to_json() self.__dict__ dict(self)
@@ -145,7 +147,7 @@ class MutualFund(AbstractStockFund):
         self._price_to_cash = a_dict['priceToCashflow']
 
     def __setPerformance(self):
-        print("PERFORM_ANCE", self.__y_query.fund_performance, self.__y_query.fund_performance)
+        print("PERFORM_ANCE", self.__y_query.fund_performance)
         is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
         if is_null:
             print(self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
