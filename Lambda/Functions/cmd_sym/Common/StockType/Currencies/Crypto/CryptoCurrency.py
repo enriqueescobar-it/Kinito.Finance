@@ -9,6 +9,7 @@ class CryptoCurrency(AbstractCurrency):
         super().__init__(c_name.replace(' ', '').replace('-', ''), q_type)
         self.__class = 'Crypto'
         self.__ticker = t_name
+        self._setInfo()
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -45,3 +46,7 @@ class CryptoCurrency(AbstractCurrency):
             "has_sectors": self._has_sectors,
             "has_holdings": self._has_holdings
         }.items()
+
+    def _setInfo(self):
+        self._stock_part_count = 0
+        self._bond_part_count = 0
