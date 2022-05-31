@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6146f2e-d186-4011-a5ed-e02567a0f772" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../Doc/StockType.graphml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Doc/StockType.graphml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Doc/StockType.png" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Doc/StockType.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Funds/AbstractStockFund.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Funds/AbstractStockFund.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script_0_stock_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/script_0_stock_type.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Layers/Common/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Layers/Common/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DarkyenusTimeTracker">
+    <option name="totalTimeSeconds" value="3549" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -27,22 +28,26 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="26zjD94FpXXyfivedZkQUxKSAjr" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-    <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "F:/Disk_X/Kinito.Finance/Lambda/Functions/cmd_sym",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Disk_X\Kinito.Finance\Lambda\Functions\cmd_sym" />
       <recent name="F:\Disk_X\Kinito.Finance\Lambda\Functions\cmd_sym\Common\Readers\Engine" />
       <recent name="F:\Disk_X\Kinito.Finance\Lambda\Functions\cmd_sym\Common\Readers" />
       <recent name="F:\Disk_X\Kinito.Finance\Lambda\Functions\cmd_sym\Common" />
@@ -91,6 +96,7 @@
       <workItem from="1649706626540" duration="95000" />
       <workItem from="1649706766718" duration="603000" />
       <workItem from="1650420873292" duration="187000" />
+      <workItem from="1653969400343" duration="377000" />
     </task>
     <servers />
   </component>
@@ -107,5 +113,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
