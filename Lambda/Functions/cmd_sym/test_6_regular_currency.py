@@ -18,6 +18,6 @@ print(regularCurrency.to_json())
 print(regularCurrency)
 
 print('\n============   ', 'r_Currency', '   ============\n')
-r_Currency: RegularCurrency = RegularCurrency('a canada', 'CDN=X', 'UNE_QUOTE')
+r_Currency: RegularCurrency = RegularCurrency('a canada', 'COP=X', 'UNE_QUOTE')
 print(r_Currency.to_json())
 print(r_Currency)
