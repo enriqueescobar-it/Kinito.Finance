@@ -6,17 +6,15 @@ abstractStock: AbstractStock = AbstractStock()
 print(abstractStock.to_json())
 print(abstractStock)
 
-print('\n============   ', 'futureStock', '   ============\n')
-futureStock: AbstractStockFuture = AbstractStockFuture('una cia', 'GC=F', 'A_QUOTE')
-print(futureStock.to_json())
-print(futureStock)
+future_list: list = ['CL=F', 'GC=F', 'SI=F']
+count: int = 0
 
-print('\n============   ', 'fStock', '   ============\n')
-fStock: AbstractStockFuture = AbstractStockFuture('une cie', 'SI=F', 'UNA_QUOTE')
-print(fStock.to_json())
-print(fStock)
-
-print('\n============   ', 'f_Stock', '   ============\n')
-f_Stock: AbstractStockFuture = AbstractStockFuture('a cy', 'CL=F', 'UNE_QUOTE')
-print(f_Stock.to_json())
-print(f_Stock)
+for future_item in future_list:
+    future_title: str = "futureStock_" + future_item
+    future_compa: str = "company " + str(count)
+    future_quote: str = "quote_" + str(count)
+    print('\n============   ', future_title, '   ============\n')
+    future_stock: AbstractStockFuture = AbstractStockFuture(future_compa, future_item, future_quote)
+    print(future_stock.to_json())
+    print(future_stock)
+    count = count + 1
