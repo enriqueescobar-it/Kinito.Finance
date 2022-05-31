@@ -25,9 +25,8 @@ class AbstractCurrency(AbstractStock):
         self.__class = 'Currency'
         self._quote_type = q_type
         #
-        self._setInfo()
-        #self._sector_df = DataFrame(columns=['S'])
-        #self._holding_df = DataFrame(columns=['H'])
+        self._stock_part_count = 0
+        self._bond_part_count = 0
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -59,10 +58,6 @@ class AbstractCurrency(AbstractStock):
             "quote_type": self._quote_type,
             "name": self._name
         }.items()
-
-    def _setInfo(self):
-        self._stock_part_count = 0
-        self._bond_part_count = 0
 
     @property
     def Name(self):
