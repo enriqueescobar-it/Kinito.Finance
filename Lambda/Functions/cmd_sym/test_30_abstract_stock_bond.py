@@ -6,12 +6,14 @@ abstractStock: AbstractStock = AbstractStock()
 print(abstractStock.to_json())
 print(abstractStock)
 
-print('\n============   ', 'abstractStockBond', '   ============\n')
-abstractStockBond: AbstractStockBond = AbstractStockBond('a company', 'BOND', 'A_QUOTE')
-print(abstractStockBond.to_json())
-print(abstractStockBond)
+bond_list: list = ['BOND', 'BAND']
+count: int = 0
 
-print('\n============   ', 'aStockBond', '   ============\n')
-aStockBond: AbstractStockBond = AbstractStockBond('une compagnie', 'BAND', 'UN_QUOTE')
-print(aStockBond.to_json())
-print(aStockBond)
+for bond_item in bond_list:
+    bond_title: str = "bond_stock_" + bond_item
+    bond_compa: str = "company " + str(count)
+    bond_quote: str = "quote_" + str(count)
+    print('\n============   ', bond_title, '   ============\n')
+    bond_stock: AbstractStockBond = AbstractStockBond(bond_compa, bond_item, bond_quote)
+    print(bond_stock.to_json())
+    print(bond_stock)

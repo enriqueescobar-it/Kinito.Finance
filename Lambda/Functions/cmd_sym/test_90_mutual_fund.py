@@ -12,12 +12,14 @@ abstractStockFund: AbstractStockFund = AbstractStockFund('stock fund', 'A_QUOTE'
 print(abstractStockFund.to_json())
 print(abstractStockFund)
 
-print('\n============   ', 'mf_0', '   ============\n')
-mf_0: MutualFund = MutualFund('a mutual', 'QASGX', 'UN_QUOTE')
-print(mf_0.to_json())
-print(mf_0)
+mutual_list: list = ['HISFX', 'QASGX', 'RYVYX', 'SCATX', 'SAGAX']
+count: int = 0
 
-print('\n============   ', 'mf_1', '   ============\n')
-mf_1: MutualFund = MutualFund('un mutual', 'HISFX', 'UNE_QUOTE')
-print(mf_1.to_json())
-print(mf_1)
+for mutual_item in mutual_list:
+    mutual_title: str = "mutual_stock_" + mutual_item
+    mutual_compa: str = "company " + str(count)
+    mutual_quote: str = "quote_" + str(count)
+    print('\n============   ', mutual_title, '   ============\n')
+    mutual_stock: MutualFund = MutualFund(mutual_compa, mutual_item, mutual_quote)
+    print(mutual_stock.to_json())
+    print(mutual_stock)

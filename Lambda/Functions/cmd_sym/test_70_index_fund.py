@@ -12,12 +12,14 @@ abstractStockFund: AbstractStockFund = AbstractStockFund('stock fund', 'A_QUOTE'
 print(abstractStockFund.to_json())
 print(abstractStockFund)
 
-print('\n============   ', 'i_0', '   ============\n')
-i_0: IndexFund = IndexFund('an index', 'VFX', 'UN_QUOTE')
-print(i_0.to_json())
-print(i_0)
+index_list: list = ['^SOX', '^GSPC', '^VIX', '^SKEW', '^GSPTSE', '^IXIC', '^NDX', '^NYA', '^DJI', '^TNX', '^TYX', '^W5000']
+count: int = 0
 
-print('\n============   ', 'i_1', '   ============\n')
-i_1: IndexFund = IndexFund('un index', 'TNX', 'UNE_QUOTE')
-print(i_1.to_json())
-print(i_1)
+for index_item in index_list:
+    index_title: str = "index_stock_" + index_item
+    index_compa: str = "company " + str(count)
+    index_quote: str = "quote_" + str(count)
+    print('\n============   ', index_title, '   ============\n')
+    index_stock: IndexFund = IndexFund(index_compa, index_item, index_quote)
+    print(index_stock.to_json())
+    print(index_stock)

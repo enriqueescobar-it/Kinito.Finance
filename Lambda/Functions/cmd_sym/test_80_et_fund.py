@@ -12,12 +12,14 @@ abstractStockFund: AbstractStockFund = AbstractStockFund('stock fund', 'A_QUOTE'
 print(abstractStockFund.to_json())
 print(abstractStockFund)
 
-print('\n============   ', 'etf_0', '   ============\n')
-etf_0: ExchangeTradedFund = ExchangeTradedFund('un etf', 'VOO', 'UN_QUOTE')
-print(etf_0.to_json())
-print(etf_0)
+et_list: list = ['VOO', 'VOOG', 'FDTS']
+count: int = 0
 
-print('\n============   ', 'etf_1', '   ============\n')
-etf_1: ExchangeTradedFund = ExchangeTradedFund('un etf', 'VOOG', 'UNE_QUOTE')
-print(etf_1.to_json())
-print(etf_1)
+for et_item in et_list:
+    et_title: str = "et_stock_" + et_item
+    et_compa: str = "company " + str(count)
+    et_quote: str = "quote_" + str(count)
+    print('\n============   ', et_title, '   ============\n')
+    et_stock: ExchangeTradedFund = ExchangeTradedFund(et_compa, et_item, et_quote)
+    print(et_stock.to_json())
+    print(et_stock)

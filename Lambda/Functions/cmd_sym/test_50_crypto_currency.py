@@ -12,12 +12,14 @@ abstractCurrency: AbstractCurrency = AbstractCurrency('a cy', 'A_QUOTE')
 print(abstractCurrency.to_json())
 print(abstractCurrency)
 
-print('\n============   ', 'cryptoCurrency', '   ============\n')
-cryptoCurrency: CryptoCurrency = CryptoCurrency('an ethereum', 'ETH-USD', 'UNE_QUOTE')
-print(cryptoCurrency.to_json())
-print(cryptoCurrency)
+crypto_currency_list: list = ['ETH-USD', 'XRP-USD']
+count: int = 0
 
-print('\n============   ', 'c_Currency', '   ============\n')
-c_Currency: CryptoCurrency = CryptoCurrency('an xrp', 'XRP-USD', 'UN_QUOTE')
-print(c_Currency.to_json())
-print(c_Currency)
+for crypto_currency_item in crypto_currency_list:
+    crypto_currency_title: str = "crypto_currency_stock_" + crypto_currency_item
+    crypto_currency_compa: str = "company " + str(count)
+    crypto_currency_quote: str = "quote_" + str(count)
+    print('\n============   ', crypto_currency_title, '   ============\n')
+    crypto_currency_stock: CryptoCurrency = CryptoCurrency(crypto_currency_compa, crypto_currency_item, crypto_currency_quote)
+    print(crypto_currency_stock.to_json())
+    print(crypto_currency_stock)
