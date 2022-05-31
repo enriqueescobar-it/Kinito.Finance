@@ -6,6 +6,7 @@ from pandas import DataFrame
 import pandas
 from prettytable import PrettyTable
 from yahooquery import Ticker
+
 from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 
 

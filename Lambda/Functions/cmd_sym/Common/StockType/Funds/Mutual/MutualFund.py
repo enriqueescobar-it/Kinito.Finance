@@ -83,13 +83,13 @@ class MutualFund(AbstractStockFund):
             self._sector_df['Sector'] = s
             self._sector_df['Percent'] = 1.0
             self._sector_df.loc[0] = [s, 1.0]
-        print(self._sector_df)
 
     def __plotSectorDf(self) -> plt:
-        self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
-                                 autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
-                                 title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
-        return plt
+        if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
+            self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
+                                    autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
+                                    title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
+            return plt
 
     def __setHoldingDf(self):
         is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
@@ -105,7 +105,6 @@ class MutualFund(AbstractStockFund):
             self._holding_df['holdingName'] = 'a name'
             self._holding_df['holdingPercent'] = 1.0
             self._holding_df.loc[0] = [self.__ticker, s, 1.0]
-        print(self._holding_df)
 
     def __setAllocation(self):
         is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
