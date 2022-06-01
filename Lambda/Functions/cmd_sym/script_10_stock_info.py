@@ -24,8 +24,9 @@ print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
 a_ticker: str = args["symbol"]
 
 a_stock_info: stock_info = stock_info(a_ticker)
-print(a_stock_info)
 print(a_stock_info.to_json())
+print(a_stock_info)
+exit(1)
 print(a_stock_info.CompanyName)
 print(a_stock_info.QuoteType)
 print(a_stock_info.StockType)

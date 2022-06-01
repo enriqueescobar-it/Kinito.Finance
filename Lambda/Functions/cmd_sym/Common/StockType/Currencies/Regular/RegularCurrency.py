@@ -15,7 +15,7 @@ class RegularCurrency(AbstractCurrency):
 
     def __init__(self, c_name: str, t_name: str, q_type: str):
         super().__init__(c_name.replace(' ', '').replace('/', '-'), q_type)
-        self.__class = 'Regular'
+        self.__class = 'RegularCurrency'
         self.__ticker = t_name
         self.__y_query = Ticker(t_name)
         self._setInfo()
@@ -36,8 +36,8 @@ class RegularCurrency(AbstractCurrency):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
-        s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
-        s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.head().to_string(index=True)
+        s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
+        s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
         return s
 
     def __iter__(self):
@@ -65,6 +65,7 @@ class RegularCurrency(AbstractCurrency):
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
+        self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):
         is_df: bool = isinstance(self.__y_query.fund_sector_weightings, pandas.DataFrame)
@@ -78,6 +79,13 @@ class RegularCurrency(AbstractCurrency):
             self._sector_df['Sector'] = s
             self._sector_df['Percent'] = 1.0
             self._sector_df.loc[0] = [s, 1.0]
+
+    def __plotSectorDf(self) -> plt:
+        if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
+            self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
+                                    autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
+                                    title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
+            return plt
 
     def __setHoldingDf(self):
         is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
@@ -121,7 +129,7 @@ class RegularCurrency(AbstractCurrency):
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
 
         if is_null:
-            print("+ ", self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
+            print(self.__class__.__name__ + ": " + self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
                 if key == 'equityHoldings':
@@ -137,7 +145,7 @@ class RegularCurrency(AbstractCurrency):
         is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
 
         if is_null:
-            print("+ ", self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
+            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_performance.get(self.__ticker):
-                print("+ ", key)
+                print("+", self.__class__.__name__, ':', key)

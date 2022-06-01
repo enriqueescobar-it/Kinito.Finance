@@ -6,7 +6,7 @@ abstractStock: AbstractStock = AbstractStock()
 print(abstractStock.to_json())
 print(abstractStock)
 
-option_list: list = ['APT', 'OPT']
+option_list: list = ['APT', '_PT']
 count: int = 0
 
 for option_item in option_list:
