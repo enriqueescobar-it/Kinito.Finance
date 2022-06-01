@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b6146f2e-d186-4011-a5ed-e02567a0f772" name="Changes" comment="">
+    <list default="true" id="b6146f2e-d186-4011-a5ed-e02567a0f772" name="Changes" comment="standard set allocation">
+      <change afterPath="$PROJECT_DIR$/test_11_si_abstract_stock_bond.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Bonds/AbstractStockBond.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Bonds/AbstractStockBond.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Currencies/Crypto/CryptoCurrency.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Currencies/Crypto/CryptoCurrency.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Currencies/Regular/RegularCurrency.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Currencies/Regular/RegularCurrency.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Equities/AbstractStockEquity.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Equities/AbstractStockEquity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Funds/ExchangeTraded/ExchangeTradedFund.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Funds/ExchangeTraded/ExchangeTradedFund.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Funds/Index/IndexFund.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Funds/Index/IndexFund.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Funds/Mutual/MutualFund.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Funds/Mutual/MutualFund.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Futures/AbstractStockFuture.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Futures/AbstractStockFuture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/StockType/Options/AbstractStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Options/AbstractStockOption.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/InfoType/stock_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/InfoType/stock_info.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,6 +98,14 @@
       <workItem from="1650420873292" duration="187000" />
       <workItem from="1653969400343" duration="377000" />
     </task>
+    <task id="LOCAL-00001" summary="standard set allocation">
+      <created>1654061589253</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1654061589253</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -123,5 +124,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="standard set allocation" />
+    <option name="LAST_COMMIT_MESSAGE" value="standard set allocation" />
   </component>
 </project>
