@@ -4,6 +4,13 @@
     <list default="true" id="b6146f2e-d186-4011-a5ed-e02567a0f772" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockType/Bonds/AbstractStockBond.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Bonds/AbstractStockBond.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockType/Currencies/Crypto/CryptoCurrency.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Currencies/Crypto/CryptoCurrency.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockType/Currencies/Regular/RegularCurrency.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Currencies/Regular/RegularCurrency.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockType/Equities/AbstractStockEquity.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Equities/AbstractStockEquity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockType/Funds/Index/IndexFund.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Funds/Index/IndexFund.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockType/Futures/AbstractStockFuture.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Futures/AbstractStockFuture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/StockType/Options/AbstractStockOption.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/StockType/Options/AbstractStockOption.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Layers/Common/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Layers/Common/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +49,7 @@
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "last_opened_file_path": "F:/Disk_X/Kinito.Finance/Lambda/Functions/cmd_sym",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
