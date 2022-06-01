@@ -7,10 +7,12 @@ import pandas
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
+#
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
 
 class IndexFund(AbstractStockFund):
+    #
     __y_query: Ticker
 
     def __init__(self, c_name: str, t_name: str, q_type: str):
@@ -20,6 +22,7 @@ class IndexFund(AbstractStockFund):
         #self.__quote_type = q_type
         #
         self.__y_query = Ticker(t_name)
+        #
         self._setInfo()
 
     def __str__(self):
@@ -38,8 +41,11 @@ class IndexFund(AbstractStockFund):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
-        s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
-        s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
+        s = pt.__str__()
+        if self._has_sectors:
+            s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
+        if self._has_holdings:
+            s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
         return s
 
     def __iter__(self):
@@ -66,6 +72,8 @@ class IndexFund(AbstractStockFund):
     def _setInfo(self):
         self.__setSectorDf()
         self.__setHoldingDf()
+        self._stock_part_count = 0
+        self._bond_part_count = 0
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
@@ -133,7 +141,7 @@ class IndexFund(AbstractStockFund):
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
 
         if is_null:
-            print("+ ", self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
+            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
                 if key == 'equityHoldings':

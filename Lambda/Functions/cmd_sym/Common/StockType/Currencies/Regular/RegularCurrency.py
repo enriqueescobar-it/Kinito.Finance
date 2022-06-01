@@ -7,17 +7,21 @@ import pandas
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
+#
 from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 
 
 class RegularCurrency(AbstractCurrency):
+    #
     __y_query: Ticker
 
     def __init__(self, c_name: str, t_name: str, q_type: str):
         super().__init__(c_name.replace(' ', '').replace('/', '-'), q_type)
-        self.__class = 'RegularCurrency'
         self.__ticker = t_name
+        self.__class = 'RegularCurrency'
+        #
         self.__y_query = Ticker(t_name)
+        #
         self._setInfo()
 
     def __str__(self):
@@ -36,8 +40,11 @@ class RegularCurrency(AbstractCurrency):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
-        s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
-        s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
+        s = pt.__str__()
+        if self._has_sectors:
+            s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
+        if self._has_holdings:
+            s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
         return s
 
     def __iter__(self):
@@ -129,7 +136,7 @@ class RegularCurrency(AbstractCurrency):
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
 
         if is_null:
-            print(self.__class__.__name__ + ": " + self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
+            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
                 if key == 'equityHoldings':

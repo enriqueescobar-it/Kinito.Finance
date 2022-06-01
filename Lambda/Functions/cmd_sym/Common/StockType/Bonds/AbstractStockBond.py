@@ -1,19 +1,23 @@
+from matplotlib import pyplot as plt
 import numpy as np
 from pandas import DataFrame
 import pandas
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
+#
 from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockBond(AbstractStock):
     __ticker: str = 'NA'
+    #
+    #
     _name: str = 'NA'
     _has_sectors: bool = False
     _has_holdings: bool = False
-    _holding_df: DataFrame = DataFrame()
     _sector_df: DataFrame = DataFrame()
+    _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
     _bond_part_count: int = -1
     _price_to_book: float = np.nan
@@ -26,26 +30,32 @@ class AbstractStockBond(AbstractStock):
         self.__ticker = t_name
         self.__class = 'Bond'
         self._quote_type = q_type
+        #
         self.__y_query = Ticker(t_name)
+        #
         self._setInfo()
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
+        pt.add_row(['Info', 'StockInfo'])
         pt.add_row(['Ticker', self.__ticker])
         pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
         pt.add_row(['Name', self._name])
-        pt.add_row(['StockPartCount', self._stock_part_count])
-        pt.add_row(['BondPartCount', self._bond_part_count])
+        pt.add_row(['StockPercent', self._stock_part_count])
+        pt.add_row(['BondPercent', self._bond_part_count])
         pt.add_row(['PriceToEarnings', self._price_to_earn])
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
-        s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
-        s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.head().to_string(index=True)
+        s = pt.__str__()
+        if self._has_sectors:
+            s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
+        if self._has_holdings:
+            s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
         return s
 
     def __repr__(self):
@@ -76,6 +86,7 @@ class AbstractStockBond(AbstractStock):
         self._stock_part_count, self._bond_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
+        self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):
         is_df: bool = isinstance(self.__y_query.fund_sector_weightings, pandas.DataFrame)
@@ -89,6 +100,13 @@ class AbstractStockBond(AbstractStock):
             self._sector_df['Sector'] = s
             self._sector_df['Percent'] = 1.0
             self._sector_df.loc[0] = [s, 1.0]
+
+    def __plotSectorDf(self) -> plt:
+        if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
+            self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
+                                    autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
+                                    title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
+            return plt
 
     def __setHoldingDf(self):
         is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
@@ -132,7 +150,7 @@ class AbstractStockBond(AbstractStock):
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
 
         if is_null:
-            print("+ ", self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
+            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
                 if key == 'equityHoldings':
@@ -148,10 +166,10 @@ class AbstractStockBond(AbstractStock):
         is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
 
         if is_null:
-            print("+ ", self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
+            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_performance.get(self.__ticker):
-                print("+ ", key)
+                print("+", self.__class__.__name__, ':', key)
 
     @property
     def Name(self):

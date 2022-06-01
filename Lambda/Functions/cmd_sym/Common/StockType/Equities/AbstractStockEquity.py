@@ -1,5 +1,5 @@
-import numpy as np
 from matplotlib import pyplot as plt
+import numpy as np
 from pandas import DataFrame
 import pandas
 from prettytable import PrettyTable
@@ -11,9 +11,9 @@ from Common.Readers.Engine.YahooFinStockInfo import YahooFinStockInfo
 
 class AbstractStockEquity(AbstractStock):
     __ticker: str = 'NA'
-    _name: str = 'NA'
     __y_query: Ticker
     __yfsi: YahooFinStockInfo
+    _name: str = 'NA'
     _has_sectors: bool = False
     _has_holdings: bool = False
     _sector_df: DataFrame = DataFrame()
@@ -51,8 +51,11 @@ class AbstractStockEquity(AbstractStock):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
-        s = pt.__str__() + "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
-        s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
+        s = pt.__str__()
+        if self._has_sectors:
+            s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
+        if self._has_holdings:
+            s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
         return s
 
     def __repr__(self):
