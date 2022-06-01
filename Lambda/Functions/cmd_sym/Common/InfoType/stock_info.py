@@ -166,7 +166,7 @@ class stock_info(abstract_info):
     def __set_actions(self):
         if any(self.__yFinance.actions):
             self._actions_df = self.__yFinance.actions
-            self._has_actions = True
+            self._has_actions = any(self._actions_df) and self._actions_df.shape[0] > 0
 
     def __set_splits(self):
         if any(self.__yFinance.splits):
