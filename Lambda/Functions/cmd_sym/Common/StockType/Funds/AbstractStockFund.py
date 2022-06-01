@@ -14,6 +14,7 @@ class AbstractStockFund(AbstractStock):
     _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
     _bond_part_count: int = -1
+    _cash_part_count: int = -1
     _price_to_earn: float = np.nan
     _price_to_book: float = np.nan
     _price_to_sale: float = np.nan
@@ -26,8 +27,7 @@ class AbstractStockFund(AbstractStock):
         self._name = c_name.replace(' ', '')
         self._stock_part_count = 0
         self._bond_part_count = 0
-        #self._sector_df = DataFrame(columns=['S'])
-        #self._holding_df = DataFrame(columns=['H'])
+        self._cash_part_count = 0
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -39,6 +39,7 @@ class AbstractStockFund(AbstractStock):
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
+        pt.add_row(['CashPercent', self._cash_part_count])
         pt.add_row(['PriceToEarnings', self._price_to_earn])
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
@@ -61,6 +62,7 @@ class AbstractStockFund(AbstractStock):
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
+            "cash_percent": self._cash_part_count,
             "price_to_earnings": self._price_to_earn,
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
@@ -88,6 +90,10 @@ class AbstractStockFund(AbstractStock):
     @property
     def BondPartCount(self):
         return self._bond_part_count
+
+    @property
+    def CashPartCount(self):
+        return self._cash_part_count
 
     @property
     def PriceToEarnings(self):

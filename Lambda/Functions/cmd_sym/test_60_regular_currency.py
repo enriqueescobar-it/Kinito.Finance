@@ -12,7 +12,7 @@ abstractCurrency: AbstractCurrency = AbstractCurrency('a cy', 'A_QUOTE')
 print(abstractCurrency.to_json())
 print(abstractCurrency)
 
-regular_currency_list: list = ['COP=X', 'CAD=X']
+regular_currency_list: list = ['COP=X', 'CAD=X', 'JPY=X', 'RUB=X']
 count: int = 0
 
 for regular_currency_item in regular_currency_list:

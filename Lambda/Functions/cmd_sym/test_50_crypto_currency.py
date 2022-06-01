@@ -12,7 +12,7 @@ abstractCurrency: AbstractCurrency = AbstractCurrency('a cy', 'A_QUOTE')
 print(abstractCurrency.to_json())
 print(abstractCurrency)
 
-crypto_currency_list: list = ['ETH-USD', 'XRP-USD']
+crypto_currency_list: list = ['ETH-USD', 'XRP-USD', 'BTC-USD', 'USDT-USD']
 count: int = 0
 
 for crypto_currency_item in crypto_currency_list:

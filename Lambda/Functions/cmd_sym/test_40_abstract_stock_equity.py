@@ -6,7 +6,7 @@ abstractStock: AbstractStock = AbstractStock()
 print(abstractStock.to_json())
 print(abstractStock)
 
-equity_list: list = ['AAPL', 'AMZN']
+equity_list: list = ['AAPL', 'AMZN', 'MSFT', 'GOOG']
 count: int = 0
 
 for equity_item in equity_list:

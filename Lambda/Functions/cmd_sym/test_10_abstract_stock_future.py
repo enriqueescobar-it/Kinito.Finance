@@ -6,7 +6,7 @@ abstractStock: AbstractStock = AbstractStock()
 print(abstractStock.to_json())
 print(abstractStock)
 
-future_list: list = ['CL=F', 'GC=F', 'SI=F']
+future_list: list = ['CL=F', 'GC=F', 'SI=F', 'ES=F', 'YM=F', 'NQ=F', 'RTY=F']
 count: int = 0
 
 for future_item in future_list:

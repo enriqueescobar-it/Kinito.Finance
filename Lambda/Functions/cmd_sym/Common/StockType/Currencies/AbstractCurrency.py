@@ -14,6 +14,7 @@ class AbstractCurrency(AbstractStock):
     _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
     _bond_part_count: int = -1
+    _cash_part_count: int = -1
     _price_to_earn: float = np.nan
     _price_to_book: float = np.nan
     _price_to_sale: float = np.nan
@@ -27,6 +28,7 @@ class AbstractCurrency(AbstractStock):
         #
         self._stock_part_count = 0
         self._bond_part_count = 0
+        self._cash_part_count = 0
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -37,6 +39,7 @@ class AbstractCurrency(AbstractStock):
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPartCount', self._stock_part_count])
         pt.add_row(['BondPartCount', self._bond_part_count])
+        pt.add_row(['CashPercent', self._cash_part_count])
         pt.add_row(['PriceToEarnings', self._price_to_earn])
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
@@ -78,6 +81,10 @@ class AbstractCurrency(AbstractStock):
     @property
     def BondPartCount(self):
         return self._bond_part_count
+
+    @property
+    def CashPartCount(self):
+        return self._cash_part_count
 
     @property
     def PriceToEarnings(self):

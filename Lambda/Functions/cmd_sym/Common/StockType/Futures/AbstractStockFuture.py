@@ -20,6 +20,7 @@ class AbstractStockFuture(AbstractStock):
     _holding_df: DataFrame = DataFrame()
     _stock_part_count: int = -1
     _bond_part_count: int = -1
+    _cash_part_count: int = -1
     _price_to_book: float = np.nan
     _price_to_cash: float = np.nan
     _price_to_earn: float = np.nan
@@ -45,6 +46,7 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
+        pt.add_row(['CashPercent', self._cash_part_count])
         pt.add_row(['PriceToEarnings', self._price_to_earn])
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
@@ -70,6 +72,7 @@ class AbstractStockFuture(AbstractStock):
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
+            "cash_percent": self._cash_part_count,
             "price_to_earnings": self._price_to_earn,
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
@@ -83,7 +86,7 @@ class AbstractStockFuture(AbstractStock):
         self.__setHoldingDf()
         self._stock_part_count = 0
         self._bond_part_count = 0
-        self._stock_part_count, self._bond_part_count = self.__setAllocation()
+        self._stock_part_count, self._bond_part_count, self._cash_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
         self.__plotSectorDf()#.show()
@@ -126,10 +129,17 @@ class AbstractStockFuture(AbstractStock):
     def __setAllocation(self):
         is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
         df: DataFrame = DataFrame()
+        stock_int: int = 0
+        bond_int: int = 0
+        cash_int: int = 0
 
         if is_df:
             df = self.__y_query.fund_category_holdings.set_index('maxAge')
             df.reset_index(inplace=True)
+            stock_int = int(df['stockPosition'][0] * 100)
+            bond_int = int(df['bondPosition'][0] * 100)
+            if 'cashPosition' in df.columns:
+                cash_int = int(df['cashPosition'][0] * 100)
         else:
             df['maxAge'] = 1.0
             df['cashPosition'] = np.nan
@@ -141,10 +151,10 @@ class AbstractStockFuture(AbstractStock):
             df.loc[0] = [1.0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
             df = df.set_index('maxAge')
             df.reset_index(inplace=True)
-        stock_int: int = int(np.nan_to_num(df['stockPosition'][0]) *100) if np.isnan(df['stockPosition'][0]) else int(df['stockPosition'][0]*100)
-        #stock_int: int = int(df['stockPosition'][0]*100)
-        bond_int: int = 100 - stock_int
-        return stock_int, bond_int
+            stock_int = int(np.nan_to_num(df['stockPosition'][0]) * 100)
+            bond_int = int(np.nan_to_num(df['bondPosition'][0]) * 100)
+            cash_int = int(np.nan_to_num(df['cashPosition'][0]) * 100)
+        return stock_int, bond_int, cash_int
 
     def __setInfo(self):
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
@@ -190,6 +200,10 @@ class AbstractStockFuture(AbstractStock):
     @property
     def BondPartCount(self):
         return self._bond_part_count
+
+    @property
+    def CashPartCount(self):
+        return self._cash_part_count
 
     @property
     def PriceToEarnings(self):
