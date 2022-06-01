@@ -126,10 +126,10 @@ class IndexFund(AbstractStockFund):
         if is_df:
             df = self.__y_query.fund_category_holdings.set_index('maxAge')
             df.reset_index(inplace=True)
-            stock_int = int(df['stockPosition'][0] * 100)
-            bond_int = int(df['bondPosition'][0] * 100)
+            stock_int = round(df['stockPosition'][0] * 100)
+            bond_int = round(df['bondPosition'][0] * 100)
             if 'cashPosition' in df.columns:
-                cash_int = int(df['cashPosition'][0] * 100)
+                cash_int = round(df['cashPosition'][0] * 100)
         else:
             df['maxAge'] = 1.0
             df['cashPosition'] = np.nan
@@ -141,9 +141,9 @@ class IndexFund(AbstractStockFund):
             df.loc[0] = [1.0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
             df = df.set_index('maxAge')
             df.reset_index(inplace=True)
-            stock_int = int(np.nan_to_num(df['stockPosition'][0]) * 100)
-            bond_int = int(np.nan_to_num(df['bondPosition'][0]) * 100)
-            cash_int = int(np.nan_to_num(df['cashPosition'][0]) * 100)
+            stock_int = round(np.nan_to_num(df['stockPosition'][0]) * 100)
+            bond_int = round(np.nan_to_num(df['bondPosition'][0]) * 100)
+            cash_int = round(np.nan_to_num(df['cashPosition'][0]) * 100)
         return stock_int, bond_int, cash_int
 
     def __setInfo(self):
