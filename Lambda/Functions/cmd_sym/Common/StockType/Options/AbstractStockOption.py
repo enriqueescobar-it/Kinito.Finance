@@ -131,14 +131,25 @@ class AbstractStockOption(AbstractStock):
         stock_int: int = 0
         bond_int: int = 0
         cash_int: int = 0
+        other_int: int = 0
+        pref_int: int = 0
+        conv_int: int = 0
 
         if is_df:
             df = self.__y_query.fund_category_holdings.set_index('maxAge')
             df.reset_index(inplace=True)
-            stock_int = round(df['stockPosition'][0] * 100)
-            bond_int = round(df['bondPosition'][0] * 100)
+            if 'stockPosition' in df.columns:
+                stock_int = round(df['stockPosition'][0] * 100)
+            if 'bondPosition' in df.columns:
+                bond_int = round(df['bondPosition'][0] * 100)
             if 'cashPosition' in df.columns:
                 cash_int = round(df['cashPosition'][0] * 100)
+            if 'otherPosition' in df.columns:
+                other_int = round(df['otherPosition'][0] * 100)
+            if 'preferredPosition' in df.columns:
+                pref_int = round(df['preferredPosition'][0] * 100)
+            if 'convertiblePosition' in df.columns:
+                conv_int = round(df['convertiblePosition'][0] * 100)
         else:
             df['maxAge'] = 1.0
             df['cashPosition'] = np.nan
