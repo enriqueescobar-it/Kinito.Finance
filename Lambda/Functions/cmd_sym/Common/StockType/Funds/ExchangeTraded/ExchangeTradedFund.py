@@ -79,6 +79,15 @@ class ExchangeTradedFund(AbstractStockFund):
         self._stock_part_count, self._bond_part_count, self._cash_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
+        print(len(self.__y_query.financial_data))
+        print('[', self.__y_query.financial_data, ']')
+        print(self.is_dict_valid(self.__y_query.financial_data, 'financialData'))
+        print('[', self.__y_query.key_stats, ']')
+        print('[', self.__y_query.price, ']')
+        print('[', self.__y_query.quote_type, ']')
+        print('[', self.__y_query.share_purchase_activity, ']')
+        print('[', self.__y_query.summary_detail, ']')
+        exit(1)
         self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):

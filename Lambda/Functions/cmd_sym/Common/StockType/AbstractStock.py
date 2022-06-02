@@ -27,7 +27,11 @@ class AbstractStock(ABC):
     def is_dict_valid(self, a_dict: dict, a_str: str):
         str_subs = "summaryTypes=" + a_str
         str_dict = str(a_dict)
-        return any(a_dict) and not(str_subs in str_dict)
+        boo: bool = any(a_dict) and not(str_subs in str_dict)
+        if boo:
+            return boo, a_dict
+        else:
+            return boo, {}
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
