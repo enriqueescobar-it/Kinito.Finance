@@ -32,12 +32,16 @@ class AbstractStock(ABC):
 
     def is_dict_valid(self, a_dict: dict, a_str: str):
         str_subs = "summaryTypes=" + a_str
-        str_dict = str(a_dict)
+        str_dict: str = str(a_dict)
         boo: bool = any(a_dict) and not(str_subs in str_dict)
         if boo:
             return boo, a_dict
         else:
             return boo, {}
+    def is_any_valid(self, a_any: any, a_str: str) -> bool:
+        str_subs = "summaryTypes=" + a_str
+        any_str: str = str(a_any)
+        return any(a_any) and not (str_subs in any_str)
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
