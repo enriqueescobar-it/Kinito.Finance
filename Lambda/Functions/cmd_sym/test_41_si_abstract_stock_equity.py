@@ -8,8 +8,8 @@ print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
 print(abstractStock.to_json())
 print(abstractStock)
-
-equity_list: list = ['AAPL', 'AMZN', 'MSFT', 'GOOG']
+#
+equity_list: list = ['AAPL', 'AMZN', 'GOOG', 'MSFT']
 count: int = 0
 
 for equity_item in equity_list:

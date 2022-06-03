@@ -16,8 +16,22 @@ class AbstractStockBond(AbstractStock):
     _name: str = 'NA'
     _has_sectors: bool = False
     _has_holdings: bool = False
+    _has_quote_dict: bool = True
+    _has_summary_dict: bool = True
+    _has_financial_dict: bool = False
+    _has_stats_dict: bool = False
+    _has_price_dict: bool = True
+    _has_net_share_dict: bool = False
+    _has_fund_bond_dict: bool = False
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
+    _quote_dict: dict = {}
+    _summary_dict: dict = {}
+    _financial_dict: dict = {}
+    _stats_dict: dict = {}
+    _price_dict: dict = {}
+    _net_share_dict: dict = {}
+    _fund_bond_dict: dict = {}
     _stock_part_count: int = -1
     _bond_part_count: int = -1
     _cash_part_count: int = -1
@@ -53,11 +67,32 @@ class AbstractStockBond(AbstractStock):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
+        pt.add_row(["HasQuoteDict", self._has_quote_dict])
+        pt.add_row(["HasSummaryDict", self._has_summary_dict])
+        pt.add_row(['HasFinancialDict', self._has_financial_dict])
+        pt.add_row(['HasStatsDict', self._has_stats_dict])
+        pt.add_row(["HasPriceDict", self._has_price_dict])
+        pt.add_row(["HasNetShareDict", self._has_net_share_dict])
+        pt.add_row(["HasFundBondDict", self._has_fund_bond_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
         if self._has_holdings:
             s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
+        if self._has_quote_dict:
+            s += "\n\nQUOTE DICTIONARY\n" + str(self._quote_dict)
+        if self._has_summary_dict:
+            s += "\n\nSUMMARY DICTIONARY\n" + str(self._summary_dict)
+        if self._has_financial_dict:
+            s += "\n\nFINANCIAL DICTIONARY\n" + str(self._financial_dict)
+        if self._has_stats_dict:
+            s += "\n\nSTATS DICTIONARY\n" + str(self._stats_dict)
+        if self._has_price_dict:
+            s += "\n\nPRICE DICTIONARY\n" + str(self._price_dict)
+        if self._has_net_share_dict:
+            s += "\n\nNET SHARE DICTIONARY\n" + str(self._net_share_dict)
+        if self._has_fund_bond_dict:
+            s += "\n\nFUND BOND DICTIONARY\n" + str(self._fund_bond_dict)
         return s
 
     def __repr__(self):
@@ -78,7 +113,14 @@ class AbstractStockBond(AbstractStock):
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
             "has_sectors": self._has_sectors,
-            "has_holdings": self._has_holdings
+            "has_holdings": self._has_holdings,
+            "has_quote_dict": self._has_quote_dict,
+            "has_summary_dict": self._has_summary_dict,
+            "has_financial_dict": self._has_financial_dict,
+            "has_stats_dict": self._has_stats_dict,
+            "has_price_dict": self._has_price_dict,
+            "has_net_share_dict": self._has_net_share_dict,
+            "has_fund_bond_dict": self._has_fund_bond_dict
         }.items()
 
     def _setInfo(self):
@@ -89,6 +131,17 @@ class AbstractStockBond(AbstractStock):
         self._stock_part_count, self._bond_part_count, self._cash_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
+        self._quote_dict = self.sub_dict(self.__y_query.quote_type, self.__ticker)
+        self._summary_dict = self.sub_dict(self.__y_query.summary_detail, self.__ticker)
+        self._has_financial_dict, self._financial_dict = self.is_dict_valid(self.__y_query.financial_data, 'financialData')
+        self._financial_dict = self.sub_dict(self._financial_dict, self.__ticker)
+        self._has_stats_dict, self._stats_dict = self.is_dict_valid(self.__y_query.key_stats, 'defaultKeyStatistics')
+        self._stats_dict = self.sub_dict(self._stats_dict, self.__ticker)
+        self._price_dict = self.sub_dict(self.__y_query.price, self.__ticker)
+        self._has_net_share_dict, self._net_share_dict = self.is_dict_valid(self.__y_query.share_purchase_activity, 'netSharePurchaseActivity')
+        self._net_share_dict = self.sub_dict(self.__y_query.share_purchase_activity, self.__ticker)
+        self._has_fund_bond_dict, self._fund_bond_dict = self.is_dict_valid(self.__y_query.fund_bond_holdings, 'topHoldings')
+        self._fund_bond_dict = self.sub_dict(self._fund_bond_dict, self.__ticker)
         self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):

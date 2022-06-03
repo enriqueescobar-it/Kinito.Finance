@@ -1,5 +1,8 @@
 from abc import *
 import json
+
+import pandas as pd
+from pandas import DataFrame
 from prettytable import PrettyTable
 
 
@@ -23,6 +26,9 @@ class AbstractStock(ABC):
         yield from {
             "Info": self.__class
         }.items()
+
+    def sub_dict(self, a_dict: dict, a_str: str) -> dict:
+        return a_dict.get(a_str)
 
     def is_dict_valid(self, a_dict: dict, a_str: str):
         str_subs = "summaryTypes=" + a_str
