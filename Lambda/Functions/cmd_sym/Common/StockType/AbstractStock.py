@@ -1,7 +1,6 @@
-from abc import *
 import json
+from abc import *
 
-import pandas as pd
 from pandas import DataFrame
 from prettytable import PrettyTable
 
@@ -27,21 +26,25 @@ class AbstractStock(ABC):
             "Info": self.__class
         }.items()
 
-    def sub_dict(self, a_dict: dict, a_str: str) -> dict:
-        return a_dict.get(a_str)
-
-    def is_dict_valid(self, a_dict: dict, a_str: str):
-        str_subs = "summaryTypes=" + a_str
-        str_dict: str = str(a_dict)
-        boo: bool = any(a_dict) and not(str_subs in str_dict)
-        if boo:
-            return boo, a_dict
-        else:
-            return boo, {}
-    def is_any_valid(self, a_any: any, a_str: str) -> bool:
+    def __is_any_valid(self, a_any: any, a_str: str) -> bool:
         str_subs = "summaryTypes=" + a_str
         any_str: str = str(a_any)
         return any(a_any) and not (str_subs in any_str)
+
+    def _get_df_valid(self, a_any: any, a_str: str) -> (bool, DataFrame):
+        boo: bool = self.__is_any_valid(a_any, a_str)
+        df: DataFrame = a_any if boo else DataFrame()
+        return boo, df
+
+    def _get_dict_valid(self, a_dict: dict, a_str: str) -> (bool, dict):
+        str_subs = "summaryTypes=" + a_str
+        str_dict: str = str(a_dict)
+        boo: bool = any(a_dict) and not(str_subs in str_dict)
+        a_dict = a_dict if boo else {}
+        return boo, a_dict
+
+    def _get_sub_dict(self, a_dict: dict, a_str: str) -> dict:
+        return a_dict.get(a_str)
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
