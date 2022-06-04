@@ -25,6 +25,7 @@ class AbstractStockFuture(AbstractStock):
     _has_trend_df: bool = False
     _has_company_officers_df: bool = False
     _has_institute_owner_df: bool = False
+    _has_insider_holder_df: bool = False
     _has_major_holder_dict: bool = False
     _has_fund_owner_df: bool = False
     _has_fund_bond_dict: bool = False
@@ -42,6 +43,7 @@ class AbstractStockFuture(AbstractStock):
     _fund_perf_df: DataFrame = DataFrame()
     _fund_bond_rating_df: DataFrame = DataFrame()
     _fund_sector_weight_df: DataFrame = DataFrame()
+    _insider_holder_df: DataFrame = DataFrame()
     _major_holder_dict: dict = {}
     _quote_dict: dict = {}
     _summary_dict: dict = {}
@@ -94,6 +96,7 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(["HasTrendDf", self._has_trend_df])
         pt.add_row(["HasCompanyOfficersDf", self._has_company_officers_df])
         pt.add_row(["HasInstituteOwnerDf", self._has_institute_owner_df])
+        pt.add_row(["HasInsiderHolderDf", self._has_insider_holder_df])
         pt.add_row(["HasMajorHolderDict", self._has_major_holder_dict])
         pt.add_row(["HasFundOwnerDf", self._has_fund_owner_df])
         pt.add_row(["HasFundBondDict", self._has_fund_bond_dict])
@@ -124,6 +127,8 @@ class AbstractStockFuture(AbstractStock):
             s += "\n\nCOMPANY OFFICERS DF\n" + self._company_officers_df.to_string(index=True)
         if self._has_institute_owner_df:
             s += "\n\nINSTITUTION OWNER DF\n" + self._institute_owner_df.to_string(index=False)
+        if self._has_insider_holder_df:
+            s += "\n\nINSIDER HOLDER DF\n" + self._insider_holder_df.to_string(index=False)
         if self._has_major_holder_dict:
             s += "\n\nMAJOR HOLDER DICTIONARY\n" + str(self._major_holder_dict)
         if self._has_fund_owner_df:
@@ -168,6 +173,7 @@ class AbstractStockFuture(AbstractStock):
             "has_trend_df": self._has_trend_df,
             "has_company_officers_df": self._has_company_officers_df,
             "has_institute_owner_df": self._has_institute_owner_df,
+            "has_insider_holder_df": self._has_insider_holder_df,
             "has_major_holder_dict": self._has_major_holder_dict,
             "has_fund_owner_df": self._has_fund_owner_df,
             "has_fund_bond_dict": self._has_fund_bond_dict,
@@ -197,6 +203,7 @@ class AbstractStockFuture(AbstractStock):
         self._has_trend_df, self._trend_df = self._get_df_valid(self.__y_query.recommendation_trend, 'recommendationTrend')
         self._has_company_officers_df, self._company_officers_df = self._get_df_valid(self.__y_query.company_officers, 'assetProfile')
         self._has_institute_owner_df, self._institute_owner_df = self._get_df_valid(self.__y_query.institution_ownership, 'institutionOwnership')
+        self._has_insider_holder_df, self._insider_holder_df = self._get_df_valid(self.__y_query.insider_holders, 'insiderHolders')
         self._has_major_holder_dict, self._major_holder_dict = self._get_dict_valid(self.__y_query.major_holders, 'majorHoldersBreakdown')
         self._major_holder_dict = self._get_sub_dict(self._major_holder_dict, self.__ticker)
         self._has_fund_owner_df, self._fund_owner_df = self._get_df_valid(self.__y_query.fund_ownership, 'fundOwnership')
@@ -206,9 +213,8 @@ class AbstractStockFuture(AbstractStock):
         self._has_fund_perf_df, self._fund_perf_df = self._get_df_valid(self.__y_query.fund_performance, 'fundPerformance')
         self._has_fund_bond_rating_df, self._fund_bond_rating_df = self._get_df_valid(self.__y_query.fund_bond_ratings, 'topHoldings')
         self._has_fund_sector_weight_df, self._fund_sector_weight_df = self._get_df_valid(self.__y_query.fund_sector_weightings, 'topHoldings')
-        print(type(self.__y_query.insider_holders))
-        print('[', self.__y_query.insider_holders, ']insiderHolders')
-        #print('[', self.__y_query.insider_transactions, ']insiderTransactions')
+        print(type(self.__y_query.insider_transactions))
+        print('[', self.__y_query.insider_transactions, ']insiderTransactions')
         #print('[', self.__y_query.earnings_trend, ']earningsTrend')
         #print('[', self.__y_query.earning_history, ']earningsHistory')
         #print('[', self.__y_query.sec_filings, ']secFilings')
