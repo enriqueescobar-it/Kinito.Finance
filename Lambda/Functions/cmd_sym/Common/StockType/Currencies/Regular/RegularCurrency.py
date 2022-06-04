@@ -76,7 +76,7 @@ class RegularCurrency(AbstractCurrency):
         self.__setPerformance()
         print(len(self.__y_query.financial_data))
         print('[', self.__y_query.financial_data, ']')
-        print(self.is_dict_valid(self.__y_query.financial_data, 'financialData'))
+        print(self._get_dict_valid(self.__y_query.financial_data, 'financialData'))
         print('[', self.__y_query.key_stats, ']')
         print('[', self.__y_query.price, ']')
         print('[', self.__y_query.quote_type, ']')

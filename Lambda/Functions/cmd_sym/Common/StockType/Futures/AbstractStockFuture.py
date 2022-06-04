@@ -22,9 +22,27 @@ class AbstractStockFuture(AbstractStock):
     _has_stats_dict: bool = False
     _has_price_dict: bool = True
     _has_net_share_dict: bool = False
+    _has_trend_df: bool = False
+    _has_company_officers_df: bool = False
+    _has_institute_owner_df: bool = False
+    _has_major_holder_dict: bool = False
+    _has_fund_owner_df: bool = False
     _has_fund_bond_dict: bool = False
+    _has_fund_category_df: bool = False
+    _has_fund_perf_df: bool = False
+    _has_fund_bond_rating_df: bool = False
+    _has_fund_sector_weight_df: bool = False
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
+    _trend_df: DataFrame = DataFrame()
+    _company_officers_df: DataFrame = DataFrame()
+    _institute_owner_df: DataFrame = DataFrame()
+    _fund_owner_df: DataFrame = DataFrame()
+    _fund_category_df: DataFrame = DataFrame()
+    _fund_perf_df: DataFrame = DataFrame()
+    _fund_bond_rating_df: DataFrame = DataFrame()
+    _fund_sector_weight_df: DataFrame = DataFrame()
+    _major_holder_dict: dict = {}
     _quote_dict: dict = {}
     _summary_dict: dict = {}
     _financial_dict: dict = {}
@@ -73,7 +91,16 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['HasStatsDict', self._has_stats_dict])
         pt.add_row(["HasPriceDict", self._has_price_dict])
         pt.add_row(["HasNetShareDict", self._has_net_share_dict])
+        pt.add_row(["HasTrendDf", self._has_trend_df])
+        pt.add_row(["HasCompanyOfficersDf", self._has_company_officers_df])
+        pt.add_row(["HasInstituteOwnerDf", self._has_institute_owner_df])
+        pt.add_row(["HasMajorHolderDict", self._has_major_holder_dict])
+        pt.add_row(["HasFundOwnerDf", self._has_fund_owner_df])
         pt.add_row(["HasFundBondDict", self._has_fund_bond_dict])
+        pt.add_row(["HasFundCategoryDf", self._has_fund_category_df])
+        pt.add_row(["HasFundPerformanceDf", self._has_fund_perf_df])
+        pt.add_row(["HasFundRatingDf", self._has_fund_bond_rating_df])
+        pt.add_row(["HasFundSectorWeightDf", self._has_fund_sector_weight_df])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -91,8 +118,26 @@ class AbstractStockFuture(AbstractStock):
             s += "\n\nPRICE DICTIONARY\n" + str(self._price_dict)
         if self._has_net_share_dict:
             s += "\n\nNET SHARE DICTIONARY\n" + str(self._net_share_dict)
+        if self._has_trend_df:
+            s += "\n\nRECOMMENDED TREND DF\n" + self._trend_df.to_string(index=True)
+        if self._has_company_officers_df:
+            s += "\n\nCOMPANY OFFICERS DF\n" + self._company_officers_df.to_string(index=True)
+        if self._has_institute_owner_df:
+            s += "\n\nINSTITUTION OWNER DF\n" + self._institute_owner_df.to_string(index=False)
+        if self._has_major_holder_dict:
+            s += "\n\nMAJOR HOLDER DICTIONARY\n" + str(self._major_holder_dict)
+        if self._has_fund_owner_df:
+            s += "\n\nFUND OWNER DF\n" + self._fund_owner_df.to_string(index=True)
         if self._has_fund_bond_dict:
             s += "\n\nFUND BOND DICTIONARY\n" + str(self._fund_bond_dict)
+        if self._has_fund_category_df:
+            s += "\n\nFUND CATEGORY DF\n" + self._fund_category_df.to_string(index=True)
+        if self._has_fund_perf_df:
+            s += "\n\nFUND PERFORMANCE DF\n" + self._fund_perf_df.to_string(index=True)
+        if self._has_fund_bond_rating_df:
+            s += "\n\nFUND BOND RATING DF\n" + self._fund_bond_rating_df.to_string(index=True)
+        if self._has_fund_sector_weight_df:
+            s += "\n\nFUND SECTOR WEIGHT DF\n" + self._fund_sector_weight_df.to_string(index=True)
         return s
 
     def __repr__(self):
@@ -120,7 +165,16 @@ class AbstractStockFuture(AbstractStock):
             "has_stats_dict": self._has_stats_dict,
             "has_price_dict": self._has_price_dict,
             "has_net_share_dict": self._has_net_share_dict,
-            "has_fund_bond_dict": self._has_fund_bond_dict
+            "has_trend_df": self._has_trend_df,
+            "has_company_officers_df": self._has_company_officers_df,
+            "has_institute_owner_df": self._has_institute_owner_df,
+            "has_major_holder_dict": self._has_major_holder_dict,
+            "has_fund_owner_df": self._has_fund_owner_df,
+            "has_fund_bond_dict": self._has_fund_bond_dict,
+            "has_fund_category_df": self._has_fund_category_df,
+            "has_fund_perf_df": self._has_fund_perf_df,
+            "has_fund_bond_rating_df": self._has_fund_bond_rating_df,
+            "has_fund_sector_weight_df": self._has_fund_sector_weight_df
         }.items()
 
     def _setInfo(self):
@@ -131,26 +185,37 @@ class AbstractStockFuture(AbstractStock):
         self._stock_part_count, self._bond_part_count, self._cash_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()
-        self._quote_dict = self.sub_dict(self.__y_query.quote_type, self.__ticker)
-        self._summary_dict = self.sub_dict(self.__y_query.summary_detail, self.__ticker)
-        self._has_financial_dict, self._financial_dict = self.is_dict_valid(self.__y_query.financial_data, 'financialData')
-        self._financial_dict = self.sub_dict(self._financial_dict, self.__ticker)
-        self._has_stats_dict, self._stats_dict = self.is_dict_valid(self.__y_query.key_stats, 'defaultKeyStatistics')
-        self._stats_dict = self.sub_dict(self._stats_dict, self.__ticker)
-        self._price_dict = self.sub_dict(self.__y_query.price, self.__ticker)
-        self._has_net_share_dict, self._net_share_dict = self.is_dict_valid(self.__y_query.share_purchase_activity, 'netSharePurchaseActivity')
-        self._net_share_dict = self.sub_dict(self.__y_query.share_purchase_activity, self.__ticker)
-        self._has_fund_bond_dict, self._fund_bond_dict = self.is_dict_valid(self.__y_query.fund_bond_holdings, 'topHoldings')
-        self._fund_bond_dict = self.sub_dict(self._fund_bond_dict, self.__ticker)
-        '''
-        exit(-1)
-        print('[', self.__y_query.fund_category_holdings, ']DF')
-        print('[', self.__y_query.fund_performance, ']DF') # fundPerformance
-        print('[', self.__y_query.fund_bond_ratings, ']DF')
-        print('[', self.__y_query.fund_sector_weightings, ']DF')
-        print('[', self.__y_query.income_statement(frequency='a'), ']DF')
-        print('[', self.__y_query.recommendation_trend, ']DF')
-        exit(1)'''
+        self._quote_dict = self._get_sub_dict(self.__y_query.quote_type, self.__ticker)
+        self._summary_dict = self._get_sub_dict(self.__y_query.summary_detail, self.__ticker)
+        self._has_financial_dict, self._financial_dict = self._get_dict_valid(self.__y_query.financial_data, 'financialData')
+        self._financial_dict = self._get_sub_dict(self._financial_dict, self.__ticker)
+        self._has_stats_dict, self._stats_dict = self._get_dict_valid(self.__y_query.key_stats, 'defaultKeyStatistics')
+        self._stats_dict = self._get_sub_dict(self._stats_dict, self.__ticker)
+        self._price_dict = self._get_sub_dict(self.__y_query.price, self.__ticker)
+        self._has_net_share_dict, self._net_share_dict = self._get_dict_valid(self.__y_query.share_purchase_activity, 'netSharePurchaseActivity')
+        self._net_share_dict = self._get_sub_dict(self.__y_query.share_purchase_activity, self.__ticker)
+        self._has_trend_df, self._trend_df = self._get_df_valid(self.__y_query.recommendation_trend, 'recommendationTrend')
+        self._has_company_officers_df, self._company_officers_df = self._get_df_valid(self.__y_query.company_officers, 'assetProfile')
+        self._has_institute_owner_df, self._institute_owner_df = self._get_df_valid(self.__y_query.institution_ownership, 'institutionOwnership')
+        self._has_major_holder_dict, self._major_holder_dict = self._get_dict_valid(self.__y_query.major_holders, 'majorHoldersBreakdown')
+        self._major_holder_dict = self._get_sub_dict(self._major_holder_dict, self.__ticker)
+        self._has_fund_owner_df, self._fund_owner_df = self._get_df_valid(self.__y_query.fund_ownership, 'fundOwnership')
+        self._has_fund_bond_dict, self._fund_bond_dict = self._get_dict_valid(self.__y_query.fund_bond_holdings, 'topHoldings')
+        self._fund_bond_dict = self._get_sub_dict(self._fund_bond_dict, self.__ticker)
+        self._has_fund_category_df, self._fund_category_df = self._get_df_valid(self.__y_query.fund_category_holdings, 'topHoldings')
+        self._has_fund_perf_df, self._fund_perf_df = self._get_df_valid(self.__y_query.fund_performance, 'fundPerformance')
+        self._has_fund_bond_rating_df, self._fund_bond_rating_df = self._get_df_valid(self.__y_query.fund_bond_ratings, 'topHoldings')
+        self._has_fund_sector_weight_df, self._fund_sector_weight_df = self._get_df_valid(self.__y_query.fund_sector_weightings, 'topHoldings')
+        print(type(self.__y_query.insider_holders))
+        print('[', self.__y_query.insider_holders, ']insiderHolders')
+        #print('[', self.__y_query.insider_transactions, ']insiderTransactions')
+        #print('[', self.__y_query.earnings_trend, ']earningsTrend')
+        #print('[', self.__y_query.earning_history, ']earningsHistory')
+        #print('[', self.__y_query.sec_filings, ']secFilings')
+        #print('[', self.__y_query.balance_sheet(frequency='a'), ']B_DF unavailable')
+        #print('[', self.__y_query.income_statement(frequency='a'), ']I_DF unavailable')
+        #print('[', self.__y_query.cash_flow(frequency='a'), ']C_DF unavailable')
+        #exit(-1)
         self.__plotSectorDf()#.show()
 
     def __setSectorDf(self):
