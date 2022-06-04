@@ -106,6 +106,7 @@ class AbstractStockEquity(AbstractStock):
         pt.add_row(["HasInsiderTransactionDf", self._has_insider_transaction_df])
         pt.add_row(["HasMajorHolderDict", self._has_major_holder_dict])
         pt.add_row(["HasEarningsTrendDict", self._has_earnings_trend_dict])
+        pt.add_row(["HasEarningsHistoryDf", self._has_earning_history_df])
         pt.add_row(["HasFundOwnerDf", self._has_fund_owner_df])
         pt.add_row(["HasFundBondDict", self._has_fund_bond_dict])
         pt.add_row(["HasFundCategoryDf", self._has_fund_category_df])
@@ -143,6 +144,8 @@ class AbstractStockEquity(AbstractStock):
             s += "\n\nMAJOR HOLDER DICTIONARY\n" + str(self._major_holder_dict)
         if self._has_earnings_trend_dict:
             s += "\n\nEARNINGS TREND DICTIONARY\n" + str(self._earnings_trend_dict)
+        if self._has_earning_history_df:
+            s += "\n\nEARNINGS HISTORY DF\n" + self._earning_history_df.to_string(index=False)
         if self._has_fund_owner_df:
             s += "\n\nFUND OWNER DF\n" + self._fund_owner_df.to_string(index=True)
         if self._has_fund_bond_dict:
@@ -189,6 +192,7 @@ class AbstractStockEquity(AbstractStock):
             "has_insider_transaction_df": self._has_insider_transaction_df,
             "has_major_holder_dict": self._has_major_holder_dict,
             "has_earnings_trend_dict": self._has_earnings_trend_dict,
+            "has_earning_history_df": self._has_earning_history_df,
             "has_fund_owner_df": self._has_fund_owner_df,
             "has_fund_bond_dict": self._has_fund_bond_dict,
             "has_fund_category_df": self._has_fund_category_df,
@@ -223,6 +227,7 @@ class AbstractStockEquity(AbstractStock):
         self._major_holder_dict = self._get_sub_dict(self._major_holder_dict, self.__ticker)
         self._has_earnings_trend_dict, self._earnings_trend_dict = self._get_dict_valid(self.__y_query.earnings_trend, 'earningsTrend')
         self._earnings_trend_dict = self._get_sub_dict(self._earnings_trend_dict, self.__ticker)
+        self._has_earning_history_df, self._earning_history_df = self._get_df_valid(self.__y_query.earning_history, 'earningsHistory')
         self._has_fund_owner_df, self._fund_owner_df = self._get_df_valid(self.__y_query.fund_ownership, 'fundOwnership')
         self._has_fund_bond_dict, self._fund_bond_dict = self._get_dict_valid(self.__y_query.fund_bond_holdings, 'topHoldings')
         self._fund_bond_dict = self._get_sub_dict(self._fund_bond_dict, self.__ticker)
@@ -230,9 +235,8 @@ class AbstractStockEquity(AbstractStock):
         self._has_fund_perf_df, self._fund_perf_df = self._get_df_valid(self.__y_query.fund_performance, 'fundPerformance')
         self._has_fund_bond_rating_df, self._fund_bond_rating_df = self._get_df_valid(self.__y_query.fund_bond_ratings, 'topHoldings')
         self._has_fund_sector_weight_df, self._fund_sector_weight_df = self._get_df_valid(self.__y_query.fund_sector_weightings, 'topHoldings')
-        print(type(self.__y_query.earning_history))
-        print('[', self.__y_query.earning_history, ']earningsHistory')
-        #print('[', self.__y_query.sec_filings, ']secFilings')
+        print(type(self.__y_query.sec_filings))
+        print('[', self.__y_query.sec_filings, ']secFilings')
         #print('[', self.__y_query.balance_sheet(frequency='a'), ']B_DF unavailable')
         #print('[', self.__y_query.income_statement(frequency='a'), ']I_DF unavailable')
         #print('[', self.__y_query.cash_flow(frequency='a'), ']C_DF unavailable')
