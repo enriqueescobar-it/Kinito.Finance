@@ -31,18 +31,15 @@ class AbstractStock(ABC):
 
     def _get_df_valid(self, a_any: any, a_str: str) -> (bool, DataFrame):
         boo: bool = self.__is_any_valid(a_any, a_str)
-        df: DataFrame = a_any if boo else DataFrame()
-        return boo, df
+        return (boo, a_any) if boo else (boo, DataFrame())
 
     def _get_df_available(self, a_any: any) -> (bool, DataFrame):
         boo: bool = not (" data unavailable for " in str(a_any))
-        df: DataFrame = a_any if boo else DataFrame()
-        return boo, df
+        return (boo, a_any) if boo else (boo, DataFrame())
 
     def _get_dict_valid(self, a_dict: dict, a_str: str) -> (bool, dict):
         boo: bool = any(a_dict) and not(("summaryTypes=" + a_str) in str(a_dict))
-        a_dict = a_dict if boo else {}
-        return boo, a_dict
+        return (boo, a_dict) if boo else (boo, {})
 
     def _get_sub_dict(self, a_dict: dict, a_str: str) -> dict:
         return a_dict.get(a_str)
