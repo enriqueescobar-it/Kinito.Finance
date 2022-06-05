@@ -27,19 +27,20 @@ class AbstractStock(ABC):
         }.items()
 
     def __is_any_valid(self, a_any: any, a_str: str) -> bool:
-        str_subs = "summaryTypes=" + a_str
-        any_str: str = str(a_any)
-        return any(a_any) and not (str_subs in any_str)
+        return any(a_any) and not (("summaryTypes=" + a_str) in str(a_any))
 
     def _get_df_valid(self, a_any: any, a_str: str) -> (bool, DataFrame):
         boo: bool = self.__is_any_valid(a_any, a_str)
         df: DataFrame = a_any if boo else DataFrame()
         return boo, df
 
+    def _get_df_available(self, a_any: any) -> (bool, DataFrame):
+        boo: bool = not (" data unavailable for " in str(a_any))
+        df: DataFrame = a_any if boo else DataFrame()
+        return boo, df
+
     def _get_dict_valid(self, a_dict: dict, a_str: str) -> (bool, dict):
-        str_subs = "summaryTypes=" + a_str
-        str_dict: str = str(a_dict)
-        boo: bool = any(a_dict) and not(str_subs in str_dict)
+        boo: bool = any(a_dict) and not(("summaryTypes=" + a_str) in str(a_dict))
         a_dict = a_dict if boo else {}
         return boo, a_dict
 

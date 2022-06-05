@@ -150,7 +150,7 @@ class AbstractStockEquity(AbstractStock):
         if self._has_earning_history_df:
             s += "\n\nEARNINGS HISTORY DF\n" + self._earning_history_df.to_string(index=False)
         if self._has_sec_filing_df:
-            s += "\n\nSEC FILING DF\n" + self._sec_filing_df.to_string(index=False)
+            s += "\n\nSEC FILING DF\n" + self._sec_filing_df.head().to_string(index=False)
         if self._has_fund_owner_df:
             s += "\n\nFUND OWNER DF\n" + self._fund_owner_df.to_string(index=True)
         if self._has_fund_bond_dict:
@@ -242,7 +242,7 @@ class AbstractStockEquity(AbstractStock):
         self._has_fund_perf_df, self._fund_perf_df = self._get_df_valid(self.__y_query.fund_performance, 'fundPerformance')
         self._has_fund_bond_rating_df, self._fund_bond_rating_df = self._get_df_valid(self.__y_query.fund_bond_ratings, 'topHoldings')
         self._has_fund_sector_weight_df, self._fund_sector_weight_df = self._get_df_valid(self.__y_query.fund_sector_weightings, 'topHoldings')
-        #print('[', self.__y_query.balance_sheet(frequency='a'), ']B_DF unavailable')
+        #print(self.__y_query.balance_sheet(frequency='a'))
         #print('[', self.__y_query.income_statement(frequency='a'), ']I_DF unavailable')
         #print('[', self.__y_query.cash_flow(frequency='a'), ']C_DF unavailable')
         #exit(-1)
