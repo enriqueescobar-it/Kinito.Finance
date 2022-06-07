@@ -7,27 +7,12 @@ from Common.StockType.AbstractStock import AbstractStock
 
 class AbstractStockFund(AbstractStock):
     __ticker: str = 'NA'
-    _name: str = 'NA'
-    _has_sectors: bool = False
-    _has_holdings: bool = False
-    _sector_df: DataFrame = DataFrame()
-    _holding_df: DataFrame = DataFrame()
-    _stock_part_count: int = -1
-    _bond_part_count: int = -1
-    _cash_part_count: int = -1
-    _price_to_earn: float = np.nan
-    _price_to_book: float = np.nan
-    _price_to_sale: float = np.nan
-    _price_to_cash: float = np.nan
 
     def __init__(self, c_name: str, q_type: str):
         self.__class = 'Fund'
         self._quote_type = q_type
         #
         self._name = c_name.replace(' ', '')
-        self._stock_part_count = 0
-        self._bond_part_count = 0
-        self._cash_part_count = 0
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -73,51 +58,3 @@ class AbstractStockFund(AbstractStock):
             "has_sectors": self._has_sectors,
             "has_holdings": self._has_holdings
         }.items()
-
-    @property
-    def Name(self):
-        return self._name
-
-    @property
-    def SectorDataFrame(self):
-        return self._sector_df
-
-    @property
-    def HoldingDataFrame(self):
-        return self._holding_df
-
-    @property
-    def StockPartCount(self):
-        return self._stock_part_count
-
-    @property
-    def BondPartCount(self):
-        return self._bond_part_count
-
-    @property
-    def CashPartCount(self):
-        return self._cash_part_count
-
-    @property
-    def PriceToEarnings(self):
-        return self._price_to_earn
-
-    @property
-    def PriceToSales(self):
-        return self._price_to_sale
-
-    @property
-    def PriceToBook(self):
-        return self._price_to_book
-
-    @property
-    def PriceToCashflow(self):
-        return self._price_to_cash
-
-    @property
-    def HasSectors(self):
-        return self._has_sectors
-
-    @property
-    def HasHoldings(self):
-        return self._has_holdings
