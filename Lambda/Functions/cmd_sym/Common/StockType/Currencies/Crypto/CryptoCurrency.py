@@ -66,7 +66,7 @@ class CryptoCurrency(AbstractCurrency):
 
     def _setInfo(self):
         self._set_sector_df(self.__y_query.fund_sector_weightings)
-        self.__setHoldingDf()
+        self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._stock_part_count = 0
         self._bond_part_count = 0
         self._stock_part_count, self._bond_part_count, self._cash_part_count = self.__setAllocation()
@@ -80,21 +80,6 @@ class CryptoCurrency(AbstractCurrency):
                                     autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
                                     title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
             return plt
-
-    def __setHoldingDf(self):
-        is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
-
-        if is_df:
-            self._holding_df = self.__y_query.fund_top_holdings
-            self._holding_df.set_index('symbol', inplace=True)
-            self._holding_df.reset_index(inplace=True)
-            self._has_holdings = True
-        else:
-            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
-            self._holding_df['symbol'] = s
-            self._holding_df['holdingName'] = 'a name'
-            self._holding_df['holdingPercent'] = 1.0
-            self._holding_df.loc[0] = [self.__ticker, s, 1.0]
 
     def __setAllocation(self):
         is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)

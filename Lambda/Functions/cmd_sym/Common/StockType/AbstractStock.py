@@ -28,6 +28,7 @@ class AbstractStock(ABC):
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
+        pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
@@ -52,6 +53,7 @@ class AbstractStock(ABC):
     def __iter__(self):
         yield from {
             "Info": self.__class,
+            "type": self.__class,
             "quote_type": self._quote_type,
             "name": self._name,
             "stock_percent": self._stock_part_count,
@@ -80,6 +82,22 @@ class AbstractStock(ABC):
                 self._sector_df['Sector'] = s
                 self._sector_df['Percent'] = 1.0
                 self._sector_df.loc[0] = [s, 1.0]
+
+    def _set_holding_df(self, any_top: any, str_ticker: str, any_sector: any):
+        is_ok: bool = any(any_top) and any(any_sector)
+        if is_ok:
+            is_df: bool = isinstance(any_top, DataFrame)
+            if is_df:
+                self._holding_df = any_top
+                self._holding_df.set_index('symbol', inplace=True)
+                self._holding_df.reset_index(inplace=True)
+                self._has_holdings = True
+            else:
+                s: str = (list(any_sector.values())[0]).split(' found ')[0]
+                self._holding_df['symbol'] = s
+                self._holding_df['holdingName'] = 'a name'
+                self._holding_df['holdingPercent'] = 1.0
+                self._holding_df.loc[0] = [str_ticker, s, 1.0]
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
