@@ -65,6 +65,22 @@ class AbstractStock(ABC):
             "has_holdings": self._has_holdings
         }.items()
 
+    def _set_sector_df(self, a_any: any):
+        is_any: bool = any(a_any)
+        if not is_any:
+            self._sector_df = DataFrame()
+        else:
+            is_df: bool = isinstance(a_any, DataFrame)
+            if is_df:
+                self._sector_df = a_any.reset_index()
+                self._sector_df.columns = ['Sector', 'Percent']
+                self._has_sectors = True
+            else:
+                s: str = (list(a_any.values())[0]).split(' found ')[0]
+                self._sector_df['Sector'] = s
+                self._sector_df['Percent'] = 1.0
+                self._sector_df.loc[0] = [s, 1.0]
+
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
 

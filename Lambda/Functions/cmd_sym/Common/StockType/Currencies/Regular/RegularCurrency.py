@@ -67,7 +67,7 @@ class RegularCurrency(AbstractCurrency):
         }.items()
 
     def _setInfo(self):
-        self.__setSectorDf()
+        self._set_sector_df(self.__y_query.fund_sector_weightings)
         self.__setHoldingDf()
         self._stock_part_count = 0
         self._bond_part_count = 0
@@ -75,19 +75,6 @@ class RegularCurrency(AbstractCurrency):
         self.__setInfo()
         self.__setPerformance()
         self.__plotSectorDf()#.show()
-
-    def __setSectorDf(self):
-        is_df: bool = isinstance(self.__y_query.fund_sector_weightings, pandas.DataFrame)
-
-        if is_df:
-            self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
-            self._sector_df.columns = ['Sector', 'Percent']
-            self._has_sectors = True
-        else:
-            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
-            self._sector_df['Sector'] = s
-            self._sector_df['Percent'] = 1.0
-            self._sector_df.loc[0] = [s, 1.0]
 
     def __plotSectorDf(self) -> plt:
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
