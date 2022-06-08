@@ -13,6 +13,9 @@ class AbstractStock(ABC):
     _stock_part_count: int = 0
     _bond_part_count: int = 0
     _cash_part_count: int = 0
+    _other_part_count: int = 0
+    _pref_part_count: int = 0
+    _conv_part_count: int = 0
     _price_to_book: float = np.nan
     _price_to_cash: float = np.nan
     _price_to_earn: float = np.nan
@@ -98,6 +101,54 @@ class AbstractStock(ABC):
                 self._holding_df['holdingName'] = 'a name'
                 self._holding_df['holdingPercent'] = 1.0
                 self._holding_df.loc[0] = [str_ticker, s, 1.0]
+
+    def _set_part_count(self, any_top: any, any_category: any):
+        is_df: bool = any(any_top) and isinstance(any_top, DataFrame)
+        df: DataFrame = DataFrame()
+        stock_int: int = 0
+        bond_int: int = 0
+        cash_int: int = 0
+        other_int: int = 0
+        pref_int: int = 0
+        conv_int: int = 0
+        if is_df and any(any_category) and isinstance(any_category, DataFrame):
+            df = any_category.set_index('maxAge')
+            df.reset_index(inplace=True)
+            if 'stockPosition' in df.columns:
+                stock_int = round(df['stockPosition'][0] * 100)
+            if 'bondPosition' in df.columns:
+                bond_int = round(df['bondPosition'][0] * 100)
+            if 'cashPosition' in df.columns:
+                cash_int = round(df['cashPosition'][0] * 100)
+            if 'otherPosition' in df.columns:
+                other_int = round(df['otherPosition'][0] * 100)
+            if 'preferredPosition' in df.columns:
+                pref_int = round(df['preferredPosition'][0] * 100)
+            if 'convertiblePosition' in df.columns:
+                conv_int = round(df['convertiblePosition'][0] * 100)
+        else:
+            df['maxAge'] = 1.0
+            df['cashPosition'] = np.nan
+            df['stockPosition'] = np.nan
+            df['bondPosition'] = np.nan
+            df['otherPosition'] = np.nan
+            df['preferredPosition'] = np.nan
+            df['convertiblePosition'] = np.nan
+            df.loc[0] = [1.0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+            df = df.set_index('maxAge')
+            df.reset_index(inplace=True)
+            stock_int = round(np.nan_to_num(df['stockPosition'][0]) * 100)
+            bond_int = round(np.nan_to_num(df['bondPosition'][0]) * 100)
+            cash_int = round(np.nan_to_num(df['cashPosition'][0]) * 100)
+            other_int = round(np.nan_to_num(df['otherPosition'][0]) * 100)
+            pref_int = round(np.nan_to_num(df['preferredPosition'][0]) * 100)
+            conv_int = round(np.nan_to_num(df['convertiblePosition'][0]) * 100)
+        self._stock_part_count = stock_int
+        self._bond_part_count = bond_int
+        self._cash_part_count = cash_int
+        self._other_part_count = other_int
+        self._pref_part_count = pref_int
+        self._conv_part_count = conv_int
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)

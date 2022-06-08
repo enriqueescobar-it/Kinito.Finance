@@ -69,9 +69,7 @@ class RegularCurrency(AbstractCurrency):
     def _setInfo(self):
         self._set_sector_df(self.__y_query.fund_sector_weightings)
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
-        self._stock_part_count = 0
-        self._bond_part_count = 0
-        self._stock_part_count, self._bond_part_count, self._cash_part_count = self.__setAllocation()
+        self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self.__setInfo()
         self.__setPerformance()
         self.__plotSectorDf()#.show()
@@ -82,47 +80,6 @@ class RegularCurrency(AbstractCurrency):
                                     autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
                                     title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
             return plt
-
-    def __setAllocation(self):
-        is_df: bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
-        df: DataFrame = DataFrame()
-        stock_int: int = 0
-        bond_int: int = 0
-        cash_int: int = 0
-        other_int: int = 0
-        pref_int: int = 0
-        conv_int: int = 0
-
-        if is_df:
-            df = self.__y_query.fund_category_holdings.set_index('maxAge')
-            df.reset_index(inplace=True)
-            if 'stockPosition' in df.columns:
-                stock_int = round(df['stockPosition'][0] * 100)
-            if 'bondPosition' in df.columns:
-                bond_int = round(df['bondPosition'][0] * 100)
-            if 'cashPosition' in df.columns:
-                cash_int = round(df['cashPosition'][0] * 100)
-            if 'otherPosition' in df.columns:
-                other_int = round(df['otherPosition'][0] * 100)
-            if 'preferredPosition' in df.columns:
-                pref_int = round(df['preferredPosition'][0] * 100)
-            if 'convertiblePosition' in df.columns:
-                conv_int = round(df['convertiblePosition'][0] * 100)
-        else:
-            df['maxAge'] = 1.0
-            df['cashPosition'] = np.nan
-            df['stockPosition'] = np.nan
-            df['bondPosition'] = np.nan
-            df['otherPosition'] = np.nan
-            df['preferredPosition'] = np.nan
-            df['convertiblePosition'] = np.nan
-            df.loc[0] = [1.0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
-            df = df.set_index('maxAge')
-            df.reset_index(inplace=True)
-            stock_int = round(np.nan_to_num(df['stockPosition'][0]) * 100)
-            bond_int = round(np.nan_to_num(df['bondPosition'][0]) * 100)
-            cash_int = round(np.nan_to_num(df['cashPosition'][0]) * 100)
-        return stock_int, bond_int, cash_int
 
     def __setInfo(self):
         is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
