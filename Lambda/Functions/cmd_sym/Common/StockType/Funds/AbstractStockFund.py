@@ -9,6 +9,7 @@ class AbstractStockFund(AbstractStock):
     __ticker: str = 'NA'
 
     def __init__(self, c_name: str, q_type: str):
+        super().__init__()
         self.__class = 'Fund'
         self._quote_type = q_type
         #

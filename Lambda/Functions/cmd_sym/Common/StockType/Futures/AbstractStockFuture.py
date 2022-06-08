@@ -15,6 +15,7 @@ class AbstractStockFuture(AbstractStock):
     #
 
     def __init__(self, c_name: str, t_name: str, q_type: str):
+        super().__init__()
         self._name = c_name.replace(' ', '')
         self.__ticker = t_name
         self.__class = 'Future'
@@ -72,7 +73,6 @@ class AbstractStockFuture(AbstractStock):
     def _setInfo(self):
         self.__setSectorDf()
         self.__setHoldingDf()
-
         self._stock_part_count, self._bond_part_count, self._cash_part_count = self.__setAllocation()
         self.__setInfo()
         self.__setPerformance()

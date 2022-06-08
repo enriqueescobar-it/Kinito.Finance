@@ -7,6 +7,7 @@ class AbstractCurrency(AbstractStock):
     __ticker: str = 'NA'
 
     def __init__(self, c_name: str, q_type: str):
+        super().__init__()
         self._name = c_name.replace(' ', '')
         #
         self.__class = 'Currency'

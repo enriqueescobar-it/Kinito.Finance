@@ -14,6 +14,7 @@ class AbstractStockOption(AbstractStock):
     #
 
     def __init__(self, c_name: str, t_name: str, q_type: str):
+        super().__init__()
         self._name = c_name.replace(' ', '')
         self.__ticker = t_name
         self.__class = 'Option'
