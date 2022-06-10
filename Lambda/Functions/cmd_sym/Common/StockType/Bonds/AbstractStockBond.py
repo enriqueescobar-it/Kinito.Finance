@@ -71,7 +71,7 @@ class AbstractStockBond(AbstractStock):
         self._set_sector_df(self.__y_query.fund_sector_weightings)
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
-        self.__setInfo()
+        self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
         self.__setPerformance()
         self.__plotSectorDf()#.show()
 
@@ -81,12 +81,6 @@ class AbstractStockBond(AbstractStock):
                                     autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
                                     title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
             return plt
-
-    def __setInfo(self):
-        if not self._is_any_null(self.__y_query.fund_holding_info, self.__ticker):
-            for key in self.__y_query.fund_holding_info.get(self.__ticker):
-                if key == 'equityHoldings':
-                    self._set_price_to(self.__y_query.fund_holding_info.get(self.__ticker)[key])
 
     def __setPerformance(self):
         if not self._is_any_null(self.__y_query.fund_performance, self.__ticker):

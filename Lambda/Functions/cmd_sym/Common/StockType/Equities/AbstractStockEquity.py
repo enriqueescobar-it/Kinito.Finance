@@ -71,6 +71,7 @@ class AbstractStockEquity(AbstractStock):
         self._set_sector_df(self.__y_query.fund_sector_weightings)
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
+        self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
         self.__setInfo()
         self.__setPerformance()
         self.__plotSectorDf()#.show()

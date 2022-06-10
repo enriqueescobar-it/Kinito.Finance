@@ -156,6 +156,12 @@ class AbstractStock(ABC):
             print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
         return boo
 
+    def _set_fund_holding_info(self, holding_info_dict: dict, ticker_str: str):
+        if not self._is_any_null(holding_info_dict, ticker_str):
+            for key in holding_info_dict.get(ticker_str):
+                if key == 'equityHoldings':
+                    self._set_price_to(holding_info_dict.get(ticker_str)[key])
+
     def _set_price_to(self, a_dict: dict):
         self._price_to_earn = a_dict['priceToEarnings']
         self._price_to_book = a_dict['priceToBook']
