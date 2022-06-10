@@ -85,13 +85,7 @@ class RegularCurrency(AbstractCurrency):
         if not self._is_any_null(self.__y_query.fund_holding_info, self.__ticker):
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
                 if key == 'equityHoldings':
-                    self.__setPriceTo(self.__y_query.fund_holding_info.get(self.__ticker)[key])
-
-    def __setPriceTo(self, a_dict: dict):
-        self._price_to_earn = a_dict['priceToEarnings']
-        self._price_to_book = a_dict['priceToBook']
-        self._price_to_sale = a_dict['priceToSales']
-        self._price_to_cash = a_dict['priceToCashflow']
+                    self._set_price_to(self.__y_query.fund_holding_info.get(self.__ticker)[key])
 
     def __setPerformance(self):
         if not self._is_any_null(self.__y_query.fund_performance, self.__ticker):

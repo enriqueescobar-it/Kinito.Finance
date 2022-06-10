@@ -156,6 +156,12 @@ class AbstractStock(ABC):
             print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
         return boo
 
+    def _set_price_to(self, a_dict: dict):
+        self._price_to_earn = a_dict['priceToEarnings']
+        self._price_to_book = a_dict['priceToBook']
+        self._price_to_sale = a_dict['priceToSales']
+        self._price_to_cash = a_dict['priceToCashflow']
+
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
 
