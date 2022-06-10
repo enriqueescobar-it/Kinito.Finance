@@ -85,9 +85,7 @@ class AbstractStockOption(AbstractStock):
             return plt
 
     def __setInfo(self):
-        is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
-
-        if is_null:
+        if self._is_any_null(self.__y_query.fund_holding_info, self.__ticker):
             print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
@@ -101,9 +99,7 @@ class AbstractStockOption(AbstractStock):
         self._price_to_cash = a_dict['priceToCashflow']
 
     def __setPerformance(self):
-        is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
-
-        if is_null:
+        if self._is_any_null(self.__y_query.fund_performance, self.__ticker):
             print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
         else:
             for key in self.__y_query.fund_performance.get(self.__ticker):

@@ -150,6 +150,10 @@ class AbstractStock(ABC):
         self._pref_part_count = pref_int
         self._conv_part_count = conv_int
 
+    def _is_any_null(self, a_any: any, a_str: str) -> bool:
+        print("+ as", type(a_any))
+        return any(a_any) and len(a_any.get(a_str)) >= 50
+
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
 
