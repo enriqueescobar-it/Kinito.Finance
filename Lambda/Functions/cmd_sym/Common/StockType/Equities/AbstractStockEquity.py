@@ -73,7 +73,7 @@ class AbstractStockEquity(AbstractStock):
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
         self.__setInfo()
-        self.__setPerformance()
+        self._set_fund_performance(self.__y_query.fund_performance, self.__ticker)
         self.__plotSectorDf()#.show()
 
     def __plotSectorDf(self) -> plt:
@@ -125,8 +125,3 @@ class AbstractStockEquity(AbstractStock):
         "52WeekChange": 0.8239218,
         "SandP52WeekChange": 0.103224516
         '''
-
-    def __setPerformance(self):
-        if not self._is_any_null(self.__y_query.fund_performance, self.__ticker):
-            for key in self.__y_query.fund_performance.get(self.__ticker):
-                print("+", self.__class__.__name__, ':', key)

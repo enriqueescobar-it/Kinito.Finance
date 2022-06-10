@@ -70,6 +70,9 @@ class AbstractStock(ABC):
             "has_holdings": self._has_holdings
         }.items()
 
+    def _set_info(self):
+        pass
+
     def _set_sector_df(self, a_any: any):
         is_any: bool = any(a_any)
         if not is_any:
@@ -167,6 +170,11 @@ class AbstractStock(ABC):
         self._price_to_book = a_dict['priceToBook']
         self._price_to_sale = a_dict['priceToSales']
         self._price_to_cash = a_dict['priceToCashflow']
+
+    def _set_fund_performance(self, a_any: any, a_str: str):
+        if not self._is_any_null(a_any, a_str):
+            for key in a_any.get(a_str):
+                print("+", self.__class__.__name__, ':', key)
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)

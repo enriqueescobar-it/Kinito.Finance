@@ -71,7 +71,7 @@ class AbstractStockOption(AbstractStock):
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
-        self.__setPerformance()
+        self._set_fund_performance(self.__y_query.fund_performance, self.__ticker)
         self.__plotSectorDf()#.show()
 
     def __plotSectorDf(self) -> plt:
@@ -80,8 +80,3 @@ class AbstractStockOption(AbstractStock):
                                     autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
                                     title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
             return plt
-
-    def __setPerformance(self):
-        if not self._is_any_null(self.__y_query.fund_performance, self.__ticker):
-            for key in self.__y_query.fund_performance.get(self.__ticker):
-                print("+", self.__class__.__name__, ':', key)
