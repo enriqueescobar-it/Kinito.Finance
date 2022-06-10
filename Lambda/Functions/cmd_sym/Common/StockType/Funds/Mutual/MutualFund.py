@@ -20,7 +20,7 @@ class MutualFund(AbstractStockFund):
         #
         self.__y_query = Ticker(t_name)
         #
-        self._setInfo()
+        self._set_info()
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -68,7 +68,7 @@ class MutualFund(AbstractStockFund):
         return json.dumps(dict(self), ensure_ascii=False)
         #return super().to_json() self.__dict__ dict(self)
 
-    def _setInfo(self):
+    def _set_info(self):
         self._set_sector_df(self.__y_query.fund_sector_weightings)
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)

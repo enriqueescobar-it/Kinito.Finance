@@ -17,7 +17,7 @@ class RegularCurrency(AbstractCurrency):
         #
         self.__y_query = Ticker(t_name)
         #
-        self._setInfo()
+        self._set_info()
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -61,7 +61,7 @@ class RegularCurrency(AbstractCurrency):
             "has_holdings": self._has_holdings
         }.items()
 
-    def _setInfo(self):
+    def _set_info(self):
         self._set_sector_df(self.__y_query.fund_sector_weightings)
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
