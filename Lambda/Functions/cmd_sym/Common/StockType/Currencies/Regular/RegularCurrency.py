@@ -67,11 +67,3 @@ class RegularCurrency(AbstractCurrency):
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
         self._set_fund_performance(self.__y_query.fund_performance, self.__ticker)
-        self.__plotSectorDf()#.show()
-
-    def __plotSectorDf(self) -> plt:
-        if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
-            self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
-                                    autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
-                                    title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
-            return plt

@@ -1,4 +1,3 @@
-from matplotlib import pyplot as plt
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
@@ -74,14 +73,6 @@ class AbstractStockEquity(AbstractStock):
         self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
         self.__setInfo()
         self._set_fund_performance(self.__y_query.fund_performance, self.__ticker)
-        self.__plotSectorDf()#.show()
-
-    def __plotSectorDf(self) -> plt:
-        if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
-            self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
-                                    autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
-                                    title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
-            return plt
 
     def __setInfo(self):
         self._price_to_book = self.__yfsi.PriceToBook

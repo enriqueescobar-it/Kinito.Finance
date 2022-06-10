@@ -1,6 +1,7 @@
 from abc import *
 import json
 import numpy as np
+from matplotlib import pyplot as plt
 from pandas import DataFrame
 from prettytable import PrettyTable
 
@@ -175,6 +176,13 @@ class AbstractStock(ABC):
         if not self._is_any_null(a_any, a_str):
             for key in a_any.get(a_str):
                 print("+", self.__class__.__name__, ':', key)
+
+    def _plot_sector_df(self, class_str: str, tick_str: str):
+        if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
+            self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
+                                    autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
+                                    title='Sector Distribution ' + tick_str + ' ' + class_str)
+            return plt
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
