@@ -101,8 +101,6 @@ class MutualFund(AbstractStockFund):
         self._price_to_cash = a_dict['priceToCashflow']
 
     def __setPerformance(self):
-        if self._is_any_null(self.__y_query.fund_performance, self.__ticker):
-            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
-        else:
+        if not self._is_any_null(self.__y_query.fund_performance, self.__ticker):
             for key in self.__y_query.fund_performance.get(self.__ticker):
                 print("+", self.__class__.__name__, ':', key)

@@ -1,12 +1,9 @@
 from matplotlib import pyplot as plt
-import numpy as np
-from pandas import DataFrame
-import pandas
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
-from Common.StockType.AbstractStock import AbstractStock
 from Common.Readers.Engine.YahooFinStockInfo import YahooFinStockInfo
+from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockEquity(AbstractStock):
@@ -129,8 +126,6 @@ class AbstractStockEquity(AbstractStock):
         '''
 
     def __setPerformance(self):
-        if self._is_any_null(self.__y_query.fund_performance, self.__ticker):
-            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
-        else:
+        if not self._is_any_null(self.__y_query.fund_performance, self.__ticker):
             for key in self.__y_query.fund_performance.get(self.__ticker):
                 print("+", self.__class__.__name__, ':', key)

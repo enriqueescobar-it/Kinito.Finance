@@ -151,8 +151,10 @@ class AbstractStock(ABC):
         self._conv_part_count = conv_int
 
     def _is_any_null(self, a_any: any, a_str: str) -> bool:
-        print("+ as", type(a_any))
-        return any(a_any) and len(a_any.get(a_str)) >= 50
+        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and (not (("Quote not found for ticker symbol:" + a_str) in str(a_any)))
+        if boo:
+            print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
+        return boo
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)

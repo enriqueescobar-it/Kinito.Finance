@@ -82,9 +82,7 @@ class RegularCurrency(AbstractCurrency):
             return plt
 
     def __setInfo(self):
-        if self._is_any_null(self.__y_query.fund_holding_info, self.__ticker):
-            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
-        else:
+        if not self._is_any_null(self.__y_query.fund_holding_info, self.__ticker):
             for key in self.__y_query.fund_holding_info.get(self.__ticker):
                 if key == 'equityHoldings':
                     self.__setPriceTo(self.__y_query.fund_holding_info.get(self.__ticker)[key])
@@ -96,8 +94,6 @@ class RegularCurrency(AbstractCurrency):
         self._price_to_cash = a_dict['priceToCashflow']
 
     def __setPerformance(self):
-        if self._is_any_null(self.__y_query.fund_performance, self.__ticker):
-            print("+", self.__class__.__name__, ':', self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
-        else:
+        if not self._is_any_null(self.__y_query.fund_performance, self.__ticker):
             for key in self.__y_query.fund_performance.get(self.__ticker):
                 print("+", self.__class__.__name__, ':', key)
