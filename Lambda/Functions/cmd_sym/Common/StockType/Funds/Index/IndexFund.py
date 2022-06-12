@@ -39,6 +39,7 @@ class IndexFund(AbstractStockFund):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
+        pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -61,7 +62,8 @@ class IndexFund(AbstractStockFund):
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
             "has_sectors": self._has_sectors,
-            "has_holdings": self._has_holdings
+            "has_holdings": self._has_holdings,
+            "has_key_stat_dict": self._has_key_stat_dict
         }.items()
 
     def to_json(self):
@@ -74,3 +76,4 @@ class IndexFund(AbstractStockFund):
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
         self._set_fund_performance(self.__y_query.fund_performance, self.__ticker)
+        self._key_stats('defaultKeyStatistics', self.__y_query.key_stats, self.__ticker)

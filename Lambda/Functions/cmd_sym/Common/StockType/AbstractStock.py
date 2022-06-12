@@ -23,8 +23,10 @@ class AbstractStock(ABC):
     _price_to_sale: float = np.nan
     _has_sectors: bool = False
     _has_holdings: bool = False
+    _has_key_stat_dict: bool = False
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
+    _key_stat_dict: dict = {}
 
     def __init__(self):
         self.__class = 'TypeInfo'
@@ -44,6 +46,7 @@ class AbstractStock(ABC):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
+        pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -68,11 +71,22 @@ class AbstractStock(ABC):
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
             "has_sectors": self._has_sectors,
-            "has_holdings": self._has_holdings
+            "has_holdings": self._has_holdings,
+            "has_key_stat_dict": self._has_key_stat_dict
         }.items()
 
     def _set_info(self):
         pass
+
+    def _get_dict_valid(self, a_dict: dict, a_str: str) -> (bool, dict):
+        boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and not(("summaryTypes=" + a_str) in str(a_dict))
+        return (boo, a_dict) if boo else (boo, {})
+
+    def _is_any_null(self, a_any: any, a_str: str) -> bool:
+        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and (not (("Quote not found for ticker symbol:" + a_str) in str(a_any)))
+        if boo:
+            print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
+        return boo
 
     def _set_sector_df(self, a_any: any):
         is_any: bool = any(a_any)
@@ -154,12 +168,6 @@ class AbstractStock(ABC):
         self._pref_part_count = pref_int
         self._conv_part_count = conv_int
 
-    def _is_any_null(self, a_any: any, a_str: str) -> bool:
-        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and (not (("Quote not found for ticker symbol:" + a_str) in str(a_any)))
-        if boo:
-            print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
-        return boo
-
     def _set_fund_holding_info(self, holding_info_dict: dict, ticker_str: str):
         if not self._is_any_null(holding_info_dict, ticker_str):
             for key in holding_info_dict.get(ticker_str):
@@ -176,6 +184,11 @@ class AbstractStock(ABC):
         if not self._is_any_null(a_any, a_str):
             for key in a_any.get(a_str):
                 print("+", self.__class__.__name__, ':', key)
+
+    def _key_stats(self, str_stats: str, key_stats: dict, str_filter: str):
+        boo, key_stats = self._get_dict_valid(key_stats, str_stats)
+        if self._has_key_stat_dict:
+            self._key_stat_dict = key_stats.get(str_filter)
 
     def _plot_sector_df(self, class_str: str, tick_str: str):
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
@@ -226,6 +239,10 @@ class AbstractStock(ABC):
     @property
     def HasHoldings(self):
         return self._has_holdings
+
+    @property
+    def HasKeyStatDict(self):
+        return self._has_key_stat_dict
 
     @property
     def SectorDataFrame(self):
