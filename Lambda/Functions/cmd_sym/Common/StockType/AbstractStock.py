@@ -26,11 +26,13 @@ class AbstractStock(ABC):
     _has_key_stat_dict: bool = False
     _has_financial_data_dict: bool = False
     _has_price_dict: bool = False
+    _has_quote_type_dict: bool = False
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _key_stat_dict: dict = {}
     _financial_data_dict: dict = {}
     _price_dict: dict = {}
+    _quote_type_dict: dict = {}
 
     def __init__(self):
         self.__class = 'TypeInfo'
@@ -53,6 +55,7 @@ class AbstractStock(ABC):
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
+        pt.add_row(['HasQuoteTypeDict', self._has_quote_type_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -80,14 +83,17 @@ class AbstractStock(ABC):
             "has_holdings": self._has_holdings,
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
-            "has_price_dict": self._has_price_dict
+            "has_price_dict": self._has_price_dict,
+            "has_quote_type_dict": self._has_quote_type_dict
         }.items()
 
     def _set_info(self):
         pass
 
     def _get_dict_valid(self, a_dict: dict, a_str: str) -> (bool, dict):
-        boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and not(("summaryTypes=" + a_str) in str(a_dict))
+        boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and\
+                    not(("summaryTypes=" + a_str) in str(a_dict)) and\
+                    not("Quote not found for ticker symbol: " in str(a_dict))
         return (boo, a_dict) if boo else (boo, {})
 
     def _is_any_null(self, a_any: any, a_str: str) -> bool:
@@ -208,14 +214,18 @@ class AbstractStock(ABC):
             self._financial_data_dict = a_dict.get(str_ticker)
 
     def _set_price_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and not(("Quote not found for ticker symbol: " + str_ticker) in str(a_dict))
+        boo: bool = False
+        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
         if boo:
             self._has_price_dict = boo
             self._price_dict = a_dict.get(str_ticker)
 
     def _set_quote_type_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        print(type(a_dict))
-        print(str(a_dict))
+        boo: bool = False
+        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
+        if boo:
+            self._has_quote_type_dict = boo
+            self._quote_type_dict = a_dict.get(str_ticker)
 
     def _set_summary_detail_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         print(type(a_dict))
