@@ -24,9 +24,13 @@ class AbstractStock(ABC):
     _has_sectors: bool = False
     _has_holdings: bool = False
     _has_key_stat_dict: bool = False
+    _has_financial_data_dict: bool = False
+    _has_price_dict: bool = False
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _key_stat_dict: dict = {}
+    _financial_data_dict: dict = {}
+    _price_dict: dict = {}
 
     def __init__(self):
         self.__class = 'TypeInfo'
@@ -47,6 +51,8 @@ class AbstractStock(ABC):
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
+        pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
+        pt.add_row(['HasPriceDict', self._has_price_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -72,7 +78,9 @@ class AbstractStock(ABC):
             "price_to_cashflow": self._price_to_cash,
             "has_sectors": self._has_sectors,
             "has_holdings": self._has_holdings,
-            "has_key_stat_dict": self._has_key_stat_dict
+            "has_key_stat_dict": self._has_key_stat_dict,
+            "has_financial_data_dict": self._has_financial_data_dict,
+            "has_price_dict": self._has_price_dict
         }.items()
 
     def _set_info(self):
@@ -83,7 +91,7 @@ class AbstractStock(ABC):
         return (boo, a_dict) if boo else (boo, {})
 
     def _is_any_null(self, a_any: any, a_str: str) -> bool:
-        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and (not (("Quote not found for ticker symbol:" + a_str) in str(a_any)))
+        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and (not (("Quote not found for ticker symbol: " + a_str) in str(a_any)))
         if boo:
             print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
         return boo
@@ -185,10 +193,41 @@ class AbstractStock(ABC):
             for key in a_any.get(a_str):
                 print("+", self.__class__.__name__, ':', key)
 
-    def _key_stats(self, str_stats: str, key_stats: dict, str_filter: str):
-        boo, key_stats = self._get_dict_valid(key_stats, str_stats)
-        if self._has_key_stat_dict:
-            self._key_stat_dict = key_stats.get(str_filter)
+    def _set_key_stat_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
+        boo: bool = False
+        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
+        if boo:
+            self._has_key_stat_dict = boo
+            self._key_stat_dict = a_dict.get(str_ticker)
+
+    def _set_financial_data_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
+        boo: bool = False
+        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
+        if boo:
+            self._has_financial_data_dict = boo
+            self._financial_data_dict = a_dict.get(str_ticker)
+
+    def _set_price_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
+        boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and not(("Quote not found for ticker symbol: " + str_ticker) in str(a_dict))
+        if boo:
+            self._has_price_dict = boo
+            self._price_dict = a_dict.get(str_ticker)
+
+    def _set_quote_type_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
+        print(type(a_dict))
+        print(str(a_dict))
+
+    def _set_summary_detail_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
+        print(type(a_dict))
+        print(str(a_dict))
+
+    def _set_summary_profile_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
+        print(type(a_dict))
+        print(str(a_dict))
+
+    def _set_share_purchase_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
+        print(type(a_dict))
+        print(str(a_dict))
 
     def _plot_sector_df(self, class_str: str, tick_str: str):
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
@@ -243,6 +282,14 @@ class AbstractStock(ABC):
     @property
     def HasKeyStatDict(self):
         return self._has_key_stat_dict
+
+    @property
+    def HasFinancialDataDict(self):
+        return self._has_financial_data_dict
+
+    @property
+    def HasPriceDict(self):
+        return self._has_price_dict
 
     @property
     def SectorDataFrame(self):

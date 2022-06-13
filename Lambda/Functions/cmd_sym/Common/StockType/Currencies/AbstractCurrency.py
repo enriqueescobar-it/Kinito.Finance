@@ -30,6 +30,9 @@ class AbstractCurrency(AbstractStock):
         pt.add_row(['PriceToCashflow', self._price_to_cash])
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
+        pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
+        pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
+        pt.add_row(['HasPriceDict', self._has_price_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
@@ -46,5 +49,17 @@ class AbstractCurrency(AbstractStock):
             "ticker": self.__ticker,
             "type": self.__class,
             "quote_type": self._quote_type,
-            "name": self._name
+            "name": self._name,
+            "stock_percent": self._stock_part_count,
+            "bond_percent": self._bond_part_count,
+            "cash_percent": self._cash_part_count,
+            "price_to_earnings": self._price_to_earn,
+            "price_to_book": self._price_to_book,
+            "price_to_sales": self._price_to_sale,
+            "price_to_cashflow": self._price_to_cash,
+            "has_sectors": self._has_sectors,
+            "has_holdings": self._has_holdings,
+            "has_key_stat_dict": self._has_key_stat_dict,
+            "has_financial_data_dict": self._has_financial_data_dict,
+            "has_price_dict": self._has_price_dict
         }.items()

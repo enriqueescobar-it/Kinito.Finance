@@ -39,6 +39,8 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['HasSectors', self._has_sectors])
         pt.add_row(['HasHoldings', self._has_holdings])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
+        pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
+        pt.add_row(['HasPriceDict', self._has_price_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -65,7 +67,9 @@ class AbstractStockFuture(AbstractStock):
             "price_to_cashflow": self._price_to_cash,
             "has_sectors": self._has_sectors,
             "has_holdings": self._has_holdings,
-            "has_key_stat_dict": self._has_key_stat_dict
+            "has_key_stat_dict": self._has_key_stat_dict,
+            "has_financial_data_dict": self._has_financial_data_dict,
+            "has_price_dict": self._has_price_dict
         }.items()
 
     def _set_info(self):
@@ -74,4 +78,6 @@ class AbstractStockFuture(AbstractStock):
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
         self._set_fund_performance(self.__y_query.fund_performance, self.__ticker)
-        self._key_stats('defaultKeyStatistics', self.__y_query.key_stats, self.__ticker)
+        self._set_key_stat_dict('defaultKeyStatistics', self.__y_query.key_stats, self.__ticker)
+        self._set_financial_data_dict('financialData', self.__y_query.financial_data, self.__ticker)
+        self._set_price_dict('?', self.__y_query.price, self.__ticker)
