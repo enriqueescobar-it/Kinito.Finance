@@ -27,12 +27,14 @@ class AbstractStock(ABC):
     _has_financial_data_dict: bool = False
     _has_price_dict: bool = False
     _has_quote_type_dict: bool = False
+    _has_summary_detail_dict: bool = False
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _key_stat_dict: dict = {}
     _financial_data_dict: dict = {}
     _price_dict: dict = {}
     _quote_type_dict: dict = {}
+    _summary_detail_dict: dict = {}
 
     def __init__(self):
         self.__class = 'TypeInfo'
@@ -56,6 +58,7 @@ class AbstractStock(ABC):
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
         pt.add_row(['HasQuoteTypeDict', self._has_quote_type_dict])
+        pt.add_row(['HasSummaryDetailDict', self._has_summary_detail_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -84,7 +87,8 @@ class AbstractStock(ABC):
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
-            "has_quote_type_dict": self._has_quote_type_dict
+            "has_quote_type_dict": self._has_quote_type_dict,
+            "has_summary_detail_dict": self._has_summary_detail_dict
         }.items()
 
     def _set_info(self):
@@ -228,8 +232,11 @@ class AbstractStock(ABC):
             self._quote_type_dict = a_dict.get(str_ticker)
 
     def _set_summary_detail_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        print(type(a_dict))
-        print(str(a_dict))
+        boo: bool = False
+        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
+        if boo:
+            self._has_summary_detail_dict = boo
+            self._summary_detail_dict = a_dict.get(str_ticker)
 
     def _set_summary_profile_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         print(type(a_dict))
@@ -300,6 +307,14 @@ class AbstractStock(ABC):
     @property
     def HasPriceDict(self):
         return self._has_price_dict
+
+    @property
+    def HasQuoteTypeDict(self):
+        return self._has_quote_type_dict
+
+    @property
+    def HasSummaryDetailDict(self):
+        return self._has_summary_detail_dict
 
     @property
     def SectorDataFrame(self):

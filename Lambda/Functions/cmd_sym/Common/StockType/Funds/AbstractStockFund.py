@@ -36,6 +36,7 @@ class AbstractStockFund(AbstractStock):
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
         pt.add_row(['HasQuoteTypeDict', self._has_quote_type_dict])
+        pt.add_row(['HasSummaryDetailDict', self._has_summary_detail_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.head().to_string(index=True)
@@ -65,5 +66,6 @@ class AbstractStockFund(AbstractStock):
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
-            "has_quote_type_dict": self._has_quote_type_dict
+            "has_quote_type_dict": self._has_quote_type_dict,
+            "has_summary_detail_dict": self._has_summary_detail_dict
         }.items()
