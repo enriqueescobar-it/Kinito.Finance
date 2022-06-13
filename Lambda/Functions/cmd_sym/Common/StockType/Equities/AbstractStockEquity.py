@@ -43,6 +43,8 @@ class AbstractStockEquity(AbstractStock):
         pt.add_row(['HasPriceDict', self._has_price_dict])
         pt.add_row(['HasQuoteTypeDict', self._has_quote_type_dict])
         pt.add_row(['HasSummaryDetailDict', self._has_summary_detail_dict])
+        pt.add_row(['HasSummaryProfileDict', self._has_summary_profile_dict])
+        pt.add_row(['HasSharePurchaseDict', self._has_share_purchase_dict])
         s = pt.__str__()
         if self._has_sectors:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
@@ -73,7 +75,9 @@ class AbstractStockEquity(AbstractStock):
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
             "has_quote_type_dict": self._has_quote_type_dict,
-            "has_summary_detail_dict": self._has_summary_detail_dict
+            "has_summary_detail_dict": self._has_summary_detail_dict,
+            "has_summary_profile_dict": self._has_summary_profile_dict,
+            "has_share_purchase_dict": self._has_share_purchase_dict
         }.items()
 
     def _set_info(self):
@@ -88,8 +92,8 @@ class AbstractStockEquity(AbstractStock):
         self._set_price_dict('?', self.__y_query.price, self.__ticker)
         self._set_quote_type_dict('?', self.__y_query.quote_type, self.__ticker)
         self._set_summary_detail_dict('?', self.__y_query.summary_detail, self.__ticker)
-        #self._set_summary_profile_dict('?', self.__y_query.summary_profile, self.__ticker)
-        #self._set_share_purchase_dict('?', self.__y_query.share_purchase_activity, self.__ticker)
+        self._set_summary_profile_dict('?', self.__y_query.summary_profile, self.__ticker)
+        self._set_share_purchase_dict('?', self.__y_query.share_purchase_activity, self.__ticker)
 
     def __setInfo(self):
         self._price_to_book = self.__yfsi.PriceToBook
