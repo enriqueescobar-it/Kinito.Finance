@@ -24,6 +24,9 @@ class CryptoCurrency(AbstractCurrency):
         pt.add_row(['Ticker', self.__ticker])
         pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['UUID', self._uuid])
+        pt.add_row(['UnderlyingSymbol', self._underlying_s])
+        pt.add_row(['Symbol', self._symbol])
         pt.add_row(['Exchange', self._exchange])
         pt.add_row(['TZ', self._t_z])
         pt.add_row(['Name', self._name])
@@ -56,6 +59,9 @@ class CryptoCurrency(AbstractCurrency):
             "ticker": self.__ticker,
             "type": self.__class,
             "quote_type": self._quote_type,
+            "uuid": self._uuid,
+            "underlying_symbol": self._underlying_s,
+            "symbol": self._symbol,
             "exchange": self._exchange,
             "t_z": self._t_z,
             "name": self._name,

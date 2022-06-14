@@ -1,5 +1,7 @@
 from abc import *
 import json
+from typing import Optional, Any
+
 import numpy as np
 from matplotlib import pyplot as plt
 from pandas import DataFrame
@@ -10,6 +12,9 @@ class AbstractStock(ABC):
     __class: str = 'NA'
     _header: list = ['Info', 'TypeInfo']
     _quote_type: str = 'NA'
+    _uuid: str = '00000000-0000-0000-0000-000000000000'
+    _underlying_s: str = 'NA'
+    _symbol: str = 'NA'
     _exchange: str = 'NA'
     _t_z: str = 'GMT'
     _name: str = 'NA'
@@ -50,6 +55,9 @@ class AbstractStock(ABC):
         pt.field_names = self._header
         pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['UUID', self._uuid])
+        pt.add_row(['UnderlyingSymbol', self._underlying_s])
+        pt.add_row(['Symbol', self._symbol])
         pt.add_row(['Exchange', self._exchange])
         pt.add_row(['TZ', self._t_z])
         pt.add_row(['Name', self._name])
@@ -84,6 +92,9 @@ class AbstractStock(ABC):
             "Info": self.__class,
             "type": self.__class,
             "quote_type": self._quote_type,
+            "uuid": self._uuid,
+            "underlying_symbol": self._underlying_s,
+            "symbol": self._symbol,
             "exchange": self._exchange,
             "t_z": self._t_z,
             "name": self._name,
@@ -106,12 +117,11 @@ class AbstractStock(ABC):
         }.items()
 
     def __set_quote_type_dict(self):
-        print('uuid', self._quote_type_dict.get('uuid'))
-        print('underlyingSymbol', self._quote_type_dict.get('underlyingSymbol'))
-        print('symbol', self._quote_type_dict.get('symbol'))
+        self._uuid = self._quote_type_dict.get('uuid')
+        self._underlying_s = self._quote_type_dict.get('underlyingSymbol')
+        self._symbol = self._quote_type_dict.get('symbol')
         self._exchange = self._quote_type_dict.get('exchange')
         self._t_z = self._quote_type_dict.get('timeZoneShortName')
-        print(self._quote_type_dict)
 
     def _set_info(self):
         pass
