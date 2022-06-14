@@ -10,6 +10,8 @@ class AbstractStock(ABC):
     __class: str = 'NA'
     _header: list = ['Info', 'TypeInfo']
     _quote_type: str = 'NA'
+    _exchange: str = 'NA'
+    _t_z: str = 'GMT'
     _name: str = 'NA'
     _stock_part_count: int = 0
     _bond_part_count: int = 0
@@ -48,6 +50,8 @@ class AbstractStock(ABC):
         pt.field_names = self._header
         pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['Exchange', self._exchange])
+        pt.add_row(['TZ', self._t_z])
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
@@ -80,6 +84,8 @@ class AbstractStock(ABC):
             "Info": self.__class,
             "type": self.__class,
             "quote_type": self._quote_type,
+            "exchange": self._exchange,
+            "t_z": self._t_z,
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
@@ -98,6 +104,14 @@ class AbstractStock(ABC):
             "has_summary_profile_dict": self._has_summary_profile_dict,
             "has_share_purchase_dict": self._has_share_purchase_dict
         }.items()
+
+    def __set_quote_type_dict(self):
+        print('uuid', self._quote_type_dict.get('uuid'))
+        print('underlyingSymbol', self._quote_type_dict.get('underlyingSymbol'))
+        print('symbol', self._quote_type_dict.get('symbol'))
+        self._exchange = self._quote_type_dict.get('exchange')
+        self._t_z = self._quote_type_dict.get('timeZoneShortName')
+        print(self._quote_type_dict)
 
     def _set_info(self):
         pass
@@ -223,6 +237,8 @@ class AbstractStock(ABC):
 
     def _set_quote_type_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_quote_type_dict, self._quote_type_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
+        if self._has_quote_type_dict:
+            self.__set_quote_type_dict()
 
     def _set_summary_detail_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_summary_detail_dict, self._summary_detail_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)

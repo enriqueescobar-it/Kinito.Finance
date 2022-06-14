@@ -26,6 +26,8 @@ class RegularCurrency(AbstractCurrency):
         pt.add_row(['Ticker', self.__ticker])
         pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['Exchange', self._exchange])
+        pt.add_row(['TZ', self._t_z])
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
@@ -56,6 +58,8 @@ class RegularCurrency(AbstractCurrency):
             "ticker": self.__ticker,
             "type": self.__class,
             "quote_type": self._quote_type,
+            "exchange": self._exchange,
+            "t_z": self._t_z,
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
