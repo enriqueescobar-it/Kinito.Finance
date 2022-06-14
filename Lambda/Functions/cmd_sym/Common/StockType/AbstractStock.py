@@ -21,8 +21,8 @@ class AbstractStock(ABC):
     _price_to_cash: float = np.nan
     _price_to_earn: float = np.nan
     _price_to_sale: float = np.nan
-    _has_sectors: bool = False
-    _has_holdings: bool = False
+    _has_sector_df: bool = False
+    _has_holding_df: bool = False
     _has_key_stat_dict: bool = False
     _has_financial_data_dict: bool = False
     _has_price_dict: bool = False
@@ -56,8 +56,8 @@ class AbstractStock(ABC):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
-        pt.add_row(['HasSectors', self._has_sectors])
-        pt.add_row(['HasHoldings', self._has_holdings])
+        pt.add_row(['HasSectorDf', self._has_sector_df])
+        pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
@@ -66,9 +66,9 @@ class AbstractStock(ABC):
         pt.add_row(['HasSummaryProfileDict', self._has_summary_profile_dict])
         pt.add_row(['HasSharePurchaseDict', self._has_share_purchase_dict])
         s = pt.__str__()
-        if self._has_sectors:
+        if self._has_sector_df:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
-        if self._has_holdings:
+        if self._has_holding_df:
             s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
         return s
 
@@ -88,8 +88,8 @@ class AbstractStock(ABC):
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
-            "has_sectors": self._has_sectors,
-            "has_holdings": self._has_holdings,
+            "has_sector_df": self._has_sector_df,
+            "has_holding_df": self._has_holding_df,
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
@@ -109,7 +109,8 @@ class AbstractStock(ABC):
         return (boo, a_dict.get(a_key)) if boo else (boo, {})
 
     def _is_any_null(self, a_any: any, a_str: str) -> bool:
-        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and (not (("Quote not found for ticker symbol: " + a_str) in str(a_any)))
+        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and\
+                    (not (("Quote not found for ticker symbol: " + a_str) in str(a_any)))
         if boo:
             print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
         return boo
@@ -123,7 +124,7 @@ class AbstractStock(ABC):
             if is_df:
                 self._sector_df = a_any.reset_index()
                 self._sector_df.columns = ['Sector', 'Percent']
-                self._has_sectors = True
+                self._has_sector_df = True
             else:
                 s: str = (list(a_any.values())[0]).split(' found ')[0]
                 self._sector_df['Sector'] = s
@@ -138,7 +139,7 @@ class AbstractStock(ABC):
                 self._holding_df = any_top
                 self._holding_df.set_index('symbol', inplace=True)
                 self._holding_df.reset_index(inplace=True)
-                self._has_holdings = True
+                self._has_holding_df = True
             else:
                 s: str = (list(any_sector.values())[0]).split(' found ')[0]
                 self._holding_df['symbol'] = s
@@ -275,12 +276,12 @@ class AbstractStock(ABC):
         return self._price_to_sale
 
     @property
-    def HasSectors(self):
-        return self._has_sectors
+    def HasSectorDf(self):
+        return self._has_sector_df
 
     @property
-    def HasHoldings(self):
-        return self._has_holdings
+    def HasHoldingDf(self):
+        return self._has_holding_df
 
     @property
     def HasKeyStatDict(self):

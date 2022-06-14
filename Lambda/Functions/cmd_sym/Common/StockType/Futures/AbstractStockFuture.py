@@ -36,8 +36,8 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
-        pt.add_row(['HasSectors', self._has_sectors])
-        pt.add_row(['HasHoldings', self._has_holdings])
+        pt.add_row(['HasSectorDf', self._has_sector_df])
+        pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
@@ -46,9 +46,9 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['HasSummaryProfileDict', self._has_summary_profile_dict])
         pt.add_row(['HasSharePurchaseDict', self._has_share_purchase_dict])
         s = pt.__str__()
-        if self._has_sectors:
+        if self._has_sector_df:
             s += "\n\nSECTOR DATAFRAME\n" + self._sector_df.to_string(index=True)
-        if self._has_holdings:
+        if self._has_holding_df:
             s += "\n\nHOLDING DATAFRAME\n" + self._holding_df.to_string(index=True)
         return s
 
@@ -69,8 +69,8 @@ class AbstractStockFuture(AbstractStock):
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
-            "has_sectors": self._has_sectors,
-            "has_holdings": self._has_holdings,
+            "has_sector_df": self._has_sector_df,
+            "has_holding_df": self._has_holding_df,
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
