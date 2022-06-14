@@ -102,11 +102,11 @@ class AbstractStock(ABC):
     def _set_info(self):
         pass
 
-    def _get_dict_valid(self, a_dict: dict, a_str: str) -> (bool, dict):
+    def _get_dict_valid(self, a_key: str, a_dict: dict, a_str: str) -> (bool, dict):
         boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and\
                     not(("summaryTypes=" + a_str) in str(a_dict)) and\
                     not("Quote not found for ticker symbol: " in str(a_dict))
-        return (boo, a_dict) if boo else (boo, {})
+        return (boo, a_dict.get(a_key)) if boo else (boo, {})
 
     def _is_any_null(self, a_any: any, a_str: str) -> bool:
         boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and (not (("Quote not found for ticker symbol: " + a_str) in str(a_any)))
@@ -212,53 +212,25 @@ class AbstractStock(ABC):
                 print("+", self.__class__.__name__, ':', key)
 
     def _set_key_stat_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = False
-        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
-        if boo:
-            self._has_key_stat_dict = boo
-            self._key_stat_dict = a_dict.get(str_ticker)
+        self._has_key_stat_dict, self._key_stat_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
 
     def _set_financial_data_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = False
-        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
-        if boo:
-            self._has_financial_data_dict = boo
-            self._financial_data_dict = a_dict.get(str_ticker)
+        self._has_financial_data_dict, self._financial_data_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
 
     def _set_price_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = False
-        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
-        if boo:
-            self._has_price_dict = boo
-            self._price_dict = a_dict.get(str_ticker)
+        self._has_price_dict, self._price_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
 
     def _set_quote_type_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = False
-        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
-        if boo:
-            self._has_quote_type_dict = boo
-            self._quote_type_dict = a_dict.get(str_ticker)
+        self._has_quote_type_dict, self._quote_type_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
 
     def _set_summary_detail_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = False
-        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
-        if boo:
-            self._has_summary_detail_dict = boo
-            self._summary_detail_dict = a_dict.get(str_ticker)
+        self._has_summary_detail_dict, self._summary_detail_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
 
     def _set_summary_profile_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = False
-        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
-        if boo:
-            self._has_summary_profile_dict = boo
-            self._summary_profile_dict = a_dict.get(str_ticker)
+        self._has_summary_profile_dict, self._summary_profile_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
 
     def _set_share_purchase_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        boo: bool = False
-        boo, a_dict = self._get_dict_valid(a_dict, str_filter)
-        if boo:
-            self._has_share_purchase_dict = boo
-            self._share_purchase_dict = a_dict.get(str_ticker)
+        self._has_share_purchase_dict, self._share_purchase_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
 
     def _plot_sector_df(self, class_str: str, tick_str: str):
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
