@@ -29,6 +29,9 @@ class CryptoCurrency(AbstractCurrency):
         pt.add_row(['Symbol', self._symbol])
         pt.add_row(['Exchange', self._exchange])
         pt.add_row(['TZ', self._t_z])
+        pt.add_row(['Industry', self._industry])
+        pt.add_row(['Sector', self._sector])
+        pt.add_row(['EmployeeCount', self._employee_count])
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
@@ -64,6 +67,9 @@ class CryptoCurrency(AbstractCurrency):
             "symbol": self._symbol,
             "exchange": self._exchange,
             "t_z": self._t_z,
+            "industry": self._industry,
+            "sector": self._sector,
+            "employee_count": self._employee_count,
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,

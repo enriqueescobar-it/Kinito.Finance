@@ -17,6 +17,8 @@ class AbstractStock(ABC):
     _symbol: str = 'NA'
     _exchange: str = 'NA'
     _t_z: str = 'GMT'
+    _industry: str = 'NA'
+    _sector: str = 'NA'
     _name: str = 'NA'
     _stock_part_count: int = 0
     _bond_part_count: int = 0
@@ -24,6 +26,7 @@ class AbstractStock(ABC):
     _other_part_count: int = 0
     _pref_part_count: int = 0
     _conv_part_count: int = 0
+    _employee_count: int = 0
     _price_to_book: float = np.nan
     _price_to_cash: float = np.nan
     _price_to_earn: float = np.nan
@@ -60,6 +63,9 @@ class AbstractStock(ABC):
         pt.add_row(['Symbol', self._symbol])
         pt.add_row(['Exchange', self._exchange])
         pt.add_row(['TZ', self._t_z])
+        pt.add_row(['Industry', self._industry])
+        pt.add_row(['Sector', self._sector])
+        pt.add_row(['EmployeeCount', self._employee_count])
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
@@ -97,6 +103,9 @@ class AbstractStock(ABC):
             "symbol": self._symbol,
             "exchange": self._exchange,
             "t_z": self._t_z,
+            "industry": self._industry,
+            "sector": self._sector,
+            "employee_count": self._employee_count,
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
@@ -123,17 +132,25 @@ class AbstractStock(ABC):
         self._exchange = self._quote_type_dict.get('exchange')
         self._t_z = self._quote_type_dict.get('timeZoneShortName')
 
+    def __set_summary_profile_dict(self):
+        if 'industry' in self._summary_profile_dict.keys():
+            self._industry = self._summary_profile_dict.get('industry')
+        if 'sector' in self._summary_profile_dict.keys():
+            self._sector = self._summary_profile_dict.get('sector')
+        if 'fullTimeEmployees' in self._summary_profile_dict.keys():
+            self._employee_count = self._summary_profile_dict.get('fullTimeEmployees')
+
     def _set_info(self):
         pass
 
     def _get_dict_valid(self, a_key: str, a_dict: dict, a_str: str) -> (bool, dict):
-        boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and\
-                    not(("summaryTypes=" + a_str) in str(a_dict)) and\
-                    not("Quote not found for ticker symbol: " in str(a_dict))
+        boo: bool = any(a_dict) and (isinstance(a_dict, dict)) and \
+                    not (("summaryTypes=" + a_str) in str(a_dict)) and \
+                    not ("Quote not found for ticker symbol: " in str(a_dict))
         return (boo, a_dict.get(a_key)) if boo else (boo, {})
 
     def _is_any_null(self, a_any: any, a_str: str) -> bool:
-        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and\
+        boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and \
                     (not (("Quote not found for ticker symbol: " + a_str) in str(a_any)))
         if boo:
             print("+", self.__class__.__name__, 'dict:', a_str, type(a_any), 'size', len(a_any.get(a_str)))
@@ -238,12 +255,25 @@ class AbstractStock(ABC):
 
     def _set_key_stat_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_key_stat_dict, self._key_stat_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
+        # if self._has_key_stat_dict:
+        # print('regularMarketTime', self._key_stat_dict.get('regularMarketTime'))
+        # print('exchangeName', self._key_stat_dict.get('exchangeName'))
+        # print('currencySymbol', self._key_stat_dict.get('currencySymbol'))
+        # print('quoteSourceName', self._key_stat_dict.get('quoteSourceName'))
+        # print(self._key_stat_dict)
 
     def _set_financial_data_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_financial_data_dict, self._financial_data_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
+        if self._has_financial_data_dict:
+            print('+++++++++++++++++', self._financial_data_dict)
 
     def _set_price_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_price_dict, self._price_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
+        if self._has_price_dict:
+            print('regularMarketTime', self._price_dict.get('regularMarketTime'))
+            print('exchangeName', self._price_dict.get('exchangeName'))
+            print('currencySymbol', self._price_dict.get('currencySymbol'))
+            print('quoteSourceName', self._price_dict.get('quoteSourceName'))
 
     def _set_quote_type_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_quote_type_dict, self._quote_type_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
@@ -252,18 +282,32 @@ class AbstractStock(ABC):
 
     def _set_summary_detail_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_summary_detail_dict, self._summary_detail_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
+        if self._has_summary_detail_dict:
+            print('open', self._summary_detail_dict.get('open'))
+            print('previousClose', self._summary_detail_dict.get('previousClose'))
+            print('dayHigh', self._summary_detail_dict.get('dayHigh'))
+            print('dayLow', self._summary_detail_dict.get('dayLow'))
+            print('fiftyTwoWeekHigh', self._summary_detail_dict.get('fiftyTwoWeekHigh'))
+            print('fiftyTwoWeekLow', self._summary_detail_dict.get('fiftyTwoWeekLow'))
+            print('fiftyDayAverage', self._summary_detail_dict.get('fiftyDayAverage'))
+            print('twoHundredDayAverage', self._summary_detail_dict.get('twoHundredDayAverage'))
 
     def _set_summary_profile_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        self._has_summary_profile_dict, self._summary_profile_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
+        self._has_summary_profile_dict, self._summary_profile_dict = self._get_dict_valid(str_ticker, a_dict,
+                                                                                          str_filter)
+        if self._has_summary_profile_dict:
+            self.__set_summary_profile_dict()
 
     def _set_share_purchase_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_share_purchase_dict, self._share_purchase_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
+        # if self._has_share_purchase_dict:
+        #    print('------------------', self._share_purchase_dict)
 
     def _plot_sector_df(self, class_str: str, tick_str: str):
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():
             self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
-                                    autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
-                                    title='Sector Distribution ' + tick_str + ' ' + class_str)
+                                     autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
+                                     title='Sector Distribution ' + tick_str + ' ' + class_str)
             return plt
 
     def to_json(self):
