@@ -1,6 +1,5 @@
 import json
 from abc import *
-from typing import Optional, Any
 
 import numpy as np
 from matplotlib import pyplot as plt
@@ -36,6 +35,14 @@ class AbstractStock(ABC):
     _price_to_cash: float = np.nan
     _price_to_earn: float = np.nan
     _price_to_sale: float = np.nan
+    _open: float = np.nan
+    _high: float = np.nan
+    _low: float = np.nan
+    _close: float = np.nan
+    _high_52week: float = np.nan
+    _low_52week: float = np.nan
+    _mean_52week: float = np.nan
+    _mean_200day: float = np.nan
     _has_sector_df: bool = False
     _has_holding_df: bool = False
     _has_key_stat_dict: bool = False
@@ -84,6 +91,14 @@ class AbstractStock(ABC):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['Open', self._open])
+        pt.add_row(['High', self._high])
+        pt.add_row(['Low', self._low])
+        pt.add_row(['Close', self._close])
+        pt.add_row(['High52Week', self._high_52week])
+        pt.add_row(['Low52Week', self._low_52week])
+        pt.add_row(['Mean52Week', self._mean_52week])
+        pt.add_row(['Mean200Days', self._mean_200day])
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
@@ -129,6 +144,14 @@ class AbstractStock(ABC):
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
+            "open": self._open,
+            "high": self._high,
+            "low": self._low,
+            "close": self._close,
+            "high_52week": self._high_52week,
+            "low_52week": self._low_52week,
+            "mean_52week": self._mean_52week,
+            "mean_200day": self._mean_200day,
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_key_stat_dict": self._has_key_stat_dict,
@@ -284,6 +307,27 @@ class AbstractStock(ABC):
         if 'regularMarketTime' in self._price_dict.keys():
             self._exchange_dt = self._price_dict.get('regularMarketTime')
 
+    def __set_financial_data_dict(self):
+        print('+++++++++++++++++', self._financial_data_dict)
+
+    def __set_summary_detail_dict(self):
+        if 'open' in self._summary_detail_dict.keys():
+            self._open = self._summary_detail_dict.get('open')
+        if 'dayHigh' in self._summary_detail_dict.keys():
+            self._low = self._summary_detail_dict.get('dayLow')
+        if 'dayHigh' in self._summary_detail_dict.keys():
+            self._high = self._summary_detail_dict.get('dayHigh')
+        if 'previousClose' in self._summary_detail_dict.keys():
+            self._close = self._summary_detail_dict.get('previousClose')
+        if 'fiftyTwoWeekHigh' in self._summary_detail_dict.keys():
+            self._high_52week = self._summary_detail_dict.get('fiftyTwoWeekHigh')
+        if 'fiftyTwoWeekLow' in self._summary_detail_dict.keys():
+            self._low_52week = self._summary_detail_dict.get('fiftyTwoWeekLow')
+        if 'fiftyDayAverage' in self._summary_detail_dict.keys():
+            self._mean_52week = self._summary_detail_dict.get('fiftyDayAverage')
+        if 'twoHundredDayAverage' in self._summary_detail_dict.keys():
+            self._mean_200day = self._summary_detail_dict.get('twoHundredDayAverage')
+
     def _set_fund_performance(self, a_any: any, a_str: str):
         if not self._is_any_null(a_any, a_str):
             for key in a_any.get(a_str):
@@ -291,12 +335,12 @@ class AbstractStock(ABC):
 
     def _set_key_stat_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_key_stat_dict, self._key_stat_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
-        # if self._has_key_stat_dict:
+        if self._has_key_stat_dict:
+            print('==================', self._key_stat_dict)
         # print('regularMarketTime', self._key_stat_dict.get('regularMarketTime'))
         # print('exchangeName', self._key_stat_dict.get('exchangeName'))
         # print('currencySymbol', self._key_stat_dict.get('currencySymbol'))
         # print('quoteSourceName', self._key_stat_dict.get('quoteSourceName'))
-        # print(self._key_stat_dict)
 
     def _set_financial_data_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_financial_data_dict, self._financial_data_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
@@ -413,16 +457,3 @@ class AbstractStock(ABC):
     @property
     def HoldingDataFrame(self):
         return self._holding_df
-
-    def __set_financial_data_dict(self):
-        print('+++++++++++++++++', self._financial_data_dict)
-
-    def __set_summary_detail_dict(self):
-        print('open', self._summary_detail_dict.get('open'))
-        print('previousClose', self._summary_detail_dict.get('previousClose'))
-        print('dayHigh', self._summary_detail_dict.get('dayHigh'))
-        print('dayLow', self._summary_detail_dict.get('dayLow'))
-        print('fiftyTwoWeekHigh', self._summary_detail_dict.get('fiftyTwoWeekHigh'))
-        print('fiftyTwoWeekLow', self._summary_detail_dict.get('fiftyTwoWeekLow'))
-        print('fiftyDayAverage', self._summary_detail_dict.get('fiftyDayAverage'))
-        print('twoHundredDayAverage', self._summary_detail_dict.get('twoHundredDayAverage'))

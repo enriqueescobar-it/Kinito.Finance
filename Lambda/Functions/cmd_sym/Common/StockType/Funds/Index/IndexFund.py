@@ -49,6 +49,14 @@ class IndexFund(AbstractStockFund):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['Open', self._open])
+        pt.add_row(['High', self._high])
+        pt.add_row(['Low', self._low])
+        pt.add_row(['Close', self._close])
+        pt.add_row(['High52Week', self._high_52week])
+        pt.add_row(['Low52Week', self._low_52week])
+        pt.add_row(['Mean52Week', self._mean_52week])
+        pt.add_row(['Mean200Days', self._mean_200day])
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
@@ -92,6 +100,14 @@ class IndexFund(AbstractStockFund):
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
+            "open": self._open,
+            "high": self._high,
+            "low": self._low,
+            "close": self._close,
+            "high_52week": self._high_52week,
+            "low_52week": self._low_52week,
+            "mean_52week": self._mean_52week,
+            "mean_200day": self._mean_200day,
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_key_stat_dict": self._has_key_stat_dict,
