@@ -28,10 +28,15 @@ class AbstractStockEquity(AbstractStock):
         pt.add_row(['Ticker', self.__ticker])
         pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['QuoteSourceName', self._quote_src_name])
         pt.add_row(['UUID', self._uuid])
         pt.add_row(['UnderlyingSymbol', self._underlying_s])
         pt.add_row(['Symbol', self._symbol])
+        pt.add_row(['Currency', self._currency])
+        pt.add_row(['CurrencySymbol', self._currency_symbol])
         pt.add_row(['Exchange', self._exchange])
+        pt.add_row(['ExchangeName', self._exchange_name])
+        pt.add_row(['ExchangeDateTime', self._exchange_dt])
         pt.add_row(['TZ', self._t_z])
         pt.add_row(['Industry', self._industry])
         pt.add_row(['Sector', self._sector])
@@ -69,10 +74,15 @@ class AbstractStockEquity(AbstractStock):
             "ticker": self.__ticker,
             "type": self.__class,
             "quote_type": self._quote_type,
+            "quote_src_name": self._quote_src_name,
             "uuid": self._uuid,
             "underlying_symbol": self._underlying_s,
             "symbol": self._symbol,
+            "currency": self._currency,
+            "currency_symbol": self._currency_symbol,
             "exchange": self._exchange,
+            "exchange_name": self._exchange_name,
+            "exchange_dt": self._exchange_dt,
             "t_z": self._t_z,
             "industry": self._industry,
             "sector": self._sector,

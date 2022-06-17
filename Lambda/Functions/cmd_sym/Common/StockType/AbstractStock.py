@@ -1,5 +1,5 @@
-from abc import *
 import json
+from abc import *
 from typing import Optional, Any
 
 import numpy as np
@@ -12,10 +12,15 @@ class AbstractStock(ABC):
     __class: str = 'NA'
     _header: list = ['Info', 'TypeInfo']
     _quote_type: str = 'NA'
+    _quote_src_name: str = 'NA'
     _uuid: str = '00000000-0000-0000-0000-000000000000'
     _underlying_s: str = 'NA'
     _symbol: str = 'NA'
+    _currency: str = 'NA'
+    _currency_symbol: str = '$'
     _exchange: str = 'NA'
+    _exchange_name: str = 'NA'
+    _exchange_dt: str = 'NA'
     _t_z: str = 'GMT'
     _industry: str = 'NA'
     _sector: str = 'NA'
@@ -58,10 +63,15 @@ class AbstractStock(ABC):
         pt.field_names = self._header
         pt.add_row(['Type', self.__class])
         pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['QuoteSourceName', self._quote_src_name])
         pt.add_row(['UUID', self._uuid])
         pt.add_row(['UnderlyingSymbol', self._underlying_s])
         pt.add_row(['Symbol', self._symbol])
+        pt.add_row(['Currency', self._currency])
+        pt.add_row(['CurrencySymbol', self._currency_symbol])
         pt.add_row(['Exchange', self._exchange])
+        pt.add_row(['ExchangeName', self._exchange_name])
+        pt.add_row(['ExchangeDateTime', self._exchange_dt])
         pt.add_row(['TZ', self._t_z])
         pt.add_row(['Industry', self._industry])
         pt.add_row(['Sector', self._sector])
@@ -98,10 +108,15 @@ class AbstractStock(ABC):
             "Info": self.__class,
             "type": self.__class,
             "quote_type": self._quote_type,
+            "quote_src_name": self._quote_src_name,
             "uuid": self._uuid,
             "underlying_symbol": self._underlying_s,
             "symbol": self._symbol,
+            "currency": self._currency,
+            "currency_symbol": self._currency_symbol,
             "exchange": self._exchange,
+            "exchange_name": self._exchange_name,
+            "exchange_dt": self._exchange_dt,
             "t_z": self._t_z,
             "industry": self._industry,
             "sector": self._sector,
@@ -126,11 +141,16 @@ class AbstractStock(ABC):
         }.items()
 
     def __set_quote_type_dict(self):
-        self._uuid = self._quote_type_dict.get('uuid')
-        self._underlying_s = self._quote_type_dict.get('underlyingSymbol')
-        self._symbol = self._quote_type_dict.get('symbol')
-        self._exchange = self._quote_type_dict.get('exchange')
-        self._t_z = self._quote_type_dict.get('timeZoneShortName')
+        if 'uuid' in self._quote_type_dict.keys():
+            self._uuid = self._quote_type_dict.get('uuid')
+        if 'underlyingSymbol' in self._quote_type_dict.keys():
+            self._underlying_s = self._quote_type_dict.get('underlyingSymbol')
+        if 'symbol' in self._quote_type_dict.keys():
+            self._symbol = self._quote_type_dict.get('symbol')
+        if 'exchange' in self._quote_type_dict.keys():
+            self._exchange = self._quote_type_dict.get('exchange')
+        if 'timeZoneShortName' in self._quote_type_dict.keys():
+            self._t_z = self._quote_type_dict.get('timeZoneShortName')
 
     def __set_summary_profile_dict(self):
         if 'industry' in self._summary_profile_dict.keys():
@@ -243,10 +263,26 @@ class AbstractStock(ABC):
                     self._set_price_to(holding_info_dict.get(ticker_str)[key])
 
     def _set_price_to(self, a_dict: dict):
-        self._price_to_earn = a_dict['priceToEarnings']
-        self._price_to_book = a_dict['priceToBook']
-        self._price_to_sale = a_dict['priceToSales']
-        self._price_to_cash = a_dict['priceToCashflow']
+        if 'priceToEarnings' in a_dict.keys():
+            self._price_to_earn = a_dict['priceToEarnings']
+        if 'priceToBook' in a_dict.keys():
+            self._price_to_book = a_dict['priceToBook']
+        if 'priceToSales' in a_dict.keys():
+            self._price_to_sale = a_dict['priceToSales']
+        if 'priceToCashflow' in a_dict.keys():
+            self._price_to_cash = a_dict['priceToCashflow']
+
+    def __set_price_dict(self):
+        if 'quoteSourceName' in self._price_dict.keys():
+            self._quote_src_name = self._price_dict.get('quoteSourceName')
+        if 'exchangeName' in self._price_dict.keys():
+            self._exchange_name = self._price_dict.get('exchangeName')
+        if 'currency' in self._price_dict.keys():
+            self._currency = self._price_dict.get('currency')
+        if 'currencySymbol' in self._price_dict.keys():
+            self._currency_symbol = self._price_dict.get('currencySymbol')
+        if 'regularMarketTime' in self._price_dict.keys():
+            self._exchange_dt = self._price_dict.get('regularMarketTime')
 
     def _set_fund_performance(self, a_any: any, a_str: str):
         if not self._is_any_null(a_any, a_str):
@@ -265,15 +301,12 @@ class AbstractStock(ABC):
     def _set_financial_data_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_financial_data_dict, self._financial_data_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
         if self._has_financial_data_dict:
-            print('+++++++++++++++++', self._financial_data_dict)
+            self.__set_financial_data_dict()
 
     def _set_price_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_price_dict, self._price_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
         if self._has_price_dict:
-            print('regularMarketTime', self._price_dict.get('regularMarketTime'))
-            print('exchangeName', self._price_dict.get('exchangeName'))
-            print('currencySymbol', self._price_dict.get('currencySymbol'))
-            print('quoteSourceName', self._price_dict.get('quoteSourceName'))
+            self.__set_price_dict()
 
     def _set_quote_type_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_quote_type_dict, self._quote_type_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
@@ -283,18 +316,10 @@ class AbstractStock(ABC):
     def _set_summary_detail_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_summary_detail_dict, self._summary_detail_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
         if self._has_summary_detail_dict:
-            print('open', self._summary_detail_dict.get('open'))
-            print('previousClose', self._summary_detail_dict.get('previousClose'))
-            print('dayHigh', self._summary_detail_dict.get('dayHigh'))
-            print('dayLow', self._summary_detail_dict.get('dayLow'))
-            print('fiftyTwoWeekHigh', self._summary_detail_dict.get('fiftyTwoWeekHigh'))
-            print('fiftyTwoWeekLow', self._summary_detail_dict.get('fiftyTwoWeekLow'))
-            print('fiftyDayAverage', self._summary_detail_dict.get('fiftyDayAverage'))
-            print('twoHundredDayAverage', self._summary_detail_dict.get('twoHundredDayAverage'))
+            self.__set_summary_detail_dict()
 
     def _set_summary_profile_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        self._has_summary_profile_dict, self._summary_profile_dict = self._get_dict_valid(str_ticker, a_dict,
-                                                                                          str_filter)
+        self._has_summary_profile_dict, self._summary_profile_dict = self._get_dict_valid(str_ticker, a_dict, str_filter)
         if self._has_summary_profile_dict:
             self.__set_summary_profile_dict()
 
@@ -388,3 +413,16 @@ class AbstractStock(ABC):
     @property
     def HoldingDataFrame(self):
         return self._holding_df
+
+    def __set_financial_data_dict(self):
+        print('+++++++++++++++++', self._financial_data_dict)
+
+    def __set_summary_detail_dict(self):
+        print('open', self._summary_detail_dict.get('open'))
+        print('previousClose', self._summary_detail_dict.get('previousClose'))
+        print('dayHigh', self._summary_detail_dict.get('dayHigh'))
+        print('dayLow', self._summary_detail_dict.get('dayLow'))
+        print('fiftyTwoWeekHigh', self._summary_detail_dict.get('fiftyTwoWeekHigh'))
+        print('fiftyTwoWeekLow', self._summary_detail_dict.get('fiftyTwoWeekLow'))
+        print('fiftyDayAverage', self._summary_detail_dict.get('fiftyDayAverage'))
+        print('twoHundredDayAverage', self._summary_detail_dict.get('twoHundredDayAverage'))
