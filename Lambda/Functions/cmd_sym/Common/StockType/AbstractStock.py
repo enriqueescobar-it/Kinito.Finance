@@ -41,10 +41,16 @@ class AbstractStock(ABC):
     _conv_part_count: int = 0
     _employee_count: int = 0
     _assets_total: int = 0
+    _cashflow_free: int = 0
+    _cashflow_operating: int = 0
     _beta: float = np.nan
     _beta_3y: float = np.nan
     _yield: float = np.nan
     _profit_margins: float = np.nan
+    _gross_margins: float = np.nan
+    _operating_margins: float = np.nan
+    _ratio_current: float = np.nan
+    _ratio_quick: float = np.nan
     _ratio_peg: float = np.nan
     _ratio_short: float = np.nan
     _pe_forward: float = np.nan
@@ -60,11 +66,17 @@ class AbstractStock(ABC):
     _price_to_cash: float = np.nan
     _price_to_earn: float = np.nan
     _price_to_sale: float = np.nan
+    _rating_mean: float = np.nan
+    _rating: str = 'NA'
+    _rating_count: int = 0
     _rating_morning_star: int = 0
     _rating_risk_morning_star: int = 0
     _enterprise_value: int = 0
     _enterprise_to_revenue: float = np.nan
     _enterprise_to_ebitda: float = np.nan
+    _ebitda: int = 0
+    _ebitda_margins: float = np.nan
+    _price: float = np.nan
     _open: float = np.nan
     _high: float = np.nan
     _low: float = np.nan
@@ -78,6 +90,15 @@ class AbstractStock(ABC):
     _return_ytd: float = np.nan
     _return_mean_3y: float = np.nan
     _return_mean_5y: float = np.nan
+    _return_on_assets: float = np.nan
+    _return_on_equity: float = np.nan
+    _revenue_growth: float = np.nan
+    _revenue: int = 0
+    _revenue_per_share: float = np.nan
+    _cash_per_share: float = np.nan
+    _cash: int = 0
+    _debt: int = 0
+    _debt_to_equity: float = np.nan
     _has_sector_df: bool = False
     _has_holding_df: bool = False
     _has_key_stat_dict: bool = False
@@ -133,10 +154,16 @@ class AbstractStock(ABC):
         pt.add_row(['BondPercent', self._bond_part_count])
         pt.add_row(['CashPercent', self._cash_part_count])
         pt.add_row(['AssetsTotal', self._assets_total])
+        pt.add_row(['CashflowFree', self._cashflow_free])
+        pt.add_row(['CashflowOperating', self._cashflow_operating])
         pt.add_row(['Beta', self._beta])
         pt.add_row(['Beta3year', self._beta_3y])
         pt.add_row(['Yield', self._yield])
         pt.add_row(['ProfitMargins', self._profit_margins])
+        pt.add_row(['GrossMargins', self._gross_margins])
+        pt.add_row(['OperatingMargins', self._operating_margins])
+        pt.add_row(['RatioCurrent', self._ratio_current])
+        pt.add_row(['RatioQuick', self._ratio_quick])
         pt.add_row(['RatioPEG', self._ratio_peg])
         pt.add_row(['RatioShort', self._ratio_short])
         pt.add_row(['PEforward', self._pe_forward])
@@ -151,11 +178,17 @@ class AbstractStock(ABC):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['Rating', self._rating])
+        pt.add_row(['RatingMean', self._rating_mean])
+        pt.add_row(['RatingCount', self._rating_count])
         pt.add_row(['RatingMorningStar', self._rating_morning_star])
         pt.add_row(['RatingRiskMorningStar', self._rating_risk_morning_star])
         pt.add_row(['EnterpriseValue', self._enterprise_value])
         pt.add_row(['EnterpriseToRevenue', self._enterprise_to_revenue])
         pt.add_row(['EnterpriseToEBITDA', self._enterprise_to_ebitda])
+        pt.add_row(['EBITDA', self._ebitda])
+        pt.add_row(['EBITDAmargins', self._ebitda_margins])
+        pt.add_row(['Price', self._price])
         pt.add_row(['Open', self._open])
         pt.add_row(['High', self._high])
         pt.add_row(['Low', self._low])
@@ -169,6 +202,15 @@ class AbstractStock(ABC):
         pt.add_row(['ReturnYearToDate', self._return_ytd])
         pt.add_row(['ReturnMean3Year', self._return_mean_3y])
         pt.add_row(['ReturnMean5Year', self._return_mean_5y])
+        pt.add_row(['ReturnOnAssets', self._return_on_assets])
+        pt.add_row(['ReturnOnEquity', self._return_on_equity])
+        pt.add_row(['RevenueGrowth', self._revenue_growth])
+        pt.add_row(['Revenue', self._revenue])
+        pt.add_row(['RevenuePerShare', self._revenue_per_share])
+        pt.add_row(['CashPerShare', self._cash_per_share])
+        pt.add_row(['Cash', self._cash])
+        pt.add_row(['Debt', self._debt])
+        pt.add_row(['DebtToEquity', self._debt_to_equity])
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
@@ -221,10 +263,16 @@ class AbstractStock(ABC):
             "bond_percent": self._bond_part_count,
             "cash_percent": self._cash_part_count,
             "assets_total": self._assets_total,
+            "cashflow_free": self._cashflow_free,
+            "cashflow_operating": self._cashflow_operating,
             "beta": self._beta,
             "beta_3y": self._beta_3y,
             "yield": self._yield,
             "profit_margins": self._profit_margins,
+            "gross_margins": self._gross_margins,
+            "operating_margins": self._operating_margins,
+            "ratio_current": self._ratio_current,
+            "ratio_quick": self._ratio_quick,
             "ratio_peg": self._ratio_peg,
             "ratio_short": self._ratio_short,
             "pe_forward": self._pe_forward,
@@ -239,11 +287,17 @@ class AbstractStock(ABC):
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
+            "rating": self._rating,
+            "rating_mean": self._rating_mean,
+            "rating_count": self._rating_count,
             "rating_morning_star": self._rating_morning_star,
             "rating_risk_morning_star": self._rating_risk_morning_star,
             "enterprise_value": self._enterprise_value,
             "enterprise_to_revenue": self._enterprise_to_revenue,
             "enterprise_to_ebitda": self._enterprise_to_ebitda,
+            "ebitda": self._ebitda,
+            "ebitda_margins": self._ebitda_margins,
+            "price": self._price,
             "open": self._open,
             "high": self._high,
             "low": self._low,
@@ -257,6 +311,15 @@ class AbstractStock(ABC):
             "return_ytd": self._return_ytd,
             "return_mean_3y": self._return_mean_3y,
             "return_mean_5y": self._return_mean_5y,
+            "return_on_assets": self._return_on_assets,
+            "return_on_equity": self._return_on_equity,
+            "revenue_growth": self._revenue_growth,
+            "revenue": self._revenue,
+            "revenue_per_share": self._revenue_per_share,
+            "cash_per_share": self._cash_per_share,
+            "cash": self._cash,
+            "debt": self._debt,
+            "debt_to_equity": self._debt_to_equity,
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_key_stat_dict": self._has_key_stat_dict,
@@ -342,11 +405,50 @@ class AbstractStock(ABC):
             self._mean_200day = self._summary_detail_dict.get('twoHundredDayAverage')
 
     def __set_financial_data_dict(self):
-        print('+++++++++++++++++', self._financial_data_dict)
-        # print('regularMarketTime', self._key_stat_dict.get('regularMarketTime'))
-        # print('exchangeName', self._key_stat_dict.get('exchangeName'))
-        # print('currencySymbol', self._key_stat_dict.get('currencySymbol'))
-        # print('quoteSourceName', self._key_stat_dict.get('quoteSourceName'))
+        if 'profitMargins' in self._financial_data_dict.keys() and np.isnan(self._profit_margins):
+            self._profit_margins = self._financial_data_dict.get('profitMargins')
+        if 'grossMargins' in self._financial_data_dict.keys():
+            self._gross_margins = self._financial_data_dict.get('grossMargins')
+        if 'operatingMargins' in self._financial_data_dict.keys():
+            self._operating_margins = self._financial_data_dict.get('operatingMargins')
+        if 'currentPrice' in self._financial_data_dict.keys():
+            self._price = self._financial_data_dict.get('currentPrice')
+        if 'ebitda' in self._financial_data_dict.keys():
+            self._ebitda = self._financial_data_dict.get('ebitda')
+        if 'ebitdaMargins' in self._financial_data_dict.keys():
+            self._ebitda_margins = self._financial_data_dict.get('ebitdaMargins')
+        if 'currentRatio' in self._financial_data_dict.keys():
+            self._ratio_current = self._financial_data_dict.get('currentRatio')
+        if 'quickRatio' in self._financial_data_dict.keys():
+            self._ratio_quick = self._financial_data_dict.get('quickRatio')
+        if 'recommendationMean' in self._financial_data_dict.keys():
+            self._rating_mean = self._financial_data_dict.get('recommendationMean')
+        if 'recommendationKey' in self._financial_data_dict.keys():
+            self._rating = self._financial_data_dict.get('recommendationKey')
+        if 'numberOfAnalystOpinions' in self._financial_data_dict.keys():
+            self._rating_count = self._financial_data_dict.get('numberOfAnalystOpinions')
+        if 'debtToEquity' in self._financial_data_dict.keys():
+            self._debt_to_equity = self._financial_data_dict.get('debtToEquity')
+        if 'returnOnAssets' in self._financial_data_dict.keys():
+            self._return_on_assets = self._financial_data_dict.get('returnOnAssets')
+        if 'returnOnEquity' in self._financial_data_dict.keys():
+            self._return_on_equity = self._financial_data_dict.get('returnOnEquity')
+        if 'freeCashflow' in self._financial_data_dict.keys():
+            self._cashflow_free = self._financial_data_dict.get('freeCashflow')
+        if 'operatingCashflow' in self._financial_data_dict.keys():
+            self._cashflow_operating = self._financial_data_dict.get('operatingCashflow')
+        if 'revenueGrowth' in self._financial_data_dict.keys():
+            self._revenue_growth = self._financial_data_dict.get('revenueGrowth')
+        if 'revenuePerShare' in self._financial_data_dict.keys():
+            self._revenue_per_share = self._financial_data_dict.get('revenuePerShare')
+        if 'totalCashPerShare' in self._financial_data_dict.keys():
+            self._cash_per_share = self._financial_data_dict.get('totalCashPerShare')
+        if 'totalCash' in self._financial_data_dict.keys():
+            self._cash = self._financial_data_dict.get('totalCash')
+        if 'totalRevenue' in self._financial_data_dict.keys():
+            self._revenue = self._financial_data_dict.get('totalRevenue')
+        if 'totalDebt' in self._financial_data_dict.keys():
+            self._debt = self._financial_data_dict.get('totalDebt')
 
     def __set_key_stat_dict(self):
         if 'mostRecentQuarter' in self._key_stat_dict.keys():
@@ -511,10 +613,12 @@ class AbstractStock(ABC):
                 if key == 'equityHoldings':
                     self.__set_price_to(holding_info_dict.get(ticker_str)[key])
 
-    def _set_fund_performance(self, a_any: any, a_str: str):
-        print('^^^^^^^^^^^^^^^^^^^^^', a_any) # 'No fundamentals data found for any of the summaryTypes=fundPerformance'
-        if not self.__is_any_null(a_any, a_str):
-            for key in a_any.get(a_str):
+    def _set_fund_performance(self, str_filter: str, a_any: any, str_ticker: str):
+        print(type(a_any))
+        print('^^^^^^^^^^^^^^^^^^^^^\n', a_any, '\n')
+        # 'No fundamentals data found for any of the summaryTypes=fundPerformance'
+        if not self.__is_any_null(a_any, str_ticker):
+            for key in a_any.get(str_ticker):
                 print("+", self.__class__.__name__, ':', key)
 
     def _set_key_stat_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
@@ -549,8 +653,8 @@ class AbstractStock(ABC):
 
     def _set_share_purchase_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
         self._has_share_purchase_dict, self._share_purchase_dict = self.__is_dict_valid(str_ticker, a_dict, str_filter)
-        # if self._has_share_purchase_dict:
-        #    print('------------------', self._share_purchase_dict)
+        if self._has_share_purchase_dict:
+            print('????????????????????\n', self._share_purchase_dict, '\n')
 
     def _plot_sector_df(self, class_str: str, tick_str: str):
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():

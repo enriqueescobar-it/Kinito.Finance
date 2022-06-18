@@ -51,10 +51,16 @@ class CryptoCurrency(AbstractCurrency):
         pt.add_row(['BondPercent', self._bond_part_count])
         pt.add_row(['CashPercent', self._cash_part_count])
         pt.add_row(['AssetsTotal', self._assets_total])
+        pt.add_row(['CashflowFree', self._cashflow_free])
+        pt.add_row(['CashflowOperating', self._cashflow_operating])
         pt.add_row(['Beta', self._beta])
         pt.add_row(['Beta3year', self._beta_3y])
         pt.add_row(['Yield', self._yield])
         pt.add_row(['ProfitMargins', self._profit_margins])
+        pt.add_row(['GrossMargins', self._gross_margins])
+        pt.add_row(['OperatingMargins', self._operating_margins])
+        pt.add_row(['RatioCurrent', self._ratio_current])
+        pt.add_row(['RatioQuick', self._ratio_quick])
         pt.add_row(['RatioPEG', self._ratio_peg])
         pt.add_row(['RatioShort', self._ratio_short])
         pt.add_row(['PEforward', self._pe_forward])
@@ -69,11 +75,17 @@ class CryptoCurrency(AbstractCurrency):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['Rating', self._rating])
+        pt.add_row(['RatingMean', self._rating_mean])
+        pt.add_row(['RatingCount', self._rating_count])
         pt.add_row(['RatingMorningStar', self._rating_morning_star])
         pt.add_row(['RatingRiskMorningStar', self._rating_risk_morning_star])
         pt.add_row(['EnterpriseValue', self._enterprise_value])
         pt.add_row(['EnterpriseToRevenue', self._enterprise_to_revenue])
         pt.add_row(['EnterpriseToEBITDA', self._enterprise_to_ebitda])
+        pt.add_row(['EBITDA', self._ebitda])
+        pt.add_row(['EBITDAmargins', self._ebitda_margins])
+        pt.add_row(['Price', self._price])
         pt.add_row(['Open', self._open])
         pt.add_row(['High', self._high])
         pt.add_row(['Low', self._low])
@@ -87,6 +99,15 @@ class CryptoCurrency(AbstractCurrency):
         pt.add_row(['ReturnYearToDate', self._return_ytd])
         pt.add_row(['ReturnMean3Year', self._return_mean_3y])
         pt.add_row(['ReturnMean5Year', self._return_mean_5y])
+        pt.add_row(['ReturnOnAssets', self._return_on_assets])
+        pt.add_row(['ReturnOnEquity', self._return_on_equity])
+        pt.add_row(['RevenueGrowth', self._revenue_growth])
+        pt.add_row(['Revenue', self._revenue])
+        pt.add_row(['RevenuePerShare', self._revenue_per_share])
+        pt.add_row(['CashPerShare', self._cash_per_share])
+        pt.add_row(['Cash', self._cash])
+        pt.add_row(['Debt', self._debt])
+        pt.add_row(['DebtToEquity', self._debt_to_equity])
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
@@ -137,10 +158,16 @@ class CryptoCurrency(AbstractCurrency):
             "bond_percent": self._bond_part_count,
             "cash_percent": self._cash_part_count,
             "assets_total": self._assets_total,
+            "cashflow_free": self._cashflow_free,
+            "cashflow_operating": self._cashflow_operating,
             "beta": self._beta,
             "beta_3y": self._beta_3y,
             "yield": self._yield,
             "profit_margins": self._profit_margins,
+            "gross_margins": self._gross_margins,
+            "operating_margins": self._operating_margins,
+            "ratio_current": self._ratio_current,
+            "ratio_quick": self._ratio_quick,
             "ratio_peg": self._ratio_peg,
             "ratio_short": self._ratio_short,
             "pe_forward": self._pe_forward,
@@ -155,11 +182,17 @@ class CryptoCurrency(AbstractCurrency):
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
+            "rating": self._rating,
+            "rating_mean": self._rating_mean,
+            "rating_count": self._rating_count,
             "rating_morning_star": self._rating_morning_star,
             "rating_risk_morning_star": self._rating_risk_morning_star,
             "enterprise_value": self._enterprise_value,
             "enterprise_to_revenue": self._enterprise_to_revenue,
             "enterprise_to_ebitda": self._enterprise_to_ebitda,
+            "ebitda": self._ebitda,
+            "ebitda_margins": self._ebitda_margins,
+            "price": self._price,
             "open": self._open,
             "high": self._high,
             "low": self._low,
@@ -173,6 +206,15 @@ class CryptoCurrency(AbstractCurrency):
             "return_ytd": self._return_ytd,
             "return_mean_3y": self._return_mean_3y,
             "return_mean_5y": self._return_mean_5y,
+            "return_on_assets": self._return_on_assets,
+            "return_on_equity": self._return_on_equity,
+            "revenue_growth": self._revenue_growth,
+            "revenue": self._revenue,
+            "revenue_per_share": self._revenue_per_share,
+            "cash_per_share": self._cash_per_share,
+            "cash": self._cash,
+            "debt": self._debt,
+            "debt_to_equity": self._debt_to_equity,
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_key_stat_dict": self._has_key_stat_dict,
@@ -189,7 +231,7 @@ class CryptoCurrency(AbstractCurrency):
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
-        self._set_fund_performance(self.__y_query.fund_performance, self.__ticker)
+        self._set_fund_performance('fundPerformance', self.__y_query.fund_performance, self.__ticker)
         self._set_key_stat_dict('defaultKeyStatistics', self.__y_query.key_stats, self.__ticker)
         self._set_financial_data_dict('financialData', self.__y_query.financial_data, self.__ticker)
         self._set_price_dict('', self.__y_query.price, self.__ticker)
