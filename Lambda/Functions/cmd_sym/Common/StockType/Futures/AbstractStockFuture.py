@@ -27,6 +27,7 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['Info', 'StockInfo'])
         pt.add_row(['Ticker', self.__ticker])
         pt.add_row(['Type', self.__class])
+        pt.add_row(['LegalType', self._legal_type])
         pt.add_row(['QuoteType', self._quote_type])
         pt.add_row(['QuoteSourceName', self._quote_src_name])
         pt.add_row(['UUID', self._uuid])
@@ -37,18 +38,47 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['Exchange', self._exchange])
         pt.add_row(['ExchangeName', self._exchange_name])
         pt.add_row(['ExchangeDateTime', self._exchange_dt])
+        pt.add_row(['QuarterDateTime', self._quarter_dt])
+        pt.add_row(['QuarterlyGrowthEarnings', self._quarterly_growth_earnings])
+        pt.add_row(['YearEndLastDateTime', self._fiscal_yend_last_dt])
+        pt.add_row(['YearEndNextDateTime', self._fiscal_yend_next_dt])
+        pt.add_row(['SplitDateTime', self._split_dt])
+        pt.add_row(['SplitFactor', self._split_factor])
+        pt.add_row(['FundInceptionDateTime', self._fund_inception_dt])
         pt.add_row(['TZ', self._t_z])
         pt.add_row(['Industry', self._industry])
         pt.add_row(['Sector', self._sector])
+        pt.add_row(['Category', self._category])
+        pt.add_row(['FundFamily', self._fund_family])
         pt.add_row(['EmployeeCount', self._employee_count])
         pt.add_row(['Name', self._name])
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
         pt.add_row(['CashPercent', self._cash_part_count])
+        pt.add_row(['AssetsTotal', self._assets_total])
+        pt.add_row(['Beta', self._beta])
+        pt.add_row(['Beta3year', self._beta_3y])
+        pt.add_row(['Yield', self._yield])
+        pt.add_row(['ProfitMargins', self._profit_margins])
+        pt.add_row(['RatioPEG', self._ratio_peg])
+        pt.add_row(['RatioShort', self._ratio_short])
+        pt.add_row(['PEforward', self._pe_forward])
+        pt.add_row(['EPSforward', self._eps_forward])
+        pt.add_row(['EPStrailing', self._eps_trailing])
+        pt.add_row(['BookValue', self._book_value])
+        pt.add_row(['AnnualHoldingsTurnover', self._annual_holdings_turnover])
+        pt.add_row(['AnnualReportExpanseRatio', self._annual_report_expense_ratio])
+        pt.add_row(['CapGain', self._cap_gain])
+        pt.add_row(['DividendValue', self._dividend_value])
         pt.add_row(['PriceToEarnings', self._price_to_earn])
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['RatingMorningStar', self._rating_morning_star])
+        pt.add_row(['RatingRiskMorningStar', self._rating_risk_morning_star])
+        pt.add_row(['EnterpriseValue', self._enterprise_value])
+        pt.add_row(['EnterpriseToRevenue', self._enterprise_to_revenue])
+        pt.add_row(['EnterpriseToEBITDA', self._enterprise_to_ebitda])
         pt.add_row(['Open', self._open])
         pt.add_row(['High', self._high])
         pt.add_row(['Low', self._low])
@@ -56,7 +86,12 @@ class AbstractStockFuture(AbstractStock):
         pt.add_row(['High52Week', self._high_52week])
         pt.add_row(['Low52Week', self._low_52week])
         pt.add_row(['Mean52Week', self._mean_52week])
+        pt.add_row(['Change52Week', self._change_52week])
+        pt.add_row(['ChangeSnP52Week', self._change_snp_52week])
         pt.add_row(['Mean200Days', self._mean_200day])
+        pt.add_row(['ReturnYearToDate', self._return_ytd])
+        pt.add_row(['ReturnMean3Year', self._return_mean_3y])
+        pt.add_row(['ReturnMean5Year', self._return_mean_5y])
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
@@ -81,6 +116,7 @@ class AbstractStockFuture(AbstractStock):
             "Info": "StockInfo",
             "ticker": self.__ticker,
             "type": self.__class,
+            "legal_type": self._legal_type,
             "quote_type": self._quote_type,
             "quote_src_name": self._quote_src_name,
             "uuid": self._uuid,
@@ -91,18 +127,47 @@ class AbstractStockFuture(AbstractStock):
             "exchange": self._exchange,
             "exchange_name": self._exchange_name,
             "exchange_dt": self._exchange_dt,
+            "quarter_dt": self._quarter_dt,
+            "quarterly_growth_earnings": self._quarterly_growth_earnings,
+            "fiscal_yend_last_dt": self._fiscal_yend_last_dt,
+            "fiscal_yend_next_dt": self._fiscal_yend_next_dt,
+            "split_dt": self._split_dt,
+            "split_factor": self._split_factor,
+            "fund_inception_dt": self._fund_inception_dt,
             "t_z": self._t_z,
             "industry": self._industry,
             "sector": self._sector,
+            "category": self._category,
+            "fund_family": self._fund_family,
             "employee_count": self._employee_count,
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
             "cash_percent": self._cash_part_count,
+            "assets_total": self._assets_total,
+            "beta": self._beta,
+            "beta_3y": self._beta_3y,
+            "yield": self._yield,
+            "profit_margins": self._profit_margins,
+            "ratio_peg": self._ratio_peg,
+            "ratio_short": self._ratio_short,
+            "pe_forward": self._pe_forward,
+            "eps_forward": self._eps_forward,
+            "eps_trailing": self._eps_trailing,
+            "book_value": self._book_value,
+            "annual_holdings_turnover": self._annual_holdings_turnover,
+            "annual_report_expense_ratio": self._annual_report_expense_ratio,
+            "cap_gain": self._cap_gain,
+            "dividend_value": self._dividend_value,
             "price_to_earnings": self._price_to_earn,
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
+            "rating_morning_star": self._rating_morning_star,
+            "rating_risk_morning_star": self._rating_risk_morning_star,
+            "enterprise_value": self._enterprise_value,
+            "enterprise_to_revenue": self._enterprise_to_revenue,
+            "enterprise_to_ebitda": self._enterprise_to_ebitda,
             "open": self._open,
             "high": self._high,
             "low": self._low,
@@ -110,7 +175,12 @@ class AbstractStockFuture(AbstractStock):
             "high_52week": self._high_52week,
             "low_52week": self._low_52week,
             "mean_52week": self._mean_52week,
+            "change_52week": self._change_52week,
+            "change_snp_52week": self._change_snp_52week,
             "mean_200day": self._mean_200day,
+            "return_ytd": self._return_ytd,
+            "return_mean_3y": self._return_mean_3y,
+            "return_mean_5y": self._return_mean_5y,
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_key_stat_dict": self._has_key_stat_dict,
