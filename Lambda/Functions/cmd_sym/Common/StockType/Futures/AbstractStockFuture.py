@@ -238,7 +238,7 @@ class AbstractStockFuture(AbstractStock):
         self._set_sector_df(self.__y_query.fund_sector_weightings)
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
-        self._set_fund_holding_info(self.__y_query.fund_holding_info, self.__ticker)
+        self._set_fund_holding_info('topHoldings', self.__y_query.fund_holding_info, self.__ticker)
         self._set_fund_performance('fundPerformance', self.__y_query.fund_performance, self.__ticker)
         self._set_key_stat_dict('defaultKeyStatistics', self.__y_query.key_stats, self.__ticker)
         self._set_financial_data_dict('financialData', self.__y_query.financial_data, self.__ticker)

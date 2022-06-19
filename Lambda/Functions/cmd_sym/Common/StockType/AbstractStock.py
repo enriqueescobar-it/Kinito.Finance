@@ -637,7 +637,7 @@ class AbstractStock(ABC):
         if self._has_summary_profile_dict:
             self.__set_summary_profile_dict()
 
-    def _set_fund_holding_info(self, a_dict: dict, str_ticker: str):
+    def _set_fund_holding_info(self, str_filter: str, a_dict: dict, str_ticker: str):
         print(type(a_dict))
         print('****************', "No fundamentals data found for any of the summaryTypes=topHoldings\n", a_dict.get(str_ticker), '\n')
         if not self.__is_any_null(a_dict, str_ticker):
