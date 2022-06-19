@@ -107,6 +107,7 @@ class AbstractCurrency(AbstractStock):
         pt.add_row(['DebtToEquity', self._debt_to_equity])
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
+        pt.add_row(['HasFundHoldingInfoDict', self._has_fund_holding_info_dict])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
@@ -217,6 +218,7 @@ class AbstractCurrency(AbstractStock):
             "debt_to_equity": self._debt_to_equity,
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
+            "has_fund_holding_info_dict": self._has_fund_holding_info_dict,
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
