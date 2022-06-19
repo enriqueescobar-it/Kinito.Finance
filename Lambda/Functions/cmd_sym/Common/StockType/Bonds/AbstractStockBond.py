@@ -55,6 +55,9 @@ class AbstractStockBond(AbstractStock):
         pt.add_row(['StockPercent', self._stock_part_count])
         pt.add_row(['BondPercent', self._bond_part_count])
         pt.add_row(['CashPercent', self._cash_part_count])
+        pt.add_row(['OtherPercent', self._other_part_count])
+        pt.add_row(['PreferredPercent', self._pref_part_count])
+        pt.add_row(['ConvertiblePercent', self._conv_part_count])
         pt.add_row(['AssetsTotal', self._assets_total])
         pt.add_row(['CashflowFree', self._cashflow_free])
         pt.add_row(['CashflowOperating', self._cashflow_operating])
@@ -80,6 +83,7 @@ class AbstractStockBond(AbstractStock):
         pt.add_row(['PriceToBook', self._price_to_book])
         pt.add_row(['PriceToSales', self._price_to_sale])
         pt.add_row(['PriceToCashflow', self._price_to_cash])
+        pt.add_row(['MedianMarketCap', self._median_market_cap])
         pt.add_row(['Rating', self._rating])
         pt.add_row(['RatingMean', self._rating_mean])
         pt.add_row(['RatingCount', self._rating_count])
@@ -107,6 +111,7 @@ class AbstractStockBond(AbstractStock):
         pt.add_row(['ReturnOnAssets', self._return_on_assets])
         pt.add_row(['ReturnOnEquity', self._return_on_equity])
         pt.add_row(['RevenueGrowth', self._revenue_growth])
+        pt.add_row(['EarningsGrowth3Year', self._earnings_growth_3y])
         pt.add_row(['Revenue', self._revenue])
         pt.add_row(['RevenuePerShare', self._revenue_per_share])
         pt.add_row(['CashPerShare', self._cash_per_share])
@@ -166,6 +171,9 @@ class AbstractStockBond(AbstractStock):
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
             "cash_percent": self._cash_part_count,
+            "other_percent": self._other_part_count,
+            "preferred_percent": self._pref_part_count,
+            "convertible_percent": self._conv_part_count,
             "assets_total": self._assets_total,
             "cashflow_free": self._cashflow_free,
             "cashflow_operating": self._cashflow_operating,
@@ -191,6 +199,7 @@ class AbstractStockBond(AbstractStock):
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
             "price_to_cashflow": self._price_to_cash,
+            "median_market_cap": self._median_market_cap,
             "rating": self._rating,
             "rating_mean": self._rating_mean,
             "rating_count": self._rating_count,
@@ -218,6 +227,7 @@ class AbstractStockBond(AbstractStock):
             "return_on_assets": self._return_on_assets,
             "return_on_equity": self._return_on_equity,
             "revenue_growth": self._revenue_growth,
+            "earnings_growth_3y": self._earnings_growth_3y,
             "revenue": self._revenue,
             "revenue_per_share": self._revenue_per_share,
             "cash_per_share": self._cash_per_share,
