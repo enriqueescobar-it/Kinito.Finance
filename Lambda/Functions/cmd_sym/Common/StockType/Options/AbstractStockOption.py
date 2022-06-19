@@ -16,6 +16,7 @@ class AbstractStockOption(AbstractStock):
         self._name = c_name.replace(' ', '')
         self._ticker = t_name
         self._class_type = 'Option'
+        self._info_type = self._class_type + 'Info'
         self._quote_type = q_type
         #
         self.__y_query = Ticker(t_name)
@@ -25,7 +26,7 @@ class AbstractStockOption(AbstractStock):
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
-        pt.add_row(['Info', 'StockInfo'])
+        pt.add_row(['Info', self._info_type])
         pt.add_row(['Ticker', self._ticker])
         pt.add_row(['ClassType', self._class_type])
         pt.add_row(['LegalType', self._legal_type])
@@ -142,7 +143,8 @@ class AbstractStockOption(AbstractStock):
 
     def __iter__(self):
         yield from {
-            "Info": "StockInfo",
+            "Info": self._header[1],
+            "info": self._info_type,
             "ticker": self._ticker,
             "class_type": self._class_type,
             "legal_type": self._legal_type,

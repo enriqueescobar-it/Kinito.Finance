@@ -13,6 +13,7 @@ class RegularCurrency(AbstractCurrency):
         super().__init__(c_name.replace(' ', '').replace('/', '-'), q_type)
         self._ticker = t_name
         self._class_type = 'RegularCurrency'
+        self._info_type = self._class_type + 'Info'
         #
         self.__y_query = Ticker(t_name)
         #
@@ -21,7 +22,7 @@ class RegularCurrency(AbstractCurrency):
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
-        pt.add_row(['Info', 'StockInfo'])
+        pt.add_row(['Info', self._info_type])
         pt.add_row(['Ticker', self._ticker])
         pt.add_row(['ClassType', self._class_type])
         pt.add_row(['LegalType', self._legal_type])
@@ -135,7 +136,8 @@ class RegularCurrency(AbstractCurrency):
 
     def __iter__(self):
         yield from {
-            "Info": "StockInfo",
+            "Info": self._header[1],
+            "info": self._info_type,
             "ticker": self._ticker,
             "class_type": self._class_type,
             "legal_type": self._legal_type,

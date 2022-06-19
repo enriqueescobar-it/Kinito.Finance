@@ -9,6 +9,7 @@ class AbstractStockFund(AbstractStock):
     def __init__(self, c_name: str, q_type: str):
         super().__init__()
         self._class_type = 'Fund'
+        self._info_type = self._class_type + 'Info'
         self._quote_type = q_type
         #
         self._name = c_name.replace(' ', '')
@@ -16,7 +17,7 @@ class AbstractStockFund(AbstractStock):
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
-        pt.add_row(['Info', 'StockInfo'])
+        pt.add_row(['Info', self._info_type])
         pt.add_row(['Ticker', self._ticker])
         pt.add_row(['ClassType', self._class_type])
         pt.add_row(['LegalType', self._legal_type])
@@ -133,7 +134,8 @@ class AbstractStockFund(AbstractStock):
 
     def __iter__(self):
         yield from {
-            "Info": "StockInfo",
+            "Info": self._header[1],
+            "info": self._info_type,
             "ticker": self._ticker,
             "class_type": self._class_type,
             "legal_type": self._legal_type,
