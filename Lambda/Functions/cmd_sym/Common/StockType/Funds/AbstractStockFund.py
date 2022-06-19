@@ -113,6 +113,7 @@ class AbstractStockFund(AbstractStock):
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasFundHoldingInfoDict', self._has_fund_holding_info_dict])
+        pt.add_row(['HasFundPerformanceDict', self._has_fund_performance_dict])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
@@ -229,6 +230,7 @@ class AbstractStockFund(AbstractStock):
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_fund_holding_info_dict": self._has_fund_holding_info_dict,
+            "has_fund_performance_dict": self._has_fund_performance_dict,
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,

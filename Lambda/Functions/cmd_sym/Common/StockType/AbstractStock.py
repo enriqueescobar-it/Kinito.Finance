@@ -104,6 +104,7 @@ class AbstractStock(ABC):
     _has_sector_df: bool = False
     _has_holding_df: bool = False
     _has_fund_holding_info_dict: bool = False
+    _has_fund_performance_dict: bool = False
     _has_key_stat_dict: bool = False
     _has_financial_data_dict: bool = False
     _has_price_dict: bool = False
@@ -114,6 +115,7 @@ class AbstractStock(ABC):
     _sector_df: DataFrame = DataFrame()
     _holding_df: DataFrame = DataFrame()
     _fund_holding_info_dict: dict = {}
+    _fund_performance_dict: dict = {}
     _key_stat_dict: dict = {}
     _financial_data_dict: dict = {}
     _price_dict: dict = {}
@@ -223,6 +225,7 @@ class AbstractStock(ABC):
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasFundHoldingInfoDict', self._has_fund_holding_info_dict])
+        pt.add_row(['HasFundPerformanceDict', self._has_fund_performance_dict])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
@@ -338,6 +341,7 @@ class AbstractStock(ABC):
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_fund_holding_info_dict": self._has_fund_holding_info_dict,
+            "has_fund_performance_dict": self._has_fund_performance_dict,
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
@@ -681,19 +685,12 @@ class AbstractStock(ABC):
                 if key == 'equityHoldings':
                     self.__set_price_to(a_dict.get(str_ticker)[key])
 
-    def _set_fund_performance(self, str_filter: str, a_dict: any, str_ticker: str):
-        #print(type(a_any))
-        #print('^^^^^^^^^^^^^^^^', "No fundamentals data found for any of the summaryTypes=fundPerformance\n", a_any.get(str_ticker), '\n')
-        if not self.__is_any_null(a_dict, str_ticker):
-            for key in a_dict.get(str_ticker):
-                print("+", self.__class__.__name__, ':', key)
+    def _set_fund_performance_dict(self, str_filter: str, a_dict: any, str_ticker: str):
+        self._has_fund_performance_dict, self._fund_performance_dict =\
+            self.__is_dict_valid(str_ticker, a_dict, str_filter)
 
     def _set_share_purchase_dict(self, str_filter: str, a_dict: dict, str_ticker: str):
-        #print(type(a_dict))
-        #print('?????????????????', "No fundamentals data found for any of the summaryTypes=netSharePurchaseActivity\n", a_dict.get(str_ticker), '\n')
         self._has_share_purchase_dict, self._share_purchase_dict = self.__is_dict_valid(str_ticker, a_dict, str_filter)
-        #if self._has_share_purchase_dict:
-        #    print('????????????????????\n', self._share_purchase_dict, '\n')
 
     def _plot_sector_df(self, class_str: str, tick_str: str):
         if (self._sector_df['Percent'] != self._sector_df['Percent'][0]).all():

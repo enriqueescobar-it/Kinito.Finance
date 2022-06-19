@@ -121,6 +121,7 @@ class AbstractStockBond(AbstractStock):
         pt.add_row(['HasSectorDf', self._has_sector_df])
         pt.add_row(['HasHoldingDf', self._has_holding_df])
         pt.add_row(['HasFundHoldingInfoDict', self._has_fund_holding_info_dict])
+        pt.add_row(['HasFundPerformanceDict', self._has_fund_performance_dict])
         pt.add_row(['HasKeyStatDict', self._has_key_stat_dict])
         pt.add_row(['HasFinancialDataDict', self._has_financial_data_dict])
         pt.add_row(['HasPriceDict', self._has_price_dict])
@@ -237,6 +238,7 @@ class AbstractStockBond(AbstractStock):
             "has_sector_df": self._has_sector_df,
             "has_holding_df": self._has_holding_df,
             "has_fund_holding_info_dict": self._has_fund_holding_info_dict,
+            "has_fund_performance_dict": self._has_fund_performance_dict,
             "has_key_stat_dict": self._has_key_stat_dict,
             "has_financial_data_dict": self._has_financial_data_dict,
             "has_price_dict": self._has_price_dict,
@@ -251,7 +253,7 @@ class AbstractStockBond(AbstractStock):
         self._set_holding_df(self.__y_query.fund_top_holdings, self.__ticker, self.__y_query.fund_sector_weightings)
         self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
         self._set_fund_holding_info_dict('topHoldings', self.__y_query.fund_holding_info, self.__ticker)
-        self._set_fund_performance('fundPerformance', self.__y_query.fund_performance, self.__ticker)
+        self._set_fund_performance_dict('fundPerformance', self.__y_query.fund_performance, self.__ticker)
         self._set_key_stat_dict('defaultKeyStatistics', self.__y_query.key_stats, self.__ticker)
         self._set_financial_data_dict('financialData', self.__y_query.financial_data, self.__ticker)
         self._set_price_dict('', self.__y_query.price, self.__ticker)
