@@ -14,7 +14,7 @@ class AbstractStockFuture(AbstractStock):
         super().__init__()
         self._name = c_name.replace(' ', '')
         self.__ticker = t_name
-        self.__class = 'Future'
+        self._class_type = 'Future'
         self._quote_type = q_type
         #
         self.__y_query = Ticker(t_name)
@@ -26,7 +26,7 @@ class AbstractStockFuture(AbstractStock):
         pt.field_names = self._header
         pt.add_row(['Info', 'StockInfo'])
         pt.add_row(['Ticker', self.__ticker])
-        pt.add_row(['Type', self.__class])
+        pt.add_row(['ClassType', self._class_type])
         pt.add_row(['LegalType', self._legal_type])
         pt.add_row(['QuoteType', self._quote_type])
         pt.add_row(['QuoteSourceName', self._quote_src_name])
@@ -143,7 +143,7 @@ class AbstractStockFuture(AbstractStock):
         yield from {
             "Info": "StockInfo",
             "ticker": self.__ticker,
-            "type": self.__class,
+            "class_type": self._class_type,
             "legal_type": self._legal_type,
             "quote_type": self._quote_type,
             "quote_src_name": self._quote_src_name,

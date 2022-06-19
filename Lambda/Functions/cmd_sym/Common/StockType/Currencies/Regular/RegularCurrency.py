@@ -12,7 +12,7 @@ class RegularCurrency(AbstractCurrency):
     def __init__(self, c_name: str, t_name: str, q_type: str):
         super().__init__(c_name.replace(' ', '').replace('/', '-'), q_type)
         self.__ticker = t_name
-        self.__class = 'RegularCurrency'
+        self._class_type = 'RegularCurrency'
         #
         self.__y_query = Ticker(t_name)
         #
@@ -23,7 +23,7 @@ class RegularCurrency(AbstractCurrency):
         pt.field_names = self._header
         pt.add_row(['Info', 'StockInfo'])
         pt.add_row(['Ticker', self.__ticker])
-        pt.add_row(['Type', self.__class])
+        pt.add_row(['ClassType', self._class_type])
         pt.add_row(['LegalType', self._legal_type])
         pt.add_row(['QuoteType', self._quote_type])
         pt.add_row(['QuoteSourceName', self._quote_src_name])
@@ -137,7 +137,7 @@ class RegularCurrency(AbstractCurrency):
         yield from {
             "Info": "StockInfo",
             "ticker": self.__ticker,
-            "type": self.__class,
+            "class_type": self._class_type,
             "legal_type": self._legal_type,
             "quote_type": self._quote_type,
             "quote_src_name": self._quote_src_name,
