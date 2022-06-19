@@ -240,4 +240,4 @@ class RegularCurrency(AbstractCurrency):
         self._set_quote_type_dict('', self.__y_query.quote_type, self.__ticker)
         self._set_summary_detail_dict('', self.__y_query.summary_detail, self.__ticker)
         self._set_summary_profile_dict('', self.__y_query.summary_profile, self.__ticker)
-        self._set_share_purchase_dict('', self.__y_query.share_purchase_activity, self.__ticker)
+        self._set_share_purchase_dict('netSharePurchaseActivity', self.__y_query.share_purchase_activity, self.__ticker)
