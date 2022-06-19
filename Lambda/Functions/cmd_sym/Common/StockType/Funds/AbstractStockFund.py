@@ -4,7 +4,7 @@ from Common.StockType.AbstractStock import AbstractStock
 
 
 class AbstractStockFund(AbstractStock):
-    __ticker: str = 'NA'
+    #__ticker: str = 'NA'
 
     def __init__(self, c_name: str, q_type: str):
         super().__init__()
@@ -17,7 +17,7 @@ class AbstractStockFund(AbstractStock):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
         pt.add_row(['Info', 'StockInfo'])
-        pt.add_row(['Ticker', self.__ticker])
+        pt.add_row(['Ticker', self._ticker])
         pt.add_row(['ClassType', self._class_type])
         pt.add_row(['LegalType', self._legal_type])
         pt.add_row(['QuoteType', self._quote_type])
@@ -134,7 +134,7 @@ class AbstractStockFund(AbstractStock):
     def __iter__(self):
         yield from {
             "Info": "StockInfo",
-            "ticker": self.__ticker,
+            "ticker": self._ticker,
             "class_type": self._class_type,
             "legal_type": self._legal_type,
             "quote_type": self._quote_type,

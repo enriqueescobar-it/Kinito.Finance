@@ -8,6 +8,7 @@ from prettytable import PrettyTable
 
 
 class AbstractStock(ABC):
+    _ticker: str = 'NA'
     _class_type: str = 'NA'
     _header: list = ['Info', 'TypeInfo']
     _legal_type: str = 'NA'
@@ -130,6 +131,7 @@ class AbstractStock(ABC):
     def __str__(self):
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
+        pt.add_row(['Ticker', self._ticker])
         pt.add_row(['ClassType', self._class_type])
         pt.add_row(['LegalType', self._legal_type])
         pt.add_row(['QuoteType', self._quote_type])
@@ -246,6 +248,7 @@ class AbstractStock(ABC):
     def __iter__(self):
         yield from {
             "Info": self._class_type,
+            "ticker": self._ticker,
             "class_type": self._class_type,
             "legal_type": self._legal_type,
             "quote_type": self._quote_type,
