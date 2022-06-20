@@ -24,12 +24,13 @@ class AbstractStock(ABC):
     _currency_symbol: str = '$'
     _exchange: str = 'NA'
     _exchange_name: str = 'NA'
-    _exchange_dt: str = 'NA'
-    _quarter_dt: str = 'NA'
-    _fiscal_yend_last_dt: str = 'NA'
-    _fiscal_yend_next_dt: str = 'NA'
-    _fund_inception_dt: str = 'NA'
-    _split_dt: str = 'NA'
+    _exchange_str: str = '2001-09-11 00:00:00'
+    _quarter_str: str = '2001-09-11 00:00:00'
+    _fiscal_yend_last_str: str = '2001-09-11 00:00:00'
+    _fiscal_yend_next_str: str = '2001-09-11 00:00:00'
+    _fund_inception_str: str = '2001-09-11 00:00:00'
+    _split_str: str = '2001-09-11 00:00:00'
+    _format_dt: str = "%Y-%m-%d %H:%M:%S"
     _split_factor: str = '1:1'
     _t_z: str = 'GMT'
     _industry: str = 'NA'
@@ -148,14 +149,14 @@ class AbstractStock(ABC):
         pt.add_row(['CurrencySymbol', self._currency_symbol])
         pt.add_row(['Exchange', self._exchange])
         pt.add_row(['ExchangeName', self._exchange_name])
-        pt.add_row(['ExchangeDateTime', self._exchange_dt])
-        pt.add_row(['QuarterDateTime', self._quarter_dt])
+        pt.add_row(['ExchangeDateTime', self._exchange_str])
+        pt.add_row(['QuarterDateTime', self._quarter_str])
         pt.add_row(['QuarterlyGrowthEarnings', self._quarterly_growth_earnings])
-        pt.add_row(['YearEndLastDateTime', self._fiscal_yend_last_dt])
-        pt.add_row(['YearEndNextDateTime', self._fiscal_yend_next_dt])
-        pt.add_row(['SplitDateTime', self._split_dt])
+        pt.add_row(['YearEndLastDateTime', self._fiscal_yend_last_str])
+        pt.add_row(['YearEndNextDateTime', self._fiscal_yend_next_str])
+        pt.add_row(['SplitDateTime', self._split_str])
         pt.add_row(['SplitFactor', self._split_factor])
-        pt.add_row(['FundInceptionDateTime', self._fund_inception_dt])
+        pt.add_row(['FundInceptionDateTime', self._fund_inception_str])
         pt.add_row(['TZ', self._t_z])
         pt.add_row(['Industry', self._industry])
         pt.add_row(['Sector', self._sector])
@@ -266,14 +267,14 @@ class AbstractStock(ABC):
             "currency_symbol": self._currency_symbol,
             "exchange": self._exchange,
             "exchange_name": self._exchange_name,
-            "exchange_dt": self._exchange_dt,
-            "quarter_dt": self._quarter_dt,
+            "exchange_dt": self._exchange_str,
+            "quarter_dt": self._quarter_str,
             "quarterly_growth_earnings": self._quarterly_growth_earnings,
-            "fiscal_yend_last_dt": self._fiscal_yend_last_dt,
-            "fiscal_yend_next_dt": self._fiscal_yend_next_dt,
-            "split_dt": self._split_dt,
+            "fiscal_yend_last_dt": self._fiscal_yend_last_str,
+            "fiscal_yend_next_dt": self._fiscal_yend_next_str,
+            "split_dt": self._split_str,
             "split_factor": self._split_factor,
-            "fund_inception_dt": self._fund_inception_dt,
+            "fund_inception_dt": self._fund_inception_str,
             "t_z": self._t_z,
             "industry": self._industry,
             "sector": self._sector,
@@ -414,8 +415,8 @@ class AbstractStock(ABC):
             self._currency = self._price_dict.get('currency')
         if 'currencySymbol' in self._price_dict.keys():
             self._currency_symbol = self._price_dict.get('currencySymbol')
-        if 'regularMarketTime' in self._price_dict.keys():
-            self._exchange_dt = self._price_dict.get('regularMarketTime')
+        if 'regularMarketTime' in self._price_dict.keys() and not(self.__is_key_null(self._price_dict.get('regularMarketTime'))):
+            self._exchange_str = self._price_dict.get('regularMarketTime')
 
     def __set_quote_type_dict(self):
         if 'uuid' in self._quote_type_dict.keys():
@@ -502,22 +503,29 @@ class AbstractStock(ABC):
             self._debt = self._financial_data_dict.get('totalDebt')
 
     def __set_key_stat_dict(self):
-        if 'mostRecentQuarter' in self._key_stat_dict.keys():
-            self._quarter_dt = self._key_stat_dict.get('mostRecentQuarter')
-        if 'lastSplitDate' in self._key_stat_dict.keys():
-            self._split_dt = self._key_stat_dict.get('lastSplitDate')
-        if 'lastSplitFactor' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('lastSplitFactor'))):
+        if 'mostRecentQuarter' in self._key_stat_dict.keys() and\
+                not(self.__is_key_null(self._key_stat_dict.get('mostRecentQuarter'))):
+            self._quarter_str = self._key_stat_dict.get('mostRecentQuarter')
+        if 'lastSplitDate' in self._key_stat_dict.keys() and\
+                not(self.__is_key_null(self._key_stat_dict.get('lastSplitDate'))):
+            self._split_str = self._key_stat_dict.get('lastSplitDate')
+        if 'lastSplitFactor' in self._key_stat_dict.keys() and\
+                not(self.__is_key_null(self._key_stat_dict.get('lastSplitFactor'))):
             self._split_factor = self._key_stat_dict.get('lastSplitFactor')
-        if 'lastFiscalYearEnd' in self._key_stat_dict.keys():
-            self._fiscal_yend_last_dt = self._key_stat_dict.get('lastFiscalYearEnd')
-        if 'nextFiscalYearEnd' in self._key_stat_dict.keys():
-            self._fiscal_yend_next_dt = self._key_stat_dict.get('nextFiscalYearEnd')
+        if 'lastFiscalYearEnd' in self._key_stat_dict.keys() and\
+                not(self.__is_key_null(self._key_stat_dict.get('lastFiscalYearEnd'))):
+            self._fiscal_yend_last_str = self._key_stat_dict.get('lastFiscalYearEnd')
+        if 'nextFiscalYearEnd' in self._key_stat_dict.keys() and\
+                not(self.__is_key_null(self._key_stat_dict.get('nextFiscalYearEnd'))):
+            self._fiscal_yend_next_str = self._key_stat_dict.get('nextFiscalYearEnd')
         if 'category' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('category'))):
             self._category = self._key_stat_dict.get('category')
-        if 'fundFamily' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('fundFamily'))):
+        if 'fundFamily' in self._key_stat_dict.keys() and\
+                not(self.__is_key_null(self._key_stat_dict.get('fundFamily'))):
             self._fund_family = self._key_stat_dict.get('fundFamily')
-        if 'fundInceptionDate' in self._key_stat_dict.keys():
-            self._fund_inception_dt = self._key_stat_dict.get('fundInceptionDate')
+        if 'fundInceptionDate' in self._key_stat_dict.keys() and\
+                not(self.__is_key_null(self._key_stat_dict.get('fundInceptionDate'))):
+            self._fund_inception_str = self._key_stat_dict.get('fundInceptionDate')
         if 'legalType' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('legalType'))):
             self._legal_type = self._key_stat_dict.get('legalType')
         if 'beta' in self._key_stat_dict.keys():
