@@ -1,10 +1,16 @@
 from prettytable import PrettyTable
+#
 
+#
 from Common.StockType.AbstractStock import AbstractStock
 
 
+#
+
 class AbstractCurrency(AbstractStock):
     #__ticker: str = 'NA'
+    #
+    #
 
     def __init__(self, c_name: str, q_type: str):
         super().__init__()
@@ -13,6 +19,9 @@ class AbstractCurrency(AbstractStock):
         self._class_type = 'Currency'
         self._info_type = self._class_type + 'Info'
         self._quote_type = q_type
+        #
+        #
+        #
         #
 
     def __str__(self):

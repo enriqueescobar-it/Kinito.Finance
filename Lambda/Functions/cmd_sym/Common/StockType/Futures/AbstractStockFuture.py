@@ -5,9 +5,11 @@ from yahooquery import Ticker
 from Common.StockType.AbstractStock import AbstractStock
 
 
+#
+
 class AbstractStockFuture(AbstractStock):
     #__ticker: str = 'NA'
-    __y_query: Ticker
+    #_y_query: Ticker
     #
 
     def __init__(self, c_name: str, t_name: str, q_type: str):
@@ -18,7 +20,7 @@ class AbstractStockFuture(AbstractStock):
         self._info_type = self._class_type + 'Info'
         self._quote_type = q_type
         #
-        self.__y_query = Ticker(t_name)
+        self._y_query = Ticker(t_name)
         #
         self._set_info()
 
@@ -251,15 +253,15 @@ class AbstractStockFuture(AbstractStock):
         }.items()
 
     def _set_info(self):
-        self._set_sector_df(self.__y_query.fund_sector_weightings)
-        self._set_holding_df(self.__y_query.fund_top_holdings, self._ticker, self.__y_query.fund_sector_weightings)
-        self._set_part_count(self.__y_query.fund_top_holdings, self.__y_query.fund_category_holdings)
-        self._set_fund_holding_info_dict('topHoldings', self.__y_query.fund_holding_info, self._ticker)
-        self._set_fund_performance_dict('fundPerformance', self.__y_query.fund_performance, self._ticker)
-        self._set_key_stat_dict('defaultKeyStatistics', self.__y_query.key_stats, self._ticker)
-        self._set_financial_data_dict('financialData', self.__y_query.financial_data, self._ticker)
-        self._set_price_dict('', self.__y_query.price, self._ticker)
-        self._set_quote_type_dict('', self.__y_query.quote_type, self._ticker)
-        self._set_summary_detail_dict('', self.__y_query.summary_detail, self._ticker)
-        self._set_summary_profile_dict('', self.__y_query.summary_profile, self._ticker)
-        self._set_share_purchase_dict('netSharePurchaseActivity', self.__y_query.share_purchase_activity, self._ticker)
+        self._set_sector_df(self._y_query.fund_sector_weightings)
+        self._set_holding_df(self._y_query.fund_top_holdings, self._ticker, self._y_query.fund_sector_weightings)
+        self._set_part_count(self._y_query.fund_top_holdings, self._y_query.fund_category_holdings)
+        self._set_fund_holding_info_dict('topHoldings', self._y_query.fund_holding_info, self._ticker)
+        self._set_fund_performance_dict('fundPerformance', self._y_query.fund_performance, self._ticker)
+        self._set_key_stat_dict('defaultKeyStatistics', self._y_query.key_stats, self._ticker)
+        self._set_financial_data_dict('financialData', self._y_query.financial_data, self._ticker)
+        self._set_price_dict('', self._y_query.price, self._ticker)
+        self._set_quote_type_dict('', self._y_query.quote_type, self._ticker)
+        self._set_summary_detail_dict('', self._y_query.summary_detail, self._ticker)
+        self._set_summary_profile_dict('', self._y_query.summary_profile, self._ticker)
+        self._set_share_purchase_dict('netSharePurchaseActivity', self._y_query.share_purchase_activity, self._ticker)
