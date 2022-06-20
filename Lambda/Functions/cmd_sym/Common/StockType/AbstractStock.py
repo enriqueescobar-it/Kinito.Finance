@@ -360,6 +360,10 @@ class AbstractStock(ABC):
             "has_share_purchase_dict": self._has_share_purchase_dict
         }.items()
 
+    def __is_key_null(self, a_any: any) -> bool:
+        # or isinstance(a_any, NoneType)
+        return a_any is None
+
     def __is_any_null(self, a_any: any, a_str: str) -> bool:
         boo: bool = any(a_any) and (len(a_any.get(a_str)) >= 38) and \
                     (not (("Quote not found for ticker symbol: " + a_str) in str(a_any)))
@@ -502,19 +506,19 @@ class AbstractStock(ABC):
             self._quarter_dt = self._key_stat_dict.get('mostRecentQuarter')
         if 'lastSplitDate' in self._key_stat_dict.keys():
             self._split_dt = self._key_stat_dict.get('lastSplitDate')
-        if 'lastSplitFactor' in self._key_stat_dict.keys():
+        if 'lastSplitFactor' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('lastSplitFactor'))):
             self._split_factor = self._key_stat_dict.get('lastSplitFactor')
         if 'lastFiscalYearEnd' in self._key_stat_dict.keys():
             self._fiscal_yend_last_dt = self._key_stat_dict.get('lastFiscalYearEnd')
         if 'nextFiscalYearEnd' in self._key_stat_dict.keys():
             self._fiscal_yend_next_dt = self._key_stat_dict.get('nextFiscalYearEnd')
-        if 'category' in self._key_stat_dict.keys():
+        if 'category' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('category'))):
             self._category = self._key_stat_dict.get('category')
-        if 'fundFamily' in self._key_stat_dict.keys():
+        if 'fundFamily' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('fundFamily'))):
             self._fund_family = self._key_stat_dict.get('fundFamily')
         if 'fundInceptionDate' in self._key_stat_dict.keys():
             self._fund_inception_dt = self._key_stat_dict.get('fundInceptionDate')
-        if 'legalType' in self._key_stat_dict.keys():
+        if 'legalType' in self._key_stat_dict.keys() and not(self.__is_key_null(self._key_stat_dict.get('legalType'))):
             self._legal_type = self._key_stat_dict.get('legalType')
         if 'beta' in self._key_stat_dict.keys():
             self._beta = self._key_stat_dict.get('beta')
