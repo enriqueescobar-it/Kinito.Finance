@@ -132,7 +132,7 @@ class AbstractStock(ABC):
         #self._info_type = self._class_type + 'Info'
         pass
 
-    def __str__(self):
+    def __str__(self) -> str:
         pt: PrettyTable = PrettyTable()
         pt.field_names = self._header
         pt.add_row(['Info', self._info_type])
