@@ -1,5 +1,6 @@
 import json
 
+import numpy as np
 import yfinance as yf
 from pandas import DataFrame
 from pandas import Series
@@ -164,15 +165,16 @@ class stock_info(abstract_info):
         return json.dumps(dict(self), ensure_ascii=False)
 
     def __is_df_valid(self, a_df: any) -> bool:
-        return any(a_df) and isinstance(a_df, DataFrame)
+        return any(a_df) and isinstance(a_df, DataFrame) and not a_df.empty and\
+               not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
 
     def __set_action_df(self):
-        self._has_action_df = self.__is_df_valid(self.__yFinance.actions) and self.__yFinance.actions.shape[0] > 0
+        self._has_action_df = self.__is_df_valid(self.__yFinance.actions)
         if self._has_action_df:
-            self._action_df = self.__yFinance.actions
+            self._action_df = self.__yFinance.actions.fillna(value=np.nan, inplace=False)
 
     def __set_split_series(self):
-        self._has_split_series = any(self.__yFinance.splits)
+        self._has_split_series = any(self.__yFinance.splits) and isinstance(self.__yFinance.splits, Series)
         if self._has_split_series:
             self._split_series = self.__yFinance.splits
 
@@ -202,27 +204,31 @@ class stock_info(abstract_info):
             self.__get_stock_type(self._quote_type)
 
     def __set_balance_sheet_df(self):
-        self._has_balance_sheet_df = self.__is_df_valid(self.__yFinance.balance_sheet) and\
-                                     self.__yFinance.balance_sheet.shape[0] > 0
+        self._has_balance_sheet_df = self.__is_df_valid(self.__yFinance.balance_sheet)
         if self._has_balance_sheet_df:
-            self._balance_sheet_df = self.__yFinance.balance_sheet
+            self._balance_sheet_df = self.__yFinance.balance_sheet.fillna(value=np.nan, inplace=False)
 
     def __set_q_balance_sheet_df(self):
-        self._has_q_balance_sheet_df = any(self._q_balance_sheet_df) and self._q_balance_sheet_df.shape[0] > 0
-        self._q_balance_sheet_df = self.__yFinance.quarterly_balancesheet
-        self._q_balance_sheet_df = self.__yFinance.quarterly_balance_sheet
+        self._has_q_balance_sheet_df = self.__is_df_valid(self.__yFinance.quarterly_balancesheet) or \
+                                       self.__is_df_valid(self.__yFinance.quarterly_balance_sheet)
+        if self._has_q_balance_sheet_df:
+            self._q_balance_sheet_df = self.__yFinance.quarterly_balancesheet.fillna(value=np.nan, inplace=False)
+            self._q_balance_sheet_df = self.__yFinance.quarterly_balance_sheet.fillna(value=np.nan, inplace=False)
 
     def __set_q_cashflow_df(self):
-        self._has_q_cashflow_df = any(self._q_cashflow_df) and self._q_cashflow_df.shape[0] > 0
-        self._q_cashflow_df = self.__yFinance.quarterly_cashflow
+        self._has_q_cashflow_df = self.__is_df_valid(self.__yFinance.quarterly_cashflow)
+        if self._has_q_cashflow_df:
+            self._q_cashflow_df = self.__yFinance.quarterly_cashflow.fillna(value=np.nan, inplace=False)
 
     def __set_q_earning_df(self):
-        self._has_q_earning_df = any(self._q_earning_df) and self._q_earning_df.shape[0] > 0
-        self._q_earning_df = self.__yFinance.quarterly_earnings
+        self._has_q_earning_df = self.__is_df_valid(self.__yFinance.quarterly_earnings)
+        if self._has_q_earning_df:
+            self._q_earning_df = self.__yFinance.quarterly_earnings.fillna(value=np.nan, inplace=False)
 
     def __set_q_financial_df(self):
-        self._has_q_financial_df = any(self._q_financial_df) and self._q_financial_df.shape[0] > 0
-        self._q_financial_df = self.__yFinance.quarterly_financials
+        self._has_q_financial_df = self.__is_df_valid(self.__yFinance.quarterly_financials)
+        if self._has_q_financial_df:
+            self._q_financial_df = self.__yFinance.quarterly_financials.fillna(value=np.nan, inplace=False)
 
     def __get_str_from_key(self, a_key: str = 'NA') -> str:
         if a_key in self.__y_fin_dic:
@@ -248,6 +254,7 @@ class stock_info(abstract_info):
         else:
         #    self._stock_type = AbstractStockOption(self._company_name, self.__ticker)
             self._stock_type = AbstractStockBond(self._company_name, self.__ticker, s)
+        #    self._stock_type = AbstractStock()
 
     @property
     def ActionDataFrame(self):
