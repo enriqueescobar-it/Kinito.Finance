@@ -27,10 +27,10 @@ class stock_info(abstract_info):
     _has_split_series: bool = False
     _has_action_df: bool = False
     _has_balance_sheet_df: bool = False
-    _has_q_balance_sheet: bool = False
-    _has_q_cashflow: bool = False
-    _has_q_earnings: bool = False
-    _has_q_financials: bool = False
+    _has_q_balance_sheet_df: bool = False
+    _has_q_cashflow_df: bool = False
+    _has_q_earning_df: bool = False
+    _has_q_financial_df: bool = False
     _url: str = 'NA'
     _url_logo: str = "http://localhost"
     _address1: str = 'NA'
@@ -62,23 +62,23 @@ class stock_info(abstract_info):
             self.__get_info()
 
         if '_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_balance_sheet') or any(self.__yFinance.balance_sheet):
-            self.__set_balance_sheet()
+            self.__set_balance_sheet_df()
 
         if '_options' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_options') or any(self.__yFinance.options):
             self.__set_option_tuple()
 
         if '_quarterly_earnings' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_earnings') or any(self.__yFinance.quarterly_earnings):
-            self.__set_quarterly_earnings()
+            self.__set_q_earning_df()
 
         if '_quarterly_cashflow' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_cashflow') or any(self.__yFinance.quarterly_cashflow):
-            self.__set_quarterly_cashflow()
+            self.__set_q_cashflow_df()
 
         if '_quarterly_financials' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_financials') or any(self.__yFinance.quarterly_financials):
-            self.__set_quarterly_financials()
+            self.__set_q_financial_df()
 
         if '_quarterly_balancesheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_balancesheet') or any(self.__yFinance.quarterly_balancesheet)\
             or '_quarterly_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_balance_sheet') or any(self.__yFinance.quarterly_balance_sheet):
-            self.__set_quarterly_balance_sheet()
+            self.__set_q_balance_sheet_df()
 
         self.__set_action_df()
         self.__set_split_series()
@@ -105,27 +105,27 @@ class stock_info(abstract_info):
         pt.add_row(['HasSplitSeries', self._has_split_series])
         pt.add_row(['HasActionDf', self._has_action_df])
         pt.add_row(['HasBalanceSheetDf', self._has_balance_sheet_df])
-        pt.add_row(['HasQuarterBalanceSheet', self._has_q_balance_sheet])
-        pt.add_row(['HasQuarterCashflow', self._has_q_cashflow])
-        pt.add_row(['HasQuarterEarnings', self._has_q_earnings])
-        pt.add_row(['HasQuarterFinancials', self._has_q_financials])
+        pt.add_row(['HasQuarterBalanceSheetDf', self._has_q_balance_sheet_df])
+        pt.add_row(['HasQuarterCashflowDf', self._has_q_cashflow_df])
+        pt.add_row(['HasQuarterEarningDf', self._has_q_earning_df])
+        pt.add_row(['HasQuarterFinancialDf', self._has_q_financial_df])
         s: str = pt.__str__()
         if self._has_option_tuple:
             s += "\n\nOPTION TUPLE\n" + str(self._option_tuple)
         if self._has_split_series:
             s += "\n\nSPLIT SERIES\n" + self._split_series.to_string(index=True)
         if self._has_action_df:
-            s += "\n\nACTION DATAFRAME\n" + self._action_df.head().to_string(index=True) + "\n" + str(self._action_df.describe())
+            s += "\n\nACTION DATAFRAME\n" + self._action_df.head().to_string(index=True)
         if self._has_balance_sheet_df:
             s += "\n\nBALANCE SHEET DATAFRAME\n\n" + self._balance_sheet_df.to_string(index=True)
-        if self._has_q_balance_sheet:
-            s += "\n\nQUARTER BALANCESHEET\n" + self._q_balance_sheet_df.to_string(index=True)
-        if self._has_q_cashflow:
-            s += "\n\nQUARTER CASHFLOW\n" + self._q_cashflow_df.to_string(index=True)
-        if self._has_q_earnings:
-            s += "\n\nQUARTER EARNINGS\n" + self._q_earning_df.to_string(index=True)
-        if self._has_q_financials:
-            s += "\n\nQUARTER FINANCIALS\n" + self._q_financial_df.to_string(index=True)
+        if self._has_q_balance_sheet_df:
+            s += "\n\nQUARTER BALANCE SHEET DATAFRAME\n" + self._q_balance_sheet_df.to_string(index=True)
+        if self._has_q_cashflow_df:
+            s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._q_cashflow_df.to_string(index=True)
+        if self._has_q_earning_df:
+            s += "\n\nQUARTER EARNING DATAFRAME\n" + self._q_earning_df.to_string(index=True)
+        if self._has_q_financial_df:
+            s += "\n\nQUARTER FINANCIAL DATAFRAME\n" + self._q_financial_df.to_string(index=True)
         s += "\n\nSTOCK TYPE\n" + str(self._stock_type)
         return s
 
@@ -154,22 +154,20 @@ class stock_info(abstract_info):
             "has_split_series": self._has_split_series,
             "has_action_df": self._has_action_df,
             "has_balance_sheet_df": self._has_balance_sheet_df,
-            "has_q_balance_sheet": self._has_q_balance_sheet,
-            "has_q_cashflow": self._has_q_cashflow,
-            "has_q_earnings": self._has_q_earnings,
-            "has_q_financials": self._has_q_financials
+            "has_q_balance_sheet_df": self._has_q_balance_sheet_df,
+            "has_q_cashflow_df": self._has_q_cashflow_df,
+            "has_q_earning_df": self._has_q_earning_df,
+            "has_q_financial_df": self._has_q_financial_df
         }.items()
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
 
     def __is_df_valid(self, a_df: any) -> bool:
-        boo: bool = any(a_df) and isinstance(a_df, DataFrame)
-        #False if boo else a_df.shape[0] > 0
-        return boo
+        return any(a_df) and isinstance(a_df, DataFrame)
 
     def __set_action_df(self):
-        self._has_action_df = self.__is_df_valid(self.__yFinance.actions)
+        self._has_action_df = self.__is_df_valid(self.__yFinance.actions) and self.__yFinance.actions.shape[0] > 0
         if self._has_action_df:
             self._action_df = self.__yFinance.actions
 
@@ -203,27 +201,28 @@ class stock_info(abstract_info):
             self._quote_type = self.__get_str_from_key('quoteType')
             self.__get_stock_type(self._quote_type)
 
-    def __set_balance_sheet(self):
-        self._has_balance_sheet_df = self.__is_df_valid(self.__yFinance.balance_sheet)
+    def __set_balance_sheet_df(self):
+        self._has_balance_sheet_df = self.__is_df_valid(self.__yFinance.balance_sheet) and\
+                                     self.__yFinance.balance_sheet.shape[0] > 0
         if self._has_balance_sheet_df:
             self._balance_sheet_df = self.__yFinance.balance_sheet
 
-    def __set_quarterly_balance_sheet(self):
+    def __set_q_balance_sheet_df(self):
+        self._has_q_balance_sheet_df = any(self._q_balance_sheet_df) and self._q_balance_sheet_df.shape[0] > 0
         self._q_balance_sheet_df = self.__yFinance.quarterly_balancesheet
         self._q_balance_sheet_df = self.__yFinance.quarterly_balance_sheet
-        self._has_q_balance_sheet = any(self._q_balance_sheet_df) and self._q_balance_sheet_df.shape[0] > 0
 
-    def __set_quarterly_cashflow(self):
+    def __set_q_cashflow_df(self):
+        self._has_q_cashflow_df = any(self._q_cashflow_df) and self._q_cashflow_df.shape[0] > 0
         self._q_cashflow_df = self.__yFinance.quarterly_cashflow
-        self._has_q_cashflow = any(self._q_cashflow_df) and self._q_cashflow_df.shape[0] > 0
 
-    def __set_quarterly_earnings(self):
+    def __set_q_earning_df(self):
+        self._has_q_earning_df = any(self._q_earning_df) and self._q_earning_df.shape[0] > 0
         self._q_earning_df = self.__yFinance.quarterly_earnings
-        self._has_q_earnings = any(self._q_earning_df) and self._q_earning_df.shape[0] > 0
 
-    def __set_quarterly_financials(self):
+    def __set_q_financial_df(self):
+        self._has_q_financial_df = any(self._q_financial_df) and self._q_financial_df.shape[0] > 0
         self._q_financial_df = self.__yFinance.quarterly_financials
-        self._has_q_financials = any(self._q_financial_df) and self._q_financial_df.shape[0] > 0
 
     def __get_str_from_key(self, a_key: str = 'NA') -> str:
         if a_key in self.__y_fin_dic:
@@ -312,16 +311,16 @@ class stock_info(abstract_info):
 
     @property
     def HasQuarterBalanceSheet(self):
-        return self._has_q_balance_sheet
+        return self._has_q_balance_sheet_df
 
     @property
     def HasQuarterCashflow(self):
-        return self._has_q_cashflow
+        return self._has_q_cashflow_df
 
     @property
     def HasQuarterEarnings(self):
-        return self._has_q_earnings
+        return self._has_q_earning_df
 
     @property
     def HasQuarterFinancials(self):
-        return self._has_q_financials
+        return self._has_q_financial_df
