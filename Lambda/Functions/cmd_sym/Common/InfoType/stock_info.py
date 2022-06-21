@@ -20,7 +20,7 @@ from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
 
 class stock_info(abstract_info):
     __ticker: str = 'NA'
-    __yFinance: yf.ticker.Ticker
+    __y_finance: yf.ticker.Ticker
     __y_fin_dic: dict = {}
     __header: list = ['Info', 'StockInfo']
     _company_name: str = 'NA'
@@ -56,33 +56,132 @@ class stock_info(abstract_info):
 
     def __init__(self, a_ticker: str = 'AAPL'):
         self.__ticker = a_ticker
-        self.__yFinance = yf.Ticker(a_ticker)
+        self.__y_finance = yf.Ticker(a_ticker)
 
-        if '_info' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_info') or any(self.__yFinance.info):
+        if '_info' in self.__y_finance.__dict__ or hasattr(self.__y_finance, '_info') or any(self.__y_finance.info):
             # if self.__yFinance.__dict__['_info'] is not None:
             self.__get_info()
 
-        if '_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_balance_sheet') or any(self.__yFinance.balance_sheet):
+        if '_balance_sheet' in self.__y_finance.__dict__ or hasattr(self.__y_finance, '_balance_sheet') or\
+                any(self.__y_finance.balance_sheet):
             self.__set_balance_sheet_df()
 
-        if '_options' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_options') or any(self.__yFinance.options):
+        if '_options' in self.__y_finance.__dict__ or hasattr(self.__y_finance, '_options') or\
+                any(self.__y_finance.options):
             self.__set_option_tuple()
 
-        if '_quarterly_earnings' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_earnings') or any(self.__yFinance.quarterly_earnings):
+        if '_quarterly_earnings' in self.__y_finance.__dict__ or hasattr(self.__y_finance, '_quarterly_earnings') or\
+                any(self.__y_finance.quarterly_earnings):
             self.__set_q_earning_df()
 
-        if '_quarterly_cashflow' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_cashflow') or any(self.__yFinance.quarterly_cashflow):
+        if '_quarterly_cashflow' in self.__y_finance.__dict__ or hasattr(self.__y_finance, '_quarterly_cashflow') or\
+                any(self.__y_finance.quarterly_cashflow):
             self.__set_q_cashflow_df()
 
-        if '_quarterly_financials' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_financials') or any(self.__yFinance.quarterly_financials):
+        if '_quarterly_financials' in self.__y_finance.__dict__ or hasattr(self.__y_finance, '_quarterly_financials')\
+                or any(self.__y_finance.quarterly_financials):
             self.__set_q_financial_df()
 
-        if '_quarterly_balancesheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_balancesheet') or any(self.__yFinance.quarterly_balancesheet)\
-            or '_quarterly_balance_sheet' in self.__yFinance.__dict__ or hasattr(self.__yFinance, '_quarterly_balance_sheet') or any(self.__yFinance.quarterly_balance_sheet):
+        if '_quarterly_balancesheet' in self.__y_finance.__dict__ or\
+                hasattr(self.__y_finance, '_quarterly_balancesheet') or any(self.__y_finance.quarterly_balancesheet) or\
+                '_quarterly_balance_sheet' in self.__y_finance.__dict__ or\
+                hasattr(self.__y_finance, '_quarterly_balance_sheet') or any(self.__y_finance.quarterly_balance_sheet):
             self.__set_q_balance_sheet_df()
 
         self.__set_action_df()
         self.__set_split_series()
+
+    def __is_df_valid(self, a_df: any) -> bool:
+        return any(a_df) and isinstance(a_df, DataFrame) and not a_df.empty and\
+               not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
+
+    def __get_str_from_key(self, a_key: str = 'NA') -> str:
+        if a_key in self.__y_fin_dic:
+            return 'None' if self.__y_fin_dic[a_key] is None else self.__y_fin_dic[a_key]
+        else:
+            return 'NA'
+
+    def __get_info(self):
+        if any(self.__y_finance.info):
+            #print(self.__y_fin_dic)
+            self.__y_fin_dic = self.__y_finance.info
+            self._company_name = self.__get_str_from_key('shortName')
+            self._url = self.__get_str_from_key('website')
+            self._url_logo = self.__get_str_from_key('logo_url')
+            self._address1 = self.__get_str_from_key('address1')
+            self._address2 = self.__get_str_from_key('address2')
+            self._city = self.__get_str_from_key('city')
+            self._postal_code = self.__get_str_from_key('zip')
+            self._state = self.__get_str_from_key('state')
+            self._country = self.__get_str_from_key('country')
+            self._phone = self.__get_str_from_key('phone')
+            self._fax = self.__get_str_from_key('fax')
+            self._market = self.__get_str_from_key('market')
+            self._currency = self.__get_str_from_key('currency')
+            self._quote_type = self.__get_str_from_key('quoteType')
+            self.__get_stock_type(self._quote_type)
+
+    def __get_stock_type(self, s: str = ''):
+        if s == 'ETF':
+            self._stock_type = ExchangeTradedFund(self._company_name, self.__ticker, s)
+        elif s == 'INDEX':
+            self._stock_type = IndexFund(self._company_name, self.__ticker, s)
+        elif s == 'MUTUALFUND':
+            self._stock_type = MutualFund(self._company_name, self.__ticker, s)
+        elif s == 'CRYPTOCURRENCY':
+            self._stock_type = CryptoCurrency(self._company_name, self.__ticker, s)
+        elif s == 'CURRENCY':
+            self._stock_type = RegularCurrency(self._company_name, self.__ticker, s)
+        elif s == 'FUTURE':
+            self._stock_type = AbstractStockFuture(self._company_name, self.__ticker, s)
+        elif s == 'EQUITY':
+            self._stock_type = AbstractStockEquity(self._company_name, self.__ticker, s)
+        else:
+        #    self._stock_type = AbstractStockOption(self._company_name, self.__ticker)
+            self._stock_type = AbstractStockBond(self._company_name, self.__ticker, s)
+        #    self._stock_type = AbstractStock()
+
+    def __set_action_df(self):
+        self._has_action_df = self.__is_df_valid(self.__y_finance.actions)
+        if self._has_action_df:
+            self._action_df = self.__y_finance.actions.fillna(value=np.nan, inplace=False)
+
+    def __set_split_series(self):
+        self._has_split_series = any(self.__y_finance.splits) and isinstance(self.__y_finance.splits, Series)
+        if self._has_split_series:
+            self._split_series = self.__y_finance.splits
+
+    def __set_balance_sheet_df(self):
+        self._has_balance_sheet_df = self.__is_df_valid(self.__y_finance.balance_sheet)
+        if self._has_balance_sheet_df:
+            self._balance_sheet_df = self.__y_finance.balance_sheet.fillna(value=np.nan, inplace=False)
+
+    def __set_option_tuple(self):
+        self._has_option_tuple = self.__y_finance.options == ()
+        if self._has_option_tuple:
+            self._option_tuple = self.__y_finance.options
+
+    def __set_q_balance_sheet_df(self):
+        self._has_q_balance_sheet_df = self.__is_df_valid(self.__y_finance.quarterly_balancesheet) or \
+                                       self.__is_df_valid(self.__y_finance.quarterly_balance_sheet)
+        if self._has_q_balance_sheet_df:
+            self._q_balance_sheet_df = self.__y_finance.quarterly_balancesheet.fillna(value=np.nan, inplace=False)
+            self._q_balance_sheet_df = self.__y_finance.quarterly_balance_sheet.fillna(value=np.nan, inplace=False)
+
+    def __set_q_cashflow_df(self):
+        self._has_q_cashflow_df = self.__is_df_valid(self.__y_finance.quarterly_cashflow)
+        if self._has_q_cashflow_df:
+            self._q_cashflow_df = self.__y_finance.quarterly_cashflow.fillna(value=np.nan, inplace=False)
+
+    def __set_q_earning_df(self):
+        self._has_q_earning_df = self.__is_df_valid(self.__y_finance.quarterly_earnings)
+        if self._has_q_earning_df:
+            self._q_earning_df = self.__y_finance.quarterly_earnings.fillna(value=np.nan, inplace=False)
+
+    def __set_q_financial_df(self):
+        self._has_q_financial_df = self.__is_df_valid(self.__y_finance.quarterly_financials)
+        if self._has_q_financial_df:
+            self._q_financial_df = self.__y_finance.quarterly_financials.fillna(value=np.nan, inplace=False)
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
@@ -163,98 +262,6 @@ class stock_info(abstract_info):
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
-
-    def __is_df_valid(self, a_df: any) -> bool:
-        return any(a_df) and isinstance(a_df, DataFrame) and not a_df.empty and\
-               not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
-
-    def __set_action_df(self):
-        self._has_action_df = self.__is_df_valid(self.__yFinance.actions)
-        if self._has_action_df:
-            self._action_df = self.__yFinance.actions.fillna(value=np.nan, inplace=False)
-
-    def __set_split_series(self):
-        self._has_split_series = any(self.__yFinance.splits) and isinstance(self.__yFinance.splits, Series)
-        if self._has_split_series:
-            self._split_series = self.__yFinance.splits
-
-    def __set_option_tuple(self):
-        self._has_option_tuple = self.__yFinance.options == ()
-        if self._has_option_tuple:
-            self._option_tuple = self.__yFinance.options
-
-    def __get_info(self):
-        if any(self.__yFinance.info):
-            #print(self.__y_fin_dic)
-            self.__y_fin_dic = self.__yFinance.info
-            self._company_name = self.__get_str_from_key('shortName')
-            self._url = self.__get_str_from_key('website')
-            self._url_logo = self.__get_str_from_key('logo_url')
-            self._address1 = self.__get_str_from_key('address1')
-            self._address2 = self.__get_str_from_key('address2')
-            self._city = self.__get_str_from_key('city')
-            self._postal_code = self.__get_str_from_key('zip')
-            self._state = self.__get_str_from_key('state')
-            self._country = self.__get_str_from_key('country')
-            self._phone = self.__get_str_from_key('phone')
-            self._fax = self.__get_str_from_key('fax')
-            self._market = self.__get_str_from_key('market')
-            self._currency = self.__get_str_from_key('currency')
-            self._quote_type = self.__get_str_from_key('quoteType')
-            self.__get_stock_type(self._quote_type)
-
-    def __set_balance_sheet_df(self):
-        self._has_balance_sheet_df = self.__is_df_valid(self.__yFinance.balance_sheet)
-        if self._has_balance_sheet_df:
-            self._balance_sheet_df = self.__yFinance.balance_sheet.fillna(value=np.nan, inplace=False)
-
-    def __set_q_balance_sheet_df(self):
-        self._has_q_balance_sheet_df = self.__is_df_valid(self.__yFinance.quarterly_balancesheet) or \
-                                       self.__is_df_valid(self.__yFinance.quarterly_balance_sheet)
-        if self._has_q_balance_sheet_df:
-            self._q_balance_sheet_df = self.__yFinance.quarterly_balancesheet.fillna(value=np.nan, inplace=False)
-            self._q_balance_sheet_df = self.__yFinance.quarterly_balance_sheet.fillna(value=np.nan, inplace=False)
-
-    def __set_q_cashflow_df(self):
-        self._has_q_cashflow_df = self.__is_df_valid(self.__yFinance.quarterly_cashflow)
-        if self._has_q_cashflow_df:
-            self._q_cashflow_df = self.__yFinance.quarterly_cashflow.fillna(value=np.nan, inplace=False)
-
-    def __set_q_earning_df(self):
-        self._has_q_earning_df = self.__is_df_valid(self.__yFinance.quarterly_earnings)
-        if self._has_q_earning_df:
-            self._q_earning_df = self.__yFinance.quarterly_earnings.fillna(value=np.nan, inplace=False)
-
-    def __set_q_financial_df(self):
-        self._has_q_financial_df = self.__is_df_valid(self.__yFinance.quarterly_financials)
-        if self._has_q_financial_df:
-            self._q_financial_df = self.__yFinance.quarterly_financials.fillna(value=np.nan, inplace=False)
-
-    def __get_str_from_key(self, a_key: str = 'NA') -> str:
-        if a_key in self.__y_fin_dic:
-            return 'None' if self.__y_fin_dic[a_key] is None else self.__y_fin_dic[a_key]
-        else:
-            return 'NA'
-
-    def __get_stock_type(self, s: str = ''):
-        if s == 'ETF':
-            self._stock_type = ExchangeTradedFund(self._company_name, self.__ticker, s)
-        elif s == 'INDEX':
-            self._stock_type = IndexFund(self._company_name, self.__ticker, s)
-        elif s == 'MUTUALFUND':
-            self._stock_type = MutualFund(self._company_name, self.__ticker, s)
-        elif s == 'CRYPTOCURRENCY':
-            self._stock_type = CryptoCurrency(self._company_name, self.__ticker, s)
-        elif s == 'CURRENCY':
-            self._stock_type = RegularCurrency(self._company_name, self.__ticker, s)
-        elif s == 'FUTURE':
-            self._stock_type = AbstractStockFuture(self._company_name, self.__ticker, s)
-        elif s == 'EQUITY':
-            self._stock_type = AbstractStockEquity(self._company_name, self.__ticker, s)
-        else:
-        #    self._stock_type = AbstractStockOption(self._company_name, self.__ticker)
-            self._stock_type = AbstractStockBond(self._company_name, self.__ticker, s)
-        #    self._stock_type = AbstractStock()
 
     @property
     def ActionDataFrame(self):
