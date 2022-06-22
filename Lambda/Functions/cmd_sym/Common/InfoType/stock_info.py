@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 import numpy as np
 import yfinance as yf
@@ -23,6 +24,9 @@ class stock_info(abstract_info):
     __y_finance: yf.ticker.Ticker
     __y_fin_dic: dict = {}
     __header: list = ['Info', 'StockInfo']
+    _date_time: datetime = datetime.now()
+    _date_time_zone: str = "GMT"
+    _date_time_format: str = "%Y-%m-%d %H:%M:%S"
     _company_name: str = 'NA'
     _has_option_tuple: bool = False
     _has_split_series: bool = False
