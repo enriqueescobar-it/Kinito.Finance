@@ -24,6 +24,7 @@ class stock_info(abstract_info):
     __y_finance: yf.ticker.Ticker
     __y_fin_dic: dict = {}
     __header: list = ['Info', 'StockInfo']
+    _past_years: int = 5
     _date_time: datetime = datetime.now()
     _date_time_zone: str = "GMT"
     _date_time_format: str = "%Y-%m-%d %H:%M:%S"
@@ -58,9 +59,10 @@ class stock_info(abstract_info):
     _option_tuple: tuple = tuple()
     _stock_type: AbstractStock
 
-    def __init__(self, a_ticker: str = 'AAPL'):
+    def __init__(self, a_ticker: str = 'AAPL', past_years: int = 5):
         self.__ticker = a_ticker
         self.__y_finance = yf.Ticker(a_ticker)
+        self._past_years = past_years
 
         if '_info' in self.__y_finance.__dict__ or hasattr(self.__y_finance, '_info') or any(self.__y_finance.info):
             # if self.__yFinance.__dict__['_info'] is not None:
