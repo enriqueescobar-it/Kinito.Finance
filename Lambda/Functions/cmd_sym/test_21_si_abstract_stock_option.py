@@ -2,7 +2,7 @@ import time
 
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Options.AbstractStockOption import AbstractStockOption
-from Common.InfoType.stock_info import stock_info
+from Common.InfoType.StockInfo import StockInfo
 
 print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
@@ -26,6 +26,6 @@ for option_item in option_list:
     print(stop_t - start_t)
 
 print('\n============   ', option_list[0] + "_info", '   ============\n')
-stock_info: stock_info = stock_info(option_list[0])
+stock_info: StockInfo = StockInfo(option_list[0])
 print(stock_info.to_json())
 print(stock_info)

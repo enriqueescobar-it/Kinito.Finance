@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import numpy as np
 import yfinance as yf
@@ -7,7 +7,7 @@ from pandas import DataFrame
 from pandas import Series
 from prettytable import PrettyTable
 
-from Common.InfoType.abstract_info import abstract_info
+from Common.InfoType.AbstractInfo import AbstractInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
 from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency
@@ -19,7 +19,7 @@ from Common.StockType.Funds.Mutual.MutualFund import MutualFund
 from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
 
 
-class stock_info(abstract_info):
+class StockInfo(AbstractInfo):
     __ticker: str = 'NA'
     __y_finance: yf.ticker.Ticker
     __y_fin_dic: dict = {}

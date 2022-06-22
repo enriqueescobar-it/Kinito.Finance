@@ -2,7 +2,7 @@ import time
 
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
-from Common.InfoType.stock_info import stock_info
+from Common.InfoType.StockInfo import StockInfo
 
 print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
@@ -15,7 +15,7 @@ count: int = 0
 for future_item in future_list:
     start_t = time.time()
     print('\n============   ', future_item + '_info', '   ============\n')
-    a_stock_info: stock_info = stock_info(future_item)
+    a_stock_info: StockInfo = StockInfo(future_item)
     print(a_stock_info.to_json())
     print(a_stock_info)
     count = count + 1

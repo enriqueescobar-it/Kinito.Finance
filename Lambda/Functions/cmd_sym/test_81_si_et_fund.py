@@ -3,7 +3,7 @@ import time
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 from Common.StockType.Funds.ExchangeTraded.ExchangeTradedFund import ExchangeTradedFund
-from Common.InfoType.stock_info import stock_info
+from Common.InfoType.StockInfo import StockInfo
 
 print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
@@ -21,7 +21,7 @@ count: int = 0
 for et_item in et_list:
     start_t = time.time()
     print('\n============   ', et_item + '_info', '   ============\n')
-    a_stock_info: stock_info = stock_info(et_item)
+    a_stock_info: StockInfo = StockInfo(et_item)
     print(a_stock_info.to_json())
     print(a_stock_info)
     count = count + 1

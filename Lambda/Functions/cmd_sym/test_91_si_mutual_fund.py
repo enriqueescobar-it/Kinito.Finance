@@ -3,7 +3,7 @@ import time
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 from Common.StockType.Funds.Mutual.MutualFund import MutualFund
-from Common.InfoType.stock_info import stock_info
+from Common.InfoType.StockInfo import StockInfo
 
 print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
@@ -21,7 +21,7 @@ count: int = 0
 for mutual_item in mutual_list:
     start_t = time.time()
     print('\n============   ', mutual_item + '_info', '   ============\n')
-    a_stock_info: stock_info = stock_info(mutual_item)
+    a_stock_info: StockInfo = StockInfo(mutual_item)
     print(a_stock_info.to_json())
     print(a_stock_info)
     count = count + 1

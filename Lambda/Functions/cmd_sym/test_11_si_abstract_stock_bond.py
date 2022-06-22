@@ -2,7 +2,7 @@ import time
 
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
-from Common.InfoType.stock_info import stock_info
+from Common.InfoType.StockInfo import StockInfo
 
 print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
@@ -26,6 +26,6 @@ for bond_item in bond_list:
     print(stop_t - start_t)
 
 print('\n============   ', bond_list[0] + "_info", '   ============\n')
-stock_info: stock_info = stock_info(bond_list[0])
+stock_info: StockInfo = StockInfo(bond_list[0])
 print(stock_info.to_json())
 print(stock_info)

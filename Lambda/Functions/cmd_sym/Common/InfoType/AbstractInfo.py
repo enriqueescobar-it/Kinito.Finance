@@ -1,5 +1,5 @@
 from abc import ABC
 
 
-class abstract_info(ABC):
+class AbstractInfo(ABC):
     pass

@@ -3,7 +3,7 @@ import time
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency
-from Common.InfoType.stock_info import stock_info
+from Common.InfoType.StockInfo import StockInfo
 
 print('\n============   ', 'abstractStock', '   ============\n')
 abstractStock: AbstractStock = AbstractStock()
@@ -21,7 +21,7 @@ count: int = 0
 for crypto_currency_item in crypto_currency_list:
     start_t = time.time()
     print('\n============   ', crypto_currency_item + '_info', '   ============\n')
-    a_stock_info: stock_info = stock_info(crypto_currency_item)
+    a_stock_info: StockInfo = StockInfo(crypto_currency_item)
     print(a_stock_info.to_json())
     print(a_stock_info)
     count = count + 1
