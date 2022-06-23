@@ -30,6 +30,7 @@ class QuarterInfo(AbstractInfo):
     _previous_dt_q_str: str = '2001Q2'
     _base_quarter: FiscalQuarter = FiscalQuarter(2001, 3)
     _base_dt: datetime = _current_dt
+    _base_dt_q: int = 3
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))):
         self._current_dt = d_t
@@ -74,6 +75,9 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['PreviousQuarter', self._previous_dt_q_str])
         self._pretty_table.add_row(['PreviousFiscalQuarter', str(self._previous_quarter)])
         self._pretty_table.add_row(['PreviousFiscalQuarterStart', self._previous_dt])
+        self._pretty_table.add_row(['BaseQ', self._base_dt_q])
+        self._pretty_table.add_row(['BaseQNumber', 0])
+        self._pretty_table.add_row(['BaseQuarter', ""])
         self._pretty_table.add_row(['BaseFiscalQuarter', str(self._base_quarter)])
         self._pretty_table.add_row(['BaseFiscalQuarterStart', self._base_dt])
         return self._pretty_table.__str__()
@@ -95,6 +99,9 @@ class QuarterInfo(AbstractInfo):
             "previous_q_str": self._previous_dt_q_str,
             "previous_quarter": str(self._previous_quarter),
             "previous_quarter_start": str(self._previous_dt),
+            "base_q": self._base_dt_q,
+            "base_q_num": "",
+            "base_q_str": "",
             "base_quarter": str(self._base_quarter),
             "base_quarter_start": str(self._base_dt)
         }.items()
@@ -107,6 +114,7 @@ class QuarterInfo(AbstractInfo):
             FiscalQuarter(self._previous_quarter.fiscal_year - base_years, self._previous_quarter.fiscal_quarter)
         self._base_dt = datetime(self._base_quarter.start.year, self._base_quarter.start.month,
                                  self._base_quarter.start.day).replace(tzinfo=self._base_quarter.start.tzinfo)
+        self._base_dt_q = self._base_quarter.fiscal_quarter
 
     @property
     def CurrentDay(self):
@@ -163,6 +171,10 @@ class QuarterInfo(AbstractInfo):
     @property
     def PreviousFiscalQuarterStart(self):
         return self._previous_dt
+
+    @property
+    def BaseQ(self):
+        return self._base_dt_q
 
     @property
     def BaseFiscalQuarter(self):
