@@ -1,6 +1,7 @@
 # import the necessary packages
 import argparse
 
+from Common.InfoType.QuarterInfo import QuarterInfo
 from Common.InfoType.StockInfo import StockInfo
 from Common.InfoType.TimeInfo import TimeInfo
 from Common.Readers.Engine.YahooFinanceEngine import YahooFinanceEngine
@@ -23,9 +24,11 @@ print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
 # funds: us_treasuries = ['^TNX', '^IRX', '^TYX', '^VIX']#! #~extend
 # a_ticker: str = '^TNX'#
 a_ticker: str = args["symbol"]
-a_ti: TimeInfo = TimeInfo()
-print(a_ti.to_json())
-print(a_ti)
+#a_ti: TimeInfo = TimeInfo()
+#print(a_ti.to_json())
+#print(a_ti)
+q_i: QuarterInfo = QuarterInfo()
+print(q_i)
 exit(-1)
 a_stock_info: StockInfo = StockInfo(a_ticker)
 print(a_stock_info.to_json())
