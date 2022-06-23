@@ -73,6 +73,26 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['BaseFiscalQuarterStart', self._base_dt])
         return self._pretty_table.__str__()
 
+    def __iter__(self):
+        yield from {
+            self.__header[0]: self.__header[1],
+            "current_day": self._current_dt_day,
+            "current_day_th": self._current_dt_day_th,
+            "current_week_th": self._current_dt_week_th,
+            "current_month": self._current_dt_month,
+            "current_year": self._current_dt_year,
+            "current_q": self._current_dt_q,
+            "current_q_num": self._current_dt_q_num,
+            "current_quarter": str(self._current_quarter),
+            "previous_quarter": str(self._previous_quarter),
+            "previous_quarter_start": str(self._previous_dt),
+            "base_quarter": str(self._base_quarter),
+            "base_quarter_start": str(self._base_dt)
+        }.items()
+
+    def to_json(self):
+        return json.dumps(dict(self), ensure_ascii=False)
+
     def set_baseline(self, base_years: int = 5):
         self._base_quarter = \
             FiscalQuarter(self._previous_quarter.fiscal_year - base_years, self._previous_quarter.fiscal_quarter)
