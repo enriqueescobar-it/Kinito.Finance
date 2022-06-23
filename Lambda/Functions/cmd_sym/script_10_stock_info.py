@@ -24,6 +24,8 @@ print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
 # a_ticker: str = '^TNX'#
 a_ticker: str = args["symbol"]
 a_ti: TimeInfo = TimeInfo()
+print(a_ti.to_json())
+print(a_ti)
 exit(-1)
 a_stock_info: StockInfo = StockInfo(a_ticker)
 print(a_stock_info.to_json())
