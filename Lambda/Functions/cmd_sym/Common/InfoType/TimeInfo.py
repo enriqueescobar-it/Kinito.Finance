@@ -9,8 +9,8 @@ from Common.InfoType.AbstractInfo import AbstractInfo
 
 
 class TimeInfo(AbstractInfo):
-    _pretty_table: PrettyTable = PrettyTable()
     __header: list = ['Field', 'FieldInfo']
+    _pretty_table: PrettyTable = PrettyTable()
     _d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))
     _d_t_time: datetime.time = _d_t.time()
     _d_t_tz_info: tzinfo = ZoneInfo("America/Toronto")

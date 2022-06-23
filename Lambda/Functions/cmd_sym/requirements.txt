@@ -9,6 +9,7 @@ cssselect==1.1.0
 cycler==0.11.0
 fake-useragent==0.1.11
 feedparser==6.0.8
+fiscalyear==0.4.0
 fonttools==4.31.2
 idna==3.3
 importlib-metadata==4.11.3
