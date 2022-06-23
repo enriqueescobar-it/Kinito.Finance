@@ -8,6 +8,7 @@ from pandas import Series
 from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
+from Common.InfoType.QuarterInfo import QuarterInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
 from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency
@@ -28,6 +29,7 @@ class StockInfo(AbstractInfo):
     _date_time: datetime = datetime.now()
     _date_time_zone: str = "GMT"
     _date_time_format: str = "%Y-%m-%d %H:%M:%S"
+    _quarter_info: QuarterInfo = QuarterInfo()
     _company_name: str = 'NA'
     _has_option_tuple: bool = False
     _has_split_series: bool = False
