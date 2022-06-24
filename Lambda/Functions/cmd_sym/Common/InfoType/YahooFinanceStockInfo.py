@@ -223,7 +223,7 @@ class YahooFinanceStockInfo(AbstractInfo):
         return self._url
 
     @property
-    def URLloga(self):
+    def URLlogo(self):
         return self._url_logo
 
     @property
