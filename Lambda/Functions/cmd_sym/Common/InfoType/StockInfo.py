@@ -44,7 +44,6 @@ class StockInfo(AbstractInfo):
     _market: str = 'NA'
     _currency: str = 'NA'
     _q_balance_sheet_df: DataFrame = DataFrame()
-    _q_earning_df: DataFrame = DataFrame()
     _stock_type: AbstractStock
 
     def __init__(self, a_ticker: str = 'AAPL', past_years: int = 5):
@@ -132,7 +131,7 @@ class StockInfo(AbstractInfo):
         if self._y_finance_si.HasQCashflowDf:
             s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._y_finance_si.QCashflowDf.to_string(index=True)
         if self._y_finance_si.HasQEarningDf:
-            s += "\n\nQUARTER EARNING DATAFRAME\n" + self._q_earning_df.to_string(index=True)
+            s += "\n\nQUARTER EARNING DATAFRAME\n" + self._y_finance_si.QEarningDf.to_string(index=True)
         if self._y_finance_si.HasQFinancialDf:
             s += "\n\nQUARTER FINANCIAL DATAFRAME\n" + self._y_finance_si.QFinancialDf.to_string(index=True)
         s += "\n\nSTOCK TYPE\n" + str(self._stock_type)
@@ -190,7 +189,7 @@ class StockInfo(AbstractInfo):
 
     @property
     def QuarterEarningDataFrame(self):
-        return self._q_earning_df
+        return self._y_finance_si.QEarningDf
 
     @property
     def QuarterFinancialDataFrame(self):
