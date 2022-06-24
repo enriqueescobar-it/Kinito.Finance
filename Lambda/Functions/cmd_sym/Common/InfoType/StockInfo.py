@@ -44,7 +44,6 @@ class StockInfo(AbstractInfo):
     _market: str = 'NA'
     _currency: str = 'NA'
     _q_balance_sheet_df: DataFrame = DataFrame()
-    _q_cashflow_df: DataFrame = DataFrame()
     _q_earning_df: DataFrame = DataFrame()
     _q_financial_df: DataFrame = DataFrame()
     _stock_type: AbstractStock
@@ -131,7 +130,8 @@ class StockInfo(AbstractInfo):
             s += "\n\nBALANCE SHEET DATAFRAME\n\n" + self._y_finance_si.BalanceSheetDf.to_string(index=True)
         if self._y_finance_si.HasQBalanceSheetDf:
             s += "\n\nQUARTER BALANCE SHEET DATAFRAME\n" + self._q_balance_sheet_df.to_string(index=True)
-            s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._q_cashflow_df.to_string(index=True)
+        if self._y_finance_si.HasQCashflowDf:
+            s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._y_finance_si.QCashflowDf.to_string(index=True)
         if self._y_finance_si.HasQEarningDf:
             s += "\n\nQUARTER EARNING DATAFRAME\n" + self._q_earning_df.to_string(index=True)
         if self._y_finance_si.HasQFinancialDf:
@@ -187,7 +187,7 @@ class StockInfo(AbstractInfo):
 
     @property
     def QuarterCashflowDataFrame(self):
-        return self._q_cashflow_df
+        return self._y_finance_si.QCashflowDf
 
     @property
     def QuarterEarningDataFrame(self):
