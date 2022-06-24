@@ -43,7 +43,6 @@ class StockInfo(AbstractInfo):
     _fax: str = 'NA'
     _market: str = 'NA'
     _currency: str = 'NA'
-    _balance_sheet_df: DataFrame = DataFrame()
     _q_balance_sheet_df: DataFrame = DataFrame()
     _q_cashflow_df: DataFrame = DataFrame()
     _q_earning_df: DataFrame = DataFrame()
@@ -129,7 +128,7 @@ class StockInfo(AbstractInfo):
         if self._y_finance_si.HasActionDf:
             s += "\n\nACTION DATAFRAME\n" + self._y_finance_si.ActionDf.head().to_string(index=True)
         if self._y_finance_si.HasBalanceSheetDf:
-            s += "\n\nBALANCE SHEET DATAFRAME\n\n" + self._balance_sheet_df.to_string(index=True)
+            s += "\n\nBALANCE SHEET DATAFRAME\n\n" + self._y_finance_si.BalanceSheetDf.to_string(index=True)
         if self._y_finance_si.HasQBalanceSheetDf:
             s += "\n\nQUARTER BALANCE SHEET DATAFRAME\n" + self._q_balance_sheet_df.to_string(index=True)
             s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._q_cashflow_df.to_string(index=True)
@@ -172,7 +171,7 @@ class StockInfo(AbstractInfo):
 
     @property
     def BalanceSheetDataFrame(self):
-        return self._balance_sheet_df
+        return self._y_finance_si.BalanceSheetDf
 
     @property
     def CompanyName(self):
