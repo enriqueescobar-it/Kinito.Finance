@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 
 import yfinance as yf
-from pandas import DataFrame, Series
 from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
@@ -43,7 +42,6 @@ class StockInfo(AbstractInfo):
     _fax: str = 'NA'
     _market: str = 'NA'
     _currency: str = 'NA'
-    _q_balance_sheet_df: DataFrame = DataFrame()
     _stock_type: AbstractStock
 
     def __init__(self, a_ticker: str = 'AAPL', past_years: int = 5):
@@ -127,7 +125,7 @@ class StockInfo(AbstractInfo):
         if self._y_finance_si.HasBalanceSheetDf:
             s += "\n\nBALANCE SHEET DATAFRAME\n\n" + self._y_finance_si.BalanceSheetDf.to_string(index=True)
         if self._y_finance_si.HasQBalanceSheetDf:
-            s += "\n\nQUARTER BALANCE SHEET DATAFRAME\n" + self._q_balance_sheet_df.to_string(index=True)
+            s += "\n\nQUARTER BALANCE SHEET DATAFRAME\n" + self._y_finance_si.QBalanceSheetDf.to_string(index=True)
         if self._y_finance_si.HasQCashflowDf:
             s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._y_finance_si.QCashflowDf.to_string(index=True)
         if self._y_finance_si.HasQEarningDf:
@@ -181,7 +179,7 @@ class StockInfo(AbstractInfo):
 
     @property
     def QuarterBalanceSheetDataFrame(self):
-        return self._q_balance_sheet_df
+        return self._y_finance_si.QBalanceSheetDf
 
     @property
     def QuarterCashflowDataFrame(self):
