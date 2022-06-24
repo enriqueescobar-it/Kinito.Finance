@@ -43,9 +43,12 @@ class YahooFinanceStockInfo(AbstractInfo):
     _q_earning_df: DataFrame = DataFrame()
     _q_financial_df: DataFrame = DataFrame()
 
-    def __int__(self, a_ticker: str = 'AAPL'):
-        self._ticker = a_ticker
-        self._y_finance = yf.Ticker(a_ticker)
+    def __int__(self):
+        self.__init__(self._ticker)
+
+    def __init__(self, ticker: str):
+        self._ticker = ticker
+        self._y_finance = yf.Ticker(ticker)
         self._set_info_dict()
         self._set_balance_sheet_df()
         self._set_option_tuple()
