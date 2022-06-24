@@ -23,6 +23,7 @@ a_quote: str = args["quote"]
 # display a friendly message to the user
 print("Hi there, you are looking for the <{}> symbol with <{}> quote?".format(a_sym, a_quote))
 yf_si: YahooFinanceStockInfo = YahooFinanceStockInfo(a_sym)
+print(yf_si)
 exit(0)
 abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)

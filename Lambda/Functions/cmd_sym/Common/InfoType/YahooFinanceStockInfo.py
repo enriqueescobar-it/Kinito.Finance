@@ -19,7 +19,6 @@ class YahooFinanceStockInfo(AbstractInfo):
     _has_q_cashflow_df: bool = False
     _has_q_earning_df: bool = False
     _has_q_financial_df: bool = False
-    _info_dict: dict = {}
     _company_name: str = 'NA'
     _url: str = "http://localhost"
     _url_logo: str = "http://localhost"
@@ -34,6 +33,7 @@ class YahooFinanceStockInfo(AbstractInfo):
     _market: str = "TSX"
     _currency: str = "$"
     _quote_type: str = "Bond"
+    _info_dict: dict = {}
     _option_tuple: tuple = tuple()
     _split_series: Series = Series()
     _action_df: DataFrame = DataFrame()
@@ -174,3 +174,99 @@ class YahooFinanceStockInfo(AbstractInfo):
         self._has_split_series = any(self._y_finance.splits) and isinstance(self._y_finance.splits, Series)
         if self._has_split_series:
             self._split_series = self._y_finance.splits
+
+    @property
+    def Ticker(self):
+        return self._ticker
+
+    @property
+    def Company(self):
+        return self._company_name
+
+    @property
+    def URL(self):
+        return self._url
+
+    @property
+    def URLloga(self):
+        return self._url_logo
+
+    @property
+    def Address1(self):
+        return self._address1
+
+    @property
+    def Address2(self):
+        return self._address2
+
+    @property
+    def City(self):
+        return self._city
+
+    @property
+    def PostalCode(self):
+        return self._postal_code
+
+    @property
+    def State(self):
+        return self._state
+
+    @property
+    def Country(self):
+        return self._country
+
+    @property
+    def Phone(self):
+        return self._phone
+
+    @property
+    def Fax(self):
+        return self._fax
+
+    @property
+    def Market(self):
+        return self._market
+
+    @property
+    def Currency(self):
+        return self._currency
+
+    @property
+    def QuoteType(self):
+        return self._quote_type
+
+    @property
+    def HasInfoDict(self):
+        return self._has_info_dict
+
+    @property
+    def HasOptionTuple(self):
+        return self._has_option_tuple
+
+    @property
+    def HasSplitSeries(self):
+        return self._has_split_series
+
+    @property
+    def HasActionDf(self):
+        return self._has_action_df
+
+    @property
+    def HasBalanceSheetDf(self):
+        return self._has_balance_sheet_df
+
+    @property
+    def HasQBalanceSheetDf(self):
+        return self._has_q_balance_sheet_df
+
+    @property
+    def HasQCashflowDf(self):
+        return self._has_q_cashflow_df
+
+    @property
+    def HasQEarningDf(self):
+        return self._has_q_earning_df
+
+    @property
+    def HasFinancialDf(self):
+        return self._q_financial_df
