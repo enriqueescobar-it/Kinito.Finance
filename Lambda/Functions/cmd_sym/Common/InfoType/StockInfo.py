@@ -43,7 +43,10 @@ class StockInfo(AbstractInfo):
     _market: str = 'NA'
     _currency: str = 'NA'
     _stock_type: AbstractStock
-    _has_balance_sheets: bool = False
+    _has_balance_sheets_df: bool = False
+    _has_cashflows_df: bool = False
+    _has_earnings_df: bool = False
+    _has_financials_df: bool = False
 
     def __init__(self, a_ticker: str = 'AAPL', past_years: int = 5):
         self.__ticker = a_ticker
@@ -56,10 +59,13 @@ class StockInfo(AbstractInfo):
         self._balance_sheet_df = self._y_finance_si.BalanceSheetDf
         self._option_tuple = self._y_finance_si.OptionTuple
         self._split_series = self._y_finance_si.SplitSeries
-        self._has_balance_sheets = self._y_finance_si.HasQBalanceSheesDf
+        self._has_balance_sheets_df = self._y_finance_si.HasQBalanceSheesDf
         self._quarter_info.set_balance_sheet_df(self._y_finance_si.QBalanceSheetsDf)
+        self._has_cashflows_df = self._y_finance_si.HasQCashflowsDf
         self._q_cashflow_df = self._y_finance_si.QCashflowsDf
+        self._has_earnings_df = self._y_finance_si.HasQEarningsDf
         self._q_earning_df = self._y_finance_si.QEarningsDf
+        self._has_financials_df = self._y_finance_si.HasQFinancialsDf
         self._q_financial_df = self._y_finance_si.QFinancialsDf
 
     def __get_info(self):
@@ -118,6 +124,10 @@ class StockInfo(AbstractInfo):
         pt.add_row(['Market', self._market])
         pt.add_row(['Currency', self._currency])
         pt.add_row(['QuoteType', self._quote_type])
+        pt.add_row(['HasBalanceSheetsDf', self._has_balance_sheets_df])
+        pt.add_row(['HasCashflowsDf', self._has_cashflows_df])
+        pt.add_row(['HasEarningsDf', self._has_earnings_df])
+        pt.add_row(['HasFinancialsDf', self._has_financials_df])
         s: str = pt.__str__()
         if self._y_finance_si.HasOptionTuple:
             s += "\n\nOPTION TUPLE\n" + str(self._y_finance_si.OptionTuple)
@@ -158,7 +168,11 @@ class StockInfo(AbstractInfo):
             "fax": self._fax,
             "market": self._market,
             "currency": self._currency,
-            "quote_type": self._quote_type
+            "quote_type": self._quote_type,
+            "has_balance_sheets_df": self._has_balance_sheets_df,
+            "has_cashflows_df": self._has_cashflows_df,
+            "has_earnings_df": self._has_earnings_df,
+            "has_financials_df": self._has_financials_df
         }.items()
 
     def to_json(self):
