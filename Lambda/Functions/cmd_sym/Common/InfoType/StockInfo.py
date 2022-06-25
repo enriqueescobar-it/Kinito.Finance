@@ -195,22 +195,6 @@ class StockInfo(AbstractInfo):
         return self._y_finance_si.OptionTuple
 
     @property
-    def QuarterBalanceSheetDataFrame(self):
-        return self._y_finance_si.QBalanceSheetsDf
-
-    @property
-    def QuarterCashflowDataFrame(self):
-        return self._y_finance_si.QCashflowsDf
-
-    @property
-    def QuarterEarningDataFrame(self):
-        return self._y_finance_si.QEarningsDf
-
-    @property
-    def QuarterFinancialDataFrame(self):
-        return self._y_finance_si.QFinancialsDf
-
-    @property
     def QuoteType(self):
         return self._quote_type
 

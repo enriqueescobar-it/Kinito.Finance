@@ -1,4 +1,5 @@
 import json
+import requests
 
 import numpy as np
 import yfinance as yf
@@ -123,6 +124,9 @@ class YahooFinanceStockInfo(AbstractInfo):
         return any(a_df) and isinstance(a_df, DataFrame) and not a_df.empty and\
                not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
 
+    def __url_exists(self, url_str: str):
+        return ('http' in url_str) and (requests.head(url_str, allow_redirects=True).status_code == 200)
+
     def __get_str_from_key(self, a_dict: dict, a_key: str = 'NA') -> str:
         if a_key in a_dict:
             return 'None' if a_dict[a_key] is None else a_dict[a_key]
@@ -132,8 +136,12 @@ class YahooFinanceStockInfo(AbstractInfo):
     def __set_info_dict(self):
         self._info_dict = self._y_finance.info
         self._company_name = self.__get_str_from_key(self._info_dict, 'shortName')
-        self._url = self.__get_str_from_key(self._info_dict, 'website')
-        self._url_logo = self.__get_str_from_key(self._info_dict, 'logo_url')
+        a_str: str = self.__get_str_from_key(self._info_dict, 'website')
+        if self.__url_exists(a_str):
+            self._url = a_str
+        a_str = self.__get_str_from_key(self._info_dict, 'logo_url')
+        if self.__url_exists(a_str):
+            self._url_logo = a_str
         self._address1 = self.__get_str_from_key(self._info_dict, 'address1')
         self._address2 = self.__get_str_from_key(self._info_dict, 'address2')
         self._city = self.__get_str_from_key(self._info_dict, 'city')
