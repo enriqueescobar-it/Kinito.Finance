@@ -1,5 +1,7 @@
 import json
 
+import pandas as pd
+
 from datetime import datetime, timezone, timedelta, tzinfo
 from backports.zoneinfo import ZoneInfo
 from fiscalyear import FiscalDateTime, FiscalQuarter
@@ -33,6 +35,8 @@ class QuarterInfo(AbstractInfo):
     _base_dt_q: int = 3
     _base_dt_q_num: str = 'Q2'
     _base_dt_q_str: str = '2001Q2'
+    _has_balance_sheets_df: bool = False
+    _balance_sheets_df: pd.DataFrame = pd.DataFrame()
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))):
         self._current_dt = d_t
@@ -82,6 +86,7 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['BaseQuarter', self._base_dt_q_str])
         self._pretty_table.add_row(['BaseFiscalQuarter', str(self._base_quarter)])
         self._pretty_table.add_row(['BaseFiscalQuarterStart', self._base_dt])
+        self._pretty_table.add_row(['HasBalanceSheetDf', self._has_balance_sheets_df])
         return self._pretty_table.__str__()
 
     def __iter__(self):
@@ -105,7 +110,8 @@ class QuarterInfo(AbstractInfo):
             "base_q_num": self._base_dt_q_num,
             "base_q_str": self._base_dt_q_str,
             "base_quarter": str(self._base_quarter),
-            "base_quarter_start": str(self._base_dt)
+            "base_quarter_start": str(self._base_dt),
+            "has_balance_sheet_df": self._has_balance_sheets_df
         }.items()
 
     def to_json(self):
@@ -119,6 +125,13 @@ class QuarterInfo(AbstractInfo):
         self._base_dt_q = self._base_quarter.fiscal_quarter
         self._base_dt_q_num = 'Q' + str(self._base_dt_q)
         self._base_dt_q_str = str(self._base_quarter.fiscal_year) + self._base_dt_q_num
+
+    def set_balance_sheet_df(self, a_df: pd.DataFrame):
+        self._has_balance_sheets_df = any(a_df) and isinstance(a_df, pd.DataFrame) and not a_df.empty and \
+                                      not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
+        if self._has_balance_sheets_df:
+            self._balance_sheets_df = a_df
+            print(a_df)
 
     @property
     def CurrentDay(self):

@@ -18,10 +18,10 @@ class YahooFinanceStockInfo(AbstractInfo):
     _has_split_series: bool = False
     _has_action_df: bool = False
     _has_balance_sheet_df: bool = False
-    _has_q_balance_sheet_df: bool = False
-    _has_q_cashflow_df: bool = False
-    _has_q_earning_df: bool = False
-    _has_q_financial_df: bool = False
+    _has_q_balance_sheets_df: bool = False
+    _has_q_cashflows_df: bool = False
+    _has_q_earnings_df: bool = False
+    _has_q_financials_df: bool = False
     _company_name: str = 'NA'
     _url: str = "http://localhost"
     _url_logo: str = "http://localhost"
@@ -41,10 +41,10 @@ class YahooFinanceStockInfo(AbstractInfo):
     _split_series: Series = Series()
     _action_df: DataFrame = DataFrame()
     _balance_sheet_df: DataFrame = DataFrame()
-    _q_balance_sheet_df: DataFrame = DataFrame()
-    _q_cashflow_df: DataFrame = DataFrame()
-    _q_earning_df: DataFrame = DataFrame()
-    _q_financial_df: DataFrame = DataFrame()
+    _q_balance_sheets_df: DataFrame = DataFrame()
+    _q_cashflows_df: DataFrame = DataFrame()
+    _q_earnings_df: DataFrame = DataFrame()
+    _q_financials_df: DataFrame = DataFrame()
 
     def __int__(self):
         self.__init__(self._ticker)
@@ -84,10 +84,10 @@ class YahooFinanceStockInfo(AbstractInfo):
         self._pretty_table.add_row(['HasSplitSeries', self._has_split_series])
         self._pretty_table.add_row(['HasActionDf', self._has_action_df])
         self._pretty_table.add_row(['HasBalanceSheetDf', self._has_balance_sheet_df])
-        self._pretty_table.add_row(['HasQBalanceSheetDf', self._has_q_balance_sheet_df])
-        self._pretty_table.add_row(['HasQCashflowDf', self._has_q_cashflow_df])
-        self._pretty_table.add_row(['HasQEarningDf', self._has_q_earning_df])
-        self._pretty_table.add_row(['HasQFinancialDf', self._has_q_financial_df])
+        self._pretty_table.add_row(['HasQBalanceSheetDf', self._has_q_balance_sheets_df])
+        self._pretty_table.add_row(['HasQCashflowDf', self._has_q_cashflows_df])
+        self._pretty_table.add_row(['HasQEarningDf', self._has_q_earnings_df])
+        self._pretty_table.add_row(['HasQFinancialDf', self._has_q_financials_df])
         return self._pretty_table.__str__()
 
     def __iter__(self):
@@ -113,10 +113,10 @@ class YahooFinanceStockInfo(AbstractInfo):
             "has_split_series": self._has_split_series,
             "has_action_df": self._has_action_df,
             "has_balance_sheet_df": self._has_balance_sheet_df,
-            "has_q_balance_sheet_df": self._has_q_balance_sheet_df,
-            "has_q_cashflow_df": self._has_q_cashflow_df,
-            "has_q_earning_df": self._has_q_earning_df,
-            "has_q_financial_df": self._has_q_financial_df
+            "has_q_balance_sheet_df": self._has_q_balance_sheets_df,
+            "has_q_cashflow_df": self._has_q_cashflows_df,
+            "has_q_earning_df": self._has_q_earnings_df,
+            "has_q_financial_df": self._has_q_financials_df
         }.items()
 
     def __is_df_valid(self, a_df: DataFrame) -> bool:
@@ -166,36 +166,36 @@ class YahooFinanceStockInfo(AbstractInfo):
             self._option_tuple = self._y_finance.options
 
     def _set_q_balance_sheet_df(self):
-        self._has_q_balance_sheet_df = ('_quarterly_balancesheet' in self._y_finance.__dict__) and\
-                                        hasattr(self._y_finance, '_quarterly_balancesheet') or\
-                                        ('_quarterly_balance_sheet' in self._y_finance.__dict__) and\
-                                        hasattr(self._y_finance, '_quarterly_balance_sheet') or\
-                                        self.__is_df_valid(self._y_finance.quarterly_balance_sheet) and\
+        self._has_q_balance_sheets_df = ('_quarterly_balancesheet' in self._y_finance.__dict__) and \
+                                        hasattr(self._y_finance, '_quarterly_balancesheet') or \
+                                        ('_quarterly_balance_sheet' in self._y_finance.__dict__) and \
+                                        hasattr(self._y_finance, '_quarterly_balance_sheet') or \
+                                        self.__is_df_valid(self._y_finance.quarterly_balance_sheet) and \
                                         self.__is_df_valid(self._y_finance.quarterly_balancesheet)
-        if self._has_q_balance_sheet_df:
-            self._q_balance_sheet_df = self._y_finance.quarterly_balance_sheet.fillna(value=np.nan, inplace=False)
-            self._q_balance_sheet_df = self._y_finance.quarterly_balancesheet.fillna(value=np.nan, inplace=False)
+        if self._has_q_balance_sheets_df:
+            self._q_balance_sheets_df = self._y_finance.quarterly_balance_sheet.fillna(value=np.nan, inplace=False)
+            self._q_balance_sheets_df = self._y_finance.quarterly_balancesheet.fillna(value=np.nan, inplace=False)
 
     def _set_q_cashflow_df(self):
-        self._has_q_cashflow_df = ('_quarterly_cashflow' in self._y_finance.__dict__) and\
-                                  hasattr(self._y_finance, '_quarterly_cashflow') and\
-                                  self.__is_df_valid(self._y_finance.quarterly_cashflow)
-        if self._has_q_cashflow_df:
-            self._q_cashflow_df = self._y_finance.quarterly_cashflow.fillna(value=np.nan, inplace=False)
+        self._has_q_cashflows_df = ('_quarterly_cashflow' in self._y_finance.__dict__) and \
+                                   hasattr(self._y_finance, '_quarterly_cashflow') and \
+                                   self.__is_df_valid(self._y_finance.quarterly_cashflow)
+        if self._has_q_cashflows_df:
+            self._q_cashflows_df = self._y_finance.quarterly_cashflow.fillna(value=np.nan, inplace=False)
 
     def _set_q_earning_df(self):
-        self._has_q_earning_df = ('_quarterly_earnings' in self._y_finance.__dict__) and\
-                                 hasattr(self._y_finance, '_quarterly_earnings') and\
-                                 self.__is_df_valid(self._y_finance.quarterly_earnings)
-        if self._has_q_earning_df:
-            self._q_earning_df = self._y_finance.quarterly_earnings.fillna(value=np.nan, inplace=False)
+        self._has_q_earnings_df = ('_quarterly_earnings' in self._y_finance.__dict__) and \
+                                  hasattr(self._y_finance, '_quarterly_earnings') and \
+                                  self.__is_df_valid(self._y_finance.quarterly_earnings)
+        if self._has_q_earnings_df:
+            self._q_earnings_df = self._y_finance.quarterly_earnings.fillna(value=np.nan, inplace=False)
 
     def _set_q_financial_df(self):
-        self._has_q_financial_df = ('_quarterly_financials' in self._y_finance.__dict__) and\
-                                   hasattr(self._y_finance, '_quarterly_financials') and\
-                                   self.__is_df_valid(self._y_finance.quarterly_financials)
-        if self._has_q_financial_df:
-            self._q_financial_df = self._y_finance.quarterly_financials.fillna(value=np.nan, inplace=False)
+        self._has_q_financials_df = ('_quarterly_financials' in self._y_finance.__dict__) and \
+                                    hasattr(self._y_finance, '_quarterly_financials') and \
+                                    self.__is_df_valid(self._y_finance.quarterly_financials)
+        if self._has_q_financials_df:
+            self._q_financials_df = self._y_finance.quarterly_financials.fillna(value=np.nan, inplace=False)
 
     def _set_action_df(self):
         self._has_action_df = self.__is_df_valid(self._y_finance.actions)
@@ -311,33 +311,33 @@ class YahooFinanceStockInfo(AbstractInfo):
         return self._balance_sheet_df
 
     @property
-    def HasQBalanceSheetDf(self):
-        return self._has_q_balance_sheet_df
+    def HasQBalanceSheesDf(self):
+        return self._has_q_balance_sheets_df
 
     @property
-    def QBalanceSheetDf(self):
-        return self._q_balance_sheet_df
+    def QBalanceSheetsDf(self):
+        return self._q_balance_sheets_df
 
     @property
-    def HasQCashflowDf(self):
-        return self._has_q_cashflow_df
+    def HasQCashflowsDf(self):
+        return self._has_q_cashflows_df
 
     @property
-    def QCashflowDf(self):
-        return self._q_cashflow_df
+    def QCashflowsDf(self):
+        return self._q_cashflows_df
 
     @property
-    def HasQEarningDf(self):
-        return self._has_q_earning_df
+    def HasQEarningsDf(self):
+        return self._has_q_earnings_df
 
     @property
-    def QEarningDf(self):
-        return self._q_earning_df
+    def QEarningsDf(self):
+        return self._q_earnings_df
 
     @property
-    def HasQFinancialDf(self):
-        return self._has_q_financial_df
+    def HasQFinancialsDf(self):
+        return self._has_q_financials_df
 
     @property
-    def QFinancialDf(self):
-        return self._q_financial_df
+    def QFinancialsDf(self):
+        return self._q_financials_df

@@ -43,21 +43,24 @@ class StockInfo(AbstractInfo):
     _market: str = 'NA'
     _currency: str = 'NA'
     _stock_type: AbstractStock
+    _has_balance_sheets: bool = False
 
     def __init__(self, a_ticker: str = 'AAPL', past_years: int = 5):
         self.__ticker = a_ticker
         self.__y_finance = yf.Ticker(a_ticker)
         self._y_finance_si = YahooFinanceStockInfo(a_ticker)
         self._past_years = past_years
+        self._quarter_info = QuarterInfo()
         self.__get_info()
         self._action_df = self._y_finance_si.ActionDf
         self._balance_sheet_df = self._y_finance_si.BalanceSheetDf
         self._option_tuple = self._y_finance_si.OptionTuple
         self._split_series = self._y_finance_si.SplitSeries
-        self._q_balance_sheet_df = self._y_finance_si.QBalanceSheetDf
-        self._q_cashflow_df = self._y_finance_si.QCashflowDf
-        self._q_earning_df = self._y_finance_si.QEarningDf
-        self._q_financial_df = self._y_finance_si.QFinancialDf
+        self._has_balance_sheets = self._y_finance_si.HasQBalanceSheesDf
+        self._quarter_info.set_balance_sheet_df(self._y_finance_si.QBalanceSheetsDf)
+        self._q_cashflow_df = self._y_finance_si.QCashflowsDf
+        self._q_earning_df = self._y_finance_si.QEarningsDf
+        self._q_financial_df = self._y_finance_si.QFinancialsDf
 
     def __get_info(self):
         self.__y_fin_dic = self._y_finance_si.InfoDict
@@ -124,14 +127,14 @@ class StockInfo(AbstractInfo):
             s += "\n\nACTION DATAFRAME\n" + self._y_finance_si.ActionDf.head().to_string(index=True)
         if self._y_finance_si.HasBalanceSheetDf:
             s += "\n\nBALANCE SHEET DATAFRAME\n\n" + self._y_finance_si.BalanceSheetDf.to_string(index=True)
-        if self._y_finance_si.HasQBalanceSheetDf:
-            s += "\n\nQUARTER BALANCE SHEET DATAFRAME\n" + self._y_finance_si.QBalanceSheetDf.to_string(index=True)
-        if self._y_finance_si.HasQCashflowDf:
-            s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._y_finance_si.QCashflowDf.to_string(index=True)
-        if self._y_finance_si.HasQEarningDf:
-            s += "\n\nQUARTER EARNING DATAFRAME\n" + self._y_finance_si.QEarningDf.to_string(index=True)
-        if self._y_finance_si.HasQFinancialDf:
-            s += "\n\nQUARTER FINANCIAL DATAFRAME\n" + self._y_finance_si.QFinancialDf.to_string(index=True)
+        if self._y_finance_si.HasQBalanceSheesDf:
+            s += "\n\nQUARTER BALANCE SHEET DATAFRAME\n" + self._y_finance_si.QBalanceSheetsDf.to_string(index=True)
+        if self._y_finance_si.HasQCashflowsDf:
+            s += "\n\nQUARTER CASHFLOW DATAFRAME\n" + self._y_finance_si.QCashflowsDf.to_string(index=True)
+        if self._y_finance_si.HasQEarningsDf:
+            s += "\n\nQUARTER EARNING DATAFRAME\n" + self._y_finance_si.QEarningsDf.to_string(index=True)
+        if self._y_finance_si.HasQFinancialsDf:
+            s += "\n\nQUARTER FINANCIAL DATAFRAME\n" + self._y_finance_si.QFinancialsDf.to_string(index=True)
         s += "\n\nSTOCK TYPE\n" + str(self._stock_type)
         return s
 
@@ -179,19 +182,19 @@ class StockInfo(AbstractInfo):
 
     @property
     def QuarterBalanceSheetDataFrame(self):
-        return self._y_finance_si.QBalanceSheetDf
+        return self._y_finance_si.QBalanceSheetsDf
 
     @property
     def QuarterCashflowDataFrame(self):
-        return self._y_finance_si.QCashflowDf
+        return self._y_finance_si.QCashflowsDf
 
     @property
     def QuarterEarningDataFrame(self):
-        return self._y_finance_si.QEarningDf
+        return self._y_finance_si.QEarningsDf
 
     @property
     def QuarterFinancialDataFrame(self):
-        return self._y_finance_si.QFinancialDf
+        return self._y_finance_si.QFinancialsDf
 
     @property
     def QuoteType(self):

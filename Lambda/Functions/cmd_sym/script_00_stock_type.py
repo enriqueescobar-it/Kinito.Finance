@@ -33,14 +33,14 @@ if yf_si.HasActionDf:
     print(yf_si.ActionDf)
 if yf_si.HasBalanceSheetDf:
     print(yf_si.BalanceSheetDf)
-if yf_si.HasQBalanceSheetDf:
-    print(yf_si.QBalanceSheetDf)
-if yf_si.HasQCashflowDf:
-    print(yf_si.QCashflowDf)
-if yf_si.HasQEarningDf:
-    print(yf_si.QEarningDf)
-if yf_si.HasQFinancialDf:
-    print(yf_si.QFinancialDf)
+if yf_si.HasQBalanceSheesDf:
+    print(yf_si.QBalanceSheetsDf)
+if yf_si.HasQCashflowsDf:
+    print(yf_si.QCashflowsDf)
+if yf_si.HasQEarningsDf:
+    print(yf_si.QEarningsDf)
+if yf_si.HasQFinancialsDf:
+    print(yf_si.QFinancialsDf)
 exit(0)
 abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)
