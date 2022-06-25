@@ -39,6 +39,10 @@ class QuarterInfo(AbstractInfo):
     _balance_sheets_df: pd.DataFrame = pd.DataFrame()
     _has_cashflows_df: bool = False
     _cashflows_df: pd.DataFrame = pd.DataFrame()
+    _has_earnings_df: bool = False
+    _earnings_df: pd.DataFrame = pd.DataFrame()
+    _has_financials_df: bool = False
+    _financials_df: pd.DataFrame = pd.DataFrame()
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))):
         self._current_dt = d_t
@@ -140,6 +144,20 @@ class QuarterInfo(AbstractInfo):
                                       not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
         if self._has_cashflows_df:
             self._cashflows_df = a_df
+            print(a_df)
+
+    def set_earnings_df(self, a_df: pd.DataFrame):
+        self._has_earnings_df = any(a_df) and isinstance(a_df, pd.DataFrame) and not a_df.empty and \
+                                 not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
+        if self._has_earnings_df:
+            self._earnings_df = a_df
+            print(a_df)
+
+    def set_financials_df(self, a_df: pd.DataFrame):
+        self._has_financials_df = any(a_df) and isinstance(a_df, pd.DataFrame) and not a_df.empty and \
+                                not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
+        if self._has_financials_df:
+            self._financials_df = a_df
             print(a_df)
 
     @property

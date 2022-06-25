@@ -64,9 +64,9 @@ class StockInfo(AbstractInfo):
         self._has_cashflows_df = self._y_finance_si.HasQCashflowsDf
         self._quarter_info.set_cashflows_df(self._y_finance_si.QCashflowsDf)
         self._has_earnings_df = self._y_finance_si.HasQEarningsDf
-        self._q_earning_df = self._y_finance_si.QEarningsDf
+        self._quarter_info.set_earnings_df(self._y_finance_si.QEarningsDf)
         self._has_financials_df = self._y_finance_si.HasQFinancialsDf
-        self._q_financial_df = self._y_finance_si.QFinancialsDf
+        self._quarter_info.set_financials_df(self._y_finance_si.QFinancialsDf)
 
     def __get_info(self):
         self.__y_fin_dic = self._y_finance_si.InfoDict
