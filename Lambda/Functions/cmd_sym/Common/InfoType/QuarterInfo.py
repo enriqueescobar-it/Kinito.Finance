@@ -37,6 +37,8 @@ class QuarterInfo(AbstractInfo):
     _base_dt_q_str: str = '2001Q2'
     _has_balance_sheets_df: bool = False
     _balance_sheets_df: pd.DataFrame = pd.DataFrame()
+    _has_cashflows_df: bool = False
+    _cashflows_df: pd.DataFrame = pd.DataFrame()
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))):
         self._current_dt = d_t
@@ -126,11 +128,18 @@ class QuarterInfo(AbstractInfo):
         self._base_dt_q_num = 'Q' + str(self._base_dt_q)
         self._base_dt_q_str = str(self._base_quarter.fiscal_year) + self._base_dt_q_num
 
-    def set_balance_sheet_df(self, a_df: pd.DataFrame):
+    def set_balance_sheets_df(self, a_df: pd.DataFrame):
         self._has_balance_sheets_df = any(a_df) and isinstance(a_df, pd.DataFrame) and not a_df.empty and \
                                       not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
         if self._has_balance_sheets_df:
             self._balance_sheets_df = a_df
+            print(a_df)
+
+    def set_cashflows_df(self, a_df: pd.DataFrame):
+        self._has_cashflows_df = any(a_df) and isinstance(a_df, pd.DataFrame) and not a_df.empty and \
+                                      not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
+        if self._has_cashflows_df:
+            self._cashflows_df = a_df
             print(a_df)
 
     @property

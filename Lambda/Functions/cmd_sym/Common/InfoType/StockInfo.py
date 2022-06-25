@@ -60,9 +60,9 @@ class StockInfo(AbstractInfo):
         self._option_tuple = self._y_finance_si.OptionTuple
         self._split_series = self._y_finance_si.SplitSeries
         self._has_balance_sheets_df = self._y_finance_si.HasQBalanceSheesDf
-        self._quarter_info.set_balance_sheet_df(self._y_finance_si.QBalanceSheetsDf)
+        self._quarter_info.set_balance_sheets_df(self._y_finance_si.QBalanceSheetsDf)
         self._has_cashflows_df = self._y_finance_si.HasQCashflowsDf
-        self._q_cashflow_df = self._y_finance_si.QCashflowsDf
+        self._quarter_info.set_cashflows_df(self._y_finance_si.QCashflowsDf)
         self._has_earnings_df = self._y_finance_si.HasQEarningsDf
         self._q_earning_df = self._y_finance_si.QEarningsDf
         self._has_financials_df = self._y_finance_si.HasQFinancialsDf
