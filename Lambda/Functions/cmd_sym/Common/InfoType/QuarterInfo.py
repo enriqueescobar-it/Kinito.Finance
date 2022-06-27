@@ -4,7 +4,7 @@ import pandas as pd
 
 from datetime import datetime, timezone, timedelta, tzinfo
 from backports.zoneinfo import ZoneInfo
-from fiscalyear import FiscalDateTime, FiscalQuarter
+from fiscalyear import FiscalDateTime, FiscalQuarter, FiscalYear
 from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
@@ -70,6 +70,7 @@ class QuarterInfo(AbstractInfo):
                                      self._previous_quarter.start.day).replace(
             tzinfo=self._previous_quarter.start.tzinfo)
         self.set_baseline()
+        self.__set_balance_sheets_df()
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self.__header
@@ -119,6 +120,9 @@ class QuarterInfo(AbstractInfo):
             "base_quarter_start": str(self._base_dt),
             "has_balance_sheet_df": self._has_balance_sheets_df
         }.items()
+
+    def __set_balance_sheets_df(self):
+        pass
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)

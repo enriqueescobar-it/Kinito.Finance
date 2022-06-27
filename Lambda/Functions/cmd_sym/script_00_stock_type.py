@@ -22,26 +22,7 @@ a_sym: str = args["symbol"]
 a_quote: str = args["quote"]
 # display a friendly message to the user
 print("Hi there, you are looking for the <{}> symbol with <{}> quote?".format(a_sym, a_quote))
-yf_si: YahooFinanceStockInfo = YahooFinanceStockInfo(a_sym)
-print(yf_si.to_json())
-print(yf_si)
-if yf_si.HasOptionTuple:
-    print(yf_si.OptionTuple)
-if yf_si.HasSplitSeries:
-    print(yf_si.SplitSeries)
-if yf_si.HasActionDf:
-    print(yf_si.ActionDf)
-if yf_si.HasBalanceSheetDf:
-    print(yf_si.BalanceSheetDf)
-if yf_si.HasQBalanceSheesDf:
-    print(yf_si.QBalanceSheetsDf)
-if yf_si.HasQCashflowsDf:
-    print(yf_si.QCashflowsDf)
-if yf_si.HasQEarningsDf:
-    print(yf_si.QEarningsDf)
-if yf_si.HasQFinancialsDf:
-    print(yf_si.QFinancialsDf)
-exit(0)
+
 abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)
 print(abstractStock.to_json())
