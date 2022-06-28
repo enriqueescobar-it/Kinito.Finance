@@ -42,6 +42,7 @@ class QuarterInfo(AbstractInfo):
     _base_dt_q_str: str = '2001Q2'
     _base_quarter: FiscalQuarter = FiscalQuarter(2001, 3)
     _base_quarter_start: datetime = _current_dt
+    _base_quarter_stop: datetime = _current_dt
     _year_dt: datetime = _current_dt
     _year_dt_year: int = 2001
     _year_dt_q: int = 3
@@ -127,6 +128,7 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['BaseQuarter', self._base_dt_q_str])
         self._pretty_table.add_row(['BaseFiscalQuarter', str(self._base_quarter)])
         self._pretty_table.add_row(['BaseFiscalQuarterStart', self._base_quarter_start])
+        self._pretty_table.add_row(['BaseFiscalQuarterStop', self._base_quarter_stop])
         self._pretty_table.add_row(['HasBalanceSheetDf', self._has_balance_sheets_df])
         self._pretty_table.add_row(['HasCashflowDf', self._has_cashflows_df])
         self._pretty_table.add_row(['HasEarningDf', self._has_earnings_df])
@@ -170,7 +172,8 @@ class QuarterInfo(AbstractInfo):
             "base_q_num": self._base_dt_q_num,
             "base_q_str": self._base_dt_q_str,
             "base_quarter": str(self._base_quarter),
-            "base_quarter_start": str(self._base_dt),
+            "base_quarter_start": str(self._base_quarter_start),
+            "base_quarter_stop": str(self._base_quarter_stop),
             "has_balance_sheet_df": self._has_balance_sheets_df,
             "has_cashflows_df": self._has_cashflows_df,
             "has_earnings_df": self._has_earnings_df,
@@ -233,6 +236,7 @@ class QuarterInfo(AbstractInfo):
         self._base_dt_q_str = self.__get_quarter_string(self._base_dt)
         self._base_quarter = self.__get_quarter_fiscal(self._base_dt)
         self._base_quarter_start = self.__get_quarter_fiscal_start(self._base_dt)
+        self._base_quarter_stop = self.__get_quarter_fiscal_stop(self._base_dt)
 
     def set_balance_sheets_df(self, a_df: pd.DataFrame):
         self._has_balance_sheets_df = any(a_df) and isinstance(a_df, pd.DataFrame) and not a_df.empty and \
