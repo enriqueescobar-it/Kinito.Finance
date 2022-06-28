@@ -26,6 +26,7 @@ class QuarterInfo(AbstractInfo):
     _current_dt_q_str: str = '2001Q3'
     _current_quarter: FiscalQuarter = FiscalQuarter(2001, 3)
     _current_quarter_start: datetime = _current_dt
+    _current_quarter_stop: datetime = _current_dt
     _previous_dt: datetime = _current_dt
     _previous_dt_year: int = 2001
     _previous_dt_q: int = 2
@@ -33,6 +34,7 @@ class QuarterInfo(AbstractInfo):
     _previous_dt_q_str: str = '2001Q2'
     _previous_quarter: FiscalQuarter = FiscalQuarter(2001, 2)
     _previous_quarter_start: datetime = _current_dt
+    _previous_quarter_stop: datetime = _current_dt
     _base_dt: datetime = _current_dt
     _base_dt_year: int = 2001
     _base_dt_q: int = 3
@@ -70,6 +72,7 @@ class QuarterInfo(AbstractInfo):
         self._current_dt_q_str = self.__get_quarter_string(self._current_dt)
         self._current_quarter = self.__get_quarter_fiscal(self._current_dt)
         self._current_quarter_start = self.__get_quarter_fiscal_start(self._current_dt)
+        self._current_quarter_stop = self.__get_quarter_fiscal_stop(self._current_dt)
         self._previous_dt = datetime(self._current_dt.year, self._current_dt.month - 3, self._current_dt.day,
                                      tzinfo=self._current_dt.tzinfo)
         self._previous_dt_year = self._previous_dt.year
@@ -78,6 +81,7 @@ class QuarterInfo(AbstractInfo):
         self._previous_dt_q_str = self.__get_quarter_string(self._previous_dt)
         self._previous_quarter = self.__get_quarter_fiscal(self._previous_dt)
         self._previous_quarter_start = self.__get_quarter_fiscal_start(self._previous_dt)
+        self._previous_quarter_stop = self.__get_quarter_fiscal_stop(self._previous_dt)
         self.__set_year_line()
         self.__set_balance_sheets_df()
         self.__set_cashflows_df()
@@ -98,6 +102,7 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['CurrentQuarter', self._current_dt_q_str])
         self._pretty_table.add_row(['CurrentFiscalQuarter', str(self._current_quarter)])
         self._pretty_table.add_row(['CurrentFiscalQuarterStart', self._current_quarter_start])
+        self._pretty_table.add_row(['CurrentFiscalQuarterStop', self._current_quarter_stop])
         self._pretty_table.add_row(['PreviousDateTime', self._previous_dt])
         self._pretty_table.add_row(['PreviousYear', self._previous_dt_year])
         self._pretty_table.add_row(['PreviousQ', self._previous_dt_q])
@@ -105,6 +110,7 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['PreviousQuarter', self._previous_dt_q_str])
         self._pretty_table.add_row(['PreviousFiscalQuarter', str(self._previous_quarter)])
         self._pretty_table.add_row(['PreviousFiscalQuarterStart', self._previous_quarter_start])
+        self._pretty_table.add_row(['PreviousFiscalQuarterStop', self._previous_quarter_stop])
         self._pretty_table.add_row(['YearDateTime', self._year_dt])
         self._pretty_table.add_row(['YearYear', self._year_dt_year])
         self._pretty_table.add_row(['YearQ', self._year_dt_q])
@@ -139,6 +145,7 @@ class QuarterInfo(AbstractInfo):
             "current_q_str": self._current_dt_q_str,
             "current_quarter": str(self._current_quarter),
             "current_quarter_start": str(self._current_quarter_start),
+            "current_quarter_stop": str(self._current_quarter_stop),
             "previous_dt": str(self._previous_dt),
             "previous_year": self._previous_dt_year,
             "previous_q": self._previous_dt_q,
@@ -146,6 +153,7 @@ class QuarterInfo(AbstractInfo):
             "previous_q_str": self._previous_dt_q_str,
             "previous_quarter": str(self._previous_quarter),
             "previous_quarter_start": str(self._previous_quarter_start),
+            "previous_quarter_stop": str(self._previous_quarter_stop),
             "year_dt": str(self._year_dt),
             "year_year": self._year_dt_year,
             "year_q": self._year_dt_q,
@@ -182,6 +190,10 @@ class QuarterInfo(AbstractInfo):
     def __get_quarter_fiscal_start(self, dt: datetime) -> datetime:
         fq: FiscalQuarter = self.__get_quarter_fiscal(dt)
         return datetime(fq.start.year, fq.start.month, fq.start.day)
+
+    def __get_quarter_fiscal_stop(self, dt: datetime) -> datetime:
+        fq: FiscalQuarter = self.__get_quarter_fiscal(dt)
+        return datetime(fq.end.year, fq.end.month, fq.end.day)
 
     def __set_year_line(self):
         self._year_dt = datetime(self._previous_dt.year - 1, self._previous_dt.month,
