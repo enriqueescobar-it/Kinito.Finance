@@ -49,6 +49,7 @@ class QuarterInfo(AbstractInfo):
     _year_dt_q_str: str = '2000Q2'
     _year_quarter: FiscalQuarter = FiscalQuarter(2000, 3)
     _year_quarter_start: datetime = _current_dt
+    _year_quarter_stop: datetime = _current_dt
     _has_balance_sheets_df: bool = False
     _balance_sheets_df: pd.DataFrame = pd.DataFrame()
     _has_cashflows_df: bool = False
@@ -118,6 +119,7 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['YearQuarter', self._year_dt_q_str])
         self._pretty_table.add_row(['YearFiscalQuarter', str(self._year_quarter)])
         self._pretty_table.add_row(['YearFiscalQuarterStart', self._year_quarter_start])
+        self._pretty_table.add_row(['YearFiscalQuarterStop', self._year_quarter_stop])
         self._pretty_table.add_row(['BaseDateTime', self._base_dt])
         self._pretty_table.add_row(['BaseYear', self._base_dt_year])
         self._pretty_table.add_row(['BaseQ', self._base_dt_q])
@@ -161,6 +163,7 @@ class QuarterInfo(AbstractInfo):
             "year_q_str": self._year_dt_q_str,
             "year_quarter": str(self._year_quarter),
             "year_quarter_start": str(self._year_quarter_start),
+            "year_quarter_stop": str(self._year_quarter_stop),
             "base_dt": str(self._base_dt),
             "base_year": self._base_dt_year,
             "base_q": self._base_dt_q,
@@ -204,6 +207,7 @@ class QuarterInfo(AbstractInfo):
         self._year_dt_q_str = self.__get_quarter_string(self._year_dt)
         self._year_quarter = self.__get_quarter_fiscal(self._year_dt)
         self._year_quarter_start = self.__get_quarter_fiscal_start(self._year_dt)
+        self._year_quarter_stop = self.__get_quarter_fiscal_stop(self._year_dt)
 
     def __set_balance_sheets_df(self):
         pass
