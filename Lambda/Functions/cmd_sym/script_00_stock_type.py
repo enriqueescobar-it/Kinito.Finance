@@ -1,6 +1,5 @@
 import argparse
 
-from Common.InfoType.QuarterInfo import QuarterInfo
 from Common.InfoType.YahooFinanceStockInfo import YahooFinanceStockInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
@@ -23,9 +22,7 @@ a_sym: str = args["symbol"]
 a_quote: str = args["quote"]
 # display a friendly message to the user
 print("Hi there, you are looking for the <{}> symbol with <{}> quote?".format(a_sym, a_quote))
-qi: QuarterInfo = QuarterInfo()
-print(qi)
-exit(69)
+
 abstractStock: AbstractStock = AbstractStock()
 print(abstractStock)
 print(abstractStock.to_json())
