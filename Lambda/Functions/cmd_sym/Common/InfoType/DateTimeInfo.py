@@ -10,7 +10,7 @@ from prettytable import PrettyTable
 from Common.InfoType.AbstractInfo import AbstractInfo
 
 
-class DataTimeInfo(AbstractInfo):
+class DaTimeInfo(AbstractInfo):
     __header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _fdt: FiscalDateTime = FiscalDateTime(2001, 9, 11, 0, 0, 0, 0, tzinfo=ZoneInfo("America/Toronto"))

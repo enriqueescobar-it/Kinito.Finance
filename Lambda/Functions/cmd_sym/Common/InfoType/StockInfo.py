@@ -5,7 +5,7 @@ import yfinance as yf
 from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
-from Common.InfoType.DataTimeInfo import DataTimeInfo
+from Common.InfoType.DateTimeInfo import DaTimeInfo
 from Common.InfoType.YahooFinanceStockInfo import YahooFinanceStockInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
@@ -28,7 +28,7 @@ class StockInfo(AbstractInfo):
     _date_time_zone: str = "GMT"
     _date_time_format: str = "%Y-%m-%d %H:%M:%S"
     _y_finance_si: YahooFinanceStockInfo
-    _data_time_info: DataTimeInfo
+    _data_time_info: DaTimeInfo
     _company_name: str = 'NA'
     _url: str = 'NA'
     _url_logo: str = "http://localhost"
@@ -53,7 +53,7 @@ class StockInfo(AbstractInfo):
         self.__y_finance = yf.Ticker(a_ticker)
         self._y_finance_si = YahooFinanceStockInfo(a_ticker)
         self._past_years = past_years
-        self._data_time_info = DataTimeInfo()
+        self._data_time_info = DaTimeInfo()
         self.__get_info()
         self._action_df = self._y_finance_si.ActionDf
         self._balance_sheet_df = self._y_finance_si.BalanceSheetDf
