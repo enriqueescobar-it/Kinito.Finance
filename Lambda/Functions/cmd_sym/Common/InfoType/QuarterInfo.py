@@ -1,11 +1,9 @@
 import json
 import math
+from datetime import datetime
 
 import pandas as pd
-
-from datetime import datetime, timezone, timedelta, tzinfo
 from backports.zoneinfo import ZoneInfo
-from dateutil.relativedelta import relativedelta
 from fiscalyear import FiscalDateTime, FiscalQuarter
 from prettytable import PrettyTable
 
@@ -194,12 +192,6 @@ class QuarterInfo(AbstractInfo):
         self._year_dt_q_str = self.__get_quarter_string(self._year_dt)
         self._year_quarter = self.__get_quarter_fiscal(self._year_dt)
         self._year_quarter_start = self.__get_quarter_fiscal_start(self._year_dt)
-        cur_date = self._year_dt + relativedelta(months=1)
-        print(cur_date)
-        cur_date += relativedelta(months=1)
-        print(cur_date)
-        cur_date += relativedelta(months=1)
-        print(cur_date)
 
     def __set_balance_sheets_df(self):
         pass
