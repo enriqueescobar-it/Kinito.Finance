@@ -190,7 +190,7 @@ class QuarterInfo(AbstractInfo):
         return str(dt.year) + self.__get_quarter_str(dt)
 
     def __get_quarter_fiscal(self, dt: datetime) -> FiscalQuarter:
-        fdt = FiscalDateTime(dt.year, dt.month, dt.day)
+        fdt: FiscalDateTime = FiscalDateTime(dt.year, dt.month, dt.day)
         return FiscalQuarter(fdt.year, fdt.fiscal_quarter)
 
     def __get_quarter_fiscal_start(self, dt: datetime) -> datetime:
@@ -202,7 +202,7 @@ class QuarterInfo(AbstractInfo):
         return datetime(fq.end.year, fq.end.month, fq.end.day)
 
     def __set_year_line(self):
-        self._year_dt = datetime(self._previous_dt.year - 1, self._previous_dt.month,
+        self._year_dt = datetime(self._previous_dt.year - 1, self._previous_dt.month + 3,
                                  self._previous_dt.day).replace(tzinfo=self._previous_dt.tzinfo)
         self._year_dt_year = self._year_dt.year
         self._year_dt_q = self.__get_quarter_int(self._year_dt)
@@ -228,8 +228,8 @@ class QuarterInfo(AbstractInfo):
         return json.dumps(dict(self), ensure_ascii=False)
 
     def set_baseline(self, base_years: int = 5):
-        self._base_dt = datetime(self._previous_dt.year - base_years, self._previous_dt.month,
-                                 self._previous_dt.day, tzinfo=self._previous_dt.tzinfo)
+        self._base_dt = datetime(self._year_dt.year - base_years + 1, self._year_dt.month,
+                                 self._year_dt.day, tzinfo=self._year_dt.tzinfo)
         self._base_dt_year = self._base_dt.year
         self._base_dt_q = self.__get_quarter_int(self._base_dt)
         self._base_dt_q_num = self.__get_quarter_str(self._base_dt)
