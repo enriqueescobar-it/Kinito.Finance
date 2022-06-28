@@ -1,158 +1,154 @@
 import json
-
+import matplotlib.pyplot as plt
+import numpy as np
+from pandas import DataFrame
+import pandas
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
-#
 from Common.StockType.Funds.AbstractStockFund import AbstractStockFund
 
 
-#
-
 class MutualFund(AbstractStockFund):
-    #
-    #_y_query: Ticker
-    #
+    __y_query: Ticker
 
-    def __init__(self, c_name: str, t_name: str, q_type: str):
-        super().__init__(c_name.replace(' ', ''), q_type)
+    def __init__(self, c_name: str, t_name: str):
+        super().__init__(c_name.replace(' ', ''))
+        self.__ticker = t_name
+        self.__class = 'Mutual'
         #
-        self._ticker = t_name
-        self._class_type = 'MutualFund'
-        self._info_type = self._class_type + 'Info'
-        #self.__quote_type = q_type
-        #
-        self._y_query = Ticker(t_name)
-        #
-        self._set_info()
+        self.__y_query = Ticker(t_name)
+        self._setInfo()
 
-    def __str__(self) -> str:
-        return super(MutualFund, self).__str__()
+    def __str__(self):
+        pt: PrettyTable = PrettyTable()
+        pt.field_names = self._header
+        pt.add_row(['Info', 'StockInfo'])
+        pt.add_row(['ticker', self.__ticker])
+        pt.add_row(['type', self.__class])
+        pt.add_row(['name', self._name])
+        pt.add_row(['stock_percent', self._stock_part_count])
+        pt.add_row(['bond_percent', self._bond_part_count])
+        pt.add_row(['price_to_earnings', self._price_to_earn])
+        pt.add_row(['price_to_book', self._price_to_book])
+        pt.add_row(['price_to_sales', self._price_to_sale])
+        pt.add_row(['price_to_cashflow', self._price_to_cash])
+        return pt.__str__()
 
     def __iter__(self):
         yield from {
-            "Info": self._header[1],
-            "info": self._info_type,
-            "ticker": self._ticker,
-            "class_type": self._class_type,
-            "legal_type": self._legal_type,
-            "quote_type": self._quote_type,
-            "quote_src_name": self._quote_src_name,
-            "uuid": self._uuid,
-            "underlying_symbol": self._underlying_s,
-            "symbol": self._symbol,
-            "currency": self._currency,
-            "currency_symbol": self._currency_symbol,
-            "exchange": self._exchange,
-            "exchange_name": self._exchange_name,
-            "exchange_dt": self._exchange_str,
-            "quarter_dt": self._quarter_str,
-            "quarterly_growth_earnings": self._quarterly_growth_earnings,
-            "fiscal_yend_last_dt": self._fiscal_yend_last_str,
-            "fiscal_yend_next_dt": self._fiscal_yend_next_str,
-            "split_dt": self._split_str,
-            "split_factor": self._split_factor,
-            "fund_inception_dt": self._fund_inception_str,
-            "t_z": self._t_z,
-            "industry": self._industry,
-            "sector": self._sector,
-            "category": self._category,
-            "fund_family": self._fund_family,
-            "employee_count": self._employee_count,
+            "Info": "StockInfo",
+            "ticker": self.__ticker,
+            "type": self.__class,
             "name": self._name,
             "stock_percent": self._stock_part_count,
             "bond_percent": self._bond_part_count,
-            "cash_percent": self._cash_part_count,
-            "other_percent": self._other_part_count,
-            "preferred_percent": self._pref_part_count,
-            "convertible_percent": self._conv_part_count,
-            "assets_total": self._assets_total,
-            "cashflow_free": self._cashflow_free,
-            "cashflow_operating": self._cashflow_operating,
-            "beta": self._beta,
-            "beta_3y": self._beta_3y,
-            "yield": self._yield,
-            "profit_margins": self._profit_margins,
-            "gross_margins": self._gross_margins,
-            "operating_margins": self._operating_margins,
-            "ratio_current": self._ratio_current,
-            "ratio_quick": self._ratio_quick,
-            "ratio_peg": self._ratio_peg,
-            "ratio_short": self._ratio_short,
-            "pe_forward": self._pe_forward,
-            "eps_forward": self._eps_forward,
-            "eps_trailing": self._eps_trailing,
-            "book_value": self._book_value,
-            "annual_holdings_turnover": self._annual_holdings_turnover,
-            "annual_report_expense_ratio": self._annual_report_expense_ratio,
-            "cap_gain": self._cap_gain,
-            "dividend_value": self._dividend_value,
             "price_to_earnings": self._price_to_earn,
             "price_to_book": self._price_to_book,
             "price_to_sales": self._price_to_sale,
-            "price_to_cashflow": self._price_to_cash,
-            "median_market_cap": self._median_market_cap,
-            "rating": self._rating,
-            "rating_mean": self._rating_mean,
-            "rating_count": self._rating_count,
-            "rating_morning_star": self._rating_morning_star,
-            "rating_risk_morning_star": self._rating_risk_morning_star,
-            "enterprise_value": self._enterprise_value,
-            "enterprise_to_revenue": self._enterprise_to_revenue,
-            "enterprise_to_ebitda": self._enterprise_to_ebitda,
-            "ebitda": self._ebitda,
-            "ebitda_margins": self._ebitda_margins,
-            "price": self._price,
-            "open": self._open,
-            "high": self._high,
-            "low": self._low,
-            "close": self._close,
-            "high_52week": self._high_52week,
-            "low_52week": self._low_52week,
-            "mean_52week": self._mean_52week,
-            "change_52week": self._change_52week,
-            "change_snp_52week": self._change_snp_52week,
-            "mean_200day": self._mean_200day,
-            "return_ytd": self._return_ytd,
-            "return_mean_3y": self._return_mean_3y,
-            "return_mean_5y": self._return_mean_5y,
-            "return_on_assets": self._return_on_assets,
-            "return_on_equity": self._return_on_equity,
-            "revenue_growth": self._revenue_growth,
-            "earnings_growth_3y": self._earnings_growth_3y,
-            "revenue": self._revenue,
-            "revenue_per_share": self._revenue_per_share,
-            "cash_per_share": self._cash_per_share,
-            "cash": self._cash,
-            "debt": self._debt,
-            "debt_to_equity": self._debt_to_equity,
-            "has_sector_df": self._has_sector_df,
-            "has_holding_df": self._has_holding_df,
-            "has_fund_holding_info_dict": self._has_fund_holding_info_dict,
-            "has_fund_performance_dict": self._has_fund_performance_dict,
-            "has_key_stat_dict": self._has_key_stat_dict,
-            "has_financial_data_dict": self._has_financial_data_dict,
-            "has_price_dict": self._has_price_dict,
-            "has_quote_type_dict": self._has_quote_type_dict,
-            "has_summary_detail_dict": self._has_summary_detail_dict,
-            "has_summary_profile_dict": self._has_summary_profile_dict,
-            "has_share_purchase_dict": self._has_share_purchase_dict
+            "price_to_cashflow": self._price_to_cash
         }.items()
-
+    
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
         #return super().to_json() self.__dict__ dict(self)
 
-    def _set_info(self):
-        self._set_sector_df(self._y_query.fund_sector_weightings)
-        self._set_holding_df(self._y_query.fund_top_holdings, self._ticker, self._y_query.fund_sector_weightings)
-        self._set_part_count(self._y_query.fund_top_holdings, self._y_query.fund_category_holdings)
-        self._set_fund_holding_info_dict('topHoldings', self._y_query.fund_holding_info, self._ticker)
-        self._set_fund_performance_dict('fundPerformance', self._y_query.fund_performance, self._ticker)
-        self._set_key_stat_dict('defaultKeyStatistics', self._y_query.key_stats, self._ticker)
-        self._set_financial_data_dict('financialData', self._y_query.financial_data, self._ticker)
-        self._set_price_dict('', self._y_query.price, self._ticker)
-        self._set_quote_type_dict('', self._y_query.quote_type, self._ticker)
-        self._set_summary_detail_dict('', self._y_query.summary_detail, self._ticker)
-        self._set_summary_profile_dict('', self._y_query.summary_profile, self._ticker)
-        self._set_share_purchase_dict('netSharePurchaseActivity', self._y_query.share_purchase_activity, self._ticker)
+    def _setInfo(self):
+        self.__setSectorDf()
+        self.__setHoldingDf()
+        self._stock_part_count, self._bond_part_count = self.__setAllocation()
+        self.__setInfo()
+        self.__setPerformance()
+        print("DICT")
+        print(self.__dict__)
+        self.__plotSectorDf()#.show()
+
+    def __setSectorDf(self):
+        is_df : bool = isinstance(self.__y_query.fund_sector_weightings, pandas.DataFrame)
+
+        if is_df:
+            self._sector_df = self.__y_query.fund_sector_weightings.reset_index()
+            self._sector_df.columns = ['Sector', 'Percent']
+        else:
+            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
+            self._sector_df['Sector'] = s
+            self._sector_df['Percent'] = 1.0
+            self._sector_df.loc[0] = [s, 1.0]
+        print(self._sector_df)
+
+    def __plotSectorDf(self) -> plt:
+        self._sector_df.plot.pie(x='Sector', y='Percent', labels=self._sector_df['Sector'], subplots=True,
+                                 autopct="%.1f%%", figsize=(10, 10), fontsize=9, legend=True,
+                                 title='Sector Distribution ' + self.__ticker + ' ' + self.__class)
+        return plt
+
+    def __setHoldingDf(self):
+        is_df : bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
+
+        if is_df:
+            self._holding_df = self.__y_query.fund_top_holdings
+            self._holding_df.set_index('symbol', inplace=True)
+            self._holding_df.reset_index(inplace=True)
+        else:
+            s: str = (list(self.__y_query.fund_sector_weightings.values())[0]).split(' found ')[0]
+            self._holding_df['symbol'] = s
+            self._holding_df['holdingName'] = 'a name'
+            self._holding_df['holdingPercent'] = 1.0
+            self._holding_df.loc[0] = [self.__ticker, s, 1.0]
+        print(self._holding_df)
+
+    def __setAllocation(self):
+        is_df : bool = isinstance(self.__y_query.fund_top_holdings, pandas.DataFrame)
+        df: DataFrame = DataFrame()
+
+        if is_df:
+            df = self.__y_query.fund_category_holdings.set_index('maxAge')
+            df.reset_index(inplace=True)
+        else:
+            df['maxAge'] = 1.0
+            df['cashPosition'] = np.nan
+            df['stockPosition'] = np.nan
+            df['bondPosition'] = np.nan
+            df['otherPosition'] = np.nan
+            df['preferredPosition'] = np.nan
+            df['convertiblePosition'] = np.nan
+            df.loc[0] = [1.0, np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]
+            df = df.set_index('maxAge')
+            df.reset_index(inplace=True)
+        stock_int: int = int(np.nan_to_num(df['stockPosition'][0]) *100) if np.isnan(df['stockPosition'][0]) else int(df['stockPosition'][0]*100)
+        #stock_int: int = int(df['stockPosition'][0]*100)
+        bond_int: int = 100 - stock_int
+        return stock_int, bond_int
+
+    def __setInfo(self):
+        print("SET_INFO", self.__y_query.fund_holding_info)
+        is_null: bool = len(self.__y_query.fund_holding_info.get(self.__ticker)) >= 50
+        if is_null:
+            print(self.__ticker + ' size', len(self.__y_query.fund_holding_info.get(self.__ticker)))
+            self._info_labels.append('PriceToEarnings')
+            self._info_list.append(self._price_to_earn)
+            self._info_labels.append('PriceToBook')
+            self._info_list.append(self._price_to_book)
+            self._info_labels.append('PriceToSales')
+            self._info_list.append(self._price_to_sale)
+            self._info_labels.append('PriceToCashflow')
+            self._info_list.append(self._price_to_cash)
+        else:
+            for key in self.__y_query.fund_holding_info.get(self.__ticker):
+                if key == 'equityHoldings':
+                    self.__setPriceTo(self.__y_query.fund_holding_info.get(self.__ticker)[key])
+
+    def __setPriceTo(self, a_dict: dict):
+        self._price_to_earn = a_dict['priceToEarnings']
+        self._price_to_book = a_dict['priceToBook']
+        self._price_to_sale = a_dict['priceToSales']
+        self._price_to_cash = a_dict['priceToCashflow']
+
+    def __setPerformance(self):
+        print('Performance', self.__y_query.fund_performance)
+        is_null: bool = len(self.__y_query.fund_performance.get(self.__ticker)) >= 50
+        if is_null:
+            print(self.__ticker + ' size', len(self.__y_query.fund_performance.get(self.__ticker)))
+        else:
+            for key in self.__y_query.fund_performance.get(self.__ticker):
+                print(key)
