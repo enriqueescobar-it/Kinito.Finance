@@ -32,18 +32,18 @@ class QuarterInfo(AbstractInfo):
     _previous_dt_q_num: str = 'Q2'
     _previous_dt_q_str: str = '2001Q2'
     _previous_quarter: FiscalQuarter = FiscalQuarter(2001, 2)
-    _year_dt: datetime = _current_dt
-    _year_dt_year: int = 2001
-    _year_dt_q: int = 3
-    _year_dt_q_num: str = 'Q2'
-    _year_dt_q_str: str = '2000Q2'
-    _year_quarter: FiscalQuarter = FiscalQuarter(2000, 3)
     _base_dt: datetime = _current_dt
     _base_dt_year: int = 2001
     _base_dt_q: int = 3
     _base_dt_q_num: str = 'Q2'
     _base_dt_q_str: str = '2001Q2'
     _base_quarter: FiscalQuarter = FiscalQuarter(2001, 3)
+    _year_dt: datetime = _current_dt
+    _year_dt_year: int = 2001
+    _year_dt_q: int = 3
+    _year_dt_q_num: str = 'Q2'
+    _year_dt_q_str: str = '2000Q2'
+    _year_quarter: FiscalQuarter = FiscalQuarter(2000, 3)
     _has_balance_sheets_df: bool = False
     _balance_sheets_df: pd.DataFrame = pd.DataFrame()
     _has_cashflows_df: bool = False
@@ -73,12 +73,12 @@ class QuarterInfo(AbstractInfo):
         self._previous_dt_q_num = self.__get_quarter_str(self._previous_dt)
         self._previous_dt_q_str = self.__get_quarter_string(self._previous_dt)
         self._previous_quarter = self._current_quarter.prev_fiscal_quarter
-        self.set_baseline()
         self.__set_year_line()
         self.__set_balance_sheets_df()
         self.__set_cashflows_df()
         self.__set_earnings_df()
         self.__set_financials_df()
+        self.set_baseline()
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self.__header
@@ -92,6 +92,7 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['CurrentQNumber', self._current_dt_q_num])
         self._pretty_table.add_row(['CurrentQuarter', self._current_dt_q_str])
         self._pretty_table.add_row(['CurrentFiscalQuarter', str(self._current_quarter)])
+        self._pretty_table.add_row(['CurrentFiscalQuarterStart', self._current_dt])
         self._pretty_table.add_row(['PreviousDateTime', self._previous_dt])
         self._pretty_table.add_row(['PreviousYear', self._previous_dt_year])
         self._pretty_table.add_row(['PreviousQ', self._previous_dt_q])
@@ -99,9 +100,15 @@ class QuarterInfo(AbstractInfo):
         self._pretty_table.add_row(['PreviousQuarter', self._previous_dt_q_str])
         self._pretty_table.add_row(['PreviousFiscalQuarter', str(self._previous_quarter)])
         self._pretty_table.add_row(['PreviousFiscalQuarterStart', self._previous_dt])
+        self._pretty_table.add_row(['YearDateTime', self._year_dt])
+        self._pretty_table.add_row(['YearYear', self._year_dt_year])
         self._pretty_table.add_row(['YearQ', self._year_dt_q])
         self._pretty_table.add_row(['YearQNumber', self._year_dt_q_num])
         self._pretty_table.add_row(['YearQuarter', self._year_dt_q_str])
+        self._pretty_table.add_row(['YearFiscalQuarter', str(self._year_quarter)])
+        self._pretty_table.add_row(['YearFiscalQuarterStart', self._year_dt])
+        self._pretty_table.add_row(['BaseDateTime', self._base_dt])
+        self._pretty_table.add_row(['BaseYear', self._base_dt_year])
         self._pretty_table.add_row(['BaseQ', self._base_dt_q])
         self._pretty_table.add_row(['BaseQNumber', self._base_dt_q_num])
         self._pretty_table.add_row(['BaseQuarter', self._base_dt_q_str])
@@ -126,6 +133,7 @@ class QuarterInfo(AbstractInfo):
             "current_q_num": self._current_dt_q_num,
             "current_q_str": self._current_dt_q_str,
             "current_quarter": str(self._current_quarter),
+            "current_quarter_start": str(self._current_dt),
             "previous_dt": str(self._previous_dt),
             "previous_year": self._previous_dt_year,
             "previous_q": self._previous_dt_q,
@@ -133,9 +141,15 @@ class QuarterInfo(AbstractInfo):
             "previous_q_str": self._previous_dt_q_str,
             "previous_quarter": str(self._previous_quarter),
             "previous_quarter_start": str(self._previous_dt),
+            "year_dt": str(self._year_dt),
+            "year_year": self._year_dt_year,
             "year_q": self._year_dt_q,
             "year_q_num": self._year_dt_q_num,
             "year_q_str": self._year_dt_q_str,
+            "year_quarter": str(self._year_quarter),
+            "year_quarter_start": str(self._year_dt),
+            "base_dt": str(self._base_dt),
+            "base_year": self._base_dt_year,
             "base_q": self._base_dt_q,
             "base_q_num": self._base_dt_q_num,
             "base_q_str": self._base_dt_q_str,
@@ -157,8 +171,9 @@ class QuarterInfo(AbstractInfo):
         return str(dt.year) + self.__get_quarter_str(dt)
 
     def __set_year_line(self):
-        self._year_dt = datetime(self._year_quarter.start.year, self._year_quarter.start.month,
-                                 self._year_quarter.start.day).replace(tzinfo=self._year_quarter.start.tzinfo)
+        self._year_dt = datetime(self._previous_dt.year - 1, self._previous_dt.month,
+                                 self._previous_dt.day).replace(tzinfo=self._previous_dt.tzinfo)
+        self._year_dt_year = self._year_dt.year
         self._year_dt_q = self.__get_quarter_int(self._year_dt)
         self._year_dt_q_num = self.__get_quarter_str(self._year_dt)
         self._year_dt_q_str = self.__get_quarter_string(self._year_dt)
@@ -181,13 +196,14 @@ class QuarterInfo(AbstractInfo):
         return json.dumps(dict(self), ensure_ascii=False)
 
     def set_baseline(self, base_years: int = 5):
-        self._base_quarter = \
-            FiscalQuarter(self._previous_quarter.fiscal_year - base_years, self._previous_quarter.fiscal_quarter)
         self._base_dt = datetime(self._previous_dt.year - base_years, self._previous_dt.month,
                                  self._previous_dt.day, tzinfo=self._previous_dt.tzinfo)
+        self._base_dt_year = self._base_dt.year
         self._base_dt_q = self.__get_quarter_int(self._base_dt)
         self._base_dt_q_num = self.__get_quarter_str(self._base_dt)
         self._base_dt_q_str = self.__get_quarter_string(self._base_dt)
+        self._base_quarter = \
+            FiscalQuarter(self._year_quarter.fiscal_year - base_years, self._year_quarter.fiscal_quarter)
 
     def set_balance_sheets_df(self, a_df: pd.DataFrame):
         self._has_balance_sheets_df = any(a_df) and isinstance(a_df, pd.DataFrame) and not a_df.empty and \
