@@ -135,3 +135,11 @@ class QuarterInfo(AbstractInfo):
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
+
+    @property
+    def StartDateTime(self):
+        return self._quarter_dt_start
+
+    @property
+    def StopDateTime(self):
+        return self._quarter_dt_stop
