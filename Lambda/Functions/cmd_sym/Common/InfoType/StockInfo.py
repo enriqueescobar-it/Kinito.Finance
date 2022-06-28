@@ -5,7 +5,7 @@ import yfinance as yf
 from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
-from Common.InfoType.QuarterInfo import QuarterInfo
+from Common.InfoType.DataTimeInfo import DataTimeInfo
 from Common.InfoType.YahooFinanceStockInfo import YahooFinanceStockInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
@@ -28,7 +28,7 @@ class StockInfo(AbstractInfo):
     _date_time_zone: str = "GMT"
     _date_time_format: str = "%Y-%m-%d %H:%M:%S"
     _y_finance_si: YahooFinanceStockInfo
-    _quarter_info: QuarterInfo
+    _data_time_info: DataTimeInfo
     _company_name: str = 'NA'
     _url: str = 'NA'
     _url_logo: str = "http://localhost"
@@ -53,20 +53,20 @@ class StockInfo(AbstractInfo):
         self.__y_finance = yf.Ticker(a_ticker)
         self._y_finance_si = YahooFinanceStockInfo(a_ticker)
         self._past_years = past_years
-        self._quarter_info = QuarterInfo()
+        self._data_time_info = DataTimeInfo()
         self.__get_info()
         self._action_df = self._y_finance_si.ActionDf
         self._balance_sheet_df = self._y_finance_si.BalanceSheetDf
         self._option_tuple = self._y_finance_si.OptionTuple
         self._split_series = self._y_finance_si.SplitSeries
         self._has_balance_sheets_df = self._y_finance_si.HasQBalanceSheesDf
-        self._quarter_info.set_balance_sheets_df(self._y_finance_si.QBalanceSheetsDf)
+        self._data_time_info.set_balance_sheets_df(self._y_finance_si.QBalanceSheetsDf)
         self._has_cashflows_df = self._y_finance_si.HasQCashflowsDf
-        self._quarter_info.set_cashflows_df(self._y_finance_si.QCashflowsDf)
+        self._data_time_info.set_cashflows_df(self._y_finance_si.QCashflowsDf)
         self._has_earnings_df = self._y_finance_si.HasQEarningsDf
-        self._quarter_info.set_earnings_df(self._y_finance_si.QEarningsDf)
+        self._data_time_info.set_earnings_df(self._y_finance_si.QEarningsDf)
         self._has_financials_df = self._y_finance_si.HasQFinancialsDf
-        self._quarter_info.set_financials_df(self._y_finance_si.QFinancialsDf)
+        self._data_time_info.set_financials_df(self._y_finance_si.QFinancialsDf)
 
     def __get_info(self):
         self.__y_fin_dic = self._y_finance_si.InfoDict
