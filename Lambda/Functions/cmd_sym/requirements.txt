@@ -13,6 +13,7 @@ fiscalyear==0.4.0
 fonttools==4.31.2
 idna==3.3
 importlib-metadata==4.11.3
+joblib==1.1.0
 kiwisolver==1.4.1
 lxml==4.8.0
 matplotlib==3.5.1
@@ -32,9 +33,12 @@ pytz==2022.1
 requests==2.27.1
 requests-futures==1.0.0
 requests-html==0.10.0
+scikit-learn==1.1.1
+scipy==1.8.1
 sgmllib3k==1.0.0
 six==1.16.0
 soupsieve==2.3.1
+threadpoolctl==3.1.0
 tqdm==4.63.1
 tzdata==2022.1
 urllib3==1.26.9
