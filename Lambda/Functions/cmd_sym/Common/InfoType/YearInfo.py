@@ -3,6 +3,9 @@ import json
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from typing import List
+
+from pandas import DataFrame
+
 from Common.InfoType.AbstractInfo import AbstractInfo
 from Common.InfoType.QuarterInfo import QuarterInfo
 
@@ -18,6 +21,10 @@ class YearInfo(AbstractInfo):
     _dt_start: datetime = _dt
     _dt_stop: datetime = _dt
     _qi_list: List[QuarterInfo] = []
+    _balance_sheets_df: DataFrame = DataFrame()
+    _cashflows_df: DataFrame = DataFrame()
+    _earnings_df: DataFrame = DataFrame()
+    _financials_df: DataFrame = DataFrame()
 
     def __init__(self, dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         self._dt = dt
@@ -51,3 +58,15 @@ class YearInfo(AbstractInfo):
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
+
+    def set_balance_sheets_df(self, bs_df: DataFrame):
+        self._balance_sheets_df = bs_df
+
+    def set_cashflows_df(self, cf_df: DataFrame):
+        self._cashflows_df = cf_df
+
+    def set_earnings_df(self, e_df: DataFrame):
+        self._earnings_df = e_df
+
+    def set_financials_df(self, f_df: DataFrame):
+        self._financials_df = f_df

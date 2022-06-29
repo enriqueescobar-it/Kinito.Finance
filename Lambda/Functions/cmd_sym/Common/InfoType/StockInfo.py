@@ -6,6 +6,7 @@ from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
 from Common.InfoType.YahooFinanceStockInfo import YahooFinanceStockInfo
+from Common.InfoType.YearInfo import YearInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
 from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency
@@ -41,6 +42,7 @@ class StockInfo(AbstractInfo):
     _market: str = 'NA'
     _currency: str = 'NA'
     _stock_type: AbstractStock
+    _year_info: YearInfo
     _has_balance_sheets_df: bool = False
     _has_cashflows_df: bool = False
     _has_earnings_df: bool = False
@@ -57,13 +59,13 @@ class StockInfo(AbstractInfo):
         self._option_tuple = self._y_finance_si.OptionTuple
         self._split_series = self._y_finance_si.SplitSeries
         self._has_balance_sheets_df = self._y_finance_si.HasQBalanceSheesDf
-        self._data_time_info.set_balance_sheets_df(self._y_finance_si.QBalanceSheetsDf)
+        self._year_info.set_balance_sheets_df(self._y_finance_si.QBalanceSheetsDf)
         self._has_cashflows_df = self._y_finance_si.HasQCashflowsDf
-        self._data_time_info.set_cashflows_df(self._y_finance_si.QCashflowsDf)
+        self._year_info.set_cashflows_df(self._y_finance_si.QCashflowsDf)
         self._has_earnings_df = self._y_finance_si.HasQEarningsDf
-        self._data_time_info.set_earnings_df(self._y_finance_si.QEarningsDf)
+        self._year_info.set_earnings_df(self._y_finance_si.QEarningsDf)
         self._has_financials_df = self._y_finance_si.HasQFinancialsDf
-        self._data_time_info.set_financials_df(self._y_finance_si.QFinancialsDf)
+        self._year_info.set_financials_df(self._y_finance_si.QFinancialsDf)
 
     def __get_info(self):
         self.__y_fin_dic = self._y_finance_si.InfoDict
