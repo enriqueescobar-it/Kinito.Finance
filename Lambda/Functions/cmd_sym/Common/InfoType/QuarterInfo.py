@@ -137,6 +137,10 @@ class QuarterInfo(AbstractInfo):
         return json.dumps(dict(self), ensure_ascii=False)
 
     @property
+    def Day(self):
+        return self._dt_day
+
+    @property
     def StartDateTime(self):
         return self._quarter_dt_start
 
