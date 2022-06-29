@@ -1,5 +1,6 @@
 import argparse
 
+
 from Common.InfoType.YahooFinanceStockInfo import YahooFinanceStockInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond

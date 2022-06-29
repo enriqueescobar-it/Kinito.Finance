@@ -23,7 +23,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="folder">
+      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/AbstractMarket.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/de_market/IndexFund/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/de_market/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/script_00_stock_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/script_00_stock_type.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,13 +80,13 @@
     <option name="showMembers" value="true" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "F:/Disk_X/Kinito.Finance"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Disk_X/Kinito.Finance&quot;
   }
-}]]></component>
+}</component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <console-settings module-name="Kinito.Finance" is-module-sdk="true">
