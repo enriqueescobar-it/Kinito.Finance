@@ -7,7 +7,7 @@ from prettytable import PrettyTable
 from Common.InfoType.AbstractInfo import AbstractInfo
 
 
-class TimeInfo(AbstractInfo):
+class TimeSpanInfo(AbstractInfo):
 
     __header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
