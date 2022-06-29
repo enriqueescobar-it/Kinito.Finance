@@ -15,16 +15,20 @@ class YearInfo(AbstractInfo):
     __header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))
+    _dt_start: datetime = _dt
+    _dt_stop: datetime = _dt
     _qi_list: List[QuarterInfo] = []
 
     def __init__(self, dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         self._dt = dt
         self.__set_qi_list()
+        self._dt_start = self._qi_list[self.__quarters-1].StartDateTime
+        self._dt_stop = self._qi_list[0].StopDateTime
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self.__header
-        self._pretty_table.add_row(['Stop__', self._qi_list[0].StopDateTime])
-        self._pretty_table.add_row(['Start_', self._qi_list[self.__quarters-1].StartDateTime])
+        self._pretty_table.add_row(['Stop__', self._dt_stop])
+        self._pretty_table.add_row(['Start_', self._dt_start])
         self._pretty_table.add_row(['Length', len(self._qi_list)])
         return self._pretty_table.__str__()
 
@@ -34,8 +38,9 @@ class YearInfo(AbstractInfo):
     def __iter__(self):
         yield from {
             self.__header[0]: self.__header[1],
-            "Stop__": str(self._qi_list[0].StopDateTime),
-            "Start_": str(self._qi_list[self.__quarters-1].StartDateTime)
+            "Stop__": str(self._dt_stop),
+            "Start_": str(self._dt_start),
+            "len": len(self._qi_list)
         }.items()
         
     def __set_qi_list(self) -> None:
