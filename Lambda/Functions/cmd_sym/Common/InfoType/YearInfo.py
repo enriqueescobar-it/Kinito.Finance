@@ -34,8 +34,8 @@ class YearInfo(AbstractInfo):
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self.__header
-        self._pretty_table.add_row(['Stop__', self._dt_stop])
-        self._pretty_table.add_row(['Start_', self._dt_start])
+        self._pretty_table.add_row(['DateTimeStop', self._dt_stop])
+        self._pretty_table.add_row(['DateTimeStart', self._dt_start])
         self._pretty_table.add_row(['Length', len(self._qi_list)])
         return self._pretty_table.__str__()
 
@@ -45,9 +45,9 @@ class YearInfo(AbstractInfo):
     def __iter__(self):
         yield from {
             self.__header[0]: self.__header[1],
-            "Stop__": str(self._dt_stop),
-            "Start_": str(self._dt_start),
-            "len": len(self._qi_list)
+            "dt_stop": str(self._dt_stop),
+            "dt_start": str(self._dt_start),
+            "length": len(self._qi_list)
         }.items()
         
     def __set_qi_list(self) -> None:
@@ -70,3 +70,15 @@ class YearInfo(AbstractInfo):
 
     def set_financials_df(self, f_df: DataFrame):
         self._financials_df = f_df
+
+    @property
+    def DateTimeStop(self) -> datetime:
+        return self._dt_stop
+
+    @property
+    def DateTimeStart(self) -> datetime:
+        return self._dt_start
+
+    @property
+    def Quarters(self) -> int:
+        return self.__quarters

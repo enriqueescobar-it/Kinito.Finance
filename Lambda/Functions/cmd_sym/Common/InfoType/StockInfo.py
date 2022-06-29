@@ -54,6 +54,7 @@ class StockInfo(AbstractInfo):
         self._y_finance_si = YahooFinanceStockInfo(a_ticker)
         self._past_years = past_years
         self.__get_info()
+        self._year_info = YearInfo()
         self._action_df = self._y_finance_si.ActionDf
         self._balance_sheet_df = self._y_finance_si.BalanceSheetDf
         self._option_tuple = self._y_finance_si.OptionTuple
