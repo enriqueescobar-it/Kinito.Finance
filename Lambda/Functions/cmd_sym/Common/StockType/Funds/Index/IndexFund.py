@@ -15,7 +15,7 @@ class IndexFund(AbstractStockFund):
     #
 
     def __init__(self, c_name: str, t_name: str, q_type: str):
-        super().__init__(c_name.replace(' ', ''), q_type)
+        super().__init__(c_name.replace(' ', '').replace('.', '_').replace('-', '_').replace('/', ''), q_type)
         #
         self._ticker = t_name
         self._class_type = 'IndexFund'
