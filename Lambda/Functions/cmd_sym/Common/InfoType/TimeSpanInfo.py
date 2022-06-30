@@ -11,7 +11,7 @@ from Common.InfoType.AbstractInfo import AbstractInfo
 class TimeSpanInfo(AbstractInfo):
 
     __header: list = ['Field', 'FieldInfo']
-    __past_y: int = 0
+    __past_months: int = 0
     _pretty_table: PrettyTable = PrettyTable()
     _dt_stop: datetime
     _dt_start: datetime
@@ -23,8 +23,8 @@ class TimeSpanInfo(AbstractInfo):
     _t_days: int = 0
     _days: int = 0
 
-    def __init__(self, past_years: int = 5):
-        self.__past_y = past_years
+    def __init__(self, past_months: int = 5):
+        self.__past_months = past_months
         self.__set_years()
         self.__set_quarters()
         self.__set_months()
