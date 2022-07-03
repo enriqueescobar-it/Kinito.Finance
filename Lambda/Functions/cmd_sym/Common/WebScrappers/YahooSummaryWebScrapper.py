@@ -1,9 +1,5 @@
-from typing import Any, List
-
 import bs4
 import requests
-
-from bs4.element import ResultSet
 
 from Common.WebScrappers.YahooWebScrapper import YahooWebScrapper
 
@@ -11,7 +7,7 @@ from Common.WebScrappers.YahooWebScrapper import YahooWebScrapper
 class YahooSummaryWebScrapper(YahooWebScrapper):
     __request: str = 'NA'
     __html_parser: bs4.BeautifulSoup
-    __html_body: ResultSet[Any]
+    __html_body: bs4.ResultSet
     _market_cap: str = 'NA'
     _beta: str = 'NA'
     _pe_ratio: str = 'NA'
@@ -24,6 +20,29 @@ class YahooSummaryWebScrapper(YahooWebScrapper):
             self.__set_request()
             self.__set_html_parser()
             self.__set_html_body()
+
+    def __str__(self) -> str:
+        self._pretty_table.field_names = self._header
+        self._pretty_table.add_row(['Ticker', self._ticker])
+        self._pretty_table.add_row(['URL', self._url])
+        self._pretty_table.add_row(['MarketCap', self._market_cap])
+        self._pretty_table.add_row(['Beta', self._beta])
+        self._pretty_table.add_row(['RatioPE', self._pe_ratio])
+        self._pretty_table.add_row(['EPS', self._eps])
+        self._pretty_table.add_row(['EarningsDate', self._earnings_date])
+        return self._pretty_table.__str__()
+
+    def __iter__(self):
+        yield from {
+            self._header[0]: self._header[1],
+            "ticker": str(self._ticker),
+            "url": str(self._url),
+            "market_cap": self._market_cap,
+            "beta": self._beta,
+            "pe_ratio": self._pe_ratio,
+            "eps": self._eps,
+            "earnings_date": self._earnings_date
+        }.items()
 
     def __has_dict_key(self, a_dict: dict, a_key: str = '') -> bool:
         return a_key in a_dict
@@ -41,7 +60,7 @@ class YahooSummaryWebScrapper(YahooWebScrapper):
         self.__html_body = self.__html_parser.find_all("tbody")
 
     def parse_body(self):
-        l: dict = {}
+        l = {}
         u = list()
         try:
             table1 = self.__html_body[0].find_all("tr")

@@ -9,7 +9,7 @@ from Common.WebScrappers.AbstractWebScrapper import AbstractWebScrapper
 
 class YahooWebScrapper(AbstractWebScrapper):
     __root_link: str = "https://finance.yahoo.com/quote/"
-    __header: list = ['Field', 'FieldInfo']
+    _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _ticker: str = 'NA'
     _linker: str = "http://localhost"
@@ -21,7 +21,7 @@ class YahooWebScrapper(AbstractWebScrapper):
         self._set_link()
 
     def __str__(self) -> str:
-        self._pretty_table.field_names = self.__header
+        self._pretty_table.field_names = self._header
         self._pretty_table.add_row(['Ticker', self._ticker])
         self._pretty_table.add_row(['Link', self._linker])
         self._pretty_table.add_row(['Exists', self._exists])
@@ -33,7 +33,7 @@ class YahooWebScrapper(AbstractWebScrapper):
 
     def __iter__(self):
         yield from {
-            self.__header[0]: self.__header[1],
+            self._header[0]: self._header[1],
             "ticker": str(self._ticker),
             "link": str(self._linker),
             "exists": self._exists,
