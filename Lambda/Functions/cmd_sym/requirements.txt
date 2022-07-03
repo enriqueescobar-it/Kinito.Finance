@@ -17,6 +17,7 @@ joblib==1.1.0
 kiwisolver==1.4.1
 lxml==4.8.0
 matplotlib==3.5.1
+multidict==6.0.2
 multitasking==0.0.10
 numpy==1.22.3
 packaging==21.3
@@ -47,5 +48,6 @@ wcwidth==0.2.5
 websockets==10.2
 yahoo-fin==0.8.9.1
 yahooquery==2.2.15
+yarl==1.7.2
 yfinance==0.1.70
 zipp==3.7.0

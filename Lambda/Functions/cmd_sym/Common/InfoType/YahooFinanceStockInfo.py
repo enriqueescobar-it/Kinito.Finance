@@ -124,7 +124,7 @@ class YahooFinanceStockInfo(AbstractInfo):
         return any(a_df) and isinstance(a_df, DataFrame) and not a_df.empty and\
                not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
 
-    def __url_exists(self, url_str: str):
+    def __url_exists(self, url_str: str) -> bool:
         return ('http' in url_str) and (requests.head(url_str, allow_redirects=True).status_code == 200)
 
     def __get_str_from_key(self, a_dict: dict, a_key: str = 'NA') -> str:
