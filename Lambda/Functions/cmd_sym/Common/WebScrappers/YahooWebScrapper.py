@@ -3,12 +3,13 @@ import requests
 import yarl
 
 from prettytable import PrettyTable
+from requests import Response
 
 from Common.WebScrappers.AbstractWebScrapper import AbstractWebScrapper
 
 
 class YahooWebScrapper(AbstractWebScrapper):
-    __root_link: str = "https://finance.yahoo.com/quote/"
+    _root_link: str = "https://finance.yahoo.com/quote/"
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _ticker: str = 'NA'
@@ -41,11 +42,31 @@ class YahooWebScrapper(AbstractWebScrapper):
         }.items()
 
     def __url_exists(self, url_str: str) -> bool:
-        return ('http' in url_str) and (requests.head(url_str, allow_redirects=True).status_code == 200)
+        boo: bool = False
+        get_response: int = 0
+        try:
+            # Get Url
+            get: Response = requests.get(url_str)
+            get_response = get.status_code
+            # if the request succeeds
+            if get_response == 200:
+                boo = True
+                print(f"{url_str}: is reachable")
+            else:
+                boo = False
+                print(f"{url_str}: is Not reachable, status_code: {get.status_code}")
+        # Exception
+        except requests.exceptions.RequestException as e:
+            # print URL with Errs
+            raise SystemExit(f"{url_str}: is Not reachable \nErr: {e}")
+        finally:
+            print('FINALLY', get_response, boo)
+        return boo
 
     def _set_link(self):
-        a_link: str = '{0}{1}'.format(self.__root_link, self._ticker)
+        a_link: str = '{0}{1}'.format(self._root_link, self._ticker)
         self._exists = self.__url_exists(a_link)
+        print(a_link, self._exists)
         if self._exists:
             self._linker = a_link
             self._url = yarl.URL(a_link)

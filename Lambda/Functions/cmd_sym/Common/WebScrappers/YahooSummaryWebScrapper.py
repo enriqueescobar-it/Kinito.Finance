@@ -5,9 +5,9 @@ from Common.WebScrappers.YahooWebScrapper import YahooWebScrapper
 
 
 class YahooSummaryWebScrapper(YahooWebScrapper):
-    __request: str = 'NA'
-    __html_parser: bs4.BeautifulSoup
-    __html_body: bs4.ResultSet
+    _request: str = 'NA'
+    _html_parser: bs4.BeautifulSoup
+    _html_body: bs4.ResultSet
     _market_cap: str = 'NA'
     _beta: str = 'NA'
     _pe_ratio: str = 'NA'
@@ -51,23 +51,23 @@ class YahooSummaryWebScrapper(YahooWebScrapper):
         return 'NA' if not self.__has_dict_key(a_dict, a_key) else str(a_dict[a_key])
 
     def __set_request(self):
-        self.__request = requests.get(self.link).text
+        self._request = requests.get(self.link).text
 
     def __set_html_parser(self):
-        self.__html_parser = bs4.BeautifulSoup(self.__request, 'html.parser')
+        self._html_parser = bs4.BeautifulSoup(self._request, 'html.parser')
 
     def __set_html_body(self):
-        self.__html_body = self.__html_parser.find_all("tbody")
+        self._html_body = self._html_parser.find_all("tbody")
 
     def parse_body(self):
         l = {}
         u = list()
         try:
-            table1 = self.__html_body[0].find_all("tr")
+            table1 = self._html_body[0].find_all("tr")
         except:
             table1 = None
         try:
-            table2 = self.__html_body[1].find_all("tr")
+            table2 = self._html_body[1].find_all("tr")
         except:
             table2 = None
         for i in range(0, len(table1)):
@@ -91,3 +91,23 @@ class YahooSummaryWebScrapper(YahooWebScrapper):
         self._pe_ratio = self.__get_dict_key(u[:][10], 'PE Ratio (TTM)')
         self._eps = self.__get_dict_key(u[:][11], 'EPS (TTM)')
         self._earnings_date = self.__get_dict_key(u[:][12], 'Earnings Date')
+
+    @property
+    def beta(self) -> str:
+        return self._beta
+
+    @property
+    def eps(self) -> str:
+        return self._eps
+
+    @property
+    def earnings_date(self) -> str:
+        return self._earnings_date
+
+    @property
+    def market_cap(self) -> str:
+        return self._market_cap
+
+    @property
+    def pe_ratio(self) -> str:
+        return self._pe_ratio
