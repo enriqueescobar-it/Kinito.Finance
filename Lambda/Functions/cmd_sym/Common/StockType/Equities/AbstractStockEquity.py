@@ -1,7 +1,7 @@
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
-from Common.Readers.Engine.YahooFinStockInfo import YahooFinStockInfo
+from Common.Readers.Engine.YahooFinEngine import YahooFinStockInfo
 from Common.StockType.AbstractStock import AbstractStock
 
 
