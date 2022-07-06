@@ -5,12 +5,13 @@ import numpy as np
 import yfinance as yf
 from pandas import DataFrame, Series
 from prettytable import PrettyTable
+from requests import Response
 
 from Common.InfoType.AbstractInfo import AbstractInfo
 
 
 class YahooFinanceStockInfo(AbstractInfo):
-    __header: list = ['Field', 'FieldInfo']
+    _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _y_finance: yf.ticker.Ticker
     _ticker: str = 'AAPL'
@@ -64,7 +65,7 @@ class YahooFinanceStockInfo(AbstractInfo):
         self._set_split_series()
 
     def __str__(self) -> str:
-        self._pretty_table.field_names = self.__header
+        self._pretty_table.field_names = self._header
         self._pretty_table.add_row(['Ticker', self._ticker])
         self._pretty_table.add_row(['Company', self._company_name])
         self._pretty_table.add_row(['URL', self._url])
@@ -93,7 +94,7 @@ class YahooFinanceStockInfo(AbstractInfo):
 
     def __iter__(self):
         yield from {
-            self.__header[0]: self.__header[1],
+            self._header[0]: self._header[1],
             "ticker": self._ticker,
             "company_name": self._company_name,
             "url": self._url,
@@ -125,7 +126,26 @@ class YahooFinanceStockInfo(AbstractInfo):
                not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
 
     def __url_exists(self, url_str: str) -> bool:
-        return ('http' in url_str) and (requests.head(url_str, allow_redirects=True).status_code == 200)
+        boo: bool = False
+        get_response: int = 0
+        try:
+            # Get Url
+            get: Response = requests.get(url_str)
+            get_response = get.status_code
+            # if the request succeeds
+            if get_response == 200:
+                boo = True
+                print(f"{url_str}: is reachable")
+            else:
+                boo = False
+                print(f"{url_str}: is Not reachable, status_code: {get.status_code}")
+        # Exception
+        except requests.exceptions.RequestException as e:
+            # print URL with Errs
+            raise SystemExit(f"{url_str}: is Not reachable \nErr: {e}")
+        finally:
+            print('FINALLY', get_response, boo)
+        return boo
 
     def __get_str_from_key(self, a_dict: dict, a_key: str = 'NA') -> str:
         if a_key in a_dict:
