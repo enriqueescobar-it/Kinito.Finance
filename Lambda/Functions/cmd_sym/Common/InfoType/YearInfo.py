@@ -14,8 +14,8 @@ from prettytable import PrettyTable
 
 
 class YearInfo(AbstractInfo):
-    __quarters: int = 4
-    __header: list = ['Field', 'FieldInfo']
+    _quarters: int = 4
+    _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))
     _dt_start: datetime = _dt
@@ -29,11 +29,11 @@ class YearInfo(AbstractInfo):
     def __init__(self, dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         self._dt = dt
         self.__set_qi_list()
-        self._dt_start = self._qi_list[self.__quarters-1].StartDateTime
-        self._dt_stop = self._qi_list[0].StopDateTime
+        self._dt_start = self._qi_list[self._quarters - 1].date_time_start
+        self._dt_stop = self._qi_list[0].date_time_stop
 
     def __str__(self) -> str:
-        self._pretty_table.field_names = self.__header
+        self._pretty_table.field_names = self._header
         self._pretty_table.add_row(['DateTimeStop', self._dt_stop])
         self._pretty_table.add_row(['DateTimeStart', self._dt_start])
         self._pretty_table.add_row(['Length', len(self._qi_list)])
@@ -44,16 +44,16 @@ class YearInfo(AbstractInfo):
 
     def __iter__(self):
         yield from {
-            self.__header[0]: self.__header[1],
+            self._header[0]: self._header[1],
             "dt_stop": str(self._dt_stop),
             "dt_start": str(self._dt_start),
             "length": len(self._qi_list)
         }.items()
         
     def __set_qi_list(self) -> None:
-        for i in range(1, self.__quarters + 1):
+        for i in range(1, self._quarters + 1):
             qi: QuarterInfo = QuarterInfo(self._dt - relativedelta(months=i*3))
-            print("CACA", i*3, qi.StopDateTime)
+            print("CACA", i * 3, qi.date_time_stop)
             self._qi_list.append(qi)
 
     def to_json(self):
@@ -72,13 +72,13 @@ class YearInfo(AbstractInfo):
         self._financials_df = f_df
 
     @property
-    def DateTimeStop(self) -> datetime:
+    def date_time_stop(self) -> datetime:
         return self._dt_stop
 
     @property
-    def DateTimeStart(self) -> datetime:
+    def date_time_start(self) -> datetime:
         return self._dt_start
 
     @property
-    def Quarters(self) -> int:
-        return self.__quarters
+    def quarters(self) -> int:
+        return self._quarters

@@ -11,7 +11,7 @@ from Common.InfoType.AbstractInfo import AbstractInfo
 
 class QuarterInfo(AbstractInfo):
 
-    __header: list = ['Field', 'FieldInfo']
+    _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _d_f: FiscalDate = FiscalDate(2001, 9, 11)
     _dt_f: FiscalDateTime = FiscalDateTime(2001, 9, 11)
@@ -52,7 +52,7 @@ class QuarterInfo(AbstractInfo):
         self._quarter_dt_stop = self.__get_quarter_fiscal_dt_stop(self._dt)
 
     def __str__(self) -> str:
-        self._pretty_table.field_names = self.__header
+        self._pretty_table.field_names = self._header
         self._pretty_table.add_row(['DateTime', self._dt])
         self._pretty_table.add_row(['DateDay', self._dt_day])
         self._pretty_table.add_row(['DateDayTh', self._dt_day_th])
@@ -77,7 +77,7 @@ class QuarterInfo(AbstractInfo):
 
     def __iter__(self):
         yield from {
-            self.__header[0]: self.__header[1],
+            self._header[0]: self._header[1],
             "dt": str(self._dt),
             "dt_day": self._dt_day,
             "dt_day_th": self._dt_day_th,
@@ -137,13 +137,13 @@ class QuarterInfo(AbstractInfo):
         return json.dumps(dict(self), ensure_ascii=False)
 
     @property
-    def Day(self):
+    def day(self) -> int:
         return self._dt_day
 
     @property
-    def StartDateTime(self):
+    def date_time_start(self) -> datetime:
         return self._quarter_dt_start
 
     @property
-    def StopDateTime(self):
+    def date_time_stop(self) -> datetime:
         return self._quarter_dt_stop

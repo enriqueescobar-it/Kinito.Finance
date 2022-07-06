@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 import yfinance as yf
+from pandas import DataFrame, Series
 from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
@@ -19,10 +20,10 @@ from Common.StockType.Futures.AbstractStockFuture import AbstractStockFuture
 
 
 class StockInfo(AbstractInfo):
-    __ticker: str = 'NA'
-    __y_finance: yf.ticker.Ticker
-    __y_fin_dic: dict = {}
-    __header: list = ['Info', 'StockInfo']
+    _ticker: str = 'NA'
+    _y_finance: yf.ticker.Ticker
+    _y_fin_dic: dict = {}
+    _header: list = ['Info', 'StockInfo']
     _past_years: int = 5
     _date_time: datetime = datetime.now()
     _date_time_zone: str = "GMT"
@@ -49,8 +50,8 @@ class StockInfo(AbstractInfo):
     _has_financials_df: bool = False
 
     def __init__(self, a_ticker: str = 'AAPL', past_years: int = 5):
-        self.__ticker = a_ticker
-        self.__y_finance = yf.Ticker(a_ticker)
+        self._ticker = a_ticker
+        self._y_finance = yf.Ticker(a_ticker)
         self._y_finance_si = YahooFinanceStockInfo(a_ticker)
         self._past_years = past_years
         self.__get_info()
@@ -69,7 +70,7 @@ class StockInfo(AbstractInfo):
         self._year_info.set_financials_df(self._y_finance_si.QFinancialsDf)
 
     def __get_info(self):
-        self.__y_fin_dic = self._y_finance_si.InfoDict
+        self._y_fin_dic = self._y_finance_si.InfoDict
         self._company_name = self._y_finance_si.Company
         self._url = self._y_finance_si.URL
         self._url_logo = self._y_finance_si.URLlogo
@@ -88,28 +89,28 @@ class StockInfo(AbstractInfo):
 
     def __get_stock_type(self, s: str = ''):
         if s == 'ETF':
-            self._stock_type = ExchangeTradedFund(self._company_name, self.__ticker, s)
+            self._stock_type = ExchangeTradedFund(self._company_name, self._ticker, s)
         elif s == 'INDEX':
-            self._stock_type = IndexFund(self._company_name, self.__ticker, s)
+            self._stock_type = IndexFund(self._company_name, self._ticker, s)
         elif s == 'MUTUALFUND':
-            self._stock_type = MutualFund(self._company_name, self.__ticker, s)
+            self._stock_type = MutualFund(self._company_name, self._ticker, s)
         elif s == 'CRYPTOCURRENCY':
-            self._stock_type = CryptoCurrency(self._company_name, self.__ticker, s)
+            self._stock_type = CryptoCurrency(self._company_name, self._ticker, s)
         elif s == 'CURRENCY':
-            self._stock_type = RegularCurrency(self._company_name, self.__ticker, s)
+            self._stock_type = RegularCurrency(self._company_name, self._ticker, s)
         elif s == 'FUTURE':
-            self._stock_type = AbstractStockFuture(self._company_name, self.__ticker, s)
+            self._stock_type = AbstractStockFuture(self._company_name, self._ticker, s)
         elif s == 'EQUITY':
-            self._stock_type = AbstractStockEquity(self._company_name, self.__ticker, s)
+            self._stock_type = AbstractStockEquity(self._company_name, self._ticker, s)
         else:
         #    self._stock_type = AbstractStockOption(self._company_name, self.__ticker)
-            self._stock_type = AbstractStockBond(self._company_name, self.__ticker, s)
+            self._stock_type = AbstractStockBond(self._company_name, self._ticker, s)
         #    self._stock_type = AbstractStock()
 
     def __str__(self):
         pt: PrettyTable = PrettyTable()
-        pt.field_names = self.__header
-        pt.add_row(['Ticker', self.__ticker])
+        pt.field_names = self._header
+        pt.add_row(['Ticker', self._ticker])
         pt.add_row(['CompanyName', self._company_name])
         pt.add_row(['URL', self._url])
         pt.add_row(['LogoURL', self._url_logo])
@@ -153,8 +154,8 @@ class StockInfo(AbstractInfo):
 
     def __iter__(self):
         yield from {
-            self.__header[0]: self.__header[1],
-            "ticker": self.__ticker,
+            self._header[0]: self._header[1],
+            "ticker": self._ticker,
             "company_name": self._company_name,
             "url": self._url,
             "logo_url": self._url_logo,
@@ -179,29 +180,29 @@ class StockInfo(AbstractInfo):
         return json.dumps(dict(self), ensure_ascii=False)
 
     @property
-    def ActionDataFrame(self):
+    def dataframe_action(self) -> DataFrame:
         return self._y_finance_si.ActionDf
 
     @property
-    def BalanceSheetDataFrame(self):
+    def dataframe_balance_sheet(self) -> DataFrame:
         return self._y_finance_si.BalanceSheetDf
 
     @property
-    def CompanyName(self):
+    def company_name(self) -> str:
         return self._company_name
 
     @property
-    def OptionTuple(self):
+    def tuple_option(self) -> tuple:
         return self._y_finance_si.OptionTuple
 
     @property
-    def QuoteType(self):
+    def quote_type(self) -> str:
         return self._quote_type
 
     @property
-    def SplitSeries(self):
+    def series_split(self) -> Series:
         return self._y_finance_si.SplitSeries
 
     @property
-    def StockType(self):
+    def stock_type(self) -> AbstractStock:
         return self._stock_type
