@@ -17,7 +17,7 @@ from Common.StockType.Options.AbstractStockOption import AbstractStockOption
 
 
 class YahooFinanceEngine(AbstractEngine):
-    __pretty_table: PrettyTable = PrettyTable()
+    _pretty_table: PrettyTable = PrettyTable()
     _info_labels: list = list()
     _info_list: list = list()
     __ticker: str = 'NA'
@@ -115,11 +115,11 @@ class YahooFinanceEngine(AbstractEngine):
         # self.RecommendationDf = self.__yFinance.recommendations
         self.SplitSeries = self.__yFinance.splits
         # self.SustainabilityDf = self.__yFinance.sustainability
-        self.__pretty_table.add_column('Labels', self.InfoLabels)
-        self.__pretty_table.add_column('Type', self.InfoList)
+        self._pretty_table.add_column('Labels', self.InfoLabels)
+        self._pretty_table.add_column('Type', self.InfoList)
 
     def __str__(self):
-        return self.__pretty_table.__str__()
+        return self._pretty_table.__str__()
 
     def __setInfo(self):
         self.InfoDic = self.__yFinance.info
