@@ -1,4 +1,3 @@
-from prettytable import PrettyTable
 from yahooquery import Ticker
 
 #
@@ -25,7 +24,7 @@ class CryptoCurrency(AbstractCurrency):
         self._set_info()
 
     def __str__(self) -> str:
-        return super(AbstractCurrency, self).__str__()
+        return super(CryptoCurrency, self).__str__()
 
     def __iter__(self):
         yield from {

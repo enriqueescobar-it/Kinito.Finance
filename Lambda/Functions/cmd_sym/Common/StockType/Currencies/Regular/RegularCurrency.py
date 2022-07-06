@@ -1,4 +1,3 @@
-from prettytable import PrettyTable
 from yahooquery import Ticker
 
 #
