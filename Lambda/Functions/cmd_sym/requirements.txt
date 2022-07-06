@@ -12,7 +12,7 @@ fonttools==4.31.2
 idna==3.3
 importlib-metadata==4.11.3
 kiwisolver==1.4.1
-lxml==4.8.0
+lxml==4.9.1
 matplotlib==3.5.1
 multitasking==0.0.10
 numpy==1.22.3
