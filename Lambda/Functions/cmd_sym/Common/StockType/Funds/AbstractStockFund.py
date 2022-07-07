@@ -1,8 +1,6 @@
 #
 
 #
-
-#
 from Common.StockType.AbstractStock import AbstractStock
 
 
