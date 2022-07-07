@@ -126,8 +126,10 @@ class YahooFinanceStockInfo(AbstractInfo):
                not a_df.shape[0] == 0 and not len(a_df) == 0 and not len(a_df.index) == 0
 
     def __url_exists(self, url_str: str) -> bool:
+        if url_str == 'NA' or url_str == '' or url_str == str(None):
+            return False
         boo: bool = False
-        get_response: int = 0
+        #get_response: int = 0
         try:
             # Get Url
             get: Response = requests.get(url_str)
@@ -144,7 +146,7 @@ class YahooFinanceStockInfo(AbstractInfo):
             # print URL with Errs
             raise SystemExit(f"{url_str}: is Not reachable \nErr: {e}")
         finally:
-            print('FINALLY', get_response, boo)
+            print('FINALLY?', boo)
         return boo
 
     def __get_str_from_key(self, a_dict: dict, a_key: str = 'NA') -> str:

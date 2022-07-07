@@ -1,4 +1,3 @@
-from prettytable import PrettyTable
 #
 
 #
