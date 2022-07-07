@@ -17,9 +17,9 @@ class CryptoCurrency(AbstractCurrency):
         self._ticker = t_name
         self._class_type = 'CryptoCurrency'
         self._info_type = self._class_type + 'Info'
+        #self.__quote_type = q_type
         #
         self._y_query = Ticker(t_name)
-        #
         #
         self._set_info()
 

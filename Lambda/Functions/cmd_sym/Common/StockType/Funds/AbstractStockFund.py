@@ -1,4 +1,5 @@
-from prettytable import PrettyTable
+#
+
 #
 
 #
@@ -9,7 +10,7 @@ from Common.StockType.AbstractStock import AbstractStock
 
 class AbstractStockFund(AbstractStock):
     #__ticker: str = 'NA'
-    #
+    #_y_query: Ticker
     #
 
     def __init__(self, c_name: str, q_type: str):
@@ -139,3 +140,17 @@ class AbstractStockFund(AbstractStock):
             "has_summary_profile_dict": self._has_summary_profile_dict,
             "has_share_purchase_dict": self._has_share_purchase_dict
         }.items()
+
+    def _set_info(self):
+        self._set_sector_df(self._y_query.fund_sector_weightings)
+        self._set_holding_df(self._y_query.fund_top_holdings, self._ticker, self._y_query.fund_sector_weightings)
+        self._set_part_count(self._y_query.fund_top_holdings, self._y_query.fund_category_holdings)
+        self._set_fund_holding_info_dict('topHoldings', self._y_query.fund_holding_info, self._ticker)
+        self._set_fund_performance_dict('fundPerformance', self._y_query.fund_performance, self._ticker)
+        self._set_key_stat_dict('defaultKeyStatistics', self._y_query.key_stats, self._ticker)
+        self._set_financial_data_dict('financialData', self._y_query.financial_data, self._ticker)
+        self._set_price_dict('', self._y_query.price, self._ticker)
+        self._set_quote_type_dict('', self._y_query.quote_type, self._ticker)
+        self._set_summary_detail_dict('', self._y_query.summary_detail, self._ticker)
+        self._set_summary_profile_dict('', self._y_query.summary_profile, self._ticker)
+        self._set_share_purchase_dict('netSharePurchaseActivity', self._y_query.share_purchase_activity, self._ticker)
