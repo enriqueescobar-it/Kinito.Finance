@@ -1,19 +1,17 @@
 import json
-
-from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
+from datetime import datetime
 from typing import List
 
-from pandas import DataFrame
-
-from Common.InfoType.AbstractInfo import AbstractInfo
-from Common.InfoType.QuarterInfo import QuarterInfo
-
 from backports.zoneinfo import ZoneInfo
+from dateutil.relativedelta import relativedelta
+from pandas import DataFrame
 from prettytable import PrettyTable
 
+from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
+from Common.InfoType.Times.QuarterInfo import QuarterInfo
 
-class YearInfo(AbstractInfo):
+
+class YearInfo(AbstractTimeInfo):
     _quarters: int = 4
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()

@@ -6,10 +6,10 @@ from backports.zoneinfo import ZoneInfo
 from fiscalyear import FiscalDateTime, FiscalQuarter, FiscalYear, FiscalMonth, FiscalDay, FiscalDate
 from prettytable import PrettyTable
 
-from Common.InfoType.AbstractInfo import AbstractInfo
+from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 
 
-class QuarterInfo(AbstractInfo):
+class QuarterInfo(AbstractTimeInfo):
 
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()

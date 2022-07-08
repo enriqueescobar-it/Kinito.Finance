@@ -1,14 +1,13 @@
 import json
-
-from datetime import datetime, timedelta
+from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 from prettytable import PrettyTable
 
-from Common.InfoType.AbstractInfo import AbstractInfo
+from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 
 
-class TimeSpanInfo(AbstractInfo):
+class TimeSpanInfo(AbstractTimeInfo):
 
     __header: list = ['Field', 'FieldInfo']
     __past_months: int = 0
