@@ -1,10 +1,9 @@
 import json
-from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 from prettytable import PrettyTable
 
-from Common.InfoType.Times.AbstractTimeSpanInfo import AbstractTimeSpanInfo
+from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 
 
 class TimeSpanInfo(AbstractTimeSpanInfo):

@@ -7,7 +7,7 @@ from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
 from Common.InfoType.YahooFinanceStockInfo import YahooFinanceStockInfo
-from Common.InfoType.Times.YearSpanInfo import YearSpanInfo
+from Common.InfoType.Times.Spans.YearSpanInfo import YearSpanInfo
 from Common.StockType.AbstractStock import AbstractStock
 from Common.StockType.Bonds.AbstractStockBond import AbstractStockBond
 from Common.StockType.Currencies.Crypto.CryptoCurrency import CryptoCurrency

@@ -8,7 +8,7 @@ from pandas import DataFrame
 from prettytable import PrettyTable
 
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
-from Common.InfoType.Times.QuarterSpanInfo import QuarterSpanInfo
+from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
 
 
 class YearSpanInfo(AbstractTimeInfo):
