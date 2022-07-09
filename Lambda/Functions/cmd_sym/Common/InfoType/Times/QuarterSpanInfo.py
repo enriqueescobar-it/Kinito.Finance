@@ -9,7 +9,7 @@ from prettytable import PrettyTable
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 
 
-class QuarterInfo(AbstractTimeInfo):
+class QuarterSpanInfo(AbstractTimeInfo):
 
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()

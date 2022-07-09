@@ -8,7 +8,7 @@ from pandas import DataFrame
 from prettytable import PrettyTable
 
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
-from Common.InfoType.Times.QuarterInfo import QuarterInfo
+from Common.InfoType.Times.QuarterSpanInfo import QuarterSpanInfo
 
 
 class YearSpanInfo(AbstractTimeInfo):
@@ -18,7 +18,7 @@ class YearSpanInfo(AbstractTimeInfo):
     _dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))
     _dt_start: datetime = _dt
     _dt_stop: datetime = _dt
-    _qi_list: List[QuarterInfo] = []
+    _qi_list: List[QuarterSpanInfo] = []
     _balance_sheets_df: DataFrame = DataFrame()
     _cashflows_df: DataFrame = DataFrame()
     _earnings_df: DataFrame = DataFrame()
@@ -50,7 +50,7 @@ class YearSpanInfo(AbstractTimeInfo):
         
     def __set_qi_list(self) -> None:
         for i in range(1, self._quarters + 1):
-            qi: QuarterInfo = QuarterInfo(self._dt - relativedelta(months=i*3))
+            qi: QuarterSpanInfo = QuarterSpanInfo(self._dt - relativedelta(months=i * 3))
             print("CACA", i * 3, qi.date_time_stop)
             self._qi_list.append(qi)
 
