@@ -4,11 +4,13 @@ from datetime import datetime
 
 from backports.zoneinfo import ZoneInfo
 from fiscalyear import FiscalDateTime, FiscalQuarter, FiscalYear, FiscalMonth, FiscalDay, FiscalDate
+from prettytable import PrettyTable
 
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 
 
 class QuarterSpanInfo(AbstractTimeSpanInfo):
+    __pretty_table: PrettyTable = PrettyTable()
     _d_f: FiscalDate = FiscalDate(2001, 9, 11)
     _dt_f: FiscalDateTime = FiscalDateTime(2001, 9, 11)
     _dt_day_f: FiscalDay = FiscalDay(_dt_f.year, _dt_f.fiscal_day)
@@ -46,25 +48,25 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
         self._stop_dt = self.__get_quarter_fiscal_dt_stop(self._dt)
 
     def __str__(self) -> str:
-        self._pretty_table.field_names = self._header
-        self._pretty_table.add_row(['DateTime', self._dt])
-        self._pretty_table.add_row(['DateDay', self._dt_day])
-        self._pretty_table.add_row(['DateDayTh', self._dt_day_th])
-        self._pretty_table.add_row(['DateWeekTh', self._dt_week_th])
-        self._pretty_table.add_row(['DateMonth', self._dt_month])
-        self._pretty_table.add_row(['DateYear', self._dt_year])
-        self._pretty_table.add_row(['DateQ', self._quarter_int])
-        self._pretty_table.add_row(['DateQNumber', self._quarter_str])
-        self._pretty_table.add_row(['DateQuarter', self._quarter_string])
-        self._pretty_table.add_row(['DateQuarterStart', self._start_dt])
-        self._pretty_table.add_row(['DateQuarterStop', self._stop_dt])
-        self._pretty_table.add_row(['FiscalDate', self._d_f])
-        self._pretty_table.add_row(['FiscalDateTime', self._dt_f])
-        self._pretty_table.add_row(['FiscalDay', str(self._dt_day_f)])
-        self._pretty_table.add_row(['FiscalMonth', str(self._dt_month_f)])
-        self._pretty_table.add_row(['FiscalQuarter', str(self._quarter_f)])
-        self._pretty_table.add_row(['FiscalYear', str(self._dt_year_f)])
-        return self._pretty_table.__str__()
+        self.__pretty_table.field_names = self._header
+        self.__pretty_table.add_row(['DateTime', self._dt])
+        self.__pretty_table.add_row(['DateDay', self._dt_day])
+        self.__pretty_table.add_row(['DateDayTh', self._dt_day_th])
+        self.__pretty_table.add_row(['DateWeekTh', self._dt_week_th])
+        self.__pretty_table.add_row(['DateMonth', self._dt_month])
+        self.__pretty_table.add_row(['DateYear', self._dt_year])
+        self.__pretty_table.add_row(['DateQ', self._quarter_int])
+        self.__pretty_table.add_row(['DateQNumber', self._quarter_str])
+        self.__pretty_table.add_row(['DateQuarter', self._quarter_string])
+        self.__pretty_table.add_row(['DateQuarterStart', self._start_dt])
+        self.__pretty_table.add_row(['DateQuarterStop', self._stop_dt])
+        self.__pretty_table.add_row(['FiscalDate', self._d_f])
+        self.__pretty_table.add_row(['FiscalDateTime', self._dt_f])
+        self.__pretty_table.add_row(['FiscalDay', str(self._dt_day_f)])
+        self.__pretty_table.add_row(['FiscalMonth', str(self._dt_month_f)])
+        self.__pretty_table.add_row(['FiscalQuarter', str(self._quarter_f)])
+        self.__pretty_table.add_row(['FiscalYear', str(self._dt_year_f)])
+        return self.__pretty_table.__str__()
 
     def __repr__(self):
         return self.__str__()

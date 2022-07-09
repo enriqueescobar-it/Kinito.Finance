@@ -5,12 +5,14 @@ from typing import List
 from backports.zoneinfo import ZoneInfo
 from dateutil.relativedelta import relativedelta
 from pandas import DataFrame
+from prettytable import PrettyTable
 
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
 
 
 class YearSpanInfo(AbstractTimeSpanInfo):
+    __pretty_table: PrettyTable = PrettyTable()
     _quarters: int = 4
     _dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))
     _qi_list: List[QuarterSpanInfo] = []
@@ -26,11 +28,11 @@ class YearSpanInfo(AbstractTimeSpanInfo):
         self._stop_dt = self._qi_list[0].stop_datetime
 
     def __str__(self) -> str:
-        self._pretty_table.field_names = self._header
-        self._pretty_table.add_row(['DateTimeStop', self._stop_dt])
-        self._pretty_table.add_row(['DateTimeStart', self._start_dt])
-        self._pretty_table.add_row(['Length', len(self._qi_list)])
-        return self._pretty_table.__str__()
+        self.__pretty_table.field_names = self._header
+        self.__pretty_table.add_row(['DateTimeStop', self._stop_dt])
+        self.__pretty_table.add_row(['DateTimeStart', self._start_dt])
+        self.__pretty_table.add_row(['Length', len(self._qi_list)])
+        return self.__pretty_table.__str__()
 
     def __repr__(self) -> str:
         return self.__str__()

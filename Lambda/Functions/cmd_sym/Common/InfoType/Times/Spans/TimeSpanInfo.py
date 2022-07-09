@@ -1,11 +1,13 @@
 import json
 
 from dateutil.relativedelta import relativedelta
+from prettytable import PrettyTable
 
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 
 
 class TimeSpanInfo(AbstractTimeSpanInfo):
+    __pretty_table: PrettyTable = PrettyTable()
     __past_months: int = 0
     _years: int = 0
     _quarters: int = 0
@@ -26,8 +28,8 @@ class TimeSpanInfo(AbstractTimeSpanInfo):
         self.__set_days()
 
     def __str__(self) -> str:
-        self._pretty_table.field_names = self._header
-        return self._pretty_table.__str__()
+        self.__pretty_table.field_names = self._header
+        return self.__pretty_table.__str__()
 
     def __repr__(self) -> str:
         return self.__str__()
