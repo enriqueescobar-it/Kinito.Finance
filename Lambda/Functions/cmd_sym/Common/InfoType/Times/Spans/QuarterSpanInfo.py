@@ -6,10 +6,10 @@ from backports.zoneinfo import ZoneInfo
 from fiscalyear import FiscalDateTime, FiscalQuarter, FiscalYear, FiscalMonth, FiscalDay, FiscalDate
 from prettytable import PrettyTable
 
-from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
+from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 
 
-class QuarterSpanInfo(AbstractTimeInfo):
+class QuarterSpanInfo(AbstractTimeSpanInfo):
 
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
@@ -28,8 +28,6 @@ class QuarterSpanInfo(AbstractTimeInfo):
     _quarter_int: int = 3
     _quarter_str: str = 'Q3'
     _quarter_string: str = '2001Q3'
-    _quarter_dt_start: datetime = _dt
-    _quarter_dt_stop: datetime = _dt
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))):
         self._dt = d_t
@@ -48,8 +46,8 @@ class QuarterSpanInfo(AbstractTimeInfo):
         self._quarter_int = self.__get_quarter_int(self._dt)
         self._quarter_str = self.__get_quarter_str(self._dt)
         self._quarter_string = self.__get_quarter_string(self._dt)
-        self._quarter_dt_start = self.__get_quarter_fiscal_dt_start(self._dt)
-        self._quarter_dt_stop = self.__get_quarter_fiscal_dt_stop(self._dt)
+        self._start_dt = self.__get_quarter_fiscal_dt_start(self._dt)
+        self._stop_dt = self.__get_quarter_fiscal_dt_stop(self._dt)
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self._header
@@ -62,8 +60,8 @@ class QuarterSpanInfo(AbstractTimeInfo):
         self._pretty_table.add_row(['DateQ', self._quarter_int])
         self._pretty_table.add_row(['DateQNumber', self._quarter_str])
         self._pretty_table.add_row(['DateQuarter', self._quarter_string])
-        self._pretty_table.add_row(['DateQuarterStart', self._quarter_dt_start])
-        self._pretty_table.add_row(['DateQuarterStop', self._quarter_dt_stop])
+        self._pretty_table.add_row(['DateQuarterStart', self._start_dt])
+        self._pretty_table.add_row(['DateQuarterStop', self._stop_dt])
         self._pretty_table.add_row(['FiscalDate', self._d_f])
         self._pretty_table.add_row(['FiscalDateTime', self._dt_f])
         self._pretty_table.add_row(['FiscalDay', str(self._dt_day_f)])
@@ -87,8 +85,8 @@ class QuarterSpanInfo(AbstractTimeInfo):
             "quarter_int": self._quarter_int,
             "quarter_str": self._quarter_str,
             "quarter_string": self._quarter_string,
-            "quarter_dt_start": str(self._quarter_dt_start),
-            "quarter_dt_stop": str(self._quarter_dt_stop),
+            "quarter_dt_start": str(self._start_dt),
+            "quarter_dt_stop": str(self._stop_dt),
             "f_d": str(self._d_f),
             "f_dt": str(self._dt_f),
             "f_day": str(self._dt_day_f),
@@ -139,11 +137,3 @@ class QuarterSpanInfo(AbstractTimeInfo):
     @property
     def day(self) -> int:
         return self._dt_day
-
-    @property
-    def date_time_start(self) -> datetime:
-        return self._quarter_dt_start
-
-    @property
-    def date_time_stop(self) -> datetime:
-        return self._quarter_dt_stop

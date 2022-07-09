@@ -27,8 +27,8 @@ class YearSpanInfo(AbstractTimeInfo):
     def __init__(self, dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         self._dt = dt
         self.__set_qi_list()
-        self._dt_start = self._qi_list[self._quarters - 1].date_time_start
-        self._dt_stop = self._qi_list[0].date_time_stop
+        self._dt_start = self._qi_list[self._quarters - 1].start_datetime
+        self._dt_stop = self._qi_list[0].stop_datetime
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self._header
