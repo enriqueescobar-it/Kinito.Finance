@@ -4,16 +4,14 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from prettytable import PrettyTable
 
-from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
+from Common.InfoType.Times.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 
 
-class TimeSpanInfo(AbstractTimeInfo):
+class TimeSpanInfo(AbstractTimeSpanInfo):
 
     __header: list = ['Field', 'FieldInfo']
     __past_months: int = 0
     _pretty_table: PrettyTable = PrettyTable()
-    _dt_stop: datetime
-    _dt_start: datetime
     _years: int = 0
     _quarters: int = 0
     _months: int = 0
@@ -45,18 +43,18 @@ class TimeSpanInfo(AbstractTimeInfo):
         }.items()
 
     def __set_years(self):
-        self._years = relativedelta(self._dt_stop, self._dt_start).years
+        self._years = relativedelta(self._stop_dt, self._start_dt).years
 
     def __set_quarters(self):
-        self._quarters = relativedelta(self._dt_stop, self._dt_start).months % 3
+        self._quarters = relativedelta(self._stop_dt, self._start_dt).months % 3
 
     def __set_months(self):
         self._months = self._years * 12
-        self._months += relativedelta(self._dt_stop, self._dt_start).months
+        self._months += relativedelta(self._stop_dt, self._start_dt).months
 
     def __set_weeks(self):
         self._weeks = self._years * 52
-        self._weeks += relativedelta(self._dt_stop, self._dt_start).months
+        self._weeks += relativedelta(self._stop_dt, self._start_dt).months
 
     def __set_w_days(self):
         pass
@@ -66,7 +64,7 @@ class TimeSpanInfo(AbstractTimeInfo):
 
     def __set_days(self):
         self._days = int(round(self._years * 365.25))
-        self._days += int(round(relativedelta(self._dt_stop, self._dt_start).months * 30.4375))
+        self._days += int(round(relativedelta(self._stop_dt, self._start_dt).months * 30.4375))
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
