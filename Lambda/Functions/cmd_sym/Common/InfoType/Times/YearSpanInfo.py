@@ -11,7 +11,7 @@ from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 from Common.InfoType.Times.QuarterInfo import QuarterInfo
 
 
-class YearInfo(AbstractTimeInfo):
+class YearSpanInfo(AbstractTimeInfo):
     _quarters: int = 4
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
