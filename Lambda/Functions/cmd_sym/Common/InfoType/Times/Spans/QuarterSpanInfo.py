@@ -4,15 +4,11 @@ from datetime import datetime
 
 from backports.zoneinfo import ZoneInfo
 from fiscalyear import FiscalDateTime, FiscalQuarter, FiscalYear, FiscalMonth, FiscalDay, FiscalDate
-from prettytable import PrettyTable
 
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 
 
 class QuarterSpanInfo(AbstractTimeSpanInfo):
-
-    _header: list = ['Field', 'FieldInfo']
-    _pretty_table: PrettyTable = PrettyTable()
     _d_f: FiscalDate = FiscalDate(2001, 9, 11)
     _dt_f: FiscalDateTime = FiscalDateTime(2001, 9, 11)
     _dt_day_f: FiscalDay = FiscalDay(_dt_f.year, _dt_f.fiscal_day)

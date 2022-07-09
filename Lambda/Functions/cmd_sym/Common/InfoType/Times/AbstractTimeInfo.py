@@ -9,3 +9,7 @@ class AbstractTimeInfo(AbstractInfo):
     @property
     def stop_datetime(self) -> datetime:
         return self._stop_dt
+
+    @property
+    def current_datetime(self) -> datetime:
+        return self._stop_dt

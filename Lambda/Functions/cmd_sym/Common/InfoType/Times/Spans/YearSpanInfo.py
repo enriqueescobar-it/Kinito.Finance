@@ -5,7 +5,6 @@ from typing import List
 from backports.zoneinfo import ZoneInfo
 from dateutil.relativedelta import relativedelta
 from pandas import DataFrame
-from prettytable import PrettyTable
 
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
@@ -13,8 +12,6 @@ from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
 
 class YearSpanInfo(AbstractTimeSpanInfo):
     _quarters: int = 4
-    _header: list = ['Field', 'FieldInfo']
-    _pretty_table: PrettyTable = PrettyTable()
     _dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))
     _qi_list: List[QuarterSpanInfo] = []
     _balance_sheets_df: DataFrame = DataFrame()
