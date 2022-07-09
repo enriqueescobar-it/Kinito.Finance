@@ -7,17 +7,15 @@ from dateutil.relativedelta import relativedelta
 from pandas import DataFrame
 from prettytable import PrettyTable
 
-from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
+from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
 
 
-class YearSpanInfo(AbstractTimeInfo):
+class YearSpanInfo(AbstractTimeSpanInfo):
     _quarters: int = 4
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))
-    _dt_start: datetime = _dt
-    _dt_stop: datetime = _dt
     _qi_list: List[QuarterSpanInfo] = []
     _balance_sheets_df: DataFrame = DataFrame()
     _cashflows_df: DataFrame = DataFrame()
@@ -27,13 +25,13 @@ class YearSpanInfo(AbstractTimeInfo):
     def __init__(self, dt: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         self._dt = dt
         self.__set_qi_list()
-        self._dt_start = self._qi_list[self._quarters - 1].start_datetime
-        self._dt_stop = self._qi_list[0].stop_datetime
+        self._start_dt = self._qi_list[self._quarters - 1].start_datetime
+        self._stop_dt = self._qi_list[0].stop_datetime
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self._header
-        self._pretty_table.add_row(['DateTimeStop', self._dt_stop])
-        self._pretty_table.add_row(['DateTimeStart', self._dt_start])
+        self._pretty_table.add_row(['DateTimeStop', self._stop_dt])
+        self._pretty_table.add_row(['DateTimeStart', self._start_dt])
         self._pretty_table.add_row(['Length', len(self._qi_list)])
         return self._pretty_table.__str__()
 
@@ -43,15 +41,15 @@ class YearSpanInfo(AbstractTimeInfo):
     def __iter__(self):
         yield from {
             self._header[0]: self._header[1],
-            "dt_stop": str(self._dt_stop),
-            "dt_start": str(self._dt_start),
+            "dt_stop": str(self._stop_dt),
+            "dt_start": str(self._start_dt),
             "length": len(self._qi_list)
         }.items()
         
     def __set_qi_list(self) -> None:
         for i in range(1, self._quarters + 1):
             qi: QuarterSpanInfo = QuarterSpanInfo(self._dt - relativedelta(months=i * 3))
-            print("CACA", i * 3, qi.date_time_stop)
+            print("CACA", i * 3, qi.stop_datetime)
             self._qi_list.append(qi)
 
     def to_json(self):
@@ -68,14 +66,6 @@ class YearSpanInfo(AbstractTimeInfo):
 
     def set_financials_df(self, f_df: DataFrame):
         self._financials_df = f_df
-
-    @property
-    def date_time_stop(self) -> datetime:
-        return self._dt_stop
-
-    @property
-    def date_time_start(self) -> datetime:
-        return self._dt_start
 
     @property
     def quarters(self) -> int:
