@@ -6,6 +6,7 @@ from datetime import datetime
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
+from Common.InfoType.Times.Spans.YearSpanInfo import YearSpanInfo
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-s", "--symbol", required=True, help="symbol name case sensitive")
@@ -26,3 +27,8 @@ print(atsi)
 qsi: QuarterSpanInfo = QuarterSpanInfo(datetime.now())
 print(qsi.to_json())
 print(qsi)
+
+ysi: YearSpanInfo = YearSpanInfo(datetime.now())
+print(ysi.to_json())
+print(ysi)
+
