@@ -11,7 +11,7 @@ class AbstractTimeSpanInfo(AbstractTimeInfo):
     _start_dt: datetime = datetime.now()
 
     def __init__(self, date_time_start: datetime, date_time_stop: datetime = datetime.now()) -> None:
-        self._stop_dt = date_time_stop
+        super().__init__(date_time_stop)
         self._start_dt = date_time_start
 
     def __str__(self) -> str:
@@ -26,9 +26,6 @@ class AbstractTimeSpanInfo(AbstractTimeInfo):
             "date_time_start": str(self._start_dt),
             "date_time_stop": str(self._stop_dt)
         }.items()
-
-    def to_json(self):
-        return json.dumps(dict(self), ensure_ascii=False)
 
     @property
     def start_datetime(self) -> datetime:

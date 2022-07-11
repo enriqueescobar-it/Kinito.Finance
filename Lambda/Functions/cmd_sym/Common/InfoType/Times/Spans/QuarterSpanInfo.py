@@ -28,6 +28,7 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
     _quarter_string: str = '2001Q3'
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))):
+        super().__init__(date_time_start=d_t)
         self._dt = d_t
         self._dt_day = self._dt.day
         self._dt_f = self.__get_fiscal_date_time(self._dt)
@@ -58,18 +59,15 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
         self.__pretty_table.add_row(['DateQ', self._quarter_int])
         self.__pretty_table.add_row(['DateQNumber', self._quarter_str])
         self.__pretty_table.add_row(['DateQuarter', self._quarter_string])
-        self.__pretty_table.add_row(['DateQuarterStart', self._start_dt])
-        self.__pretty_table.add_row(['DateQuarterStop', self._stop_dt])
         self.__pretty_table.add_row(['FiscalDate', self._d_f])
         self.__pretty_table.add_row(['FiscalDateTime', self._dt_f])
         self.__pretty_table.add_row(['FiscalDay', str(self._dt_day_f)])
         self.__pretty_table.add_row(['FiscalMonth', str(self._dt_month_f)])
         self.__pretty_table.add_row(['FiscalQuarter', str(self._quarter_f)])
         self.__pretty_table.add_row(['FiscalYear', str(self._dt_year_f)])
+        self.__pretty_table.add_row(['DateTimeStart', self._start_dt])
+        self.__pretty_table.add_row(['DateTimeStop', self._stop_dt])
         return self.__pretty_table.__str__()
-
-    def __repr__(self):
-        return self.__str__()
 
     def __iter__(self):
         yield from {
@@ -83,14 +81,14 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
             "quarter_int": self._quarter_int,
             "quarter_str": self._quarter_str,
             "quarter_string": self._quarter_string,
-            "quarter_dt_start": str(self._start_dt),
-            "quarter_dt_stop": str(self._stop_dt),
             "f_d": str(self._d_f),
             "f_dt": str(self._dt_f),
             "f_day": str(self._dt_day_f),
             "f_month": str(self._dt_month_f),
             "f_quarter": str(self._quarter_f),
-            "f_year": str(self._dt_year_f)
+            "f_year": str(self._dt_year_f),
+            "date_time_start": str(self._start_dt),
+            "date_time_stop": str(self._stop_dt)
         }.items()
 
     def __get_fiscal_date(self, dt: datetime) -> FiscalDate:
@@ -128,9 +126,6 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
     def __get_quarter_fiscal_dt_stop(self, dt: datetime) -> datetime:
         fq: FiscalQuarter = self.__get_fiscal_quarter(dt)
         return datetime(fq.end.year, fq.end.month, fq.end.day)
-
-    def to_json(self):
-        return json.dumps(dict(self), ensure_ascii=False)
 
     @property
     def day(self) -> int:
