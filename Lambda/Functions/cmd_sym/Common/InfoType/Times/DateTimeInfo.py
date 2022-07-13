@@ -1,13 +1,14 @@
 import calendar
 import json
 import math
+from datetime import datetime, date, timedelta
 
 import holidays
 import pytz
-
-from datetime import datetime, date, timedelta
 from fiscalyear import FiscalDateTime, FiscalDate, FiscalQuarter, FiscalYear, FiscalMonth, FiscalDay
 from prettytable import PrettyTable
+from pytz import country_timezones
+from workalendar.usa import UnitedStates
 
 from Common.InfoType.AbstractInfo import AbstractInfo
 
@@ -18,6 +19,7 @@ class DateTimeInfo(AbstractInfo):
     _dt: datetime = datetime.now()
     _date: date = _dt.date()
     _tz: pytz.timezone = pytz.timezone("America/Toronto")
+    _country_iso: str = 'NA'
     _quarter_int: int = 3
     _quarter_str: str = 'Q3'
     _quarter_string: str = '2001Q3'
@@ -37,11 +39,11 @@ class DateTimeInfo(AbstractInfo):
 
     def __init__(self, dt: datetime = datetime.now()) -> None:
         dt = self._get_last_friday(dt) if self._is_weekend(dt) else dt
-        for holiday in holidays.UnitedStates(years=[2020, 2021]).items():
-            print(holiday)
+        dt = self._get_last_day(dt) if self._is_holiday(dt) else dt
         self._dt = dt
         self._date = dt.date()
         self._tz = self._set_timezone(dt)
+        self._country_iso = self._get_country_iso(self._tz)
         self._quarter_int = self._get_quarter_int(dt)
         self._quarter_str = self._get_quarter_str(dt)
         self._quarter_string = self._get_quarter_string(dt)
@@ -63,6 +65,7 @@ class DateTimeInfo(AbstractInfo):
         self.__pretty_table.field_names = self._header
         self.__pretty_table.add_row(['DateTime', self._dt])
         self.__pretty_table.add_row(['TimeZone', self._tz])
+        self.__pretty_table.add_row(['CountryISO', self._country_iso])
         self.__pretty_table.add_row(['Date', self._date])
         self.__pretty_table.add_row(['QuarterInt', self._quarter_int])
         self.__pretty_table.add_row(['QuarterStr', self._quarter_str])
@@ -87,6 +90,7 @@ class DateTimeInfo(AbstractInfo):
             self._header[0]: self._header[1],
             "date_time": str(self._dt),
             "time_zone": str(self._tz),
+            "country_iso": self._country_iso,
             "date": str(self._date),
             "quarter_int": str(self._quarter_int),
             "quarter_str": str(self._quarter_str),
@@ -138,16 +142,29 @@ class DateTimeInfo(AbstractInfo):
         closest_friday = dt + timedelta(days=(4 - dt.weekday()))
         return closest_friday if closest_friday < dt else closest_friday - timedelta(days=7)
 
+    def _get_last_day(self, dt) -> datetime:
+        us_calendar: UnitedStates = UnitedStates()
+        return dt if us_calendar.is_working_day(dt.date()) else us_calendar.add_working_days(dt.date(), -1)
+
     def _is_weekend(self, dt: datetime) -> bool:
         return dt.weekday() > 4
 
+    def _is_holiday(self, dt: datetime) -> bool:
+        return dt.date() in holidays.Canada(years=dt.year)
+
     def _set_timezone(self, dt: datetime) -> pytz.timezone:
         if dt.timetz() is None or dt.tzinfo is None:
-            timezone: pytz.timezone = pytz.timezone("America/Toronto")
-            self._dt = timezone.localize(dt)
-            return timezone
+            time_tz: pytz.timezone = pytz.timezone("America/Toronto")
+            self._dt = time_tz.localize(dt)
+            return time_tz
         else:
             return dt.tzinfo
+
+    def _get_country_iso(self, tz: pytz.timezone) -> str:
+        timezone_country_dict: dict = {a_timezone: country
+                              for country, timezones in country_timezones.items()
+                              for a_timezone in timezones}
+        return timezone_country_dict[tz.zone]
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
@@ -159,6 +176,10 @@ class DateTimeInfo(AbstractInfo):
     @property
     def timezone(self) -> pytz.timezone:
         return self._tz
+
+    @property
+    def country_iso(self) -> str:
+        return self._country_iso
 
     @property
     def date(self) -> date:
