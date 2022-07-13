@@ -2,9 +2,10 @@ import calendar
 import json
 import math
 
+import holidays
 import pytz
 
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from fiscalyear import FiscalDateTime, FiscalDate, FiscalQuarter, FiscalYear, FiscalMonth, FiscalDay
 from prettytable import PrettyTable
 
@@ -35,6 +36,9 @@ class DateTimeInfo(AbstractInfo):
     _fq: FiscalQuarter = FiscalQuarter(2001, 3)
 
     def __init__(self, dt: datetime = datetime.now()) -> None:
+        dt = self._get_last_friday(dt) if self._is_weekend(dt) else dt
+        for holiday in holidays.UnitedStates(years=[2020, 2021]).items():
+            print(holiday)
         self._dt = dt
         self._date = dt.date()
         self._tz = self._set_timezone(dt)
@@ -129,6 +133,13 @@ class DateTimeInfo(AbstractInfo):
 
     def _get_quarter_string(self, dt: datetime) -> str:
         return str(dt.year) + self._get_quarter_str(dt)
+
+    def _get_last_friday(self, dt: datetime) -> datetime:
+        closest_friday = dt + timedelta(days=(4 - dt.weekday()))
+        return closest_friday if closest_friday < dt else closest_friday - timedelta(days=7)
+
+    def _is_weekend(self, dt: datetime) -> bool:
+        return dt.weekday() > 4
 
     def _set_timezone(self, dt: datetime) -> pytz.timezone:
         if dt.timetz() is None or dt.tzinfo is None:
