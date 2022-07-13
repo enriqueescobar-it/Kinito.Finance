@@ -19,6 +19,7 @@ importlib-metadata==4.11.3
 joblib==1.1.0
 kiwisolver==1.4.1
 korean-lunar-calendar==0.2.1
+lunardate==0.2.0
 lxml==4.8.0
 matplotlib==3.5.1
 multidict==6.0.2
@@ -31,6 +32,7 @@ parse==1.19.0
 Pillow==9.0.1
 prettytable==3.2.0
 pyee==8.2.2
+pyluach==2.0.0
 PyMeeus==0.5.11
 pyparsing==3.0.7
 pyppeteer==1.0.2
@@ -53,6 +55,7 @@ urllib3==1.26.9
 w3lib==1.22.0
 wcwidth==0.2.5
 websockets==10.2
+workalendar==16.3.0
 yahoo-fin==0.8.9.1
 yahooquery==2.2.15
 yarl==1.7.2
