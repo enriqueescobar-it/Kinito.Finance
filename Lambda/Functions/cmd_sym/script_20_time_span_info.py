@@ -1,13 +1,14 @@
 import argparse
 
 from datetime import datetime
-# construct the argument parse and parse the arguments
 
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
+from Common.InfoType.Times.DateTimeInfo import DateTimeInfo
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
 from Common.InfoType.Times.Spans.YearSpanInfo import YearSpanInfo
 
+# construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-s", "--symbol", required=True, help="symbol name case sensitive")
 args = vars(ap.parse_args())
@@ -16,6 +17,10 @@ a_sym: str = args["symbol"]
 print("Hi there, you are looking for the <{}> symbol?".format(a_sym))
 a_ticker: str = args["symbol"]
 
+dti: DateTimeInfo = DateTimeInfo()
+print(dti.to_json())
+print(dti)
+exit(11)
 ati: AbstractTimeInfo = AbstractTimeInfo()
 print(ati.to_json())
 print(ati)
