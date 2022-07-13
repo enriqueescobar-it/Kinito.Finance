@@ -1,10 +1,9 @@
 import calendar
 import json
-from datetime import datetime
-
+import pytz
+from datetime import datetime, date
 from fiscalyear import FiscalDateTime
 from prettytable import PrettyTable
-
 from Common.InfoType.AbstractInfo import AbstractInfo
 
 
@@ -12,6 +11,8 @@ class DateTimeInfo(AbstractInfo):
     __pretty_table: PrettyTable = PrettyTable()
     _header: list = ['Field', 'FieldInfo']
     _dt: datetime = datetime.now()
+    _date: date = _dt.date()
+    _tz: pytz.timezone = pytz.timezone("America/Toronto")
     _fdt: FiscalDateTime = FiscalDateTime(2001, 9, 11)
     _year_week: int = 0
     _month_day: int = 0
@@ -22,6 +23,8 @@ class DateTimeInfo(AbstractInfo):
 
     def __init__(self, dt: datetime = datetime.now()) -> None:
         self._dt = dt
+        self._date = dt.date()
+        self._tz = self._set_timezone(dt)
         self._fdt = self._get_fiscal_date_time(dt)
         self._year_week = dt.isocalendar()[1]
         self._month_day = dt.day
@@ -33,6 +36,8 @@ class DateTimeInfo(AbstractInfo):
     def __str__(self) -> str:
         self.__pretty_table.field_names = self._header
         self.__pretty_table.add_row(['DateTime', self._dt])
+        self.__pretty_table.add_row(['TimeZone', self._tz])
+        self.__pretty_table.add_row(['Date', self._date])
         self.__pretty_table.add_row(['FiscalDateTime', self._fdt])
         self.__pretty_table.add_row(['YearWeek', self._year_week])
         self.__pretty_table.add_row(['MonthDay', self._month_day])
@@ -46,6 +51,8 @@ class DateTimeInfo(AbstractInfo):
         yield from {
             self._header[0]: self._header[1],
             "date_time": str(self._dt),
+            "time_zone": str(self._tz),
+            "date": str(self._date),
             "fiscal_date_time": str(self._fdt),
             "year_week": str(self._year_week),
             "month_day": str(self._month_day),
@@ -58,12 +65,28 @@ class DateTimeInfo(AbstractInfo):
     def _get_fiscal_date_time(self, dt: datetime) -> FiscalDateTime:
         return FiscalDateTime(dt.year, dt.month, dt.day)
 
+    def _set_timezone(self, dt: datetime) -> pytz.timezone:
+        if dt.timetz() is None or dt.tzinfo is None:
+            timezone: pytz.timezone = pytz.timezone("America/Toronto")
+            self._dt = timezone.localize(dt)
+            return timezone
+        else:
+            return dt.tzinfo
+
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
 
     @property
     def datetime(self) -> datetime:
         return self._dt
+
+    @property
+    def timezone(self) -> pytz.timezone:
+        return self._tz
+
+    @property
+    def date(self) -> date:
+        return self._date
 
     @property
     def fiscal_datetime(self) -> FiscalDateTime:
