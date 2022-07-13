@@ -5,7 +5,7 @@ import math
 import pytz
 
 from datetime import datetime, date
-from fiscalyear import FiscalDateTime
+from fiscalyear import FiscalDateTime, FiscalDate, FiscalQuarter
 from prettytable import PrettyTable
 
 from Common.InfoType.AbstractInfo import AbstractInfo
@@ -21,6 +21,8 @@ class DateTimeInfo(AbstractInfo):
     _quarter_str: str = 'Q3'
     _quarter_string: str = '2001Q3'
     _fdt: FiscalDateTime = FiscalDateTime(2001, 9, 11)
+    _fd: FiscalDate = FiscalDate(2001, 9, 11)
+    _fq: FiscalQuarter = FiscalQuarter(2001, 3)
     _year_week: int = 0
     _month_day: int = 0
     _week_day_int: int = 0
@@ -36,6 +38,8 @@ class DateTimeInfo(AbstractInfo):
         self._quarter_str = self._get_quarter_str(dt)
         self._quarter_string = self._get_quarter_string(dt)
         self._fdt = self._get_fiscal_date_time(dt)
+        self._fd = self._get_fiscal_date(dt)
+        self._fq = self._get_fiscal_quarter(dt)
         self._year_week = dt.isocalendar()[1]
         self._month_day = dt.day
         self._week_day_int = dt.weekday()
@@ -57,6 +61,8 @@ class DateTimeInfo(AbstractInfo):
         self.__pretty_table.add_row(['WeekDayISO', self._week_day_iso])
         self.__pretty_table.add_row(['WeekDayStr', self._week_day_str])
         self.__pretty_table.add_row(['FiscalDateTime', self._fdt])
+        self.__pretty_table.add_row(['FiscalDate', self._fd])
+        self.__pretty_table.add_row(['FiscalQuarter', str(self._fq)])
         self.__pretty_table.add_row(['FiscalYearDay', self._fiscal_year_day])
         return self.__pretty_table.__str__()
 
@@ -75,11 +81,20 @@ class DateTimeInfo(AbstractInfo):
             "week_day_iso": str(self._week_day_iso),
             "week_day_str": str(self._week_day_str),
             "fiscal_date_time": str(self._fdt),
+            "fiscal_date": str(self._fd),
+            "fiscal_quarter": str(self._fq),
             "fiscal_year_day": str(self._fiscal_year_day)
         }.items()
 
     def _get_fiscal_date_time(self, dt: datetime) -> FiscalDateTime:
         return FiscalDateTime(dt.year, dt.month, dt.day)
+
+    def _get_fiscal_date(self, dt: datetime) -> FiscalDate:
+        return FiscalDate(dt.year, dt.month, dt.day)
+
+    def _get_fiscal_quarter(self, dt: datetime) -> FiscalQuarter:
+        fdt: FiscalDateTime = FiscalDateTime(dt.year, dt.month, dt.day)
+        return FiscalQuarter(fdt.year, fdt.fiscal_quarter)
 
     def _get_quarter_int(self, dt: datetime) -> int:
         return math.ceil(dt.month/3)
@@ -128,6 +143,14 @@ class DateTimeInfo(AbstractInfo):
     @property
     def fiscal_datetime(self) -> FiscalDateTime:
         return self._fdt
+
+    @property
+    def fiscal_date(self) -> FiscalDate:
+        return self._fd
+
+    @property
+    def fiscal_quarter(self) -> FiscalQuarter:
+        return self._fq
 
     @property
     def year_week(self) -> int:
