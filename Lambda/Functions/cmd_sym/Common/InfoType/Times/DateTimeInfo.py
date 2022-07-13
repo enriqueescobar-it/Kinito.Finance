@@ -20,18 +20,19 @@ class DateTimeInfo(AbstractInfo):
     _quarter_int: int = 3
     _quarter_str: str = 'Q3'
     _quarter_string: str = '2001Q3'
+    _year_week: int = 0
+    _year_day: int = 0
+    _month_day: int = 0
+    _week_day_int: int = 0
+    _week_day_iso: int = 0
+    _week_day_str: str = 'Sunday'
+    _fiscal_year_day: int = 0
     _fdt: FiscalDateTime = FiscalDateTime(2001, 9, 11)
     _fd: FiscalDate = FiscalDate(2001, 9, 11)
     _fy: FiscalYear = FiscalYear(2001)
     _fm: FiscalMonth = FiscalMonth(2001, 9)
     _fday: FiscalDay = FiscalDay(_fdt.year, _fdt.fiscal_day)
     _fq: FiscalQuarter = FiscalQuarter(2001, 3)
-    _year_week: int = 0
-    _month_day: int = 0
-    _week_day_int: int = 0
-    _week_day_iso: int = 0
-    _week_day_str: str = 'Sunday'
-    _fiscal_year_day: int = 0
 
     def __init__(self, dt: datetime = datetime.now()) -> None:
         self._dt = dt
@@ -47,6 +48,7 @@ class DateTimeInfo(AbstractInfo):
         self._fday = self._get_fiscal_day(dt, self._fdt)
         self._fq = self._get_fiscal_quarter(dt)
         self._year_week = dt.isocalendar()[1]
+        self._year_day = self._dt.timetuple().tm_yday
         self._month_day = dt.day
         self._week_day_int = dt.weekday()
         self._week_day_iso = dt.isocalendar()[2]
@@ -62,6 +64,7 @@ class DateTimeInfo(AbstractInfo):
         self.__pretty_table.add_row(['QuarterStr', self._quarter_str])
         self.__pretty_table.add_row(['QuarterString', self._quarter_string])
         self.__pretty_table.add_row(['YearWeek', self._year_week])
+        self.__pretty_table.add_row(['YearDay', self._year_day])
         self.__pretty_table.add_row(['MonthDay', self._month_day])
         self.__pretty_table.add_row(['WeekDayInt', self._week_day_int])
         self.__pretty_table.add_row(['WeekDayISO', self._week_day_iso])
@@ -85,6 +88,7 @@ class DateTimeInfo(AbstractInfo):
             "quarter_str": str(self._quarter_str),
             "quarter_string": str(self._quarter_string),
             "year_week": str(self._year_week),
+            "year_day": self._year_day,
             "month_day": str(self._month_day),
             "week_day_int": str(self._week_day_int),
             "week_day_iso": str(self._week_day_iso),
@@ -162,6 +166,34 @@ class DateTimeInfo(AbstractInfo):
         return self._quarter_string
 
     @property
+    def year_week(self) -> int:
+        return self._year_week
+
+    @property
+    def year_day(self) -> int:
+        return self._year_day
+
+    @property
+    def month_day(self) -> int:
+        return self._month_day
+
+    @property
+    def week_day_int(self) -> int:
+        return self._week_day_int
+
+    @property
+    def week_day_iso(self) -> int:
+        return self._week_day_iso
+
+    @property
+    def week_day_str(self) -> str:
+        return self._week_day_str
+
+    @property
+    def fiscal_year_day(self) -> int:
+        return self._fiscal_year_day
+
+    @property
     def fiscal_datetime(self) -> FiscalDateTime:
         return self._fdt
 
@@ -184,27 +216,3 @@ class DateTimeInfo(AbstractInfo):
     @property
     def fiscal_quarter(self) -> FiscalQuarter:
         return self._fq
-
-    @property
-    def year_week(self) -> int:
-        return self._year_week
-
-    @property
-    def month_day(self) -> int:
-        return self._month_day
-
-    @property
-    def week_day_int(self) -> int:
-        return self._week_day_int
-
-    @property
-    def week_day_iso(self) -> int:
-        return self._week_day_iso
-
-    @property
-    def week_day_str(self) -> str:
-        return self._week_day_str
-
-    @property
-    def fiscal_year_day(self) -> int:
-        return self._fiscal_year_day
