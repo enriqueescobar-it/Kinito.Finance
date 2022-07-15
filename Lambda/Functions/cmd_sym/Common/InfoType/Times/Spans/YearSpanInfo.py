@@ -22,22 +22,22 @@ class YearSpanInfo(AbstractTimeSpanInfo):
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         super().__init__(date_time_start=d_t)
         self.__set_qsi_list(d_t)
-        self._start_dt = self._qsi_list[self._quarters - 1].start_datetime_info.datetime
-        self._stop_dt = self._qsi_list[0].stop_datetime_info.datetime
+        self._start_dti = self._qsi_list[self._quarters - 1].start_datetime_info
+        self._stop_dti = self._qsi_list[0].stop_datetime_info
 
     def __str__(self) -> str:
         self.__pretty_table.field_names = self._header
         self.__pretty_table.add_row(['Length', len(self._qsi_list)])
-        self.__pretty_table.add_row(['DateTimeStart', self._start_dt])
-        self.__pretty_table.add_row(['DateTimeStop', self._stop_dt])
+        self.__pretty_table.add_row(['DateTimeStart', self._start_dti.datetime])
+        self.__pretty_table.add_row(['DateTimeStop', self._stop_dti.datetime])
         return self.__pretty_table.__str__()
 
     def __iter__(self):
         yield from {
             self._header[0]: self._header[1],
             "length": len(self._qsi_list),
-            "date_time_start": str(self._start_dt),
-            "date_time_stop": str(self._stop_dt)
+            "date_time_start": str(self._start_dti.datetime),
+            "date_time_stop": str(self._stop_dti.datetime)
         }.items()
         
     def __set_qsi_list(self, dt: datetime) -> None:
