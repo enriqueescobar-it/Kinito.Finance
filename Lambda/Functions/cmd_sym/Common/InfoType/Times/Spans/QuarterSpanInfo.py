@@ -45,8 +45,8 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
         self._quarter_int = dti.quarter_int
         self._quarter_str = dti.quarter_str
         self._quarter_string = dti.quarter_string
-        self._start_dt = self.__get_quarter_fiscal_dt_start(dti)
-        self._stop_dt = self.__get_quarter_fiscal_dt_stop(dti)
+        self._start_dti = self._get_quarter_fiscal_dti_start(dti)
+        self._stop_dti = self._get_quarter_fiscal_dti_stop(dti)
 
     def __str__(self) -> str:
         self.__pretty_table.field_names = self._header
@@ -65,8 +65,8 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
         self.__pretty_table.add_row(['FiscalMonth', str(self._dt_month_f)])
         self.__pretty_table.add_row(['FiscalQuarter', str(self._quarter_f)])
         self.__pretty_table.add_row(['FiscalYear', str(self._dt_year_f)])
-        self.__pretty_table.add_row(['DateTimeStart', self._start_dt])
-        self.__pretty_table.add_row(['DateTimeStop', self._stop_dt])
+        self.__pretty_table.add_row(['DateTimeStart', self._start_dti.datetime])
+        self.__pretty_table.add_row(['DateTimeStop', self._stop_dti.datetime])
         return self.__pretty_table.__str__()
 
     def __iter__(self):
@@ -87,15 +87,19 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
             "f_month": str(self._dt_month_f),
             "f_quarter": str(self._quarter_f),
             "f_year": str(self._dt_year_f),
-            "date_time_start": str(self._start_dt),
-            "date_time_stop": str(self._stop_dt)
+            "date_time_start": str(self._start_dti.datetime),
+            "date_time_stop": str(self._stop_dti.datetime)
         }.items()
 
-    def __get_quarter_fiscal_dt_start(self, dti: DateTimeInfo) -> datetime:
-        return datetime(dti.fiscal_quarter.start.year, dti.fiscal_quarter.start.month, dti.fiscal_quarter.start.day)
+    def _get_quarter_fiscal_dti_start(self, dti: DateTimeInfo) -> DateTimeInfo:
+        return DateTimeInfo(datetime(dti.fiscal_quarter.start.year, dti.fiscal_quarter.start.month,
+                                     dti.fiscal_quarter.start.day, dti.datetime.hour, dti.datetime.minute,
+                                     dti.datetime.second, dti.datetime.microsecond, dti.timezone))
 
-    def __get_quarter_fiscal_dt_stop(self, dti: DateTimeInfo) -> datetime:
-        return datetime(dti.fiscal_quarter.end.year, dti.fiscal_quarter.end.month, dti.fiscal_quarter.end.day)
+    def _get_quarter_fiscal_dti_stop(self, dti: DateTimeInfo) -> DateTimeInfo:
+        return DateTimeInfo(datetime(dti.fiscal_quarter.end.year, dti.fiscal_quarter.end.month,
+                                     dti.fiscal_quarter.end.day, dti.datetime.hour, dti.datetime.minute,
+                                     dti.datetime.second, dti.datetime.microsecond, dti.timezone))
 
     @property
     def day(self) -> int:
