@@ -1,10 +1,10 @@
-import math
 from datetime import datetime
 
 from backports.zoneinfo import ZoneInfo
 from fiscalyear import FiscalDateTime, FiscalQuarter, FiscalYear, FiscalMonth, FiscalDay, FiscalDate
 from prettytable import PrettyTable
 
+from Common.InfoType.Times.DateTimeInfo import DateTimeInfo
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 
 
@@ -28,24 +28,25 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))):
         super().__init__(date_time_start=d_t)
-        self._dt = d_t
-        self._dt_day = self._dt.day
-        self._dt_f = self.__get_fiscal_date_time(self._dt)
-        self._dt_day_th = self._dt_f.fiscal_day
-        self._dt_week_th = self._dt.isocalendar()[1]
-        self._dt_month = self._dt.month
-        self._dt_year = self._dt.year
-        self._d_f = self.__get_fiscal_date(self._dt)
+        dti: DateTimeInfo = DateTimeInfo(d_t)
+        self._dt = dti.datetime
+        self._dt_day = dti.datetime.day
+        self._dt_f = dti.fiscal_datetime
+        self._dt_day_th = dti.year_day
+        self._dt_week_th = dti.year_week
+        self._dt_month = dti.datetime.month
+        self._dt_year = dti.datetime.year
+        self._d_f = dti.fiscal_date
         #
-        self._dt_day_f = self.__get_fiscal_day(self._dt, self._dt_f)
-        self._dt_month_f = self.__get_fiscal_month(self._dt)
-        self._quarter_f = self.__get_fiscal_quarter(self._dt)
-        self._dt_year_f = self.__get_fiscal_year(self._dt)
-        self._quarter_int = self.__get_quarter_int(self._dt)
-        self._quarter_str = self.__get_quarter_str(self._dt)
-        self._quarter_string = self.__get_quarter_string(self._dt)
-        self._start_dt = self.__get_quarter_fiscal_dt_start(self._dt)
-        self._stop_dt = self.__get_quarter_fiscal_dt_stop(self._dt)
+        self._dt_day_f = dti.fiscal_day
+        self._dt_month_f = dti.fiscal_month
+        self._quarter_f = dti.fiscal_quarter
+        self._dt_year_f = dti.fiscal_year
+        self._quarter_int = dti.quarter_int
+        self._quarter_str = dti.quarter_str
+        self._quarter_string = dti.quarter_string
+        self._start_dt = self.__get_quarter_fiscal_dt_start(dti)
+        self._stop_dt = self.__get_quarter_fiscal_dt_stop(dti)
 
     def __str__(self) -> str:
         self.__pretty_table.field_names = self._header
@@ -90,41 +91,11 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
             "date_time_stop": str(self._stop_dt)
         }.items()
 
-    def __get_fiscal_date(self, dt: datetime) -> FiscalDate:
-        return FiscalDate(dt.year, dt.month, dt.day)
+    def __get_quarter_fiscal_dt_start(self, dti: DateTimeInfo) -> datetime:
+        return datetime(dti.fiscal_quarter.start.year, dti.fiscal_quarter.start.month, dti.fiscal_quarter.start.day)
 
-    def __get_fiscal_date_time(self, dt: datetime) -> FiscalDateTime:
-        return FiscalDateTime(dt.year, dt.month, dt.day)
-
-    def __get_fiscal_day(self, dt: datetime, fdt: FiscalDateTime) -> FiscalDay:
-        return FiscalDay(dt.year, fdt.fiscal_day)
-
-    def __get_fiscal_month(self, dt: datetime) -> FiscalMonth:
-        return FiscalMonth(dt.year, dt.month)
-
-    def __get_fiscal_quarter(self, dt: datetime) -> FiscalQuarter:
-        fdt: FiscalDateTime = FiscalDateTime(dt.year, dt.month, dt.day)
-        return FiscalQuarter(fdt.year, fdt.fiscal_quarter)
-
-    def __get_fiscal_year(self, dt: datetime) -> FiscalYear:
-        return FiscalYear(dt.year)
-
-    def __get_quarter_int(self, dt: datetime) -> int:
-        return math.ceil(dt.month/3)
-
-    def __get_quarter_str(self, dt: datetime) -> str:
-        return "Q" + str(self.__get_quarter_int(dt))
-
-    def __get_quarter_string(self, dt: datetime) -> str:
-        return str(dt.year) + self.__get_quarter_str(dt)
-
-    def __get_quarter_fiscal_dt_start(self, dt: datetime) -> datetime:
-        fq: FiscalQuarter = self.__get_fiscal_quarter(dt)
-        return datetime(fq.start.year, fq.start.month, fq.start.day)
-
-    def __get_quarter_fiscal_dt_stop(self, dt: datetime) -> datetime:
-        fq: FiscalQuarter = self.__get_fiscal_quarter(dt)
-        return datetime(fq.end.year, fq.end.month, fq.end.day)
+    def __get_quarter_fiscal_dt_stop(self, dti: DateTimeInfo) -> datetime:
+        return datetime(dti.fiscal_quarter.end.year, dti.fiscal_quarter.end.month, dti.fiscal_quarter.end.day)
 
     @property
     def day(self) -> int:
