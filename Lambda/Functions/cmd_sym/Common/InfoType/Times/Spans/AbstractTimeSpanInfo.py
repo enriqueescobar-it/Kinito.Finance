@@ -16,7 +16,7 @@ class AbstractTimeSpanInfo(AbstractTimeInfo):
     def __init__(self, date_time_start: datetime, date_time_stop: datetime = datetime.now()) -> None:
         super().__init__(date_time_stop)
         self._start_dt = date_time_start
-        delta_datetime: timedelta = self.start_datetime - self.stop_datetime
+        delta_datetime: timedelta = self.start_datetime - self.stop_datetime_info.datetime
         self._delta_days = delta_datetime.days
         self._delta_hours = round(delta_datetime.seconds/60/60, 4)
         self._delta_minutes = round(delta_datetime.seconds/60, 4)
