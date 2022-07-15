@@ -22,7 +22,7 @@ class YearSpanInfo(AbstractTimeSpanInfo):
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         super().__init__(date_time_start=d_t)
         self.__set_qsi_list(d_t)
-        self._start_dt = self._qsi_list[self._quarters - 1].start_datetime
+        self._start_dt = self._qsi_list[self._quarters - 1].start_datetime_info.datetime
         self._stop_dt = self._qsi_list[0].stop_datetime_info.datetime
 
     def __str__(self) -> str:
