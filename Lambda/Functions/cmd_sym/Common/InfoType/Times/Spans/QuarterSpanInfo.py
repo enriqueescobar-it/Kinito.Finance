@@ -49,7 +49,7 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
         self._stop_dti = self._get_quarter_fiscal_dti_stop(dti)
 
     def __str__(self) -> str:
-        self.__pretty_table.field_names = self._header
+        self.__pretty_table.field_names = [self._header[0] + 'QuarterSpan', self._header[1] + 'QuarterSpan']
         self.__pretty_table.add_row(['DateTime', self._dt])
         self.__pretty_table.add_row(['DateDay', self._dt_day])
         self.__pretty_table.add_row(['DateDayTh', self._dt_day_th])
@@ -71,7 +71,7 @@ class QuarterSpanInfo(AbstractTimeSpanInfo):
 
     def __iter__(self):
         yield from {
-            self._header[0]: self._header[1],
+            self._header[0] + 'QuarterSpan': self._header[1] + 'QuarterSpan',
             "dt": str(self._dt),
             "dt_day": self._dt_day,
             "dt_day_th": self._dt_day_th,

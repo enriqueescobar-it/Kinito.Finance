@@ -24,7 +24,7 @@ class AbstractTimeSpanInfo(AbstractTimeInfo):
         self._delta_seconds = delta_datetime.seconds
 
     def __str__(self) -> str:
-        self.__pretty_table.field_names = self._header
+        self.__pretty_table.field_names = [self._header[0] + 'Span', self._header[1] + 'Span']
         self.__pretty_table.add_row(['DateTimeStart', self._start_dti.datetime])
         self.__pretty_table.add_row(['DateTimeStop', self.stop_datetime_info.datetime])
         self.__pretty_table.add_row(['DayCount', self._delta_days])
@@ -35,7 +35,7 @@ class AbstractTimeSpanInfo(AbstractTimeInfo):
 
     def __iter__(self):
         yield from {
-            self._header[0]: self._header[1],
+            self._header[0] + 'Span': self._header[1] + 'Span',
             "date_time_start": str(self._start_dti.datetime),
             "date_time_stop": str(self.stop_datetime_info.datetime),
             "delta_days": self._delta_days,

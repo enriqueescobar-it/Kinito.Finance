@@ -9,7 +9,7 @@ from Common.InfoType.Times.DateTimeInfo import DateTimeInfo
 
 class AbstractTimeInfo(AbstractInfo):
     __pretty_table: PrettyTable = PrettyTable()
-    _header: list = ['Field', 'FieldInfo']
+    _header: list = ['FieldTime', 'FieldInfoTime']
     _stop_dti: DateTimeInfo = DateTimeInfo(datetime.now())
 
     def __init__(self, date_time: datetime = datetime.now()) -> None:

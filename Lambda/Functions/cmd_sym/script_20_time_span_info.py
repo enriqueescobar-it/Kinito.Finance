@@ -20,6 +20,7 @@ a_ticker: str = args["symbol"]
 dti: DateTimeInfo = DateTimeInfo()
 print(dti.to_json())
 print(dti)
+
 ati: AbstractTimeInfo = AbstractTimeInfo()
 print(ati.to_json())
 print(ati)
@@ -31,7 +32,6 @@ print(atsi)
 qsi: QuarterSpanInfo = QuarterSpanInfo(datetime.now())
 print(qsi.to_json())
 print(qsi)
-exit(11)
 
 ysi: YearSpanInfo = YearSpanInfo(datetime.now())
 print(ysi.to_json())

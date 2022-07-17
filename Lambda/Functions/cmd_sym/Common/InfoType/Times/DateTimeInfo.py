@@ -15,7 +15,7 @@ from Common.InfoType.AbstractInfo import AbstractInfo
 
 class DateTimeInfo(AbstractInfo):
     __pretty_table: PrettyTable = PrettyTable()
-    _header: list = ['Field', 'FieldInfo']
+    _header: list = ['FieldDateTime', 'FieldInfoDateTime']
     _dt: datetime = datetime.now()
     _date: date = _dt.date()
     _tz: pytz.timezone = pytz.timezone("America/Toronto")
