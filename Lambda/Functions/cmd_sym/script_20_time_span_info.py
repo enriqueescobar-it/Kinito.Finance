@@ -1,11 +1,14 @@
 import argparse
-
 from datetime import datetime
+
+import pandas_market_calendars as mcal
+from pandas_market_calendars import exchange_calendar_nyse
 
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 from Common.InfoType.Times.DateTimeInfo import DateTimeInfo
 from Common.InfoType.Times.Spans.AbstractTimeSpanInfo import AbstractTimeSpanInfo
 from Common.InfoType.Times.Spans.QuarterSpanInfo import QuarterSpanInfo
+from Common.InfoType.Times.Spans.TimeSpanInfo import TimeSpanInfo
 from Common.InfoType.Times.Spans.YearSpanInfo import YearSpanInfo
 
 # construct the argument parse and parse the arguments
@@ -37,3 +40,9 @@ ysi: YearSpanInfo = YearSpanInfo(datetime.now())
 print(ysi.to_json())
 print(ysi)
 
+tsi: TimeSpanInfo = TimeSpanInfo(datetime.now())
+print(tsi.to_json())
+print(tsi)
+print(mcal.get_calendar_names())
+nyse: exchange_calendar_nyse.NYSEExchangeCalendar = mcal.get_calendar('NYSE')
+print(type(nyse), type(nyse.tz), nyse.tz.zone)
