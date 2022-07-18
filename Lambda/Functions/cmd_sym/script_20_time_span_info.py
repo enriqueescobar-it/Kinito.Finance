@@ -3,6 +3,7 @@ from datetime import datetime
 
 import pandas_market_calendars as mcal
 from pandas_market_calendars import exchange_calendar_nyse
+import exchange_calendars as xcals
 
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 from Common.InfoType.Times.DateTimeInfo import DateTimeInfo
@@ -46,3 +47,6 @@ print(tsi)
 print(mcal.get_calendar_names())
 nyse: exchange_calendar_nyse.NYSEExchangeCalendar = mcal.get_calendar('NYSE')
 print(type(nyse), type(nyse.tz), nyse.tz.zone)
+x = xcals.get_calendar_names(include_aliases=False)#[5:10]
+print(x)
+#c = xcals.get_calendar("XLIS")
