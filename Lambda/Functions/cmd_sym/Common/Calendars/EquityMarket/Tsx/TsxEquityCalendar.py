@@ -1,5 +1,5 @@
 import pandas_market_calendars as mcal
-from pandas_market_calendars import exchange_calendar_tsx, exchange_calendar_sifma
+from pandas_market_calendars import exchange_calendar_tsx
 
 from Common.Calendars.EquityMarket.AbstractEquityCalendar import AbstractEquityCalendar
 
