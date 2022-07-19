@@ -34,5 +34,17 @@ class YearSpanInfo(AbstractTimeSpanInfo):
             "date_time_stop": str(self._stop_dti.datetime)
         }.items()
 
-    def _get_current_quarter_start(self, d_t) -> datetime:
+    def _get_current_quarter_start(self, d_t: datetime) -> datetime:
         return QuarterSpanInfo(d_t).start_datetime_info.datetime - dateutil.relativedelta.relativedelta(months=12)
+
+    def set_balance_sheets_df(self, b_df: DataFrame):
+        self._balance_sheets_df = b_df
+
+    def set_cashflows_df(self, c_df: DataFrame):
+        self._cashflows_df = c_df
+
+    def set_earnings_df(self, e_df: DataFrame):
+        self._earnings_df = e_df
+
+    def set_financials_df(self, f_df: DataFrame):
+        self._financials_df = f_df

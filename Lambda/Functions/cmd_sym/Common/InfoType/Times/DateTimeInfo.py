@@ -153,12 +153,12 @@ class DateTimeInfo(AbstractInfo):
         return dt.date() in holidays.Canada(years=dt.year)
 
     def _set_timezone(self, dt: datetime) -> pytz.timezone:
+        time_tz: pytz.timezone = pytz.timezone("America/Toronto")
         if dt.timetz() is None or dt.tzinfo is None:
-            time_tz: pytz.timezone = pytz.timezone("America/Toronto")
             self._dt = time_tz.localize(dt)
-            return time_tz
         else:
-            return dt.tzinfo
+            time_tz = pytz.timezone(str(dt.tzinfo))
+        return time_tz
 
     def _get_country_iso(self, tz: pytz.timezone) -> str:
         timezone_country_dict: dict = {a_timezone: country
