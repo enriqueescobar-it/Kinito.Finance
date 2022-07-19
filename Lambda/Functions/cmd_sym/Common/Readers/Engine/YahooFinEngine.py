@@ -8,7 +8,7 @@ from prettytable import PrettyTable
 from Common.Readers.Engine.AbstractEngine import AbstractEngine
 
 
-class YahooFinStockInfo(AbstractEngine):
+class YahooFinEngine(AbstractEngine):
     _header: list = ['Field', 'FieldInfo']
     _pretty_table: PrettyTable = PrettyTable()
     _df: DataFrame = DataFrame()
@@ -24,6 +24,7 @@ class YahooFinStockInfo(AbstractEngine):
     def __init__(self, a_ticker: str = 'CNI'):
         self._ticker = a_ticker
         self._quote_dict = si.get_quote_table(a_ticker)
+        print(self._quote_dict)
         self._df = si.get_stats_valuation(a_ticker)
         self._df = self._df.iloc[:, :2]
         self._df.columns = ['Attribute', 'Recent']
