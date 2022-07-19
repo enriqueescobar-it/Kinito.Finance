@@ -20,6 +20,10 @@ class YearSpanInfo(AbstractTimeSpanInfo):
 
     def __init__(self, d_t: datetime = datetime.now().replace(tzinfo=ZoneInfo("America/Toronto"))) -> None:
         super().__init__(date_time_start=self._get_current_quarter_start(d_t))
+        self._set_balance_sheets_df()
+        self._set_cashflows_df()
+        self._set_earnings_df()
+        self._set_financials_df()
 
     def __str__(self) -> str:
         self.__pretty_table.field_names = [self._header[0] + 'YearSpan', self._header[1] + 'YearSpan']
@@ -36,6 +40,18 @@ class YearSpanInfo(AbstractTimeSpanInfo):
 
     def _get_current_quarter_start(self, d_t: datetime) -> datetime:
         return QuarterSpanInfo(d_t).start_datetime_info.datetime - dateutil.relativedelta.relativedelta(months=12)
+
+    def _set_balance_sheets_df(self):
+        self.set_balance_sheets_df(DataFrame())
+
+    def _set_cashflows_df(self):
+        self.set_cashflows_df(DataFrame())
+
+    def _set_earnings_df(self):
+        self.set_earnings_df(DataFrame())
+
+    def _set_financials_df(self):
+        self.set_financials_df(DataFrame())
 
     def set_balance_sheets_df(self, b_df: DataFrame):
         self._balance_sheets_df = b_df
