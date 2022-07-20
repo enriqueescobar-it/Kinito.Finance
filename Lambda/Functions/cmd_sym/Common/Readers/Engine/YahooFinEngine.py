@@ -111,25 +111,25 @@ class YahooFinEngine(AbstractEngine):
         return str_tuple
 
     def _set_quote_dict(self, quote_dict: dict) -> None:
-        self._set_days_in_range(quote_dict)
-        self._set_years_in_range(quote_dict)
-        self._set_settlement_pre(quote_dict)
-        self._set_settlement_date(quote_dict)
-        self._set_market_cap(quote_dict)
-        self._set_start_date(quote_dict)
-        self._set_algorithm(quote_dict)
-        self._set_supply_circulating(quote_dict)
-        self._set_supply_max(quote_dict)
-        self._set_inception_date(quote_dict)
-        self._set_beta_5y_monthly(quote_dict)
+        self.__set_days_in_range(quote_dict)
+        self.__set_years_in_range(quote_dict)
+        self.__set_settlement_pre(quote_dict)
+        self.__set_settlement_date(quote_dict)
+        self.__set_market_cap(quote_dict)
+        self.__set_start_date(quote_dict)
+        self.__set_algorithm(quote_dict)
+        self.__set_supply_circulating(quote_dict)
+        self.__set_supply_max(quote_dict)
+        self.__set_inception_date(quote_dict)
+        self.__set_beta_5y_monthly(quote_dict)
         print(quote_dict)
 
-    def _set_days_in_range(self, quote_dict: dict) -> None:
+    def __set_days_in_range(self, quote_dict: dict) -> None:
         str_tuple: tuple = self._set_key_in_range("Day's Range", quote_dict)
         self._days_range_low = float("{:.3f}".format(float(str_tuple[0])))
         self._days_range_high = float("{:.3f}".format(float(str_tuple[1])))
 
-    def _set_years_in_range(self, quote_dict: dict) -> None:
+    def __set_years_in_range(self, quote_dict: dict) -> None:
         str_tuple: tuple = self._set_key_in_range('52 Week Range', quote_dict)
         self._year_range_low = float("{:.3f}".format(float(str_tuple[0])))
         self._year_range_high = float("{:.3f}".format(float(str_tuple[1])))
@@ -137,43 +137,43 @@ class YahooFinEngine(AbstractEngine):
     def __get_str_from_dict(self, str_key: str, quote_dict: dict) -> str:
         a_str: str = 'NA'
         if isinstance(quote_dict, dict) and any(quote_dict) and str_key in quote_dict.keys():
-            #print(type(quote_dict[str_key]), quote_dict[str_key])
+            print(type(quote_dict[str_key]), quote_dict[str_key])
             a_str = quote_dict[str_key]
         return a_str
 
-    def _set_settlement_pre(self, quote_dict: dict) -> None:
+    def __set_settlement_pre(self, quote_dict: dict) -> None:
         str_key: str = 'Pre. Settlement'
         self._settlement_pre = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_settlement_date(self, quote_dict: dict) -> None:
+    def __set_settlement_date(self, quote_dict: dict) -> None:
         str_key: str = 'Settlement Date'
         self._settlement_date = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_start_date(self, quote_dict: dict) -> None:
+    def __set_start_date(self, quote_dict: dict) -> None:
         str_key: str = 'Start Date'
         self._start_date = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_market_cap(self, quote_dict: dict) -> None:
+    def __set_market_cap(self, quote_dict: dict) -> None:
         str_key: str = 'Market Cap'
         self._market_cap = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_algorithm(self, quote_dict: dict) -> None:
+    def __set_algorithm(self, quote_dict: dict) -> None:
         str_key: str = 'Algorithm'
         self._algorithm = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_supply_circulating(self, quote_dict: dict) -> None:
+    def __set_supply_circulating(self, quote_dict: dict) -> None:
         str_key: str = 'Circulating Supply'
         self._supply_circulating = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_supply_max(self, quote_dict: dict) -> None:
+    def __set_supply_max(self, quote_dict: dict) -> None:
         str_key: str = 'Max Supply'
         self._supply_max = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_inception_date(self, quote_dict):
+    def __set_inception_date(self, quote_dict):
         str_key: str = 'Inception Date'
         self._inception_date = self.__get_str_from_dict(str_key, quote_dict)
 
-    def _set_beta_5y_monthly(self, quote_dict):
+    def __set_beta_5y_monthly(self, quote_dict):
         str_key: str = 'Beta (5Y Monthly)'
         self._beta_5y_monthly = self.__get_str_from_dict(str_key, quote_dict)
 
