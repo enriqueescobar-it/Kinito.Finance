@@ -25,6 +25,7 @@ class YahooFinEngine(AbstractEngine):
     _supply_circulating: str = 'NA'
     _supply_max: str = 'NA'
     _inception_date: str = 'NA'
+    _beta_5y_monthly: str = 'NA'
     _ratio_pe: float = np.nan
     _ratio_fpe: float = np.nan
     _ratio_peg: float = np.nan
@@ -62,6 +63,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['CirculatingSupply', self._supply_circulating])
         self._pretty_table.add_row(['MaxSupply', self._supply_max])
         self._pretty_table.add_row(['InceptionDate', self._inception_date])
+        self._pretty_table.add_row(['Beta5yMonthly', self._beta_5y_monthly])
         self._pretty_table.add_row(['RatioPE', self._ratio_pe])
         self._pretty_table.add_row(['RatioFPE', self._ratio_fpe])
         self._pretty_table.add_row(['RatioPEG', self._ratio_peg])
@@ -89,6 +91,7 @@ class YahooFinEngine(AbstractEngine):
             "supply_circulating": self._supply_circulating,
             "supply_max": self._supply_max,
             "inception_date": self._inception_date,
+            "beta_5y_monthly": self._beta_5y_monthly,
             "ratio_pe": self._ratio_pe,
             "ratio_fpe": self._ratio_fpe,
             "ratio_peg": self._ratio_peg,
@@ -118,6 +121,7 @@ class YahooFinEngine(AbstractEngine):
         self._set_supply_circulating(quote_dict)
         self._set_supply_max(quote_dict)
         self._set_inception_date(quote_dict)
+        self._set_beta_5y_monthly(quote_dict)
         print(quote_dict)
 
     def _set_days_in_range(self, quote_dict: dict) -> None:
@@ -130,43 +134,48 @@ class YahooFinEngine(AbstractEngine):
         self._year_range_low = float("{:.3f}".format(float(str_tuple[0])))
         self._year_range_high = float("{:.3f}".format(float(str_tuple[1])))
 
-    def _get_str_from_dict(self, str_key: str, quote_dict: dict) -> str:
+    def __get_str_from_dict(self, str_key: str, quote_dict: dict) -> str:
         a_str: str = 'NA'
         if isinstance(quote_dict, dict) and any(quote_dict) and str_key in quote_dict.keys():
+            #print(type(quote_dict[str_key]), quote_dict[str_key])
             a_str = quote_dict[str_key]
         return a_str
 
     def _set_settlement_pre(self, quote_dict: dict) -> None:
         str_key: str = 'Pre. Settlement'
-        self._settlement_pre = self._get_str_from_dict(str_key, quote_dict)
+        self._settlement_pre = self.__get_str_from_dict(str_key, quote_dict)
 
     def _set_settlement_date(self, quote_dict: dict) -> None:
         str_key: str = 'Settlement Date'
-        self._settlement_date = self._get_str_from_dict(str_key, quote_dict)
+        self._settlement_date = self.__get_str_from_dict(str_key, quote_dict)
 
     def _set_start_date(self, quote_dict: dict) -> None:
         str_key: str = 'Start Date'
-        self._start_date = self._get_str_from_dict(str_key, quote_dict)
+        self._start_date = self.__get_str_from_dict(str_key, quote_dict)
 
     def _set_market_cap(self, quote_dict: dict) -> None:
         str_key: str = 'Market Cap'
-        self._market_cap = self._get_str_from_dict(str_key, quote_dict)
+        self._market_cap = self.__get_str_from_dict(str_key, quote_dict)
 
     def _set_algorithm(self, quote_dict: dict) -> None:
         str_key: str = 'Algorithm'
-        self._algorithm = self._get_str_from_dict(str_key, quote_dict)
+        self._algorithm = self.__get_str_from_dict(str_key, quote_dict)
 
     def _set_supply_circulating(self, quote_dict: dict) -> None:
         str_key: str = 'Circulating Supply'
-        self._supply_circulating = self._get_str_from_dict(str_key, quote_dict)
+        self._supply_circulating = self.__get_str_from_dict(str_key, quote_dict)
 
     def _set_supply_max(self, quote_dict: dict) -> None:
         str_key: str = 'Max Supply'
-        self._supply_max = self._get_str_from_dict(str_key, quote_dict)
+        self._supply_max = self.__get_str_from_dict(str_key, quote_dict)
 
     def _set_inception_date(self, quote_dict):
         str_key: str = 'Inception Date'
-        self._inception_date = self._get_str_from_dict(str_key, quote_dict)
+        self._inception_date = self.__get_str_from_dict(str_key, quote_dict)
+
+    def _set_beta_5y_monthly(self, quote_dict):
+        str_key: str = 'Beta (5Y Monthly)'
+        self._beta_5y_monthly = self.__get_str_from_dict(str_key, quote_dict)
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
