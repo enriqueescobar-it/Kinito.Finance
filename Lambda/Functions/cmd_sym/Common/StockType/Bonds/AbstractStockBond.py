@@ -1,7 +1,7 @@
-from prettytable import PrettyTable
 from yahooquery import Ticker
 
 #
+from Common.Readers.Engine.YahooFinEngine import YahooFinEngine
 from Common.StockType.AbstractStock import AbstractStock
 
 
@@ -21,6 +21,7 @@ class AbstractStockBond(AbstractStock):
         self._quote_type = q_type
         #
         self._y_query = Ticker(t_name)
+        self._y_fin_engine = YahooFinEngine(t_name)
         #
         self._set_info()
 

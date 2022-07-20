@@ -22,6 +22,7 @@ class AbstractStockFund(AbstractStock):
         #
         #
         #
+        #
 
     def __str__(self) -> str:
         return super(AbstractStockFund, self).__str__()

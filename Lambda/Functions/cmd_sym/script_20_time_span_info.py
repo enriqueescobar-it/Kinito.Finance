@@ -13,6 +13,8 @@ from Common.InfoType.Times.Spans.TimeSpanInfo import TimeSpanInfo
 from Common.InfoType.Times.Spans.YearSpanInfo import YearSpanInfo
 
 # construct the argument parse and parse the arguments
+from Common.Readers.Engine.YahooFinEngine import YahooFinEngine
+
 ap = argparse.ArgumentParser()
 ap.add_argument("-s", "--symbol", required=True, help="symbol name case sensitive")
 args = vars(ap.parse_args())
@@ -44,9 +46,13 @@ print(ysi)
 tsi: TimeSpanInfo = TimeSpanInfo(datetime.now())
 print(tsi.to_json())
 print(tsi)
-print(mcal.get_calendar_names())
+#print(mcal.get_calendar_names())
 nyse: exchange_calendar_nyse.NYSEExchangeCalendar = mcal.get_calendar('NYSE')
-print(type(nyse), type(nyse.tz), nyse.tz.zone)
+#print(type(nyse), type(nyse.tz), nyse.tz.zone)
 x = xcals.get_calendar_names(include_aliases=False)#[5:10]
-print(x)
+#print(x)
 #c = xcals.get_calendar("XLIS")
+
+yfe: YahooFinEngine = YahooFinEngine(a_sym)
+print(yfe.to_json())
+print(yfe)

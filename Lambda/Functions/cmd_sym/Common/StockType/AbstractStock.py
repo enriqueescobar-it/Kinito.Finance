@@ -7,9 +7,12 @@ from pandas import DataFrame
 from prettytable import PrettyTable
 from yahooquery import Ticker
 
+from Common.Readers.Engine.YahooFinEngine import YahooFinEngine
+
 
 class AbstractStock(ABC):
     _y_query: Ticker
+    _y_fin_engine: YahooFinEngine
     _ticker: str = 'NA'
     _class_type: str = 'NA'
     _info_type: str = _class_type + 'Info'

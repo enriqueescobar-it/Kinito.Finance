@@ -1,4 +1,3 @@
-from prettytable import PrettyTable
 from yahooquery import Ticker
 
 from Common.Readers.Engine.YahooFinEngine import YahooFinEngine
@@ -21,6 +20,7 @@ class AbstractStockEquity(AbstractStock):
         self._quote_type = q_type
         #
         self._y_query = Ticker(t_name)
+        self._y_fin_engine = YahooFinEngine(t_name)
         #self._yfsi = YahooFinStockInfo(t_name)
         self._set_info()
 

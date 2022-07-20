@@ -1,6 +1,7 @@
 from yahooquery import Ticker
 
 #
+from Common.Readers.Engine.YahooFinEngine import YahooFinEngine
 from Common.StockType.Currencies.AbstractCurrency import AbstractCurrency
 
 
@@ -20,6 +21,7 @@ class RegularCurrency(AbstractCurrency):
         #self.__quote_type = q_type
         #
         self._y_query = Ticker(t_name)
+        self._y_fin_engine = YahooFinEngine(t_name)
         #
         self._set_info()
 
