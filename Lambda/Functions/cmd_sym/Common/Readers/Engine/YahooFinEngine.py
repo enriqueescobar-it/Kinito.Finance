@@ -13,6 +13,8 @@ class YahooFinEngine(AbstractEngine):
     _pretty_table: PrettyTable = PrettyTable()
     _df: DataFrame = DataFrame()
     _ticker: str = 'CNI'
+    _category: str = 'NA'
+    _holdings_turnover: str = 'NA'
     _days_range_low: float = np.nan
     _days_range_high: float = np.nan
     _year_range_low: float = np.nan
@@ -29,6 +31,7 @@ class YahooFinEngine(AbstractEngine):
     _yield: str = 'NA'
     _daily_total_return_ytd: str = 'NA'
     _return_ytd: str = 'NA'
+    _return_mean_5y: str = 'NA'
     _ratio_expense_net: str = 'NA'
     _ratio_pe: float = np.nan
     _ratio_fpe: float = np.nan
@@ -55,6 +58,8 @@ class YahooFinEngine(AbstractEngine):
     def __str__(self) -> str:
         self._pretty_table.field_names = self._header
         self._pretty_table.add_row(['Ticker', self._ticker])
+        self._pretty_table.add_row(['Category', self._category])
+        self._pretty_table.add_row(['HoldingsTurnover', self._holdings_turnover])
         self._pretty_table.add_row(['DaysRangeLow', self._days_range_low])
         self._pretty_table.add_row(['DaysRangeHigh', self._days_range_high])
         self._pretty_table.add_row(['YearRangeLow', self._year_range_low])
@@ -71,6 +76,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['Yield', self._yield])
         self._pretty_table.add_row(['DailyTotalReturnYTD', self._daily_total_return_ytd])
         self._pretty_table.add_row(['ReturnYTD', self._return_ytd])
+        self._pretty_table.add_row(['ReturnMean5Y', self._return_mean_5y])
         self._pretty_table.add_row(['RatioExpenseNet', self._ratio_expense_net])
         self._pretty_table.add_row(['RatioPE', self._ratio_pe])
         self._pretty_table.add_row(['RatioFPE', self._ratio_fpe])
@@ -87,6 +93,8 @@ class YahooFinEngine(AbstractEngine):
         yield from {
             self._header[0]: self._header[1],
             "ticker": self._ticker,
+            "category": self._category,
+            "holdings_turnover": self._holdings_turnover,
             "days_range_low": self._days_range_low,
             "days_range_high": self._days_range_high,
             "year_range_low": self._year_range_low,
@@ -103,6 +111,7 @@ class YahooFinEngine(AbstractEngine):
             "yield": self._yield,
             "daily_total_return_ytd": self._daily_total_return_ytd,
             "return_ytd": self._return_ytd,
+            "return_mean_5y": self._return_mean_5y,
             "ratio_expense_net": self._ratio_expense_net,
             "ratio_pe": self._ratio_pe,
             "ratio_fpe": self._ratio_fpe,
@@ -123,6 +132,8 @@ class YahooFinEngine(AbstractEngine):
         return str_tuple
 
     def _set_quote_dict(self, quote_dict: dict) -> None:
+        self.__set_category(quote_dict)
+        self.__set_holdings_turnover(quote_dict)
         self.__set_days_in_range(quote_dict)
         self.__set_years_in_range(quote_dict)
         self.__set_settlement_pre(quote_dict)
@@ -138,6 +149,7 @@ class YahooFinEngine(AbstractEngine):
         self.__set_yield(quote_dict)
         self.__set_ratio_expense_net(quote_dict)
         self.__set_daily_total_return_ytd(quote_dict)
+        self.__set_return_mean_5y(quote_dict)
         self.__set_ratio_pe(quote_dict)
         print(quote_dict)
 
@@ -160,6 +172,14 @@ class YahooFinEngine(AbstractEngine):
             else:
                 a_str = quote_dict[str_key]
         return a_str
+
+    def __set_category(self, quote_dict: dict) -> None:
+        str_key: str = 'Category'
+        self._category = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_holdings_turnover(self, quote_dict: dict) -> None:
+        str_key: str = 'Holdings Turnover'
+        self._holdings_turnover = self.__get_str_from_dict(str_key, quote_dict)
 
     def __set_settlement_pre(self, quote_dict: dict) -> None:
         str_key: str = 'Pre. Settlement'
@@ -189,31 +209,35 @@ class YahooFinEngine(AbstractEngine):
         str_key: str = 'Max Supply'
         self._supply_max = self.__get_str_from_dict(str_key, quote_dict)
 
-    def __set_inception_date(self, quote_dict):
+    def __set_inception_date(self, quote_dict: dict) -> None:
         str_key: str = 'Inception Date'
         self._inception_date = self.__get_str_from_dict(str_key, quote_dict)
 
-    def __set_beta_5y_monthly(self, quote_dict):
+    def __set_beta_5y_monthly(self, quote_dict: dict) -> None:
         str_key: str = 'Beta (5Y Monthly)'
         self._beta_5y_monthly = self.__get_str_from_dict(str_key, quote_dict)
 
-    def __set_yield(self, quote_dict):
+    def __set_yield(self, quote_dict: dict) -> None:
         str_key: str = 'Yield'
         self._yield = self.__get_str_from_dict(str_key, quote_dict)
 
-    def __set_daily_total_return_ytd(self, quote_dict):
+    def __set_daily_total_return_ytd(self, quote_dict: dict) -> None:
         str_key: str = 'YTD Daily Total Return'
         self._daily_total_return_ytd = self.__get_str_from_dict(str_key, quote_dict)
 
-    def __set_return_ytd(self, quote_dict):
+    def __set_return_ytd(self, quote_dict: dict) -> None:
         str_key: str = 'YTD Return'
         self._return_ytd = self.__get_str_from_dict(str_key, quote_dict)
 
-    def __set_ratio_expense_net(self, quote_dict):
+    def __set_return_mean_5y(self, quote_dict: dict) -> None:
+        str_key: str = '5y Average Return'
+        self._return_mean_5y = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_ratio_expense_net(self, quote_dict: dict) -> None:
         str_key: str = 'Expense Ratio (net)'
         self._ratio_expense_net = self.__get_str_from_dict(str_key, quote_dict)
 
-    def __set_ratio_pe(self, quote_dict):
+    def __set_ratio_pe(self, quote_dict: dict) -> None:
         str_key: str = 'PE Ratio (TTM)'
         s: str = self.__get_str_from_dict(str_key, quote_dict)
         self._ratio_pe = 0.0 if s == 'NA' else float("{:.3f}".format(float(s)))
