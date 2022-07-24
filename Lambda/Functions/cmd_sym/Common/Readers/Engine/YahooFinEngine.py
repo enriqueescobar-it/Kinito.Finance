@@ -26,6 +26,10 @@ class YahooFinEngine(AbstractEngine):
     _supply_max: str = 'NA'
     _inception_date: str = 'NA'
     _beta_5y_monthly: str = 'NA'
+    _yield: str = 'NA'
+    _daily_total_return_ytd: str = 'NA'
+    _return_ytd: str = 'NA'
+    _ratio_expense_net: str = 'NA'
     _ratio_pe: float = np.nan
     _ratio_fpe: float = np.nan
     _ratio_peg: float = np.nan
@@ -60,10 +64,14 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['StartDate', self._start_date])
         self._pretty_table.add_row(['MarketCap', self._market_cap])
         self._pretty_table.add_row(['Algorithm', self._algorithm])
-        self._pretty_table.add_row(['CirculatingSupply', self._supply_circulating])
-        self._pretty_table.add_row(['MaxSupply', self._supply_max])
+        self._pretty_table.add_row(['SupplyCirculating', self._supply_circulating])
+        self._pretty_table.add_row(['SupplyMax', self._supply_max])
         self._pretty_table.add_row(['InceptionDate', self._inception_date])
         self._pretty_table.add_row(['Beta5yMonthly', self._beta_5y_monthly])
+        self._pretty_table.add_row(['Yield', self._yield])
+        self._pretty_table.add_row(['DailyTotalReturnYTD', self._daily_total_return_ytd])
+        self._pretty_table.add_row(['ReturnYTD', self._return_ytd])
+        self._pretty_table.add_row(['RatioExpenseNet', self._ratio_expense_net])
         self._pretty_table.add_row(['RatioPE', self._ratio_pe])
         self._pretty_table.add_row(['RatioFPE', self._ratio_fpe])
         self._pretty_table.add_row(['RatioPEG', self._ratio_peg])
@@ -92,6 +100,10 @@ class YahooFinEngine(AbstractEngine):
             "supply_max": self._supply_max,
             "inception_date": self._inception_date,
             "beta_5y_monthly": self._beta_5y_monthly,
+            "yield": self._yield,
+            "daily_total_return_ytd": self._daily_total_return_ytd,
+            "return_ytd": self._return_ytd,
+            "ratio_expense_net": self._ratio_expense_net,
             "ratio_pe": self._ratio_pe,
             "ratio_fpe": self._ratio_fpe,
             "ratio_peg": self._ratio_peg,
@@ -122,6 +134,11 @@ class YahooFinEngine(AbstractEngine):
         self.__set_supply_max(quote_dict)
         self.__set_inception_date(quote_dict)
         self.__set_beta_5y_monthly(quote_dict)
+        self.__set_return_ytd(quote_dict)
+        self.__set_yield(quote_dict)
+        self.__set_ratio_expense_net(quote_dict)
+        self.__set_daily_total_return_ytd(quote_dict)
+        self.__set_ratio_pe(quote_dict)
         print(quote_dict)
 
     def __set_days_in_range(self, quote_dict: dict) -> None:
@@ -137,8 +154,11 @@ class YahooFinEngine(AbstractEngine):
     def __get_str_from_dict(self, str_key: str, quote_dict: dict) -> str:
         a_str: str = 'NA'
         if isinstance(quote_dict, dict) and any(quote_dict) and str_key in quote_dict.keys():
-            print(type(quote_dict[str_key]), quote_dict[str_key])
-            a_str = quote_dict[str_key]
+            print('???', type(quote_dict[str_key]), quote_dict[str_key])
+            if not isinstance(quote_dict[str_key], str):
+                a_str = str(quote_dict[str_key])
+            else:
+                a_str = quote_dict[str_key]
         return a_str
 
     def __set_settlement_pre(self, quote_dict: dict) -> None:
@@ -176,6 +196,27 @@ class YahooFinEngine(AbstractEngine):
     def __set_beta_5y_monthly(self, quote_dict):
         str_key: str = 'Beta (5Y Monthly)'
         self._beta_5y_monthly = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_yield(self, quote_dict):
+        str_key: str = 'Yield'
+        self._yield = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_daily_total_return_ytd(self, quote_dict):
+        str_key: str = 'YTD Daily Total Return'
+        self._daily_total_return_ytd = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_return_ytd(self, quote_dict):
+        str_key: str = 'YTD Return'
+        self._return_ytd = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_ratio_expense_net(self, quote_dict):
+        str_key: str = 'Expense Ratio (net)'
+        self._ratio_expense_net = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_ratio_pe(self, quote_dict):
+        str_key: str = 'PE Ratio (TTM)'
+        s: str = self.__get_str_from_dict(str_key, quote_dict)
+        self._ratio_pe = 0.0 if s == 'NA' else float("{:.3f}".format(float(s)))
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
