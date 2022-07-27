@@ -4,6 +4,7 @@ from datetime import datetime
 import pandas_market_calendars as mcal
 from pandas_market_calendars import exchange_calendar_nyse
 import exchange_calendars as xcals
+from typing import List
 
 from Common.InfoType.Times.AbstractTimeInfo import AbstractTimeInfo
 from Common.InfoType.Times.DateTimeInfo import DateTimeInfo
@@ -38,6 +39,10 @@ print(atsi)
 qsi: QuarterSpanInfo = QuarterSpanInfo(datetime.now())
 print(qsi.to_json())
 print(qsi)
+
+qsi_list: List[QuarterSpanInfo]
+for x in range(4):
+    print(x)
 
 ysi: YearSpanInfo = YearSpanInfo(datetime.now())
 print(ysi.to_json())

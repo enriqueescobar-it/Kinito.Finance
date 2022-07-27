@@ -14,6 +14,7 @@ class YahooFinEngine(AbstractEngine):
     _df: DataFrame = DataFrame()
     _ticker: str = 'CNI'
     _category: str = 'NA'
+    _category_mean: str = 'NA'
     _holdings_turnover: str = 'NA'
     _days_range_low: float = np.nan
     _days_range_high: float = np.nan
@@ -26,7 +27,7 @@ class YahooFinEngine(AbstractEngine):
     _algorithm: str = 'NA'
     _supply_circulating: str = 'NA'
     _supply_max: str = 'NA'
-    _inception_date: str = 'NA'
+    _date_inception: str = 'NA'
     _beta_5y_monthly: str = 'NA'
     _yield: str = 'NA'
     _daily_total_return_ytd: str = 'NA'
@@ -59,6 +60,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.field_names = self._header
         self._pretty_table.add_row(['Ticker', self._ticker])
         self._pretty_table.add_row(['Category', self._category])
+        self._pretty_table.add_row(['CategoryMean', self._category_mean])
         self._pretty_table.add_row(['HoldingsTurnover', self._holdings_turnover])
         self._pretty_table.add_row(['DaysRangeLow', self._days_range_low])
         self._pretty_table.add_row(['DaysRangeHigh', self._days_range_high])
@@ -71,7 +73,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['Algorithm', self._algorithm])
         self._pretty_table.add_row(['SupplyCirculating', self._supply_circulating])
         self._pretty_table.add_row(['SupplyMax', self._supply_max])
-        self._pretty_table.add_row(['InceptionDate', self._inception_date])
+        self._pretty_table.add_row(['DateInception', self._date_inception])
         self._pretty_table.add_row(['Beta5yMonthly', self._beta_5y_monthly])
         self._pretty_table.add_row(['Yield', self._yield])
         self._pretty_table.add_row(['DailyTotalReturnYTD', self._daily_total_return_ytd])
@@ -94,6 +96,7 @@ class YahooFinEngine(AbstractEngine):
             self._header[0]: self._header[1],
             "ticker": self._ticker,
             "category": self._category,
+            "category_mean": self._category_mean,
             "holdings_turnover": self._holdings_turnover,
             "days_range_low": self._days_range_low,
             "days_range_high": self._days_range_high,
@@ -106,7 +109,7 @@ class YahooFinEngine(AbstractEngine):
             "algorithm": self._algorithm,
             "supply_circulating": self._supply_circulating,
             "supply_max": self._supply_max,
-            "inception_date": self._inception_date,
+            "date_inception": self._date_inception,
             "beta_5y_monthly": self._beta_5y_monthly,
             "yield": self._yield,
             "daily_total_return_ytd": self._daily_total_return_ytd,
@@ -133,6 +136,7 @@ class YahooFinEngine(AbstractEngine):
 
     def _set_quote_dict(self, quote_dict: dict) -> None:
         self.__set_category(quote_dict)
+        self.__set_category_mean(quote_dict)
         self.__set_holdings_turnover(quote_dict)
         self.__set_days_in_range(quote_dict)
         self.__set_years_in_range(quote_dict)
@@ -177,6 +181,10 @@ class YahooFinEngine(AbstractEngine):
         str_key: str = 'Category'
         self._category = self.__get_str_from_dict(str_key, quote_dict)
 
+    def __set_category_mean(self, quote_dict: dict) -> None:
+        str_key: str = 'Average for Category'
+        self._category_mean = self.__get_str_from_dict(str_key, quote_dict)
+
     def __set_holdings_turnover(self, quote_dict: dict) -> None:
         str_key: str = 'Holdings Turnover'
         self._holdings_turnover = self.__get_str_from_dict(str_key, quote_dict)
@@ -211,7 +219,7 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_inception_date(self, quote_dict: dict) -> None:
         str_key: str = 'Inception Date'
-        self._inception_date = self.__get_str_from_dict(str_key, quote_dict)
+        self._date_inception = self.__get_str_from_dict(str_key, quote_dict)
 
     def __set_beta_5y_monthly(self, quote_dict: dict) -> None:
         str_key: str = 'Beta (5Y Monthly)'
