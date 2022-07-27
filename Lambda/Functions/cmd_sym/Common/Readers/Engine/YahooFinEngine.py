@@ -23,6 +23,7 @@ class YahooFinEngine(AbstractEngine):
     _year_target_estimate: float = np.nan
     _settlement_pre: str = 'NA'
     _settlement_date: str = 'NA'
+    _earnings_date: str = 'NA'
     _start_date: str = 'NA'
     _market_cap: str = 'NA'
     _eps: str = 'NA'
@@ -75,6 +76,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['YearTargetEstimate', self._year_target_estimate])
         self._pretty_table.add_row(['SettlementPre', self._settlement_pre])
         self._pretty_table.add_row(['SettlementDate', self._settlement_date])
+        self._pretty_table.add_row(['EarningsDate', self._earnings_date])
         self._pretty_table.add_row(['LastDividend', self._dividend_last])
         self._pretty_table.add_row(['LastCapGain', self._cap_gain_last])
         self._pretty_table.add_row(['StartDate', self._start_date])
@@ -119,6 +121,7 @@ class YahooFinEngine(AbstractEngine):
             "settlement_date": self._settlement_date,
             "dividend_last": self._dividend_last,
             "cap_gain_last": self._cap_gain_last,
+            "earnings_date": self._earnings_date,
             "start_date": self._start_date,
             "market_cap": self._market_cap,
             "eps": self._eps,
@@ -161,6 +164,7 @@ class YahooFinEngine(AbstractEngine):
         self.__set_year_target_estimate(quote_dict)
         self.__set_settlement_pre(quote_dict)
         self.__set_settlement_date(quote_dict)
+        self.__set_earnings_date(quote_dict)
         self.__set_dividend_last(quote_dict)
         self.__set_cap_gain_last(quote_dict)
         self.__set_market_cap(quote_dict)
@@ -226,6 +230,10 @@ class YahooFinEngine(AbstractEngine):
     def __set_settlement_date(self, quote_dict: dict) -> None:
         str_key: str = 'Settlement Date'
         self._settlement_date = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_earnings_date(self, quote_dict: dict) -> None:
+        str_key: str = 'Earnings Date'
+        self._earnings_date = self.__get_str_from_dict(str_key, quote_dict)
 
     def __set_dividend_last(self, quote_dict: dict) -> None:
         str_key: str = 'Last Dividend'
