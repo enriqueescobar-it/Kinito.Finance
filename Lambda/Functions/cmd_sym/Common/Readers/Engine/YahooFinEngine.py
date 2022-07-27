@@ -24,6 +24,8 @@ class YahooFinEngine(AbstractEngine):
     _settlement_date: str = 'NA'
     _start_date: str = 'NA'
     _market_cap: str = 'NA'
+    _net_assets: str = 'NA'
+    _nav: str = 'NA'
     _algorithm: str = 'NA'
     _supply_circulating: str = 'NA'
     _supply_max: str = 'NA'
@@ -74,6 +76,8 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['LastCapGain', self._cap_gain_last])
         self._pretty_table.add_row(['StartDate', self._start_date])
         self._pretty_table.add_row(['MarketCap', self._market_cap])
+        self._pretty_table.add_row(['NetAssets', self._net_assets])
+        self._pretty_table.add_row(['NAV', self._nav])
         self._pretty_table.add_row(['Algorithm', self._algorithm])
         self._pretty_table.add_row(['SupplyCirculating', self._supply_circulating])
         self._pretty_table.add_row(['SupplyMax', self._supply_max])
@@ -112,6 +116,8 @@ class YahooFinEngine(AbstractEngine):
             "cap_gain_last": self._cap_gain_last,
             "start_date": self._start_date,
             "market_cap": self._market_cap,
+            "net_assets": self._net_assets,
+            "nav": self._nav,
             "algorithm": self._algorithm,
             "supply_circulating": self._supply_circulating,
             "supply_max": self._supply_max,
@@ -151,6 +157,8 @@ class YahooFinEngine(AbstractEngine):
         self.__set_dividend_last(quote_dict)
         self.__set_cap_gain_last(quote_dict)
         self.__set_market_cap(quote_dict)
+        self.__set_net_assets(quote_dict)
+        self.__set_nav(quote_dict)
         self.__set_start_date(quote_dict)
         self.__set_algorithm(quote_dict)
         self.__set_supply_circulating(quote_dict)
@@ -220,6 +228,14 @@ class YahooFinEngine(AbstractEngine):
     def __set_market_cap(self, quote_dict: dict) -> None:
         str_key: str = 'Market Cap'
         self._market_cap = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_net_assets(self, quote_dict: dict) -> None:
+        str_key: str = 'Net Assets'
+        self._net_assets = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_nav(self, quote_dict: dict) -> None:
+        str_key: str = 'NAV'
+        self._nav = self.__get_str_from_dict(str_key, quote_dict)
 
     def __set_algorithm(self, quote_dict: dict) -> None:
         str_key: str = 'Algorithm'
