@@ -35,6 +35,7 @@ class YahooFinEngine(AbstractEngine):
     _supply_max: str = 'NA'
     _date_inception: str = 'NA'
     _beta_5y_monthly: str = 'NA'
+    _dividend_forward: str = 'NA'
     _dividend_last: str = 'NA'
     _cap_gain_last: str = 'NA'
     _yield: str = 'NA'
@@ -79,6 +80,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['SettlementDate', self._settlement_date])
         self._pretty_table.add_row(['EarningsDate', self._earnings_date])
         self._pretty_table.add_row(['EarningsDate', self._ex_dividend_date])
+        self._pretty_table.add_row(['ForwardDividend', self._dividend_forward])
         self._pretty_table.add_row(['LastDividend', self._dividend_last])
         self._pretty_table.add_row(['LastCapGain', self._cap_gain_last])
         self._pretty_table.add_row(['StartDate', self._start_date])
@@ -121,6 +123,7 @@ class YahooFinEngine(AbstractEngine):
             "year_target_estimate": self._year_target_estimate,
             "settlement_pre": self._settlement_pre,
             "settlement_date": self._settlement_date,
+            "dividend_forward": self._dividend_forward,
             "dividend_last": self._dividend_last,
             "ex_dividend_date": self._ex_dividend_date,
             "cap_gain_last": self._cap_gain_last,
@@ -169,6 +172,7 @@ class YahooFinEngine(AbstractEngine):
         self.__set_settlement_date(quote_dict)
         self.__set_earnings_date(quote_dict)
         self.__set_ex_dividend_date(quote_dict)
+        self.__set_dividend_forward(quote_dict)
         self.__set_dividend_last(quote_dict)
         self.__set_cap_gain_last(quote_dict)
         self.__set_market_cap(quote_dict)
@@ -243,6 +247,16 @@ class YahooFinEngine(AbstractEngine):
         str_key: str = 'Ex-Dividend Date'
         self._ex_dividend_date = self.__get_str_from_dict(str_key, quote_dict)
 
+    def __set_dividend_forward(self, quote_dict: dict) -> None:
+        str_key: str = 'Forward Dividend & Yield'
+        s: str = self.__get_str_from_dict(str_key, quote_dict)
+        if not s == 'NA':
+            a_list: list = self.__get_str_from_dict(str_key, quote_dict).split(' ')
+            print(a_list)
+            self._dividend_forward = a_list[0]
+            print(type(a_list[1]), a_list[1].replace('(', '').replace(')', ''))
+            self._yield = a_list[1].replace('(', '').replace(')', '')
+
     def __set_dividend_last(self, quote_dict: dict) -> None:
         str_key: str = 'Last Dividend'
         self._dividend_last = self.__get_str_from_dict(str_key, quote_dict)
@@ -293,7 +307,8 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_yield(self, quote_dict: dict) -> None:
         str_key: str = 'Yield'
-        self._yield = self.__get_str_from_dict(str_key, quote_dict)
+        if self._yield == 'NA':
+            self._yield = self.__get_str_from_dict(str_key, quote_dict)
 
     def __set_daily_total_return_ytd(self, quote_dict: dict) -> None:
         str_key: str = 'YTD Daily Total Return'
