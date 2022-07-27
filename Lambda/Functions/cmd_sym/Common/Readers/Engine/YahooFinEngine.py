@@ -20,10 +20,12 @@ class YahooFinEngine(AbstractEngine):
     _days_range_high: float = np.nan
     _year_range_low: float = np.nan
     _year_range_high: float = np.nan
+    _year_target_estimate: float = np.nan
     _settlement_pre: str = 'NA'
     _settlement_date: str = 'NA'
     _start_date: str = 'NA'
     _market_cap: str = 'NA'
+    _eps: str = 'NA'
     _net_assets: str = 'NA'
     _nav: str = 'NA'
     _algorithm: str = 'NA'
@@ -70,12 +72,14 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['DaysRangeHigh', self._days_range_high])
         self._pretty_table.add_row(['YearRangeLow', self._year_range_low])
         self._pretty_table.add_row(['YearRangeHigh', self._year_range_high])
+        self._pretty_table.add_row(['YearTargetEstimate', self._year_target_estimate])
         self._pretty_table.add_row(['SettlementPre', self._settlement_pre])
         self._pretty_table.add_row(['SettlementDate', self._settlement_date])
         self._pretty_table.add_row(['LastDividend', self._dividend_last])
         self._pretty_table.add_row(['LastCapGain', self._cap_gain_last])
         self._pretty_table.add_row(['StartDate', self._start_date])
         self._pretty_table.add_row(['MarketCap', self._market_cap])
+        self._pretty_table.add_row(['EarningsPerShare', self._eps])
         self._pretty_table.add_row(['NetAssets', self._net_assets])
         self._pretty_table.add_row(['NAV', self._nav])
         self._pretty_table.add_row(['Algorithm', self._algorithm])
@@ -110,12 +114,14 @@ class YahooFinEngine(AbstractEngine):
             "days_range_high": self._days_range_high,
             "year_range_low": self._year_range_low,
             "year_range_high": self._year_range_high,
+            "year_target_estimate": self._year_target_estimate,
             "settlement_pre": self._settlement_pre,
             "settlement_date": self._settlement_date,
             "dividend_last": self._dividend_last,
             "cap_gain_last": self._cap_gain_last,
             "start_date": self._start_date,
             "market_cap": self._market_cap,
+            "eps": self._eps,
             "net_assets": self._net_assets,
             "nav": self._nav,
             "algorithm": self._algorithm,
@@ -152,11 +158,13 @@ class YahooFinEngine(AbstractEngine):
         self.__set_holdings_turnover(quote_dict)
         self.__set_days_in_range(quote_dict)
         self.__set_years_in_range(quote_dict)
+        self.__set_year_target_estimate(quote_dict)
         self.__set_settlement_pre(quote_dict)
         self.__set_settlement_date(quote_dict)
         self.__set_dividend_last(quote_dict)
         self.__set_cap_gain_last(quote_dict)
         self.__set_market_cap(quote_dict)
+        self.__set_eps(quote_dict)
         self.__set_net_assets(quote_dict)
         self.__set_nav(quote_dict)
         self.__set_start_date(quote_dict)
@@ -193,6 +201,12 @@ class YahooFinEngine(AbstractEngine):
                 a_str = quote_dict[str_key]
         return a_str
 
+    def __set_year_target_estimate(self, quote_dict: dict) -> None:
+        str_key: str = '1y Target Est'
+        self._year_target_estimate = np.nan
+        if not self.__get_str_from_dict(str_key, quote_dict) == 'NA':
+            self._year_target_estimate = float("{:.3f}".format(float(self.__get_str_from_dict(str_key, quote_dict))))
+
     def __set_category(self, quote_dict: dict) -> None:
         str_key: str = 'Category'
         self._category = self.__get_str_from_dict(str_key, quote_dict)
@@ -228,6 +242,10 @@ class YahooFinEngine(AbstractEngine):
     def __set_market_cap(self, quote_dict: dict) -> None:
         str_key: str = 'Market Cap'
         self._market_cap = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_eps(self, quote_dict: dict) -> None:
+        str_key: str = 'EPS (TTM)'
+        self._eps = self.__get_str_from_dict(str_key, quote_dict)
 
     def __set_net_assets(self, quote_dict: dict) -> None:
         str_key: str = 'Net Assets'
