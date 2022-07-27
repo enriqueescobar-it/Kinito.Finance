@@ -29,6 +29,8 @@ class YahooFinEngine(AbstractEngine):
     _supply_max: str = 'NA'
     _date_inception: str = 'NA'
     _beta_5y_monthly: str = 'NA'
+    _dividend_last: str = 'NA'
+    _cap_gain_last: str = 'NA'
     _yield: str = 'NA'
     _daily_total_return_ytd: str = 'NA'
     _return_ytd: str = 'NA'
@@ -68,6 +70,8 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['YearRangeHigh', self._year_range_high])
         self._pretty_table.add_row(['SettlementPre', self._settlement_pre])
         self._pretty_table.add_row(['SettlementDate', self._settlement_date])
+        self._pretty_table.add_row(['LastDividend', self._dividend_last])
+        self._pretty_table.add_row(['LastCapGain', self._cap_gain_last])
         self._pretty_table.add_row(['StartDate', self._start_date])
         self._pretty_table.add_row(['MarketCap', self._market_cap])
         self._pretty_table.add_row(['Algorithm', self._algorithm])
@@ -104,6 +108,8 @@ class YahooFinEngine(AbstractEngine):
             "year_range_high": self._year_range_high,
             "settlement_pre": self._settlement_pre,
             "settlement_date": self._settlement_date,
+            "dividend_last": self._dividend_last,
+            "cap_gain_last": self._cap_gain_last,
             "start_date": self._start_date,
             "market_cap": self._market_cap,
             "algorithm": self._algorithm,
@@ -142,6 +148,8 @@ class YahooFinEngine(AbstractEngine):
         self.__set_years_in_range(quote_dict)
         self.__set_settlement_pre(quote_dict)
         self.__set_settlement_date(quote_dict)
+        self.__set_dividend_last(quote_dict)
+        self.__set_cap_gain_last(quote_dict)
         self.__set_market_cap(quote_dict)
         self.__set_start_date(quote_dict)
         self.__set_algorithm(quote_dict)
@@ -196,6 +204,14 @@ class YahooFinEngine(AbstractEngine):
     def __set_settlement_date(self, quote_dict: dict) -> None:
         str_key: str = 'Settlement Date'
         self._settlement_date = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_dividend_last(self, quote_dict: dict) -> None:
+        str_key: str = 'Last Dividend'
+        self._dividend_last = self.__get_str_from_dict(str_key, quote_dict)
+
+    def __set_cap_gain_last(self, quote_dict: dict) -> None:
+        str_key: str = 'Last Cap Gain'
+        self._cap_gain_last = self.__get_str_from_dict(str_key, quote_dict)
 
     def __set_start_date(self, quote_dict: dict) -> None:
         str_key: str = 'Start Date'
