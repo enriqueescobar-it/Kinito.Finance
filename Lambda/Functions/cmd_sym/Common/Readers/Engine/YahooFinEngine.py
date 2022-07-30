@@ -46,6 +46,9 @@ class YahooFinEngine(AbstractEngine):
     _ratio_pe: float = np.nan
     _ratio_fpe: float = np.nan
     _ratio_peg: float = np.nan
+    _ratio_ent_value_revenue: float = np.nan
+    _ratio_ent_value_ebitda: float = np.nan
+    _enterprise_value: str = 'NA'
     _price_to_book: float = np.nan
     _price_to_earn: float = np.nan
     _price_to_sales: float = np.nan
@@ -53,17 +56,13 @@ class YahooFinEngine(AbstractEngine):
     def __init__(self, a_ticker: str = 'CNI'):
         self._ticker = a_ticker
         self._set_quote_dict(si.get_quote_table(a_ticker))
-        '''
-        self._df = si.get_stats_valuation(a_ticker)
-        self._df = self._df.iloc[:, :2]
-        self._df.columns = ['Attribute', 'Recent']
-        self._ratio_pe = float(self._df[self._df.Attribute.str.contains('Trailing P/E')].iloc[0, 1])
-        self._ratio_fpe = float(self._df[self._df.Attribute.str.contains('Forward P/E')].iloc[0, 1])
-        self._ratio_peg = float(self._df[self._df.Attribute.str.contains('PEG')].iloc[0, 1])
-        self._price_to_book = float(self._df[self._df.Attribute.str.contains('Price/Book')].iloc[0, 1])
-        self._price_to_earn = float(self._df[self._df.Attribute.str.contains('Trailing P/E')].iloc[0, 1])
-        self._price_to_sales = float(self._df[self._df.Attribute.str.contains('Price/Sales')].iloc[0, 1])
-        '''
+        try:
+            print('Exception: get_stats_valuation(', a_ticker, ')')
+            self._get_stats_valuation(a_ticker)
+        except IndexError as e:
+            print('Exception: get_stats_valuation(', a_ticker, '):', e)
+        finally:
+            print('Finally')
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self._header
@@ -79,7 +78,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['SettlementPre', self._settlement_pre])
         self._pretty_table.add_row(['SettlementDate', self._settlement_date])
         self._pretty_table.add_row(['EarningsDate', self._earnings_date])
-        self._pretty_table.add_row(['EarningsDate', self._ex_dividend_date])
+        self._pretty_table.add_row(['ExDividendDate', self._ex_dividend_date])
         self._pretty_table.add_row(['ForwardDividend', self._dividend_forward])
         self._pretty_table.add_row(['LastDividend', self._dividend_last])
         self._pretty_table.add_row(['LastCapGain', self._cap_gain_last])
@@ -101,6 +100,9 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['RatioPE', self._ratio_pe])
         self._pretty_table.add_row(['RatioFPE', self._ratio_fpe])
         self._pretty_table.add_row(['RatioPEG', self._ratio_peg])
+        self._pretty_table.add_row(['RatioEnterpriseValueRevenue', self._ratio_ent_value_revenue])
+        self._pretty_table.add_row(['RatioEnterpriseValueEBITDA', self._ratio_ent_value_ebitda])
+        self._pretty_table.add_row(['EnterpriseValue', self._enterprise_value])
         self._pretty_table.add_row(['PriceToBook', self._price_to_book])
         self._pretty_table.add_row(['PriceToEarnings', self._price_to_earn])
         self._pretty_table.add_row(['PriceToSales', self._price_to_sales])
@@ -146,6 +148,9 @@ class YahooFinEngine(AbstractEngine):
             "ratio_pe": self._ratio_pe,
             "ratio_fpe": self._ratio_fpe,
             "ratio_peg": self._ratio_peg,
+            "ratio_ent_value_revenue": self._ratio_ent_value_revenue,
+            "ratio_ent_value_ebitda": self._ratio_ent_value_ebitda,
+            "enterprise_value": self._enterprise_value,
             "price_to_book": self._price_to_book,
             "price_to_earn": self._price_to_earn,
             "price_to_sales": self._price_to_sales
@@ -330,6 +335,24 @@ class YahooFinEngine(AbstractEngine):
         str_key: str = 'PE Ratio (TTM)'
         s: str = self.__get_str_from_dict(str_key, quote_dict)
         self._ratio_pe = 0.0 if s == 'NA' else float("{:.3f}".format(float(s)))
+
+    def _get_stats_valuation(self, a_ticker: str) -> None:
+        print('_set_stats_valuation')
+        self._df = si.get_stats_valuation(a_ticker)
+        self._df = self._df.iloc[:, :2]
+        self._df.columns = ['Attribute', 'Recent']
+        self._ratio_pe = float(self._df[self._df.Attribute.str.contains('Trailing P/E')].iloc[0, 1])
+        self._ratio_fpe = float(self._df[self._df.Attribute.str.contains('Forward P/E')].iloc[0, 1])
+        self._ratio_peg = float(self._df[self._df.Attribute.str.contains('PEG')].iloc[0, 1])
+        self._ratio_ent_value_revenue = float(self._df[self._df.Attribute.str.contains('Enterprise Value/Revenue')].iloc[0, 1])
+        self._ratio_ent_value_ebitda = float(self._df[self._df.Attribute.str.contains('Enterprise Value/EBITDA')].iloc[0, 1])
+        self._enterprise_value = self._df[self._df.Attribute.str.contains('Enterprise Value')].iloc[0, 1]
+        self._price_to_book = float(self._df[self._df.Attribute.str.contains('Price/Book')].iloc[0, 1])
+        self._price_to_sales = float(self._df[self._df.Attribute.str.contains('Price/Sales')].iloc[0, 1])
+        '''
+        self._price_to_earn = float(self._df[self._df.Attribute.str.contains('Trailing P/E')].iloc[0, 1])
+        '''
+        print(self._df)
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
