@@ -63,6 +63,25 @@ class YahooFinEngine(AbstractEngine):
             print('Exception: get_stats_valuation(', a_ticker, '):', e)
         finally:
             print('Finally')
+        # combined_extra_stats[combined_extra_stats.Attribute.str.contains("Return on Equity")]
+        # combined_extra_stats[combined_extra_stats.Attribute.str.contains("Return on Assets")]
+        # combined_extra_stats[combined_extra_stats.Attribute.str.contains("Profit Margin")]
+        print(si.get_stats(a_ticker))
+        # ***
+        # sheet.loc["cash"]
+        # sheet.loc["totalStockholderEquity"]
+        # sheet.loc["totalAssets"]
+        # combined_sheets[combined_sheets.Breakdown == "totalAssets"]
+        print(si.get_balance_sheet(a_ticker))
+        # ***
+        # income.loc["totalRevenue"]
+        # income.loc["grossProfit"]
+        # combined_income[combined_income.Breakdown == "totalRevenue"]
+        print(si.get_income_statement(a_ticker))
+        # ***
+        # combined_cash_flows[combined_cash_flows.Breakdown == "dividendsPaid"]
+        # combined_cash_flows[combined_cash_flows.Breakdown == "issuanceOfStock"]
+        print(si.get_cash_flow(a_ticker))
 
     def __str__(self) -> str:
         self._pretty_table.field_names = self._header
@@ -352,7 +371,6 @@ class YahooFinEngine(AbstractEngine):
         '''
         self._price_to_earn = float(self._df[self._df.Attribute.str.contains('Trailing P/E')].iloc[0, 1])
         '''
-        print(self._df)
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
