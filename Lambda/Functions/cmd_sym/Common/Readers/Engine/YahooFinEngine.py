@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 import numpy as np
 import yahoo_fin.stock_info as si
@@ -13,7 +14,7 @@ class YahooFinEngine(AbstractEngine):
     _pretty_table: PrettyTable = PrettyTable()
     _ticker: str = 'CNI'
     _category: str = 'NA'
-    _category_mean: str = 'NA'
+    _category_mean: float = np.nan
     _holdings_turnover: str = 'NA'
     _days_range_low: float = np.nan
     _days_range_high: float = np.nan
@@ -24,24 +25,24 @@ class YahooFinEngine(AbstractEngine):
     _settlement_date: str = 'NA'
     _earnings_date: str = 'NA'
     _dividend_date: str = 'NA'
-    _ex_dividend_date: str = 'NA'
+    _ex_dividend_date: datetime = datetime(2001, 9, 11)
     _start_date: str = 'NA'
     _market_cap: str = 'NA'
-    _eps: str = 'NA'
+    _eps: float = np.nan
     _net_assets: str = 'NA'
-    _nav: str = 'NA'
+    _nav: float = np.nan
     _algorithm: str = 'NA'
     _supply_circulating: str = 'NA'
     _supply_max: str = 'NA'
     _date_inception: str = 'NA'
-    _beta_5y_monthly: str = 'NA'
+    _beta_5y_monthly: float = np.nan
     _dividend_forward: str = 'NA'
-    _dividend_last: str = 'NA'
-    _cap_gain_last: str = 'NA'
-    _yield: str = 'NA'
+    _dividend_last: float = np.nan
+    _cap_gain_last: float = np.nan
+    _yield: float = np.nan
     _daily_total_return_ytd: str = 'NA'
     _return_ytd: str = 'NA'
-    _return_mean_5y: str = 'NA'
+    _return_mean_5y: float = np.nan
     _ratio_expense_net: str = 'NA'
     _ratio_pe: float = np.nan
     _ratio_fpe: float = np.nan
@@ -155,7 +156,7 @@ class YahooFinEngine(AbstractEngine):
             "dividend_forward": self._dividend_forward,
             "dividend_last": self._dividend_last,
             "dividend_date": self._dividend_date,
-            "ex_dividend_date": self._ex_dividend_date,
+            "ex_dividend_date": str(self._ex_dividend_date),
             "cap_gain_last": self._cap_gain_last,
             "earnings_date": self._earnings_date,
             "start_date": self._start_date,
@@ -188,7 +189,8 @@ class YahooFinEngine(AbstractEngine):
         }.items()
 
     def __split_range(self, range_str: str = "0.0 - 0.0") -> tuple:
-        str_list: list = range_str.replace(',', '').split(" - ")
+        s: str = range_str if isinstance(range_str, str) else 'nan - nan'
+        str_list: list = s.replace(',', '').split(" - ")
         return str_list[0], str_list[1]
 
     def _set_key_in_range(self, str_key: str, quote_dict: dict) -> tuple:
@@ -242,11 +244,15 @@ class YahooFinEngine(AbstractEngine):
     def __get_str_from_dict(self, str_key: str, quote_dict: dict) -> str:
         a_str: str = 'NA'
         if isinstance(quote_dict, dict) and any(quote_dict) and str_key in quote_dict.keys():
-            print('???', type(quote_dict[str_key]), quote_dict[str_key])
-            if not isinstance(quote_dict[str_key], str):
-                a_str = str(quote_dict[str_key])
+            print('???', str_key, type(quote_dict[str_key]), quote_dict[str_key])
+            if isinstance(quote_dict[str_key], float):
+                a_float: float = float("{:.3f}".format(float(quote_dict[str_key])))
+                a_str = str(a_float)
+            #if not isinstance(quote_dict[str_key], str):
+            #    a_str = str(quote_dict[str_key])
             else:
-                a_str = quote_dict[str_key]
+            #    a_str = quote_dict[str_key]
+                a_str = str(quote_dict[str_key])
         return a_str
 
     def __set_year_target_estimate(self, quote_dict: dict) -> None:
@@ -261,7 +267,8 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_category_mean(self, quote_dict: dict) -> None:
         str_key: str = 'Average for Category'
-        self._category_mean = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
+            self._category_mean = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_holdings_turnover(self, quote_dict: dict) -> None:
         str_key: str = 'Holdings Turnover'
@@ -281,7 +288,9 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_ex_dividend_date(self, quote_dict: dict) -> None:
         str_key: str = 'Ex-Dividend Date'
-        self._ex_dividend_date = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'nan':
+            #self._ex_dividend_date = datetime(self.__get_str_from_dict(str_key, quote_dict))
+            print(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_dividend_forward(self, quote_dict: dict) -> None:
         str_key: str = 'Forward Dividend & Yield'
@@ -295,11 +304,13 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_dividend_last(self, quote_dict: dict) -> None:
         str_key: str = 'Last Dividend'
-        self._dividend_last = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
+            self._dividend_last = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_cap_gain_last(self, quote_dict: dict) -> None:
         str_key: str = 'Last Cap Gain'
-        self._cap_gain_last = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
+            self._cap_gain_last = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_start_date(self, quote_dict: dict) -> None:
         str_key: str = 'Start Date'
@@ -311,7 +322,8 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_eps(self, quote_dict: dict) -> None:
         str_key: str = 'EPS (TTM)'
-        self._eps = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
+            self._eps = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_net_assets(self, quote_dict: dict) -> None:
         str_key: str = 'Net Assets'
@@ -319,7 +331,8 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_nav(self, quote_dict: dict) -> None:
         str_key: str = 'NAV'
-        self._nav = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
+            self._nav = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_algorithm(self, quote_dict: dict) -> None:
         str_key: str = 'Algorithm'
@@ -339,12 +352,13 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_beta_5y_monthly(self, quote_dict: dict) -> None:
         str_key: str = 'Beta (5Y Monthly)'
-        self._beta_5y_monthly = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
+            self._beta_5y_monthly = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_yield(self, quote_dict: dict) -> None:
         str_key: str = 'Yield'
         if self._yield == 'NA':
-            self._yield = self.__get_str_from_dict(str_key, quote_dict)
+            self._yield = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_daily_total_return_ytd(self, quote_dict: dict) -> None:
         str_key: str = 'YTD Daily Total Return'
@@ -356,7 +370,8 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_return_mean_5y(self, quote_dict: dict) -> None:
         str_key: str = '5y Average Return'
-        self._return_mean_5y = self.__get_str_from_dict(str_key, quote_dict)
+        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
+            self._return_mean_5y = float(self.__get_str_from_dict(str_key, quote_dict))
 
     def __set_ratio_expense_net(self, quote_dict: dict) -> None:
         str_key: str = 'Expense Ratio (net)'
@@ -365,7 +380,7 @@ class YahooFinEngine(AbstractEngine):
     def __set_ratio_pe(self, quote_dict: dict) -> None:
         str_key: str = 'PE Ratio (TTM)'
         s: str = self.__get_str_from_dict(str_key, quote_dict)
-        self._ratio_pe = 0.0 if s == 'NA' else float("{:.3f}".format(float(s)))
+        self._ratio_pe = np.nan if s == 'NA' else float("{:.3f}".format(float(s)))
 
     def _get_stats_valuation(self, a_ticker: str) -> None:
         print('_set_stats_valuation')
