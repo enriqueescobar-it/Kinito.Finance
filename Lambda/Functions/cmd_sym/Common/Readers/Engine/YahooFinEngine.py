@@ -389,7 +389,8 @@ class YahooFinEngine(AbstractEngine):
     def __set_yield(self, quote_dict: dict) -> None:
         str_key: str = 'Yield'
         key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
-        if self._yield_pcnt == 'NA':
+        print('%%% isnan', str_key, np.isnan(self._yield_pcnt), self._yield_pcnt, key_from_quote_dict)
+        if np.isnan(self._yield_pcnt):
             self._yield_pcnt = float(key_from_quote_dict) if key_from_quote_dict != 'NA' else np.nan
 
     def __set_daily_total_return_ytd(self, quote_dict: dict) -> None:
