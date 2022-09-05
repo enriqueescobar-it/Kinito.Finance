@@ -12,7 +12,7 @@ abstractStockFund: AbstractStockFund = AbstractStockFund('stock fund', 'A_QUOTE'
 print(abstractStockFund.to_json())
 print(abstractStockFund)
 
-index_list: list = ['^SOX', '^GSPC', '^VIX', '^SKEW', '^GSPTSE', '^IXIC', '^NDX', '^NYA', '^DJI', '^TNX', '^TYX', '^W5000']
+index_list: list = ['^SOX', '^GSPC', '^VIX', '^VVIX', '^SKEW', '^GSPTSE', '^IXIC', '^NDX', '^NYA', '^DJI', '^TNX', '^TYX', '^W5000']
 count: int = 0
 
 for index_item in index_list:

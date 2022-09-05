@@ -15,7 +15,7 @@ class YahooFinEngine(AbstractEngine):
     _ticker: str = 'CNI'
     _category: str = 'NA'
     _category_mean: float = np.nan
-    _holdings_turnover: str = 'NA'
+    _holdings_turnover_pcnt: float = np.nan
     _days_range_low: float = np.nan
     _days_range_high: float = np.nan
     _year_range_low: float = np.nan
@@ -36,22 +36,22 @@ class YahooFinEngine(AbstractEngine):
     _supply_max: str = 'NA'
     _date_inception: str = 'NA'
     _beta_5y_monthly: float = np.nan
-    _dividend_forward: str = 'NA'
+    _dividend_forward: float = np.nan
     _dividend_last: float = np.nan
     _cap_gain_last: float = np.nan
-    _yield: float = np.nan
+    _yield_pcnt: float = np.nan
     _daily_total_return_ytd: str = 'NA'
-    _return_ytd: str = 'NA'
+    _return_ytd_pcnt: float = np.nan
     _return_mean_5y: float = np.nan
-    _ratio_expense_net: str = 'NA'
+    _ratio_expense_net_pcnt: float = np.nan
     _ratio_pe: float = np.nan
     _ratio_fpe: float = np.nan
     _ratio_peg: float = np.nan
-    _ratio_payout: str = 'NA'
+    _ratio_payout_pcnt: float = np.nan
     _ratio_ent_value_revenue: float = np.nan
     _ratio_ent_value_ebitda: float = np.nan
     _ebitda: str = 'NA'
-    _profit_margin: str = 'NA'
+    _profit_margin_pcnt: float = np.nan
     _enterprise_value: str = 'NA'
     _price_to_book: float = np.nan
     _price_to_earn: float = np.nan
@@ -93,7 +93,7 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['Ticker', self._ticker])
         self._pretty_table.add_row(['Category', self._category])
         self._pretty_table.add_row(['CategoryMean', self._category_mean])
-        self._pretty_table.add_row(['HoldingsTurnover', self._holdings_turnover])
+        self._pretty_table.add_row(['HoldingsTurnover', self._holdings_turnover_pcnt])
         self._pretty_table.add_row(['DaysRangeLow', self._days_range_low])
         self._pretty_table.add_row(['DaysRangeHigh', self._days_range_high])
         self._pretty_table.add_row(['YearRangeLow', self._year_range_low])
@@ -117,19 +117,19 @@ class YahooFinEngine(AbstractEngine):
         self._pretty_table.add_row(['SupplyMax', self._supply_max])
         self._pretty_table.add_row(['DateInception', self._date_inception])
         self._pretty_table.add_row(['Beta5yMonthly', self._beta_5y_monthly])
-        self._pretty_table.add_row(['Yield', self._yield])
+        self._pretty_table.add_row(['Yield', self._yield_pcnt])
         self._pretty_table.add_row(['DailyTotalReturnYTD', self._daily_total_return_ytd])
-        self._pretty_table.add_row(['ReturnYTD', self._return_ytd])
+        self._pretty_table.add_row(['ReturnYTD', self._return_ytd_pcnt])
         self._pretty_table.add_row(['ReturnMean5Y', self._return_mean_5y])
-        self._pretty_table.add_row(['RatioExpenseNet', self._ratio_expense_net])
+        self._pretty_table.add_row(['RatioExpenseNet', self._ratio_expense_net_pcnt])
         self._pretty_table.add_row(['RatioPE', self._ratio_pe])
         self._pretty_table.add_row(['RatioFPE', self._ratio_fpe])
         self._pretty_table.add_row(['RatioPEG', self._ratio_peg])
-        self._pretty_table.add_row(['RatioPayout', self._ratio_payout])
+        self._pretty_table.add_row(['RatioPayout', self._ratio_payout_pcnt])
         self._pretty_table.add_row(['RatioEnterpriseValueRevenue', self._ratio_ent_value_revenue])
         self._pretty_table.add_row(['RatioEnterpriseValueEBITDA', self._ratio_ent_value_ebitda])
         self._pretty_table.add_row(['EBITDA', self._ebitda])
-        self._pretty_table.add_row(['ProfitMargin', self._profit_margin])
+        self._pretty_table.add_row(['ProfitMargin', self._profit_margin_pcnt])
         self._pretty_table.add_row(['EnterpriseValue', self._enterprise_value])
         self._pretty_table.add_row(['PriceToBook', self._price_to_book])
         self._pretty_table.add_row(['PriceToEarnings', self._price_to_earn])
@@ -145,7 +145,7 @@ class YahooFinEngine(AbstractEngine):
             "ticker": self._ticker,
             "category": self._category,
             "category_mean": self._category_mean,
-            "holdings_turnover": self._holdings_turnover,
+            "holdings_turnover": self._holdings_turnover_pcnt,
             "days_range_low": self._days_range_low,
             "days_range_high": self._days_range_high,
             "year_range_low": self._year_range_low,
@@ -169,19 +169,19 @@ class YahooFinEngine(AbstractEngine):
             "supply_max": self._supply_max,
             "date_inception": self._date_inception,
             "beta_5y_monthly": self._beta_5y_monthly,
-            "yield": self._yield,
+            "yield": self._yield_pcnt,
             "daily_total_return_ytd": self._daily_total_return_ytd,
-            "return_ytd": self._return_ytd,
+            "return_ytd": self._return_ytd_pcnt,
             "return_mean_5y": self._return_mean_5y,
-            "ratio_expense_net": self._ratio_expense_net,
+            "ratio_expense_net": self._ratio_expense_net_pcnt,
             "ratio_pe": self._ratio_pe,
             "ratio_fpe": self._ratio_fpe,
             "ratio_peg": self._ratio_peg,
-            "ratio_payout": self._ratio_payout,
+            "ratio_payout": self._ratio_payout_pcnt,
             "ratio_ent_value_revenue": self._ratio_ent_value_revenue,
             "ratio_ent_value_ebitda": self._ratio_ent_value_ebitda,
             "ebitda": self._ebitda,
-            "profit_margin": self._profit_margin,
+            "profit_margin": self._profit_margin_pcnt,
             "enterprise_value": self._enterprise_value,
             "price_to_book": self._price_to_book,
             "price_to_earn": self._price_to_earn,
@@ -241,6 +241,13 @@ class YahooFinEngine(AbstractEngine):
         self._year_range_low = float("{:.3f}".format(float(str_tuple[0])))
         self._year_range_high = float("{:.3f}".format(float(str_tuple[1])))
 
+    def __get_percent_from_str(self, a_str: str = 'NA') -> float:
+        a_float: float = np.nan
+        print('%%%', a_str)
+        if '%' in a_str:
+            a_float = round((float(a_str.strip('%')) / 100), 5)
+        return a_float
+
     def __get_str_from_dict(self, str_key: str, quote_dict: dict) -> str:
         a_str: str = 'NA'
         if isinstance(quote_dict, dict) and any(quote_dict) and str_key in quote_dict.keys():
@@ -248,6 +255,16 @@ class YahooFinEngine(AbstractEngine):
             if isinstance(quote_dict[str_key], float):
                 a_float: float = float("{:.3f}".format(float(quote_dict[str_key])))
                 a_str = str(a_float)
+            elif isinstance(quote_dict[str_key], str) and ('%' in quote_dict[str_key]):
+                quote_dict_key: str = quote_dict[str_key]
+                print('%%%', str_key, type(quote_dict_key), quote_dict_key)
+                #a_str = str(round((float(quote_dict_key.strip('%')) / 100), 5))
+                if not(' (' in quote_dict_key):
+                    print('```_', str_key, type(quote_dict_key), quote_dict_key)
+                    a_str = str(self.__get_percent_from_str(quote_dict_key))
+                else:
+                    print('```+', str_key, type(quote_dict_key), quote_dict_key)
+                    a_str = quote_dict_key
             #if not isinstance(quote_dict[str_key], str):
             #    a_str = str(quote_dict[str_key])
             else:
@@ -258,8 +275,9 @@ class YahooFinEngine(AbstractEngine):
     def __set_year_target_estimate(self, quote_dict: dict) -> None:
         str_key: str = '1y Target Est'
         self._year_target_estimate = np.nan
-        if not self.__get_str_from_dict(str_key, quote_dict) == 'NA':
-            self._year_target_estimate = float("{:.3f}".format(float(self.__get_str_from_dict(str_key, quote_dict))))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if not key_from_quote_dict == 'NA':
+            self._year_target_estimate = float("{:.3f}".format(float(key_from_quote_dict)))
 
     def __set_category(self, quote_dict: dict) -> None:
         str_key: str = 'Category'
@@ -267,12 +285,15 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_category_mean(self, quote_dict: dict) -> None:
         str_key: str = 'Average for Category'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
-            self._category_mean = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA':
+            self._category_mean = float(key_from_quote_dict)
 
     def __set_holdings_turnover(self, quote_dict: dict) -> None:
         str_key: str = 'Holdings Turnover'
-        self._holdings_turnover = self.__get_str_from_dict(str_key, quote_dict)
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        self._holdings_turnover_pcnt = self.__get_percent_from_str(key_from_quote_dict)
+        #    float(key_from_quote_dict) if key_from_quote_dict != 'NA' else np.nan
 
     def __set_settlement_pre(self, quote_dict: dict) -> None:
         str_key: str = 'Pre. Settlement'
@@ -288,29 +309,36 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_ex_dividend_date(self, quote_dict: dict) -> None:
         str_key: str = 'Ex-Dividend Date'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'nan':
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'nan':
             #self._ex_dividend_date = datetime(self.__get_str_from_dict(str_key, quote_dict))
-            print(self.__get_str_from_dict(str_key, quote_dict))
+            print(key_from_quote_dict)
 
     def __set_dividend_forward(self, quote_dict: dict) -> None:
         str_key: str = 'Forward Dividend & Yield'
-        s: str = self.__get_str_from_dict(str_key, quote_dict)
-        if not s == 'NA':
-            a_list: list = self.__get_str_from_dict(str_key, quote_dict).split(' ')
-            print(a_list)
-            self._dividend_forward = a_list[0]
-            print(type(a_list[1]), a_list[1].replace('(', '').replace(')', ''))
-            self._yield = a_list[1].replace('(', '').replace(')', '')
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        print('```', type(key_from_quote_dict), key_from_quote_dict)
+        if not key_from_quote_dict == 'NA':
+            a_list: list = key_from_quote_dict.split(' ')
+            a_list[0] = a_list[0].replace('/', '')
+            a_list[1] = a_list[1].replace('/', '').replace('(', '').replace(')', '')
+            print('```?', a_list[0], type(a_list[0]))
+            self._dividend_forward = float(a_list[0]) if a_list[0] != 'NA' else np.nan
+            print('```!', a_list[1], type(a_list[1]))
+            self._yield_pcnt = self.__get_percent_from_str(a_list[1])
+            #    round((float(a_list[1].strip('%')) / 100), 5) if a_list[1] != 'NA' else np.nan
 
     def __set_dividend_last(self, quote_dict: dict) -> None:
         str_key: str = 'Last Dividend'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
-            self._dividend_last = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA':
+            self._dividend_last = float(key_from_quote_dict)
 
     def __set_cap_gain_last(self, quote_dict: dict) -> None:
         str_key: str = 'Last Cap Gain'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
-            self._cap_gain_last = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA':
+            self._cap_gain_last = float(key_from_quote_dict)
 
     def __set_start_date(self, quote_dict: dict) -> None:
         str_key: str = 'Start Date'
@@ -322,8 +350,9 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_eps(self, quote_dict: dict) -> None:
         str_key: str = 'EPS (TTM)'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
-            self._eps = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA':
+            self._eps = float(key_from_quote_dict)
 
     def __set_net_assets(self, quote_dict: dict) -> None:
         str_key: str = 'Net Assets'
@@ -331,8 +360,9 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_nav(self, quote_dict: dict) -> None:
         str_key: str = 'NAV'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
-            self._nav = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA':
+            self._nav = float(key_from_quote_dict)
 
     def __set_algorithm(self, quote_dict: dict) -> None:
         str_key: str = 'Algorithm'
@@ -352,13 +382,15 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_beta_5y_monthly(self, quote_dict: dict) -> None:
         str_key: str = 'Beta (5Y Monthly)'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
-            self._beta_5y_monthly = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA':
+            self._beta_5y_monthly = float(key_from_quote_dict)
 
     def __set_yield(self, quote_dict: dict) -> None:
         str_key: str = 'Yield'
-        if self._yield == 'NA':
-            self._yield = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if self._yield_pcnt == 'NA':
+            self._yield_pcnt = float(key_from_quote_dict) if key_from_quote_dict != 'NA' else np.nan
 
     def __set_daily_total_return_ytd(self, quote_dict: dict) -> None:
         str_key: str = 'YTD Daily Total Return'
@@ -366,16 +398,19 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_return_ytd(self, quote_dict: dict) -> None:
         str_key: str = 'YTD Return'
-        self._return_ytd = self.__get_str_from_dict(str_key, quote_dict)
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        self._return_ytd_pcnt = float(key_from_quote_dict) if key_from_quote_dict != 'NA' else np.nan
 
     def __set_return_mean_5y(self, quote_dict: dict) -> None:
         str_key: str = '5y Average Return'
-        if self.__get_str_from_dict(str_key, quote_dict) != 'NA':
-            self._return_mean_5y = float(self.__get_str_from_dict(str_key, quote_dict))
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA':
+            self._return_mean_5y = float(key_from_quote_dict)
 
     def __set_ratio_expense_net(self, quote_dict: dict) -> None:
         str_key: str = 'Expense Ratio (net)'
-        self._ratio_expense_net = self.__get_str_from_dict(str_key, quote_dict)
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        self._ratio_expense_net_pcnt = float(key_from_quote_dict) if key_from_quote_dict != 'NA' else np.nan
 
     def __set_ratio_pe(self, quote_dict: dict) -> None:
         str_key: str = 'PE Ratio (TTM)'
@@ -390,6 +425,7 @@ class YahooFinEngine(AbstractEngine):
         self._ratio_pe = float(df[df.Attribute.str.contains('Trailing P/E')].iloc[0, 1])
         self._ratio_fpe = float(df[df.Attribute.str.contains('Forward P/E')].iloc[0, 1])
         self._ratio_peg = float(df[df.Attribute.str.contains('PEG')].iloc[0, 1])
+        print('~~~', df[df.Attribute.str.contains('Enterprise Value/Revenue')].iloc[0, 1])
         self._ratio_ent_value_revenue = float(df[df.Attribute.str.contains('Enterprise Value/Revenue')].iloc[0, 1])
         self._ratio_ent_value_ebitda = float(df[df.Attribute.str.contains('Enterprise Value/EBITDA')].iloc[0, 1])
         self._enterprise_value = df[df.Attribute.str.contains('Enterprise Value')].iloc[0, 1]
@@ -405,10 +441,16 @@ class YahooFinEngine(AbstractEngine):
         df = df.iloc[:, :2]
         #.columns = ['Attribute', 'Value']
         self._ebitda = df[df.Attribute.str.contains('EBITDA')].iloc[0, 1]
-        self._ratio_payout = df[df.Attribute.str.contains('Payout Ratio')].iloc[0, 1]
+        another_pcnt: str = df[df.Attribute.str.contains('Payout Ratio')].iloc[0, 1]
+        print('%%%', another_pcnt)
+        self._ratio_payout_pcnt = self.__get_percent_from_str(another_pcnt)
+        #    round((float(another_pcnt.strip('%')) / 100), 5) if another_pcnt != 'NA' else np.nan
         self._dividend_date = df[df.Attribute.str.contains('Dividend Date')].iloc[0, 1]
-        self._profit_margin = df[df.Attribute.str.contains('Profit Margin')].iloc[0, 1]
-        print(df[df.Attribute.str.contains('EBITDA')].iloc[0, 1])
+        a_pcnt: str = df[df.Attribute.str.contains('Profit Margin')].iloc[0, 1]
+        print('%%%', a_pcnt)
+        self._profit_margin_pcnt = self.__get_percent_from_str(a_pcnt)
+        #    round((float(a_pcnt.strip('%')) / 100), 5) if a_pcnt != 'NA' else np.nan
+        print('***', df[df.Attribute.str.contains('EBITDA')].iloc[0, 1])
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)

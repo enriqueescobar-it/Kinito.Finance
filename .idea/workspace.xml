@@ -23,12 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5926cab-ab35-4c71-af36-218eba7c6722" name="Default Changelist" comment="folder">
-      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/AbstractMarket.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/de_market/IndexFund/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Markets/de_market/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/script_00_stock_type.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/script_00_stock_type.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinanceEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Readers/Engine/YahooFinanceEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Readers/Engine/YahooFinEngine.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/Common/Readers/Engine/YahooFinEngine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/test_70_index_fund.py" beforeDir="false" afterPath="$PROJECT_DIR$/Lambda/Functions/cmd_sym/test_70_index_fund.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +82,8 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/Disk_X/Kinito.Finance&quot;
+    &quot;last_opened_file_path&quot;: &quot;F:/Disk_X/Kinito.Finance&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="PyConsoleOptionsProvider">

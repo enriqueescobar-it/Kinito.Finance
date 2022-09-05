@@ -59,7 +59,6 @@ class YahooFinanceEngine(AbstractEngine):
     _div_last_value: float = -1.1
     _div_last_date: int = -1
     _div_ex_date: int = -1
-    _div_last_date: int = -1
     _split_date: int = -1
     _fiscal_year_end_last: int = -1
     _fiscal_year_end_next: int = -1
