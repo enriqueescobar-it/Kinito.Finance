@@ -22,9 +22,9 @@ class YahooFinEngine(AbstractEngine):
     _year_range_high: float = np.nan
     _year_target_estimate: float = np.nan
     _settlement_pre: str = 'NA'
-    _settlement_date: str = 'NA'
+    _settlement_date: datetime.date = datetime(2001, 9, 11).date()
     _earnings_date: str = 'NA'
-    _dividend_date: str = 'NA'
+    _dividend_date: datetime.date = datetime(2001, 9, 11).date()
     _ex_dividend_date: datetime = datetime(2001, 9, 11)
     _start_date: str = 'NA'
     _market_cap: str = 'NA'
@@ -34,7 +34,7 @@ class YahooFinEngine(AbstractEngine):
     _algorithm: str = 'NA'
     _supply_circulating: str = 'NA'
     _supply_max: str = 'NA'
-    _date_inception: str = 'NA'
+    _date_inception: datetime.date = datetime(2001, 9, 11).date()
     _beta_5y_monthly: float = np.nan
     _dividend_forward: float = np.nan
     _dividend_last: float = np.nan
@@ -152,10 +152,10 @@ class YahooFinEngine(AbstractEngine):
             "year_range_high": self._year_range_high,
             "year_target_estimate": self._year_target_estimate,
             "settlement_pre": self._settlement_pre,
-            "settlement_date": self._settlement_date,
+            "settlement_date": str(self._settlement_date),
             "dividend_forward": self._dividend_forward,
             "dividend_last": self._dividend_last,
-            "dividend_date": self._dividend_date,
+            "dividend_date": str(self._dividend_date),
             "ex_dividend_date": str(self._ex_dividend_date),
             "cap_gain_last": self._cap_gain_last,
             "earnings_date": self._earnings_date,
@@ -167,7 +167,7 @@ class YahooFinEngine(AbstractEngine):
             "algorithm": self._algorithm,
             "supply_circulating": self._supply_circulating,
             "supply_max": self._supply_max,
-            "date_inception": self._date_inception,
+            "date_inception": str(self._date_inception),
             "beta_5y_monthly": self._beta_5y_monthly,
             "yield": self._yield_pcnt,
             "daily_total_return_ytd": self._daily_total_return_ytd,
@@ -301,7 +301,12 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_settlement_date(self, quote_dict: dict) -> None:
         str_key: str = 'Settlement Date'
-        self._settlement_date = self.__get_str_from_dict(str_key, quote_dict)
+        date_fmt: str = '%Y-%m-%d'
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        if key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A':
+            dat: datetime.date = datetime.strptime(key_from_quote_dict, date_fmt).date()
+            print('***', date_fmt, str_key, key_from_quote_dict, dat)
+            self._settlement_date = dat
 
     def __set_earnings_date(self, quote_dict: dict) -> None:
         str_key: str = 'Earnings Date'
@@ -310,9 +315,10 @@ class YahooFinEngine(AbstractEngine):
     def __set_ex_dividend_date(self, quote_dict: dict) -> None:
         str_key: str = 'Ex-Dividend Date'
         key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
-        if key_from_quote_dict != 'nan':
+        print('***', str_key, key_from_quote_dict)
+        if key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A' and key_from_quote_dict != 'nan':
             #self._ex_dividend_date = datetime(self.__get_str_from_dict(str_key, quote_dict))
-            print(key_from_quote_dict)
+            print('***', key_from_quote_dict)
 
     def __set_dividend_forward(self, quote_dict: dict) -> None:
         str_key: str = 'Forward Dividend & Yield'
@@ -378,7 +384,11 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_inception_date(self, quote_dict: dict) -> None:
         str_key: str = 'Inception Date'
-        self._date_inception = self.__get_str_from_dict(str_key, quote_dict)
+        key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
+        a_fmt: str = '%b %d, %Y'
+        print('%%-', a_fmt, type(key_from_quote_dict), key_from_quote_dict)
+        if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A':
+            self._date_inception = datetime.strptime(key_from_quote_dict, a_fmt).date()
 
     def __set_beta_5y_monthly(self, quote_dict: dict) -> None:
         str_key: str = 'Beta (5Y Monthly)'
@@ -443,12 +453,18 @@ class YahooFinEngine(AbstractEngine):
         #.columns = ['Attribute', 'Value']
         self._ebitda = df[df.Attribute.str.contains('EBITDA')].iloc[0, 1]
         another_pcnt: str = df[df.Attribute.str.contains('Payout Ratio')].iloc[0, 1]
-        print('%%%', another_pcnt)
+        print('%%%', type(another_pcnt), another_pcnt)
         self._ratio_payout_pcnt = self.__get_percent_from_str(another_pcnt)
         #    round((float(another_pcnt.strip('%')) / 100), 5) if another_pcnt != 'NA' else np.nan
-        self._dividend_date = df[df.Attribute.str.contains('Dividend Date')].iloc[0, 1]
+        a_date = df[df.Attribute.str.contains('Dividend Date')].iloc[0, 1]
+        a_fmt: str = '%b %d, %Y'
+        print('%%-', a_fmt, type(a_date), a_date)
+        if isinstance(a_date, str) and a_date != 'NA' and a_date != 'N/A':
+            a_date = datetime.strptime(a_date, a_fmt).date()
+            print('%%%-', a_fmt, type(a_date), a_date)
+            self._dividend_date = a_date
         a_pcnt: str = df[df.Attribute.str.contains('Profit Margin')].iloc[0, 1]
-        print('%%%', a_pcnt)
+        print('%%%', type(a_pcnt), a_pcnt)
         self._profit_margin_pcnt = self.__get_percent_from_str(a_pcnt)
         #    round((float(a_pcnt.strip('%')) / 100), 5) if a_pcnt != 'NA' else np.nan
         print('***', df[df.Attribute.str.contains('EBITDA')].iloc[0, 1])
