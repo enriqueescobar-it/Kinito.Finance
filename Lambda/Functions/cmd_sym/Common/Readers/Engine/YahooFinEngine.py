@@ -231,6 +231,14 @@ class YahooFinEngine(AbstractEngine):
         self.__set_ratio_pe(quote_dict)
         print(quote_dict)
 
+    def __get_date_from_str(self, a_str: str) -> datetime.date:
+        a_date: datetime.date = datetime(2000, 1, 1).date()
+        if isinstance(a_str, str) and a_str != 'NA' and a_str != 'N/A' and a_str != 'nan' and (',' in a_str):
+            a_date = datetime.strptime(a_str, '%b %d, %Y').date()
+        if isinstance(a_str, str) and a_str != 'NA' and a_str != 'N/A' and a_str != 'nan' and ('-' in a_str):
+            a_date = datetime.strptime(a_str, '%Y-%m-%d').date()
+        return a_date
+
     def __set_days_in_range(self, quote_dict: dict) -> None:
         str_tuple: tuple = self._set_key_in_range("Day's Range", quote_dict)
         self._days_range_low = float("{:.3f}".format(float(str_tuple[0])))
@@ -301,12 +309,9 @@ class YahooFinEngine(AbstractEngine):
 
     def __set_settlement_date(self, quote_dict: dict) -> None:
         str_key: str = 'Settlement Date'
-        date_fmt: str = '%Y-%m-%d'
         key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
-        if key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A':
-            dat: datetime.date = datetime.strptime(key_from_quote_dict, date_fmt).date()
-            print('***', date_fmt, str_key, key_from_quote_dict, dat)
-            self._settlement_date = dat
+        self._settlement_date =\
+            self.__get_date_from_str(key_from_quote_dict) if isinstance(key_from_quote_dict, str) else datetime(2000, 1, 1).date()
 
     def __set_earnings_date(self, quote_dict: dict) -> None:
         str_key: str = 'Earnings Date'
@@ -319,6 +324,7 @@ class YahooFinEngine(AbstractEngine):
         if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A'\
                 and key_from_quote_dict != 'nan':
             #self._ex_dividend_date = datetime(key_from_quote_dict)
+            #self.__get_date_from_str(key_from_quote_dict) if isinstance(key_from_quote_dict, str) else datetime(2000, 1, 1).date()
             print('%%--', str_key, type(key_from_quote_dict), key_from_quote_dict)
 
     def __set_dividend_forward(self, quote_dict: dict) -> None:
@@ -386,14 +392,8 @@ class YahooFinEngine(AbstractEngine):
     def __set_inception_date(self, quote_dict: dict) -> None:
         str_key: str = 'Inception Date'
         key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
-        a_fmt: str = '%b %d, %Y'
-        print('%%-', a_fmt, type(key_from_quote_dict), key_from_quote_dict)
-        if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A'\
-                and (',' in key_from_quote_dict):
-            self._date_inception = datetime.strptime(key_from_quote_dict, a_fmt).date()
-        if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A'\
-                and ('-' in key_from_quote_dict):
-            self._date_inception = datetime.strptime(key_from_quote_dict, '%Y-%m-%d').date()
+        self._date_inception =\
+            self.__get_date_from_str(key_from_quote_dict) if isinstance(key_from_quote_dict, str) else datetime(2000, 1, 1).date()
 
     def __set_beta_5y_monthly(self, quote_dict: dict) -> None:
         str_key: str = 'Beta (5Y Monthly)'
@@ -404,7 +404,6 @@ class YahooFinEngine(AbstractEngine):
     def __set_yield(self, quote_dict: dict) -> None:
         str_key: str = 'Yield'
         key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
-        print('%%% isnan', str_key, np.isnan(self._yield_pcnt), self._yield_pcnt, key_from_quote_dict)
         if np.isnan(self._yield_pcnt):
             self._yield_pcnt = float(key_from_quote_dict) if key_from_quote_dict != 'NA' else np.nan
 
@@ -462,17 +461,12 @@ class YahooFinEngine(AbstractEngine):
         self._ratio_payout_pcnt = self.__get_percent_from_str(another_pcnt)
         #    round((float(another_pcnt.strip('%')) / 100), 5) if another_pcnt != 'NA' else np.nan
         a_date = df[df.Attribute.str.contains('Dividend Date')].iloc[0, 1]
-        a_fmt: str = '%b %d, %Y'
-        print('%%-', a_fmt, type(a_date), a_date)
-        if isinstance(a_date, str) and a_date != 'NA' and a_date != 'N/A':
-            a_date = datetime.strptime(a_date, a_fmt).date()
-            print('%%%-', a_fmt, type(a_date), a_date)
-            self._dividend_date = a_date
+        self._dividend_date = self.__get_date_from_str(a_date) if isinstance(a_date, str) else datetime(2000, 1, 1).date()
         a_pcnt: str = df[df.Attribute.str.contains('Profit Margin')].iloc[0, 1]
         print('%%%', type(a_pcnt), a_pcnt)
         self._profit_margin_pcnt = self.__get_percent_from_str(a_pcnt)
         #    round((float(a_pcnt.strip('%')) / 100), 5) if a_pcnt != 'NA' else np.nan
-        print('***', df[df.Attribute.str.contains('EBITDA')].iloc[0, 1])
+        print('%%%', df[df.Attribute.str.contains('EBITDA')].iloc[0, 1])
 
     def to_json(self):
         return json.dumps(dict(self), ensure_ascii=False)
