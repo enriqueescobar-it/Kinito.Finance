@@ -22,10 +22,10 @@ class YahooFinEngine(AbstractEngine):
     _year_range_high: float = np.nan
     _year_target_estimate: float = np.nan
     _settlement_pre: str = 'NA'
-    _settlement_date: datetime.date = datetime(2001, 9, 11).date()
+    _settlement_date: datetime.date = datetime(2000, 1, 1).date()
     _earnings_date: str = 'NA'
-    _dividend_date: datetime.date = datetime(2001, 9, 11).date()
-    _ex_dividend_date: datetime = datetime(2001, 9, 11)
+    _dividend_date: datetime.date = datetime(2000, 1, 1).date()
+    _ex_dividend_date: datetime.date = datetime(2000, 1, 1).date()
     _start_date: str = 'NA'
     _market_cap: str = 'NA'
     _eps: float = np.nan
@@ -34,7 +34,7 @@ class YahooFinEngine(AbstractEngine):
     _algorithm: str = 'NA'
     _supply_circulating: str = 'NA'
     _supply_max: str = 'NA'
-    _date_inception: datetime.date = datetime(2001, 9, 11).date()
+    _date_inception: datetime.date = datetime(2000, 1, 1).date()
     _beta_5y_monthly: float = np.nan
     _dividend_forward: float = np.nan
     _dividend_last: float = np.nan
@@ -315,10 +315,11 @@ class YahooFinEngine(AbstractEngine):
     def __set_ex_dividend_date(self, quote_dict: dict) -> None:
         str_key: str = 'Ex-Dividend Date'
         key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
-        print('***', str_key, key_from_quote_dict)
-        if key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A' and key_from_quote_dict != 'nan':
-            #self._ex_dividend_date = datetime(self.__get_str_from_dict(str_key, quote_dict))
-            print('***', key_from_quote_dict)
+        print('%%-', str_key, type(key_from_quote_dict), key_from_quote_dict)
+        if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A'\
+                and key_from_quote_dict != 'nan':
+            #self._ex_dividend_date = datetime(key_from_quote_dict)
+            print('%%--', str_key, type(key_from_quote_dict), key_from_quote_dict)
 
     def __set_dividend_forward(self, quote_dict: dict) -> None:
         str_key: str = 'Forward Dividend & Yield'
@@ -387,8 +388,12 @@ class YahooFinEngine(AbstractEngine):
         key_from_quote_dict = self.__get_str_from_dict(str_key, quote_dict)
         a_fmt: str = '%b %d, %Y'
         print('%%-', a_fmt, type(key_from_quote_dict), key_from_quote_dict)
-        if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A':
+        if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A'\
+                and (',' in key_from_quote_dict):
             self._date_inception = datetime.strptime(key_from_quote_dict, a_fmt).date()
+        if isinstance(key_from_quote_dict, str) and key_from_quote_dict != 'NA' and key_from_quote_dict != 'N/A'\
+                and ('-' in key_from_quote_dict):
+            self._date_inception = datetime.strptime(key_from_quote_dict, '%Y-%m-%d').date()
 
     def __set_beta_5y_monthly(self, quote_dict: dict) -> None:
         str_key: str = 'Beta (5Y Monthly)'

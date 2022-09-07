@@ -15,7 +15,7 @@ abstractStockFund: AbstractStockFund = AbstractStockFund('stock fund', 'A_QUOTE'
 print(abstractStockFund.to_json())
 print(abstractStockFund)
 
-et_list: list = ['VOO', 'VOOG', 'FDTS', 'SOXX', 'IWF', 'VIG']
+et_list: list = ['VOO', 'VOOG', 'VIG', 'FDTS', 'SOXX', 'IWF']
 count: int = 0
 
 for et_item in et_list:
